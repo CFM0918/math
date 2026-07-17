@@ -1,0 +1,566 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>七上 2-4 指數律｜授課簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--chalk-soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);padding:24px 14px;}
+.deck{max-width:1060px;margin:0 auto;}
+.print-hint{text-align:center;color:rgba(243,239,226,0.4);font-size:13px;padding:6px 0 22px;}
+.print-hint b{color:var(--yellow);}
+.slide{position:relative;min-height:576px;margin:0 auto 26px;padding:44px 52px;
+ background:radial-gradient(ellipse at 18% 12%,rgba(255,255,255,0.05),transparent 45%),
+  radial-gradient(ellipse at 82% 88%,rgba(255,255,255,0.035),transparent 45%),
+  radial-gradient(ellipse at 60% 40%,rgba(120,160,130,0.10),transparent 60%),
+  linear-gradient(160deg,var(--board) 0%,var(--board2) 100%);
+ border-radius:14px;box-shadow:0 10px 34px rgba(0,0,0,0.55);
+ border:1px solid rgba(242,217,121,0.14);overflow:hidden;display:flex;flex-direction:column;}
+.slide::before{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;
+ background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.014) 40px,rgba(255,255,255,0.014) 41px),
+  radial-gradient(circle at 30% 72%,rgba(255,255,255,0.03),transparent 8%),
+  radial-gradient(circle at 76% 24%,rgba(255,255,255,0.025),transparent 7%);}
+.slide::after{content:attr(data-pg);position:absolute;bottom:15px;right:26px;font-family:'Caveat',cursive;font-size:20px;color:rgba(243,239,226,0.4);}
+.tag{position:absolute;top:20px;right:26px;font-family:'Caveat',cursive;font-size:22px;color:var(--pink);transform:rotate(4deg);}
+.eyebrow{font-family:'Caveat',cursive;font-size:25px;color:var(--yellow);letter-spacing:1px;margin-bottom:8px;opacity:0.92;}
+.slide h1{font-family:'Noto Serif TC',serif;font-size:46px;font-weight:900;line-height:1.28;letter-spacing:1px;
+ text-shadow:0 0 1px rgba(243,239,226,0.5),1px 1px 0 rgba(0,0,0,0.2);}
+.slide h2{font-family:'Noto Serif TC',serif;font-size:33px;font-weight:900;color:var(--yellow);
+ margin-bottom:20px;padding-bottom:11px;border-bottom:2px dashed rgba(242,217,121,0.4);
+ text-shadow:0 0 1px rgba(242,217,121,0.4);}
+.slide p{font-size:20px;line-height:1.85;margin-bottom:12px;}
+.big-center{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;}
+.big-center .lead,.lead{font-family:'Caveat',cursive;font-size:30px;color:var(--blue);letter-spacing:1px;margin-top:12px;}
+ul{list-style:none;margin:8px 0;}
+li{font-size:21px;line-height:1.95;padding-left:32px;position:relative;margin-bottom:4px;}
+li::before{content:'\2726';position:absolute;left:4px;color:var(--yellow);font-size:17px;top:3px;}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.34);border-radius:12px;padding:15px 21px;margin:12px 0;font-size:19px;line-height:1.8;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.38);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.38);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.34);}
+.eg{position:relative;background:rgba(0,0,0,0.24);border:1px solid rgba(242,217,121,0.2);border-radius:10px;padding:17px 22px;margin:12px 0;font-size:19px;}
+.eg::before{content:'';position:absolute;top:-8px;left:38px;width:58px;height:15px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.eg .q{color:var(--blue);font-weight:700;margin-bottom:8px;font-size:19px;}
+.eg .a{color:var(--green);font-weight:700;margin-top:6px;}
+.eg .stp{color:var(--chalk-soft);font-size:18px;margin:3px 0;}
+.tip{display:flex;gap:12px;align-items:flex-start;background:rgba(242,217,121,0.09);border:1.5px dashed rgba(242,217,121,0.45);border-radius:12px;padding:13px 18px;margin:10px 0;}
+.tip .ic{font-size:24px;line-height:1;}.tip .tx{font-size:18px;line-height:1.7;}
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:18px;}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.26);padding:10px 14px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.two{display:flex;gap:20px;}.two>div{flex:1;}
+svg{display:block;margin:6px auto;max-width:100%;}
+@media print{
+ body{background:#0a130d;padding:0;}
+ .deck{max-width:none;}
+ .print-hint{display:none;}
+ .slide{margin:0;border-radius:0;box-shadow:none;min-height:100vh;
+  page-break-after:always;break-after:page;padding:32px 44px;justify-content:center;}
+ .slide:last-child{page-break-after:auto;break-after:auto;}
+ .slide h1{font-size:40px;}
+ .slide h2{font-size:27px;margin-bottom:13px;padding-bottom:8px;}
+ .slide p{font-size:17px;line-height:1.55;margin-bottom:6px;}
+ li{font-size:17px;line-height:1.55;margin-bottom:1px;padding-left:26px;}
+ .eyebrow{font-size:21px;margin-bottom:5px;}
+ .big-center .lead,.lead{font-size:26px;}
+ .box{font-size:16px;padding:10px 16px;margin:6px 0;line-height:1.5;}
+ .eg{font-size:16px;padding:11px 16px;margin:6px 0;}
+ .tip{font-size:16px;padding:10px 14px;margin:6px 0;}
+ .tbl{font-size:15px;margin:6px 0;}
+ .tbl th,.tbl td{padding:6px 10px;}
+ svg{max-height:210px;}
+}
+</style></head><body><div class="deck">
+<div class="print-hint">共 <b>30</b> 張・列印時每張一頁（Ctrl+P → 橫向 → 背景圖形）</div>
+
+
+<!-- 1 -->
+<div class="slide" data-pg="1 / 30"><div class="tag">Start!</div><div class="big-center">
+<div class="eyebrow">國一上學期・第二章 分數運算</div>
+<h1>2-4　指數律</h1>
+<div class="lead">零次方和負指數不是規定 —— 是規律逼出來的必然結果</div>
+<svg viewBox="0 0 620 160" width="80%" style="margin-top:20px;">
+<text x="60" y="34" font-family="Noto Serif TC" font-size="24" fill="#98c9dc" text-anchor="middle">2³ = 8</text>
+<text x="60" y="66" font-family="Noto Serif TC" font-size="24" fill="#98c9dc" text-anchor="middle">2² = 4</text>
+<text x="60" y="98" font-family="Noto Serif TC" font-size="24" fill="#98c9dc" text-anchor="middle">2¹ = 2</text>
+<text x="60" y="130" font-family="Noto Serif TC" font-size="26" fill="#f2d979" text-anchor="middle">2⁰ = 1</text>
+<text x="60" y="158" font-family="Noto Serif TC" font-size="24" fill="#eda0a8" text-anchor="middle">2⁻¹ = ½</text>
+<path d="M118 26 q26 16 0 32" stroke="#a6d6a0" stroke-width="1.6" fill="none"/>
+<text x="150" y="46" font-family="Caveat" font-size="20" fill="#a6d6a0" text-anchor="middle">÷2</text>
+<path d="M118 58 q26 16 0 32" stroke="#a6d6a0" stroke-width="1.6" fill="none"/>
+<text x="150" y="78" font-family="Caveat" font-size="20" fill="#a6d6a0" text-anchor="middle">÷2</text>
+<path d="M118 90 q26 16 0 32" stroke="#a6d6a0" stroke-width="1.6" fill="none"/>
+<text x="150" y="110" font-family="Caveat" font-size="20" fill="#a6d6a0" text-anchor="middle">÷2</text>
+<path d="M118 122 q26 16 0 32" stroke="#a6d6a0" stroke-width="1.6" fill="none"/>
+<text x="150" y="142" font-family="Caveat" font-size="20" fill="#a6d6a0" text-anchor="middle">÷2</text>
+<text x="400" y="70" font-family="Caveat" font-size="26" fill="#f2d979" text-anchor="middle">一直除以 2 走下去，</text>
+<text x="400" y="102" font-family="Caveat" font-size="26" fill="#f2d979" text-anchor="middle">自然就走到 2⁰ 和 2⁻¹</text>
+</svg>
+</div></div>
+
+<!-- 2 -->
+<div class="slide" data-pg="2 / 30"><div class="tag">目標</div><div class="body">
+<h2>本節學習目標</h2>
+<ul>
+<li>理解<span class="hl">零次方</span> a⁰ = 1（a≠0），並知道<b>為什麼</b></li>
+<li>理解<span class="hl">負指數</span> a⁻ⁿ = 1/aⁿ，並知道<b>為什麼</b></li>
+<li>能在 <span class="hl-b">小數 ↔ 分數 ↔ 負指數</span> 三種寫法間互換</li>
+<li>掌握並應用<span class="hl">五條指數律</span></li>
+<li>能區分 <span class="fm">aᵐ×aⁿ</span>（指數<span class="hl-g">相加</span>）與 <span class="fm">(aᵐ)ⁿ</span>（指數<span class="hl-r">相乘</span>）</li>
+<li>知道底數不同<span class="hl-r">不能</span>直接加指數</li>
+</ul>
+<div class="box y">一句話：<span class="hl">指數律不是五條要背的公式，是「數個數」的自然結果。</span></div>
+</div></div>
+
+<!-- 3 -->
+<div class="slide" data-pg="3 / 30"><div class="tag">地圖</div><div class="body">
+<h2>這一節的兩個細目</h2>
+<table class="tbl">
+<tr><th style="width:16%;">細目</th><th style="width:34%;">主題</th><th>核心</th></tr>
+<tr><td class="hl" style="font-size:24px;">①</td><td><b>指數與小數的關係</b></td><td>零次方・負指數・<span class="hl-b">小數＝分數＝負指數</span></td></tr>
+<tr><td class="hl" style="font-size:24px;">②</td><td><b>指數律</b></td><td>乘加・除減・冪乘・積分配・商分配</td></tr>
+</table>
+<div class="box"><b>順序很重要：</b>先講細目 ①，你會發現 <span class="hl">a⁰ 和 a⁻ⁿ 根本是細目 ② 的除法律推出來的</span>。
+所以這節其實只有<span class="hl">一個</span>核心 —— <b>指數律</b>，其他都是它的結果。</div>
+<div class="tip"><div class="ic">🔗</div><div class="tx"><b>承先：</b>1-4 教過「小數用 10 的負次方」，但只給規律沒給理由。這節補上理由。<br>
+<b>啟後：</b>這節是<b>八上「整式乘法、多項式展開」的直接基礎</b>。</div></div>
+</div></div>
+
+<!-- 4 -->
+<div class="slide" data-pg="4 / 30"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">細目 ①　指數與小數的關係</div>
+<h2>往下數：指數每減 1，就除以一次底數</h2>
+<table class="tbl">
+<tr><th>次方</th><th>值</th><th>↓ 每往下一列</th></tr>
+<tr><td class="fm">2³</td><td class="fm">8</td><td></td></tr>
+<tr><td class="fm">2²</td><td class="fm">4</td><td class="hl-g">÷2</td></tr>
+<tr><td class="fm">2¹</td><td class="fm">2</td><td class="hl-g">÷2</td></tr>
+<tr><td class="fm hl" style="font-size:21px;">2⁰</td><td class="fm hl" style="font-size:21px;">1</td><td class="hl-g">÷2</td></tr>
+<tr><td class="fm hl-r" style="font-size:21px;">2⁻¹</td><td class="fm hl-r" style="font-size:21px;">1/2</td><td class="hl-g">÷2</td></tr>
+<tr><td class="fm hl-r" style="font-size:21px;">2⁻²</td><td class="fm hl-r" style="font-size:21px;">1/4</td><td class="hl-g">÷2</td></tr>
+</table>
+<div class="box y" style="text-align:center;font-size:21px;">
+這張表就是<span class="hl">零次方與負指數的來源</span> ——<br>
+不是老師規定的，是<span class="hl">照著規律往下走的必然結果</span>。</div>
+</div></div>
+
+<!-- 5 -->
+<div class="slide" data-pg="5 / 30"><div class="tag">推導</div><div class="body">
+<div class="eyebrow">細目 ①</div>
+<h2>零次方：a⁰ = 1，為什麼？</h2>
+<div class="box y" style="text-align:center;font-size:22px;padding:18px;">
+<span class="fm">aⁿ ÷ aⁿ = a<span class="hl">ⁿ⁻ⁿ</span> = <span class="hl">a⁰</span></span><br>
+<span style="font-size:18px;color:var(--chalk-soft);">（用除法律）</span><br>
+<span class="fm">但 aⁿ ÷ aⁿ 明明就 = <span class="hl">1</span></span><br>
+<span style="font-size:18px;color:var(--chalk-soft);">（任何數除以自己）</span><br>
+<span class="fm" style="font-size:26px;">所以 <span class="hl">a⁰ = 1</span></span></div>
+<div class="box g" style="text-align:center;">驗證：<span class="fm">5³ ÷ 5³ = 5⁰</span>；而 <span class="fm">125 ÷ 125 = 1</span> → <span class="fm hl">5⁰ = 1</span> ✓</div>
+<div class="box r" style="text-align:center;">⚠️ 為什麼要 <span class="hl-r">a ≠ 0</span>？因為 0⁰ 會變成 <span class="fm">0 ÷ 0</span>，<b>沒有意義</b>。</div>
+</div></div>
+
+<!-- 6 -->
+<div class="slide" data-pg="6 / 30"><div class="tag">推導</div><div class="body">
+<div class="eyebrow">細目 ①</div>
+<h2>負指數：a⁻ⁿ = 1/aⁿ，為什麼？</h2>
+<div class="box y" style="text-align:center;font-size:22px;padding:18px;">
+<span class="fm">a⁰ ÷ aⁿ = a<span class="hl">⁰⁻ⁿ</span> = <span class="hl">a⁻ⁿ</span></span><br>
+<span style="font-size:18px;color:var(--chalk-soft);">（一樣用除法律）</span><br>
+<span class="fm">但 a⁰ ÷ aⁿ = 1 ÷ aⁿ = <span class="hl">1/aⁿ</span></span><br>
+<span class="fm" style="font-size:26px;">所以 <span class="hl">a⁻ⁿ = 1/aⁿ</span></span></div>
+<div class="two">
+<div class="box"><span class="fm" style="font-size:20px;">2⁻³ = 1/2³ = <span class="hl-g">1/8</span></span></div>
+<div class="box"><span class="fm" style="font-size:20px;">10⁻² = 1/10² = <span class="hl-g">1/100</span> = 0.01</span></div>
+</div>
+<div class="box r" style="text-align:center;font-size:21px;">
+⚠️ <span class="hl-r">負指數不代表負數！</span>　<span class="fm">2⁻³ = 1/8</span> 是<b>正的</b>。<br>
+負號只是說「<span class="hl">倒過來</span>」，不是說「變負」。</div>
+</div></div>
+
+<!-- 7 -->
+<div class="slide" data-pg="7 / 30"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">細目 ①　本節核心</div>
+<h2>小數 ＝ 分數 ＝ 負指數（同一個數的三張臉）</h2>
+<table class="tbl">
+<tr><th>小數</th><th>分數</th><th>負指數</th></tr>
+<tr><td class="fm">0.5</td><td class="fm">1/2</td><td class="fm hl">2⁻¹</td></tr>
+<tr><td class="fm">0.25</td><td class="fm">1/4</td><td class="fm hl">2⁻²</td></tr>
+<tr><td class="fm">0.125</td><td class="fm">1/8</td><td class="fm hl">2⁻³</td></tr>
+<tr><td class="fm">0.1</td><td class="fm">1/10</td><td class="fm hl-r">10⁻¹</td></tr>
+<tr><td class="fm">0.01</td><td class="fm">1/100</td><td class="fm hl-r">10⁻²</td></tr>
+<tr><td class="fm">0.001</td><td class="fm">1/1000</td><td class="fm hl-r">10⁻³</td></tr>
+</table>
+<div class="box y" style="text-align:center;">這就是 <span class="hl">1-4 科學記號</span>裡「小數用負次方」的<span class="hl">真正理由</span> ——<br>
+當時只教了規律，現在才知道背後是<span class="hl">除法律</span>逼出來的。</div>
+</div></div>
+
+<!-- 8 -->
+<div class="slide" data-pg="8 / 30"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 1　難度 ★☆☆</div>
+<h2>零次方與負指數</h2>
+<div class="eg">
+<div class="q">(1) 計算 <span class="fm">5⁰ + 3⁰ + (−7)⁰</span></div>
+<div class="stp">每個都等於 1（底數都不是 0）→ 1 + 1 + 1 = <span class="hl">3</span></div>
+<div class="a">答：3</div>
+</div>
+<div class="eg">
+<div class="q">(2) 計算 <span class="fm">2⁻³</span>　(3) 把 <span class="fm">0.25</span> 寫成 2 的次方</div>
+<div class="stp">(2) <span class="fm">2⁻³ = 1/2³ = 1/8</span></div>
+<div class="stp">(3) <span class="fm">0.25 = 1/4 = 1/2² = 2⁻²</span></div>
+<div class="a">答：(2) 1/8　(3) 2⁻²</div>
+</div>
+<div class="tip"><div class="ic">📌</div><div class="tx">(3) 的思路：<b>小數 → 分數 → 看分母是幾的幾次方 → 加負號</b>。這是三種寫法互換的標準流程。</div></div>
+</div></div>
+
+<!-- 9 -->
+<div class="slide" data-pg="9 / 30"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">細目 ②　指數律</div>
+<h2>五條指數律（a≠0、b≠0）</h2>
+<table class="tbl">
+<tr><th style="width:12%;">　</th><th style="width:24%;">名稱</th><th style="width:30%;">公式</th><th>指數怎麼動</th></tr>
+<tr><td class="hl" style="font-size:20px;">①</td><td>乘法律</td><td class="fm hl-b">aᵐ × aⁿ = aᵐ⁺ⁿ</td><td>相<span class="hl-g">加</span></td></tr>
+<tr><td class="hl" style="font-size:20px;">②</td><td>除法律</td><td class="fm hl-b">aᵐ ÷ aⁿ = aᵐ⁻ⁿ</td><td>相<span class="hl-g">減</span></td></tr>
+<tr><td class="hl" style="font-size:20px;">③</td><td>冪的冪</td><td class="fm hl-b">(aᵐ)ⁿ = aᵐⁿ</td><td>相<span class="hl-r">乘</span></td></tr>
+<tr><td class="hl" style="font-size:20px;">④</td><td>積的冪</td><td class="fm hl-b">(ab)ⁿ = aⁿbⁿ</td><td>分配進去</td></tr>
+<tr><td class="hl" style="font-size:20px;">⑤</td><td>商的冪</td><td class="fm hl-b">(a/b)ⁿ = aⁿ/bⁿ</td><td>分配進去</td></tr>
+</table>
+<div class="box y" style="text-align:center;font-family:'Caveat',cursive;font-size:24px;">
+乘加　·　除減　·　冪乘　·　積分配　·　商分配</div>
+</div></div>
+
+<!-- 10 -->
+<div class="slide" data-pg="10 / 30"><div class="tag">推導</div><div class="body">
+<div class="eyebrow">細目 ②　① 乘法律</div>
+<h2>為什麼同底數相乘要「加」指數？數個數就知道</h2>
+<div class="box y" style="text-align:center;font-size:22px;padding:18px;">
+<span class="fm">3⁴ × 3² = (3×3×3×3) × (3×3)</span><br>
+<span style="font-size:19px;color:var(--chalk-soft);">四個 3　　　　兩個 3</span><br>
+<span class="fm">= 一共 <span class="hl">六</span> 個 3 相乘 = <span class="hl">3⁶</span> = 729</span></div>
+<div class="box g" style="text-align:center;font-size:21px;">
+<span class="fm">aᵐ × aⁿ = aᵐ⁺ⁿ</span>　—— 就是在<span class="hl">數總共有幾個 a</span></div>
+<div class="tip"><div class="ic">📌</div><div class="tx"><b>這就是為什麼指數律不用背。</b>忘記的時候，用小數字展開數一數，規則自己會跑出來。</div></div>
+</div></div>
+
+<!-- 11 -->
+<div class="slide" data-pg="11 / 30"><div class="tag">推導</div><div class="body">
+<div class="eyebrow">細目 ②　③ 冪的冪</div>
+<h2>為什麼次方的次方要「乘」指數？</h2>
+<div class="box y" style="text-align:center;font-size:21px;padding:18px;">
+<span class="fm">(2³)⁴ = 2³ × 2³ × 2³ × 2³</span><br>
+<span style="font-size:18px;color:var(--chalk-soft);">四個 2³</span><br>
+<span class="fm">= 2³⁺³⁺³⁺³ = 2<span class="hl">³×⁴</span> = <span class="hl">2¹²</span> = 4096</span></div>
+<div class="box g"><b>加法變乘法的關鍵：</b>「<span class="hl">四個 3 相加</span>」就是「<span class="hl">3 × 4</span>」——
+所以冪的冪的指數是<b>相乘</b>。</div>
+<div class="box r" style="text-align:center;font-size:20px;">
+⚠️ 別和乘法律搞混：<span class="fm">2²×2³ = 2⁵ = 32</span>　但　<span class="fm">(2²)³ = 2⁶ = 64</span></div>
+</div></div>
+
+<!-- 12 -->
+<div class="slide" data-pg="12 / 30"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">細目 ②　④⑤ 積的冪、商的冪</div>
+<h2>括號裡的每個因數，都要各自乘方</h2>
+<div class="two">
+<div class="box"><b class="hl-b">④ 積的冪</b>　<span class="fm">(ab)ⁿ = aⁿ × bⁿ</span><br>
+<span class="fm">(2×3)⁴ = 2⁴ × 3⁴ = 16 × 81 = <span class="hl">1296</span></span><br>
+<span style="font-size:16px;color:var(--chalk-soft);">驗算：6⁴ = 1296 ✓</span><br>
+<span class="fm">(2a)³ = 2³a³ = <span class="hl">8a³</span></span></div>
+<div class="box g"><b class="hl-g">⑤ 商的冪</b>　<span class="fm">(a/b)ⁿ = aⁿ/bⁿ</span><br>
+<span class="fm">(2/3)³ = 2³/3³ = <span class="hl">8/27</span></span><br>
+<span class="fm">(x/3)² = <span class="hl">x²/9</span></span></div>
+</div>
+<div class="box r"><b class="hl-r">⚠️ 最常錯：</b><span class="fm">(−3b²)³</span> 的負號<b>不見了</b>。<br>
+正確：<span class="fm">(−3b²)³ = (−3)³ × (b²)³ = <span class="hl-g">−27b⁶</span></span>　——
+<span class="hl">括號要連同符號一起乘方</span>。</div>
+</div></div>
+
+<!-- 13 -->
+<div class="slide" data-pg="13 / 30"><div class="tag">避雷</div><div class="body">
+<div class="eyebrow">細目 ②　⚠️ 陷阱一（最高頻）</div>
+<h2>指數該「加」還是該「乘」？</h2>
+<table class="tbl">
+<tr><th style="width:30%;">式子</th><th style="width:34%;">指數怎麼算</th><th>結果</th></tr>
+<tr><td class="fm" style="font-size:22px;">2² × 2³</td><td>相<span class="hl-g" style="font-size:20px;">加</span>　2+3 = 5</td><td class="fm hl-g" style="font-size:22px;">2⁵ = 32</td></tr>
+<tr><td class="fm" style="font-size:22px;">(2²)³</td><td>相<span class="hl-r" style="font-size:20px;">乘</span>　2×3 = 6</td><td class="fm hl-r" style="font-size:22px;">2⁶ = 64</td></tr>
+</table>
+<div class="box y" style="text-align:center;font-size:22px;">
+<span class="hl">32 ≠ 64</span> —— 兩者完全不同！</div>
+<div class="box g"><b>怎麼分辨？</b>看有沒有<span class="hl">括號把整個次方包起來</span>：<br>
+・<span class="fm">aᵐ × aⁿ</span>　兩塊<b>並排相乘</b> → 數總共幾個 a → <b>加</b><br>
+・<span class="fm">(aᵐ)ⁿ</span>　一塊<b>被整個乘方</b> → n 個 aᵐ → <b>乘</b></div>
+</div></div>
+
+<!-- 14 -->
+<div class="slide" data-pg="14 / 30"><div class="tag">避雷</div><div class="body">
+<div class="eyebrow">細目 ②　⚠️ 陷阱二</div>
+<h2>底數不同，不能直接加指數</h2>
+<div class="box r" style="text-align:center;font-size:23px;padding:18px;">
+❌ <span class="fm">2³ × 3² = 6⁵</span>　—— <span class="hl-r">大錯</span>！<br>
+<span style="font-size:18px;">（2³×3² = 8×9 = 72；而 6⁵ = 7776）</span></div>
+<div class="box g" style="text-align:center;font-size:21px;">
+✓ 只有<span class="hl">同底數</span>才能加指數</div>
+<div class="box y"><b>但是注意：</b><span class="fm">(2×3)³ = 2³ × 3³ = 8 × 27 = <span class="hl">216</span></span> ✓<br>
+這是<span class="hl">積的冪</span>（同指數、不同底數 → 可以合併底數），
+和「同底數相乘」是<b>兩回事</b>，別搞混。</div>
+<div class="tip"><div class="ic">📌</div><div class="tx"><b>追問句：</b>「這兩個<b>底數</b>一樣嗎？不一樣的話可以直接加指數嗎？」<br>
+每次計算前<b>先確認底數</b>，這個習慣可以擋掉一半的錯。</div></div>
+</div></div>
+
+<!-- 15 -->
+<div class="slide" data-pg="15 / 30"><div class="tag">避雷</div><div class="body">
+<div class="eyebrow">細目 ②　⚠️ 陷阱三</div>
+<h2>括號位置決定負號有沒有被乘方</h2>
+<table class="tbl">
+<tr><th style="width:26%;">式子</th><th style="width:40%;">意思</th><th>結果</th></tr>
+<tr><td class="fm" style="font-size:22px;">(−3)⁴</td><td>整體乘方：(−3)×(−3)×(−3)×(−3)</td><td class="fm hl-g" style="font-size:22px;">81</td></tr>
+<tr><td class="fm" style="font-size:22px;">−3⁴</td><td>先算 3⁴ = 81，再加負號</td><td class="fm hl-r" style="font-size:22px;">−81</td></tr>
+<tr><td class="fm" style="font-size:22px;">(−2)⁵</td><td>整體乘方（奇次方）</td><td class="fm hl-r" style="font-size:22px;">−32</td></tr>
+</table>
+<div class="box y" style="text-align:center;font-size:21px;">
+<span class="hl">括號有沒有把負號包進去</span>，答案差一個負號</div>
+<div class="box g" style="text-align:center;">複習 1-4：負數的<span class="hl-g">偶次方得正</span>、<span class="hl-r">奇次方得負</span></div>
+</div></div>
+
+<!-- 16 -->
+<div class="slide" data-pg="16 / 30"><div class="tag">避雷</div><div class="body">
+<div class="eyebrow">細目 ②　⚠️ 陷阱四</div>
+<h2>加法沒有分配律！</h2>
+<div class="box r" style="text-align:center;font-size:24px;padding:20px;">
+❌ <span class="fm">(a+b)ⁿ = aⁿ + bⁿ</span>　—— <span class="hl-r">錯</span>！</div>
+<div class="box g" style="text-align:center;font-size:22px;">
+<b>反例（最快的打臉法）</b><br>
+<span class="fm">(1+1)² = 2² = <span class="hl">4</span></span><br>
+<span class="fm">1² + 1² = 1 + 1 = <span class="hl">2</span></span><br>
+<span class="fm hl-r" style="font-size:24px;">4 ≠ 2</span></div>
+<div class="box y" style="text-align:center;font-size:20px;">
+指數律的分配<span class="hl">只對乘法成立</span>：<span class="fm">(ab)ⁿ = aⁿbⁿ</span> ✓<br>
+對加法<span class="hl-r">完全不成立</span>：<span class="fm">(a+b)ⁿ ≠ aⁿ+bⁿ</span></div>
+<div class="tip"><div class="ic">📌</div><div class="tx"><b>學會用反例：</b>不確定一個規則對不對，就<b>代最小的數字試試看</b>（1、2 最好用）。
+一個反例就能推翻一條規則 —— 這是數學最有力的武器。</div></div>
+</div></div>
+
+<!-- 17 -->
+<div class="slide" data-pg="17 / 30"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 2　難度 ★☆☆</div>
+<h2>三條基本律</h2>
+<div class="eg">
+<div class="q">化簡：(1) <span class="fm">3⁴ × 3²</span>　(2) <span class="fm">5⁶ ÷ 5²</span>　(3) <span class="fm">(2³)⁴</span></div>
+<div class="stp">(1) 同底數<b>相乘</b> → 指數<span class="hl-g">相加</span>：<span class="fm">3⁴⁺² = 3⁶ = 729</span></div>
+<div class="stp">(2) 同底數<b>相除</b> → 指數<span class="hl-g">相減</span>：<span class="fm">5⁶⁻² = 5⁴ = 625</span></div>
+<div class="stp">(3) 次方的次方 → 指數<span class="hl-r">相乘</span>：<span class="fm">2³ˣ⁴ = 2¹² = 4096</span></div>
+<div class="a">答：(1) 3⁶ = 729　(2) 5⁴ = 625　(3) 2¹² = 4096</div>
+</div>
+<div class="box y" style="text-align:center;">三題分別對應<span class="hl">乘加、除減、冪乘</span> —— 這節最基本的三個動作</div>
+</div></div>
+
+<!-- 18 -->
+<div class="slide" data-pg="18 / 30"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 3　難度 ★★☆</div>
+<h2>先化成同底數，路就通了</h2>
+<div class="eg">
+<div class="q">化簡 <span class="fm">(2³ × 4²) ÷ 2⁵</span></div>
+<div class="stp"><b>Step 1　化同底</b>　4 不是 2，但 <span class="fm">4 = 2²</span> → <span class="fm">4² = (2²)² = 2⁴</span></div>
+<div class="stp"><b>Step 2　乘法律</b>　<span class="fm">2³ × 2⁴ = 2⁷</span></div>
+<div class="stp"><b>Step 3　除法律</b>　<span class="fm">2⁷ ÷ 2⁵ = 2² = 4</span></div>
+<div class="a">答：4</div>
+</div>
+<div class="box y" style="text-align:center;font-size:21px;">
+💡 關鍵動作：<span class="hl">看到不同底數，先想能不能化成同一個底數</span></div>
+<div class="tip"><div class="ic">📌</div><div class="tx">常見的同底數家族：<b>2、4、8、16、32</b>（都是 2 的次方）；<b>3、9、27、81</b>（都是 3 的次方）。
+看到這些數字，馬上想到可以化成同底。</div></div>
+</div></div>
+
+<!-- 19 -->
+<div class="slide" data-pg="19 / 30"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 4　難度 ★★☆</div>
+<h2>混合化簡</h2>
+<div class="eg">
+<div class="q">化簡 <span class="fm">(2³ × 3²)² ÷ (2×3)³</span></div>
+<div class="stp"><b>Step 1　展開分子</b>　<span class="fm">(2³×3²)² = 2⁶ × 3⁴</span>（冪的冪：指數各乘 2）</div>
+<div class="stp"><b>Step 2　展開分母</b>　<span class="fm">(2×3)³ = 2³ × 3³</span>（積的冪）</div>
+<div class="stp"><b>Step 3　同底數各自相除</b>　<span class="fm">2⁶⁻³ × 3⁴⁻³ = 2³ × 3¹</span></div>
+<div class="stp"><b>Step 4</b>　<span class="fm">8 × 3 = 24</span></div>
+<div class="a">答：24</div>
+</div>
+<div class="box y"><b>做法要點：</b>把 2 的部分和 3 的部分<span class="hl">分開處理</span>，各自用除法律，最後再乘起來。</div>
+</div></div>
+
+<!-- 20 -->
+<div class="slide" data-pg="20 / 30"><div class="tag">修正</div><div class="body">
+<div class="eyebrow">例題 5　難度 ★★☆　<span style="color:#eda0a8;">（原教材答案有誤，已修正）</span></div>
+<h2>化簡 <span class="fm">(3⁴ × 9³) ÷ 3⁷</span></h2>
+<div class="eg">
+<div class="stp"><b>Step 1　化同底</b>　<span class="fm">9 = 3²</span> → <span class="fm">9³ = (3²)³ = 3⁶</span></div>
+<div class="stp"><b>Step 2　乘法律</b>　<span class="fm">3⁴ × 3⁶ = 3¹⁰</span></div>
+<div class="stp"><b>Step 3　除法律</b>　<span class="fm">3¹⁰ ÷ 3⁷ = 3³</span></div>
+<div class="stp"><b>Step 4</b>　<span class="fm">3³ = 27</span></div>
+<div class="a">答：27</div>
+</div>
+<div class="box r"><b class="hl-r">⚠️ 原教材這題答案標成 9，是錯的。</b>
+有趣的是原文括號裡自己重算了一次得到 27，卻沒改答案 —— <br>
+<span class="hl">這正好示範了「算完要檢查、檢查完要真的改」有多重要。</span></div>
+</div></div>
+
+<!-- 21 -->
+<div class="slide" data-pg="21 / 30"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 6　難度 ★★★</div>
+<h2>代數式化簡</h2>
+<div class="eg">
+<div class="q">化簡 <span class="fm">(3a²b³)² ÷ (9a³b) × (3b²)</span></div>
+<div class="stp"><b>Step 1　展開冪</b>　<span class="fm">(3a²b³)² = 3² × a⁴ × b⁶ = 9a⁴b⁶</span></div>
+<div class="stp"><b>Step 2　係數</b>　<span class="fm">9 ÷ 9 × 3 = 3</span></div>
+<div class="stp"><b>Step 3　a 的指數</b>　<span class="fm">4 − 3 = 1</span> → a</div>
+<div class="stp"><b>Step 4　b 的指數</b>　<span class="fm">6 − 1 + 2 = 7</span> → b⁷</div>
+<div class="a">答：3ab⁷</div>
+</div>
+<div class="box y"><b>方法：把「係數」「a」「b」拆成三條線各自處理</b>，最後合起來。
+這樣不管式子多長都不會亂。</div>
+</div></div>
+
+<!-- 22 -->
+<div class="slide" data-pg="22 / 30"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 7　難度 ★★★</div>
+<h2>整體代換：不必求出 a 和 m</h2>
+<div class="eg">
+<div class="q">已知 <span class="fm">aᵐ = 3、aⁿ = 5</span>，求 <span class="fm">aᵐ⁺ⁿ</span> 與 <span class="fm">a²ᵐ⁻ⁿ</span></div>
+<div class="stp"><b>aᵐ⁺ⁿ</b>　用乘法律<b>反過來</b>拆：<span class="fm">aᵐ⁺ⁿ = aᵐ × aⁿ = 3 × 5 = 15</span></div>
+<div class="stp"><b>a²ᵐ⁻ⁿ</b>　先拆：<span class="fm">a²ᵐ⁻ⁿ = a²ᵐ ÷ aⁿ</span></div>
+<div class="stp">　　再看 <span class="fm">a²ᵐ = (aᵐ)² = 3² = 9</span></div>
+<div class="stp">　　所以 <span class="fm">a²ᵐ⁻ⁿ = 9 ÷ 5 = 9/5</span></div>
+<div class="a">答：aᵐ⁺ⁿ = 15；a²ᵐ⁻ⁿ = 9/5</div>
+</div>
+<div class="box y" style="text-align:center;font-size:21px;">
+💡 <span class="hl">把 aᵐ 當成一整塊</span>，完全不需要知道 a 是多少、m 是多少</div>
+<div class="tip"><div class="ic">📌</div><div class="tx"><b>指數律要會「反過來用」：</b>aᵐ⁺ⁿ 看到就要能拆成 aᵐ×aⁿ。
+會正著用只有一半功力，<b>反著用才是重點</b>。</div></div>
+</div></div>
+
+<!-- 23 -->
+<div class="slide" data-pg="23 / 30"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 8　難度 ★★★</div>
+<h2>科學記號 ＋ 指數律（連結 1-4）</h2>
+<div class="eg">
+<div class="q">計算 <span class="fm">(3.6×10⁵) × (4×10³) ÷ (6×10⁴)</span>，用科學記號表示</div>
+<div class="stp"><b>Step 1　係數分開算</b>　<span class="fm">3.6 × 4 ÷ 6 = 14.4 ÷ 6 = 2.4</span></div>
+<div class="stp"><b>Step 2　10 的次方用指數律</b>　<span class="fm">10⁵ × 10³ ÷ 10⁴ = 10⁵⁺³⁻⁴ = 10⁴</span></div>
+<div class="stp"><b>Step 3　組合</b>　<span class="fm">2.4 × 10⁴</span></div>
+<div class="stp"><b>Step 4　檢查規範化</b>　係數 2.4 在 1 ~ 10 之間 ✓</div>
+<div class="a">答：2.4×10⁴</div>
+</div>
+<div class="box y"><b>這就是 1-4 科學記號乘除的原理：</b><span class="hl">係數歸係數、次方歸次方</span>，
+次方的部分就是在用<b>指數律</b>。</div>
+</div></div>
+
+<!-- 24 -->
+<div class="slide" data-pg="24 / 30"><div class="tag">修正</div><div class="body">
+<div class="eyebrow">例題 9　難度 ★★★　<span style="color:#eda0a8;">（原教材答案有誤，已修正）</span></div>
+<h2>化簡 <span class="fm">[(−2)³ × (−3)²] ÷ [2⁴ × 3]</span></h2>
+<div class="eg">
+<div class="stp"><b>Step 1　分子</b>　<span class="fm">(−2)³ = −8</span>（奇次方 → 負）；<span class="fm">(−3)² = 9</span>（偶次方 → 正）</div>
+<div class="stp">　　<span class="fm">(−8) × 9 = −72</span></div>
+<div class="stp"><b>Step 2　分母</b>　<span class="fm">2⁴ × 3 = 16 × 3 = 48</span></div>
+<div class="stp"><b>Step 3　相除</b>　<span class="fm">−72 ÷ 48 = −3/2</span>（約分：同除 24）</div>
+<div class="a">答：−3/2</div>
+</div>
+<div class="box r"><b class="hl-r">⚠️ 原教材這題答案標成 −9/2，是錯的。</b>
+和上一題一樣，括號內算對了卻沒改標籤。<br>
+<span class="hl">兩題都示範了同一件事：檢查要檢查到底。</span></div>
+</div></div>
+
+<!-- 25 -->
+<div class="slide" data-pg="25 / 30"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 1</div>
+<h2>電腦記憶體 —— 指數律的日常應用</h2>
+<div class="box"><span class="fm">1KB = 2¹⁰ bytes　·　1MB = 2²⁰ bytes　·　1GB = 2³⁰ bytes</span></div>
+<div class="eg">
+<div class="stp"><b>(1) 1GB 是幾個 KB？</b>　<span class="fm">2³⁰ ÷ 2¹⁰ = 2²⁰ = 1048576</span>（約 <span class="hl">105 萬</span>個）</div>
+<div class="stp"><b>(2) 4GB 是 2 的幾次方 bytes？</b>　<span class="fm">4 × 2³⁰ = 2² × 2³⁰ = 2³²</span></div>
+<div class="stp"><b>(3) 某影片 2³⁵ bytes，是幾 GB？</b>　<span class="fm">2³⁵ ÷ 2³⁰ = 2⁵ = 32 GB</span></div>
+<div class="stp"><b>(4) 速度每秒 2¹⁰ bytes，傳完要幾秒？</b>　<span class="fm">2³⁵ ÷ 2¹⁰ = 2²⁵ 秒</span></div>
+</div>
+<div class="box y">💡 (4) 的答案 <span class="fm">2²⁵</span> 秒 ≈ 3355 萬秒 ≈ <span class="hl">388 天</span> —— 大得離譜正是重點！
+<span class="fm">2¹⁰ bytes/秒 = 1KB/秒</span>，這是 1990 年代的網速。<b>讓學生感受指數的威力。</b></div>
+</div></div>
+
+<!-- 26 -->
+<div class="slide" data-pg="26 / 30"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 2</div>
+<h2>細菌分裂 —— 指數成長</h2>
+<div class="box">細菌每 <span class="hl">20 分鐘</span>分裂一次（一變二），從 <span class="hl">1</span> 個開始</div>
+<div class="eg">
+<div class="stp"><b>(1) 2 小時後幾個？</b>　2 小時 = 120 分 = <span class="fm">6</span> 次分裂 → <span class="fm hl">2⁶ = 64 個</span></div>
+<div class="stp"><b>(2) n 小時後幾個？</b>　n 小時分裂 <span class="fm">3n</span> 次 → <span class="fm hl">2³ⁿ 個</span></div>
+<div class="stp"><b>(3) 若初始有 2³ 個，已分裂 5 次？</b>　<span class="fm">2³ × 2⁵ = 2⁸ = 256 個</span></div>
+<div class="stp"><b>(4) 要超過 10⁶ 個，至少幾小時？</b>（已知 <span class="fm">2¹⁰ ≈ 10³</span>）</div>
+<div class="stp">　　<span class="fm">10⁶ = (10³)² ≈ (2¹⁰)² = 2²⁰</span></div>
+<div class="stp">　　<span class="fm">2³ⁿ > 2²⁰ → 3n > 20 → n > 6.67 → 至少 7 小時</span></div>
+</div>
+<div class="box y">💡 (4) 用到 <span class="fm hl">2¹⁰ ≈ 10³</span>（1024 ≈ 1000）—— 工程師天天在用的近似，
+也解釋了為什麼 1KB 有時被說成「約 1000 bytes」。</div>
+</div></div>
+
+<!-- 27 -->
+<div class="slide" data-pg="27 / 30"><div class="tag">避雷</div><div class="body">
+<h2>避雷指南：五個最常見錯誤</h2>
+<table class="tbl">
+<tr><th style="width:42%;">❌ 錯誤</th><th>✓ 正確</th></tr>
+<tr><td><span class="fm">aᵐ × aⁿ</span> 算成 <span class="fm">aᵐˣⁿ</span></td><td><span class="fm hl-g">aᵐ⁺ⁿ</span>（同底數相乘，指數<b>相加</b>）</td></tr>
+<tr><td><span class="fm">(aᵐ)ⁿ</span> 算成 <span class="fm">aᵐ⁺ⁿ</span></td><td><span class="fm hl-g">aᵐⁿ</span>（冪的冪，指數<b>相乘</b>）</td></tr>
+<tr><td><span class="fm">2³ × 3²</span> 算成 <span class="fm">6⁵</span></td><td>底數不同<b class="hl-g">不能</b>加指數</td></tr>
+<tr><td><span class="fm">(−3b²)³</span> 算成 <span class="fm">+27b⁶</span></td><td><span class="fm hl-g">−27b⁶</span>（括號連同符號一起乘方）</td></tr>
+<tr><td><span class="fm">(a+b)ⁿ</span> 算成 <span class="fm">aⁿ+bⁿ</span></td><td><b class="hl-g">加法沒有分配律</b>！反例 (1+1)²=4≠2</td></tr>
+</table>
+<div class="box y" style="text-align:center;font-size:21px;">
+自我檢查句：<span class="hl">「底數一樣嗎？一樣的話，這是相乘（指數加）還是次方的次方（指數乘）？」</span></div>
+</div></div>
+
+<!-- 28 -->
+<div class="slide" data-pg="28 / 30"><div class="tag">回顧</div><div class="body">
+<h2>回頭看細目 ①：現在你懂為什麼了</h2>
+<div class="box"><b>1-4 當時只告訴你「規律」：</b><br>
+<span class="fm">10⁻ⁿ ＝ 小數點後第 n 位是 1</span>　·　<span class="fm">0.0000056 = 5.6×10⁻⁶</span></div>
+<div class="box g"><b>現在你知道「理由」了：</b><br>
+<span class="fm">a⁰ ÷ aⁿ = a⁰⁻ⁿ = a⁻ⁿ</span>　而　<span class="fm">a⁰ ÷ aⁿ = 1/aⁿ</span><br>
+→ <span class="fm hl">a⁻ⁿ = 1/aⁿ</span>　—— 是<span class="hl">除法律逼出來的</span>，不是規定</div>
+<div class="box y" style="text-align:center;font-size:21px;">
+<span class="fm">0.001 = 1/1000 = 1/10³ = <span class="hl">10⁻³</span></span></div>
+<div class="tip"><div class="ic">💡</div><div class="tx"><b>數學就是這樣長大的：</b>先有規律 → 為了讓規律<b>一直成立</b> → 反過來定義新東西（a⁰、a⁻ⁿ）。
+不是先有定義才有規律。</div></div>
+</div></div>
+
+<!-- 29 -->
+<div class="slide" data-pg="29 / 30"><div class="tag">總結</div><div class="body">
+<h2>本節總結</h2>
+<ul>
+<li><span class="hl">零次方與負指數不是規定，是除法律逼出來的</span>：<span class="fm">aⁿ÷aⁿ → a⁰=1</span>；<span class="fm">a⁰÷aⁿ → a⁻ⁿ=1/aⁿ</span></li>
+<li><span class="hl">小數 = 分數 = 負指數</span>：<span class="fm">0.25 = 1/4 = 2⁻²</span> —— 這才是 1-4「小數用負次方」的真正理由</li>
+<li><span class="hl">五條指數律</span>：乘<b>加</b>、除<b>減</b>、冪<b>乘</b>、積分配、商分配</li>
+<li><span class="hl">三大陷阱</span>：指數加 vs 乘、底數不同不能加、括號決定負號有沒有被乘方</li>
+<li><span class="hl-r">加法沒有分配律</span>：<span class="fm">(a+b)ⁿ ≠ aⁿ+bⁿ</span></li>
+</ul>
+<div class="box g" style="text-align:center;font-size:20px;">
+🔗 <b>承先</b>：1-4 的科學記號終於有理論根據<br>
+🔗 <b>啟後</b>：這節是<span class="hl">八上「整式乘法、多項式展開」的直接基礎</span></div>
+</div></div>
+
+<!-- 30 -->
+<div class="slide" data-pg="30 / 30"><div class="tag">Next</div><div class="big-center">
+<div class="eyebrow">第 2 章完・下一章</div>
+<h1 style="font-size:42px;">第 3 章　一元一次方程式</h1>
+<div class="lead">從「算出答案」到「解出未知數」——<br>數學課最大的一次思維轉彎</div>
+<svg viewBox="0 0 560 76" width="62%" style="margin-top:20px;">
+<line x1="20" y1="38" x2="520" y2="38" stroke="#f2d979" stroke-width="2" stroke-dasharray="2 10" opacity="0.7"/>
+<path d="M520 38 l-12 -7 M520 38 l-12 7" stroke="#f2d979" stroke-width="2" fill="none"/>
+<text x="270" y="24" font-family="Caveat" font-size="23" fill="#a6d6a0" text-anchor="middle">2x + 3 = 11　→　x = ?</text>
+</svg>
+<div class="box y" style="max-width:820px;margin-top:18px;">
+第 2 章你學會了<span class="hl">分數、GCD/LCM、指數</span> —— 全都是<b>計算工具</b>。<br>
+第 3 章開始，這些工具要拿來<span class="hl">解方程式</span>：<br>
+<span class="fm">3-1 代數式的運算與化簡　·　3-2 一元一次方程式的解法　·　3-3 應用問題</span></div>
+</div></div>
+
+</div></body></html>

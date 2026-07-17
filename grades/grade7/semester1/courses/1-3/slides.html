@@ -1,0 +1,392 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>七上 1-3 整數的乘除與四則運算｜授課簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--chalk-soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);padding:24px 14px;}
+.deck{max-width:1060px;margin:0 auto;}
+.print-hint{text-align:center;color:rgba(243,239,226,0.4);font-size:13px;padding:6px 0 22px;}
+.print-hint b{color:var(--yellow);}
+.slide{position:relative;min-height:576px;margin:0 auto 26px;padding:44px 52px;
+ background:radial-gradient(ellipse at 18% 12%,rgba(255,255,255,0.05),transparent 45%),
+  radial-gradient(ellipse at 82% 88%,rgba(255,255,255,0.035),transparent 45%),
+  radial-gradient(ellipse at 60% 40%,rgba(120,160,130,0.10),transparent 60%),
+  linear-gradient(160deg,var(--board) 0%,var(--board2) 100%);
+ border-radius:14px;box-shadow:0 10px 34px rgba(0,0,0,0.55);
+ border:1px solid rgba(242,217,121,0.14);overflow:hidden;display:flex;flex-direction:column;}
+.slide::before{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;
+ background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.014) 40px,rgba(255,255,255,0.014) 41px),
+  radial-gradient(circle at 30% 72%,rgba(255,255,255,0.03),transparent 8%),
+  radial-gradient(circle at 76% 24%,rgba(255,255,255,0.025),transparent 7%);}
+.slide::after{content:attr(data-pg);position:absolute;bottom:15px;right:26px;font-family:'Caveat',cursive;font-size:20px;color:rgba(243,239,226,0.4);}
+.tag{position:absolute;top:20px;right:26px;font-family:'Caveat',cursive;font-size:22px;color:var(--pink);transform:rotate(4deg);}
+.eyebrow{font-family:'Caveat',cursive;font-size:25px;color:var(--yellow);letter-spacing:1px;margin-bottom:8px;opacity:0.92;}
+.slide h1{font-family:'Noto Serif TC',serif;font-size:50px;font-weight:900;line-height:1.28;letter-spacing:1px;
+ text-shadow:0 0 1px rgba(243,239,226,0.5),1px 1px 0 rgba(0,0,0,0.2);}
+.slide h2{font-family:'Noto Serif TC',serif;font-size:33px;font-weight:900;color:var(--yellow);
+ margin-bottom:20px;padding-bottom:11px;border-bottom:2px dashed rgba(242,217,121,0.4);
+ text-shadow:0 0 1px rgba(242,217,121,0.4);}
+.slide p{font-size:20px;line-height:1.85;margin-bottom:12px;}
+.big-center{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;}
+.big-center .lead,.lead{font-family:'Caveat',cursive;font-size:30px;color:var(--blue);letter-spacing:1px;margin-top:12px;}
+ul{list-style:none;margin:8px 0;}
+li{font-size:21px;line-height:1.95;padding-left:32px;position:relative;margin-bottom:4px;}
+li::before{content:'\2726';position:absolute;left:4px;color:var(--yellow);font-size:17px;top:3px;}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.34);border-radius:12px;padding:15px 21px;margin:12px 0;font-size:19px;line-height:1.8;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.38);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.38);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.34);}
+.eg{position:relative;background:rgba(0,0,0,0.24);border:1px solid rgba(242,217,121,0.2);border-radius:10px;padding:17px 22px;margin:12px 0;font-size:19px;}
+.eg::before{content:'';position:absolute;top:-8px;left:38px;width:58px;height:15px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.eg .q{color:var(--blue);font-weight:700;margin-bottom:8px;font-size:19px;}
+.eg .a{color:var(--green);font-weight:700;margin-top:6px;}
+.eg .stp{color:var(--chalk-soft);font-size:18px;margin:3px 0;}
+.tip{display:flex;gap:12px;align-items:flex-start;background:rgba(242,217,121,0.09);border:1.5px dashed rgba(242,217,121,0.45);border-radius:12px;padding:13px 18px;margin:10px 0;}
+.tip .ic{font-size:24px;line-height:1;}.tip .tx{font-size:18px;line-height:1.7;}
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:18px;}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.26);padding:10px 14px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.two{display:flex;gap:20px;}.two>div{flex:1;}
+svg{display:block;margin:6px auto;max-width:100%;}
+@media print{
+ body{background:#0a130d;padding:0;}
+ .deck{max-width:none;}
+ .print-hint{display:none;}
+ .slide{margin:0;border-radius:0;box-shadow:none;min-height:100vh;
+  page-break-after:always;break-after:page;padding:32px 44px;justify-content:center;}
+ .slide:last-child{page-break-after:auto;break-after:auto;}
+ .slide h1{font-size:42px;}
+ .slide h2{font-size:27px;margin-bottom:13px;padding-bottom:8px;}
+ .slide p{font-size:17px;line-height:1.55;margin-bottom:6px;}
+ li{font-size:17px;line-height:1.55;margin-bottom:1px;padding-left:26px;}
+ .eyebrow{font-size:21px;margin-bottom:5px;}
+ .big-center .lead,.lead{font-size:26px;}
+ .box{font-size:16px;padding:10px 16px;margin:6px 0;line-height:1.5;}
+ .eg{font-size:16px;padding:11px 16px;margin:6px 0;}
+ .tip{font-size:16px;padding:10px 14px;margin:6px 0;}
+ .tbl{font-size:15px;margin:6px 0;}
+ .tbl th,.tbl td{padding:6px 10px;}
+ svg{max-height:210px;}
+}
+</style></head><body><div class="deck">
+<div class="print-hint">📽 共 <b>27</b> 張投影片　·　七上 第1章 整數運算　·　按 <b>Ctrl+P</b> 可列印或轉存 PDF</div>
+
+<!-- 1 封面 -->
+<div class="slide" data-pg="1 / 27"><div class="big-center">
+<svg viewBox="0 0 860 120" width="86%" style="opacity:0.9;">
+<text x="60" y="46" font-family="Caveat" font-size="42" fill="#a6d6a0" transform="rotate(-6 60 46)">(−4)×(−3)=+12</text>
+<text x="400" y="38" font-family="Caveat" font-size="40" fill="#eda0a8" transform="rotate(5 400 38)">(−12)÷(+3)=−4</text>
+<text x="700" y="48" font-family="Caveat" font-size="40" fill="#f2d979" transform="rotate(-4 700 48)">5÷0 ✗</text>
+<line x1="50" y1="90" x2="810" y2="90" stroke="#f3efe2" stroke-width="2"/>
+<line x1="560" y1="78" x2="560" y2="102" stroke="#f2d979" stroke-width="3"/>
+<text x="560" y="118" font-family="Caveat" font-size="20" fill="#f2d979" text-anchor="middle">0</text>
+<path d="M560 90 Q470 60 380 90" stroke="#eda0a8" stroke-width="2" fill="none" stroke-dasharray="4 4"/>
+<path d="M380 90 Q290 60 200 90" stroke="#eda0a8" stroke-width="2" fill="none" stroke-dasharray="4 4"/>
+<path d="M200 90 l10 -5 M200 90 l10 5" stroke="#eda0a8" stroke-width="2" fill="none"/>
+<path d="M50 90 l12 -6 M50 90 l12 6" stroke="#f3efe2" stroke-width="2" fill="none"/>
+<path d="M810 90 l-12 -6 M810 90 l-12 6" stroke="#f3efe2" stroke-width="2" fill="none"/>
+</svg>
+<div class="eyebrow">國一上學期 · 第1章 整數運算</div>
+<h1>1-3　整數的乘除與四則運算</h1>
+<div class="lead">「同號得正、異號得負」，乘除共用一套規則</div>
+</div></div>
+
+<!-- 2 導覽 -->
+<div class="slide" data-pg="2 / 27"><div class="eyebrow">本節導覽</div><h2>今天要學會三件事</h2><div class="body">
+<ul>
+<li><span class="hl">① 正、負整數的乘法</span>　同號得正、異號得負；連乘數負號</li>
+<li><span class="hl-b">② 正、負整數的除法</span>　規則同乘法；⚠️ 除數不可以是 0</li>
+<li><span class="hl-r">③ 正、負整數的四則運算</span>　先乘除、後加減</li>
+</ul>
+<div class="box y">好消息：<span class="hl">乘法和除法共用同一套符號規則</span> —— 只要記一次。</div>
+</div></div>
+
+<!-- 3 乘法的意義 -->
+<div class="slide" data-pg="3 / 27"><div class="eyebrow">核心 ①　乘法</div><h2>乘法 = 重複相加</h2><div class="body">
+<div class="box" style="text-align:center;font-size:22px;">
+<span class="fm">(−2) × 3 = (−2) + (−2) + (−2) = <span class="hl">−6</span></span></div>
+<svg viewBox="0 0 900 120" width="100%">
+<line x1="40" y1="72" x2="860" y2="72" stroke="#f3efe2" stroke-width="2"/>
+<g font-family="Noto Sans TC" font-size="17" text-anchor="middle">
+<line x1="700" y1="60" x2="700" y2="84" stroke="#f2d979" stroke-width="3.5"/><text x="700" y="104" fill="#f2d979">0</text>
+<line x1="580" y1="64" x2="580" y2="80" stroke="rgba(243,239,226,.6)" stroke-width="1.5"/><text x="580" y="104" fill="#eda0a8">−2</text>
+<line x1="460" y1="64" x2="460" y2="80" stroke="rgba(243,239,226,.6)" stroke-width="1.5"/><text x="460" y="104" fill="#eda0a8">−4</text>
+<circle cx="340" cy="72" r="7" fill="#f2d979"/><text x="340" y="104" fill="#f2d979">−6</text>
+</g>
+<path d="M700 56 Q640 26 580 56" stroke="#eda0a8" stroke-width="2.5" fill="none"/>
+<path d="M580 56 Q520 26 460 56" stroke="#eda0a8" stroke-width="2.5" fill="none"/>
+<path d="M460 56 Q400 26 340 56" stroke="#eda0a8" stroke-width="2.5" fill="none"/>
+<text x="520" y="20" font-family="Noto Sans TC" font-size="17" fill="#eda0a8" text-anchor="middle">往左跳 3 次，每次 2 格</text>
+</svg>
+<div class="tip"><div class="ic">💡</div><div class="tx">從 0 出發，<span class="hl-r">往左</span>跳 3 次 → 這就是<span class="hl">負數乘正數 = 負數</span>的意義。</div></div>
+</div></div>
+
+<!-- 4 乘法符號規則 -->
+<div class="slide" data-pg="4 / 27"><div class="eyebrow">核心 ①　乘法</div><h2>符號規則：同號得正、異號得負</h2><div class="body">
+<table class="tbl">
+<tr><th>算式</th><th>符號判斷</th><th>結果</th></tr>
+<tr><td class="fm">(+4) × (+3)</td><td class="hl-g">同號 → 正</td><td class="fm hl">+12</td></tr>
+<tr><td class="fm">(+4) × (−3)</td><td class="hl-r">異號 → 負</td><td class="fm hl">−12</td></tr>
+<tr><td class="fm">(−4) × (+3)</td><td class="hl-r">異號 → 負</td><td class="fm hl">−12</td></tr>
+<tr><td class="fm">(−4) × (−3)</td><td class="hl-g">同號 → 正</td><td class="fm hl">+12</td></tr>
+</table>
+<div class="box y" style="text-align:center;font-size:21px;">
+口訣：<span class="hl">同號得正，異號得負</span>　—— 先定符號，再算絕對值相乘</div>
+</div></div>
+
+<!-- 5 例題1 -->
+<div class="slide" data-pg="5 / 27"><div class="tag">例題 1 ★☆☆</div><div class="eyebrow">換你試試看</div><h2>乘法符號</h2><div class="body">
+<div class="eg"><div class="q">計算 (+4)×(−3) 與 (−4)×(−3)</div>
+<div class="stp fm">(+4)×(−3)：<span class="hl-r">異號</span>得負，4×3=12 → <span class="hl-r">−12</span></div>
+<div class="stp fm">(−4)×(−3)：<span class="hl-g">同號</span>得正，4×3=12 → <span class="hl-b">+12</span></div>
+<div class="a">答：−12　與　+12</div></div>
+<div class="tip"><div class="ic">🔑</div><div class="tx">兩個負數相乘會<span class="hl">變成正數</span> —— 這是最反直覺、也最常考的地方。</div></div>
+</div></div>
+
+<!-- 6 連乘數負號 -->
+<div class="slide" data-pg="6 / 27"><div class="eyebrow">核心 ①　乘法</div><h2>連乘：數負號個數</h2><div class="body big-center">
+<div class="two" style="width:100%;">
+<div class="box g" style="text-align:center;"><div style="font-size:26px;font-weight:900;color:var(--green);">偶數個負號</div>
+<div style="font-size:34px;margin:10px 0;" class="fm hl-g">→ 正</div></div>
+<div class="box r" style="text-align:center;"><div style="font-size:26px;font-weight:900;color:var(--pink);">奇數個負號</div>
+<div style="font-size:34px;margin:10px 0;" class="fm hl-r">→ 負</div></div>
+</div>
+<div class="box y" style="max-width:820px;">先<span class="hl">數負號個數</span>定符號，再把<span class="hl">絕對值全部相乘</span> —— 比兩兩配對快得多，也不容易錯。</div>
+</div></div>
+
+<!-- 7 例題2 -->
+<div class="slide" data-pg="7 / 27"><div class="tag">例題 2 ★★☆</div><div class="eyebrow">換你試試看</div><h2>連乘的符號</h2><div class="body">
+<div class="eg"><div class="q">計算 (−2)×(−3)×(−1)×(−4)</div>
+<div class="stp">Step 1　數負號：(−2)、(−3)、(−1)、(−4) 共 <span class="hl">4 個</span> → <span class="hl-g">偶數 → 正</span></div>
+<div class="stp fm">Step 2　算絕對值：2×3×1×4 = 24</div>
+<div class="a">答：+24</div></div>
+<div class="box">再看一組：(−2)×(−3)×(−5) → <span class="hl-r">3 個負號（奇數）→ 負</span>；2×3×5=30 → <span class="hl-r">−30</span></div>
+</div></div>
+
+<!-- 8 0 乘法 -->
+<div class="slide" data-pg="8 / 27"><div class="eyebrow">核心 ①　乘法</div><h2>0 的乘法</h2><div class="body big-center">
+<div class="box y" style="font-size:30px;padding:22px 40px;"><span class="fm"><span class="hl">0 × 任何數 = 0</span></span></div>
+<p style="margin-top:16px;">不管另一個數是正是負、多大多小 —— 只要有 0，結果就是 0。</p>
+<div class="box" style="max-width:700px;"><span class="fm">0 × (−7) = 0　；　0 × 1000000 = 0</span></div>
+</div></div>
+
+<!-- 9 除法符號 -->
+<div class="slide" data-pg="9 / 27"><div class="eyebrow">核心 ②　除法</div><h2>除法符號：和乘法完全一樣</h2><div class="body">
+<div class="box y" style="text-align:center;font-size:22px;">
+<span class="hl">同號得正，異號得負</span>　—— 和乘法<span class="hl">共用同一套規則</span></div>
+<table class="tbl">
+<tr><th>算式</th><th>符號判斷</th><th>結果</th></tr>
+<tr><td class="fm">(+12) ÷ (+3)</td><td class="hl-g">同號 → 正</td><td class="fm hl">+4</td></tr>
+<tr><td class="fm">(−12) ÷ (+3)</td><td class="hl-r">異號 → 負</td><td class="fm hl">−4</td></tr>
+<tr><td class="fm">(+12) ÷ (−3)</td><td class="hl-r">異號 → 負</td><td class="fm hl">−4</td></tr>
+<tr><td class="fm">(−12) ÷ (−3)</td><td class="hl-g">同號 → 正</td><td class="fm hl">+4</td></tr>
+</table>
+<div class="tip"><div class="ic">👍</div><div class="tx">好消息：<span class="hl">只要記一次符號規則</span>，乘法除法都通用。</div></div>
+</div></div>
+
+<!-- 10 除法的意義 -->
+<div class="slide" data-pg="10 / 27"><div class="eyebrow">核心 ②　除法</div><h2>除法 = 分組</h2><div class="body">
+<div class="box" style="text-align:center;font-size:22px;">
+<span class="fm">(−12) ÷ 3 = <span class="hl">−4</span></span>　　把 −12 平分成 3 組，每組是 −4</div>
+<svg viewBox="0 0 900 110" width="100%">
+<line x1="40" y1="66" x2="860" y2="66" stroke="#f3efe2" stroke-width="2"/>
+<g font-family="Noto Sans TC" font-size="16" text-anchor="middle">
+<line x1="760" y1="54" x2="760" y2="78" stroke="#f2d979" stroke-width="3.5"/><text x="760" y="98" fill="#f2d979">0</text>
+<circle cx="200" cy="66" r="7" fill="#eda0a8"/><text x="200" y="98" fill="#eda0a8">−12</text>
+<line x1="386" y1="58" x2="386" y2="74" stroke="rgba(243,239,226,.6)" stroke-width="1.5"/><text x="386" y="98" fill="rgba(243,239,226,.7)">−8</text>
+<line x1="573" y1="58" x2="573" y2="74" stroke="rgba(243,239,226,.6)" stroke-width="1.5"/><text x="573" y="98" fill="rgba(243,239,226,.7)">−4</text>
+</g>
+<path d="M760 44 L573 44" stroke="#a6d6a0" stroke-width="2.5"/><path d="M760 38 L760 50 M573 38 L573 50" stroke="#a6d6a0" stroke-width="2.5"/>
+<path d="M573 44 L386 44" stroke="#a6d6a0" stroke-width="2.5"/><path d="M386 38 L386 50" stroke="#a6d6a0" stroke-width="2.5"/>
+<path d="M386 44 L200 44" stroke="#a6d6a0" stroke-width="2.5"/><path d="M200 38 L200 50" stroke="#a6d6a0" stroke-width="2.5"/>
+<text x="666" y="32" font-size="15" fill="#a6d6a0" text-anchor="middle" font-family="Noto Sans TC">−4</text>
+<text x="480" y="32" font-size="15" fill="#a6d6a0" text-anchor="middle" font-family="Noto Sans TC">−4</text>
+<text x="293" y="32" font-size="15" fill="#a6d6a0" text-anchor="middle" font-family="Noto Sans TC">−4</text>
+</svg>
+<div class="tip"><div class="ic">💡</div><div class="tx">從 0 到 −12 平均切成 <span class="hl-g">3 段</span>，每段是 <span class="hl-g">−4</span>。</div></div>
+</div></div>
+
+<!-- 11 例題3 -->
+<div class="slide" data-pg="11 / 27"><div class="tag">例題 3 ★★☆</div><div class="eyebrow">換你試試看</div><h2>除法符號</h2><div class="body">
+<div class="eg"><div class="q">計算 (−12)÷(+3) 與 (−12)÷(−3)</div>
+<div class="stp fm">(−12)÷(+3)：<span class="hl-r">異號</span>得負，12÷3=4 → <span class="hl-r">−4</span></div>
+<div class="stp fm">(−12)÷(−3)：<span class="hl-g">同號</span>得正，12÷3=4 → <span class="hl-b">+4</span></div>
+<div class="a">答：−4　與　+4</div></div>
+</div></div>
+
+<!-- 12 除以0 -->
+<div class="slide" data-pg="12 / 27"><div class="tag">最重要觀念</div><div class="eyebrow">核心 ②　除法</div><h2>⚠️ 0 的除法：兩件完全不同的事</h2><div class="body">
+<div class="two">
+<div class="box g" style="text-align:center;"><div class="fm" style="font-size:30px;color:var(--green);">0 ÷ 5 = 0</div>
+<div style="font-size:17px;margin-top:10px;"><span class="hl-g">✅ 合法</span><br>0 分給 5 個人，每人拿 0</div></div>
+<div class="box r" style="text-align:center;"><div class="fm" style="font-size:30px;color:var(--pink);">5 ÷ 0 = ？</div>
+<div style="font-size:17px;margin-top:10px;"><span class="hl-r">❌ 無意義</span><br>不存在這個運算結果</div></div>
+</div>
+<div class="box y" style="text-align:center;font-size:21px;">
+<span class="hl">除數不可以是 0</span> —— 這是數學的鐵則</div>
+<div class="tip"><div class="ic">⚠️</div><div class="tx">最常見迷思：以為「0÷任何數=0」和「任何數÷0=0」是<span class="hl-r">同一件事</span>。它們完全不同！</div></div>
+</div></div>
+
+<!-- 13 例題4 -->
+<div class="slide" data-pg="13 / 27"><div class="tag">例題 4 ★★☆</div><div class="eyebrow">換你試試看</div><h2>判斷對錯</h2><div class="body">
+<div class="eg"><div class="q">判斷：「0 除以任何數都等於 0，所以任何數除以 0 也等於 0。」</div>
+<div class="stp">前半句：0 ÷ 5 = 0 → <span class="hl-g">對</span>（但要補一句：除數不能是 0）</div>
+<div class="stp">後半句：5 ÷ 0 → <span class="hl-r">無意義</span>，不是 0，也不是任何數</div>
+<div class="a">答：整句話是<span class="hl-r">錯</span>的。兩者不能混為一談。</div></div>
+</div></div>
+
+<!-- 14 連除 -->
+<div class="slide" data-pg="14 / 27"><div class="eyebrow">核心 ②　除法</div><h2>連除要由左往右</h2><div class="body">
+<div class="eg"><div class="q">計算 (−18) ÷ (−2) ÷ (−3)</div>
+<div class="stp fm">由左往右：(−18)÷(−2) = <span class="hl-b">9</span>（同號得正）</div>
+<div class="stp fm">再算：9 ÷ (−3) = <span class="hl-r">−3</span>（異號得負）</div>
+<div class="a">答：−3</div></div>
+<div class="box r">⚠️ 不可以先算後面！若先算 (−2)÷(−3) 會得到完全不同的答案。</div>
+<div class="tip"><div class="ic">🔗</div><div class="tx">和 1-2 的減法一樣：<span class="hl">除法也沒有結合律</span>，一律<span class="hl">由左往右</span>。</div></div>
+</div></div>
+
+<!-- 15 四則順序 -->
+<div class="slide" data-pg="15 / 27"><div class="eyebrow">核心 ③　四則運算</div><h2>運算順序三原則</h2><div class="body">
+<ul>
+<li><span class="hl">① 有括號</span> → 先算括號內</li>
+<li><span class="hl-b">② 沒括號</span> → 先<span class="hl-b">乘除</span>、後<span class="hl-b">加減</span></li>
+<li><span class="hl-g">③ 同一層級</span> → 由左往右</li>
+</ul>
+<div class="box y" style="text-align:center;font-size:22px;">
+括號 → 乘除 → 加減</div>
+<div class="tip"><div class="ic">⚠️</div><div class="tx">最常錯：<span class="hl-r">看到加減就先算</span>，忽略乘除有優先權。</div></div>
+</div></div>
+
+<!-- 16 例題5 -->
+<div class="slide" data-pg="16 / 27"><div class="tag">例題 5 ★★★</div><div class="eyebrow">換你試試看</div><h2>四則混合運算</h2><div class="body">
+<div class="eg"><div class="q">計算 (−3) + 4×(−2) − (−6)÷2</div>
+<div class="stp">Step 1　沒有括號 → <span class="hl">先做乘除</span></div>
+<div class="stp fm">　　　　4×(−2) = <span class="hl-r">−8</span>　；　(−6)÷2 = <span class="hl-r">−3</span></div>
+<div class="stp fm">Step 2　原式 = (−3) + (−8) − (−3)</div>
+<div class="stp fm">Step 3　(−3)+(−8) = −11</div>
+<div class="stp fm">Step 4　−11 − (−3) = −11 + 3 = −8</div>
+<div class="a">答：−8</div></div>
+</div></div>
+
+<!-- 17 例題 括號 -->
+<div class="slide" data-pg="17 / 27"><div class="tag">例題 6 ★★★</div><div class="eyebrow">換你試試看</div><h2>括號＋乘除＋加減</h2><div class="body">
+<div class="eg"><div class="q">計算 (6 − 10) × (−3) + 8 ÷ (−4)</div>
+<div class="stp fm">Step 1　先算括號：(6−10) = <span class="hl-r">−4</span></div>
+<div class="stp fm">Step 2　乘除：(−4)×(−3) = <span class="hl-b">+12</span>（同號得正）；8÷(−4) = <span class="hl-r">−2</span></div>
+<div class="stp fm">Step 3　加減：12 + (−2) = 10</div>
+<div class="a">答：10</div></div>
+</div></div>
+
+<!-- 18 例題 冷藏 -->
+<div class="slide" data-pg="18 / 27"><div class="tag">例題 7 ★★☆</div><div class="eyebrow">生活應用</div><h2>冷藏系統故障</h2><div class="body">
+<div class="eg"><div class="q">倉庫溫度每小時下降 1.5°C，從 0°C 開始故障，4 小時後溫度是多少？</div>
+<div class="stp">想法：「每小時下降固定量」連續 4 次 → 用<span class="hl">乘法</span></div>
+<div class="stp fm">列式：0 + (−1.5) × 4</div>
+<div class="stp fm">(−1.5)×4：異號得負，1.5×4=6 → <span class="hl-r">−6</span></div>
+<div class="a">答：−6°C</div></div>
+<div class="tip"><div class="ic">💡</div><div class="tx">「連續固定變化」是<span class="hl">乘法</span>的典型應用情境。</div></div>
+</div></div>
+
+<!-- 19 隨堂基礎 -->
+<div class="slide" data-pg="19 / 27"><div class="eyebrow">隨堂練習</div><h2>小試身手（基礎）</h2><div class="body">
+<table class="tbl">
+<tr><th>題目</th><th>答案</th><th>題目</th><th>答案</th></tr>
+<tr><td class="fm">(+6)×(+5)</td><td class="hl">+30</td><td class="fm">(−24)÷(−6)</td><td class="hl">+4</td></tr>
+<tr><td class="fm">(−7)×(+4)</td><td class="hl">−28</td><td class="fm">(+18)÷(−3)</td><td class="hl">−6</td></tr>
+<tr><td class="fm">(−9)×(−6)</td><td class="hl">+54</td><td class="fm">0 × (−7)</td><td class="hl">0</td></tr>
+</table>
+</div></div>
+
+<!-- 20 隨堂進階 -->
+<div class="slide" data-pg="20 / 27"><div class="eyebrow">隨堂練習</div><h2>小試身手（進階）</h2><div class="body">
+<table class="tbl">
+<tr><th>題目</th><th>答案</th></tr>
+<tr><td class="fm">(−2)×(−3)×(−5)</td><td class="hl">−30　（3 個負號，奇數 → 負）</td></tr>
+<tr><td class="fm">(−4)×(−4)×(−4)×(−4)×(−1)</td><td class="hl">−256　（5 個負號，奇數 → 負）</td></tr>
+<tr><td class="fm">5 + (−3)×4</td><td class="hl">−7　（先算 −12）</td></tr>
+<tr><td class="fm">(6−10)×(−3) + 8÷(−4)</td><td class="hl">10</td></tr>
+<tr><td class="fm">(−18)÷(−2)÷(−3)</td><td class="hl">−3　（由左往右）</td></tr>
+<tr><td>登山隊每小時降 200 公尺共 3 小時，再上升 250 公尺</td><td class="hl">−350 公尺</td></tr>
+</table>
+</div></div>
+
+<!-- 21 素養1 -->
+<div class="slide" data-pg="21 / 27"><div class="tag">素養 · 品管</div><div class="eyebrow">生活應用</div><h2>工廠獎懲計算</h2><div class="body">
+<div class="eg"><div class="q">每件瑕疵品扣款 50 元，每件合格品加發獎金 8 元。某天完成 100 件，其中 6 件瑕疵。</div>
+<div class="stp fm">(1) 扣款：(−50) × 6 = <span class="hl-r">−300</span> 元</div>
+<div class="stp fm">(2) 合格品 = 100 − 6 = 94 件；獎金 = 94 × 8 = <span class="hl-b">752</span> 元</div>
+<div class="stp fm">(3) 淨收入 = 752 + (−300) = <span class="hl">452</span> 元</div>
+<div class="a">答：(1) 扣 300 元　(2) 獎金 752 元　(3) 淨收入 452 元</div></div>
+<div class="tip"><div class="ic">🏭</div><div class="tx">「每件扣款 × 件數」用<span class="hl-r">負數乘法</span>，最後再與獎金<span class="hl">相加</span>。</div></div>
+</div></div>
+
+<!-- 22 素養2 -->
+<div class="slide" data-pg="22 / 27"><div class="tag">素養 · 氣象</div><div class="eyebrow">生活應用</div><h2>連續氣溫變化</h2><div class="body">
+<div class="eg"><div class="q">從 10°C 開始，連續 5 天每天平均下降 2°C；之後連續 3 天每天平均回升 3°C。</div>
+<div class="stp fm">(1) 第 5 天結束：10 + (−2)×5 = 10 − 10 = <span class="hl">0°C</span></div>
+<div class="stp fm">(2) 第 8 天結束：0 + (+3)×3 = <span class="hl">9°C</span></div>
+<div class="stp fm">(3) 淨變化：9 − 10 = <span class="hl-r">−1°C</span></div>
+<div class="a">答：(1) 0°C　(2) 9°C　(3) 淨變化 −1°C（整體略降 1 度）</div></div>
+<div class="tip"><div class="ic">🌡️</div><div class="tx">注意 (3)：連續下降又回升，<span class="hl">最後仍比原本低 1 度</span> —— 用減法算淨變化。</div></div>
+</div></div>
+
+<!-- 23 避雷 -->
+<div class="slide" data-pg="23 / 27"><div class="eyebrow">避雷指南</div><h2>四個最常見錯誤</h2><div class="body">
+<table class="tbl">
+<tr><th>❌ 錯誤</th><th>✓ 正確</th></tr>
+<tr><td>連乘時兩兩配對慢慢算，容易錯</td><td class="hl">數負號個數：偶數→正、奇數→負</td></tr>
+<tr><td class="fm">以為任何數 ÷ 0 = 0</td><td class="hl fm">a ÷ 0 無意義；只有 0 ÷ a = 0 合法</td></tr>
+<tr><td>看到加減就先算</td><td class="hl">先乘除、後加減</td></tr>
+<tr><td class="fm">(−18)÷(−2)÷(−3) 先算後面</td><td class="hl fm">由左往右 → −3</td></tr>
+</table>
+</div></div>
+
+<!-- 24 符號規則總表 -->
+<div class="slide" data-pg="24 / 27"><div class="eyebrow">整合</div><h2>符號規則一張表</h2><div class="body">
+<table class="tbl">
+<tr><th>　</th><th>乘法 ×</th><th>除法 ÷</th></tr>
+<tr><td class="hl-g">同號</td><td class="fm hl">得正</td><td class="fm hl">得正</td></tr>
+<tr><td class="hl-r">異號</td><td class="fm hl">得負</td><td class="fm hl">得負</td></tr>
+<tr><td>特殊</td><td class="fm">0 × a = 0</td><td class="fm hl-r">a ÷ 0 無意義</td></tr>
+</table>
+<div class="box y" style="text-align:center;font-size:21px;">乘除<span class="hl">共用</span>符號規則；連乘看<span class="hl">負號個數</span>（偶正奇負）</div>
+</div></div>
+
+<!-- 25 總結 -->
+<div class="slide" data-pg="25 / 27"><div class="eyebrow">本節總結</div><h2>三句話記住全部</h2><div class="body">
+<div class="box"><span class="hl-b">① 乘法：</span>同號得正、異號得負；連乘看<span class="hl">負號個數</span>，偶正奇負；0 乘任何數都是 0</div>
+<div class="box y"><span class="hl">② 除法：</span>符號規則和乘法<span class="hl">完全一樣</span>；⚠️ <span class="hl-r">除數不可以是 0</span>（a÷0 無意義，但 0÷a = 0）</div>
+<div class="box r"><span class="hl-r">③ 四則運算：</span>括號 → 乘除 → 加減；同級<span class="hl">由左往右</span></div>
+</div></div>
+
+<!-- 26 課後 -->
+<div class="slide" data-pg="26 / 27"><div class="eyebrow">課後任務</div><h2>回家練習方向</h2><div class="body">
+<ul>
+<li><span class="hl">基礎</span>：乘除符號判斷、單步計算</li>
+<li><span class="hl-b">進階</span>：連乘數負號、連除由左往右、四則混合</li>
+<li><span class="hl-r">素養</span>：工廠獎懲、連續氣溫變化、登山高度</li>
+</ul>
+<div class="box y">自我檢查句：<span class="hl">「這一步，我是在處理乘除還是加減？順序對嗎？」</span></div>
+</div></div>
+
+<!-- 27 下節預告 -->
+<div class="slide" data-pg="27 / 27"><div class="big-center">
+<div class="eyebrow">下節預告</div>
+<h1 style="font-size:42px;">1-4　科學記號</h1>
+<div class="lead">整數的乘方，以及用 a×10ⁿ 表達超大與超小的數</div>
+<svg viewBox="0 0 520 60" width="56%" style="margin-top:18px;">
+<line x1="20" y1="30" x2="480" y2="30" stroke="#f2d979" stroke-width="2" stroke-dasharray="2 10" opacity="0.7"/>
+<path d="M480 30 l-12 -7 M480 30 l-12 7" stroke="#f2d979" stroke-width="2" fill="none"/>
+</svg>
+<div class="box y" style="max-width:760px;margin-top:20px;">第 1 章最後一節 —— 學完就完成「整數運算」整章！</div>
+</div></div>
+
+</div></body></html>

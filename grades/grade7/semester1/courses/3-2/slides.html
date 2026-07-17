@@ -1,0 +1,601 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>七上 3-2 一元一次方程式的解法｜授課簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--chalk-soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);padding:24px 14px;}
+.deck{max-width:1060px;margin:0 auto;}
+.print-hint{text-align:center;color:rgba(243,239,226,0.4);font-size:13px;padding:6px 0 22px;}
+.print-hint b{color:var(--yellow);}
+.slide{position:relative;min-height:576px;margin:0 auto 26px;padding:44px 52px;
+ background:radial-gradient(ellipse at 18% 12%,rgba(255,255,255,0.05),transparent 45%),
+  radial-gradient(ellipse at 82% 88%,rgba(255,255,255,0.035),transparent 45%),
+  radial-gradient(ellipse at 60% 40%,rgba(120,160,130,0.10),transparent 60%),
+  linear-gradient(160deg,var(--board) 0%,var(--board2) 100%);
+ border-radius:14px;box-shadow:0 10px 34px rgba(0,0,0,0.55);
+ border:1px solid rgba(242,217,121,0.14);overflow:hidden;display:flex;flex-direction:column;}
+.slide::before{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;
+ background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.014) 40px,rgba(255,255,255,0.014) 41px),
+  radial-gradient(circle at 30% 72%,rgba(255,255,255,0.03),transparent 8%),
+  radial-gradient(circle at 76% 24%,rgba(255,255,255,0.025),transparent 7%);}
+.slide::after{content:attr(data-pg);position:absolute;bottom:15px;right:26px;font-family:'Caveat',cursive;font-size:20px;color:rgba(243,239,226,0.4);}
+.tag{position:absolute;top:20px;right:26px;font-family:'Caveat',cursive;font-size:22px;color:var(--pink);transform:rotate(4deg);}
+.eyebrow{font-family:'Caveat',cursive;font-size:25px;color:var(--yellow);letter-spacing:1px;margin-bottom:8px;opacity:0.92;}
+.slide h1{font-family:'Noto Serif TC',serif;font-size:46px;font-weight:900;line-height:1.28;letter-spacing:1px;
+ text-shadow:0 0 1px rgba(243,239,226,0.5),1px 1px 0 rgba(0,0,0,0.2);}
+.slide h2{font-family:'Noto Serif TC',serif;font-size:33px;font-weight:900;color:var(--yellow);
+ margin-bottom:20px;padding-bottom:11px;border-bottom:2px dashed rgba(242,217,121,0.4);
+ text-shadow:0 0 1px rgba(242,217,121,0.4);}
+.slide p{font-size:20px;line-height:1.85;margin-bottom:12px;}
+.big-center{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;}
+.big-center .lead,.lead{font-family:'Caveat',cursive;font-size:30px;color:var(--blue);letter-spacing:1px;margin-top:12px;}
+ul{list-style:none;margin:8px 0;}
+li{font-size:21px;line-height:1.95;padding-left:32px;position:relative;margin-bottom:4px;}
+li::before{content:'\2726';position:absolute;left:4px;color:var(--yellow);font-size:17px;top:3px;}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.34);border-radius:12px;padding:15px 21px;margin:12px 0;font-size:19px;line-height:1.8;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.38);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.38);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.34);}
+.eg{position:relative;background:rgba(0,0,0,0.24);border:1px solid rgba(242,217,121,0.2);border-radius:10px;padding:17px 22px;margin:12px 0;font-size:19px;}
+.eg::before{content:'';position:absolute;top:-8px;left:38px;width:58px;height:15px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.eg .q{color:var(--blue);font-weight:700;margin-bottom:8px;font-size:19px;}
+.eg .a{color:var(--green);font-weight:700;margin-top:6px;}
+.eg .stp{color:var(--chalk-soft);font-size:18px;margin:3px 0;}
+.tip{display:flex;gap:12px;align-items:flex-start;background:rgba(242,217,121,0.09);border:1.5px dashed rgba(242,217,121,0.45);border-radius:12px;padding:13px 18px;margin:10px 0;}
+.tip .ic{font-size:24px;line-height:1;}.tip .tx{font-size:18px;line-height:1.7;}
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:18px;}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.26);padding:10px 14px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.two{display:flex;gap:20px;}.two>div{flex:1;}
+svg{display:block;margin:6px auto;max-width:100%;}
+@media print{
+ body{background:#0a130d;padding:0;}
+ .deck{max-width:none;}
+ .print-hint{display:none;}
+ .slide{margin:0;border-radius:0;box-shadow:none;min-height:100vh;
+  page-break-after:always;break-after:page;padding:32px 44px;justify-content:center;}
+ .slide:last-child{page-break-after:auto;break-after:auto;}
+ .slide h1{font-size:40px;}
+ .slide h2{font-size:27px;margin-bottom:13px;padding-bottom:8px;}
+ .slide p{font-size:17px;line-height:1.55;margin-bottom:6px;}
+ li{font-size:17px;line-height:1.55;margin-bottom:1px;padding-left:26px;}
+ .eyebrow{font-size:21px;margin-bottom:5px;}
+ .big-center .lead,.lead{font-size:26px;}
+ .box{font-size:16px;padding:10px 16px;margin:6px 0;line-height:1.5;}
+ .eg{font-size:16px;padding:11px 16px;margin:6px 0;}
+ .tip{font-size:16px;padding:10px 14px;margin:6px 0;}
+ .tbl{font-size:15px;margin:6px 0;}
+ .tbl th,.tbl td{padding:6px 10px;}
+ svg{max-height:210px;}
+}
+</style></head><body><div class="deck">
+<div class="print-hint">共 <b>30</b> 張・列印時每張一頁（Ctrl+P → 橫向 → 背景圖形）</div>
+
+
+<!-- 1 -->
+<div class="slide" data-pg="1 / 30"><div class="tag">Start!</div><div class="big-center">
+<div class="eyebrow">國一上學期・第三章 一元一次方程式</div>
+<h1>3-2　一元一次方程式的解法</h1>
+<div class="lead">移項就是「搬家要變號」—— 但為什麼要變號？<br>因為方程式是一座天平</div><svg viewBox="0 0 520 150" width="72%" style="margin:8px auto;display:block;">
+<line x1="260.0" y1="40" x2="260.0" y2="120" stroke="#f3efe2" stroke-width="3"/>
+<path d="M220.0 120 L300.0 120 L288.0 132 L232.0 132 Z" fill="rgba(243,239,226,0.25)" stroke="#f3efe2" stroke-width="1.5"/>
+<g transform="rotate(0 260.0 40)">
+<line x1="110.0" y1="40" x2="410.0" y2="40" stroke="#f2d979" stroke-width="3.5"/>
+<circle cx="260.0" cy="40" r="5" fill="#f2d979"/>
+<line x1="110.0" y1="40" x2="110.0" y2="62" stroke="#f3efe2" stroke-width="1.5"/>
+<line x1="410.0" y1="40" x2="410.0" y2="62" stroke="#f3efe2" stroke-width="1.5"/>
+<rect x="54.0" y="62" width="112" height="34" rx="7" fill="rgba(152,201,220,0.18)" stroke="#98c9dc" stroke-width="1.5"/>
+<text x="110.0" y="85" font-family="Noto Serif TC" font-size="20" fill="#98c9dc" text-anchor="middle">2x + 3</text>
+<rect x="354.0" y="62" width="112" height="34" rx="7" fill="rgba(166,214,160,0.18)" stroke="#a6d6a0" stroke-width="1.5"/>
+<text x="410.0" y="85" font-family="Noto Serif TC" font-size="20" fill="#a6d6a0" text-anchor="middle">11</text>
+</g></svg>
+</div></div>
+
+<!-- 2 -->
+<div class="slide" data-pg="2 / 30"><div class="tag">目標</div><div class="body">
+<h2>本節學習目標</h2>
+<ul>
+<li>理解<span class="hl">等式</span>與代數式的差別（等號讓式子從「描述」變成「問題」）</li>
+<li>知道<span class="hl-b">一元一次方程式</span>的定義（一個未知數、次數為 1）</li>
+<li>理解方程式的<span class="hl">解</span>：使等式成立的值</li>
+<li>能用<span class="hl">三步驟列式</span>（設未知數 → 找等量關係 → 列方程式）</li>
+<li>理解<span class="hl">等量公理</span>（天平），並知道<b>移項就是它的簡寫</b></li>
+<li>能解含<b>括號</b>、含<b>分數係數</b>、<b>兩邊都有未知數</b>的方程式</li>
+<li>養成<span class="hl-r">代回驗算</span>的習慣</li>
+</ul>
+<div class="box y">一句話：<span class="hl">移項不是死背的口訣，是天平的必然結果。</span></div>
+</div></div>
+
+<!-- 3 -->
+<div class="slide" data-pg="3 / 30"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">細目 ①　從代數式到方程式</div>
+<h2>一個等號，改變一切</h2>
+<table class="tbl">
+<tr><th style="width:22%;">　</th><th style="width:39%;">3-1 代數式</th><th>3-2 方程式</th></tr>
+<tr><td>樣子</td><td class="fm hl-b" style="font-size:22px;">2x + 3</td><td class="fm hl-g" style="font-size:22px;">2x + 3 = 11</td></tr>
+<tr><td>是什麼</td><td>一句<b>描述</b></td><td class="hl">一個<b>問題</b></td></tr>
+<tr><td>能做什麼</td><td>代入 x 求值</td><td class="hl"><b>解出 x</b></td></tr>
+<tr><td>答案</td><td>隨 x 而變</td><td class="hl"><b>x = 4</b>（唯一）</td></tr>
+</table>
+<div class="box y" style="text-align:center;font-size:21px;">
+差別只有一個<span class="hl">等號</span> ——<br>
+但有了等號，式子就從<b>描述</b>變成<b>問題</b>，而問題<span class="hl">有答案</span>。</div>
+</div></div>
+
+<!-- 4 -->
+<div class="slide" data-pg="4 / 30"><div class="tag">定義</div><div class="body">
+<div class="eyebrow">細目 ①</div>
+<h2>什麼是「一元一次方程式」？</h2>
+<div class="box y" style="text-align:center;font-size:21px;">
+<span class="hl">一元</span>：只有 <b>1 個</b>未知數　·　<span class="hl">一次</span>：未知數的最高次方是 <b>1</b><br>
+<span class="hl">方程式</span>：含有未知數的<b>等式</b></div>
+<table class="tbl">
+<tr><th style="width:38%;">式子</th><th>是一元一次方程式嗎？</th></tr>
+<tr><td class="fm">2x + 3 = 11</td><td class="hl-g">✅</td></tr>
+<tr><td class="fm">2x + 3</td><td class="hl-r">❌ 沒有等號（是<b>代數式</b>）</td></tr>
+<tr><td class="fm">x² + 1 = 5</td><td class="hl-r">❌ 是<b>二次</b>（次方是 2）</td></tr>
+<tr><td class="fm">x + y = 3</td><td class="hl-r">❌ 是<b>二元</b>（兩個未知數）</td></tr>
+<tr><td class="fm">3 + 5 = 8</td><td class="hl-r">❌ 沒有未知數（普通等式）</td></tr>
+</table>
+</div></div>
+
+<!-- 5 -->
+<div class="slide" data-pg="5 / 30"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">細目 ①</div>
+<h2>什麼是「解」？</h2>
+<div class="box y" style="text-align:center;font-size:22px;">
+<span class="hl">解</span>（也叫<span class="hl">根</span>）：使等式<b>成立</b>的未知數的值</div>
+<div class="eg">
+<div class="q">x + 5 = 12，哪個數是解？</div>
+<div class="stp">x = 3 → <span class="fm">3 + 5 = 8 <span class="hl-r">≠ 12</span></span> ❌ 不是解</div>
+<div class="stp">x = 7 → <span class="fm">7 + 5 = 12 <span class="hl-g">= 12</span></span> ✓ <b>是解</b></div>
+</div>
+<div class="box g" style="text-align:center;font-size:20px;">
+💡 <b>檢驗一個數是不是解，只要代回去看左右相等嗎。</b></div>
+<div class="tip"><div class="ic">💡</div><div class="tx"><b>這也是為什麼驗算永遠有效</b> —— 它就是<b>解的定義本身</b>。
+代回去左右相等 → 它就是解。這不是「檢查」，這是<b>證明</b>。</div></div>
+</div></div>
+
+<!-- 6 -->
+<div class="slide" data-pg="6 / 30"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">細目 ①　列式</div>
+<h2>列式三步驟</h2>
+<div class="box y" style="text-align:center;font-size:24px;padding:18px;">
+<span class="hl">① 設未知數　→　② 找等量關係　→　③ 列出方程式</span></div>
+<div class="box"><b class="hl-b">① 設未知數</b>　通常設<b>題目所求</b>的量，或設<b>最小／最單純</b>的量（其他量用它表示比較好寫）。<br>
+<span class="hl-r">一定要寫清楚單位</span>：「設兒子現在 <b>x 歲</b>」</div>
+<div class="box g"><b class="hl-g">② 找等量關係</b>　在題目裡找這些字：<br>
+<span class="hl" style="font-size:20px;">是　·　等於　·　共　·　一樣　·　剩下　·　總共</span><br>
+<b>這些字的位置，就是等號的位置。</b></div>
+<div class="box"><b class="hl-b">③ 列出方程式</b>　把等號左右兩邊各自用 x 表示</div>
+</div></div>
+
+<!-- 7 -->
+<div class="slide" data-pg="7 / 30"><div class="tag">工具</div><div class="body">
+<div class="eyebrow">細目 ①</div>
+<h2>常見的等量關係</h2>
+<table class="tbl">
+<tr><th style="width:32%;">情境</th><th>等量關係</th></tr>
+<tr><td class="hl-b">年齡問題</td><td>兩人<b>同時</b>增加相同歲數</td></tr>
+<tr><td class="hl-b">和差問題</td><td class="fm">甲 + 乙 = 總數</td></tr>
+<tr><td class="hl-b">買賣問題</td><td class="fm">售價 − 成本 = 利潤</td></tr>
+<tr><td class="hl-b">打折</td><td class="fm">定價 × 折數 = 售價</td></tr>
+<tr><td class="hl-b">追及問題</td><td class="fm">甲走的距離 = 乙走的距離</td></tr>
+<tr><td class="hl-b">平均</td><td class="fm">總和 ÷ 個數 = 平均</td></tr>
+</table>
+<div class="box r" style="text-align:center;">
+⚠️ <b>最常見的列式錯誤：設了 x 卻忘記 x 是什麼。</b><br>
+寫完式子回頭問一次：「<span class="hl">我的 x 到底代表什麼？</span>」</div>
+</div></div>
+
+<!-- 8 -->
+<div class="slide" data-pg="8 / 30"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">細目 ②　等量公理</div>
+<h2>方程式就是一座天平</h2><svg viewBox="0 0 520 150" width="72%" style="margin:8px auto;display:block;">
+<line x1="260.0" y1="40" x2="260.0" y2="120" stroke="#f3efe2" stroke-width="3"/>
+<path d="M220.0 120 L300.0 120 L288.0 132 L232.0 132 Z" fill="rgba(243,239,226,0.25)" stroke="#f3efe2" stroke-width="1.5"/>
+<g transform="rotate(0 260.0 40)">
+<line x1="110.0" y1="40" x2="410.0" y2="40" stroke="#f2d979" stroke-width="3.5"/>
+<circle cx="260.0" cy="40" r="5" fill="#f2d979"/>
+<line x1="110.0" y1="40" x2="110.0" y2="62" stroke="#f3efe2" stroke-width="1.5"/>
+<line x1="410.0" y1="40" x2="410.0" y2="62" stroke="#f3efe2" stroke-width="1.5"/>
+<rect x="54.0" y="62" width="112" height="34" rx="7" fill="rgba(152,201,220,0.18)" stroke="#98c9dc" stroke-width="1.5"/>
+<text x="110.0" y="85" font-family="Noto Serif TC" font-size="20" fill="#98c9dc" text-anchor="middle">x + 5</text>
+<rect x="354.0" y="62" width="112" height="34" rx="7" fill="rgba(166,214,160,0.18)" stroke="#a6d6a0" stroke-width="1.5"/>
+<text x="410.0" y="85" font-family="Noto Serif TC" font-size="20" fill="#a6d6a0" text-anchor="middle">12</text>
+</g></svg>
+<div class="box y" style="text-align:center;font-size:21px;">
+等式就像天平兩邊<span class="hl">平衡</span> ——<br>
+兩邊<span class="hl">同時</span>做相同的加減乘除，平衡<b>不會被破壞</b>。</div>
+<div class="box g"><b>這就是「等量公理」。</b>接下來三張，你會看到<span class="hl">移項只是它的簡寫</span>。</div>
+</div></div>
+
+<!-- 9 -->
+<div class="slide" data-pg="9 / 30"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">細目 ②</div>
+<h2>等量公理：四條</h2>
+<table class="tbl">
+<tr><th style="width:22%;">公理</th><th>內容</th></tr>
+<tr><td class="hl-b">加法</td><td class="fm" style="font-size:20px;">a = b　→　a + c = b + c</td></tr>
+<tr><td class="hl-b">減法</td><td class="fm" style="font-size:20px;">a = b　→　a − c = b − c</td></tr>
+<tr><td class="hl-b">乘法</td><td class="fm" style="font-size:20px;">a = b　→　a × c = b × c</td></tr>
+<tr><td class="hl-b">除法</td><td class="fm" style="font-size:20px;">a = b　→　a ÷ c = b ÷ c　<span class="hl-r">（c ≠ 0）</span></td></tr>
+</table>
+<div class="box r"><b class="hl-r">為什麼除法要 c ≠ 0？</b>因為<b>除以 0 沒有意義</b> —— 這是 1-3 學過的。</div>
+<div class="box y" style="text-align:center;font-size:21px;">
+🔑 <span class="hl">關鍵：一定要「兩邊都做」</span><br>
+只動一邊 = <b>天平倒了</b> = 等式不成立</div>
+</div></div>
+
+<!-- 10 -->
+<div class="slide" data-pg="10 / 30"><div class="tag">推導</div><div class="body">
+<div class="eyebrow">細目 ②　移項法則</div>
+<h2>移項為什麼要變號？看天平就懂了</h2>
+<div class="box y" style="text-align:center;font-size:20px;">解 <span class="fm" style="font-size:24px;">x + 5 = 12</span></div>
+<table class="tbl">
+<tr><th style="width:50%;">用等量公理（完整寫法）</th><th>用移項（簡寫）</th></tr>
+<tr><td class="fm">x + 5 = 12</td><td class="fm">x + 5 = 12</td></tr>
+<tr><td class="hl-b">兩邊<b>同減 5</b>：</td><td class="hl-g">+5 <b>移項</b>變 −5：</td></tr>
+<tr><td class="fm">x + 5 <span class="hl-r">− 5</span> = 12 <span class="hl-r">− 5</span></td><td class="fm">x = 12 <span class="hl-r">− 5</span></td></tr>
+<tr><td class="fm hl">x = 7</td><td class="fm hl">x = 7</td></tr>
+</table>
+<div class="box g" style="text-align:center;font-size:21px;">
+💡 <span class="hl">移項不是新規則，是「兩邊同加同減」的快寫法。</span><br>
+理解這一點，就不會死背「搬家變號」卻搞不清楚為什麼。</div>
+</div></div>
+
+<!-- 11 -->
+<div class="slide" data-pg="11 / 30"><div class="tag">避雷</div><div class="body">
+<div class="eyebrow">細目 ②</div>
+<h2>移項法則：搬家要變號</h2>
+<div class="box y" style="text-align:center;font-size:24px;padding:20px;">
+<span class="hl">加號 ↔ 減號</span>　　<span class="hl">乘號 ↔ 除號</span></div>
+<div class="two">
+<div class="box"><span class="fm" style="font-size:19px;">x <span class="hl-b">+ 5</span> = 12</span><br>
+→ <span class="fm" style="font-size:19px;">x = 12 <span class="hl-r">− 5</span></span></div>
+<div class="box g"><span class="fm" style="font-size:19px;">x <span class="hl-b">− 5</span> = 12</span><br>
+→ <span class="fm" style="font-size:19px;">x = 12 <span class="hl-r">+ 5</span></span></div>
+</div>
+<div class="box r" style="text-align:center;font-size:22px;">
+⚠️ <b>最常見錯誤：移項忘記變號</b><br>
+<span class="fm">x + 3 = 10 → x = 10 <span class="hl-r">+</span> 3 = 13</span> ❌<br>
+<span class="fm">正確：x = 10 <span class="hl-g">−</span> 3 = <span class="hl-g">7</span></span> ✓</div>
+</div></div>
+
+<!-- 12 -->
+<div class="slide" data-pg="12 / 30"><div class="tag">流程</div><div class="body">
+<div class="eyebrow">細目 ②</div>
+<h2>解題標準流程：五步驟</h2>
+<table class="tbl">
+<tr><th style="width:10%;">　</th><th style="width:36%;">動作</th><th>注意</th></tr>
+<tr><td class="hl" style="font-size:20px;">①</td><td>有括號先<b>去括號</b></td><td>括號前是負號 → <span class="hl-r">每項變號</span>（3-1）</td></tr>
+<tr><td class="hl" style="font-size:20px;">②</td><td>有分數 → 兩邊同乘 <b>LCM</b></td><td>⚠️ <span class="hl-r">每一項</span>都要乘！</td></tr>
+<tr><td class="hl" style="font-size:20px;">③</td><td><b>移項</b>：x 在左、常數在右</td><td><span class="hl-r">移項要變號</span></td></tr>
+<tr><td class="hl" style="font-size:20px;">④</td><td><b>合併同類項</b></td><td>只加減係數（3-1）</td></tr>
+<tr><td class="hl" style="font-size:20px;">⑤</td><td>兩邊<b>同除以 x 的係數</b></td><td>⚠️ 除以<span class="hl-r">負數</span>時符號要對</td></tr>
+</table>
+<div class="box y"><b>💡 固定習慣：x 項一律移到<span class="hl">左邊</span>，常數一律移到<span class="hl">右邊</span>。</b><br>
+不要每題自己想要移哪邊 —— <b>固定下來，錯誤率大幅下降</b>。</div>
+</div></div>
+
+<!-- 13 -->
+<div class="slide" data-pg="13 / 30"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 1　難度 ★☆☆</div>
+<h2>解 <span class="fm">x + 5 = 12</span></h2><svg viewBox="0 0 520 150" width="72%" style="margin:8px auto;display:block;">
+<line x1="260.0" y1="40" x2="260.0" y2="120" stroke="#f3efe2" stroke-width="3"/>
+<path d="M220.0 120 L300.0 120 L288.0 132 L232.0 132 Z" fill="rgba(243,239,226,0.25)" stroke="#f3efe2" stroke-width="1.5"/>
+<g transform="rotate(0 260.0 40)">
+<line x1="110.0" y1="40" x2="410.0" y2="40" stroke="#f2d979" stroke-width="3.5"/>
+<circle cx="260.0" cy="40" r="5" fill="#f2d979"/>
+<line x1="110.0" y1="40" x2="110.0" y2="62" stroke="#f3efe2" stroke-width="1.5"/>
+<line x1="410.0" y1="40" x2="410.0" y2="62" stroke="#f3efe2" stroke-width="1.5"/>
+<rect x="54.0" y="62" width="112" height="34" rx="7" fill="rgba(152,201,220,0.18)" stroke="#98c9dc" stroke-width="1.5"/>
+<text x="110.0" y="85" font-family="Noto Serif TC" font-size="20" fill="#98c9dc" text-anchor="middle">x + 5</text>
+<rect x="354.0" y="62" width="112" height="34" rx="7" fill="rgba(166,214,160,0.18)" stroke="#a6d6a0" stroke-width="1.5"/>
+<text x="410.0" y="85" font-family="Noto Serif TC" font-size="20" fill="#a6d6a0" text-anchor="middle">12</text>
+</g></svg>
+<div class="eg">
+<div class="stp"><b>移項</b>　+5 移到右邊變 −5 → <span class="fm">x = 12 − 5</span></div>
+<div class="stp"><b>驗算</b>　<span class="fm">7 + 5 = 12</span> ✓</div>
+<div class="a">答：x = 7</div>
+</div>
+</div></div>
+
+<!-- 14 -->
+<div class="slide" data-pg="14 / 30"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 2　難度 ★★☆</div>
+<h2>解 <span class="fm">2x + 3 = 11</span></h2>
+<div class="eg">
+<div class="stp"><b>Step 1　移項</b>　<span class="fm">2x = 11 − 3 = 8</span></div>
+<div class="stp"><b>Step 2　兩邊同除以 2</b>　<span class="fm">x = 8 ÷ 2 = 4</span></div>
+<div class="stp"><b>驗算</b>　<span class="fm">2(4) + 3 = 8 + 3 = 11</span> ✓</div>
+<div class="a">答：x = 4</div>
+</div>
+<div class="box y"><b>為什麼 Step 2 要除以 2？</b>因為 <span class="fm">2x</span> 的意思是「2 <b>乘以</b> x」，
+要把 x 單獨留下，就要<span class="hl">除以 2</span>（乘號移過去變除號）。</div>
+<div class="box g" style="text-align:center;">
+這兩步剛好是<span class="hl">五步驟的 ③ 和 ⑤</span> —— 沒有括號、沒有分數，所以跳過 ①②④。</div>
+</div></div>
+
+<!-- 15 -->
+<div class="slide" data-pg="15 / 30"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 3　難度 ★★★</div>
+<h2>兩邊都有 x：<span class="fm">3(x + 2) − 5 = x + 7</span></h2>
+<div class="eg">
+<div class="stp"><b>① 去括號、合併左邊</b>　<span class="fm">3x + 6 − 5 = 3x + 1</span></div>
+<div class="stp"><b>方程式變成</b>　<span class="fm">3x + 1 = x + 7</span></div>
+<div class="stp"><b>③ 移項</b>（x 移左、常數移右）　<span class="fm">3x − x = 7 − 1</span></div>
+<div class="stp"><b>④ 合併</b>　<span class="fm">2x = 6</span></div>
+<div class="stp"><b>⑤ 同除以 2</b>　<span class="fm">x = 3</span></div>
+<div class="stp"><b>驗算</b>　左 = <span class="fm">3(3+2) − 5 = 10</span>；右 = <span class="fm">3 + 7 = 10</span> ✓</div>
+<div class="a">答：x = 3</div>
+</div>
+<div class="box r"><b class="hl-r">最常見錯誤：</b>兩邊都有 x 時<b>只移一邊</b>，導致 x 項沒有完全集中。
+→ <span class="hl">固定「x 移左、常數移右」</span>。</div>
+</div></div>
+
+<!-- 16 -->
+<div class="slide" data-pg="16 / 30"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 4　難度 ★★★</div>
+<h2>含分數係數：<span class="fm">x/3 + 1/2 = 2</span></h2>
+<div class="box y"><b>想法：</b>兩邊同乘分母 3 和 2 的 <span class="hl">LCM = 6</span>，<b>一次消掉所有分母</b></div>
+<div class="eg">
+<div class="stp"><b>② 兩邊同乘 6</b>　<span class="fm">6×(x/3) + 6×(1/2) = 6×2</span></div>
+<div class="stp">　　<span class="fm">2x + 3 = 12</span>　← 分母全部不見了</div>
+<div class="stp"><b>③ 移項</b>　<span class="fm">2x = 12 − 3 = 9</span></div>
+<div class="stp"><b>⑤ 同除以 2</b>　<span class="fm">x = 9/2 = 4.5</span></div>
+<div class="stp"><b>驗算</b>　<span class="fm">4.5/3 + 1/2 = 1.5 + 0.5 = 2</span> ✓</div>
+<div class="a">答：x = 9/2（即 4.5）</div>
+</div>
+<div class="box r"><b class="hl-r">⚠️ 最常錯：只乘了某一項。</b>等量公理是對<b>整個等式的每一項</b>操作。<br>
+💡 這裡用到 <span class="hl">2-2 的 LCM</span> —— 通分的老朋友。</div>
+</div></div>
+
+<!-- 17 -->
+<div class="slide" data-pg="17 / 30"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 5　難度 ★★★</div>
+<h2>x 係數變負：<span class="fm">2(x + 3) − 4 = 3x − 5</span></h2>
+<div class="eg">
+<div class="stp"><b>① 去括號</b>　<span class="fm">2x + 6 − 4 = 2x + 2</span></div>
+<div class="stp"><b>方程式變成</b>　<span class="fm">2x + 2 = 3x − 5</span></div>
+<div class="stp"><b>③ 移項</b>　<span class="fm">2x − 3x = −5 − 2</span></div>
+<div class="stp"><b>④ 合併</b>　<span class="fm hl-r">−x = −7</span>　← x 的係數變負了！</div>
+<div class="stp"><b>⑤ 兩邊同除以 −1</b>　<span class="fm">x = 7</span></div>
+<div class="stp"><b>驗算</b>　左 = <span class="fm">2(10) − 4 = 16</span>；右 = <span class="fm">3(7) − 5 = 16</span> ✓</div>
+<div class="a">答：x = 7</div>
+</div>
+<div class="box y" style="text-align:center;font-size:20px;">
+💡 遇到 <span class="fm">−x = −7</span> <b>不要慌</b>，<span class="hl">兩邊同除以 −1</span> 就好。<br>
+或直接想：「<b>負的 x 是 −7，那 x 就是 7</b>」。</div>
+</div></div>
+
+<!-- 18 -->
+<div class="slide" data-pg="18 / 30"><div class="tag">避雷</div><div class="body">
+<div class="eyebrow">⚠️ 高頻錯誤</div>
+<h2>除以負數，符號會翻轉</h2>
+<div class="eg">
+<div class="q">解 <span class="fm">−2x + 5 = 11</span></div>
+<div class="stp"><b>移項</b>　<span class="fm">−2x = 11 − 5 = 6</span></div>
+<div class="stp"><b>兩邊同除以 −2</b>　<span class="fm">x = 6 ÷ (−2) = <span class="hl-g">−3</span></span></div>
+<div class="stp"><b>驗算</b>　<span class="fm">−2(−3) + 5 = 6 + 5 = 11</span> ✓</div>
+<div class="a">答：x = −3</div>
+</div>
+<div class="box r" style="text-align:center;font-size:21px;">
+⚠️ 這裡最多人算成 <span class="fm hl-r">x = +3</span><br>
+<span class="fm">6 ÷ (−2)</span>：異號相除 → <span class="hl-g">得負</span>（1-3 學過）</div>
+<div class="tip"><div class="ic">📌</div><div class="tx"><b>看到 x 的係數是負的，就多花三秒確認符號。</b>
+這是整節最容易掉分的地方，而且錯了驗算一定抓得到 —— <b>所以更要驗算</b>。</div></div>
+</div></div>
+
+<!-- 19 -->
+<div class="slide" data-pg="19 / 30"><div class="tag">精選</div><div class="body">
+<div class="eyebrow">⚠️ 心理陷阱</div>
+<h2>答案是分數，很正常</h2>
+<div class="eg">
+<div class="q">解 <span class="fm">3(2x − 1) + 4 = 2(x + 5)</span></div>
+<div class="stp"><b>① 去括號</b>　左：<span class="fm">6x − 3 + 4 = 6x + 1</span>；右：<span class="fm">2x + 10</span></div>
+<div class="stp"><b>方程式</b>　<span class="fm">6x + 1 = 2x + 10</span></div>
+<div class="stp"><b>③ 移項</b>　<span class="fm">6x − 2x = 10 − 1</span></div>
+<div class="stp"><b>④ 合併</b>　<span class="fm">4x = 9</span></div>
+<div class="stp"><b>⑤ 同除以 4</b>　<span class="fm">x = 9/4</span>（即 2.25）</div>
+<div class="a">答：x = 9/4</div>
+</div>
+<div class="box y" style="text-align:center;font-size:21px;">
+💡 <span class="hl">答案是分數很正常！</span>不要因為「不是整數」就以為算錯，<br>
+硬去湊一個整數答案 —— <b>這是心理陷阱，不是數學問題</b>。</div>
+</div></div>
+
+<!-- 20 -->
+<div class="slide" data-pg="20 / 30"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">細目 ②</div>
+<h2>驗算：不是額外的事，是流程的最後一步</h2>
+<div class="box y" style="text-align:center;font-size:22px;padding:16px;">
+把答案<span class="hl">代回原方程式</span>，確認左右兩邊相等</div>
+<div class="box g" style="font-size:20px;">
+<b>為什麼驗算一定有效？</b><br>
+因為「<span class="hl">解</span>」的定義就是「<span class="hl">使等式成立的值</span>」。<br>
+代回去左右相等 → 它就是解。<br>
+<b>這不是「檢查」，這是「證明」。</b></div>
+<div class="box r"><b>⚠️ 驗算要代回<span class="hl-r">原方程式</span>，不是代回化簡後的式子。</b><br>
+因為如果化簡那一步就錯了，代回化簡後的式子還是會「對」—— 抓不到錯。</div>
+<div class="tip"><div class="ic">📌</div><div class="tx"><b>追問句：</b>「這個答案代回<b>原</b>方程式，左右兩邊真的相等嗎？」<br>
+把驗算變成解題流程的<b>最後必要步驟</b>，而不是「有空再做」的事。</div></div>
+</div></div>
+
+<!-- 21 -->
+<div class="slide" data-pg="21 / 30"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 1</div>
+<h2>年齡問題 —— 列式的經典訓練</h2>
+<div class="box">父親現在的年齡是兒子的 <span class="hl">3 倍</span>。<span class="hl">5 年後</span>，父親的年齡是那時兒子年齡的 <span class="hl">2 倍多 3 歲</span>。</div>
+<div class="eg">
+<div class="stp"><b>① 設未知數</b>　設兒子現在 <span class="fm hl">x</span> 歲 → 父親現在 <span class="fm hl">3x</span> 歲</div>
+<div class="stp"><b>② 找等量關係</b>　5 年後：父親 <span class="fm">3x + 5</span>、兒子 <span class="fm">x + 5</span></div>
+<div class="stp"><b>③ 列式</b>　<span class="fm hl" style="font-size:20px;">3x + 5 = 2(x + 5) + 3</span></div>
+<div class="stp"><b>解</b>　<span class="fm">3x + 5 = 2x + 10 + 3 → 3x + 5 = 2x + 13 → x = 8</span></div>
+<div class="stp"><b>父親現在</b>　<span class="fm">3 × 8 = 24</span> 歲</div>
+<div class="a">答：兒子 8 歲，父親 24 歲</div>
+</div>
+<div class="box y">💡 <b>年齡問題的關鍵：兩人<span class="hl">同時</span>增加相同歲數。</b>常見錯誤：只給其中一個人加 5 歲。<br>
+<b>驗算</b>：5 年後父 29、子 13；<span class="fm">2(13) + 3 = 29</span> ✓</div>
+</div></div>
+
+<!-- 22 -->
+<div class="slide" data-pg="22 / 30"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 2</div>
+<h2>成本與定價 —— 三個不同的量</h2>
+<div class="box">老闆希望<span class="hl">打 8 折</span>出售後，仍能獲得「<span class="hl">成本的 20%</span>」作為利潤。打 8 折後的實際售價是 <span class="hl">180 元</span>。</div>
+<div class="eg">
+<div class="stp"><b>(1) 求成本</b>　設成本 <span class="fm">x</span> 元；「獲利成本的 20%」→ 售價 = <span class="fm">x + 0.2x = 1.2x</span></div>
+<div class="stp">　　<span class="fm">1.2x = 180 → x = 150</span> 元</div>
+<div class="stp"><b>(2) 求原定價</b>　設定價 <span class="fm">p</span> 元；打 8 折後是 180 → <span class="fm">0.8p = 180 → p = 225</span> 元</div>
+<div class="stp"><b>(3) 加價率</b>　<span class="fm">(225 − 150) ÷ 150 = 75/150 = 50%</span></div>
+<div class="a">答：成本 150 元、定價 225 元、加價率 50%</div>
+</div>
+<div class="box r">⚠️ 這題有<span class="hl-r">三個不同的量</span>：成本 <b>150</b>、定價 <b>225</b>、售價 <b>180</b>。
+<b>讀題時要分清楚誰是誰</b>，這是最容易混的地方。</div>
+</div></div>
+
+<!-- 23 -->
+<div class="slide" data-pg="23 / 30"><div class="tag">觀念</div><div class="body">
+<div class="eyebrow">素養 2 延伸　⚠️ 重要觀念</div>
+<h2>「打 8 折」和「賺 20%」完全無關</h2>
+<div class="box r" style="text-align:center;font-size:21px;">
+❌ 常見誤解：「打 8 折 = 少賺 20% = 剛好賺 20%？」</div>
+<div class="two">
+<div class="box"><b class="hl-b">打折</b>　是<span class="hl">對定價</span>打<br>
+<span class="fm">225 × 0.8 = 180</span><br>
+<span style="font-size:16px;color:var(--chalk-soft);">基準：定價 225</span></div>
+<div class="box g"><b class="hl-g">利潤率</b>　是<span class="hl">對成本</span>算<br>
+<span class="fm">(180 − 150) ÷ 150 = 20%</span><br>
+<span style="font-size:16px;color:var(--chalk-soft);">基準：成本 150</span></div>
+</div>
+<div class="box y" style="text-align:center;font-size:21px;">
+<span class="hl">基準不同，百分比就不能直接比較。</span><br>
+兩個 20% 講的是<b>完全不同的東西</b>。</div>
+<div class="tip"><div class="ic">💡</div><div class="tx"><b>看到百分比，先問：「這是誰的百分之幾？」</b>
+這個習慣會一路用到八下的比例、九上的機率，甚至你以後看新聞、看財報。</div></div>
+</div></div>
+
+<!-- 24 -->
+<div class="slide" data-pg="24 / 30"><div class="tag">練習</div><div class="body">
+<h2>列式練習：把中文翻成方程式</h2>
+<table class="tbl">
+<tr><th style="width:52%;">題目</th><th>方程式</th></tr>
+<tr><td>某數的 2 倍加 3 等於 11</td><td class="fm hl">2x + 3 = 11</td></tr>
+<tr><td>某數減 8 等於 15</td><td class="fm hl">x − 8 = 15</td></tr>
+<tr><td>連續兩整數的和是 25</td><td class="fm hl">x + (x+1) = 25</td></tr>
+<tr><td>甲有 x 元，乙比甲多 50 元，共 200 元</td><td class="fm hl">x + (x+50) = 200</td></tr>
+<tr><td>定價 x 元打 9 折後是 270 元</td><td class="fm hl">0.9x = 270</td></tr>
+</table>
+<div class="box y"><b>共同點：每一題的「<span class="hl">等於／是／共</span>」都對應到<span class="hl">等號</span>的位置。</b><br>
+找到那個字，方程式就寫出一半了。</div>
+</div></div>
+
+<!-- 25 -->
+<div class="slide" data-pg="25 / 30"><div class="tag">連結</div><div class="body">
+<h2>這節用到了前面哪些東西？</h2>
+<table class="tbl">
+<tr><th style="width:24%;">來自</th><th style="width:36%;">用在哪一步</th><th>例子</th></tr>
+<tr><td class="hl-b">3-1 去括號</td><td>五步驟的 <b>①</b></td><td class="fm">3(x+2) → 3x+6</td></tr>
+<tr><td class="hl-b">3-1 合併同類項</td><td>五步驟的 <b>④</b></td><td class="fm">3x−x → 2x</td></tr>
+<tr><td class="hl-b">2-2 的 LCM</td><td>五步驟的 <b>②</b> 去分母</td><td class="fm">x/3+1/2 → ×6</td></tr>
+<tr><td class="hl-b">1-3 正負數除法</td><td>五步驟的 <b>⑤</b></td><td class="fm">6 ÷ (−2) = −3</td></tr>
+<tr><td class="hl-b">1-3 除以 0 無意義</td><td>等量公理的<b>限制</b></td><td class="fm">c ≠ 0</td></tr>
+</table>
+<div class="box y" style="text-align:center;font-size:21px;">
+<span class="hl">解方程式沒有一個動作是新的</span> ——<br>
+全部都是前面學過的工具，只是<b>排成一個固定順序</b>。</div>
+</div></div>
+
+<!-- 26 -->
+<div class="slide" data-pg="26 / 30"><div class="tag">避雷</div><div class="body">
+<h2>避雷指南：六個最常見錯誤</h2>
+<table class="tbl">
+<tr><th style="width:44%;">❌ 錯誤</th><th>✓ 正確</th></tr>
+<tr><td><span class="fm">x + 3 = 10 → x = 10 + 3</span></td><td><span class="fm hl-g">x = 10 − 3 = 7</span>（移項要<b>變號</b>）</td></tr>
+<tr><td>兩邊都有 x 時只移一邊</td><td><b class="hl-g">x 項一律移左、常數一律移右</b></td></tr>
+<tr><td>去分母時只乘某一項</td><td><b class="hl-g">每一項</b>都要乘 LCM</td></tr>
+<tr><td><span class="fm">−2x = 6 → x = 3</span></td><td><span class="fm hl-g">x = −3</span>（除以負數，符號翻轉）</td></tr>
+<tr><td><span class="fm">−x = −7</span> 卡住不會</td><td><b class="hl-g">兩邊同除以 −1</b> → x = 7</td></tr>
+<tr><td>算出分數就以為錯了</td><td><b class="hl-g">答案是分數很正常</b>（如 x = 9/4）</td></tr>
+</table>
+<div class="box y" style="text-align:center;">
+自我檢查句：<span class="hl">「這個答案代回原方程式，左右兩邊真的相等嗎？」</span></div>
+</div></div>
+
+<!-- 27 -->
+<div class="slide" data-pg="27 / 30"><div class="tag">觀念</div><div class="body">
+<h2>再談一次：為什麼移項要變號？</h2>
+<div class="box"><b>因為你不是在「搬」，你是在「兩邊同時做同一件事」。</b></div>
+<div class="eg">
+<div class="q">解 <span class="fm">2x = 8</span></div>
+<div class="stp"><b>完整想法</b>　左邊的 x 被「乘以 2」綁住了，我要<b>解開它</b></div>
+<div class="stp">　　乘法的反向動作是<b>除法</b> → <span class="hl">兩邊同除以 2</span></div>
+<div class="stp">　　<span class="fm">2x ÷ 2 = 8 ÷ 2</span> → <span class="fm">x = 4</span></div>
+<div class="stp"><b>簡寫</b>　「2 移過去變成除以 2」→ <span class="fm">x = 8 ÷ 2 = 4</span></div>
+</div>
+<div class="box y" style="text-align:center;font-size:21px;">
+<span class="hl">解方程式 = 一層一層把 x 身上的東西「解開」</span><br>
+每解開一層，就用<b>反向動作</b>，而且<b>兩邊都要做</b>。</div>
+</div></div>
+
+<!-- 28 -->
+<div class="slide" data-pg="28 / 30"><div class="tag">總結</div><div class="body">
+<h2>本節總結</h2>
+<ul>
+<li><span class="hl">一個等號改變一切</span>：代數式只是<b>描述</b>，方程式是<b>問題</b> —— 而問題有答案</li>
+<li><span class="hl">列式三步驟</span>：設未知數 → 找等量關係（題目裡的「是、等於、共」）→ 列方程式</li>
+<li><span class="hl">移項不是新規則</span>，是等量公理（天平兩邊同時做）的<b>簡寫</b> —— 所以要變號</li>
+<li><span class="hl">五步驟解法</span>：去括號 → 去分母 → 移項 → 合併 → 同除係數</li>
+<li><span class="hl-r">驗算不是額外的事</span>，它就是「解」的定義本身 —— 代回<b>原式</b>看左右相等嗎</li>
+</ul>
+<div class="box g" style="text-align:center;font-size:20px;">
+🔗 <b>承先</b>：3-1 去括號＋合併是第 ①④ 步；2-2 的 LCM 是去分母的工具<br>
+🔗 <b>啟後</b>：3-3 要用方程式解<span class="hl">真實問題</span> —— 難的不是解，是<b>列式</b></div>
+</div></div>
+
+<!-- 29 -->
+<div class="slide" data-pg="29 / 30"><div class="tag">Next</div><div class="big-center">
+<div class="eyebrow">下節預告</div>
+<h1 style="font-size:42px;">3-3　應用問題</h1>
+<div class="lead">解方程式你已經會了 ——<br>下節的難點<span style="color:#f2d979;">不是解，是「列」</span></div>
+<svg viewBox="0 0 620 100" width="76%" style="margin-top:16px;">
+<rect x="20" y="20" width="200" height="58" rx="9" fill="rgba(237,160,168,0.14)" stroke="#eda0a8" stroke-width="1.5"/>
+<text x="120" y="44" font-family="Noto Sans TC" font-size="15" fill="#eda0a8" text-anchor="middle">一段中文</text>
+<text x="120" y="66" font-family="Caveat" font-size="17" fill="rgba(243,239,226,0.6)" text-anchor="middle">「爸爸年齡是兒子3倍…」</text>
+<text x="290" y="54" font-family="Caveat" font-size="24" fill="#f2d979" text-anchor="middle">最難</text>
+<path d="M245 54 L335 54" stroke="#f2d979" stroke-width="2" stroke-dasharray="3 4"/>
+<path d="M335 54 l-10 -6 M335 54 l-10 6" stroke="#f2d979" stroke-width="2" fill="none"/>
+<rect x="350" y="20" width="200" height="58" rx="9" fill="rgba(166,214,160,0.14)" stroke="#a6d6a0" stroke-width="1.5"/>
+<text x="450" y="44" font-family="Noto Sans TC" font-size="15" fill="#a6d6a0" text-anchor="middle">一個方程式</text>
+<text x="450" y="68" font-family="Noto Serif TC" font-size="17" fill="#f2d979" text-anchor="middle">3x+5 = 2(x+5)+3</text>
+<text x="585" y="54" font-family="Caveat" font-size="20" fill="rgba(243,239,226,0.5)" text-anchor="middle">→ 簡單</text>
+</svg>
+<div class="box y" style="max-width:820px;margin-top:14px;">
+從「一段中文」跨到「一個方程式」，這一步<span class="hl">最難</span>。<br>
+跨過去之後，解方程式只是<b>照五步驟做完</b>而已。</div>
+</div></div>
+
+<!-- 30 -->
+<div class="slide" data-pg="30 / 30"><div class="tag">End</div><div class="big-center">
+<h2>一句話帶走</h2>
+<div class="box y" style="text-align:center;font-size:26px;padding:26px;">
+<span class="hl">解方程式，就是一層一層<br>把 x 身上的東西解開。</span></div>
+<div class="box g" style="text-align:center;font-size:20px;">
+每解開一層 → 用<b>反向動作</b>（加↔減、乘↔除）<br>
+而且 → <b>兩邊都要做</b>（天平不能倒）<br>
+最後 → <b>代回原式驗算</b>（證明你解對了）</div>
+<div class="box" style="text-align:center;">
+移項的「變號」不是規定，<span class="hl">是天平的必然結果</span>。<br>
+懂了這個，你就不需要背任何口訣。</div>
+</div></div>
+
+</div></body></html>

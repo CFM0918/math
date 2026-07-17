@@ -1,0 +1,414 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>七上 1-1 正數、負數與數線｜授課簡報</title><style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap');
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--chalk-soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);padding:24px 14px;}
+.deck{max-width:1060px;margin:0 auto;}
+.print-hint{text-align:center;color:rgba(243,239,226,0.4);font-size:13px;padding:6px 0 22px;}
+.print-hint b{color:var(--yellow);}
+.slide{position:relative;min-height:576px;margin:0 auto 26px;padding:44px 52px;
+ background:radial-gradient(ellipse at 18% 12%,rgba(255,255,255,0.05),transparent 45%),
+  radial-gradient(ellipse at 82% 88%,rgba(255,255,255,0.035),transparent 45%),
+  radial-gradient(ellipse at 60% 40%,rgba(120,160,130,0.10),transparent 60%),
+  linear-gradient(160deg,var(--board) 0%,var(--board2) 100%);
+ border-radius:14px;box-shadow:0 10px 34px rgba(0,0,0,0.55);
+ border:1px solid rgba(242,217,121,0.14);overflow:hidden;display:flex;flex-direction:column;}
+.slide::before{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;
+ background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.014) 40px,rgba(255,255,255,0.014) 41px),
+  radial-gradient(circle at 30% 72%,rgba(255,255,255,0.03),transparent 8%),
+  radial-gradient(circle at 76% 24%,rgba(255,255,255,0.025),transparent 7%);}
+.slide::after{content:attr(data-pg);position:absolute;bottom:15px;right:26px;font-family:'Caveat',cursive;font-size:20px;color:rgba(243,239,226,0.4);}
+.tag{position:absolute;top:20px;right:26px;font-family:'Caveat',cursive;font-size:22px;color:var(--pink);transform:rotate(4deg);}
+.eyebrow{font-family:'Caveat',cursive;font-size:25px;color:var(--yellow);letter-spacing:1px;margin-bottom:8px;opacity:0.92;}
+.slide h1{font-family:'Noto Serif TC',serif;font-size:50px;font-weight:900;line-height:1.28;letter-spacing:1px;
+ text-shadow:0 0 1px rgba(243,239,226,0.5),1px 1px 0 rgba(0,0,0,0.2);}
+.slide h2{font-family:'Noto Serif TC',serif;font-size:33px;font-weight:900;color:var(--yellow);
+ margin-bottom:20px;padding-bottom:11px;border-bottom:2px dashed rgba(242,217,121,0.4);
+ text-shadow:0 0 1px rgba(242,217,121,0.4);}
+.slide p{font-size:20px;line-height:1.85;margin-bottom:12px;}
+.big-center{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;}
+.big-center .lead,.lead{font-family:'Caveat',cursive;font-size:30px;color:var(--blue);letter-spacing:1px;margin-top:12px;}
+ul{list-style:none;margin:8px 0;}
+li{font-size:21px;line-height:1.95;padding-left:32px;position:relative;margin-bottom:4px;}
+li::before{content:'\2726';position:absolute;left:4px;color:var(--yellow);font-size:17px;top:3px;}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.34);border-radius:12px;padding:15px 21px;margin:12px 0;font-size:19px;line-height:1.8;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.38);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.38);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.34);}
+.eg{position:relative;background:rgba(0,0,0,0.24);border:1px solid rgba(242,217,121,0.2);border-radius:10px;padding:17px 22px;margin:12px 0;font-size:19px;}
+.eg::before{content:'';position:absolute;top:-8px;left:38px;width:58px;height:15px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.eg .q{color:var(--blue);font-weight:700;margin-bottom:8px;font-size:19px;}
+.eg .a{color:var(--green);font-weight:700;}
+.eg .stp{color:var(--chalk-soft);font-size:18px;margin:3px 0;}
+.tip{display:flex;gap:12px;align-items:flex-start;background:rgba(242,217,121,0.09);border:1.5px dashed rgba(242,217,121,0.45);border-radius:12px;padding:13px 18px;margin:10px 0;}
+.tip .ic{font-size:24px;line-height:1;}.tip .tx{font-size:18px;line-height:1.7;}
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:18px;}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.26);padding:10px 14px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.two{display:flex;gap:20px;}.two>div{flex:1;}
+.chip{display:inline-block;font-family:'Caveat',cursive;font-size:22px;padding:2px 14px;border-radius:20px;border:1.5px solid;margin:2px;}
+svg{display:block;margin:6px auto;max-width:100%;}
+@media print{
+ body{background:#0a130d;padding:0;}
+ .deck{max-width:none;}
+ .print-hint{display:none;}
+ .slide{margin:0;border-radius:0;box-shadow:none;min-height:100vh;
+  page-break-after:always;break-after:page;padding:32px 44px;justify-content:center;}
+ .slide:last-child{page-break-after:auto;break-after:auto;}
+ .slide h1{font-size:42px;}
+ .slide h2{font-size:27px;margin-bottom:13px;padding-bottom:8px;}
+ .slide p{font-size:17px;line-height:1.55;margin-bottom:6px;}
+ li{font-size:17px;line-height:1.55;margin-bottom:1px;padding-left:26px;}
+ .eyebrow{font-size:21px;margin-bottom:5px;}
+ .big-center .lead,.lead{font-size:26px;}
+ .box{font-size:16px;padding:10px 16px;margin:6px 0;line-height:1.5;}
+ .eg{font-size:16px;padding:11px 16px;margin:6px 0;}
+ .tip{font-size:16px;padding:10px 14px;margin:6px 0;}
+ .tbl{font-size:15px;margin:6px 0;}
+ .tbl th,.tbl td{padding:6px 10px;}
+ svg{max-height:210px;}
+}
+</style></head><body><div class="deck">
+<div class="print-hint">📽 共 <b>28</b> 張投影片　·　七上 第1章 整數運算　·　按 <b>Ctrl+P</b> 可列印或轉存 PDF</div>
+
+<!-- 1 封面 -->
+<div class="slide" data-pg="1 / 28"><div class="big-center">
+<svg viewBox="0 0 860 120" width="86%" style="opacity:0.9;">
+<text x="60" y="52" font-family="Caveat" font-size="44" fill="#eda0a8" transform="rotate(-7 60 52)">−5</text>
+<text x="200" y="40" font-family="Caveat" font-size="40" fill="#98c9dc" transform="rotate(5 200 40)">0</text>
+<text x="330" y="54" font-family="Caveat" font-size="44" fill="#f2d979" transform="rotate(-4 330 54)">+3</text>
+<text x="480" y="42" font-family="Caveat" font-size="40" fill="#a6d6a0" transform="rotate(6 480 42)">|−7|</text>
+<text x="650" y="52" font-family="Caveat" font-size="42" fill="#c9aee0" transform="rotate(-5 650 52)">−(−2)</text>
+<line x1="50" y1="92" x2="810" y2="92" stroke="#f3efe2" stroke-width="2"/>
+<line x1="430" y1="80" x2="430" y2="104" stroke="#f2d979" stroke-width="3"/>
+<text x="430" y="120" font-family="Caveat" font-size="22" fill="#f2d979" text-anchor="middle">0</text>
+<path d="M50 92 l12 -6 M50 92 l12 6" stroke="#f3efe2" stroke-width="2" fill="none"/>
+<path d="M810 92 l-12 -6 M810 92 l-12 6" stroke="#f3efe2" stroke-width="2" fill="none"/>
+</svg>
+<div class="eyebrow">國一上學期 · 第1章 整數運算</div>
+<h1>1-1　正數、負數與數線</h1>
+<div class="lead">從 0 出發，往兩個方向認識數的世界</div>
+</div></div>
+
+<!-- 2 導覽 -->
+<div class="slide" data-pg="2 / 28"><div class="eyebrow">本節導覽</div><h2>今天要學會四件事</h2><div class="body">
+<ul>
+<li><span class="hl">① 正負數的概念</span>　用正負號表達「相反意義的量」</li>
+<li><span class="hl-b">② 數線</span>　把抽象的數畫成看得見的位置</li>
+<li><span class="hl-r">③ 數的比較大小</span>　誰大誰小，數線說了算</li>
+<li><span class="hl-g">④ 相反數與絕對值</span>　方向相反、距離相同</li>
+</ul>
+<div class="box y">這是國中數學的起點 —— 把小學的「0 與正數」擴展到完整的整數世界。</div>
+</div></div>
+
+<!-- 3 情境引入 -->
+<div class="slide" data-pg="3 / 28"><div class="eyebrow">情境引入</div><h2>為什麼需要負數？</h2><div class="body">
+<div class="two">
+<div><div class="box y">🌡️ <span class="hl">溫度</span><br>冷氣房 18°C，南極可到 <span class="hl-r">−40°C</span>。「零下」就是負數的日常說法。</div>
+<div class="box">💰 <span class="hl-b">收支</span><br>存錢 <span class="hl">+200</span> 元，提款 <span class="hl-r">−200</span> 元，餘額 0 表示沒錢也沒欠錢。</div></div>
+<div><div class="box g">⛰️ <span class="hl-g">海拔</span><br>玉山標高 <span class="hl">+3952</span> 公尺，海溝最深約 <span class="hl-r">−4000</span> 公尺，海平面是 0。</div>
+<div class="box r">⚽ <span class="hl-r">輸贏分</span><br>淨勝 <span class="hl">+3</span> 分，落後 <span class="hl-r">−3</span> 分，平手是 0 分。</div></div>
+</div>
+<div class="tip"><div class="ic">💡</div><div class="tx">共同點：都有<span class="hl">「相反方向」</span>的兩種意義，光靠正數不夠用了。</div></div>
+</div></div>
+
+<!-- 4 核心① 定義 -->
+<div class="slide" data-pg="4 / 28"><div class="eyebrow">核心 ①　正負數的概念</div><h2>正數、負數、零的定義</h2><div class="body">
+<div class="box"><span class="hl">正數</span>：比 0 <span class="hl">大</span>的數。前面可加「+」，通常省略不寫 —— 5 就是 +5。</div>
+<div class="box r"><span class="hl-r">負數</span>：比 0 <span class="hl-r">小</span>的數。前面<span class="hl-r">一定要加「−」</span>，如 −5，負號不可省略。</div>
+<div class="box y"><span class="hl">0</span>：正數與負數的<span class="hl">分界</span>。<span class="hl">0 既不是正數，也不是負數。</span></div>
+<div class="tip"><div class="ic">🔑</div><div class="tx">正號可省略，<span class="hl-r">負號絕不可省略</span> —— 這是書寫上最基本的規矩。</div></div>
+</div></div>
+
+<!-- 5 0的特殊性 -->
+<div class="slide" data-pg="5 / 28"><div class="tag">最常考迷思</div><div class="eyebrow">核心 ①</div><h2>0 到底算什麼？</h2><div class="body big-center">
+<div style="font-family:'Noto Serif TC';font-size:74px;font-weight:900;color:var(--yellow);text-shadow:0 0 2px rgba(242,217,121,0.5);">0</div>
+<div style="margin:16px 0;">
+<span class="chip" style="border-color:var(--pink);color:var(--pink);">不是正數</span>
+<span class="chip" style="border-color:var(--pink);color:var(--pink);">不是負數</span>
+<span class="chip" style="border-color:var(--yellow);color:var(--yellow);">是分界點</span>
+</div>
+<div class="box r" style="max-width:760px;">❌ 學生常誤以為「0 不是負的，所以 0 是正數」</div>
+<div class="tip" style="max-width:760px;"><div class="ic">❓</div><div class="tx">追問：「0 前面可以加正號嗎？」讓學生自己發現 <span class="hl">0 沒有方向性</span>。</div></div>
+</div></div>
+
+<!-- 6 例題1 -->
+<div class="slide" data-pg="6 / 28"><div class="tag">例題 1 ★☆☆</div><div class="eyebrow">換你試試看</div><h2>哪些用到了負數？</h2><div class="body">
+<div class="eg"><div class="q">下列敘述哪些用到負數概念？請寫出對應的數。<br>(1) 氣溫下降 3 度　(2) 海拔高度 1200 公尺　(3) 提款機領出 500 元　(4) 體重增加 2 公斤</div>
+<div class="stp">想法：判斷「方向性的量」—— 是增加／上方，還是減少／下方？</div>
+<div class="stp">(1) 「下降」是減少 → <span class="hl-r">−3</span>　　(2) 海平面之上 → +1200（正數，非負數）</div>
+<div class="stp">(3) 「領出」帳戶減少 → <span class="hl-r">−500</span>　　(4) 「增加」是正向 → +2</div>
+<div class="a">答：用到負數的是 (1) −3 與 (3) −500</div></div>
+<div class="tip"><div class="ic">⚠️</div><div class="tx">(2) 是陷阱題 —— 考學生會不會把<span class="hl">所有的量都當成負數</span>。</div></div>
+</div></div>
+
+<!-- 7 核心② 數線三要素 -->
+<div class="slide" data-pg="7 / 28"><div class="eyebrow">核心 ②　數線</div><h2>數線的三要素</h2><div class="body">
+<svg viewBox="0 0 900 120" width="100%">
+<line x1="40" y1="60" x2="860" y2="60" stroke="#f3efe2" stroke-width="2.5"/>
+<path d="M860 60 l-14 -7 M860 60 l-14 7" stroke="#f3efe2" stroke-width="2.5" fill="none"/>
+<line x1="450" y1="42" x2="450" y2="78" stroke="#f2d979" stroke-width="4"/>
+<text x="450" y="100" font-size="22" fill="#f2d979" text-anchor="middle" font-family="Noto Sans TC">0</text>
+<text x="450" y="30" font-size="17" fill="#f2d979" text-anchor="middle" font-family="Noto Sans TC">原點</text>
+<text x="800" y="40" font-size="17" fill="#98c9dc" text-anchor="middle" font-family="Noto Sans TC">正方向 →</text>
+<line x1="530" y1="50" x2="530" y2="70" stroke="#98c9dc" stroke-width="2"/>
+<line x1="610" y1="50" x2="610" y2="70" stroke="#98c9dc" stroke-width="2"/>
+<path d="M530 88 L610 88" stroke="#a6d6a0" stroke-width="2"/>
+<text x="570" y="110" font-size="16" fill="#a6d6a0" text-anchor="middle" font-family="Noto Sans TC">單位長度</text>
+</svg>
+<div class="box"><span class="hl">① 原點</span>：代表 0 的位置　<span class="hl-b">② 正方向</span>：通常向右　<span class="hl-g">③ 單位長度</span>：每一格的長度</div>
+<div class="box y">數線上<span class="hl">每一點對應唯一一個數</span>，反過來每個數也只對應一點（一一對應）。</div>
+</div></div>
+
+<!-- 8 數線 左小右大 -->
+<div class="slide" data-pg="8 / 28"><div class="eyebrow">核心 ②　數線</div><h2>左小右大</h2><div class="body">
+<svg viewBox="0 0 900 130" width="100%">
+<line x1="40" y1="65" x2="860" y2="65" stroke="#f3efe2" stroke-width="2.5"/>
+<path d="M40 65 l14 -7 M40 65 l14 7" stroke="#f3efe2" stroke-width="2.5" fill="none"/>
+<path d="M860 65 l-14 -7 M860 65 l-14 7" stroke="#f3efe2" stroke-width="2.5" fill="none"/>
+<g font-family="Noto Sans TC" font-size="19" text-anchor="middle">
+<line x1="130" y1="55" x2="130" y2="75" stroke="#eda0a8" stroke-width="2"/><circle cx="130" cy="65" r="6" fill="#eda0a8"/><text x="130" y="96" fill="#eda0a8">−4</text>
+<line x1="240" y1="55" x2="240" y2="75" stroke="#eda0a8" stroke-width="2"/><text x="240" y="96" fill="#eda0a8">−3</text>
+<line x1="350" y1="55" x2="350" y2="75" stroke="#eda0a8" stroke-width="2"/><text x="350" y="96" fill="#eda0a8">−2</text>
+<line x1="450" y1="48" x2="450" y2="82" stroke="#f2d979" stroke-width="4"/><text x="450" y="96" fill="#f2d979">0</text>
+<line x1="560" y1="55" x2="560" y2="75" stroke="#98c9dc" stroke-width="2"/><text x="560" y="96" fill="#98c9dc">+1</text>
+<line x1="670" y1="55" x2="670" y2="75" stroke="#98c9dc" stroke-width="2"/><circle cx="670" cy="65" r="6" fill="#98c9dc"/><text x="670" y="96" fill="#98c9dc">+2</text>
+<line x1="780" y1="55" x2="780" y2="75" stroke="#98c9dc" stroke-width="2"/><text x="780" y="96" fill="#98c9dc">+3</text>
+</g>
+<text x="140" y="126" font-size="16" fill="#eda0a8" font-family="Noto Sans TC">← 越左邊越小</text>
+<text x="700" y="126" font-size="16" fill="#98c9dc" font-family="Noto Sans TC">越右邊越大 →</text>
+</svg>
+<div class="box y" style="text-align:center;font-size:22px;">數線上，<span class="hl">越往右數字越大，越往左數字越小</span></div>
+</div></div>
+
+<!-- 9 例題2 -->
+<div class="slide" data-pg="9 / 28"><div class="tag">例題 2 ★★☆</div><div class="eyebrow">換你試試看</div><h2>數線上的點</h2><div class="body">
+<div class="eg"><div class="q">A 點在 0 的左方 4 格，B 點在 0 的右方 2 格。<br>(1) 寫出 A、B 代表的數　(2) 哪個比較大？</div>
+<div class="stp">想法：左方 → 負數，右方 → 正數；格數就是離原點的距離</div>
+<div class="stp">(1) A 在左方 4 格 → A = −4；B 在右方 2 格 → B = +2</div>
+<div class="stp">(2) 數線上越右邊越大，B 在 A 的右邊</div>
+<div class="a">答：A = −4，B = +2，B 比較大（+2 &gt; −4）</div></div>
+</div></div>
+
+<!-- 10 核心③ 比較大小 第一條 -->
+<div class="slide" data-pg="10 / 28"><div class="eyebrow">核心 ③　數的比較大小</div><h2>第一條：正 &gt; 0 &gt; 負</h2><div class="body big-center">
+<div class="box y" style="font-size:34px;font-family:'Noto Serif TC';padding:22px 40px;">
+<span class="hl-b">正數</span>　&gt;　<span class="hl">0</span>　&gt;　<span class="hl-r">負數</span></div>
+<p style="margin-top:18px;">這是最上位的判斷：<span class="hl">只要一正一負，正的一定大</span>。</p>
+<div class="box r" style="max-width:720px;">例：<span class="hl-b">+2</span> &gt; <span class="hl-r">−100</span>　　別被 100 這個大數字騙了！</div>
+</div></div>
+
+<!-- 11 比較大小 兩正兩負 -->
+<div class="slide" data-pg="11 / 28"><div class="eyebrow">核心 ③　數的比較大小</div><h2>第二、三條：同號怎麼比</h2><div class="body">
+<div class="two">
+<div class="box" style="text-align:center;"><div style="font-size:26px;font-weight:900;color:var(--blue);margin-bottom:10px;">兩個正數</div>
+<div style="font-size:30px;font-family:'Noto Serif TC';color:var(--blue);">+8 &gt; +3</div>
+<div style="font-size:16px;margin-top:8px;">數字大的就大（符合直覺）</div></div>
+<div class="box r" style="text-align:center;"><div style="font-size:26px;font-weight:900;color:var(--pink);margin-bottom:10px;">兩個負數</div>
+<div style="font-size:30px;font-family:'Noto Serif TC';color:var(--pink);">−8 &lt; −3</div>
+<div style="font-size:16px;margin-top:8px;">數字大的<span class="hl-r">反而小</span>（違反直覺！）</div></div>
+</div>
+<svg viewBox="0 0 900 80" width="100%">
+<line x1="40" y1="42" x2="860" y2="42" stroke="#f3efe2" stroke-width="2"/>
+<circle cx="160" cy="42" r="7" fill="#eda0a8"/><text x="160" y="72" font-size="19" fill="#eda0a8" text-anchor="middle" font-family="Noto Sans TC">−8</text>
+<circle cx="360" cy="42" r="7" fill="#eda0a8"/><text x="360" y="72" font-size="19" fill="#eda0a8" text-anchor="middle" font-family="Noto Sans TC">−3</text>
+<line x1="450" y1="30" x2="450" y2="54" stroke="#f2d979" stroke-width="3"/><text x="450" y="72" font-size="19" fill="#f2d979" text-anchor="middle" font-family="Noto Sans TC">0</text>
+<circle cx="560" cy="42" r="7" fill="#98c9dc"/><text x="560" y="72" font-size="19" fill="#98c9dc" text-anchor="middle" font-family="Noto Sans TC">+3</text>
+<circle cx="760" cy="42" r="7" fill="#98c9dc"/><text x="760" y="72" font-size="19" fill="#98c9dc" text-anchor="middle" font-family="Noto Sans TC">+8</text>
+</svg>
+<div class="tip"><div class="ic">🔑</div><div class="tx">畫出數線就一目了然：<span class="hl-r">−8 在 −3 的左邊</span>，所以更小。</div></div>
+</div></div>
+
+<!-- 12 例題3 -->
+<div class="slide" data-pg="12 / 28"><div class="tag">例題 3 ★★★</div><div class="eyebrow">換你試試看</div><h2>判斷對錯（打迷思）</h2><div class="body">
+<div class="eg"><div class="q">判斷對錯並說明理由：<br>(1) 0 是最小的正數　(2) 任何負數都比任何正數小　(3) −10 比 −3 大</div>
+<div class="stp">(1) <span class="hl-r">錯</span>。0 不是正數，這句話本身矛盾。</div>
+<div class="stp">(2) <span class="hl-g">對</span>。數線上負數全在 0 左邊，正數全在右邊。</div>
+<div class="stp">(3) <span class="hl-r">錯</span>。−10 在 −3 的左邊，所以 −10 &lt; −3。</div>
+<div class="a">答：(1) 錯　(2) 對　(3) 錯</div></div>
+<div class="tip"><div class="ic">💡</div><div class="tx">(3) 是全章最大迷思 —— <span class="hl-r">數字看起來大，不代表數值大</span>。</div></div>
+</div></div>
+
+<!-- 13 隨堂 排序 -->
+<div class="slide" data-pg="13 / 28"><div class="eyebrow">隨堂練習</div><h2>小試身手：排大小</h2><div class="body">
+<table class="tbl">
+<tr><th>題目</th><th>答案</th></tr>
+<tr><td>將 +4、−7、0、−2、+1 由小到大排列</td><td class="hl">−7 &lt; −2 &lt; 0 &lt; +1 &lt; +4</td></tr>
+<tr><td>哪些是負數：+3、−8、0、−0.5、6</td><td class="hl">−8、−0.5</td></tr>
+<tr><td>寫出一個比 −5 大、比 −1 小的整數</td><td class="hl">−4、−3、−2（共3種）</td></tr>
+<tr><td>甲地 −3°C、乙地 +5°C、丙地 0°C，由冷到熱</td><td class="hl">甲 → 丙 → 乙</td></tr>
+</table>
+</div></div>
+
+<!-- 14 核心④ 相反數 -->
+<div class="slide" data-pg="14 / 28"><div class="eyebrow">核心 ④　相反數</div><h2>什麼是相反數？</h2><div class="body">
+<div class="box y" style="text-align:center;font-size:22px;">只有<span class="hl">正負號不同</span>的兩個數，互為<span class="hl">相反數</span></div>
+<svg viewBox="0 0 900 130" width="100%">
+<line x1="40" y1="62" x2="860" y2="62" stroke="#f3efe2" stroke-width="2"/>
+<line x1="450" y1="46" x2="450" y2="78" stroke="#f2d979" stroke-width="4"/><text x="450" y="100" font-size="20" fill="#f2d979" text-anchor="middle" font-family="Noto Sans TC">0</text>
+<circle cx="210" cy="62" r="8" fill="#eda0a8"/><text x="210" y="100" font-size="21" fill="#eda0a8" text-anchor="middle" font-family="Noto Sans TC">−3</text>
+<circle cx="690" cy="62" r="8" fill="#98c9dc"/><text x="690" y="100" font-size="21" fill="#98c9dc" text-anchor="middle" font-family="Noto Sans TC">+3</text>
+<path d="M210 38 Q450 6 690 38" stroke="#a6d6a0" stroke-width="2" fill="none" stroke-dasharray="5 5"/>
+<text x="450" y="24" font-size="17" fill="#a6d6a0" text-anchor="middle" font-family="Noto Sans TC">對稱、等距</text>
+<text x="320" y="126" font-size="15" fill="#a6d6a0" text-anchor="middle" font-family="Noto Sans TC">距離 3</text>
+<text x="575" y="126" font-size="15" fill="#a6d6a0" text-anchor="middle" font-family="Noto Sans TC">距離 3</text>
+</svg>
+<div class="box">數線意義：互為相反數的兩點，<span class="hl-g">對稱分布在原點兩側，與原點等距</span>。</div>
+</div></div>
+
+<!-- 15 相反數 0 -->
+<div class="slide" data-pg="15 / 28"><div class="eyebrow">核心 ④　相反數</div><h2>相反數的三個重點</h2><div class="body">
+<table class="tbl">
+<tr><th>數</th><th>相反數</th><th>說明</th></tr>
+<tr><td>+6</td><td class="hl">−6</td><td>只改變正負號</td></tr>
+<tr><td>−6</td><td class="hl">+6</td><td>負的相反數是正的</td></tr>
+<tr><td>0</td><td class="hl">0</td><td><span class="hl">0 的相反數是 0</span>（唯一的特例）</td></tr>
+</table>
+<div class="box r">⚠️ 別把<span class="hl-r">相反數</span>和<span class="hl-r">倒數</span>搞混：−3 的相反數是 +3，倒數是 −1/3。</div>
+</div></div>
+
+<!-- 16 核心④ 絕對值定義 -->
+<div class="slide" data-pg="16 / 28"><div class="eyebrow">核心 ④　絕對值</div><h2>絕對值 = 到原點的距離</h2><div class="body big-center">
+<div style="font-family:'Noto Serif TC';font-size:56px;font-weight:900;color:var(--yellow);">|a|</div>
+<p class="lead" style="margin:10px 0 16px;">a 到原點的距離，恆 ≥ 0</p>
+<svg viewBox="0 0 820 110" width="92%">
+<line x1="40" y1="58" x2="780" y2="58" stroke="#f3efe2" stroke-width="2"/>
+<line x1="410" y1="42" x2="410" y2="74" stroke="#f2d979" stroke-width="4"/><text x="410" y="96" font-size="20" fill="#f2d979" text-anchor="middle" font-family="Noto Sans TC">0</text>
+<circle cx="170" cy="58" r="7" fill="#eda0a8"/><text x="170" y="96" font-size="20" fill="#eda0a8" text-anchor="middle" font-family="Noto Sans TC">−5</text>
+<circle cx="650" cy="58" r="7" fill="#98c9dc"/><text x="650" y="96" font-size="20" fill="#98c9dc" text-anchor="middle" font-family="Noto Sans TC">+5</text>
+<path d="M170 34 L410 34" stroke="#eda0a8" stroke-width="2"/><text x="290" y="24" font-size="17" fill="#eda0a8" text-anchor="middle" font-family="Noto Sans TC">5</text>
+<path d="M410 34 L650 34" stroke="#98c9dc" stroke-width="2"/><text x="530" y="24" font-size="17" fill="#98c9dc" text-anchor="middle" font-family="Noto Sans TC">5</text>
+</svg>
+<div class="box y" style="max-width:800px;">|−5| = |+5| = <span class="hl">5</span>　　距離不分方向，所以<span class="hl">絕對值恆非負</span>。</div>
+</div></div>
+
+<!-- 17 絕對值三規則 -->
+<div class="slide" data-pg="17 / 28"><div class="eyebrow">核心 ④　絕對值</div><h2>求絕對值三規則</h2><div class="body">
+<div class="two">
+<div class="box" style="text-align:center;"><div style="font-size:30px;font-weight:900;color:var(--blue);font-family:'Noto Serif TC';">|+7| = 7</div><div style="font-size:16px;margin-top:10px;">正數 → <span class="hl-b">不變</span></div></div>
+<div class="box r" style="text-align:center;"><div style="font-size:30px;font-weight:900;color:var(--pink);font-family:'Noto Serif TC';">|−7| = 7</div><div style="font-size:16px;margin-top:10px;">負數 → <span class="hl-r">去負號</span></div></div>
+<div class="box y" style="text-align:center;"><div style="font-size:30px;font-weight:900;color:var(--yellow);font-family:'Noto Serif TC';">|0| = 0</div><div style="font-size:16px;margin-top:10px;">零 → <span class="hl">還是零</span></div></div>
+</div>
+<div class="box r" style="text-align:center;">❌ 絕不可能 |−7| = −7　　<span class="hl-r">距離不會是負的！</span></div>
+</div></div>
+
+<!-- 18 例題4 -->
+<div class="slide" data-pg="18 / 28"><div class="tag">例題 4 ★★☆</div><div class="eyebrow">換你試試看</div><h2>距離原點 5 的點</h2><div class="body">
+<div class="eg"><div class="q">數線上有一點 E，E 到原點的距離是 5。<br>(1) E 可能是哪些數？　(2) 若 E 在 0 的右邊，E 是多少？</div>
+<div class="stp">想法：「到原點的距離」就是絕對值 —— 距離相同、方向可有兩種</div>
+<div class="stp">(1) 左邊是 −5，右邊是 +5</div>
+<div class="stp">(2) 右邊 → 取正的那個</div>
+<div class="a">答：(1) E = −5 或 +5　(2) E = +5</div></div>
+</div></div>
+
+<!-- 19 |x|=a -->
+<div class="slide" data-pg="19 / 28"><div class="eyebrow">絕對值進階</div><h2>|x| = a 有幾個解？</h2><div class="body">
+<table class="tbl">
+<tr><th>情況</th><th>解</th><th>例子</th></tr>
+<tr><td>a &gt; 0</td><td class="hl">兩個解</td><td>|x| = 6 → x = +6 或 −6</td></tr>
+<tr><td>a = 0</td><td class="hl">一個解</td><td>|x| = 0 → x = 0</td></tr>
+<tr><td>a &lt; 0</td><td class="hl-r">無解</td><td>|x| = −3 → ✗（絕對值不可能為負）</td></tr>
+</table>
+<div class="tip"><div class="ic">🔑</div><div class="tx">固定提醒句：<span class="hl">「絕對值方程式通常有兩個答案，除非等於 0」</span> —— 別漏掉負的那個！</div></div>
+</div></div>
+
+<!-- 20 −|x| 陷阱 -->
+<div class="slide" data-pg="20 / 28"><div class="tag">易錯</div><div class="eyebrow">絕對值進階</div><h2>−|x| 的陷阱</h2><div class="body">
+<div class="box r" style="text-align:center;font-size:26px;font-family:'Noto Serif TC';">−|−6| = ？</div>
+<div class="eg">
+<div class="stp">Step 1　先算<span class="hl">內層</span>：|−6| = 6</div>
+<div class="stp">Step 2　再看<span class="hl-r">外面的負號</span>：−(6) = −6</div>
+<div class="a">答：−|−6| = −6</div></div>
+<div class="box y">口訣：<span class="hl">層層剝開，由內而外算</span>。−|x| 表示「先取絕對值，再加負號」，結果恆為<span class="hl">非正數</span>。</div>
+</div></div>
+
+<!-- 21 例題5 排序 -->
+<div class="slide" data-pg="21 / 28"><div class="tag">例題 5 ★★★</div><div class="eyebrow">換你試試看</div><h2>混合排序</h2><div class="body">
+<div class="eg"><div class="q">將下列各數由小到大排列：　−7、|−4|、0、−|2|、5</div>
+<div class="stp">Step 1　先化簡：|−4| = <span class="hl">4</span>；−|2| = <span class="hl-r">−2</span></div>
+<div class="stp">Step 2　變成：−7、4、0、−2、5</div>
+<div class="stp">Step 3　排序：−7 &lt; −2 &lt; 0 &lt; 4 &lt; 5</div>
+<div class="a">答：−7 &lt; −|2| &lt; 0 &lt; |−4| &lt; 5</div></div>
+<div class="tip"><div class="ic">💡</div><div class="tx">遇到含符號的數列，<span class="hl">一律先化簡成真實數值再排</span>。</div></div>
+</div></div>
+
+<!-- 22 核心迷思 -->
+<div class="slide" data-pg="22 / 28"><div class="tag">全章最大迷思</div><div class="eyebrow">觀念釐清</div><h2>「數值大小」≠「絕對值大小」</h2><div class="body">
+<div class="eg"><div class="q">(1) −8 與 −3，哪個大？　(2) |−8| 與 |−3|，哪個大？</div>
+<div class="stp">(1) 數線上 −3 在 −8 右邊 → <span class="hl">−3 較大</span>（−8 &lt; −3）</div>
+<div class="stp">(2) |−8| = 8，|−3| = 3 → <span class="hl">|−8| 較大</span>（8 &gt; 3）</div>
+<div class="a">兩個答案完全相反！</div></div>
+<div class="box y"><span class="hl">發現：</span>負數的絕對值愈大，數值反而愈小。<br><span class="hl-b">問「誰比較大」比數值；問「誰離 0 比較遠」比絕對值。</span></div>
+</div></div>
+
+<!-- 23 素養1 -->
+<div class="slide" data-pg="23 / 28"><div class="tag">素養 · 氣象</div><div class="eyebrow">生活應用</div><h2>城市氣溫偏離分析</h2><div class="body">
+<div class="box" style="font-size:17px;">某日 6 城市與「歷史同期平均氣溫」的差距（°C），正值＝偏高，負值＝偏低：</div>
+<table class="tbl" style="font-size:17px;">
+<tr><th>城市</th><th>台北</th><th>台中</th><th>高雄</th><th>花蓮</th><th>屏東</th><th>南投</th></tr>
+<tr><td>溫差</td><td>+1.2</td><td>−0.8</td><td class="hl">+2.5</td><td>−1.5</td><td class="hl-b">+0.3</td><td class="hl-r">−2.1</td></tr>
+</table>
+<div class="eg" style="font-size:17px;">
+<div class="stp">(1) 偏冷最多 → 比<span class="hl">數值</span>（最負）→ <span class="hl-r">南投 −2.1</span></div>
+<div class="stp">(2) 最接近歷史同期 → 離 0 最近 → <span class="hl-b">屏東 +0.3</span></div>
+<div class="stp">(3) 偏離程度最大（不分冷熱）→ 比<span class="hl">絕對值</span> → <span class="hl">高雄 2.5</span></div>
+<div class="a">答：(1) 南投　(2) 屏東　(3) 高雄</div></div>
+</div></div>
+
+<!-- 24 素養2 -->
+<div class="slide" data-pg="24 / 28"><div class="tag">素養 · 地理</div><div class="eyebrow">生活應用</div><h2>登山隊的高度追蹤</h2><div class="body">
+<div class="eg"><div class="q">登山隊從海平面（0 公尺）出發：第1天爬升至 +850 公尺紮營，第2天下撤 200 公尺，第3天再爬升 600 公尺。地圖上另有一處「低於海平面 50 公尺」的鹽湖紀念碑。</div>
+<div class="stp">(1) 第2天結束：850 − 200 = <span class="hl">+650</span> 公尺</div>
+<div class="stp">(2) 第3天結束：650 + 600 = <span class="hl">+1250</span> 公尺</div>
+<div class="stp">(3) 鹽湖紀念碑「低於海平面 50 公尺」→ <span class="hl-r">−50</span>，比第2天的 +650 低</div>
+<div class="a">答：(1) +650　(2) +1250　(3) −50 公尺，比較低</div></div>
+<div class="tip"><div class="ic">🗺️</div><div class="tx">把<span class="hl">海平面當成數線的 0</span>，往上為正、往下為負。</div></div>
+</div></div>
+
+<!-- 25 距離應用 -->
+<div class="slide" data-pg="25 / 28"><div class="eyebrow">素養 · 延伸</div><h2>絕對值就是「距離」</h2><div class="body">
+<div class="two">
+<div class="box y">🏭 <span class="hl">品管判定</span><br>|實際值 − 標準值| ≤ 容許誤差 → 合格<br><span style="font-size:16px;">螺絲 10mm，誤差 ≤0.05：9.97mm → |−0.03| = 0.03 ✓</span></div>
+<div class="box g">📏 <span class="hl-g">兩點距離</span><br>數線上 a、b 兩點距離 = |a − b|<br><span style="font-size:16px;">學校 −8、公園 +5 → |−8 − 5| = 13 公里</span></div>
+</div>
+<div class="tip"><div class="ic">💼</div><div class="tx">在品管、測量、導航中，絕對值用來衡量<span class="hl">「偏離多遠」</span>—— 不管偏高還偏低。</div></div>
+</div></div>
+
+<!-- 26 避雷 -->
+<div class="slide" data-pg="26 / 28"><div class="eyebrow">避雷指南</div><h2>五個最常見錯誤</h2><div class="body">
+<table class="tbl">
+<tr><th>❌ 錯誤</th><th>✓ 正確</th></tr>
+<tr><td>0 是正數</td><td class="hl">0 既非正數也非負數</td></tr>
+<tr><td>−10 &gt; −3</td><td class="hl">−10 &lt; −3（負數絕對值大反而小）</td></tr>
+<tr><td>|−7| = −7</td><td class="hl">|−7| = 7（距離恆非負）</td></tr>
+<tr><td>−|2| = 2</td><td class="hl">−|2| = −2（負號在絕對值外）</td></tr>
+<tr><td>|x| = 5 只有 x = 5</td><td class="hl">x = 5 或 −5（兩解）</td></tr>
+</table>
+</div></div>
+
+<!-- 27 總結 -->
+<div class="slide" data-pg="27 / 28"><div class="eyebrow">本節總結</div><h2>四句話記住全部</h2><div class="body">
+<div class="box"><span class="hl-b">① 正負數：</span>正數 &gt; 0 &gt; 負數；0 是分界，既非正也非負</div>
+<div class="box y"><span class="hl">② 數線：</span>原點、正方向、單位長度；左小右大</div>
+<div class="box r"><span class="hl-r">③ 比大小：</span>正 &gt; 0 &gt; 負；兩負數絕對值大的反而小</div>
+<div class="box g"><span class="hl-g">④ 相反數與絕對值：</span>相反數＝只差正負號、對稱等距；絕對值＝到原點的距離，恆 ≥ 0</div>
+</div></div>
+
+<!-- 28 下節預告 -->
+<div class="slide" data-pg="28 / 28"><div class="big-center">
+<div class="eyebrow">課後任務 · 下節預告</div>
+<h1 style="font-size:42px;">1-2　整數的加減運算</h1>
+<div class="lead">認識了正負數與數線，下一節開始真正的運算</div>
+<svg viewBox="0 0 520 60" width="56%" style="margin-top:18px;">
+<line x1="20" y1="30" x2="480" y2="30" stroke="#f2d979" stroke-width="2" stroke-dasharray="2 10" opacity="0.7"/>
+<path d="M480 30 l-12 -7 M480 30 l-12 7" stroke="#f2d979" stroke-width="2" fill="none"/>
+</svg>
+<div class="box y" style="max-width:720px;margin-top:20px;">回家練習方向：基礎（正負數表示、求絕對值）→ 進階（排序、|x|=a）→ 素養（溫差、品管、距離）</div>
+</div></div>
+
+</div></body></html>

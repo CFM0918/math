@@ -1,0 +1,617 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>七上 3-3 應用問題｜授課簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--chalk-soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);padding:24px 14px;}
+.deck{max-width:1060px;margin:0 auto;}
+.print-hint{text-align:center;color:rgba(243,239,226,0.4);font-size:13px;padding:6px 0 22px;}
+.print-hint b{color:var(--yellow);}
+.slide{position:relative;min-height:576px;margin:0 auto 26px;padding:44px 52px;
+ background:radial-gradient(ellipse at 18% 12%,rgba(255,255,255,0.05),transparent 45%),
+  radial-gradient(ellipse at 82% 88%,rgba(255,255,255,0.035),transparent 45%),
+  radial-gradient(ellipse at 60% 40%,rgba(120,160,130,0.10),transparent 60%),
+  linear-gradient(160deg,var(--board) 0%,var(--board2) 100%);
+ border-radius:14px;box-shadow:0 10px 34px rgba(0,0,0,0.55);
+ border:1px solid rgba(242,217,121,0.14);overflow:hidden;display:flex;flex-direction:column;}
+.slide::before{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;
+ background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.014) 40px,rgba(255,255,255,0.014) 41px),
+  radial-gradient(circle at 30% 72%,rgba(255,255,255,0.03),transparent 8%),
+  radial-gradient(circle at 76% 24%,rgba(255,255,255,0.025),transparent 7%);}
+.slide::after{content:attr(data-pg);position:absolute;bottom:15px;right:26px;font-family:'Caveat',cursive;font-size:20px;color:rgba(243,239,226,0.4);}
+.tag{position:absolute;top:20px;right:26px;font-family:'Caveat',cursive;font-size:22px;color:var(--pink);transform:rotate(4deg);}
+.eyebrow{font-family:'Caveat',cursive;font-size:25px;color:var(--yellow);letter-spacing:1px;margin-bottom:8px;opacity:0.92;}
+.slide h1{font-family:'Noto Serif TC',serif;font-size:46px;font-weight:900;line-height:1.28;letter-spacing:1px;
+ text-shadow:0 0 1px rgba(243,239,226,0.5),1px 1px 0 rgba(0,0,0,0.2);}
+.slide h2{font-family:'Noto Serif TC',serif;font-size:33px;font-weight:900;color:var(--yellow);
+ margin-bottom:20px;padding-bottom:11px;border-bottom:2px dashed rgba(242,217,121,0.4);
+ text-shadow:0 0 1px rgba(242,217,121,0.4);}
+.slide p{font-size:20px;line-height:1.85;margin-bottom:12px;}
+.big-center{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;}
+.big-center .lead,.lead{font-family:'Caveat',cursive;font-size:30px;color:var(--blue);letter-spacing:1px;margin-top:12px;}
+ul{list-style:none;margin:8px 0;}
+li{font-size:21px;line-height:1.95;padding-left:32px;position:relative;margin-bottom:4px;}
+li::before{content:'\2726';position:absolute;left:4px;color:var(--yellow);font-size:17px;top:3px;}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.34);border-radius:12px;padding:15px 21px;margin:12px 0;font-size:19px;line-height:1.8;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.38);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.38);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.34);}
+.eg{position:relative;background:rgba(0,0,0,0.24);border:1px solid rgba(242,217,121,0.2);border-radius:10px;padding:17px 22px;margin:12px 0;font-size:19px;}
+.eg::before{content:'';position:absolute;top:-8px;left:38px;width:58px;height:15px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.eg .q{color:var(--blue);font-weight:700;margin-bottom:8px;font-size:19px;}
+.eg .a{color:var(--green);font-weight:700;margin-top:6px;}
+.eg .stp{color:var(--chalk-soft);font-size:18px;margin:3px 0;}
+.tip{display:flex;gap:12px;align-items:flex-start;background:rgba(242,217,121,0.09);border:1.5px dashed rgba(242,217,121,0.45);border-radius:12px;padding:13px 18px;margin:10px 0;}
+.tip .ic{font-size:24px;line-height:1;}.tip .tx{font-size:18px;line-height:1.7;}
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:18px;}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.26);padding:10px 14px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.two{display:flex;gap:20px;}.two>div{flex:1;}
+svg{display:block;margin:6px auto;max-width:100%;}
+@media print{
+ body{background:#0a130d;padding:0;}
+ .deck{max-width:none;}
+ .print-hint{display:none;}
+ .slide{margin:0;border-radius:0;box-shadow:none;min-height:100vh;
+  page-break-after:always;break-after:page;padding:32px 44px;justify-content:center;}
+ .slide:last-child{page-break-after:auto;break-after:auto;}
+ .slide h1{font-size:40px;}
+ .slide h2{font-size:27px;margin-bottom:13px;padding-bottom:8px;}
+ .slide p{font-size:17px;line-height:1.55;margin-bottom:6px;}
+ li{font-size:17px;line-height:1.55;margin-bottom:1px;padding-left:26px;}
+ .eyebrow{font-size:21px;margin-bottom:5px;}
+ .big-center .lead,.lead{font-size:26px;}
+ .box{font-size:16px;padding:10px 16px;margin:6px 0;line-height:1.5;}
+ .eg{font-size:16px;padding:11px 16px;margin:6px 0;}
+ .tip{font-size:16px;padding:10px 14px;margin:6px 0;}
+ .tbl{font-size:15px;margin:6px 0;}
+ .tbl th,.tbl td{padding:6px 10px;}
+ svg{max-height:210px;}
+}
+</style></head><body><div class="deck">
+<div class="print-hint">共 <b>30</b> 張・列印時每張一頁（Ctrl+P → 橫向 → 背景圖形）</div>
+
+
+<!-- 1 -->
+<div class="slide" data-pg="1 / 30"><div class="tag">Start!</div><div class="big-center">
+<div class="eyebrow">國一上學期・第三章 一元一次方程式</div>
+<h1>3-3　應用問題</h1>
+<div class="lead">難的不是解方程式 ——<br>是把文字翻譯成方程式這一步</div>
+<svg viewBox="0 0 640 108" width="84%" style="margin-top:20px;">
+<rect x="12" y="20" width="212" height="64" rx="10" fill="rgba(237,160,168,0.14)" stroke="#eda0a8" stroke-width="1.5"/>
+<text x="118" y="46" font-family="Noto Sans TC" font-size="16" fill="#eda0a8" text-anchor="middle">一段中文</text>
+<text x="118" y="70" font-family="Caveat" font-size="17" fill="rgba(243,239,226,0.65)" text-anchor="middle">「甲車時速60、乙車時速40…」</text>
+<text x="320" y="42" font-family="Caveat" font-size="27" fill="#f2d979" text-anchor="middle">最難的一步</text>
+<path d="M245 58 L395 58" stroke="#f2d979" stroke-width="2" stroke-dasharray="3 5"/>
+<path d="M395 58 l-11 -6 M395 58 l-11 6" stroke="#f2d979" stroke-width="2" fill="none"/>
+<rect x="412" y="20" width="212" height="64" rx="10" fill="rgba(166,214,160,0.14)" stroke="#a6d6a0" stroke-width="1.5"/>
+<text x="518" y="46" font-family="Noto Sans TC" font-size="16" fill="#a6d6a0" text-anchor="middle">一個方程式</text>
+<text x="518" y="72" font-family="Noto Serif TC" font-size="19" fill="#f2d979" text-anchor="middle">60t + 40t = 360</text>
+</svg>
+</div></div>
+
+<!-- 2 -->
+<div class="slide" data-pg="2 / 30"><div class="tag">目標</div><div class="body">
+<h2>本節學習目標</h2>
+<ul>
+<li>掌握應用問題的<span class="hl">五步驟解題流程</span></li>
+<li>能正確<span class="hl">設未知數</span>，並清楚寫出「設…為 x」</li>
+<li>能抓住每種題型的<span class="hl-b">關鍵不變量</span>來列式</li>
+<li>能處理五大題型：<span class="hl">數字、行程、工作、分配、濃度</span></li>
+<li>能分辨行程的<span class="hl-g">相向（速度相加）</span>與<span class="hl-r">追及（速度相減）</span></li>
+<li>解完後能<span class="hl">檢查合理性</span>（人數不能是負數或小數）</li>
+</ul>
+<div class="box y">一句話：<span class="hl">五大題型不是五種公式，是同一套步驟的五個應用。</span></div>
+</div></div>
+
+<!-- 3 -->
+<div class="slide" data-pg="3 / 30"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">細目 ①　應用問題的解題步驟</div>
+<h2>五步驟</h2>
+<div class="box y" style="text-align:center;font-size:20px;padding:16px;">
+<span class="hl">① 設未知數　→　② 找不變量　→　③ 列式　→　④ 解方程式　→　⑤ 檢查合理性</span></div>
+<table class="tbl">
+<tr><th style="width:9%;">　</th><th style="width:30%;">動作</th><th>關鍵</th></tr>
+<tr><td class="hl" style="font-size:19px;">①</td><td><b>設未知數</b></td><td>一定要寫出「<span class="hl-r">設…為 x</span>」這句話</td></tr>
+<tr><td class="hl" style="font-size:19px;">②</td><td><b>找不變量</b></td><td class="hl">「這題真正<b>不會變</b>的東西是什麼？」</td></tr>
+<tr><td class="hl" style="font-size:19px;">③</td><td><b>列式</b></td><td>把不變量寫成<b>等式的兩邊</b></td></tr>
+<tr><td class="hl" style="font-size:19px;">④</td><td><b>解方程式</b></td><td>3-2 的五步驟（去括號→去分母→移項→合併→同除）</td></tr>
+<tr><td class="hl" style="font-size:19px;">⑤</td><td><b>檢查合理性</b></td><td>人數、個數不能是<b>負數或小數</b></td></tr>
+</table>
+</div></div>
+
+<!-- 4 -->
+<div class="slide" data-pg="4 / 30"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">細目 ①　🔑 整節的靈魂</div>
+<h2>第 ② 步：找不變量</h2>
+<div class="box y" style="text-align:center;font-size:24px;padding:20px;">
+<span class="hl">「這題真正不會變的東西是什麼？」</span></div>
+<table class="tbl">
+<tr><th style="width:34%;">題型</th><th>不變量</th></tr>
+<tr><td class="hl-b">行程（相向）</td><td class="hl"><b>總距離</b></td></tr>
+<tr><td class="hl-b">行程（追及）</td><td class="hl"><b>追上時兩人的位置</b></td></tr>
+<tr><td class="hl-b">工作</td><td class="hl"><b>總工作量 = 1</b></td></tr>
+<tr><td class="hl-b">分配</td><td class="hl"><b>總金額</b>（總車費、總團費）</td></tr>
+<tr><td class="hl-b">濃度</td><td class="hl"><b>溶質的重量</b>（鹽、糖、橡膠原料）</td></tr>
+</table>
+<div class="box g" style="text-align:center;font-size:21px;">
+💡 找到不變量 → <span class="hl">它就是等號</span>。方程式就寫出來了。</div>
+</div></div>
+
+<!-- 5 -->
+<div class="slide" data-pg="5 / 30"><div class="tag">避雷</div><div class="body">
+<div class="eyebrow">細目 ①　⚠️ 最常見錯誤</div>
+<h2>千萬不要跳過「設…為 x」</h2>
+<div class="box r" style="text-align:center;font-size:21px;padding:18px;">
+❌ 直接列式 → 解出 <span class="fm">x = 30</span> →<br>
+<span class="hl-r">「所以 30 是什麼？人數？錢？天數？」</span></div>
+<div class="box g"><b class="hl-g">✓ 正確做法</b><br>
+「<span class="hl">設原本預計參加的人數為 x 人</span>」← 寫下這句話，只要三秒<br>
+解出 x = 30 → 立刻知道：<b>原本預計 30 人</b></div>
+<div class="box y" style="text-align:center;font-size:20px;">
+<span class="hl">設未知數不是形式，是在幫未來的自己。</span><br>
+題目越長，這句話越重要。</div>
+<div class="tip"><div class="ic">📌</div><div class="tx"><b>而且「設」還要寫單位。</b>「設 x」和「設兒子現在 <b>x 歲</b>」差很多 ——
+後者讓你在列式時自動想到「5 年後是 x+5」。</div></div>
+</div></div>
+
+<!-- 6 -->
+<div class="slide" data-pg="6 / 30"><div class="tag">題型</div><div class="body">
+<div class="eyebrow">題型 1　數字問題</div>
+<h2>連續整數怎麼設？</h2>
+<div class="two">
+<div class="box"><b class="hl-b">連續整數</b><br>
+<span class="fm" style="font-size:21px;">x、x+1、x+2</span></div>
+<div class="box g"><b class="hl-g">連續偶數（或奇數）</b><br>
+<span class="fm" style="font-size:21px;">x、x+2、x+4</span></div>
+</div>
+<div class="eg">
+<div class="q">兩個連續整數的和是 47，求這兩個整數。</div>
+<div class="stp"><b>① 設</b>　較小的整數為 <span class="fm hl">x</span>，則較大的是 <span class="fm hl">x+1</span></div>
+<div class="stp"><b>③ 列式</b>　<span class="fm">x + (x+1) = 47</span></div>
+<div class="stp"><b>④ 解</b>　<span class="fm">2x + 1 = 47 → 2x = 46 → x = 23</span></div>
+<div class="stp"><b>⑤ 檢查</b>　23、24 都是整數 ✓；23 + 24 = 47 ✓</div>
+<div class="a">答：23 和 24</div>
+</div>
+<div class="box y"><b>為什麼連續偶數是 x、x+2 而不是 x、x+1？</b>
+因為偶數之間差 <span class="hl">2</span>（2, 4, 6, 8…）。連續奇數也是差 2（1, 3, 5…）。</div>
+</div></div>
+
+<!-- 7 -->
+<div class="slide" data-pg="7 / 30"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">題型 2　行程問題　⚠️ 最常搞混</div>
+<h2>相向「相加」，追及「相減」</h2>
+<div class="box y" style="text-align:center;font-size:22px;">
+<span class="fm hl">距離 = 速度 × 時間</span></div>
+<table class="tbl">
+<tr><th style="width:24%;">情況</th><th style="width:40%;">關係</th><th>速度</th></tr>
+<tr><td class="hl-g"><b>相向而行</b><br><span style="font-size:15px;">（面對面接近）</span></td><td>兩者距離之<b>和</b> = 總距離</td><td class="hl-g" style="font-size:19px;">相<b>加</b></td></tr>
+<tr><td class="hl-r"><b>同向追及</b><br><span style="font-size:15px;">（後面追前面）</span></td><td>追上時兩人<b>位置相同</b></td><td class="hl-r" style="font-size:19px;">相<b>減</b></td></tr>
+<tr><td class="hl-b"><b>反向而行</b><br><span style="font-size:15px;">（背對背遠離）</span></td><td>兩者距離之<b>和</b> = 相距</td><td class="hl-b" style="font-size:19px;">相<b>加</b></td></tr>
+</table>
+<div class="box g"><b>💡 為什麼？用想的不用背：</b><br>
+<span class="hl-g">相向</span>是「<b>一起把距離吃掉</b>」→ 兩人的速度<b>都在幫忙</b> → <b>相加</b><br>
+<span class="hl-r">追及</span>是「<b>後面比前面快多少</b>」→ 只有<b>速度差</b>在縮短距離 → <b>相減</b></div>
+</div></div>
+
+<!-- 8 -->
+<div class="slide" data-pg="8 / 30"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 2　難度 ★★☆</div>
+<h2>行程：相向而行</h2>
+<div class="box">甲、乙兩地相距 <span class="hl">360 公里</span>，甲車時速 <span class="hl">60</span>、乙車時速 <span class="hl">40</span>，同時出發<b>相向而行</b>，幾小時後相遇？</div>
+<svg viewBox="0 0 560 74" width="88%" style="margin:6px auto;display:block;">
+<line x1="40" y1="46" x2="520" y2="46" stroke="#f3efe2" stroke-width="2"/>
+<line x1="40" y1="38" x2="40" y2="54" stroke="#f3efe2" stroke-width="2"/>
+<line x1="520" y1="38" x2="520" y2="54" stroke="#f3efe2" stroke-width="2"/>
+<text x="40" y="68" font-family="Noto Sans TC" font-size="14" fill="#f3efe2" text-anchor="middle">甲地</text>
+<text x="520" y="68" font-family="Noto Sans TC" font-size="14" fill="#f3efe2" text-anchor="middle">乙地</text>
+<text x="280" y="68" font-family="Noto Serif TC" font-size="15" fill="#f2d979" text-anchor="middle">360 公里</text>
+<path d="M60 30 L200 30" stroke="#98c9dc" stroke-width="2.5"/>
+<path d="M200 30 l-9 -5 M200 30 l-9 5" stroke="#98c9dc" stroke-width="2.5" fill="none"/>
+<text x="130" y="20" font-family="Noto Serif TC" font-size="15" fill="#98c9dc" text-anchor="middle">60t →</text>
+<path d="M500 30 L360 30" stroke="#eda0a8" stroke-width="2.5"/>
+<path d="M360 30 l9 -5 M360 30 l9 5" stroke="#eda0a8" stroke-width="2.5" fill="none"/>
+<text x="430" y="20" font-family="Noto Serif TC" font-size="15" fill="#eda0a8" text-anchor="middle">← 40t</text>
+<circle cx="280" cy="46" r="4.5" fill="#a6d6a0"/>
+<text x="280" y="16" font-family="Caveat" font-size="17" fill="#a6d6a0" text-anchor="middle">相遇</text>
+</svg>
+<div class="eg">
+<div class="stp"><b>① 設</b>　t 小時後相遇　｜　<b>② 不變量</b>：總距離 <span class="hl">360 公里</span></div>
+<div class="stp"><b>③ 列式</b>　<span class="fm">60t + 40t = 360</span>　（相向 → 速度<b>相加</b>）</div>
+<div class="stp"><b>④ 解</b>　<span class="fm">100t = 360 → t = 3.6</span></div>
+<div class="stp"><b>⑤ 檢查</b>　時間<b>可以</b>是小數 ✓</div>
+<div class="a">答：3.6 小時後相遇</div>
+</div>
+</div></div>
+
+<!-- 9 -->
+<div class="slide" data-pg="9 / 30"><div class="tag">題型</div><div class="body">
+<div class="eyebrow">題型 3　工作問題</div>
+<h2>把整件工作看成「1」</h2>
+<div class="box y" style="text-align:center;font-size:21px;padding:16px;">
+甲 n 天完成　→　甲<b>每天</b>做 <span class="fm hl" style="font-size:24px;">1/n</span></div>
+<div class="eg">
+<div class="q">甲單獨 8 天、乙單獨 12 天，合作幾天完成？</div>
+<div class="stp"><b>② 不變量</b>　總工作量 = <span class="hl">1</span></div>
+<div class="stp">　　甲每天 <span class="fm">1/8</span>、乙每天 <span class="fm">1/12</span></div>
+<div class="stp"><b>③ 列式</b>　設合作 t 天：<span class="fm">t × (1/8 + 1/12) = 1</span></div>
+<div class="stp"><b>④ 解</b>　通分（<span class="hl">LCM = 24</span>）：<span class="fm">1/8 + 1/12 = 3/24 + 2/24 = 5/24</span></div>
+<div class="stp">　　<span class="fm">t × 5/24 = 1 → t = 24/5 = 4.8</span></div>
+<div class="a">答：4.8 天</div>
+</div>
+<div class="box g"><b>為什麼是「1」？</b>因為<b>整件工作</b>就是 100% = <span class="hl">1</span>。<br>
+💡 這裡用到 <span class="hl">2-2 的 LCM</span> 和 <span class="hl">2-3 的分數加法</span> —— 老朋友又出現了。</div>
+</div></div>
+
+<!-- 10 -->
+<div class="slide" data-pg="10 / 30"><div class="tag">題型</div><div class="body">
+<div class="eyebrow">題型 4　分配問題</div>
+<h2>不變量：總金額</h2>
+<div class="box">原本預計 x 人，每人 <span class="hl">150 元</span>；<b>5 人取消</b>後，每人要付 <span class="hl">180 元</span>（<b>總車費不變</b>）。求 x。</div>
+<div class="eg">
+<div class="stp"><b>② 不變量</b>　<span class="hl">總車費</span> —— 不管幾個人分攤，總數固定</div>
+<div class="stp"><b>③ 列式</b>　<span class="fm">150x = 180(x − 5)</span>　← <b>左邊是總車費，右邊也是總車費</b></div>
+<div class="stp"><b>④ 解</b>　<span class="fm">150x = 180x − 900 → −30x = −900 → x = 30</span></div>
+<div class="stp"><b>⑤ 檢查</b>　30 是整數 ✓ 合理</div>
+<div class="stp"><b>驗算</b>　<span class="fm">150 × 30 = 4500</span>；剩 25 人 → <span class="fm">4500 ÷ 25 = 180</span> ✓</div>
+<div class="a">答：原本預計 30 人</div>
+</div>
+<div class="box y"><b>列式的訣竅：</b>「<span class="hl">總車費 = 總車費</span>」—— 用兩種方式表達<b>同一個東西</b>，
+一種是「30 人 × 150」，一種是「25 人 × 180」。</div>
+</div></div>
+
+<!-- 11 -->
+<div class="slide" data-pg="11 / 30"><div class="tag">題型</div><div class="body">
+<div class="eyebrow">題型 5　濃度問題</div>
+<h2>不變量：溶質的重量</h2>
+<div class="box y" style="text-align:center;font-size:21px;">
+<span class="fm hl">濃度 = 溶質 ÷ 溶液總重</span></div>
+<div class="eg">
+<div class="q">300 克食鹽水，含鹽率 8%，要加多少克<b>水</b>才能降到 5%？</div>
+<div class="stp"><b>② 不變量</b>　<span class="hl">鹽的重量</span> —— <b class="hl-r">加水不會讓鹽變多！</b></div>
+<div class="stp">　　原本鹽量 = <span class="fm">300 × 8% = 24 克</span></div>
+<div class="stp"><b>③ 列式</b>　設加 x 克水：<span class="fm">24 ÷ (300 + x) = 5%</span></div>
+<div class="stp"><b>④ 解</b>　<span class="fm">24 = 0.05(300+x) → 24 = 15 + 0.05x → 9 = 0.05x → x = 180</span></div>
+<div class="stp"><b>驗算</b>　<span class="fm">24 ÷ 480 = 0.05 = 5%</span> ✓</div>
+<div class="a">答：需加入 180 克水</div>
+</div>
+<div class="box r" style="text-align:center;">
+⚠️ <b class="hl-r">最常見誤解：以為「加水會讓鹽也跟著變多」。</b><br>
+<span class="hl">加的是水，鹽的重量完全不變</span> —— 這就是不變量。</div>
+</div></div>
+
+<!-- 12 -->
+<div class="slide" data-pg="12 / 30"><div class="tag">避雷</div><div class="body">
+<div class="eyebrow">題型 5　⚠️ 關鍵區別</div>
+<h2>加「水」和加「純糖」完全不一樣</h2>
+<div class="two">
+<div class="box"><b class="hl-b">加水</b>　300g 鹽水 8% → 5%<br>
+鹽：<span class="hl-g">不變</span>（24 克）<br>
+總重：<span class="hl-r">變</span>（300 → 300+x）<br>
+<span class="fm" style="font-size:18px;">24 / (300+x) = 0.05</span><br>
+<span style="font-size:15px;color:var(--chalk-soft);">只有分母加 x</span></div>
+<div class="box g"><b class="hl-g">加純糖</b>　200g 糖水 10% → 20%<br>
+糖：<span class="hl-r">變</span>（20 → 20+x）<br>
+總重：<span class="hl-r">也變</span>（200 → 200+x）<br>
+<span class="fm" style="font-size:18px;">(20+x) / (200+x) = 0.2</span><br>
+<span style="font-size:15px;color:var(--chalk-soft);">分子分母<b>都</b>加 x</span></div>
+</div>
+<div class="eg">
+<div class="q">200 克糖水含糖率 10%，加多少克<b>純糖</b>可提高到 20%？</div>
+<div class="stp">原糖量 = <span class="fm">200 × 10% = 20 克</span></div>
+<div class="stp"><span class="fm">(20+x) = 0.2(200+x) = 40 + 0.2x → 0.8x = 20 → x = 25</span></div>
+<div class="stp"><b>驗算</b>　<span class="fm">(20+25)/225 = 45/225 = 20%</span> ✓</div>
+<div class="a">答：加 25 克純糖</div>
+</div>
+</div></div>
+
+<!-- 13 -->
+<div class="slide" data-pg="13 / 30"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">細目 ①　第 ⑤ 步</div>
+<h2>不是每個「數學上正確」的答案都是對的</h2>
+<table class="tbl">
+<tr><th style="width:38%;">量</th><th style="width:30%;">可以是小數嗎？</th><th>可以是負數嗎？</th></tr>
+<tr><td class="hl-b"><b>人數、個數、袋數</b></td><td class="hl-r">❌ 必須是<b>整數</b></td><td class="hl-r">❌</td></tr>
+<tr><td class="hl-b"><b>年齡</b></td><td class="hl-r">❌ 通常是整數</td><td class="hl-r">❌</td></tr>
+<tr><td class="hl-b"><b>時間</b></td><td class="hl-g">✅（如 3.6 小時）</td><td class="hl-r">❌</td></tr>
+<tr><td class="hl-b"><b>距離、重量</b></td><td class="hl-g">✅</td><td class="hl-r">❌</td></tr>
+</table>
+<div class="box y" style="text-align:center;font-size:21px;">
+💡 解出 <span class="fm hl-r">x = 30.5 人</span> → <span class="hl">一定是算錯了</span>！</div>
+<div class="box g"><b>檢查合理性是抓計算錯誤的好方法。</b>
+它不花時間，但能救你 —— <b>因為答案荒謬的時候，人會停下來重算</b>。</div>
+</div></div>
+
+<!-- 14 -->
+<div class="slide" data-pg="14 / 30"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 1</div>
+<h2>兄弟上學 —— 追及問題</h2>
+<div class="box">家到學校 <span class="hl">4.8 公里</span>。弟弟先走，時速 <span class="hl">4</span>。哥哥<b>晚 10 分鐘</b>出發，騎車時速 <span class="hl">16</span>。</div>
+<div class="eg">
+<div class="stp"><b>(1) 弟弟幾小時到校？</b>　<span class="fm">4.8 ÷ 4 = 1.2 小時 = 72 分鐘</span></div>
+<div class="stp"><b>(2) 哥哥幾小時到校？誰先到？</b>　<span class="fm">4.8 ÷ 16 = 0.3 小時 = 18 分鐘</span></div>
+<div class="stp">　　以弟弟出發為 0 分 → 哥哥在第 <span class="fm">10 + 18 = 28 分</span>到校</div>
+<div class="stp">　　弟弟第 72 分到 → <span class="hl">哥哥早到</span>（早 44 分鐘）</div>
+</div>
+<div class="box y"><b>(2) 的陷阱：</b>哥哥「出發後 18 分鐘」到校，但要比較誰先到，
+必須把兩人放在<span class="hl">同一個時間軸</span>上 —— 哥哥晚 10 分出發，所以是第 28 分。</div>
+</div></div>
+
+<!-- 15 -->
+<div class="slide" data-pg="15 / 30"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養 1　(3)　★★★</div>
+<h2>哥哥出發後多久追上弟弟？</h2>
+<div class="eg">
+<div class="stp"><b>先算「頭」</b>　哥哥出發時，弟弟已走 10 分 = <span class="fm">1/6 小時</span></div>
+<div class="stp">　　弟弟已走 <span class="fm">4 × 1/6 = 2/3 公里</span>　← 這就是弟弟的「頭」</div>
+<div class="stp"><b>設</b>　哥哥出發後 t 小時追上</div>
+<div class="stp"><b>② 不變量</b>　<span class="hl">追上 = 兩人位置相同</span></div>
+<div class="stp">　　哥哥走的距離 = <span class="fm">16t</span>　；　弟弟的位置 = <span class="fm">2/3 + 4t</span></div>
+<div class="stp"><b>③ 列式</b>　<span class="fm hl">16t = 2/3 + 4t</span></div>
+<div class="stp"><b>④ 解</b>　<span class="fm">12t = 2/3 → t = 1/18 小時 ≈ 3.3 分鐘</span></div>
+<div class="stp"><b>⑤ 檢查</b>　追上時哥哥走 <span class="fm">16 × 1/18 = 8/9 ≈ 0.89 公里 &lt; 4.8</span> ✓ 確實在到校前追上</div>
+<div class="a">答：約 1/18 小時（約 3.3 分鐘）後追上</div>
+</div>
+</div></div>
+
+<!-- 16 -->
+<div class="slide" data-pg="16 / 30"><div class="tag">觀念</div><div class="body">
+<div class="eyebrow">素養 1 延伸　💡 重要</div>
+<h2>追及問題的兩種寫法，其實是同一個</h2>
+<div class="two">
+<div class="box"><b class="hl-b">寫法一：位置相等</b><br>
+<span class="fm" style="font-size:19px;">16t = 2/3 + 4t</span><br>
+<span style="font-size:16px;color:var(--chalk-soft);">哥哥走的 = 弟弟的位置</span></div>
+<div class="box g"><b class="hl-g">寫法二：速度差追頭</b><br>
+<span class="fm" style="font-size:19px;">(16 − 4)t = 2/3</span><br>
+<span style="font-size:16px;color:var(--chalk-soft);">用速度差把「頭」吃掉</span></div>
+</div>
+<div class="box y" style="text-align:center;font-size:21px;">
+把寫法一的 <span class="fm">4t</span> 移到左邊 → <span class="fm">16t − 4t = 2/3</span> → <span class="fm">12t = 2/3</span><br>
+<span class="hl">就是寫法二。兩式完全相同。</span></div>
+<div class="box g"><b>這就是「追及速度相減」的由來 ——</b>
+它不是一條要背的公式，是<span class="hl">移項的結果</span>。</div>
+<div class="tip"><div class="ic">💡</div><div class="tx"><b>這是整節最值得帶走的觀念：</b>那些看起來要背的「題型公式」，
+其實都是<b>基本原理 + 移項</b>推出來的。<b>懂原理的人不用背公式。</b></div></div>
+</div></div>
+
+<!-- 17 -->
+<div class="slide" data-pg="17 / 30"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 2</div>
+<h2>橡膠溶液混合 —— 溶質守恆</h2>
+<div class="box">濃度 <span class="hl">20%</span> 的橡膠溶液 <span class="hl">400 公斤</span>，與另一種未知濃度的溶液混合，
+要調出 <span class="hl">15%</span>、總重 <span class="hl">600 公斤</span>。</div>
+<div class="eg">
+<div class="stp"><b>(1) 要加多少公斤？</b>　<span class="fm">600 − 400 = 200 公斤</span></div>
+<div class="stp"><b>(2) 加入的溶液濃度？</b></div>
+<div class="stp">　　<b>② 不變量</b>：混合前後<span class="hl">橡膠原料總重相等</span></div>
+<div class="stp">　　設濃度為 c：<span class="fm hl">400×0.2 + 200×c = 600×0.15</span></div>
+<div class="stp">　　<span class="fm">80 + 200c = 90 → 200c = 10 → c = 0.05 = 5%</span></div>
+<div class="stp"><b>驗算</b>　<span class="fm">80 + 200×0.05 = 90</span>；<span class="fm">600 × 15% = 90</span> ✓</div>
+<div class="a">答：(1) 200 公斤　(2) 濃度 5%</div>
+</div>
+<div class="box y" style="text-align:center;font-size:20px;">
+💡 <b>混合問題的通式</b>：<span class="fm hl">A的溶質 + B的溶質 = 混合後的溶質</span><br>
+這就是<span class="hl">溶質守恆</span> —— 混合只是把東西倒在一起，<b>溶質不會憑空生出來或消失</b>。</div>
+</div></div>
+
+<!-- 18 -->
+<div class="slide" data-pg="18 / 30"><div class="tag">精選</div><div class="body">
+<h2>隨堂精選：三題值得講</h2>
+<div class="eg">
+<div class="q">① 打 8 折前後<b>差價</b>是 60 元，求原價</div>
+<div class="stp">打 8 折 → 售價 = <span class="fm">0.8p</span>；<b>差價</b> = 原價 − 售價 = <span class="fm">p − 0.8p = 0.2p</span></div>
+<div class="stp"><span class="fm">0.2p = 60 → p = 300 元</span></div>
+<div class="stp"><span class="hl-r">💡「差價」是少收的那部分，不是售價！讀清楚問什麼。</span></div>
+</div>
+<div class="eg">
+<div class="q">② 甲乙合作 4 天完成，甲單獨 6 天，乙單獨幾天？</div>
+<div class="stp">合作 4 天 → 兩人每天合做 <span class="fm">1/4</span>；甲每天 <span class="fm">1/6</span></div>
+<div class="stp">乙每天 = <span class="fm">1/4 − 1/6 = 3/12 − 2/12 = 1/12</span> → 乙單獨 <span class="hl">12 天</span></div>
+<div class="stp"><span class="hl-r">💡 這題是反過來問：已知合作速度，求單獨速度。</span></div>
+</div>
+</div></div>
+
+<!-- 19 -->
+<div class="slide" data-pg="19 / 30"><div class="tag">避雷</div><div class="body">
+<h2>避雷指南：六個最常見錯誤</h2>
+<table class="tbl">
+<tr><th style="width:44%;">❌ 錯誤</th><th>✓ 正確</th></tr>
+<tr><td>跳過「設…為 x」直接列式</td><td><b class="hl-g">一定要先寫設的句子</b>，否則解完不知道答案是什麼</td></tr>
+<tr><td>相向速度<b>相減</b>、追及速度<b>相加</b></td><td><b class="hl-g">相向相加、追及相減</b>（剛好相反！）</td></tr>
+<tr><td>濃度題：以為加水鹽也變多</td><td><b class="hl-g">加水鹽不變</b> —— 鹽是不變量</td></tr>
+<tr><td>加<b>純糖</b>時只改分子</td><td>加純糖 → <b class="hl-g">分子和分母都要加 x</b></td></tr>
+<tr><td>解出 30.5 人還照樣寫答案</td><td><b class="hl-g">人數必須是整數</b> → 一定算錯了</td></tr>
+<tr><td>打折題把「差價」當成「售價」</td><td>差價 = 原價 − 售價 = <span class="fm hl-g">0.2p</span>（8折時）</td></tr>
+</table>
+<div class="box y" style="text-align:center;">
+自我檢查句：<span class="hl">「這題真正不會變的東西是什麼？」</span></div>
+</div></div>
+
+<!-- 20 -->
+<div class="slide" data-pg="20 / 30"><div class="tag">總覽</div><div class="body">
+<h2>五大題型，其實是同一套步驟</h2>
+<table class="tbl">
+<tr><th style="width:22%;">題型</th><th style="width:34%;">不變量（＝等號）</th><th>列式長相</th></tr>
+<tr><td class="hl-b">數字</td><td>題目給的和／差</td><td class="fm">x + (x+1) = 47</td></tr>
+<tr><td class="hl-b">行程（相向）</td><td><b>總距離</b></td><td class="fm">60t + 40t = 360</td></tr>
+<tr><td class="hl-b">行程（追及）</td><td><b>位置相同</b></td><td class="fm">16t = 2/3 + 4t</td></tr>
+<tr><td class="hl-b">工作</td><td><b>總工作量 = 1</b></td><td class="fm">t(1/8 + 1/12) = 1</td></tr>
+<tr><td class="hl-b">分配</td><td><b>總金額</b></td><td class="fm">150x = 180(x−5)</td></tr>
+<tr><td class="hl-b">濃度</td><td><b>溶質重量</b></td><td class="fm">24 = 0.05(300+x)</td></tr>
+</table>
+<div class="box y" style="text-align:center;font-size:21px;">
+六種題型、六個式子，<span class="hl">但只有一個做法</span>：<br>
+<b>找到那個不會變的東西，把它寫成等號兩邊。</b></div>
+</div></div>
+
+<!-- 21 -->
+<div class="slide" data-pg="21 / 30"><div class="tag">回顧</div><div class="body">
+<div class="eyebrow">🎓 七上完結</div>
+<h2>這一節，用到了整個七上</h2>
+<table class="tbl">
+<tr><th style="width:26%;">來自</th><th style="width:34%;">學到什麼</th><th>在 3-3 怎麼用</th></tr>
+<tr><td class="hl-b">1-1 正負數與數線</td><td>正負、絕對值</td><td>檢查合理性（不能是負數）</td></tr>
+<tr><td class="hl-b">1-2 整數加減</td><td>符號規則</td><td>移項變號</td></tr>
+<tr><td class="hl-b">1-3 整數乘除</td><td>同號異號、除以 0</td><td>解方程式最後一步</td></tr>
+<tr><td class="hl-b">1-4 科學記號</td><td>乘方、(−a)ⁿ</td><td>代入求值</td></tr>
+<tr><td class="hl-b">2-2 GCD／LCM</td><td>公共取小、全部取大</td><td class="hl"><b>工作問題通分</b></td></tr>
+<tr><td class="hl-b">2-3 分數四則</td><td>通分、約分</td><td class="fm">1/8 + 1/12 = 5/24</td></tr>
+</table>
+<div class="box g" style="text-align:center;">
+你以為那些章節各自獨立 —— <span class="hl">其實它們一直在為這一刻做準備</span>。</div>
+</div></div>
+
+<!-- 22 -->
+<div class="slide" data-pg="22 / 30"><div class="tag">回顧</div><div class="body">
+<div class="eyebrow">🎓 七上完結</div>
+<h2>第 3 章：三節一氣呵成</h2>
+<table class="tbl">
+<tr><th style="width:20%;">節</th><th style="width:34%;">學到什麼</th><th>在五步驟的哪一步</th></tr>
+<tr><td class="hl-b"><b>3-1</b> 代數式</td><td>簡記、列式、化簡</td><td class="hl">五步驟的 <b>①③</b></td></tr>
+<tr><td class="hl-b"><b>3-2</b> 解方程式</td><td>等量公理、移項</td><td class="hl">五步驟的 <b>④</b></td></tr>
+<tr><td class="hl-b"><b>3-3</b> 應用問題</td><td><b>找不變量</b></td><td class="hl">五步驟的 <b>②⑤</b> ＋ 全部整合</td></tr>
+</table>
+<div class="box y" style="text-align:center;font-size:22px;">
+3-1 教你<span class="hl">寫</span>　→　3-2 教你<span class="hl">解</span>　→　3-3 教你<span class="hl">想</span></div>
+<div class="box g"><b>而最難的永遠是「想」。</b>
+解方程式是機械動作，電腦做得比你快；<br>
+但「<span class="hl">這題真正不會變的東西是什麼？</span>」—— <b>這一步只有人做得到。</b></div>
+</div></div>
+
+<!-- 23 -->
+<div class="slide" data-pg="23 / 30"><div class="tag">觀念</div><div class="body">
+<h2>從 3+5=8 到解決一整類問題</h2>
+<div class="box r"><b class="hl-r">一年前的你</b><br>
+「兩車相距 360 公里，一台時速 60、一台時速 40，幾小時相遇？」<br>
+→ 試試看 3 小時？180+120 = 300，不夠…<br>
+→ 試試看 4 小時？240+160 = 400，太多了…<br>
+<span class="hl-r">一直猜，很慢，而且不一定猜得到 3.6。</span></div>
+<div class="box g"><b class="hl-g">現在的你</b><br>
+<span class="fm" style="font-size:20px;">60t + 40t = 360 → t = 3.6</span><br>
+<b>一個式子，直接得到答案。</b>而且換成任何速度、任何距離，<span class="hl">同一個做法</span>。</div>
+<div class="box y" style="text-align:center;font-size:21px;">
+<span class="hl">這就是代數的意義 —— 不是刁難你，<br>是讓你一次解決一整類問題。</span></div>
+</div></div>
+
+<!-- 24 -->
+<div class="slide" data-pg="24 / 30"><div class="tag">總結</div><div class="body">
+<h2>本節總結</h2>
+<ul>
+<li><span class="hl">五步驟</span>：設未知數 → <b>找不變量</b> → 列式 → 解 → 檢查合理性</li>
+<li><span class="hl">第 ② 步是靈魂</span>：「這題真正不會變的東西是什麼？」找到它，<b>它就是等號</b></li>
+<li><span class="hl">五大題型是同一套步驟</span>：數字、行程、工作、分配、濃度 —— 差別只在不變量</li>
+<li><span class="hl-r">相向相加、追及相減</span>；<span class="hl-r">加水溶質不變、加純溶質分子分母都變</span></li>
+<li><span class="hl">檢查合理性</span>：人數不能是小數或負數。<b>數學上算對 ≠ 答案合理</b></li>
+</ul>
+<div class="box g" style="text-align:center;font-size:20px;">
+🔗 <b>承先</b>：3-1 列式化簡、3-2 解方程式、2-2 的 LCM、1-1 的正負數 —— <span class="hl">整個七上的總集合</span><br>
+🔗 <b>啟後</b>：七下第 1 章「二元一次聯立方程式」—— <b>當一個未知數不夠用時，就設兩個</b></div>
+</div></div>
+
+<!-- 25 -->
+<div class="slide" data-pg="25 / 30"><div class="tag">地圖</div><div class="body">
+<div class="eyebrow">🎓 七上完結</div>
+<h2>你這一年走了多遠</h2>
+<table class="tbl">
+<tr><th style="width:30%;">第 1 章 整數運算</th><th style="width:34%;">第 2 章 分數運算</th><th>第 3 章 一元一次方程式</th></tr>
+<tr><td>1-1 正數負數與數線</td><td>2-1 因數、倍數</td><td>3-1 代數式的運算與化簡</td></tr>
+<tr><td>1-2 整數的加減運算</td><td>2-2 最大公因數、最小公倍數</td><td>3-2 一元一次方程式的解法</td></tr>
+<tr><td>1-3 整數的乘除與四則</td><td>2-3 分數的四則運算</td><td>3-3 應用問題</td></tr>
+<tr><td>1-4 科學記號</td><td>2-4 指數律</td><td class="hl">✓ 全部完成</td></tr>
+</table>
+<div class="box y" style="text-align:center;font-size:23px;">
+<span class="hl">11 節</span>　·　從<b>數線上的一個點</b>　→　到<b>解決真實世界的問題</b></div>
+<div class="box g" style="text-align:center;">
+下一站：<span class="hl">七下</span> —— 二元一次聯立方程式、比例、不等式、統計、幾何</div>
+</div></div>
+
+<!-- 26 -->
+<div class="slide" data-pg="26 / 30"><div class="tag">總結</div><div class="body">
+<h2>七上帶走的三句話</h2>
+<div class="box y" style="font-size:20px;padding:16px;">
+<b class="hl">① 規則不是規定，是推出來的</b><br>
+a⁰ = 1 是除法律逼出來的；移項變號是天平逼出來的；
+「追及速度相減」是移項逼出來的。<br>
+<span class="hl-g">懂原理的人不用背公式。</span></div>
+<div class="box y" style="font-size:20px;padding:16px;">
+<b class="hl">② 檢查永遠是自己的事</b><br>
+代一組數字驗算、代回原式、看答案合不合理 ——<br>
+<span class="hl-g">這些都不花時間，但每一個都能救你。</span></div>
+<div class="box y" style="font-size:20px;padding:16px;">
+<b class="hl">③ 符號是為了讓你想得更遠</b><br>
+把「要賣幾件才不虧本」變成 <span class="fm">130x − 50000</span>，<br>
+<span class="hl-g">你就從「算一次」升級成「解決一整類」。</span></div>
+</div></div>
+
+<!-- 27 -->
+<div class="slide" data-pg="27 / 30"><div class="tag">工具</div><div class="body">
+<h2>隨身卡：應用問題五步驟</h2>
+<div class="box y" style="font-size:21px;padding:18px;">
+<b class="hl">① 設</b>　寫出「設 ___ 為 x ___（單位）」<br><br>
+<b class="hl">② 找</b>　問自己：「<b>這題真正不會變的東西是什麼？</b>」<br>
+　　　行程→距離／位置　工作→總量1　分配→總金額　濃度→溶質<br><br>
+<b class="hl">③ 列</b>　把不變量寫成等號的<b>兩邊</b>（用兩種方式表達同一個東西）<br><br>
+<b class="hl">④ 解</b>　去括號 → 去分母 → 移項 → 合併 → 同除係數<br><br>
+<b class="hl">⑤ 檢</b>　人數是整數嗎？答案是正的嗎？代回原式對嗎？</div>
+<div class="box g" style="text-align:center;font-size:20px;">
+<b>卡住的時候，回到第 ② 步。</b><span class="hl">列不出式子，永遠是因為還沒找到不變量。</span></div>
+</div></div>
+
+<!-- 28 -->
+<div class="slide" data-pg="28 / 30"><div class="tag">速查</div><div class="body">
+<h2>速查：各題型的不變量與列式</h2>
+<table class="tbl">
+<tr><th style="width:20%;">題型</th><th style="width:30%;">不變量</th><th>典型列式</th></tr>
+<tr><td class="hl-b">連續整數</td><td>題目給的和</td><td class="fm">x + (x+1) = 47</td></tr>
+<tr><td class="hl-b">相向</td><td>總距離</td><td class="fm">60t + 40t = 360</td></tr>
+<tr><td class="hl-b">反向</td><td>相距</td><td class="fm">50t + 70t = 480</td></tr>
+<tr><td class="hl-b">追及</td><td>位置相同</td><td class="fm">16t = 2/3 + 4t</td></tr>
+<tr><td class="hl-b">工作（合作）</td><td>總量 = 1</td><td class="fm">t(1/8 + 1/12) = 1</td></tr>
+<tr><td class="hl-b">工作（逆推）</td><td>合作速度</td><td class="fm">1/6 + 1/y = 1/4</td></tr>
+<tr><td class="hl-b">分配</td><td>總金額</td><td class="fm">150x = 180(x−5)</td></tr>
+<tr><td class="hl-b">濃度（加水）</td><td>溶質</td><td class="fm">24 = 0.05(300+x)</td></tr>
+<tr><td class="hl-b">濃度（加純糖）</td><td>—（都變）</td><td class="fm">(20+x) = 0.2(200+x)</td></tr>
+<tr><td class="hl-b">混合</td><td>溶質守恆</td><td class="fm">400(.2) + 200c = 600(.15)</td></tr>
+</table>
+</div></div>
+
+<!-- 29 -->
+<div class="slide" data-pg="29 / 30"><div class="tag">Next</div><div class="big-center">
+<div class="eyebrow">下一站</div>
+<h1 style="font-size:40px;">七下　二元一次聯立方程式</h1>
+<div class="lead">當一個未知數不夠用時 ——<br>就設兩個</div>
+<svg viewBox="0 0 600 96" width="76%" style="margin-top:16px;">
+<text x="140" y="34" font-family="Noto Serif TC" font-size="21" fill="#98c9dc" text-anchor="middle">七上：2x + 3 = 11</text>
+<text x="140" y="60" font-family="Caveat" font-size="18" fill="rgba(243,239,226,0.6)" text-anchor="middle">一個未知數・一個式子</text>
+<path d="M280 44 L360 44" stroke="#f2d979" stroke-width="2" stroke-dasharray="3 5"/>
+<path d="M360 44 l-10 -6 M360 44 l-10 6" stroke="#f2d979" stroke-width="2" fill="none"/>
+<text x="470" y="28" font-family="Noto Serif TC" font-size="20" fill="#a6d6a0" text-anchor="middle">七下：x + y = 10</text>
+<text x="470" y="52" font-family="Noto Serif TC" font-size="20" fill="#a6d6a0" text-anchor="middle">　　　2x − y = 5</text>
+<text x="470" y="80" font-family="Caveat" font-size="18" fill="#f2d979" text-anchor="middle">兩個未知數・要兩個式子</text>
+</svg>
+<div class="box y" style="max-width:820px;margin-top:14px;">
+「雞兔同籠」這種題目，用一個 x 硬解很痛苦 ——<br>
+<span class="hl">設 x 隻雞、y 隻兔，兩個式子，答案自己跑出來。</span></div>
+</div></div>
+
+<!-- 30 -->
+<div class="slide" data-pg="30 / 30"><div class="tag">Fin</div><div class="big-center">
+<div class="eyebrow">🎓 七上・完</div>
+<h1 style="font-size:36px;">一句話帶走</h1>
+<div class="box y" style="max-width:860px;margin-top:20px;font-size:25px;padding:28px;text-align:center;">
+<span class="hl">列不出式子，<br>永遠是因為還沒找到<br>那個不會變的東西。</span></div>
+<div class="lead" style="margin-top:22px;">解方程式，電腦比你快。<br>
+但「這題真正不會變的東西是什麼？」——<br>
+<span style="color:#a6d6a0;">這一步，只有你做得到。</span></div>
+</div></div>
+
+</div></body></html>

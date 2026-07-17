@@ -1,0 +1,1059 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>七上 2-4 指數律｜互動教學平台</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;--wood:#6b4a32;}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);overscroll-behavior:none;}
+.topbar{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:10px 16px;background:linear-gradient(180deg,#1b2f21,#132218);border-bottom:2px solid var(--wood);box-shadow:0 4px 18px rgba(0,0,0,0.5);}
+.brand{font-family:'Noto Serif TC',serif;font-weight:900;font-size:clamp(15px,2.2vw,20px);color:var(--yellow);white-space:nowrap;}
+.brand small{display:block;font-family:'Caveat',cursive;font-size:14px;color:var(--soft);font-weight:400;}
+.spacer{flex:1;}
+.btn{background:rgba(243,239,226,0.08);border:1.5px solid rgba(243,239,226,0.28);color:var(--chalk);
+  border-radius:10px;padding:7px 13px;font-family:inherit;font-size:14px;cursor:pointer;white-space:nowrap;transition:.15s;}
+.btn:hover{background:rgba(243,239,226,0.16);}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:10px 16px 0;scrollbar-width:none;}
+.tabs::-webkit-scrollbar{display:none;}
+.tab{background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.2);border-bottom:none;
+  color:var(--soft);border-radius:10px 10px 0 0;padding:9px 15px;font-size:14px;cursor:pointer;white-space:nowrap;font-family:inherit;}
+.tab.on{background:var(--board);border-color:var(--yellow);color:var(--yellow);font-weight:700;}
+.tab .n{font-family:'Caveat',cursive;font-size:18px;margin-right:5px;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px 60px;}
+.panel{display:none;}.panel.on{display:block;}
+.card{background:radial-gradient(ellipse at 20% 10%,rgba(255,255,255,0.05),transparent 45%),
+   linear-gradient(160deg,var(--board),var(--board2));
+  border:1.5px solid rgba(242,217,121,0.16);border-radius:14px;padding:18px;margin-bottom:16px;
+  box-shadow:0 8px 26px rgba(0,0,0,0.45);position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 38px,rgba(255,255,255,0.012) 38px,rgba(255,255,255,0.012) 39px);}
+.card>*{position:relative;}
+.card h3{font-family:'Noto Serif TC',serif;font-size:clamp(17px,2.4vw,21px);color:var(--yellow);
+  margin-bottom:12px;padding-bottom:8px;border-bottom:2px dashed rgba(242,217,121,0.35);display:flex;align-items:center;gap:8px;}
+.card h3 .ic{font-size:20px;}
+.goals{display:flex;flex-wrap:wrap;gap:9px;}
+.goal{display:flex;align-items:center;gap:9px;background:rgba(242,217,121,0.07);
+  border:1.5px dashed rgba(242,217,121,0.4);border-radius:22px;padding:8px 15px 8px 8px;
+  font-size:clamp(13.5px,1.8vw,15px);color:var(--yellow);line-height:1.5;}
+.goal .bdg{width:24px;height:24px;border-radius:50%;background:var(--yellow);color:#16281c;
+  font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;flex:none;}
+.deck{position:relative;background:rgba(0,0,0,0.22);border-radius:12px;padding:clamp(16px,3vw,30px);
+  min-height:clamp(260px,42vh,380px);display:flex;flex-direction:column;justify-content:center;}
+.sl{display:none;animation:fade .25s;}.sl.on{display:block;}
+@keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+.sl .eyebrow{font-family:'Caveat',cursive;font-size:20px;color:var(--yellow);margin-bottom:6px;}
+.sl h4{font-family:'Noto Serif TC',serif;font-size:clamp(19px,3vw,27px);margin-bottom:12px;line-height:1.35;}
+.sl p{font-size:clamp(15px,2vw,18px);line-height:1.8;margin-bottom:9px;}
+.sl ul{list-style:none;}
+.sl li{font-size:clamp(15px,2vw,18px);line-height:1.85;padding-left:26px;position:relative;margin-bottom:4px;}
+.sl li::before{content:'✦';position:absolute;left:2px;color:var(--yellow);font-size:14px;top:3px;}
+.nav{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:14px;}
+.nav .pg{font-family:'Caveat',cursive;font-size:20px;color:var(--soft);min-width:64px;text-align:center;}
+.dots{display:flex;gap:6px;justify-content:center;margin-top:10px;flex-wrap:wrap;}
+.dot{width:9px;height:9px;border-radius:50%;background:rgba(243,239,226,0.25);cursor:pointer;border:none;padding:0;}
+.dot.on{background:var(--yellow);transform:scale(1.3);}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.32);border-radius:10px;
+  padding:11px 15px;margin:9px 0;font-size:clamp(14px,1.9vw,17px);line-height:1.7;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.36);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.36);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.32);}
+.two{display:flex;gap:12px;flex-wrap:wrap;}.two>*{flex:1;min-width:220px;}
+.teach{background:rgba(201,174,224,0.12);border:1.5px dashed rgba(201,174,224,0.5);
+  border-radius:10px;padding:11px 15px;margin:9px 0;font-size:clamp(14px,1.8vw,15px);line-height:1.7;}
+.teach b{color:var(--purple);}
+.tbl{width:100%;border-collapse:collapse;margin:9px 0;font-size:clamp(13.5px,1.8vw,16px);}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.24);padding:8px 11px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.cv-wrap{background:rgba(0,0,0,0.25);border-radius:12px;padding:10px;}
+canvas.viz{width:100%;display:block;border-radius:8px;touch-action:none;}
+.ctrl{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center;}
+.readout{font-family:'Noto Serif TC',serif;font-size:clamp(14px,1.9vw,18px);color:var(--chalk);
+  background:rgba(242,217,121,0.1);border:1px solid rgba(242,217,121,0.3);border-radius:8px;
+  padding:7px 12px;flex:1;min-width:220px;}
+.readout b{color:var(--yellow);}
+.q{background:rgba(0,0,0,0.2);border:1px solid rgba(242,217,121,0.18);border-radius:10px;padding:13px 15px;margin:10px 0;}
+.q .qt{font-size:clamp(15px,2vw,17px);margin-bottom:10px;line-height:1.7;}
+.q .qt .qn{font-family:'Caveat',cursive;color:var(--yellow);font-size:20px;margin-right:6px;}
+.opts{display:flex;flex-direction:column;gap:7px;}
+.opt{text-align:left;background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.22);
+  color:var(--chalk);border-radius:9px;padding:9px 13px;font-family:inherit;font-size:15px;cursor:pointer;transition:.15s;line-height:1.5;}
+.opt:hover:not(:disabled){background:rgba(243,239,226,0.13);}
+.opt.right{background:rgba(166,214,160,0.24);border-color:var(--green);color:#fff;font-weight:700;}
+.opt.wrong{background:rgba(237,160,168,0.22);border-color:var(--pink);}
+.opt:disabled{cursor:default;}
+.fb{display:none;margin-top:9px;padding:9px 13px;border-radius:8px;font-size:14.5px;line-height:1.65;}
+.fb.on{display:block;}
+.fb.ok{background:rgba(166,214,160,0.14);border-left:3px solid var(--green);}
+.fb.no{background:rgba(237,160,168,0.14);border-left:3px solid var(--pink);}
+.fill{display:inline-block;background:rgba(0,0,0,0.3);border:none;border-bottom:2px solid var(--yellow);
+  color:var(--yellow);font-family:'Noto Serif TC',serif;font-size:17px;width:110px;text-align:center;padding:3px 5px;margin:0 4px;}
+.fill:focus{outline:none;background:rgba(242,217,121,0.12);}
+.exq{background:rgba(0,0,0,0.26);border:1.5px solid rgba(242,217,121,0.28);border-radius:11px;padding:13px 15px;margin:10px 0;position:relative;}
+.exq::before{content:'';position:absolute;top:-8px;left:32px;width:54px;height:14px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.exq .exq-q{font-size:clamp(14.5px,1.9vw,17px);line-height:1.75;margin-bottom:11px;}
+.exo{text-align:left;background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.22);
+  color:var(--chalk);border-radius:9px;padding:9px 13px;font-family:inherit;font-size:clamp(14px,1.8vw,15.5px);
+  cursor:pointer;transition:.15s;line-height:1.55;width:100%;margin-bottom:6px;display:block;}
+.exo:hover:not(:disabled){background:rgba(243,239,226,0.13);}
+.exo.right{background:rgba(166,214,160,0.26);border-color:var(--green);color:#fff;font-weight:700;}
+.exo.wrong{background:rgba(237,160,168,0.2);border-color:var(--pink);opacity:.75;}
+.exo:disabled{cursor:default;}
+@keyframes shake{10%,90%{transform:translateX(-2px);}30%,70%{transform:translateX(4px);}50%{transform:translateX(-4px);}}
+.exo.shake{animation:shake .4s;}
+.exsol{display:none;margin-top:10px;padding:11px 14px;border-radius:9px;
+  background:rgba(166,214,160,0.13);border-left:3px solid var(--green);font-size:clamp(14px,1.8vw,15.5px);line-height:1.75;}
+.exsol.on{display:block;animation:fade .3s;}
+.exsol .st{color:var(--soft);margin:3px 0;}
+.exsol .an{color:var(--green);font-weight:700;margin-top:6px;}
+.exlock{display:flex;align-items:center;gap:7px;margin-top:9px;font-size:13.5px;color:rgba(243,239,226,0.45);}
+.exlock.hide{display:none;}
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:11px;}
+.icard{background:rgba(0,0,0,0.22);border:1.5px solid rgba(242,217,121,0.22);border-radius:11px;padding:14px;text-align:center;}
+.icard .big{font-family:'Noto Serif TC',serif;font-size:clamp(17px,2.6vw,23px);font-weight:900;margin:6px 0;}
+.icard .cap{font-size:13.5px;color:var(--soft);line-height:1.6;}
+.frow{display:flex;gap:12px;align-items:center;padding:9px 12px;border-bottom:1px dashed rgba(243,239,226,0.16);}
+.frow:last-child{border-bottom:none;}
+.flab{color:var(--blue);font-weight:700;min-width:150px;font-size:clamp(13.5px,1.8vw,15.5px);flex:none;}
+.fval{color:var(--yellow);font-weight:700;font-family:'Noto Serif TC',serif;font-size:clamp(14px,1.9vw,17px);}
+@media(max-width:560px){.frow{flex-direction:column;align-items:flex-start;gap:3px;}.flab{min-width:0;}}
+.hud{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:12px;}
+.hud .st{background:rgba(0,0,0,0.3);border:1.5px solid rgba(242,217,121,0.28);border-radius:9px;
+  padding:7px 13px;font-size:14px;flex:1;min-width:88px;text-align:center;}
+.hud .st b{display:block;font-family:'Noto Serif TC',serif;font-size:20px;color:var(--yellow);}
+.tbar{height:8px;background:rgba(0,0,0,0.35);border-radius:5px;overflow:hidden;margin-bottom:12px;}
+.tfill{height:100%;background:linear-gradient(90deg,var(--green),var(--yellow),var(--pink));width:100%;transition:width .1s linear;}
+.gscreen{display:none;}.gscreen.on{display:block;}
+.lvchips{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin:14px 0;}
+.lvchip{background:rgba(152,201,220,0.12);border:1.5px solid rgba(152,201,220,0.35);border-radius:18px;
+  padding:6px 13px;font-size:13.5px;color:var(--blue);}
+.lvchip.done{background:rgba(166,214,160,0.2);border-color:var(--green);color:var(--green);}
+.lvchip.now{background:rgba(242,217,121,0.22);border-color:var(--yellow);color:var(--yellow);font-weight:700;}
+.gq{font-size:clamp(16px,2.2vw,20px);line-height:1.7;margin:14px 0;text-align:center;font-family:'Noto Serif TC',serif;}
+.gopts{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+@media(max-width:560px){.gopts{grid-template-columns:1fr;}}
+.gopt{background:rgba(243,239,226,0.07);border:1.5px solid rgba(243,239,226,0.25);color:var(--chalk);
+  border-radius:10px;padding:12px;font-family:'Noto Serif TC',serif;font-size:17px;cursor:pointer;transition:.15s;min-height:48px;}
+.gopt:hover:not(:disabled){background:rgba(243,239,226,0.15);}
+.gopt.right{background:rgba(166,214,160,0.3);border-color:var(--green);font-weight:900;}
+.gopt.wrong{background:rgba(237,160,168,0.25);border-color:var(--pink);}
+.gfb{margin-top:11px;padding:10px 13px;border-radius:8px;font-size:14.5px;line-height:1.6;display:none;}
+.gfb.on{display:block;}
+.gfb.ok{background:rgba(166,214,160,0.15);border-left:3px solid var(--green);}
+.gfb.no{background:rgba(237,160,168,0.15);border-left:3px solid var(--pink);}
+.rank{font-size:54px;text-align:center;margin:10px 0;}
+.hint{text-align:center;color:rgba(243,239,226,0.35);font-size:12.5px;padding:8px 0 0;}
+@media (max-width:640px){.topbar{padding:8px 10px;gap:8px;}.wrap{padding:0 10px 70px;}.card{padding:13px;}}
+</style></head><body>
+
+<div class="topbar">
+  <div class="brand">2-4　指數律<small>七上 · 第2章 分數運算</small></div>
+  <div class="spacer"></div>
+</div>
+
+<div class="tabs" id="tabs">
+  <button class="tab on" data-p="0"><span class="n">①</span>指數與小數的關係</button>
+  <button class="tab" data-p="1"><span class="n">②</span>五條指數律</button>
+  <button class="tab" data-p="2"><span class="n">③</span>陷阱與應用</button>
+  <button class="tab" data-p="3"><span class="n">★</span>題型測驗</button>
+  <button class="tab" data-p="4"><span class="n">🎮</span>闖關遊戲</button>
+</div>
+
+<div class="wrap">
+  <div class="card" id="goalCard">
+    <h3><span class="ic">🎯</span>本節學習目標</h3>
+    <div class="goals" id="goals"></div>
+  </div>
+  <div id="wrap"></div>
+</div>
+
+<script>
+const GOALS = [
+  '理解零次方 a⁰ = 1，並知道為什麼',
+  '理解負指數 a⁻ⁿ = 1/aⁿ，並知道為什麼',
+  '能在小數 ↔ 分數 ↔ 負指數間互換',
+  '掌握並應用五條指數律',
+  '能區分 aᵐ×aⁿ（指數加）與 (aᵐ)ⁿ（指數乘）',
+  '知道底數不同不能直接加指數',
+];
+
+const DATA = [
+{ key:'ladder', viz:'ladder', vizTitle:'指數階梯 —— 一直除以底數走下去，自然就走到 a⁰ 和 a⁻ⁿ',
+  slides:[
+    {eb:'細目 ①', h:'往下數：指數每減 1，就除以一次底數', html:`
+      <table class="tbl">
+        <tr><th>次方</th><th>值</th><th>↓ 每往下一列</th></tr>
+        <tr><td class="fm">2³</td><td class="fm">8</td><td></td></tr>
+        <tr><td class="fm">2²</td><td class="fm">4</td><td class="hl-g">÷2</td></tr>
+        <tr><td class="fm">2¹</td><td class="fm">2</td><td class="hl-g">÷2</td></tr>
+        <tr><td class="fm hl" style="font-size:19px;">2⁰</td><td class="fm hl" style="font-size:19px;">1</td><td class="hl-g">÷2</td></tr>
+        <tr><td class="fm hl-r" style="font-size:19px;">2⁻¹</td><td class="fm hl-r" style="font-size:19px;">1/2</td><td class="hl-g">÷2</td></tr>
+        <tr><td class="fm hl-r" style="font-size:19px;">2⁻²</td><td class="fm hl-r" style="font-size:19px;">1/4</td><td class="hl-g">÷2</td></tr>
+      </table>
+      <div class="box y" style="text-align:center;">這張表就是<span class="hl">零次方與負指數的來源</span> —— 不是老師規定的，是<span class="hl">照著規律往下走的必然結果</span>。</div>`},
+    {eb:'細目 ①', h:'零次方：a⁰ = 1，為什麼？', html:`
+      <div class="box y" style="text-align:center;font-size:19px;padding:14px;">
+        <span class="fm">aⁿ ÷ aⁿ = a<span class="hl">ⁿ⁻ⁿ</span> = <span class="hl">a⁰</span></span>　<span style="font-size:14px;color:var(--soft)">（用除法律）</span><br>
+        <span class="fm">但 aⁿ ÷ aⁿ 明明就 = <span class="hl">1</span></span>　<span style="font-size:14px;color:var(--soft)">（任何數除以自己）</span><br>
+        <span class="fm" style="font-size:23px;">所以 <span class="hl">a⁰ = 1</span></span></div>
+      <div class="box g" style="text-align:center;">驗證：<span class="fm">5³ ÷ 5³ = 5⁰</span>；而 <span class="fm">125 ÷ 125 = 1</span> → <span class="fm hl">5⁰ = 1</span> ✓</div>
+      <div class="box r" style="text-align:center;">⚠️ 為什麼要 <span class="hl-r">a ≠ 0</span>？因為 0⁰ 會變成 <span class="fm">0 ÷ 0</span>，<b>沒有意義</b>。</div>`},
+    {eb:'細目 ①', h:'負指數：a⁻ⁿ = 1/aⁿ，為什麼？', html:`
+      <div class="box y" style="text-align:center;font-size:19px;padding:14px;">
+        <span class="fm">a⁰ ÷ aⁿ = a<span class="hl">⁰⁻ⁿ</span> = <span class="hl">a⁻ⁿ</span></span>　<span style="font-size:14px;color:var(--soft)">（一樣用除法律）</span><br>
+        <span class="fm">但 a⁰ ÷ aⁿ = 1 ÷ aⁿ = <span class="hl">1/aⁿ</span></span><br>
+        <span class="fm" style="font-size:23px;">所以 <span class="hl">a⁻ⁿ = 1/aⁿ</span></span></div>
+      <div class="two">
+        <div class="box"><span class="fm" style="font-size:18px;">2⁻³ = 1/2³ = <span class="hl-g">1/8</span></span></div>
+        <div class="box"><span class="fm" style="font-size:18px;">10⁻² = 1/100 = <span class="hl-g">0.01</span></span></div>
+      </div>
+      <div class="box r" style="text-align:center;font-size:18px;">
+        ⚠️ <span class="hl-r">負指數不代表負數！</span>　<span class="fm">2⁻³ = 1/8</span> 是<b>正的</b>。<br>
+        負號只是說「<span class="hl">倒過來</span>」，不是說「變負」。</div>`},
+    {eb:'細目 ① 核心', h:'小數 ＝ 分數 ＝ 負指數', html:`
+      <table class="tbl">
+        <tr><th>小數</th><th>分數</th><th>負指數</th></tr>
+        <tr><td class="fm">0.5</td><td class="fm">1/2</td><td class="fm hl">2⁻¹</td></tr>
+        <tr><td class="fm">0.25</td><td class="fm">1/4</td><td class="fm hl">2⁻²</td></tr>
+        <tr><td class="fm">0.125</td><td class="fm">1/8</td><td class="fm hl">2⁻³</td></tr>
+        <tr><td class="fm">0.01</td><td class="fm">1/100</td><td class="fm hl-r">10⁻²</td></tr>
+        <tr><td class="fm">0.001</td><td class="fm">1/1000</td><td class="fm hl-r">10⁻³</td></tr>
+      </table>
+      <div class="box y" style="text-align:center;">這就是 <span class="hl">1-4 科學記號</span>裡「小數用負次方」的<span class="hl">真正理由</span> —— 當時只教規律，現在才知道背後是<span class="hl">除法律</span>逼出來的。</div>`},
+    {eb:'例題 1 ★☆☆', h:'零次方', html:`
+      <div class="exq" data-a="2">
+        <div class="exq-q"><span class="hl">Q</span>　計算 <span class="fm">5⁰ + 3⁰ + (−7)⁰</span></div>
+        <button class="exo" data-i="0">0</button>
+        <button class="exo" data-i="1">1</button>
+        <button class="exo" data-i="2">3</button>
+        <button class="exo" data-i="3">−1</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st fm">5⁰ = 1；3⁰ = 1；(−7)⁰ = 1</div>
+          <div class="st">底數都不是 0，所以三個都等於 <b>1</b></div>
+          <div class="st fm">1 + 1 + 1 = 3</div>
+          <div class="st">(−7)⁰ 也是 1 —— <b>負數的零次方一樣是 1</b>，只要底數不是 0。</div>
+          <div class="an">答：3</div>
+        </div>
+      </div>`},
+    {eb:'例題 2 ★★☆', h:'小數 → 負指數', html:`
+      <div class="exq" data-a="1">
+        <div class="exq-q"><span class="hl">Q</span>　把 <span class="fm">0.25</span> 寫成 <b>2 的次方</b></div>
+        <button class="exo" data-i="0">2⁻⁴</button>
+        <button class="exo" data-i="1">2⁻²</button>
+        <button class="exo" data-i="2">−2²</button>
+        <button class="exo" data-i="3">2²</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st"><b>標準流程：小數 → 分數 → 看分母是幾的幾次方 → 加負號</b></div>
+          <div class="st fm">0.25 = 1/4</div>
+          <div class="st fm">4 = 2² → 1/4 = 1/2²</div>
+          <div class="st fm">1/2² = 2⁻²</div>
+          <div class="st">(C) −2² = −4，是<b>負數</b>，完全不對 —— <span class="hl-r">負指數 ≠ 負數！</span></div>
+          <div class="an">答：2⁻²</div>
+        </div>
+      </div>`}
+  ],
+  fa:[
+    {q:'<span class="fm">2⁻³</span> = ?', o:['−8','1/8','−1/8','8'], a:1, e:'a⁻ⁿ = 1/aⁿ → 2⁻³ = 1/2³ = 1/8。負指數不是負數！'},
+    {q:'把 <span class="fm">0.125</span> 寫成 2 的次方', o:['2⁻³','2³','2⁻⁴','−2³'], a:0, e:'0.125 = 1/8 = 1/2³ = 2⁻³。'},
+    {q:'<span class="fm">a⁰ = 1</span> 的條件是？', o:['a > 0','a ≠ 0','a 是整數','沒有條件'], a:1, e:'a ≠ 0。因為 0⁰ 會變成 0÷0，沒有意義。'}
+  ],
+  info:[
+    {big:'a⁰ = 1', cap:'由 aⁿ÷aⁿ 推出<br>不是規定', c:'var(--yellow)'},
+    {big:'a⁻ⁿ = 1/aⁿ', cap:'由 a⁰÷aⁿ 推出<br>不是負數！', c:'var(--pink)'},
+    {big:'0.25 = 1/4 = 2⁻²', cap:'同一個數<br>三張臉', c:'var(--green)'}
+  ]
+},
+{ key:'laws', viz:'laws', vizTitle:'五條指數律驗證器 —— 換一條律，看它怎麼展開、怎麼驗算',
+  slides:[
+    {eb:'細目 ②', h:'五條指數律（a≠0、b≠0）', html:`
+      <table class="tbl">
+        <tr><th style="width:10%;">　</th><th style="width:22%;">名稱</th><th style="width:32%;">公式</th><th>指數怎麼動</th></tr>
+        <tr><td class="hl">①</td><td>乘法律</td><td class="fm hl-b">aᵐ × aⁿ = aᵐ⁺ⁿ</td><td>相<span class="hl-g">加</span></td></tr>
+        <tr><td class="hl">②</td><td>除法律</td><td class="fm hl-b">aᵐ ÷ aⁿ = aᵐ⁻ⁿ</td><td>相<span class="hl-g">減</span></td></tr>
+        <tr><td class="hl">③</td><td>冪的冪</td><td class="fm hl-b">(aᵐ)ⁿ = aᵐⁿ</td><td>相<span class="hl-r">乘</span></td></tr>
+        <tr><td class="hl">④</td><td>積的冪</td><td class="fm hl-b">(ab)ⁿ = aⁿbⁿ</td><td>分配進去</td></tr>
+        <tr><td class="hl">⑤</td><td>商的冪</td><td class="fm hl-b">(a/b)ⁿ = aⁿ/bⁿ</td><td>分配進去</td></tr>
+      </table>
+      <div class="box y" style="text-align:center;font-family:'Caveat',cursive;font-size:21px;">乘加　·　除減　·　冪乘　·　積分配　·　商分配</div>`},
+    {eb:'細目 ② ①乘法律', h:'為什麼同底數相乘要「加」指數？數個數就知道', html:`
+      <div class="box y" style="text-align:center;font-size:19px;padding:14px;">
+        <span class="fm">3⁴ × 3² = (3×3×3×3) × (3×3)</span><br>
+        <span style="font-size:15px;color:var(--soft)">四個 3　　　　兩個 3</span><br>
+        <span class="fm">= 一共 <span class="hl">六</span> 個 3 相乘 = <span class="hl">3⁶</span> = 729</span></div>
+      <div class="box g" style="text-align:center;"><span class="fm">aᵐ × aⁿ = aᵐ⁺ⁿ</span>　—— 就是在<span class="hl">數總共有幾個 a</span></div>
+      <div class="teach"><b>這就是為什麼指數律不用背。</b>忘記的時候，用小數字展開數一數，規則自己會跑出來。</div>`},
+    {eb:'細目 ② ③冪的冪', h:'為什麼次方的次方要「乘」指數？', html:`
+      <div class="box y" style="text-align:center;font-size:18px;padding:14px;">
+        <span class="fm">(2³)⁴ = 2³ × 2³ × 2³ × 2³</span>　<span style="font-size:14px;color:var(--soft)">（四個 2³）</span><br>
+        <span class="fm">= 2³⁺³⁺³⁺³ = 2<span class="hl">³×⁴</span> = <span class="hl">2¹²</span> = 4096</span></div>
+      <div class="box g"><b>加法變乘法的關鍵：</b>「<span class="hl">四個 3 相加</span>」就是「<span class="hl">3 × 4</span>」—— 所以冪的冪的指數是<b>相乘</b>。</div>
+      <div class="box r" style="text-align:center;">⚠️ 別和乘法律搞混：<span class="fm">2²×2³ = 2⁵ = 32</span>　但　<span class="fm">(2²)³ = 2⁶ = 64</span></div>`},
+    {eb:'細目 ② ④⑤', h:'括號裡的每個因數，都要各自乘方', html:`
+      <div class="two">
+        <div class="box"><b class="hl-b">④ 積的冪</b>　<span class="fm">(ab)ⁿ = aⁿ × bⁿ</span><br>
+          <span class="fm">(2×3)⁴ = 2⁴×3⁴ = <span class="hl">1296</span></span><br>
+          <span style="font-size:13px;color:var(--soft)">驗算：6⁴ = 1296 ✓</span><br>
+          <span class="fm">(2a)³ = <span class="hl">8a³</span></span></div>
+        <div class="box g"><b class="hl-g">⑤ 商的冪</b>　<span class="fm">(a/b)ⁿ = aⁿ/bⁿ</span><br>
+          <span class="fm">(2/3)³ = <span class="hl">8/27</span></span><br>
+          <span class="fm">(x/3)² = <span class="hl">x²/9</span></span></div>
+      </div>
+      <div class="box r"><b class="hl-r">⚠️ 最常錯：</b><span class="fm">(−3b²)³</span> 的負號不見了。<br>
+        正確：<span class="fm">(−3b²)³ = (−3)³ × (b²)³ = <span class="hl-g">−27b⁶</span></span> —— <span class="hl">括號要連同符號一起乘方</span>。</div>`},
+    {eb:'例題 3 ★☆☆', h:'三條基本律', html:`
+      <div class="exq" data-a="3">
+        <div class="exq-q"><span class="hl">Q</span>　<span class="fm">(2³)⁴</span> = ?</div>
+        <button class="exo" data-i="0">2⁷ = 128</button>
+        <button class="exo" data-i="1">2¹ = 2</button>
+        <button class="exo" data-i="2">8⁴ = 4096（但寫成 8⁴）</button>
+        <button class="exo" data-i="3">2¹² = 4096</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">冪的冪 → 指數<b>相乘</b>：<span class="fm">(2³)⁴ = 2³ˣ⁴ = 2¹² = 4096</span></div>
+          <div class="st">(A) 2⁷ 是把指數<b>相加</b>了（3+4）—— 那是<b>乘法律</b>，不是冪的冪！</div>
+          <div class="st">(C) 值雖然對（8⁴ = 4096），但題目要的是化簡成<b>2 的次方</b>，且 8⁴ 沒有化到最簡形式。</div>
+          <div class="an">答：2¹² = 4096</div>
+        </div>
+      </div>`},
+    {eb:'例題 4 ★★☆', h:'先化成同底數，路就通了', html:`
+      <div class="exq" data-a="0">
+        <div class="exq-q"><span class="hl">Q</span>　化簡 <span class="fm">(2³ × 4²) ÷ 2⁵</span></div>
+        <button class="exo" data-i="0">4</button>
+        <button class="exo" data-i="1">2</button>
+        <button class="exo" data-i="2">8</button>
+        <button class="exo" data-i="3">16</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st"><b>Step 1 化同底</b>：4 不是 2，但 <span class="fm">4 = 2²</span> → <span class="fm">4² = (2²)² = 2⁴</span></div>
+          <div class="st fm"><b>Step 2 乘法律</b>：2³ × 2⁴ = 2⁷</div>
+          <div class="st fm"><b>Step 3 除法律</b>：2⁷ ÷ 2⁵ = 2² = 4</div>
+          <div class="st"><b>關鍵動作</b>：看到不同底數，先想能不能<b>化成同一個底數</b>。<br>
+            常見家族：2、4、8、16、32（都是 2 的次方）；3、9、27、81（都是 3 的次方）。</div>
+          <div class="an">答：4</div>
+        </div>
+      </div>`},
+    {eb:'例題 5 ★★☆', h:'⚠️ 原教材答案有誤的那題', html:`
+      <div class="exq" data-a="2">
+        <div class="exq-q"><span class="hl">Q</span>　化簡 <span class="fm">(3⁴ × 9³) ÷ 3⁷</span></div>
+        <button class="exo" data-i="0">9</button>
+        <button class="exo" data-i="1">3</button>
+        <button class="exo" data-i="2">27</button>
+        <button class="exo" data-i="3">81</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st fm"><b>Step 1 化同底</b>：9 = 3² → 9³ = (3²)³ = 3⁶</div>
+          <div class="st fm"><b>Step 2 乘法律</b>：3⁴ × 3⁶ = 3¹⁰</div>
+          <div class="st fm"><b>Step 3 除法律</b>：3¹⁰ ÷ 3⁷ = 3³ = 27</div>
+          <div class="st"><span class="hl-r">原教材這題答案標成 9，是錯的</span> —— 有趣的是原文括號裡自己重算出 27 卻沒改答案。<br>
+            <b>這正好示範了「算完要檢查、檢查完要真的改」有多重要。</b></div>
+          <div class="an">答：27</div>
+        </div>
+      </div>`}
+  ],
+  fa:[
+    {q:'<span class="fm">2⁵ × 2³</span> = ?', o:['2⁸','2¹⁵','4⁸','2²'], a:0, e:'同底數相乘 → 指數相加：2⁵⁺³ = 2⁸ = 256。'},
+    {q:'<span class="fm">7⁸ ÷ 7⁵</span> = ?', o:['7¹³','7³','1³','7⁴⁰'], a:1, e:'同底數相除 → 指數相減：7⁸⁻⁵ = 7³ = 343。'},
+    {q:'<span class="fm">(−3b²)³</span> = ?', o:['27b⁶','−27b⁶','−27b⁵','−9b⁶'], a:1, e:'(−3)³ = −27；(b²)³ = b⁶ → −27b⁶。括號要連同符號一起乘方。'}
+  ],
+  info:[
+    {big:'乘加 · 除減', cap:'同底數相乘加指數<br>相除減指數', c:'var(--blue)'},
+    {big:'冪乘', cap:'(aᵐ)ⁿ = aᵐⁿ<br>指數相乘', c:'var(--pink)'},
+    {big:'積分配 · 商分配', cap:'(ab)ⁿ = aⁿbⁿ<br>(a/b)ⁿ = aⁿ/bⁿ', c:'var(--green)'}
+  ]
+},
+{ key:'trap', viz:'trap', vizTitle:'加 vs 乘 點陣對照 —— 一個點代表一個 a，數點點就知道差在哪',
+  slides:[
+    {eb:'⚠️ 陷阱一（最高頻）', h:'指數該「加」還是該「乘」？', html:`
+      <table class="tbl">
+        <tr><th style="width:28%;">式子</th><th style="width:36%;">指數怎麼算</th><th>結果</th></tr>
+        <tr><td class="fm" style="font-size:19px;">2² × 2³</td><td>相<span class="hl-g" style="font-size:18px;">加</span>　2+3 = 5</td><td class="fm hl-g" style="font-size:19px;">2⁵ = 32</td></tr>
+        <tr><td class="fm" style="font-size:19px;">(2²)³</td><td>相<span class="hl-r" style="font-size:18px;">乘</span>　2×3 = 6</td><td class="fm hl-r" style="font-size:19px;">2⁶ = 64</td></tr>
+      </table>
+      <div class="box y" style="text-align:center;font-size:20px;"><span class="hl">32 ≠ 64</span> —— 兩者完全不同！</div>
+      <div class="box g"><b>怎麼分辨？</b>看有沒有<span class="hl">括號把整個次方包起來</span>：<br>
+        ・<span class="fm">aᵐ × aⁿ</span>　兩塊<b>並排相乘</b> → 數總共幾個 a → <b>加</b><br>
+        ・<span class="fm">(aᵐ)ⁿ</span>　一塊<b>被整個乘方</b> → n 個 aᵐ → <b>乘</b></div>`},
+    {eb:'⚠️ 陷阱二', h:'底數不同，不能直接加指數', html:`
+      <div class="box r" style="text-align:center;font-size:20px;padding:14px;">
+        ❌ <span class="fm">2³ × 3² = 6⁵</span>　—— <span class="hl-r">大錯</span>！<br>
+        <span style="font-size:15px;">（2³×3² = 8×9 = 72；而 6⁵ = 7776）</span></div>
+      <div class="box g" style="text-align:center;">✓ 只有<span class="hl">同底數</span>才能加指數</div>
+      <div class="box y"><b>但是注意：</b><span class="fm">(2×3)³ = 2³ × 3³ = 8 × 27 = <span class="hl">216</span></span> ✓<br>
+        這是<span class="hl">積的冪</span>（同指數、不同底數 → 可以合併底數），和「同底數相乘」是<b>兩回事</b>。</div>
+      <div class="teach"><b>追問句：</b>「這兩個<b>底數</b>一樣嗎？不一樣的話可以直接加指數嗎？」每次計算前<b>先確認底數</b>，這個習慣可以擋掉一半的錯。</div>`},
+    {eb:'⚠️ 陷阱三', h:'括號位置決定負號有沒有被乘方', html:`
+      <table class="tbl">
+        <tr><th style="width:24%;">式子</th><th style="width:44%;">意思</th><th>結果</th></tr>
+        <tr><td class="fm" style="font-size:19px;">(−3)⁴</td><td>整體乘方：(−3)×(−3)×(−3)×(−3)</td><td class="fm hl-g" style="font-size:19px;">81</td></tr>
+        <tr><td class="fm" style="font-size:19px;">−3⁴</td><td>先算 3⁴ = 81，再加負號</td><td class="fm hl-r" style="font-size:19px;">−81</td></tr>
+        <tr><td class="fm" style="font-size:19px;">(−2)⁵</td><td>整體乘方（奇次方）</td><td class="fm hl-r" style="font-size:19px;">−32</td></tr>
+      </table>
+      <div class="box y" style="text-align:center;"><span class="hl">括號有沒有把負號包進去</span>，答案差一個負號</div>
+      <div class="box g" style="text-align:center;">複習 1-4：負數的<span class="hl-g">偶次方得正</span>、<span class="hl-r">奇次方得負</span></div>`},
+    {eb:'⚠️ 陷阱四', h:'加法沒有分配律！', html:`
+      <div class="box r" style="text-align:center;font-size:21px;padding:16px;">❌ <span class="fm">(a+b)ⁿ = aⁿ + bⁿ</span>　—— <span class="hl-r">錯</span>！</div>
+      <div class="box g" style="text-align:center;font-size:19px;">
+        <b>反例（最快的打臉法）</b><br>
+        <span class="fm">(1+1)² = 2² = <span class="hl">4</span></span>　；　<span class="fm">1² + 1² = <span class="hl">2</span></span><br>
+        <span class="fm hl-r" style="font-size:21px;">4 ≠ 2</span></div>
+      <div class="box y" style="text-align:center;">指數律的分配<span class="hl">只對乘法成立</span>：<span class="fm">(ab)ⁿ = aⁿbⁿ</span> ✓<br>
+        對加法<span class="hl-r">完全不成立</span></div>
+      <div class="teach"><b>學會用反例：</b>不確定一個規則對不對，就<b>代最小的數字試試看</b>（1、2 最好用）。一個反例就能推翻一條規則 —— 這是數學最有力的武器。</div>`},
+    {eb:'例題 6 ★★★', h:'整體代換：不必求出 a 和 m', html:`
+      <div class="exq" data-a="2">
+        <div class="exq-q"><span class="hl">Q</span>　已知 <span class="fm">aᵐ = 3、aⁿ = 5</span>，求 <span class="fm">a²ᵐ⁻ⁿ</span></div>
+        <button class="exo" data-i="0">1</button>
+        <button class="exo" data-i="1">6/5</button>
+        <button class="exo" data-i="2">9/5</button>
+        <button class="exo" data-i="3">15</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st fm"><b>Step 1 先拆</b>：a²ᵐ⁻ⁿ = a²ᵐ ÷ aⁿ</div>
+          <div class="st fm"><b>Step 2</b>：a²ᵐ = (aᵐ)² = 3² = 9</div>
+          <div class="st fm"><b>Step 3</b>：9 ÷ 5 = 9/5</div>
+          <div class="st">(B) 6/5 是把 a²ᵐ 算成 <b>2 × aᵐ = 6</b> 了 —— <span class="hl-r">a²ᵐ 是 (aᵐ)²，不是 2aᵐ！</span></div>
+          <div class="st"><b>💡 把 aᵐ 當成一整塊</b>，完全不需要知道 a 是多少、m 是多少。<br>
+            <b>指數律要會「反過來用」</b>：看到 a²ᵐ⁻ⁿ 就要能拆成 a²ᵐ ÷ aⁿ。</div>
+          <div class="an">答：9/5</div>
+        </div>
+      </div>`},
+    {eb:'例題 7 ★★★', h:'科學記號 ＋ 指數律（連結 1-4）', html:`
+      <div class="exq" data-a="1">
+        <div class="exq-q"><span class="hl">Q</span>　計算 <span class="fm">(3.6×10⁵) × (4×10³) ÷ (6×10⁴)</span>，用科學記號表示</div>
+        <button class="exo" data-i="0">24×10³</button>
+        <button class="exo" data-i="1">2.4×10⁴</button>
+        <button class="exo" data-i="2">2.4×10¹²</button>
+        <button class="exo" data-i="3">2.4×10⁵</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st fm"><b>Step 1 係數分開算</b>：3.6 × 4 ÷ 6 = 14.4 ÷ 6 = 2.4</div>
+          <div class="st fm"><b>Step 2 次方用指數律</b>：10⁵ × 10³ ÷ 10⁴ = 10⁵⁺³⁻⁴ = 10⁴</div>
+          <div class="st fm"><b>Step 3 組合</b>：2.4 × 10⁴</div>
+          <div class="st"><b>Step 4 檢查規範化</b>：係數 2.4 在 1 ~ 10 之間 ✓</div>
+          <div class="st">(A) 24×10³ 值雖對，但係數 24 <b>不在 1~10 之間</b>，<span class="hl-r">不是規範的科學記號</span>。</div>
+          <div class="st">(C) 是把指數<b>相乘</b>了（5×3÷4？）—— 科學記號乘除時，次方要<b>相加減</b>。</div>
+          <div class="an">答：2.4×10⁴</div>
+        </div>
+      </div>`},
+    {eb:'素養 ★★★', h:'細菌分裂 —— 指數成長', html:`
+      <div class="box">細菌每 <span class="hl">20 分鐘</span>分裂一次（一變二），從 <span class="hl">1</span> 個開始</div>
+      <div class="exq" data-a="0">
+        <div class="exq-q"><span class="hl">Q</span>　要超過 <span class="fm">10⁶</span> 個，至少幾小時？（已知 <span class="fm">2¹⁰ ≈ 10³</span>）</div>
+        <button class="exo" data-i="0">7 小時</button>
+        <button class="exo" data-i="1">20 小時</button>
+        <button class="exo" data-i="2">6 小時</button>
+        <button class="exo" data-i="3">60 小時</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st fm">n 小時分裂 3n 次 → 細菌數 = 2³ⁿ</div>
+          <div class="st fm">10⁶ = (10³)² ≈ (2¹⁰)² = 2²⁰</div>
+          <div class="st fm">2³ⁿ > 2²⁰ → 3n > 20 → n > 6.67</div>
+          <div class="st">n 要是整數且「超過」→ <b>至少 7 小時</b></div>
+          <div class="st">(C) 6 小時只有 2¹⁸ ≈ 26 萬個，<b>還不到</b> 10⁶。</div>
+          <div class="st">💡 這裡用到 <b>2¹⁰ ≈ 10³</b>（1024 ≈ 1000）—— 工程師天天在用的近似，也解釋了為什麼 1KB 有時被說成「約 1000 bytes」。</div>
+          <div class="an">答：至少 7 小時</div>
+        </div>
+      </div>`}
+  ],
+  fa:[
+    {q:'<span class="fm">2³ × 3²</span> = ?', o:['6⁵','72','6⁶','36'], a:1, e:'底數不同不能加指數！乖乖算：8 × 9 = 72。'},
+    {q:'<span class="fm">(−3)⁴</span> 和 <span class="fm">−3⁴</span> 相等嗎？', o:['相等，都是 81','相等，都是 −81','不相等：81 與 −81','不相等：−81 與 81'], a:2, e:'(−3)⁴ = 81（整體乘方）；−3⁴ = −81（先算 3⁴ 再加負號）。'},
+    {q:'判斷 <span class="fm">(a+b)² = a² + b²</span>', o:['對','錯，反例 (1+1)²=4≠2','對，這是積的冪','錯，應該是 a²−b²'], a:1, e:'加法沒有分配律。反例：(1+1)² = 4，但 1²+1² = 2。'}
+  ],
+  info:[
+    {big:'加 vs 乘', cap:'2²×2³ = 32<br>(2²)³ = 64', c:'var(--pink)'},
+    {big:'底數要一樣', cap:'2³×3² ≠ 6⁵<br>先確認底數', c:'var(--yellow)'},
+    {big:'反例最有力', cap:'代 1、2 試試<br>一個反例推翻一切', c:'var(--green)'}
+  ]
+}];
+
+const QUIZ = [
+  {type:'choice', q:'<span class="fm">2⁵ × 2³</span> = ?', o:['2⁸','2¹⁵','4⁸','2²'], a:0, e:'同底數相乘 → 指數相加：2⁸ = 256。'},
+  {type:'fill', q:'<span class="fm">7⁸ ÷ 7⁵</span> = 7 的幾次方？請填指數：', a:['3'], e:'指數相減：8 − 5 = 3 → 7³ = 343。'},
+  {type:'choice', q:'<span class="fm">(3²)⁵</span> = ?', o:['3⁷','3¹⁰','9⁵','3²⁵'], a:1, e:'冪的冪 → 指數相乘：3²ˣ⁵ = 3¹⁰。'},
+  {type:'choice', q:'<span class="fm">5⁰ + 3⁰ + (−7)⁰</span> = ?', o:['0','1','3','−1'], a:2, e:'底數都不是 0 → 三個都等於 1 → 3。'},
+  {type:'fill', q:'<span class="fm">2⁻³</span> = ?（填分數，如 1/8）', a:['1/8'], e:'a⁻ⁿ = 1/aⁿ → 2⁻³ = 1/2³ = 1/8。'},
+  {type:'choice', q:'把 <span class="fm">0.125</span> 寫成 2 的次方', o:['2⁻³','2³','2⁻⁴','−2³'], a:0, e:'0.125 = 1/8 = 1/2³ = 2⁻³。'},
+  {type:'tf', q:'判斷：「<span class="fm">2⁻³</span> 是負數。」', a:false, e:'錯。2⁻³ = 1/8 是<b>正的</b>。負指數只表示「倒過來」，不是「變負」。'},
+  {type:'tf', q:'判斷：「<span class="fm">2³ × 3² = 6⁵</span>」', a:false, e:'錯。底數不同不能加指數。2³×3² = 8×9 = 72，而 6⁵ = 7776。'},
+  {type:'tf', q:'判斷：「<span class="fm">a³ × b³ = (ab)³</span>」', a:true, e:'對。這是積的冪的逆用：同指數不同底數可以合併底數。'},
+  {type:'tf', q:'判斷：「<span class="fm">(a+b)ⁿ = aⁿ + bⁿ</span>」', a:false, e:'錯。加法沒有分配律。反例：(1+1)² = 4 ≠ 1²+1² = 2。'},
+  {type:'choice', q:'<span class="fm">(2²×3)³ ÷ (2×3²)</span> = ?', o:['96','32','2⁵×3²','48'], a:0, e:'分子 = 2⁶×3³；分母 = 2×3²；差 = 2⁵×3 = 32×3 = 96。'},
+  {type:'choice', q:'<span class="fm">(3⁴ × 9³) ÷ 3⁷</span> = ?', o:['9','3','27','81'], a:2, e:'9³ = 3⁶；3⁴×3⁶ = 3¹⁰；3¹⁰÷3⁷ = 3³ = 27。'},
+  {type:'choice', q:'<span class="fm">(a²b³)⁴ ÷ (a³b²)²</span> = ?', o:['a²b⁸','a⁵b¹⁰','a²b⁶','a⁴b⁸'], a:0, e:'分子 a⁸b¹²；分母 a⁶b⁴；相除 → a²b⁸。'},
+  {type:'choice', q:'<span class="fm">(−2a³)² × (3a)²</span> = ?', o:['−36a⁸','36a⁸','36a⁶','−36a⁶'], a:1, e:'4a⁶ × 9a² = 36a⁸。(−2)² = +4（偶次方得正）。'},
+  {type:'choice', q:'已知 <span class="fm">2ⁿ = 32</span>，求 <span class="fm">4ⁿ</span>', o:['64','1024','128','256'], a:1, e:'2ⁿ=2⁵ → n=5；4⁵ = (2²)⁵ = 2¹⁰ = 1024。或 4ⁿ = (2ⁿ)² = 32² = 1024。'},
+  {type:'choice', q:'<span class="fm">[(−2)³ × (−3)²] ÷ [2⁴ × 3]</span> = ?', o:['−9/2','−3/2','3/2','9/2'], a:1, e:'分子 (−8)×9 = −72；分母 16×3 = 48；−72÷48 = −3/2。'},
+  {type:'choice', q:'<span class="fm">(5×10⁶)² ÷ (2.5×10⁸)</span> = ?', o:['1×10⁵','1×10⁴','2×10⁵','10×10⁴'], a:0, e:'分子 25×10¹²；25÷2.5 = 10；10¹²÷10⁸ = 10⁴；10×10⁴ = 10⁵ = 1×10⁵。'},
+  {type:'choice', q:'1GB = 2³⁰ bytes、1KB = 2¹⁰ bytes。1GB 是幾個 KB？', o:['2³','2²⁰','2⁴⁰','2³⁰'], a:1, e:'2³⁰ ÷ 2¹⁰ = 2²⁰ ≈ 105 萬個。'}
+];
+
+const GAME = [
+  {name:'零次方', qs:[
+    {q:'5⁰ = ?', o:['0','1','5','無意義'], a:1, e:'任何不為 0 的數，0 次方都是 1。'},
+    {q:'(−7)⁰ = ?', o:['−1','1','0','−7'], a:1, e:'底數 −7 ≠ 0 → (−7)⁰ = 1。'},
+    {q:'a⁰ = 1 的條件？', o:['a > 0','a ≠ 0','a 是整數','沒有條件'], a:1, e:'a ≠ 0。0⁰ 會變成 0÷0，沒有意義。'},
+    {q:'a⁰ = 1 是怎麼來的？', o:['數學家規定的','由 aⁿ÷aⁿ 推出','背起來就好','由 a+0 推出'], a:1, e:'aⁿ÷aⁿ = aⁿ⁻ⁿ = a⁰，而 aⁿ÷aⁿ = 1 → a⁰ = 1。'}
+  ]},
+  {name:'負指數', qs:[
+    {q:'2⁻³ = ?', o:['−8','1/8','−1/8','8'], a:1, e:'a⁻ⁿ = 1/aⁿ → 1/2³ = 1/8。'},
+    {q:'2⁻³ 是正數還是負數？', o:['正數','負數','零','看情況'], a:0, e:'1/8 是正的！負指數只表示「倒過來」，不是「變負」。'},
+    {q:'10⁻² = ?', o:['0.01','−100','0.1','−0.01'], a:0, e:'1/10² = 1/100 = 0.01。'},
+    {q:'把 0.25 寫成 2 的次方', o:['2⁻⁴','2⁻²','−2²','2²'], a:1, e:'0.25 = 1/4 = 1/2² = 2⁻²。'}
+  ]},
+  {name:'乘法律・除法律', qs:[
+    {q:'2⁵ × 2³ = ?', o:['2⁸','2¹⁵','4⁸','2²'], a:0, e:'同底數相乘 → 指數相加 → 2⁸。'},
+    {q:'7⁸ ÷ 7⁵ = ?', o:['7¹³','7³','1³','7⁴⁰'], a:1, e:'同底數相除 → 指數相減 → 7³。'},
+    {q:'3⁴ × 3² = ?', o:['3⁸','3⁶','9⁶','3²'], a:1, e:'指數相加：4+2 = 6 → 3⁶ = 729。'},
+    {q:'為什麼同底數相乘要「加」指數？', o:['規定的','在數總共幾個 a','為了好記','因為底數一樣'], a:1, e:'3⁴×3² = (3×3×3×3)×(3×3) = 六個 3 → 3⁶。就是在數個數。'}
+  ]},
+  {name:'冪的冪', qs:[
+    {q:'(2³)⁴ = ?', o:['2⁷','2¹²','8⁴','2¹'], a:1, e:'冪的冪 → 指數相乘：3×4 = 12 → 2¹²。'},
+    {q:'(3²)⁵ = ?', o:['3⁷','3¹⁰','9⁵','3²⁵'], a:1, e:'指數相乘：2×5 = 10 → 3¹⁰。'},
+    {q:'2²×2³ 和 (2²)³ 相等嗎？', o:['相等，都是 32','相等，都是 64','不相等：32 與 64','不相等：64 與 32'], a:2, e:'2²×2³ = 2⁵ = 32（加）；(2²)³ = 2⁶ = 64（乘）。'},
+    {q:'(aᵐ)ⁿ 的指數怎麼算？', o:['相加','相乘','相減','相除'], a:1, e:'冪的冪 → 指數相乘 → aᵐⁿ。'}
+  ]},
+  {name:'積冪・商冪', qs:[
+    {q:'(2×3)⁴ = ?', o:['6⁴ = 1296','2⁴×3⁴ = 1296','兩個都對','6⁸'], a:2, e:'(ab)ⁿ = aⁿbⁿ；6⁴ = 2⁴×3⁴ = 1296，兩種寫法都對。'},
+    {q:'(2/3)³ = ?', o:['8/27','6/9','2/27','8/3'], a:0, e:'商的冪：2³/3³ = 8/27。'},
+    {q:'(−3b²)³ = ?', o:['27b⁶','−27b⁶','−27b⁵','−9b⁶'], a:1, e:'(−3)³ = −27；(b²)³ = b⁶ → −27b⁶。'},
+    {q:'(3x)⁴ = ?', o:['3x⁴','81x⁴','12x⁴','81x'], a:1, e:'積的冪：3⁴ × x⁴ = 81x⁴。'}
+  ]},
+  {name:'避開陷阱', qs:[
+    {q:'2³ × 3² = ?', o:['6⁵','72','6⁶','36'], a:1, e:'底數不同不能加指數！8 × 9 = 72。'},
+    {q:'(−3)⁴ 和 −3⁴ ？', o:['都是 81','都是 −81','81 與 −81','−81 與 81'], a:2, e:'括號決定負號有沒有被乘方。'},
+    {q:'(a+b)² = a² + b² 嗎？', o:['對','錯，反例 (1+1)²=4≠2','對，這是積的冪','要看 a、b'], a:1, e:'加法沒有分配律！'},
+    {q:'不確定規則對不對，最快的檢查法？', o:['問老師','代小數字找反例','背公式','跳過'], a:1, e:'代 1、2 試試看。一個反例就能推翻一條規則。'}
+  ]},
+  {name:'綜合應用', qs:[
+    {q:'(2³ × 4²) ÷ 2⁵ = ?', o:['4','2','8','16'], a:0, e:'4² = 2⁴；2³×2⁴ = 2⁷；2⁷÷2⁵ = 2² = 4。'},
+    {q:'(3⁴ × 9³) ÷ 3⁷ = ?', o:['9','3','27','81'], a:2, e:'9³ = 3⁶；3¹⁰÷3⁷ = 3³ = 27。'},
+    {q:'aᵐ=3、aⁿ=5，求 a²ᵐ⁻ⁿ', o:['1','6/5','9/5','15'], a:2, e:'(aᵐ)²÷aⁿ = 9÷5 = 9/5。'},
+    {q:'(3.6×10⁵)×(4×10³)÷(6×10⁴) = ?', o:['24×10³','2.4×10⁴','2.4×10¹²','2.4×10⁵'], a:1, e:'係數 2.4；次方 10⁵⁺³⁻⁴ = 10⁴。'}
+  ]}
+];
+
+document.getElementById('goals').innerHTML = GOALS.map((g,i)=>
+  `<div class="goal"><div class="bdg">${i+1}</div>${g}</div>`).join('');
+
+const wrap = document.getElementById('wrap');
+DATA.forEach((sec, si)=>{
+  const p = document.createElement('div');
+  p.className = 'panel' + (si===0?' on':'');
+  p.dataset.p = si;
+  p.innerHTML = `
+    <div class="card">
+      <h3><span class="ic">📽</span>簡報翻頁器</h3>
+      <div class="deck" data-deck="${si}">
+        ${sec.slides.map((s,i)=>`<div class="sl${i===0?' on':''}" data-i="${i}">
+          <div class="eyebrow">${s.eb}</div><h4>${s.h}</h4>${s.html}</div>`).join('')}
+      </div>
+      <div class="nav">
+        <button class="btn" data-nav="prev" data-s="${si}">◀ 上一張</button>
+        <span class="pg" id="pg-${si}">1 / ${sec.slides.length}</span>
+        <button class="btn" data-nav="next" data-s="${si}">下一張 ▶</button>
+      </div>
+      <div class="dots" id="dots-${si}">
+        ${sec.slides.map((_,i)=>`<button class="dot${i===0?' on':''}" data-s="${si}" data-i="${i}"></button>`).join('')}
+      </div>
+    </div>
+    <div class="card">
+      <h3><span class="ic">🎯</span>Canvas 互動視覺化<span style="font-size:14px;color:var(--soft);font-weight:400;">　${sec.vizTitle}</span></h3>
+      <div class="cv-wrap">
+        <canvas class="viz" data-viz="${sec.viz}" data-si="${si}"></canvas>
+        <div class="ctrl" data-ctrl="${si}"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3><span class="ic">✅</span>形成性評量</h3>
+      ${sec.fa.map((f,i)=>`<div class="q" data-fa="${si}-${i}">
+        <div class="qt"><span class="qn">Q${i+1}</span>${f.q}</div>
+        <div class="opts">${f.o.map((o,oi)=>`<button class="opt" data-si="${si}" data-qi="${i}" data-oi="${oi}">${o}</button>`).join('')}</div>
+        <div class="fb" id="fb-${si}-${i}"></div>
+      </div>`).join('')}
+    </div>
+    <div class="card">
+      <h3><span class="ic">📊</span>資訊圖表</h3>
+      <div class="info">
+        ${sec.info.map(c=>`<div class="icard"><div class="big" style="color:${c.c}">${c.big}</div><div class="cap">${c.cap}</div></div>`).join('')}
+      </div>
+    </div>`;
+  wrap.appendChild(p);
+});
+
+const qp = document.createElement('div');
+qp.className='panel'; qp.dataset.p='3';
+qp.innerHTML = `<div class="card"><h3><span class="ic">📝</span>題型測驗　<span style="font-size:14px;color:var(--soft);font-weight:400;">單選 · 是非 · 填充，共 ${QUIZ.length} 題</span></h3>
+  <div id="quizBox"></div>
+  <div style="display:flex;gap:10px;align-items:center;margin-top:14px;flex-wrap:wrap;">
+    <button class="btn" id="gradeBtn" style="background:rgba(242,217,121,.2);border-color:var(--yellow);color:var(--yellow);font-weight:700;">📊 批改並看成績</button>
+    <button class="btn" id="resetQuiz">🔄 重做</button>
+    <div class="readout" id="score" style="display:none;"></div>
+  </div></div>
+  <div class="card"><h3><span class="ic">📋</span>公式速查表</h3>
+    <div class="frow"><div class="flab">乘方意義</div><div class="fval">aⁿ ＝ n 個 a 相乘（不是 a×n）</div></div>
+    <div class="frow"><div class="flab">① 乘法律</div><div class="fval">aᵐ × aⁿ = aᵐ⁺ⁿ（同底數，指數<b>加</b>）</div></div>
+    <div class="frow"><div class="flab">② 除法律</div><div class="fval">aᵐ ÷ aⁿ = aᵐ⁻ⁿ（同底數，指數<b>減</b>）</div></div>
+    <div class="frow"><div class="flab">③ 冪的冪</div><div class="fval">(aᵐ)ⁿ = aᵐⁿ（指數<b>乘</b>）</div></div>
+    <div class="frow"><div class="flab">④ 積的冪</div><div class="fval">(ab)ⁿ = aⁿbⁿ</div></div>
+    <div class="frow"><div class="flab">⑤ 商的冪</div><div class="fval">(a/b)ⁿ = aⁿ/bⁿ</div></div>
+    <div class="frow"><div class="flab">零次方</div><div class="fval">a⁰ = 1（a ≠ 0）；由 aⁿ÷aⁿ 推出</div></div>
+    <div class="frow"><div class="flab">負指數</div><div class="fval">a⁻ⁿ = 1/aⁿ；由 a⁰÷aⁿ 推出。<b>不是負數！</b></div></div>
+    <div class="frow"><div class="flab">三種寫法</div><div class="fval">0.25 = 1/4 = 2⁻²　；　0.001 = 1/1000 = 10⁻³</div></div>
+    <div class="frow"><div class="flab">負號位置</div><div class="fval">(−3)⁴ = 81　；　−3⁴ = −81</div></div>
+    <div class="frow"><div class="flab">加法無分配律</div><div class="fval">(a+b)ⁿ ≠ aⁿ + bⁿ　（反例 (1+1)²=4≠2）</div></div>
+    <div class="frow"><div class="flab">不同底數</div><div class="fval">2³×3² ≠ 6⁵；先想能不能<b>化成同底數</b></div></div>
+    <div class="frow"><div class="flab">同底數家族</div><div class="fval">2,4,8,16,32（2的次方）；3,9,27,81（3的次方）</div></div>
+    <div class="frow"><div class="flab">整體代換</div><div class="fval">已知 aᵐ=3 → a²ᵐ = (aᵐ)² = 9（不必求 a）</div></div>
+    <div class="frow"><div class="flab">自我檢查句</div><div class="fval">「底數一樣嗎？這是相乘（加）還是次方的次方（乘）？」</div></div>
+  </div>`;
+wrap.appendChild(qp);
+
+const gp = document.createElement('div');
+gp.className='panel'; gp.dataset.p='4';
+gp.innerHTML = `<div class="card"><h3><span class="ic">🎮</span>闖關遊戲　<span style="font-size:14px;color:var(--soft);font-weight:400;">6 關挑戰 · 每題 20 秒 · 連擊與速度都有加分</span></h3>
+  <div class="gscreen on" id="gStart">
+    <div style="text-align:center;font-size:clamp(15px,2vw,18px);line-height:1.8;">
+      闖過 <b class="hl">7</b> 關，每關 1 題，每題 <b class="hl">20 秒</b>。<br>
+      計分：基礎 <b class="hl">10</b> 分 + 連擊獎勵（最多 <b class="hl">5</b>）+ 速度獎勵（最多 <b class="hl">5</b>）＝ 單題最高 <b class="hl">20</b> 分</div>
+    <div class="lvchips" id="gStartChips"></div>
+    <div style="text-align:center;"><button class="btn" id="gGo" style="background:rgba(242,217,121,.25);border-color:var(--yellow);color:var(--yellow);font-weight:700;font-size:16px;padding:10px 24px;">🚀 開始挑戰</button></div>
+  </div>
+  <div class="gscreen" id="gPlay">
+    <div class="hud">
+      <div class="st">關卡<b id="hLv">1/7</b></div>
+      <div class="st">分數<b id="hSc">0</b></div>
+      <div class="st">連擊<b id="hStk">0</b></div>
+      <div class="st">剩餘<b id="hT">20</b></div>
+    </div>
+    <div class="tbar"><div class="tfill" id="tFill"></div></div>
+    <div class="lvchips" id="gChips"></div>
+    <div class="gq" id="gQ"></div>
+    <div class="gopts" id="gO"></div>
+    <div class="gfb" id="gFb"></div>
+    <div style="text-align:center;margin-top:12px;"><button class="btn" id="gNext" style="display:none;">下一關 ▶</button></div>
+  </div>
+  <div class="gscreen" id="gEnd">
+    <div class="rank" id="gRank">🏆</div>
+    <div style="text-align:center;font-size:clamp(17px,2.6vw,22px);font-family:'Noto Serif TC';" id="gFinal"></div>
+    <div style="text-align:center;color:var(--soft);margin-top:8px;" id="gStats"></div>
+    <div style="text-align:center;margin-top:16px;"><button class="btn" id="gAgain" style="background:rgba(242,217,121,.25);border-color:var(--yellow);color:var(--yellow);font-weight:700;">🔄 再挑戰一次</button></div>
+  </div></div>`;
+wrap.appendChild(gp);
+document.getElementById('gStartChips').innerHTML = GAME.map((g,i)=>`<div class="lvchip">第${i+1}關 ${g.name}</div>`).join('');
+
+const qb = document.getElementById('quizBox');
+QUIZ.forEach((q,i)=>{
+  const d = document.createElement('div'); d.className='q';
+  let body='';
+  if(q.type==='choice') body = `<div class="opts">${q.o.map((o,oi)=>`<button class="opt" data-quiz="${i}" data-oi="${oi}">${o}</button>`).join('')}</div>`;
+  else if(q.type==='tf') body = `<div class="opts" style="flex-direction:row;gap:10px;">
+      <button class="opt" data-quiz="${i}" data-oi="1" style="flex:1;">⭕ 對</button>
+      <button class="opt" data-quiz="${i}" data-oi="0" style="flex:1;">❌ 錯</button></div>`;
+  else body = `<div><input class="fill" data-quiz="${i}" placeholder="?"></div>`;
+  d.innerHTML = `<div class="qt"><span class="qn">${i+1}</span>
+    <span style="font-size:12px;color:var(--soft);border:1px solid rgba(243,239,226,.25);border-radius:6px;padding:1px 6px;margin-right:6px;">
+    ${q.type==='choice'?'單選':q.type==='tf'?'是非':'填充'}</span>${q.q}</div>${body}
+    <div class="fb" id="qfb-${i}"></div>`;
+  qb.appendChild(d);
+});
+
+document.getElementById('tabs').addEventListener('click', e=>{
+  const t = e.target.closest('.tab'); if(!t) return;
+  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on', x===t));
+  document.querySelectorAll('.panel').forEach(x=>x.classList.toggle('on', x.dataset.p===t.dataset.p));
+  document.getElementById('goalCard').style.display = (t.dataset.p==='4')?'none':'';
+  window.scrollTo({top:0,behavior:'smooth'});
+  setTimeout(resizeAll, 60);
+});
+
+const cur = DATA.map(()=>0);
+function showSlide(si, i){
+  const deck = document.querySelector(`[data-deck="${si}"]`);
+  const sl = deck.querySelectorAll('.sl');
+  i = Math.max(0, Math.min(sl.length-1, i));
+  cur[si] = i;
+  sl.forEach((s,k)=>s.classList.toggle('on', k===i));
+  document.getElementById('pg-'+si).textContent = `${i+1} / ${sl.length}`;
+  document.querySelectorAll(`#dots-${si} .dot`).forEach((d,k)=>d.classList.toggle('on', k===i));
+}
+document.addEventListener('click', e=>{
+  const n = e.target.closest('[data-nav]');
+  if(n){ const si=+n.dataset.s; showSlide(si, cur[si] + (n.dataset.nav==='next'?1:-1)); return; }
+  const d = e.target.closest('.dot');
+  if(d){ showSlide(+d.dataset.s, +d.dataset.i); return; }
+});
+document.addEventListener('keydown', e=>{
+  const p = document.querySelector('.panel.on'); if(!p) return;
+  const si = +p.dataset.p; if(si>=DATA.length) return;
+  if(e.key==='ArrowRight') showSlide(si, cur[si]+1);
+  if(e.key==='ArrowLeft') showSlide(si, cur[si]-1);
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.opt[data-si]'); if(!o) return;
+  const si=+o.dataset.si, qi=+o.dataset.qi, oi=+o.dataset.oi;
+  const f = DATA[si].fa[qi];
+  const box = document.querySelector(`[data-fa="${si}-${qi}"]`);
+  box.querySelectorAll('.opt').forEach((b,k)=>{
+    b.disabled = true;
+    if(k===f.a) b.classList.add('right'); else if(k===oi) b.classList.add('wrong');
+  });
+  const fb = document.getElementById(`fb-${si}-${qi}`);
+  const ok = oi===f.a;
+  fb.className = 'fb on ' + (ok?'ok':'no');
+  fb.innerHTML = (ok?'✅ <b>答對了！</b> ':'❌ <b>再想想。</b> ') + f.e;
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.exo');
+  if(o && !o.disabled){
+    const box = o.closest('.exq');
+    const ans = +box.dataset.a, pick = +o.dataset.i;
+    if(pick === ans){
+      box.querySelectorAll('.exo').forEach(b=>{ b.disabled=true; if(+b.dataset.i===ans) b.classList.add('right'); });
+      box.querySelector('.exsol').classList.add('on');
+      box.querySelector('.exlock').classList.add('hide');
+    } else {
+      o.classList.add('wrong','shake');
+      setTimeout(()=>o.classList.remove('shake'), 420);
+      o.disabled = true;
+      const lock = box.querySelector('.exlock');
+      lock.innerHTML = '🔒 再想想 —— 答對才會顯示詳解'; lock.style.color='var(--pink)';
+    }
+  }
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.opt[data-quiz]'); if(!o) return;
+  const i = +o.dataset.quiz;
+  o.parentElement.querySelectorAll('.opt').forEach(b=>b.classList.remove('right','wrong'));
+  o.classList.add('right'); o.dataset.sel='1';
+  o.parentElement.querySelectorAll('.opt').forEach(b=>{ if(b!==o) delete b.dataset.sel; });
+});
+document.getElementById('gradeBtn').addEventListener('click', ()=>{
+  let right=0;
+  QUIZ.forEach((q,i)=>{
+    const fb = document.getElementById('qfb-'+i);
+    let ok=false, picked=null;
+    if(q.type==='fill'){
+      const inp = document.querySelector(`.fill[data-quiz="${i}"]`);
+      const v = (inp.value||'').trim().replace(/−/g,'-').replace(/\s/g,'');
+      ok = q.a.some(a=>a.replace(/−/g,'-').replace(/\s/g,'')===v);
+      inp.style.borderBottomColor = ok?'var(--green)':'var(--pink)';
+    } else {
+      const sel = document.querySelector(`.opt[data-quiz="${i}"][data-sel="1"]`);
+      if(sel){ picked=+sel.dataset.oi; ok = (q.type==='tf') ? (picked===1)===q.a : picked===q.a; }
+      document.querySelectorAll(`.opt[data-quiz="${i}"]`).forEach(b=>{
+        b.classList.remove('right','wrong');
+        const bi=+b.dataset.oi;
+        const isAns = (q.type==='tf') ? ((bi===1)===q.a) : (bi===q.a);
+        if(isAns) b.classList.add('right'); else if(picked===bi) b.classList.add('wrong');
+      });
+    }
+    if(ok) right++;
+    fb.className='fb on '+(ok?'ok':'no');
+    fb.innerHTML = (ok?'✅ <b>正確</b> ':'❌ <b>錯誤</b> ') + q.e;
+  });
+  const s = document.getElementById('score');
+  const pct = Math.round(right/QUIZ.length*100);
+  s.style.display='block';
+  s.innerHTML = `成績：<b>${right} / ${QUIZ.length}</b>　（${pct} 分）　${pct>=80?'🏆 很棒！':pct>=60?'💪 再加油':'📖 建議重看重點'}`;
+});
+document.getElementById('resetQuiz').addEventListener('click', ()=>{
+  document.querySelectorAll('.opt[data-quiz]').forEach(b=>{b.classList.remove('right','wrong'); delete b.dataset.sel;});
+  document.querySelectorAll('.fill').forEach(i=>{i.value=''; i.style.borderBottomColor='var(--yellow)';});
+  document.querySelectorAll('[id^="qfb-"]').forEach(f=>f.className='fb');
+  document.getElementById('score').style.display='none';
+});
+
+/* ===== 闖關遊戲 ===== */
+const G = {lv:0, score:0, streak:0, best:0, t:20, timer:null, cur:null, answered:false};
+function gShow(id){ ['gStart','gPlay','gEnd'].forEach(x=>document.getElementById(x).classList.toggle('on', x===id)); }
+function gChips(){
+  document.getElementById('gChips').innerHTML = GAME.map((g,i)=>
+    `<div class="lvchip ${i<G.lv?'done':i===G.lv?'now':''}">${i+1}. ${g.name}</div>`).join('');
+}
+function gLoad(){
+  if(G.lv>=GAME.length){ gFinish(); return; }
+  G.answered=false; G.t=20;
+  const bank = GAME[G.lv].qs;
+  G.cur = bank[Math.floor(Math.random()*bank.length)];
+  document.getElementById('hLv').textContent = (G.lv+1)+'/'+GAME.length;
+  document.getElementById('hSc').textContent = G.score;
+  document.getElementById('hStk').textContent = G.streak;
+  document.getElementById('gQ').innerHTML = `<span style="color:var(--blue);font-size:15px;">第 ${G.lv+1} 關 · ${GAME[G.lv].name}</span><br>${G.cur.q}`;
+  document.getElementById('gO').innerHTML = G.cur.o.map((o,i)=>
+    `<button class="gopt" data-g="${i}">${'ABCD'[i]}. ${o}</button>`).join('');
+  document.getElementById('gFb').className='gfb';
+  document.getElementById('gNext').style.display='none';
+  gChips();
+  clearInterval(G.timer);
+  G.timer = setInterval(()=>{
+    G.t -= 0.1;
+    document.getElementById('hT').textContent = Math.max(0,G.t).toFixed(0);
+    document.getElementById('tFill').style.width = Math.max(0,G.t/20*100)+'%';
+    if(G.t<=0){ clearInterval(G.timer); gAnswer(-1); }
+  },100);
+}
+function gAnswer(pick){
+  if(G.answered) return;
+  G.answered = true; clearInterval(G.timer);
+  const ans = G.cur.a, ok = pick===ans;
+  document.querySelectorAll('.gopt').forEach((b,i)=>{
+    b.disabled=true;
+    if(i===ans) b.classList.add('right'); else if(i===pick) b.classList.add('wrong');
+  });
+  let gain=0, sb=0, tb=0;
+  if(ok){
+    G.streak++; G.best=Math.max(G.best,G.streak);
+    sb = Math.min(5, G.streak-1); tb = Math.min(5, Math.floor(G.t/4));
+    gain = 10+sb+tb; G.score += gain;
+  } else { G.streak = 0; }
+  document.getElementById('hSc').textContent = G.score;
+  document.getElementById('hStk').textContent = G.streak;
+  const fb = document.getElementById('gFb');
+  fb.className = 'gfb on '+(ok?'ok':'no');
+  fb.innerHTML = (ok? `✅ <b>答對！+${gain} 分</b>（基礎10 + 連擊${sb} + 速度${tb}）<br>`
+                    : (pick===-1?'⏰ <b>時間到！</b><br>':'❌ <b>答錯了</b><br>')) + G.cur.e;
+  document.getElementById('gNext').style.display='inline-block';
+  document.getElementById('gNext').textContent = (G.lv>=GAME.length-1)?'看成績 🏁':'下一關 ▶';
+}
+function gFinish(){
+  clearInterval(G.timer);
+  const max = GAME.length*20, pct = Math.round(G.score/max*100);
+  const rank = pct>=85?['🏆','數論大師']:pct>=70?['🥇','高手']:pct>=50?['🥈','不錯']:['📖','再加油'];
+  document.getElementById('gRank').textContent = rank[0];
+  document.getElementById('gFinal').innerHTML = `<b class="hl">${G.score}</b> / ${max} 分　·　${rank[1]}`;
+  document.getElementById('gStats').innerHTML = `最高連擊 <b class="hl">${G.best}</b>　·　完成 ${GAME.length} 關`;
+  gShow('gEnd');
+}
+document.getElementById('gGo').addEventListener('click', ()=>{ G.lv=0;G.score=0;G.streak=0;G.best=0; gShow('gPlay'); gLoad(); });
+document.getElementById('gAgain').addEventListener('click', ()=>{ G.lv=0;G.score=0;G.streak=0;G.best=0; gShow('gPlay'); gLoad(); });
+document.getElementById('gNext').addEventListener('click', ()=>{ G.lv++; gLoad(); });
+document.addEventListener('click', e=>{ const b=e.target.closest('.gopt'); if(!b||b.disabled) return; gAnswer(+b.dataset.g); });
+
+/* ===== Canvas ===== */
+const VIZ = {}; let DPR=1;
+function gcd(a,b){ a=Math.abs(a); b=Math.abs(b); while(b){ [a,b]=[b,a%b]; } return a||1; }
+const SUP={'0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹','-':'⁻'};
+function sup(n){ return String(n).split('').map(c=>SUP[c]||c).join(''); }
+function pw(a,n){ return Math.pow(a,n); }
+/* 值的顯示：整數就整數，負指數就顯示分數＋小數 */
+function valStr(a,n){
+  if(n>=0){ const v=pw(a,n); return v>=1e7 ? v.toExponential(2) : String(v); }
+  const d=pw(a,-n);
+  const dec=1/d;
+  const ds = dec>=0.0001 ? (''+parseFloat(dec.toFixed(6))) : dec.toExponential(1);
+  return '1/'+d+'  ( = '+ds+' )';
+}
+const LAWS=[
+  {n:'① 乘法律', f:'aᵐ × aⁿ = aᵐ⁺ⁿ', how:'同底數相乘，指數相加',
+   ex:(a,m,n)=>[`${a}${sup(m)} × ${a}${sup(n)}`, `${a}${sup(m+n)}`, pw(a,m)+' × '+pw(a,n), ''+pw(a,m+n)]},
+  {n:'② 除法律', f:'aᵐ ÷ aⁿ = aᵐ⁻ⁿ', how:'同底數相除，指數相減',
+   ex:(a,m,n)=>[`${a}${sup(m)} ÷ ${a}${sup(n)}`, `${a}${sup(m-n)}`, pw(a,m)+' ÷ '+pw(a,n), valStr(a,m-n)]},
+  {n:'③ 冪的冪', f:'(aᵐ)ⁿ = aᵐⁿ', how:'指數相乘',
+   ex:(a,m,n)=>[`(${a}${sup(m)})${sup(n)}`, `${a}${sup(m*n)}`, pw(a,m)+' 的 '+n+' 次方', ''+pw(a,m*n)]},
+  {n:'④ 積的冪', f:'(ab)ⁿ = aⁿbⁿ', how:'括號內每個因數都要乘方',
+   ex:(a,m,n)=>[`(${a}×${m})${sup(n)}`, `${a}${sup(n)} × ${m}${sup(n)}`, ''+pw(a*m,n), pw(a,n)+' × '+pw(m,n)+' = '+pw(a*m,n)]},
+  {n:'⑤ 商的冪', f:'(a/b)ⁿ = aⁿ/bⁿ', how:'分子分母各自乘方',
+   ex:(a,m,n)=>[`(${a}/${m})${sup(n)}`, `${a}${sup(n)}/${m}${sup(n)}`, '', pw(a,n)+'/'+pw(m,n)]}
+];
+
+function initViz(cv){
+  const si=+cv.dataset.si, kind=cv.dataset.viz;
+  const ctx=cv.getContext('2d');
+  const st = VIZ[si] = {kind, cv, ctx};
+  const ctrl = document.querySelector(`[data-ctrl="${si}"]`);
+  if(kind==='ladder'){
+    st.bi=0; st.focus=3;                       // 底數 index、聚焦到哪一列
+    ctrl.innerHTML = `<div class="readout" id="ro-${si}"></div>
+      <button class="btn" data-t="base" data-si="${si}">🔄 換底數</button>
+      <button class="btn" data-t="up" data-si="${si}">▲ 往上一階</button>
+      <button class="btn" data-t="down" data-si="${si}" style="background:rgba(242,217,121,.2);border-color:var(--yellow);color:var(--yellow);font-weight:700;">▼ 往下一階（÷底數）</button>`;
+  } else if(kind==='laws'){
+    st.li=0; st.a=2; st.m=3; st.n=2;
+    ctrl.innerHTML = `<div class="readout" id="ro-${si}"></div>
+      <button class="btn" data-t="law" data-si="${si}" style="background:rgba(242,217,121,.2);border-color:var(--yellow);color:var(--yellow);font-weight:700;">🔀 換一條律</button>
+      <button class="btn" data-t="am" data-si="${si}">底數 a ±</button>
+      <button class="btn" data-t="mm" data-si="${si}">m ±</button>
+      <button class="btn" data-t="nn" data-si="${si}">n ±</button>`;
+  } else {                                     // trap
+    st.a=2; st.m=2; st.n=3;
+    ctrl.innerHTML = `<div class="readout" id="ro-${si}"></div>
+      <button class="btn" data-t="am" data-si="${si}">底數 a ±</button>
+      <button class="btn" data-t="mm" data-si="${si}">m ±</button>
+      <button class="btn" data-t="nn" data-si="${si}">n ±</button>`;
+  }
+  draw(si);
+}
+
+const BASES=[2,3,5,10];
+function drawLadder(st, ctx, w, h, ro){
+  const a=BASES[st.bi];
+  const rows=[3,2,1,0,-1,-2,-3];
+  ctx.textAlign='center';
+  ctx.fillStyle='#f2d979'; ctx.font='bold 15px "Noto Sans TC"';
+  ctx.fillText(`底數 a = ${a}　·　每往下一階就 ÷${a}`, w/2, 18);
+  const y0=40, rh=26, cx1=w*0.28, cx2=w*0.60, cx3=w*0.84;
+  rows.forEach((e,i)=>{
+    const y=y0+i*rh, on=(i===st.focus);
+    if(on){
+      ctx.fillStyle='rgba(242,217,121,.18)';
+      ctx.strokeStyle='rgba(242,217,121,.7)'; ctx.lineWidth=1.5;
+      ctx.beginPath(); ctx.roundRect(w*0.10, y-17, w*0.80, 24, 6); ctx.fill(); ctx.stroke();
+    }
+    const col = e>0 ? '#98c9dc' : (e===0 ? '#f2d979' : '#eda0a8');
+    ctx.fillStyle=on?'#fff':col;
+    ctx.font=(on?'bold ':'')+'17px "Noto Serif TC"';
+    ctx.fillText(`${a}${sup(e)}`, cx1, y);
+    ctx.fillStyle=on?'#fff':'rgba(243,239,226,.8)';
+    ctx.font=(on?'bold ':'')+'15px "Noto Serif TC"';
+    ctx.fillText(valStr(a,e), cx2, y);
+    if(i>0){
+      ctx.fillStyle='#a6d6a0'; ctx.font='14px "Caveat"';
+      ctx.fillText(`÷${a}`, cx3, y-2);
+      ctx.strokeStyle='rgba(166,214,160,.5)'; ctx.lineWidth=1.2;
+      ctx.beginPath(); ctx.moveTo(cx3, y-rh+6); ctx.lineTo(cx3, y-14); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx3, y-14); ctx.lineTo(cx3-3.5, y-19); ctx.moveTo(cx3, y-14); ctx.lineTo(cx3+3.5, y-19); ctx.stroke();
+    }
+  });
+  const e=rows[st.focus];
+  const note = e>0 ? '一般的正整數次方' :
+    (e===0 ? '⭐ 零次方 —— 從上面一路 ÷'+a+' 走下來，必然是 1' :
+     '⭐ 負指數 —— 繼續 ÷'+a+' 走下去，就變成分數（但仍是正數！）');
+  ctx.fillStyle='rgba(242,217,121,.8)'; ctx.font='13px "Noto Sans TC"';
+  ctx.fillText(note, w/2, y0+rows.length*rh+6);
+  ro.innerHTML = `<b>${a}${sup(e)} = ${valStr(a,e)}</b>　｜　${note}`
+    + (e<0 ? `　<span style="color:var(--pink)">${a}${sup(e)} = 1/${a}${sup(-e)}</span>` : '');
+}
+
+function drawLaws(st, ctx, w, h, ro){
+  const L=LAWS[st.li], {a,m,n}=st;
+  const [lhs, rhs, lval, rval] = L.ex(a,m,n);
+  ctx.textAlign='center';
+  ctx.fillStyle='#f2d979'; ctx.font='bold 16px "Noto Sans TC"';
+  ctx.fillText(`${L.n}　${L.f}`, w/2, 22);
+  ctx.fillStyle='rgba(243,239,226,.55)'; ctx.font='13px "Noto Sans TC"';
+  ctx.fillText(L.how, w/2, 42);
+  ctx.fillStyle='#98c9dc'; ctx.font='bold 25px "Noto Serif TC"';
+  ctx.fillText(lhs, w*0.28, 82);
+  ctx.fillStyle='rgba(243,239,226,.7)'; ctx.font='22px "Noto Serif TC"';
+  ctx.fillText('=', w*0.50, 82);
+  ctx.fillStyle='#a6d6a0'; ctx.font='bold 25px "Noto Serif TC"';
+  ctx.fillText(rhs, w*0.72, 82);
+  ctx.strokeStyle='rgba(243,239,226,.18)'; ctx.lineWidth=1;
+  ctx.beginPath(); ctx.moveTo(w*0.12, 100); ctx.lineTo(w*0.88, 100); ctx.stroke();
+  ctx.fillStyle='rgba(242,217,121,.85)'; ctx.font='bold 13px "Noto Sans TC"';
+  ctx.fillText('數值驗證', w/2, 120);
+  ctx.fillStyle='rgba(243,239,226,.8)'; ctx.font='16px "Noto Serif TC"';
+  if(lval) ctx.fillText(lval, w*0.28, 146);
+  ctx.fillStyle='rgba(243,239,226,.7)'; ctx.font='15px "Noto Serif TC"';
+  ctx.fillText('=', w*0.50, 146);
+  ctx.fillStyle='#a6d6a0'; ctx.font='bold 16px "Noto Serif TC"';
+  ctx.fillText(rval, w*0.72, 146);
+  ctx.fillStyle='#a6d6a0'; ctx.font='bold 15px "Noto Sans TC"';
+  ctx.fillText('✓ 兩邊相等 —— 指數律成立', w/2, 174);
+  const p=['a','m','n'];
+  ro.innerHTML = `<b>${L.n}</b>　${L.f}　｜　代入 <b>${lhs} = ${rhs}</b>　｜　驗證：${lval?lval+' = ':''}<b>${rval}</b> ✓`;
+}
+
+function drawTrap(st, ctx, w, h, ro){
+  const {a,m,n}=st;
+  const addN=m+n, mulN=m*n;
+  ctx.textAlign='center';
+  ctx.fillStyle='rgba(242,217,121,.85)'; ctx.font='bold 13px "Noto Sans TC"';
+  ctx.fillText(`一個點 ● 代表一個 ${a}　——　數點點，就知道指數該加還是該乘`, w/2, 16);
+  const half=w/2, R=4.2, gap=13;
+  const panel=(cx, title, cnt, groups, col, val, sub)=>{
+    ctx.fillStyle=col; ctx.font='bold 17px "Noto Serif TC"';
+    ctx.fillText(title, cx, 42);
+    ctx.fillStyle='rgba(243,239,226,.55)'; ctx.font='12px "Noto Sans TC"';
+    ctx.fillText(sub, cx, 60);
+    // 點陣：依 groups 分組畫
+    let gy=80;
+    const perRow=Math.min(10, Math.max(...groups.map(g=>g)));
+    let idx=0;
+    groups.forEach((g,gi)=>{
+      const tw=(g-1)*gap;
+      const sx=cx-tw/2;
+      // 群組底框
+      ctx.fillStyle='rgba(243,239,226,.05)';
+      ctx.strokeStyle=col.replace(')',',.35)').replace('rgb','rgba').replace('#','');
+      ctx.beginPath(); ctx.roundRect(sx-9, gy-9, tw+18, 18, 5);
+      ctx.fillStyle='rgba(243,239,226,.06)'; ctx.fill();
+      ctx.strokeStyle='rgba(243,239,226,.2)'; ctx.lineWidth=1; ctx.stroke();
+      for(let i=0;i<g;i++){
+        ctx.beginPath(); ctx.arc(sx+i*gap, gy, R, 0, 7);
+        ctx.fillStyle=col; ctx.fill(); idx++;
+      }
+      gy+=22;
+    });
+    ctx.fillStyle='rgba(243,239,226,.75)'; ctx.font='13px "Noto Sans TC"';
+    ctx.fillText(`共 ${cnt} 個 ${a}`, cx, gy+6);
+    ctx.fillStyle=col; ctx.font='bold 18px "Noto Serif TC"';
+    ctx.fillText(val, cx, gy+30);
+  };
+  panel(half*0.5, `${a}${sup(m)} × ${a}${sup(n)}`, addN, [m,n], '#98c9dc',
+        `= ${a}${sup(addN)} = ${pw(a,addN)}`, `兩塊並排 → 指數相「加」 ${m}+${n}=${addN}`);
+  const gs=[]; for(let i=0;i<n;i++) gs.push(m);
+  panel(half*1.5, `(${a}${sup(m)})${sup(n)}`, mulN, gs, '#eda0a8',
+        `= ${a}${sup(mulN)} = ${pw(a,mulN)}`, `${n} 組，每組 ${m} 個 → 指數相「乘」 ${m}×${n}=${mulN}`);
+  ctx.strokeStyle='rgba(243,239,226,.16)'; ctx.lineWidth=1;
+  ctx.beginPath(); ctx.moveTo(half, 34); ctx.lineTo(half, h-24); ctx.stroke();
+  const same = addN===mulN;
+  ctx.fillStyle= same?'#f2d979':'#eda0a8'; ctx.font='bold 14px "Noto Sans TC"';
+  ctx.fillText(same ? `⚠️ 這組剛好 ${addN}=${mulN}，是巧合！換個 m、n 就不同了`
+                    : `${pw(a,addN)} ≠ ${pw(a,mulN)} —— 差很多！`, w/2, h-8);
+  ro.innerHTML = `<b>${a}${sup(m)} × ${a}${sup(n)} = ${a}${sup(addN)} = ${pw(a,addN)}</b>（指數相<span style="color:var(--blue)">加</span> ${m}+${n}=${addN}）`
+    + `　｜　<b>(${a}${sup(m)})${sup(n)} = ${a}${sup(mulN)} = ${pw(a,mulN)}</b>（指數相<span style="color:var(--pink)">乘</span> ${m}×${n}=${mulN}）`
+    + (same ? '　<span style="color:var(--yellow)">⚠️ 這組剛好相等，是巧合</span>' : '');
+}
+
+function draw(si){
+  const st=VIZ[si]; if(!st) return;
+  const {cv,ctx,kind}=st, w=cv.width/DPR, h=cv.height/DPR;
+  ctx.clearRect(0,0,w,h);
+  const ro=document.getElementById('ro-'+si);
+  if(kind==='ladder') drawLadder(st,ctx,w,h,ro);
+  else if(kind==='laws') drawLaws(st,ctx,w,h,ro);
+  else if(kind==='trap') drawTrap(st,ctx,w,h,ro);
+}
+
+document.addEventListener('click', e=>{
+  const btn=e.target.closest('[data-t]'); if(!btn) return;
+  const si=+btn.dataset.si, st=VIZ[si]; if(!st) return;
+  const t=btn.dataset.t;
+  if(t==='base') st.bi=(st.bi+1)%BASES.length;
+  if(t==='down') st.focus=Math.min(6, st.focus+1);
+  if(t==='up')   st.focus=Math.max(0, st.focus-1);
+  if(t==='law')  st.li=(st.li+1)%LAWS.length;
+  if(t==='am')   st.a = st.a>=5 ? 2 : st.a+1;
+  if(t==='mm')   st.m = st.m>=(st.kind==='trap'?4:5) ? 1 : st.m+1;
+  if(t==='nn')   st.n = st.n>=(st.kind==='trap'?4:4) ? 1 : st.n+1;
+  // 除法律要 m>n 才不會出現負指數的怪值
+  if(st.kind==='laws' && st.li===1 && st.m<=st.n) st.m=st.n+1;
+  draw(si);
+});
+
+function resizeAll(){
+  DPR = Math.min(2, window.devicePixelRatio||1);
+  document.querySelectorAll('canvas.viz').forEach(cv=>{
+    const w = cv.clientWidth || cv.parentElement.clientWidth;
+    const h = (cv.dataset.viz==='ladder') ? 240 : (cv.dataset.viz==='trap' ? 214 : 196);
+    cv.width=w*DPR; cv.height=h*DPR; cv.style.height=h+'px';
+    cv.getContext('2d').setTransform(DPR,0,0,DPR,0,0);
+  });
+  Object.keys(VIZ).forEach(k=>draw(+k));
+}
+document.querySelectorAll('canvas.viz').forEach(initViz);
+window.addEventListener('resize', resizeAll);
+resizeAll();
+</script>
+<div class="hint">← → 鍵可翻頁　·　Canvas 用按鈕互動　·　支援平板觸控</div>
+</body></html>

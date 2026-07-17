@@ -1,0 +1,836 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>七上 2-2 最大公因數、最小公倍數｜互動教學平台</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;--wood:#6b4a32;}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);overscroll-behavior:none;}
+.topbar{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:10px 16px;background:linear-gradient(180deg,#1b2f21,#132218);border-bottom:2px solid var(--wood);box-shadow:0 4px 18px rgba(0,0,0,0.5);}
+.brand{font-family:'Noto Serif TC',serif;font-weight:900;font-size:clamp(15px,2.2vw,20px);color:var(--yellow);white-space:nowrap;}
+.brand small{display:block;font-family:'Caveat',cursive;font-size:14px;color:var(--soft);font-weight:400;}
+.spacer{flex:1;}
+.btn{background:rgba(243,239,226,0.08);border:1.5px solid rgba(243,239,226,0.28);color:var(--chalk);
+  border-radius:10px;padding:7px 13px;font-family:inherit;font-size:14px;cursor:pointer;white-space:nowrap;transition:.15s;}
+.btn:hover{background:rgba(243,239,226,0.16);}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:10px 16px 0;scrollbar-width:none;}
+.tabs::-webkit-scrollbar{display:none;}
+.tab{background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.2);border-bottom:none;
+  color:var(--soft);border-radius:10px 10px 0 0;padding:9px 15px;font-size:14px;cursor:pointer;white-space:nowrap;font-family:inherit;}
+.tab.on{background:var(--board);border-color:var(--yellow);color:var(--yellow);font-weight:700;}
+.tab .n{font-family:'Caveat',cursive;font-size:18px;margin-right:5px;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px 60px;}
+.panel{display:none;}.panel.on{display:block;}
+.card{background:radial-gradient(ellipse at 20% 10%,rgba(255,255,255,0.05),transparent 45%),
+   linear-gradient(160deg,var(--board),var(--board2));
+  border:1.5px solid rgba(242,217,121,0.16);border-radius:14px;padding:18px;margin-bottom:16px;
+  box-shadow:0 8px 26px rgba(0,0,0,0.45);position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 38px,rgba(255,255,255,0.012) 38px,rgba(255,255,255,0.012) 39px);}
+.card>*{position:relative;}
+.card h3{font-family:'Noto Serif TC',serif;font-size:clamp(17px,2.4vw,21px);color:var(--yellow);
+  margin-bottom:12px;padding-bottom:8px;border-bottom:2px dashed rgba(242,217,121,0.35);display:flex;align-items:center;gap:8px;}
+.card h3 .ic{font-size:20px;}
+.goals{display:flex;flex-wrap:wrap;gap:9px;}
+.goal{display:flex;align-items:center;gap:9px;background:rgba(242,217,121,0.07);
+  border:1.5px dashed rgba(242,217,121,0.4);border-radius:22px;padding:8px 15px 8px 8px;
+  font-size:clamp(13.5px,1.8vw,15px);color:var(--yellow);line-height:1.5;}
+.goal .bdg{width:24px;height:24px;border-radius:50%;background:var(--yellow);color:#16281c;
+  font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;flex:none;}
+.deck{position:relative;background:rgba(0,0,0,0.22);border-radius:12px;padding:clamp(16px,3vw,30px);
+  min-height:clamp(260px,42vh,380px);display:flex;flex-direction:column;justify-content:center;}
+.sl{display:none;animation:fade .25s;}.sl.on{display:block;}
+@keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+.sl .eyebrow{font-family:'Caveat',cursive;font-size:20px;color:var(--yellow);margin-bottom:6px;}
+.sl h4{font-family:'Noto Serif TC',serif;font-size:clamp(19px,3vw,27px);margin-bottom:12px;line-height:1.35;}
+.sl p{font-size:clamp(15px,2vw,18px);line-height:1.8;margin-bottom:9px;}
+.sl ul{list-style:none;}
+.sl li{font-size:clamp(15px,2vw,18px);line-height:1.85;padding-left:26px;position:relative;margin-bottom:4px;}
+.sl li::before{content:'✦';position:absolute;left:2px;color:var(--yellow);font-size:14px;top:3px;}
+.nav{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:14px;}
+.nav .pg{font-family:'Caveat',cursive;font-size:20px;color:var(--soft);min-width:64px;text-align:center;}
+.dots{display:flex;gap:6px;justify-content:center;margin-top:10px;flex-wrap:wrap;}
+.dot{width:9px;height:9px;border-radius:50%;background:rgba(243,239,226,0.25);cursor:pointer;border:none;padding:0;}
+.dot.on{background:var(--yellow);transform:scale(1.3);}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.32);border-radius:10px;
+  padding:11px 15px;margin:9px 0;font-size:clamp(14px,1.9vw,17px);line-height:1.7;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.36);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.36);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.32);}
+.two{display:flex;gap:12px;flex-wrap:wrap;}.two>*{flex:1;min-width:220px;}
+.teach{background:rgba(201,174,224,0.12);border:1.5px dashed rgba(201,174,224,0.5);
+  border-radius:10px;padding:11px 15px;margin:9px 0;font-size:clamp(14px,1.8vw,15px);line-height:1.7;}
+.teach b{color:var(--purple);}
+.tbl{width:100%;border-collapse:collapse;margin:9px 0;font-size:clamp(13.5px,1.8vw,16px);}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.24);padding:8px 11px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.cv-wrap{background:rgba(0,0,0,0.25);border-radius:12px;padding:10px;}
+canvas.viz{width:100%;display:block;border-radius:8px;touch-action:none;}
+.ctrl{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center;}
+.readout{font-family:'Noto Serif TC',serif;font-size:clamp(14px,1.9vw,18px);color:var(--chalk);
+  background:rgba(242,217,121,0.1);border:1px solid rgba(242,217,121,0.3);border-radius:8px;
+  padding:7px 12px;flex:1;min-width:220px;}
+.readout b{color:var(--yellow);}
+.q{background:rgba(0,0,0,0.2);border:1px solid rgba(242,217,121,0.18);border-radius:10px;padding:13px 15px;margin:10px 0;}
+.q .qt{font-size:clamp(15px,2vw,17px);margin-bottom:10px;line-height:1.7;}
+.q .qt .qn{font-family:'Caveat',cursive;color:var(--yellow);font-size:20px;margin-right:6px;}
+.opts{display:flex;flex-direction:column;gap:7px;}
+.opt{text-align:left;background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.22);
+  color:var(--chalk);border-radius:9px;padding:9px 13px;font-family:inherit;font-size:15px;cursor:pointer;transition:.15s;line-height:1.5;}
+.opt:hover:not(:disabled){background:rgba(243,239,226,0.13);}
+.opt.right{background:rgba(166,214,160,0.24);border-color:var(--green);color:#fff;font-weight:700;}
+.opt.wrong{background:rgba(237,160,168,0.22);border-color:var(--pink);}
+.opt:disabled{cursor:default;}
+.fb{display:none;margin-top:9px;padding:9px 13px;border-radius:8px;font-size:14.5px;line-height:1.65;}
+.fb.on{display:block;}
+.fb.ok{background:rgba(166,214,160,0.14);border-left:3px solid var(--green);}
+.fb.no{background:rgba(237,160,168,0.14);border-left:3px solid var(--pink);}
+.fill{display:inline-block;background:rgba(0,0,0,0.3);border:none;border-bottom:2px solid var(--yellow);
+  color:var(--yellow);font-family:'Noto Serif TC',serif;font-size:17px;width:110px;text-align:center;padding:3px 5px;margin:0 4px;}
+.fill:focus{outline:none;background:rgba(242,217,121,0.12);}
+.exq{background:rgba(0,0,0,0.26);border:1.5px solid rgba(242,217,121,0.28);border-radius:11px;padding:13px 15px;margin:10px 0;position:relative;}
+.exq::before{content:'';position:absolute;top:-8px;left:32px;width:54px;height:14px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.exq .exq-q{font-size:clamp(14.5px,1.9vw,17px);line-height:1.75;margin-bottom:11px;}
+.exo{text-align:left;background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.22);
+  color:var(--chalk);border-radius:9px;padding:9px 13px;font-family:inherit;font-size:clamp(14px,1.8vw,15.5px);
+  cursor:pointer;transition:.15s;line-height:1.55;width:100%;margin-bottom:6px;display:block;}
+.exo:hover:not(:disabled){background:rgba(243,239,226,0.13);}
+.exo.right{background:rgba(166,214,160,0.26);border-color:var(--green);color:#fff;font-weight:700;}
+.exo.wrong{background:rgba(237,160,168,0.2);border-color:var(--pink);opacity:.75;}
+.exo:disabled{cursor:default;}
+@keyframes shake{10%,90%{transform:translateX(-2px);}30%,70%{transform:translateX(4px);}50%{transform:translateX(-4px);}}
+.exo.shake{animation:shake .4s;}
+.exsol{display:none;margin-top:10px;padding:11px 14px;border-radius:9px;
+  background:rgba(166,214,160,0.13);border-left:3px solid var(--green);font-size:clamp(14px,1.8vw,15.5px);line-height:1.75;}
+.exsol.on{display:block;animation:fade .3s;}
+.exsol .st{color:var(--soft);margin:3px 0;}
+.exsol .an{color:var(--green);font-weight:700;margin-top:6px;}
+.exlock{display:flex;align-items:center;gap:7px;margin-top:9px;font-size:13.5px;color:rgba(243,239,226,0.45);}
+.exlock.hide{display:none;}
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:11px;}
+.icard{background:rgba(0,0,0,0.22);border:1.5px solid rgba(242,217,121,0.22);border-radius:11px;padding:14px;text-align:center;}
+.icard .big{font-family:'Noto Serif TC',serif;font-size:clamp(17px,2.6vw,23px);font-weight:900;margin:6px 0;}
+.icard .cap{font-size:13.5px;color:var(--soft);line-height:1.6;}
+.frow{display:flex;gap:12px;align-items:center;padding:9px 12px;border-bottom:1px dashed rgba(243,239,226,0.16);}
+.frow:last-child{border-bottom:none;}
+.flab{color:var(--blue);font-weight:700;min-width:150px;font-size:clamp(13.5px,1.8vw,15.5px);flex:none;}
+.fval{color:var(--yellow);font-weight:700;font-family:'Noto Serif TC',serif;font-size:clamp(14px,1.9vw,17px);}
+@media(max-width:560px){.frow{flex-direction:column;align-items:flex-start;gap:3px;}.flab{min-width:0;}}
+.hud{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:12px;}
+.hud .st{background:rgba(0,0,0,0.3);border:1.5px solid rgba(242,217,121,0.28);border-radius:9px;
+  padding:7px 13px;font-size:14px;flex:1;min-width:88px;text-align:center;}
+.hud .st b{display:block;font-family:'Noto Serif TC',serif;font-size:20px;color:var(--yellow);}
+.tbar{height:8px;background:rgba(0,0,0,0.35);border-radius:5px;overflow:hidden;margin-bottom:12px;}
+.tfill{height:100%;background:linear-gradient(90deg,var(--green),var(--yellow),var(--pink));width:100%;transition:width .1s linear;}
+.gscreen{display:none;}.gscreen.on{display:block;}
+.lvchips{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin:14px 0;}
+.lvchip{background:rgba(152,201,220,0.12);border:1.5px solid rgba(152,201,220,0.35);border-radius:18px;
+  padding:6px 13px;font-size:13.5px;color:var(--blue);}
+.lvchip.done{background:rgba(166,214,160,0.2);border-color:var(--green);color:var(--green);}
+.lvchip.now{background:rgba(242,217,121,0.22);border-color:var(--yellow);color:var(--yellow);font-weight:700;}
+.gq{font-size:clamp(16px,2.2vw,20px);line-height:1.7;margin:14px 0;text-align:center;font-family:'Noto Serif TC',serif;}
+.gopts{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+@media(max-width:560px){.gopts{grid-template-columns:1fr;}}
+.gopt{background:rgba(243,239,226,0.07);border:1.5px solid rgba(243,239,226,0.25);color:var(--chalk);
+  border-radius:10px;padding:12px;font-family:'Noto Serif TC',serif;font-size:17px;cursor:pointer;transition:.15s;min-height:48px;}
+.gopt:hover:not(:disabled){background:rgba(243,239,226,0.15);}
+.gopt.right{background:rgba(166,214,160,0.3);border-color:var(--green);font-weight:900;}
+.gopt.wrong{background:rgba(237,160,168,0.25);border-color:var(--pink);}
+.gfb{margin-top:11px;padding:10px 13px;border-radius:8px;font-size:14.5px;line-height:1.6;display:none;}
+.gfb.on{display:block;}
+.gfb.ok{background:rgba(166,214,160,0.15);border-left:3px solid var(--green);}
+.gfb.no{background:rgba(237,160,168,0.15);border-left:3px solid var(--pink);}
+.rank{font-size:54px;text-align:center;margin:10px 0;}
+.hint{text-align:center;color:rgba(243,239,226,0.35);font-size:12.5px;padding:8px 0 0;}
+@media (max-width:640px){.topbar{padding:8px 10px;gap:8px;}.wrap{padding:0 10px 70px;}.card{padding:13px;}}
+</style></head><body>
+
+<div class="topbar">
+  <div class="brand">2-2　最大公因數、最小公倍數<small>七上 · 第2章 分數運算</small></div>
+  <div class="spacer"></div>
+</div>
+
+<div class="tabs" id="tabs">
+  <button class="tab on" data-p="0"><span class="n">①</span>公因數與最大公因數</button>
+  <button class="tab" data-p="1"><span class="n">②</span>公倍數與最小公倍數</button>
+  <button class="tab" data-p="2"><span class="n">★</span>題型測驗</button>
+  <button class="tab" data-p="3"><span class="n">🎮</span>闖關遊戲</button>
+</div>
+
+<div class="wrap">
+  <div class="card" id="goalCard">
+    <h3><span class="ic">🎯</span>本節學習目標</h3>
+    <div class="goals" id="goals"></div>
+  </div>
+  <div id="wrap"></div>
+</div>
+
+<script>
+const GOALS = [
+  '理解公因數／公倍數的意義',
+  '用質因數分解求 GCD：公共取小',
+  '用質因數分解求 LCM：全部取大',
+  '理解並驗證 GCD × LCM = a × b（僅兩數）',
+  '知道 GCD = 1 就是互質，此時 LCM = a × b',
+  '判斷應用題該用 GCD 還是 LCM',
+];
+document.getElementById('goals').innerHTML = GOALS.map((g,i)=>
+  `<div class="goal"><div class="bdg">${i+1}</div>${g}</div>`).join('');
+
+const DATA = [
+{ key:'gcd', viz:'gcd', vizTitle:'互動 GCD —— 調 a、b，看質因數表如何「公共取小」',
+  slides:[
+    {eb:'核心 ①', h:'公因數與最大公因數', html:`
+      <div class="box y"><span class="hl">公因數</span>：同時是 a 和 b 的因數<br>
+        <span class="hl">最大公因數（GCD）</span>：所有公因數中<b>最大</b>的那個</div>
+      <div class="two">
+        <div class="box">12 的因數<br><span class="fm">1, <span class="hl-g">2</span>, <span class="hl-g">3</span>, 4, <span class="hl-g">6</span>, 12</span></div>
+        <div class="box">18 的因數<br><span class="fm">1, <span class="hl-g">2</span>, <span class="hl-g">3</span>, <span class="hl-g">6</span>, 9, 18</span></div>
+      </div>
+      <div class="box g" style="text-align:center;">公因數：<span class="fm hl-g">1, 2, 3, 6</span> → <span class="hl">GCD(12,18) = 6</span></div>`},
+    {eb:'核心 ①', h:'質因數分解法：公共取小', html:`
+      <div class="box y" style="text-align:center;">取<span class="hl">共同</span>的質因數，各取<span class="hl">最小</span>指數，相乘</div>
+      <table class="tbl">
+        <tr><th>　</th><th>2</th><th>3</th></tr>
+        <tr><td class="fm">36 = 2²×3²</td><td class="fm hl-g">2²</td><td class="fm">3²</td></tr>
+        <tr><td class="fm">48 = 2⁴×3¹</td><td class="fm">2⁴</td><td class="fm hl-g">3¹</td></tr>
+        <tr><td class="hl">取小</td><td class="fm hl">2²</td><td class="fm hl">3¹</td></tr>
+      </table>
+      <div class="box g" style="text-align:center;"><span class="fm">GCD = 2²×3 = <span class="hl-g">12</span></span></div>
+      <div class="teach"><b>動手試：</b>用下方<b>互動 GCD</b> 改 a、b，看表格怎麼「取小」。</div>`},
+    {eb:'例題 1 ★☆☆', h:'求 GCD(36, 48)', html:`
+      <div class="exq" data-a="1">
+        <div class="exq-q"><span class="hl">Q</span>　<span class="fm">36 = 2²×3²、48 = 2⁴×3</span>，求 GCD(36, 48)</div>
+        <button class="exo" data-i="0">144</button>
+        <button class="exo" data-i="1">12</button>
+        <button class="exo" data-i="2">6</button>
+        <button class="exo" data-i="3">24</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">共同質因數：<b>2 和 3</b></div>
+          <div class="st fm">2 取小 → 2²（36 是 2²，48 是 2⁴，取小的 2²）</div>
+          <div class="st fm">3 取小 → 3¹（36 是 3²，48 是 3¹，取小的 3¹）</div>
+          <div class="st fm">GCD = 2² × 3 = 12</div>
+          <div class="st">(A) 144 是 <b>LCM</b>（全部取大），別搞反了！</div>
+          <div class="an">答：12</div>
+        </div>
+      </div>`},
+    {eb:'例題 2 ★★☆', h:'三個數的 GCD', html:`
+      <div class="exq" data-a="0">
+        <div class="exq-q"><span class="hl">Q</span>　求 GCD(72, 90, 120)<br>
+          <span class="fm" style="font-size:15px;">72 = 2³×3²　90 = 2×3²×5　120 = 2³×3×5</span></div>
+        <button class="exo" data-i="0">6</button>
+        <button class="exo" data-i="1">30</button>
+        <button class="exo" data-i="2">12</button>
+        <button class="exo" data-i="3">2</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">共同質因數：<b>只有 2 和 3</b> —— <span class="hl-r">5 不是 72 的因數！</span></div>
+          <div class="st fm">2 取最小 → 2¹（從 90 來）</div>
+          <div class="st fm">3 取最小 → 3¹（從 120 來）</div>
+          <div class="st fm">GCD = 2 × 3 = 6</div>
+          <div class="an">答：6</div>
+        </div>
+      </div>
+      <div class="teach"><b>關鍵：</b>質因數必須<b>每個數都有</b>才算共同。5 只出現在 90 和 120，不算！</div>`},
+    {eb:'應用', h:'什麼時候用 GCD？', html:`
+      <div class="box y" style="text-align:center;font-size:19px;">
+        <span class="hl">分組、分配、最多、最大、切割</span> → 用 <span class="hl-b">GCD</span></div>
+      <div class="box">要「共同的、<b>最大</b>的一份」時就是 GCD。</div>
+      <div class="box g"><b>例：</b>180cm × 120cm 地板鋪正方形磁磚（不切割），邊長最大？<br>
+        <span class="fm">GCD(180, 120) = 60 cm</span>；塊數 = (180÷60)×(120÷60) = <span class="hl-g">6 塊</span></div>
+      <div class="teach"><b>自我檢查：</b>「這題問的是<b>最多幾份</b>嗎？」是 → GCD。</div>`},
+    {eb:'例題 3 ★★★', h:'鋪磁磚', html:`
+      <div class="exq" data-a="2">
+        <div class="exq-q"><span class="hl">Q</span>　長 180cm、寬 120cm 的地板，鋪滿正方形磁磚（不切割、不重疊），邊長<b>最大</b>幾公分？</div>
+        <button class="exo" data-i="0">30 cm</button>
+        <button class="exo" data-i="1">360 cm</button>
+        <button class="exo" data-i="2">60 cm</button>
+        <button class="exo" data-i="3">20 cm</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">關鍵字「<b>最大、不切割</b>」→ 用 <b>GCD</b></div>
+          <div class="st fm">180 = 2²×3²×5　；　120 = 2³×3×5</div>
+          <div class="st fm">GCD = 2²×3×5 = 60 cm</div>
+          <div class="st fm">塊數 = (180÷60)×(120÷60) = 3×2 = 6 塊</div>
+          <div class="an">答：60 cm，共 6 塊</div>
+        </div>
+      </div>`}
+  ],
+  fa:[
+    {q:'求 <span class="fm">GCD(24, 40)</span>', o:['4','8','120','2'], a:1, e:'24=2³×3、40=2³×5；共同只有 2，取小 → 2³ = 8。'},
+    {q:'<span class="fm">GCD(2³×3²×5, 2²×3×5²)</span> = ?', o:['60','1800','30','360'], a:0, e:'公共取小：2²×3¹×5¹ = 4×3×5 = 60。'},
+    {q:'GCD 的規則是？', o:['共同質因數取最小指數','所有質因數取最大指數','所有質因數取最小指數','共同質因數取最大指數'], a:0, e:'GCD 公共取小 —— 只取共同的，指數取最小。'}
+  ],
+  info:[
+    {big:'公共取小', cap:'只取共同質因數<br>指數取最小', c:'var(--blue)'},
+    {big:'GCD(36,48)=12', cap:'2²×3', c:'var(--yellow)'},
+    {big:'分組/最多', cap:'應用題關鍵字<br>→ 用 GCD', c:'var(--green)'}
+  ]
+},
+{ key:'lcm', viz:'lcm', vizTitle:'互動 LCM —— 調 a、b，看質因數表如何「全部取大」並驗證性質',
+  slides:[
+    {eb:'核心 ②', h:'公倍數與最小公倍數', html:`
+      <div class="box y"><span class="hl">公倍數</span>：同時是 a 和 b 的倍數<br>
+        <span class="hl">最小公倍數（LCM）</span>：所有公倍數中<b>最小</b>的那個（不含 0）</div>
+      <div class="box">4 的倍數：4, 8, <span class="hl-g">12</span>, 16, 20, <span class="hl-g">24</span>, …</div>
+      <div class="box">6 的倍數：6, <span class="hl-g">12</span>, 18, <span class="hl-g">24</span>, …</div>
+      <div class="box g" style="text-align:center;">公倍數：<span class="fm hl-g">12, 24, 36…</span>（無限多）→ <span class="hl">LCM(4,6) = 12</span></div>`},
+    {eb:'核心 ②', h:'質因數分解法：全部取大', html:`
+      <div class="box y" style="text-align:center;">取<span class="hl">所有出現過</span>的質因數，各取<span class="hl">最大</span>指數，相乘</div>
+      <table class="tbl">
+        <tr><th>　</th><th>2</th><th>3</th></tr>
+        <tr><td class="fm">36 = 2²×3²</td><td class="fm">2²</td><td class="fm hl-g">3²</td></tr>
+        <tr><td class="fm">48 = 2⁴×3¹</td><td class="fm hl-g">2⁴</td><td class="fm">3¹</td></tr>
+        <tr><td class="hl">取大</td><td class="fm hl">2⁴</td><td class="fm hl">3²</td></tr>
+      </table>
+      <div class="box g" style="text-align:center;"><span class="fm">LCM = 2⁴×3² = 16×9 = <span class="hl-g">144</span></span></div>
+      <div class="teach"><b>動手試：</b>用下方<b>互動 LCM</b> 看表格怎麼「取大」，還會自動驗證 GCD×LCM = a×b。</div>`},
+    {eb:'核心口訣', h:'一張表分清 GCD 與 LCM', html:`
+      <table class="tbl">
+        <tr><th>　</th><th>質因數</th><th>指數</th></tr>
+        <tr><td class="hl-b" style="font-size:20px;">GCD</td><td>只取<span class="hl-b">共同</span>的</td><td>取<span class="hl-b">最小</span></td></tr>
+        <tr><td class="hl-g" style="font-size:20px;">LCM</td><td>取<span class="hl-g">全部</span>出現過的</td><td>取<span class="hl-g">最大</span></td></tr>
+      </table>
+      <div class="box y" style="text-align:center;font-family:'Caveat',cursive;font-size:22px;">
+        GCD → 公共取小　　LCM → 全部取大</div>
+      <div class="teach"><b>怎麼記不會反：</b>因數會<b>變小</b>（12 的因數 ≤ 12）、倍數會<b>變大</b>（12 的倍數 ≥ 12）。</div>`},
+    {eb:'重要性質', h:'GCD × LCM = a × b', html:`
+      <div class="box y" style="text-align:center;font-size:24px;padding:16px;">
+        <span class="fm"><span class="hl">GCD(a,b) × LCM(a,b) = a × b</span></span></div>
+      <div class="box r" style="text-align:center;">⚠️ <span class="hl-r">只對「兩個數」成立</span> —— 三個數不能亂套！</div>
+      <div class="box g">驗證（36, 48）：<span class="fm">12 × 144 = 1728</span>；<span class="fm">36 × 48 = 1728</span> ✓</div>
+      <div class="box"><span class="hl">互質</span>：GCD = 1 → <span class="fm">LCM = a × b</span>。例：GCD(4,9)=1 → LCM = 36 = 4×9</div>`},
+    {eb:'例題 4 ★★☆', h:'用性質反推', html:`
+      <div class="exq" data-a="2">
+        <div class="exq-q"><span class="hl">Q</span>　已知 GCD(a,b) = 6、LCM(a,b) = 180、a = 12，求 b</div>
+        <button class="exo" data-i="0">15</button>
+        <button class="exo" data-i="1">30</button>
+        <button class="exo" data-i="2">90</button>
+        <button class="exo" data-i="3">180</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st fm">性質：GCD × LCM = a × b</div>
+          <div class="st fm">6 × 180 = 12 × b → 1080 = 12b</div>
+          <div class="st fm">b = 1080 ÷ 12 = 90</div>
+          <div class="st">驗算：12 = 2²×3、90 = 2×3²×5 → GCD = 2×3 = 6 ✓；LCM = 2²×3²×5 = 180 ✓</div>
+          <div class="an">答：b = 90</div>
+        </div>
+      </div>`},
+    {eb:'應用', h:'什麼時候用 LCM？', html:`
+      <div class="box y" style="text-align:center;font-size:19px;">
+        <span class="hl">週期、重合、最少、下一次、同時</span> → 用 <span class="hl-g">LCM</span></div>
+      <div class="box">要「共同的、<b>最小</b>的時刻」時就是 LCM。</div>
+      <div class="box g"><b>例：</b>A 線每 24 分、B 線每 36 分出貨，8:00 同時開始，第一次同時出貨？<br>
+        <span class="fm">LCM(24, 36) = 72 分</span> → 8:00 + 72分 = <span class="hl-g">9:12</span></div>
+      <div class="teach"><b>自我檢查：</b>「這題問的是<b>最少等多久</b>嗎？」是 → LCM。</div>`},
+    {eb:'例題 5 ★★★', h:'生產線同步', html:`
+      <div class="exq" data-a="1">
+        <div class="exq-q"><span class="hl">Q</span>　A 線每 24 分鐘出貨、B 線每 36 分鐘出貨。上午 8:00 同時開始，第一次「兩線同時出貨」是幾點？</div>
+        <button class="exo" data-i="0">8:36</button>
+        <button class="exo" data-i="1">9:12</button>
+        <button class="exo" data-i="2">10:00</button>
+        <button class="exo" data-i="3">8:12</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">關鍵字「<b>同時、第一次</b>」→ 用 <b>LCM</b></div>
+          <div class="st fm">24 = 2³×3　；　36 = 2²×3²</div>
+          <div class="st fm">LCM = 2³×3² = 8×9 = 72 分鐘</div>
+          <div class="st fm">8:00 + 72 分 = 8:00 + 1小時12分 = 9:12</div>
+          <div class="an">答：9 時 12 分</div>
+        </div>
+      </div>`},
+    {eb:'挑戰 ★★★', h:'兩數和 70、GCD = 10', html:`
+      <div class="exq" data-a="0">
+        <div class="exq-q"><span class="hl">Q</span>　兩數之和為 70、GCD = 10，這兩個數的組合共有幾種？</div>
+        <button class="exo" data-i="0">3 種</button>
+        <button class="exo" data-i="1">2 種</button>
+        <button class="exo" data-i="2">6 種</button>
+        <button class="exo" data-i="3">7 種</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st fm">設兩數 = 10m、10n → 10m + 10n = 70 → m + n = 7</div>
+          <div class="st">且 m、n 必須<b>互質</b>（否則 GCD 會大於 10）</div>
+          <div class="st fm">m+n=7 且互質：(1,6)、(2,5)、(3,4) → 共 3 種</div>
+          <div class="st fm">兩數：(10,60)、(20,50)、(30,40)</div>
+          <div class="an">答：3 種</div>
+        </div>
+      </div>
+      <div class="teach"><b>通用技巧：</b>把 GCD <b>提出來</b>之後，剩下的兩數<b>一定互質</b>。</div>`}
+  ],
+  fa:[
+    {q:'求 <span class="fm">LCM(12, 18)</span>', o:['6','36','216','72'], a:1, e:'12=2²×3、18=2×3²；全部取大 → 2²×3² = 36。'},
+    {q:'三燈帶每 12、15、20 秒閃一次，最少幾秒再同時閃？', o:['30 秒','47 秒','60 秒','3600 秒'], a:2, e:'「同時、最少」→ LCM(12,15,20)=2²×3×5=60 秒。'},
+    {q:'GCD(a,b)=1 時，LCM(a,b) = ?', o:['1','a+b','a×b','a−b'], a:2, e:'由 GCD×LCM = a×b → 1×LCM = a×b → LCM = a×b（互質）。'}
+  ],
+  info:[
+    {big:'全部取大', cap:'所有質因數<br>指數取最大', c:'var(--green)'},
+    {big:'GCD×LCM=a×b', cap:'僅兩數成立', c:'var(--yellow)'},
+    {big:'週期/最少', cap:'應用題關鍵字<br>→ 用 LCM', c:'var(--pink)'}
+  ]
+}];
+
+const QUIZ = [
+  {type:'choice', q:'求 <span class="fm">GCD(24, 40)</span>', o:['4','8','120','2'], a:1, e:'24=2³×3、40=2³×5 → 公共取小 2³ = 8。'},
+  {type:'fill', q:'求 <span class="fm">LCM(12, 18)</span> = ', a:['36'], e:'12=2²×3、18=2×3² → 全部取大 2²×3² = 36。'},
+  {type:'choice', q:'<span class="fm">LCM(2³×3²×5, 2²×3×5²)</span> = ?', o:['60','1800','360','30'], a:1, e:'全部取大：2³×3²×5² = 8×9×25 = 1800。'},
+  {type:'choice', q:'求 <span class="fm">GCD(48, 72, 96)</span>', o:['12','24','8','48'], a:1, e:'48=2⁴×3、72=2³×3²、96=2⁵×3 → 2 取小 2³、3 取小 3¹ → 24。'},
+  {type:'tf', q:'判斷：「三個數也可以用 GCD×LCM = a×b×c。」', a:false, e:'錯。這個性質<b>只對兩個數</b>成立。'},
+  {type:'fill', q:'GCD=4、LCM=60、a=12，求 b = ', a:['20'], e:'4×60 = 12×b → 240 = 12b → b = 20。'},
+  {type:'choice', q:'繩 A 90cm、繩 B 150cm 剪成等長不浪費，最長每段幾 cm？', o:['15','30','450','10'], a:1, e:'「最長、不浪費」→ GCD(90,150)：90=2×3²×5、150=2×3×5² → 2×3×5 = 30。'},
+  {type:'choice', q:'A 每 8 天休假、B 每 12 天休假，今天同休，下次同休是幾天後？', o:['4 天','24 天','96 天','20 天'], a:1, e:'「下次同時」→ LCM(8,12) = 2³×3 = 24 天。'},
+  {type:'choice', q:'承上題，若今天是星期一，那天是星期幾？', o:['星期一','星期三','星期四','星期日'], a:2, e:'24÷7 = 3週餘3天；星期一+3天 = 星期四。'},
+  {type:'choice', q:'糖果180、餅乾120、貼紙90 平均分裝成最多袋，可分幾袋？', o:['10 袋','30 袋','60 袋','15 袋'], a:1, e:'「最多、平均分」→ GCD(180,120,90) = 2×3×5 = 30 袋。'}
+];
+
+const GAME = [
+  {name:'公因數概念', qs:[
+    {q:'12 和 18 的公因數有哪些？', o:['1,2,3,6','1,2,3,4,6','2,3,6','1,6'], a:0, e:'12的因數 1,2,3,4,6,12；18的因數 1,2,3,6,9,18 → 公因數 1,2,3,6。'},
+    {q:'GCD(12, 18) = ?', o:['3','6','36','2'], a:1, e:'公因數中最大的是 6。'},
+    {q:'公因數是什麼？', o:['同時是兩數的因數','同時是兩數的倍數','兩數相加','兩數相乘'], a:0, e:'同時是 a 和 b 的因數。'},
+    {q:'任何兩數的公因數一定有？', o:['0','1','2','它們的和'], a:1, e:'1 是所有數的因數，所以一定是公因數。'}
+  ]},
+  {name:'GCD 取小', qs:[
+    {q:'GCD(36, 48)？36=2²×3²、48=2⁴×3', o:['144','12','6','24'], a:1, e:'公共取小：2²×3¹ = 12。144 是 LCM！'},
+    {q:'GCD(24, 40)？', o:['8','4','120','2'], a:0, e:'24=2³×3、40=2³×5 → 共同只有 2，取小 2³ = 8。'},
+    {q:'GCD 的指數要取？', o:['最大','最小','相加','相乘'], a:1, e:'GCD 公共取小。'},
+    {q:'GCD(72,90,120)？5 算不算共同質因數？', o:['算，GCD=30','不算，GCD=6','算，GCD=10','不算，GCD=2'], a:1, e:'5 不是 72 的因數 → 不算共同。GCD = 2×3 = 6。'}
+  ]},
+  {name:'公倍數概念', qs:[
+    {q:'4 和 6 的最小公倍數？', o:['24','12','2','48'], a:1, e:'4的倍數 4,8,12…；6的倍數 6,12… → 最小公倍數 12。'},
+    {q:'公倍數有幾個？', o:['1 個','有限多個','無限多個','沒有'], a:2, e:'公倍數有無限多個，但最小的只有一個。'},
+    {q:'LCM 不含哪個數？', o:['0','1','本身','質數'], a:0, e:'LCM 不含 0（0 是任何數的倍數但無意義）。'},
+    {q:'12 最小的倍數是？', o:['1','6','12','24'], a:2, e:'最小的倍數是本身 → 12。'}
+  ]},
+  {name:'LCM 取大', qs:[
+    {q:'LCM(36, 48)？36=2²×3²、48=2⁴×3', o:['12','144','1728','72'], a:1, e:'全部取大：2⁴×3² = 16×9 = 144。'},
+    {q:'LCM(12, 18)？', o:['6','36','216','72'], a:1, e:'12=2²×3、18=2×3² → 2²×3² = 36。'},
+    {q:'LCM 的指數要取？', o:['最大','最小','相加','平均'], a:0, e:'LCM 全部取大。'},
+    {q:'LCM(12,15,20)？', o:['30','60','120','3600'], a:1, e:'12=2²×3、15=3×5、20=2²×5 → 2²×3×5 = 60。'}
+  ]},
+  {name:'重要性質', qs:[
+    {q:'GCD(a,b) × LCM(a,b) = ?', o:['a+b','a×b','a−b','a÷b'], a:1, e:'這是兩數的重要性質（僅兩數成立）。'},
+    {q:'GCD=6、LCM=180、a=12，b=？', o:['15','30','90','180'], a:2, e:'6×180 = 12×b → b = 90。'},
+    {q:'GCD(a,b)=1 代表？', o:['a=b','互質','a=1','b=1'], a:1, e:'GCD=1 就是互質，此時 LCM = a×b。'},
+    {q:'GCD×LCM=a×b 對三個數成立嗎？', o:['成立','不成立','有時成立','看情況'], a:1, e:'只對兩個數成立，三數不可亂套。'}
+  ]},
+  {name:'應用判斷', qs:[
+    {q:'「地板鋪最大正方形磁磚」用？', o:['GCD','LCM','兩者都要','都不用'], a:0, e:'最大、不切割 → GCD。'},
+    {q:'「兩生產線第一次同時出貨」用？', o:['GCD','LCM','兩者都要','都不用'], a:1, e:'同時、第一次 → LCM。'},
+    {q:'A每24分、B每36分出貨，8:00同開，第一次同時出貨？', o:['8:36','9:12','10:00','8:12'], a:1, e:'LCM(24,36)=72分 → 9:12。'},
+    {q:'180cm×120cm 鋪最大正方形磁磚，共幾塊？', o:['3 塊','6 塊','12 塊','60 塊'], a:1, e:'GCD=60cm；(180÷60)×(120÷60)=3×2=6 塊。'}
+  ]}
+];
+
+const wrap = document.getElementById('wrap');
+DATA.forEach((sec, si)=>{
+  const p = document.createElement('div');
+  p.className = 'panel' + (si===0?' on':'');
+  p.dataset.p = si;
+  p.innerHTML = `
+    <div class="card">
+      <h3><span class="ic">📽</span>簡報翻頁器</h3>
+      <div class="deck" data-deck="${si}">
+        ${sec.slides.map((s,i)=>`<div class="sl${i===0?' on':''}" data-i="${i}">
+          <div class="eyebrow">${s.eb}</div><h4>${s.h}</h4>${s.html}</div>`).join('')}
+      </div>
+      <div class="nav">
+        <button class="btn" data-nav="prev" data-s="${si}">◀ 上一張</button>
+        <span class="pg" id="pg-${si}">1 / ${sec.slides.length}</span>
+        <button class="btn" data-nav="next" data-s="${si}">下一張 ▶</button>
+      </div>
+      <div class="dots" id="dots-${si}">
+        ${sec.slides.map((_,i)=>`<button class="dot${i===0?' on':''}" data-s="${si}" data-i="${i}"></button>`).join('')}
+      </div>
+    </div>
+    <div class="card">
+      <h3><span class="ic">🎯</span>Canvas 互動視覺化<span style="font-size:14px;color:var(--soft);font-weight:400;">　${sec.vizTitle}</span></h3>
+      <div class="cv-wrap">
+        <canvas class="viz" data-viz="${sec.viz}" data-si="${si}"></canvas>
+        <div class="ctrl" data-ctrl="${si}"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3><span class="ic">✅</span>形成性評量</h3>
+      ${sec.fa.map((f,i)=>`<div class="q" data-fa="${si}-${i}">
+        <div class="qt"><span class="qn">Q${i+1}</span>${f.q}</div>
+        <div class="opts">${f.o.map((o,oi)=>`<button class="opt" data-si="${si}" data-qi="${i}" data-oi="${oi}">${o}</button>`).join('')}</div>
+        <div class="fb" id="fb-${si}-${i}"></div>
+      </div>`).join('')}
+    </div>
+    <div class="card">
+      <h3><span class="ic">📊</span>資訊圖表</h3>
+      <div class="info">
+        ${sec.info.map(c=>`<div class="icard"><div class="big" style="color:${c.c}">${c.big}</div><div class="cap">${c.cap}</div></div>`).join('')}
+      </div>
+    </div>`;
+  wrap.appendChild(p);
+});
+
+const qp = document.createElement('div');
+qp.className='panel'; qp.dataset.p='2';
+qp.innerHTML = `<div class="card"><h3><span class="ic">📝</span>題型測驗　<span style="font-size:14px;color:var(--soft);font-weight:400;">單選 · 是非 · 填充，共 ${QUIZ.length} 題</span></h3>
+  <div id="quizBox"></div>
+  <div style="display:flex;gap:10px;align-items:center;margin-top:14px;flex-wrap:wrap;">
+    <button class="btn" id="gradeBtn" style="background:rgba(242,217,121,.2);border-color:var(--yellow);color:var(--yellow);font-weight:700;">📊 批改並看成績</button>
+    <button class="btn" id="resetQuiz">🔄 重做</button>
+    <div class="readout" id="score" style="display:none;"></div>
+  </div></div>
+  <div class="card"><h3><span class="ic">📋</span>公式速查表</h3>
+    <div class="frow"><div class="flab">公因數</div><div class="fval">同時是 a、b 的因數</div></div>
+    <div class="frow"><div class="flab">GCD</div><div class="fval">共同質因數，各取<b>最小</b>指數相乘</div></div>
+    <div class="frow"><div class="flab">公倍數</div><div class="fval">同時是 a、b 的倍數</div></div>
+    <div class="frow"><div class="flab">LCM</div><div class="fval">所有質因數，各取<b>最大</b>指數相乘</div></div>
+    <div class="frow"><div class="flab">口訣</div><div class="fval">GCD 公共取小　·　LCM 全部取大</div></div>
+    <div class="frow"><div class="flab">重要性質</div><div class="fval">GCD(a,b) × LCM(a,b) = a × b（僅兩數）</div></div>
+    <div class="frow"><div class="flab">互質</div><div class="fval">GCD = 1 → LCM = a × b</div></div>
+    <div class="frow"><div class="flab">應用判斷</div><div class="fval">分組／最多 → GCD；週期／最少 → LCM</div></div>
+    <div class="frow"><div class="flab">怎麼記不會反</div><div class="fval">因數會變小（≤原數）；倍數會變大（≥原數）</div></div>
+  </div>`;
+wrap.appendChild(qp);
+
+const gp = document.createElement('div');
+gp.className='panel'; gp.dataset.p='3';
+gp.innerHTML = `<div class="card"><h3><span class="ic">🎮</span>闖關遊戲　<span style="font-size:14px;color:var(--soft);font-weight:400;">6 關挑戰 · 每題 20 秒 · 連擊與速度都有加分</span></h3>
+  <div class="gscreen on" id="gStart">
+    <div style="text-align:center;font-size:clamp(15px,2vw,18px);line-height:1.8;">
+      闖過 <b class="hl">6</b> 關，每關 1 題，每題 <b class="hl">20 秒</b>。<br>
+      計分：基礎 <b class="hl">10</b> 分 + 連擊獎勵（最多 <b class="hl">5</b>）+ 速度獎勵（最多 <b class="hl">5</b>）＝ 單題最高 <b class="hl">20</b> 分</div>
+    <div class="lvchips" id="gStartChips"></div>
+    <div style="text-align:center;"><button class="btn" id="gGo" style="background:rgba(242,217,121,.25);border-color:var(--yellow);color:var(--yellow);font-weight:700;font-size:16px;padding:10px 24px;">🚀 開始挑戰</button></div>
+  </div>
+  <div class="gscreen" id="gPlay">
+    <div class="hud">
+      <div class="st">關卡<b id="hLv">1/6</b></div>
+      <div class="st">分數<b id="hSc">0</b></div>
+      <div class="st">連擊<b id="hStk">0</b></div>
+      <div class="st">剩餘<b id="hT">20</b></div>
+    </div>
+    <div class="tbar"><div class="tfill" id="tFill"></div></div>
+    <div class="lvchips" id="gChips"></div>
+    <div class="gq" id="gQ"></div>
+    <div class="gopts" id="gO"></div>
+    <div class="gfb" id="gFb"></div>
+    <div style="text-align:center;margin-top:12px;"><button class="btn" id="gNext" style="display:none;">下一關 ▶</button></div>
+  </div>
+  <div class="gscreen" id="gEnd">
+    <div class="rank" id="gRank">🏆</div>
+    <div style="text-align:center;font-size:clamp(17px,2.6vw,22px);font-family:'Noto Serif TC';" id="gFinal"></div>
+    <div style="text-align:center;color:var(--soft);margin-top:8px;" id="gStats"></div>
+    <div style="text-align:center;margin-top:16px;"><button class="btn" id="gAgain" style="background:rgba(242,217,121,.25);border-color:var(--yellow);color:var(--yellow);font-weight:700;">🔄 再挑戰一次</button></div>
+  </div></div>`;
+wrap.appendChild(gp);
+document.getElementById('gStartChips').innerHTML = GAME.map((g,i)=>`<div class="lvchip">第${i+1}關 ${g.name}</div>`).join('');
+
+const qb = document.getElementById('quizBox');
+QUIZ.forEach((q,i)=>{
+  const d = document.createElement('div'); d.className='q';
+  let body='';
+  if(q.type==='choice') body = `<div class="opts">${q.o.map((o,oi)=>`<button class="opt" data-quiz="${i}" data-oi="${oi}">${o}</button>`).join('')}</div>`;
+  else if(q.type==='tf') body = `<div class="opts" style="flex-direction:row;gap:10px;">
+      <button class="opt" data-quiz="${i}" data-oi="1" style="flex:1;">⭕ 對</button>
+      <button class="opt" data-quiz="${i}" data-oi="0" style="flex:1;">❌ 錯</button></div>`;
+  else body = `<div><input class="fill" data-quiz="${i}" placeholder="?"></div>`;
+  d.innerHTML = `<div class="qt"><span class="qn">${i+1}</span>
+    <span style="font-size:12px;color:var(--soft);border:1px solid rgba(243,239,226,.25);border-radius:6px;padding:1px 6px;margin-right:6px;">
+    ${q.type==='choice'?'單選':q.type==='tf'?'是非':'填充'}</span>${q.q}</div>${body}
+    <div class="fb" id="qfb-${i}"></div>`;
+  qb.appendChild(d);
+});
+
+document.getElementById('tabs').addEventListener('click', e=>{
+  const t = e.target.closest('.tab'); if(!t) return;
+  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on', x===t));
+  document.querySelectorAll('.panel').forEach(x=>x.classList.toggle('on', x.dataset.p===t.dataset.p));
+  document.getElementById('goalCard').style.display = (t.dataset.p==='3')?'none':'';
+  window.scrollTo({top:0,behavior:'smooth'});
+  setTimeout(resizeAll, 60);
+});
+
+const cur = DATA.map(()=>0);
+function showSlide(si, i){
+  const deck = document.querySelector(`[data-deck="${si}"]`);
+  const sl = deck.querySelectorAll('.sl');
+  i = Math.max(0, Math.min(sl.length-1, i));
+  cur[si] = i;
+  sl.forEach((s,k)=>s.classList.toggle('on', k===i));
+  document.getElementById('pg-'+si).textContent = `${i+1} / ${sl.length}`;
+  document.querySelectorAll(`#dots-${si} .dot`).forEach((d,k)=>d.classList.toggle('on', k===i));
+}
+document.addEventListener('click', e=>{
+  const n = e.target.closest('[data-nav]');
+  if(n){ const si=+n.dataset.s; showSlide(si, cur[si] + (n.dataset.nav==='next'?1:-1)); return; }
+  const d = e.target.closest('.dot');
+  if(d){ showSlide(+d.dataset.s, +d.dataset.i); return; }
+});
+document.addEventListener('keydown', e=>{
+  const p = document.querySelector('.panel.on'); if(!p) return;
+  const si = +p.dataset.p; if(si>=DATA.length) return;
+  if(e.key==='ArrowRight') showSlide(si, cur[si]+1);
+  if(e.key==='ArrowLeft') showSlide(si, cur[si]-1);
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.opt[data-si]'); if(!o) return;
+  const si=+o.dataset.si, qi=+o.dataset.qi, oi=+o.dataset.oi;
+  const f = DATA[si].fa[qi];
+  const box = document.querySelector(`[data-fa="${si}-${qi}"]`);
+  box.querySelectorAll('.opt').forEach((b,k)=>{
+    b.disabled = true;
+    if(k===f.a) b.classList.add('right'); else if(k===oi) b.classList.add('wrong');
+  });
+  const fb = document.getElementById(`fb-${si}-${qi}`);
+  const ok = oi===f.a;
+  fb.className = 'fb on ' + (ok?'ok':'no');
+  fb.innerHTML = (ok?'✅ <b>答對了！</b> ':'❌ <b>再想想。</b> ') + f.e;
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.exo');
+  if(o && !o.disabled){
+    const box = o.closest('.exq');
+    const ans = +box.dataset.a, pick = +o.dataset.i;
+    if(pick === ans){
+      box.querySelectorAll('.exo').forEach(b=>{ b.disabled=true; if(+b.dataset.i===ans) b.classList.add('right'); });
+      box.querySelector('.exsol').classList.add('on');
+      box.querySelector('.exlock').classList.add('hide');
+    } else {
+      o.classList.add('wrong','shake');
+      setTimeout(()=>o.classList.remove('shake'), 420);
+      o.disabled = true;
+      const lock = box.querySelector('.exlock');
+      lock.innerHTML = '🔒 再想想 —— 答對才會顯示詳解'; lock.style.color='var(--pink)';
+    }
+  }
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.opt[data-quiz]'); if(!o) return;
+  const i = +o.dataset.quiz;
+  o.parentElement.querySelectorAll('.opt').forEach(b=>b.classList.remove('right','wrong'));
+  o.classList.add('right'); o.dataset.sel='1';
+  o.parentElement.querySelectorAll('.opt').forEach(b=>{ if(b!==o) delete b.dataset.sel; });
+});
+document.getElementById('gradeBtn').addEventListener('click', ()=>{
+  let right=0;
+  QUIZ.forEach((q,i)=>{
+    const fb = document.getElementById('qfb-'+i);
+    let ok=false, picked=null;
+    if(q.type==='fill'){
+      const inp = document.querySelector(`.fill[data-quiz="${i}"]`);
+      const v = (inp.value||'').trim().replace(/−/g,'-').replace(/\s/g,'');
+      ok = q.a.some(a=>a.replace(/−/g,'-').replace(/\s/g,'')===v);
+      inp.style.borderBottomColor = ok?'var(--green)':'var(--pink)';
+    } else {
+      const sel = document.querySelector(`.opt[data-quiz="${i}"][data-sel="1"]`);
+      if(sel){ picked=+sel.dataset.oi; ok = (q.type==='tf') ? (picked===1)===q.a : picked===q.a; }
+      document.querySelectorAll(`.opt[data-quiz="${i}"]`).forEach(b=>{
+        b.classList.remove('right','wrong');
+        const bi=+b.dataset.oi;
+        const isAns = (q.type==='tf') ? ((bi===1)===q.a) : (bi===q.a);
+        if(isAns) b.classList.add('right'); else if(picked===bi) b.classList.add('wrong');
+      });
+    }
+    if(ok) right++;
+    fb.className='fb on '+(ok?'ok':'no');
+    fb.innerHTML = (ok?'✅ <b>正確</b> ':'❌ <b>錯誤</b> ') + q.e;
+  });
+  const s = document.getElementById('score');
+  const pct = Math.round(right/QUIZ.length*100);
+  s.style.display='block';
+  s.innerHTML = `成績：<b>${right} / ${QUIZ.length}</b>　（${pct} 分）　${pct>=80?'🏆 很棒！':pct>=60?'💪 再加油':'📖 建議重看重點'}`;
+});
+document.getElementById('resetQuiz').addEventListener('click', ()=>{
+  document.querySelectorAll('.opt[data-quiz]').forEach(b=>{b.classList.remove('right','wrong'); delete b.dataset.sel;});
+  document.querySelectorAll('.fill').forEach(i=>{i.value=''; i.style.borderBottomColor='var(--yellow)';});
+  document.querySelectorAll('[id^="qfb-"]').forEach(f=>f.className='fb');
+  document.getElementById('score').style.display='none';
+});
+
+/* ===== 闖關遊戲 ===== */
+const G = {lv:0, score:0, streak:0, best:0, t:20, timer:null, cur:null, answered:false};
+function gShow(id){ ['gStart','gPlay','gEnd'].forEach(x=>document.getElementById(x).classList.toggle('on', x===id)); }
+function gChips(){
+  document.getElementById('gChips').innerHTML = GAME.map((g,i)=>
+    `<div class="lvchip ${i<G.lv?'done':i===G.lv?'now':''}">${i+1}. ${g.name}</div>`).join('');
+}
+function gLoad(){
+  if(G.lv>=GAME.length){ gFinish(); return; }
+  G.answered=false; G.t=20;
+  const bank = GAME[G.lv].qs;
+  G.cur = bank[Math.floor(Math.random()*bank.length)];
+  document.getElementById('hLv').textContent = (G.lv+1)+'/'+GAME.length;
+  document.getElementById('hSc').textContent = G.score;
+  document.getElementById('hStk').textContent = G.streak;
+  document.getElementById('gQ').innerHTML = `<span style="color:var(--blue);font-size:15px;">第 ${G.lv+1} 關 · ${GAME[G.lv].name}</span><br>${G.cur.q}`;
+  document.getElementById('gO').innerHTML = G.cur.o.map((o,i)=>
+    `<button class="gopt" data-g="${i}">${'ABCD'[i]}. ${o}</button>`).join('');
+  document.getElementById('gFb').className='gfb';
+  document.getElementById('gNext').style.display='none';
+  gChips();
+  clearInterval(G.timer);
+  G.timer = setInterval(()=>{
+    G.t -= 0.1;
+    document.getElementById('hT').textContent = Math.max(0,G.t).toFixed(0);
+    document.getElementById('tFill').style.width = Math.max(0,G.t/20*100)+'%';
+    if(G.t<=0){ clearInterval(G.timer); gAnswer(-1); }
+  },100);
+}
+function gAnswer(pick){
+  if(G.answered) return;
+  G.answered = true; clearInterval(G.timer);
+  const ans = G.cur.a, ok = pick===ans;
+  document.querySelectorAll('.gopt').forEach((b,i)=>{
+    b.disabled=true;
+    if(i===ans) b.classList.add('right'); else if(i===pick) b.classList.add('wrong');
+  });
+  let gain=0, sb=0, tb=0;
+  if(ok){
+    G.streak++; G.best=Math.max(G.best,G.streak);
+    sb = Math.min(5, G.streak-1); tb = Math.min(5, Math.floor(G.t/4));
+    gain = 10+sb+tb; G.score += gain;
+  } else { G.streak = 0; }
+  document.getElementById('hSc').textContent = G.score;
+  document.getElementById('hStk').textContent = G.streak;
+  const fb = document.getElementById('gFb');
+  fb.className = 'gfb on '+(ok?'ok':'no');
+  fb.innerHTML = (ok? `✅ <b>答對！+${gain} 分</b>（基礎10 + 連擊${sb} + 速度${tb}）<br>`
+                    : (pick===-1?'⏰ <b>時間到！</b><br>':'❌ <b>答錯了</b><br>')) + G.cur.e;
+  document.getElementById('gNext').style.display='inline-block';
+  document.getElementById('gNext').textContent = (G.lv>=GAME.length-1)?'看成績 🏁':'下一關 ▶';
+}
+function gFinish(){
+  clearInterval(G.timer);
+  const max = GAME.length*20, pct = Math.round(G.score/max*100);
+  const rank = pct>=85?['🏆','數論大師']:pct>=70?['🥇','高手']:pct>=50?['🥈','不錯']:['📖','再加油'];
+  document.getElementById('gRank').textContent = rank[0];
+  document.getElementById('gFinal').innerHTML = `<b class="hl">${G.score}</b> / ${max} 分　·　${rank[1]}`;
+  document.getElementById('gStats').innerHTML = `最高連擊 <b class="hl">${G.best}</b>　·　完成 ${GAME.length} 關`;
+  gShow('gEnd');
+}
+document.getElementById('gGo').addEventListener('click', ()=>{ G.lv=0;G.score=0;G.streak=0;G.best=0; gShow('gPlay'); gLoad(); });
+document.getElementById('gAgain').addEventListener('click', ()=>{ G.lv=0;G.score=0;G.streak=0;G.best=0; gShow('gPlay'); gLoad(); });
+document.getElementById('gNext').addEventListener('click', ()=>{ G.lv++; gLoad(); });
+document.addEventListener('click', e=>{ const b=e.target.closest('.gopt'); if(!b||b.disabled) return; gAnswer(+b.dataset.g); });
+
+/* ===== Canvas ===== */
+const VIZ = {}; let DPR=1;
+const SUP = {'0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹'};
+function sup(n){ return String(n).split('').map(c=>SUP[c]||c).join(''); }
+function pf(n){ const m={}; let x=n; for(let p=2;p*p<=x;p++){ while(x%p===0){ m[p]=(m[p]||0)+1; x/=p; } } if(x>1) m[x]=(m[x]||0)+1; return m; }
+function fmt(m){ const k=Object.keys(m).map(Number).sort((a,b)=>a-b);
+  return k.length? k.map(p=>m[p]>1?p+sup(m[p]):''+p).join(' × ') : '1'; }
+function gcd(a,b){ while(b){ [a,b]=[b,a%b]; } return a; }
+
+function initViz(cv){
+  const si=+cv.dataset.si, kind=cv.dataset.viz;
+  const ctx=cv.getContext('2d');
+  const st = VIZ[si] = {kind, cv, ctx, a:36, b:48};
+  const ctrl = document.querySelector(`[data-ctrl="${si}"]`);
+  ctrl.innerHTML = `<div class="readout" id="ro-${si}"></div>
+    <button class="btn" data-t="am" data-si="${si}">a − 1</button>
+    <button class="btn" data-t="ap" data-si="${si}">a + 1</button>
+    <button class="btn" data-t="bm" data-si="${si}">b − 1</button>
+    <button class="btn" data-t="bp" data-si="${si}">b + 1</button>
+    <button class="btn" data-t="rnd" data-si="${si}">🎲 隨機</button>`;
+  cv.style.cursor='default';
+  draw(si);
+}
+function draw(si){
+  const st=VIZ[si]; if(!st) return;
+  const {cv,ctx,kind}=st, w=cv.width/DPR, h=cv.height/DPR;
+  ctx.clearRect(0,0,w,h);
+  const ro=document.getElementById('ro-'+si);
+  const a=st.a, b=st.b;
+  const ma=pf(a), mb=pf(b);
+  const primes=[...new Set([...Object.keys(ma),...Object.keys(mb)])].map(Number).sort((x,y)=>x-y);
+  const isG = kind==='gcd';
+  // 表格
+  const cols = primes.length+1;
+  const cw = Math.min(90, (w-24)/cols), x0=(w-cw*cols)/2, rh=26, y0=34;
+  ctx.textAlign='center'; ctx.font='14px "Noto Sans TC"';
+  // 標頭
+  ctx.fillStyle='#f2d979'; ctx.font='bold 15px "Noto Serif TC"';
+  primes.forEach((p,i)=> ctx.fillText(String(p), x0+cw*(i+1)+cw/2, y0));
+  // a 列
+  ctx.textAlign='right'; ctx.fillStyle='#98c9dc'; ctx.font='bold 14px "Noto Serif TC"';
+  ctx.fillText(a+' =', x0+cw-6, y0+rh);
+  ctx.textAlign='center';
+  primes.forEach((p,i)=>{
+    const e=ma[p]||0;
+    const other=mb[p]||0;
+    const pick = isG ? (e<=other && e>0) : (e>=other);
+    ctx.fillStyle = e===0 ? 'rgba(243,239,226,.3)' : (pick?'#a6d6a0':'rgba(243,239,226,.75)');
+    ctx.font = (pick&&e>0)?'bold 17px "Noto Serif TC"':'15px "Noto Serif TC"';
+    ctx.fillText(e===0?'—':(p+sup(e)), x0+cw*(i+1)+cw/2, y0+rh);
+  });
+  // b 列
+  ctx.textAlign='right'; ctx.fillStyle='#eda0a8'; ctx.font='bold 14px "Noto Serif TC"';
+  ctx.fillText(b+' =', x0+cw-6, y0+rh*2);
+  ctx.textAlign='center';
+  primes.forEach((p,i)=>{
+    const e=mb[p]||0, other=ma[p]||0;
+    const pick = isG ? (e<other && e>0)||(e===other&&e>0&&true) : (e>other);
+    const show = isG ? (e>0 && e<=other) : (e>=other);
+    ctx.fillStyle = e===0 ? 'rgba(243,239,226,.3)' : (show?'#a6d6a0':'rgba(243,239,226,.75)');
+    ctx.font = (show&&e>0)?'bold 17px "Noto Serif TC"':'15px "Noto Serif TC"';
+    ctx.fillText(e===0?'—':(p+sup(e)), x0+cw*(i+1)+cw/2, y0+rh*2);
+  });
+  // 結果列
+  ctx.textAlign='right'; ctx.fillStyle='#f2d979'; ctx.font='bold 14px "Noto Sans TC"';
+  ctx.fillText(isG?'取小 →':'取大 →', x0+cw-6, y0+rh*3);
+  ctx.textAlign='center';
+  const res={};
+  primes.forEach((p,i)=>{
+    const ea=ma[p]||0, eb=mb[p]||0;
+    let e;
+    if(isG){ e = (ea>0&&eb>0)? Math.min(ea,eb) : 0; }
+    else { e = Math.max(ea,eb); }
+    if(e>0) res[p]=e;
+    ctx.fillStyle = e>0?'#f2d979':'rgba(237,160,168,.5)';
+    ctx.font='bold 17px "Noto Serif TC"';
+    ctx.fillText(e===0?'✗':(p+sup(e)), x0+cw*(i+1)+cw/2, y0+rh*3);
+  });
+  const val = Object.keys(res).reduce((acc,p)=>acc*Math.pow(+p,res[p]),1);
+  ctx.fillStyle=isG?'#98c9dc':'#a6d6a0'; ctx.font='bold 19px "Noto Serif TC"';
+  ctx.fillText(`${isG?'GCD':'LCM'}(${a}, ${b}) = ${fmt(res)} = ${val}`, w/2, y0+rh*4+8);
+
+  const g=gcd(a,b), l=a*b/g;
+  if(isG){
+    ro.innerHTML = `<b>GCD(${a}, ${b}) = ${val}</b>　｜　公共取小：<b>${fmt(res)}</b>`
+      + (Object.keys(res).length===0 ? '　<span style="color:var(--pink)">沒有共同質因數 → 互質，GCD = 1</span>' : '');
+  } else {
+    ro.innerHTML = `<b>LCM(${a}, ${b}) = ${val}</b>　｜　全部取大：<b>${fmt(res)}</b>`
+      + `　｜　驗證 GCD×LCM = ${g}×${l} = <b>${g*l}</b> = a×b = <b>${a*b}</b> ${g*l===a*b?'✓':'✗'}`;
+  }
+}
+document.addEventListener('click', e=>{
+  const btn=e.target.closest('[data-t]'); if(!btn) return;
+  const si=+btn.dataset.si, st=VIZ[si], t=btn.dataset.t;
+  if(t==='ap') st.a=Math.min(200,st.a+1);
+  if(t==='am') st.a=Math.max(2,st.a-1);
+  if(t==='bp') st.b=Math.min(200,st.b+1);
+  if(t==='bm') st.b=Math.max(2,st.b-1);
+  if(t==='rnd'){ st.a=Math.floor(Math.random()*90)+10; st.b=Math.floor(Math.random()*90)+10; }
+  draw(si);
+});
+function resizeAll(){
+  DPR = Math.min(2, window.devicePixelRatio||1);
+  document.querySelectorAll('canvas.viz').forEach(cv=>{
+    const w = cv.clientWidth || cv.parentElement.clientWidth;
+    const h = 175;
+    cv.width=w*DPR; cv.height=h*DPR; cv.style.height=h+'px';
+    cv.getContext('2d').setTransform(DPR,0,0,DPR,0,0);
+  });
+  Object.keys(VIZ).forEach(k=>draw(+k));
+}
+document.querySelectorAll('canvas.viz').forEach(initViz);
+window.addEventListener('resize', resizeAll);
+resizeAll();
+</script>
+<div class="hint">← → 鍵可翻頁　·　Canvas 用按鈕互動　·　支援平板觸控</div>
+</body></html>

@@ -1,0 +1,381 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>七上 2-2 最大公因數、最小公倍數｜授課簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--chalk-soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);padding:24px 14px;}
+.deck{max-width:1060px;margin:0 auto;}
+.print-hint{text-align:center;color:rgba(243,239,226,0.4);font-size:13px;padding:6px 0 22px;}
+.print-hint b{color:var(--yellow);}
+.slide{position:relative;min-height:576px;margin:0 auto 26px;padding:44px 52px;
+ background:radial-gradient(ellipse at 18% 12%,rgba(255,255,255,0.05),transparent 45%),
+  radial-gradient(ellipse at 82% 88%,rgba(255,255,255,0.035),transparent 45%),
+  radial-gradient(ellipse at 60% 40%,rgba(120,160,130,0.10),transparent 60%),
+  linear-gradient(160deg,var(--board) 0%,var(--board2) 100%);
+ border-radius:14px;box-shadow:0 10px 34px rgba(0,0,0,0.55);
+ border:1px solid rgba(242,217,121,0.14);overflow:hidden;display:flex;flex-direction:column;}
+.slide::before{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;
+ background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.014) 40px,rgba(255,255,255,0.014) 41px),
+  radial-gradient(circle at 30% 72%,rgba(255,255,255,0.03),transparent 8%),
+  radial-gradient(circle at 76% 24%,rgba(255,255,255,0.025),transparent 7%);}
+.slide::after{content:attr(data-pg);position:absolute;bottom:15px;right:26px;font-family:'Caveat',cursive;font-size:20px;color:rgba(243,239,226,0.4);}
+.tag{position:absolute;top:20px;right:26px;font-family:'Caveat',cursive;font-size:22px;color:var(--pink);transform:rotate(4deg);}
+.eyebrow{font-family:'Caveat',cursive;font-size:25px;color:var(--yellow);letter-spacing:1px;margin-bottom:8px;opacity:0.92;}
+.slide h1{font-family:'Noto Serif TC',serif;font-size:46px;font-weight:900;line-height:1.28;letter-spacing:1px;
+ text-shadow:0 0 1px rgba(243,239,226,0.5),1px 1px 0 rgba(0,0,0,0.2);}
+.slide h2{font-family:'Noto Serif TC',serif;font-size:33px;font-weight:900;color:var(--yellow);
+ margin-bottom:20px;padding-bottom:11px;border-bottom:2px dashed rgba(242,217,121,0.4);
+ text-shadow:0 0 1px rgba(242,217,121,0.4);}
+.slide p{font-size:20px;line-height:1.85;margin-bottom:12px;}
+.big-center{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;}
+.big-center .lead,.lead{font-family:'Caveat',cursive;font-size:30px;color:var(--blue);letter-spacing:1px;margin-top:12px;}
+ul{list-style:none;margin:8px 0;}
+li{font-size:21px;line-height:1.95;padding-left:32px;position:relative;margin-bottom:4px;}
+li::before{content:'\2726';position:absolute;left:4px;color:var(--yellow);font-size:17px;top:3px;}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.34);border-radius:12px;padding:15px 21px;margin:12px 0;font-size:19px;line-height:1.8;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.38);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.38);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.34);}
+.eg{position:relative;background:rgba(0,0,0,0.24);border:1px solid rgba(242,217,121,0.2);border-radius:10px;padding:17px 22px;margin:12px 0;font-size:19px;}
+.eg::before{content:'';position:absolute;top:-8px;left:38px;width:58px;height:15px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.eg .q{color:var(--blue);font-weight:700;margin-bottom:8px;font-size:19px;}
+.eg .a{color:var(--green);font-weight:700;margin-top:6px;}
+.eg .stp{color:var(--chalk-soft);font-size:18px;margin:3px 0;}
+.tip{display:flex;gap:12px;align-items:flex-start;background:rgba(242,217,121,0.09);border:1.5px dashed rgba(242,217,121,0.45);border-radius:12px;padding:13px 18px;margin:10px 0;}
+.tip .ic{font-size:24px;line-height:1;}.tip .tx{font-size:18px;line-height:1.7;}
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:18px;}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.26);padding:10px 14px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.two{display:flex;gap:20px;}.two>div{flex:1;}
+svg{display:block;margin:6px auto;max-width:100%;}
+@media print{
+ body{background:#0a130d;padding:0;}
+ .deck{max-width:none;}
+ .print-hint{display:none;}
+ .slide{margin:0;border-radius:0;box-shadow:none;min-height:100vh;
+  page-break-after:always;break-after:page;padding:32px 44px;justify-content:center;}
+ .slide:last-child{page-break-after:auto;break-after:auto;}
+ .slide h1{font-size:40px;}
+ .slide h2{font-size:27px;margin-bottom:13px;padding-bottom:8px;}
+ .slide p{font-size:17px;line-height:1.55;margin-bottom:6px;}
+ li{font-size:17px;line-height:1.55;margin-bottom:1px;padding-left:26px;}
+ .eyebrow{font-size:21px;margin-bottom:5px;}
+ .big-center .lead,.lead{font-size:26px;}
+ .box{font-size:16px;padding:10px 16px;margin:6px 0;line-height:1.5;}
+ .eg{font-size:16px;padding:11px 16px;margin:6px 0;}
+ .tip{font-size:16px;padding:10px 14px;margin:6px 0;}
+ .tbl{font-size:15px;margin:6px 0;}
+ .tbl th,.tbl td{padding:6px 10px;}
+ svg{max-height:210px;}
+}
+</style></head><body><div class="deck">
+<div class="print-hint">📽 共 <b>26</b> 張投影片　·　七上 第2章 分數運算　·　按 <b>Ctrl+P</b> 可列印或轉存 PDF</div>
+
+<!-- 1 封面 -->
+<div class="slide" data-pg="1 / 26"><div class="big-center">
+<svg viewBox="0 0 880 130" width="88%" style="opacity:0.9;">
+<text x="60" y="46" font-family="Caveat" font-size="40" fill="#98c9dc" transform="rotate(-6 60 46)">36 = 2²×3²</text>
+<text x="330" y="38" font-family="Caveat" font-size="40" fill="#eda0a8" transform="rotate(5 330 38)">48 = 2⁴×3</text>
+<text x="600" y="48" font-family="Caveat" font-size="38" fill="#a6d6a0" transform="rotate(-4 600 48)">12 × 144 = 1728</text>
+<rect x="180" y="76" width="200" height="34" rx="17" fill="none" stroke="#f2d979" stroke-width="2"/>
+<text x="280" y="99" font-family="Caveat" font-size="22" fill="#f2d979" text-anchor="middle">GCD 公共取小</text>
+<rect x="480" y="76" width="200" height="34" rx="17" fill="none" stroke="#a6d6a0" stroke-width="2"/>
+<text x="580" y="99" font-family="Caveat" font-size="22" fill="#a6d6a0" text-anchor="middle">LCM 全部取大</text>
+</svg>
+<div class="eyebrow">國一上學期 · 第2章 分數運算</div>
+<h1>2-2　最大公因數、最小公倍數</h1>
+<div class="lead">GCD 取小、LCM 取大 —— 從標準分解式一眼看出</div>
+</div></div>
+
+<!-- 2 導覽 -->
+<div class="slide" data-pg="2 / 26"><div class="eyebrow">本節導覽</div><h2>今天要學會兩件事</h2><div class="body">
+<ul>
+<li><span class="hl">① 公因數與最大公因數（GCD）</span>　公共取小</li>
+<li><span class="hl-b">② 公倍數與最小公倍數（LCM）</span>　全部取大</li>
+</ul>
+<div class="box y">上一節學會了<span class="hl">標準分解式</span>，這一節就是它的<span class="hl">威力展現</span> ——<br>
+把兩個數的「基因」攤開來，共同的部分就是 GCD，全部合起來就是 LCM。</div>
+<div class="box g">還會學到一個漂亮的性質：<span class="fm hl-g">GCD × LCM = a × b</span></div>
+</div></div>
+
+<!-- 3 公因數定義 -->
+<div class="slide" data-pg="3 / 26"><div class="eyebrow">核心 ①</div><h2>公因數與最大公因數</h2><div class="body">
+<div class="box y"><span class="hl">公因數</span>：同時是 a 和 b 的因數<br>
+<span class="hl">最大公因數（GCD）</span>：所有公因數中<span class="hl">最大</span>的那個</div>
+<div class="two">
+<div class="box">12 的因數<br><span class="fm">1, <span class="hl-g">2</span>, <span class="hl-g">3</span>, 4, <span class="hl-g">6</span>, 12</span></div>
+<div class="box">18 的因數<br><span class="fm">1, <span class="hl-g">2</span>, <span class="hl-g">3</span>, <span class="hl-g">6</span>, 9, 18</span></div>
+</div>
+<div class="box g" style="text-align:center;font-size:21px;">
+公因數：<span class="fm hl-g">1, 2, 3, 6</span>　→　<span class="hl">GCD(12,18) = 6</span></div>
+</div></div>
+
+<!-- 4 GCD 公共取小 -->
+<div class="slide" data-pg="4 / 26"><div class="eyebrow">核心 ①</div><h2>質因數分解法：公共取小</h2><div class="body">
+<div class="box y" style="text-align:center;font-size:21px;">
+取<span class="hl">共同</span>的質因數，各取<span class="hl">最小</span>指數，相乘</div>
+<table class="tbl">
+<tr><th>　</th><th>2</th><th>3</th></tr>
+<tr><td class="fm">36 = 2²×3²</td><td class="fm hl-g">2²</td><td class="fm">3²</td></tr>
+<tr><td class="fm">48 = 2⁴×3¹</td><td class="fm">2⁴</td><td class="fm hl-g">3¹</td></tr>
+<tr><td class="hl">取小</td><td class="fm hl">2²</td><td class="fm hl">3¹</td></tr>
+</table>
+<div class="box g" style="text-align:center;font-size:22px;">
+<span class="fm">GCD = 2² × 3 = <span class="hl-g">12</span></span></div>
+</div></div>
+
+<!-- 5 例題1 GCD -->
+<div class="slide" data-pg="5 / 26"><div class="tag">例題 1 ★☆☆</div><div class="eyebrow">換你試試看</div><h2>求 GCD(36, 48)</h2><div class="body">
+<div class="eg"><div class="q">用質因數分解法求 GCD(36, 48)</div>
+<div class="stp fm">36 = 2² × 3²</div>
+<div class="stp fm">48 = 2⁴ × 3¹</div>
+<div class="stp">共同質因數：<span class="hl">2 和 3</span></div>
+<div class="stp fm">2 取小 → 2²　；　3 取小 → 3¹</div>
+<div class="a">答：GCD = 2² × 3 = 12</div></div>
+</div></div>
+
+<!-- 6 三數GCD -->
+<div class="slide" data-pg="6 / 26"><div class="tag">例題 2 ★★☆</div><div class="eyebrow">換你試試看</div><h2>三個數的 GCD</h2><div class="body">
+<div class="eg"><div class="q">求 GCD(72, 90, 120)</div>
+<div class="stp fm">72 = 2³ × 3²</div>
+<div class="stp fm">90 = 2¹ × 3² × 5</div>
+<div class="stp fm">120 = 2³ × 3¹ × 5</div>
+<div class="stp">共同質因數：<span class="hl">只有 2 和 3</span>（<span class="hl-r">5 不是 72 的因數！</span>）</div>
+<div class="stp fm">2 取最小 → 2¹（從 90）；3 取最小 → 3¹（從 120）</div>
+<div class="a">答：GCD = 2 × 3 = 6</div></div>
+<div class="tip"><div class="ic">⚠️</div><div class="tx">關鍵：質因數必須<span class="hl">每個數都有</span>才算共同。5 只出現在 90 和 120，不算！</div></div>
+</div></div>
+
+<!-- 7 公倍數定義 -->
+<div class="slide" data-pg="7 / 26"><div class="eyebrow">核心 ②</div><h2>公倍數與最小公倍數</h2><div class="body">
+<div class="box y"><span class="hl">公倍數</span>：同時是 a 和 b 的倍數<br>
+<span class="hl">最小公倍數（LCM）</span>：所有公倍數中<span class="hl">最小</span>的那個（不含 0）</div>
+<div class="box">4 的倍數：4, 8, <span class="hl-g">12</span>, 16, 20, <span class="hl-g">24</span>, 28, …</div>
+<div class="box">6 的倍數：6, <span class="hl-g">12</span>, 18, <span class="hl-g">24</span>, 30, …</div>
+<div class="box g" style="text-align:center;font-size:21px;">
+公倍數：<span class="fm hl-g">12, 24, 36, …</span>（無限多）　→　<span class="hl">LCM(4,6) = 12</span></div>
+</div></div>
+
+<!-- 8 LCM 全部取大 -->
+<div class="slide" data-pg="8 / 26"><div class="eyebrow">核心 ②</div><h2>質因數分解法：全部取大</h2><div class="body">
+<div class="box y" style="text-align:center;font-size:21px;">
+取<span class="hl">所有出現過</span>的質因數，各取<span class="hl">最大</span>指數，相乘</div>
+<table class="tbl">
+<tr><th>　</th><th>2</th><th>3</th></tr>
+<tr><td class="fm">36 = 2²×3²</td><td class="fm">2²</td><td class="fm hl-g">3²</td></tr>
+<tr><td class="fm">48 = 2⁴×3¹</td><td class="fm hl-g">2⁴</td><td class="fm">3¹</td></tr>
+<tr><td class="hl">取大</td><td class="fm hl">2⁴</td><td class="fm hl">3²</td></tr>
+</table>
+<div class="box g" style="text-align:center;font-size:22px;">
+<span class="fm">LCM = 2⁴ × 3² = 16 × 9 = <span class="hl-g">144</span></span></div>
+</div></div>
+
+<!-- 9 口訣 -->
+<div class="slide" data-pg="9 / 26"><div class="tag">核心口訣</div><div class="eyebrow">整合</div><h2>一張表分清 GCD 與 LCM</h2><div class="body">
+<table class="tbl">
+<tr><th>　</th><th>質因數</th><th>指數</th></tr>
+<tr><td class="hl-b" style="font-size:22px;">GCD</td><td>只取<span class="hl-b">共同</span>的</td><td>取<span class="hl-b">最小</span></td></tr>
+<tr><td class="hl-g" style="font-size:22px;">LCM</td><td>取<span class="hl-g">全部</span>出現過的</td><td>取<span class="hl-g">最大</span></td></tr>
+</table>
+<div class="box y" style="text-align:center;font-size:24px;font-family:'Caveat',cursive;">
+GCD → 公共取小（縮水）　　LCM → 全部取大（擴充）</div>
+<div class="tip"><div class="ic">⚠️</div><div class="tx">最常錯：<span class="hl-r">方向搞反</span> —— 把 GCD 取大、LCM 取小。<br>
+想一想：因數會<span class="hl">變小</span>（12 的因數 ≤ 12），倍數會<span class="hl">變大</span>（12 的倍數 ≥ 12）。</div></div>
+</div></div>
+
+<!-- 10 重要性質 -->
+<div class="slide" data-pg="10 / 26"><div class="eyebrow">重要性質</div><h2>GCD × LCM = a × b</h2><div class="body big-center">
+<div class="box y" style="font-size:28px;padding:20px 36px;">
+<span class="fm"><span class="hl">GCD(a,b) × LCM(a,b) = a × b</span></span></div>
+<div class="box r" style="max-width:820px;text-align:center;">
+⚠️ <span class="hl-r">只對「兩個數」成立</span> —— 三個數不能亂套！</div>
+<div class="eg" style="max-width:820px;"><div class="q">驗證（36, 48）</div>
+<div class="stp fm">GCD × LCM = 12 × 144 = <span class="hl">1728</span></div>
+<div class="stp fm">a × b = 36 × 48 = <span class="hl">1728</span> ✓</div></div>
+</div></div>
+
+<!-- 11 互質 -->
+<div class="slide" data-pg="11 / 26"><div class="eyebrow">特殊情況</div><h2>互質</h2><div class="body big-center">
+<div class="box y" style="font-size:24px;padding:18px 30px;">
+<span class="fm"><span class="hl">GCD(a, b) = 1</span></span>　→　a 和 b <span class="hl">互質</span></div>
+<div class="box g" style="max-width:820px;">
+由 GCD × LCM = a × b → <span class="fm">1 × LCM = a × b</span><br>
+所以互質時：<span class="fm hl-g" style="font-size:22px;">LCM = a × b</span></div>
+<div class="box" style="max-width:820px;">
+例：GCD(4, 9) = 1（互質）→ LCM(4, 9) = <span class="fm hl">36 = 4 × 9</span></div>
+</div></div>
+
+<!-- 12 例題3 反推 -->
+<div class="slide" data-pg="12 / 26"><div class="tag">例題 3 ★★☆</div><div class="eyebrow">換你試試看</div><h2>用性質反推</h2><div class="body">
+<div class="eg"><div class="q">已知 GCD(a,b) = 6、LCM(a,b) = 180、a = 12，求 b</div>
+<div class="stp fm">性質：GCD × LCM = a × b</div>
+<div class="stp fm">6 × 180 = 12 × b　→　1080 = 12b</div>
+<div class="stp fm">b = 1080 ÷ 12 = <span class="hl">90</span></div>
+<div class="stp">驗算：12 = 2²×3、90 = 2×3²×5 → GCD = 2×3 = 6 ✓；LCM = 2²×3²×5 = 180 ✓</div>
+<div class="a">答：b = 90</div></div>
+</div></div>
+
+<!-- 13 應用判斷 -->
+<div class="slide" data-pg="13 / 26"><div class="tag">最重要</div><div class="eyebrow">應用</div><h2>怎麼判斷用 GCD 還是 LCM？</h2><div class="body">
+<table class="tbl">
+<tr><th>關鍵字</th><th>用哪個</th><th>理由</th></tr>
+<tr><td>分組、分配、<span class="hl-b">最多</span>、<span class="hl-b">最大</span>、切割</td><td class="hl-b" style="font-size:22px;">GCD</td><td>要「共同的、<span class="hl-b">最大</span>的一份」</td></tr>
+<tr><td>週期、重合、<span class="hl-g">最少</span>、下一次、<span class="hl-g">同時</span></td><td class="hl-g" style="font-size:22px;">LCM</td><td>要「共同的、<span class="hl-g">最小</span>的時刻」</td></tr>
+</table>
+<div class="box y" style="text-align:center;font-size:20px;">
+自我檢查句：<span class="hl">「這題問的是『最多幾份』(GCD)，還是『最少等多久』(LCM)？」</span></div>
+</div></div>
+
+<!-- 14 例題4 LCM應用 -->
+<div class="slide" data-pg="14 / 26"><div class="tag">例題 4 ★★★</div><div class="eyebrow">生活應用 · LCM</div><h2>生產線同步</h2><div class="body">
+<div class="eg"><div class="q">A 線每 24 分鐘出一批，B 線每 36 分鐘出一批。上午 8:00 同時開始，第一次「兩線同時出貨」是幾點幾分？</div>
+<div class="stp">關鍵字「<span class="hl-g">同時、第一次</span>」→ 用 <span class="hl-g">LCM</span></div>
+<div class="stp fm">24 = 2³ × 3　；　36 = 2² × 3²</div>
+<div class="stp fm">LCM = 2³ × 3² = 8 × 9 = <span class="hl">72</span> 分鐘</div>
+<div class="stp fm">8:00 + 72 分 = 8:00 + 1 小時 12 分 = <span class="hl">9:12</span></div>
+<div class="a">答：9 時 12 分</div></div>
+</div></div>
+
+<!-- 15 例題5 GCD應用 -->
+<div class="slide" data-pg="15 / 26"><div class="tag">例題 5 ★★★</div><div class="eyebrow">生活應用 · GCD</div><h2>鋪磁磚</h2><div class="body">
+<div class="eg"><div class="q">長 180 cm、寬 120 cm 的地板，鋪滿正方形磁磚（不切割、不重疊），邊長最大幾公分？共需幾塊？</div>
+<div class="stp">關鍵字「<span class="hl-b">最大、不切割</span>」→ 用 <span class="hl-b">GCD</span></div>
+<div class="stp fm">180 = 2² × 3² × 5　；　120 = 2³ × 3 × 5</div>
+<div class="stp fm">GCD = 2² × 3 × 5 = <span class="hl">60</span> cm</div>
+<div class="stp fm">塊數 = (180÷60) × (120÷60) = 3 × 2 = <span class="hl">6</span> 塊</div>
+<div class="a">答：邊長最大 60 公分，共需 6 塊</div></div>
+</div></div>
+
+<!-- 16 隨堂基礎 -->
+<div class="slide" data-pg="16 / 26"><div class="eyebrow">隨堂練習</div><h2>小試身手（基礎）</h2><div class="body">
+<table class="tbl">
+<tr><th>題目</th><th>答案</th></tr>
+<tr><td class="fm">GCD(24, 40)</td><td class="hl fm">8　（2³）</td></tr>
+<tr><td class="fm">LCM(12, 18)</td><td class="hl fm">36　（2²×3²）</td></tr>
+<tr><td class="fm">GCD(2³×3²×5, 2²×3×5²)</td><td class="hl fm">2²×3×5 = 60</td></tr>
+<tr><td class="fm">LCM(2³×3²×5, 2²×3×5²)</td><td class="hl fm">2³×3²×5² = 1800</td></tr>
+<tr><td class="fm">GCD=4、LCM=60、a=12，求 b</td><td class="hl fm">b = 20</td></tr>
+<tr><td class="fm">GCD(48, 72, 96)</td><td class="hl fm">24　（2³×3）</td></tr>
+</table>
+</div></div>
+
+<!-- 17 隨堂進階 -->
+<div class="slide" data-pg="17 / 26"><div class="eyebrow">隨堂練習</div><h2>小試身手（進階）</h2><div class="body">
+<table class="tbl">
+<tr><th>題目</th><th>答案</th></tr>
+<tr><td>三燈帶每 12、15、20 秒閃一次，最少幾秒再同時閃？</td><td class="hl">60 秒（LCM）</td></tr>
+<tr><td>繩 A 90cm、繩 B 150cm 剪成等長不浪費，最長每段？</td><td class="hl">30 cm（GCD）</td></tr>
+<tr><td>判斷：GCD(a,b)=1 → 互質，LCM = a×b</td><td class="hl">對</td></tr>
+<tr><td>90cm×60cm 地板鋪最大正方形磁磚，需幾塊？</td><td class="hl">GCD=30；3×2 = 6 塊</td></tr>
+<tr><td>A 每 8 天休、B 每 12 天休，今天同休，下次幾天後？</td><td class="hl">24 天後（LCM）</td></tr>
+</table>
+</div></div>
+
+<!-- 18 星期幾 -->
+<div class="slide" data-pg="18 / 26"><div class="tag">延伸 ★★★</div><div class="eyebrow">隨堂進階</div><h2>那天是星期幾？</h2><div class="body">
+<div class="eg"><div class="q">A 每 8 天休假、B 每 12 天休假。今天（星期一）兩人同時休假，下次同時休假是幾天後？那天星期幾？</div>
+<div class="stp fm">LCM(8, 12)：8 = 2³、12 = 2²×3 → LCM = 2³×3 = <span class="hl">24</span> 天後</div>
+<div class="stp fm">星期幾？24 ÷ 7 = 3 週 <span class="hl">餘 3</span> 天</div>
+<div class="stp fm">星期一 + 3 天 = <span class="hl">星期四</span></div>
+<div class="a">答：24 天後，星期四</div></div>
+<div class="tip"><div class="ic">💡</div><div class="tx">「星期幾」問題的技巧：<span class="hl">除以 7 看餘數</span>，餘幾就往後推幾天。</div></div>
+</div></div>
+
+<!-- 19 兩數和 -->
+<div class="slide" data-pg="19 / 26"><div class="tag">挑戰 ★★★</div><div class="eyebrow">隨堂進階</div><h2>兩數和 70、GCD = 10</h2><div class="body">
+<div class="eg"><div class="q">兩數之和為 70，且 GCD = 10，求這兩個數的所有可能組合</div>
+<div class="stp fm">設兩數 = 10m、10n → 10m + 10n = 70 → <span class="hl">m + n = 7</span></div>
+<div class="stp">且 m、n 必須<span class="hl-r">互質</span>（否則 GCD 會大於 10）</div>
+<div class="stp fm">m+n=7 且互質：(1,6)、(2,5)、(3,4)</div>
+<div class="a">答：(10, 60)、(20, 50)、(30, 40)</div></div>
+<div class="tip"><div class="ic">🔑</div><div class="tx">關鍵洞察：把 GCD <span class="hl">提出來</span>之後，剩下的兩個數<span class="hl">一定互質</span> —— 這是解這類題的通用技巧。</div></div>
+</div></div>
+
+<!-- 20 素養1 -->
+<div class="slide" data-pg="20 / 26"><div class="tag">素養 · 排程</div><div class="eyebrow">生活應用</div><h2>機台保養排程</h2><div class="body">
+<div class="eg" style="font-size:17px;"><div class="q">A 每 24 小時保養、B 每 36 小時、C 每 48 小時。某天上午 8:00 三台同時完成保養。</div>
+<div class="stp fm">(1) 24 = 2³×3；36 = 2²×3²；48 = 2⁴×3 → LCM = 2⁴×3² = <span class="hl">144 小時</span></div>
+<div class="stp fm">(2) 144 ÷ 24 = 6 天 → <span class="hl">6 天後的上午 8:00</span></div>
+<div class="stp">(3) 這 144 小時內各保養幾次？A：144÷24 = <span class="hl">6</span> 次；B：144÷36 = <span class="hl">4</span> 次；C：144÷48 = <span class="hl">3</span> 次</div>
+<div class="a">三台「同時」保養的只有第 144 小時那一次</div></div>
+<div class="tip"><div class="ic">🏭</div><div class="tx">實務意義：知道 LCM 就能<span class="hl">預先安排技師</span>，在同一時間服務三台機台，省下往返成本。</div></div>
+</div></div>
+
+<!-- 21 素養2 -->
+<div class="slide" data-pg="21 / 26"><div class="tag">素養 · 分配</div><div class="eyebrow">生活應用</div><h2>園遊會贈品袋</h2><div class="body">
+<div class="eg" style="font-size:17px;"><div class="q">糖果 180 顆、餅乾 120 片、貼紙 90 張，平均分裝成最多袋（每袋各物數量相等且不剩）。</div>
+<div class="stp fm">(1) 180 = 2²×3²×5；120 = 2³×3×5；90 = 2×3²×5 → GCD = 2×3×5 = <span class="hl">30 袋</span></div>
+<div class="stp fm">(2) 每袋：糖果 180÷30 = <span class="hl">6</span> 顆；餅乾 120÷30 = <span class="hl">4</span> 片；貼紙 90÷30 = <span class="hl">3</span> 張</div>
+<div class="stp fm">(3) 再加鉛筆 75 支：75 = 3×5² → GCD(30, 75) = 3×5 = <span class="hl-r">15 袋</span></div>
+<div class="a">加入鉛筆後最多只能分 15 袋（變少了！）</div></div>
+<div class="tip"><div class="ic">💡</div><div class="tx">(3) 的啟示：<span class="hl">多一種物品 = 多一個限制</span>，最多袋數只會<span class="hl-r">變少或不變</span>，不可能變多。</div></div>
+</div></div>
+
+<!-- 22 避雷 -->
+<div class="slide" data-pg="22 / 26"><div class="eyebrow">避雷指南</div><h2>三個最常見錯誤</h2><div class="body">
+<table class="tbl">
+<tr><th>❌ 錯誤</th><th>✓ 正確</th></tr>
+<tr><td>GCD 取大、LCM 取小（方向反了）</td><td class="hl">GCD 公共取小；LCM 全部取大</td></tr>
+<tr><td class="fm">三個數也套 GCD×LCM = a×b×c</td><td class="hl">這個性質只對<b>兩個數</b>成立</td></tr>
+<tr><td>應用題分不清用 GCD 還是 LCM</td><td class="hl">分組/最多 → GCD；週期/最少 → LCM</td></tr>
+</table>
+<div class="box y" style="text-align:center;">
+記住：<span class="hl">因數會變小</span>（≤ 原數）、<span class="hl">倍數會變大</span>（≥ 原數）—— 方向就不會錯了。</div>
+</div></div>
+
+<!-- 23 速查表 -->
+<div class="slide" data-pg="23 / 26"><div class="eyebrow">公式速查</div><h2>GCD／LCM 總表</h2><div class="body">
+<table class="tbl">
+<tr><th>項目</th><th>內容</th></tr>
+<tr><td>公因數</td><td>同時是 a、b 的因數</td></tr>
+<tr><td class="hl-b">GCD</td><td class="hl">共同質因數，各取<b>最小</b>指數相乘</td></tr>
+<tr><td>公倍數</td><td>同時是 a、b 的倍數</td></tr>
+<tr><td class="hl-g">LCM</td><td class="hl">所有質因數，各取<b>最大</b>指數相乘</td></tr>
+<tr><td>重要性質</td><td class="hl fm">GCD(a,b) × LCM(a,b) = a × b（僅兩數）</td></tr>
+<tr><td>互質</td><td class="hl fm">GCD = 1 → LCM = a × b</td></tr>
+<tr><td>應用判斷</td><td class="hl">分組/最多 → GCD；週期/最少 → LCM</td></tr>
+</table>
+</div></div>
+
+<!-- 24 總結 -->
+<div class="slide" data-pg="24 / 26"><div class="eyebrow">本節總結</div><h2>三句話記住全部</h2><div class="body">
+<div class="box"><span class="hl-b">① GCD：</span>公共質因數取<span class="hl">最小</span>指數 →「最多能分幾份」用它</div>
+<div class="box g"><span class="hl-g">② LCM：</span>所有質因數取<span class="hl">最大</span>指數 →「最少等多久／下一次同時」用它</div>
+<div class="box y"><span class="hl">③ 性質：</span><span class="fm">GCD × LCM = a × b</span>（⚠️ 只對兩數）；<span class="fm">GCD = 1</span> 就是互質，此時 <span class="fm">LCM = a × b</span></div>
+<div class="box r" style="text-align:center;font-size:22px;font-family:'Caveat',cursive;">
+GCD 公共取小　·　LCM 全部取大</div>
+</div></div>
+
+<!-- 25 課後 -->
+<div class="slide" data-pg="25 / 26"><div class="eyebrow">課後任務</div><h2>回家練習方向</h2><div class="body">
+<ul>
+<li><span class="hl">基礎</span>：質因數分解法求 GCD、LCM</li>
+<li><span class="hl-b">進階</span>：三個數的 GCD／LCM、用性質反推、互質判斷</li>
+<li><span class="hl-r">素養</span>：機台排程（LCM）、贈品分裝（GCD）、星期幾問題</li>
+</ul>
+<div class="box y">自我檢查句：<span class="hl">「這題問的是最多幾份（GCD），還是最少等多久（LCM）？」</span></div>
+</div></div>
+
+<!-- 26 下節預告 -->
+<div class="slide" data-pg="26 / 26"><div class="big-center">
+<div class="eyebrow">下節預告</div>
+<h1 style="font-size:42px;">2-3　分數的四則運算</h1>
+<div class="lead">GCD 用來約分，LCM 用來通分 —— 馬上就派上用場！</div>
+<svg viewBox="0 0 520 60" width="56%" style="margin-top:18px;">
+<line x1="20" y1="30" x2="480" y2="30" stroke="#f2d979" stroke-width="2" stroke-dasharray="2 10" opacity="0.7"/>
+<path d="M480 30 l-12 -7 M480 30 l-12 7" stroke="#f2d979" stroke-width="2" fill="none"/>
+</svg>
+<div class="box y" style="max-width:780px;margin-top:20px;">
+原來 GCD 和 LCM 不是為了考試而存在 ——<br>
+<span class="hl">約分要用 GCD、通分要用 LCM</span>，下一節你就會天天用到。</div>
+</div></div>
+
+</div></body></html>

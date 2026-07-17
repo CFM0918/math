@@ -1,0 +1,592 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>七上 2-3 分數的四則運算｜授課簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--chalk-soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);padding:24px 14px;}
+.deck{max-width:1060px;margin:0 auto;}
+.print-hint{text-align:center;color:rgba(243,239,226,0.4);font-size:13px;padding:6px 0 22px;}
+.print-hint b{color:var(--yellow);}
+.slide{position:relative;min-height:576px;margin:0 auto 26px;padding:44px 52px;
+ background:radial-gradient(ellipse at 18% 12%,rgba(255,255,255,0.05),transparent 45%),
+  radial-gradient(ellipse at 82% 88%,rgba(255,255,255,0.035),transparent 45%),
+  radial-gradient(ellipse at 60% 40%,rgba(120,160,130,0.10),transparent 60%),
+  linear-gradient(160deg,var(--board) 0%,var(--board2) 100%);
+ border-radius:14px;box-shadow:0 10px 34px rgba(0,0,0,0.55);
+ border:1px solid rgba(242,217,121,0.14);overflow:hidden;display:flex;flex-direction:column;}
+.slide::before{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;
+ background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.014) 40px,rgba(255,255,255,0.014) 41px),
+  radial-gradient(circle at 30% 72%,rgba(255,255,255,0.03),transparent 8%),
+  radial-gradient(circle at 76% 24%,rgba(255,255,255,0.025),transparent 7%);}
+.slide::after{content:attr(data-pg);position:absolute;bottom:15px;right:26px;font-family:'Caveat',cursive;font-size:20px;color:rgba(243,239,226,0.4);}
+.tag{position:absolute;top:20px;right:26px;font-family:'Caveat',cursive;font-size:22px;color:var(--pink);transform:rotate(4deg);}
+.eyebrow{font-family:'Caveat',cursive;font-size:25px;color:var(--yellow);letter-spacing:1px;margin-bottom:8px;opacity:0.92;}
+.slide h1{font-family:'Noto Serif TC',serif;font-size:46px;font-weight:900;line-height:1.28;letter-spacing:1px;
+ text-shadow:0 0 1px rgba(243,239,226,0.5),1px 1px 0 rgba(0,0,0,0.2);}
+.slide h2{font-family:'Noto Serif TC',serif;font-size:33px;font-weight:900;color:var(--yellow);
+ margin-bottom:20px;padding-bottom:11px;border-bottom:2px dashed rgba(242,217,121,0.4);
+ text-shadow:0 0 1px rgba(242,217,121,0.4);}
+.slide p{font-size:20px;line-height:1.85;margin-bottom:12px;}
+.big-center{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;}
+.big-center .lead,.lead{font-family:'Caveat',cursive;font-size:30px;color:var(--blue);letter-spacing:1px;margin-top:12px;}
+ul{list-style:none;margin:8px 0;}
+li{font-size:21px;line-height:1.95;padding-left:32px;position:relative;margin-bottom:4px;}
+li::before{content:'\2726';position:absolute;left:4px;color:var(--yellow);font-size:17px;top:3px;}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.34);border-radius:12px;padding:15px 21px;margin:12px 0;font-size:19px;line-height:1.8;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.38);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.38);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.34);}
+.eg{position:relative;background:rgba(0,0,0,0.24);border:1px solid rgba(242,217,121,0.2);border-radius:10px;padding:17px 22px;margin:12px 0;font-size:19px;}
+.eg::before{content:'';position:absolute;top:-8px;left:38px;width:58px;height:15px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.eg .q{color:var(--blue);font-weight:700;margin-bottom:8px;font-size:19px;}
+.eg .a{color:var(--green);font-weight:700;margin-top:6px;}
+.eg .stp{color:var(--chalk-soft);font-size:18px;margin:3px 0;}
+.tip{display:flex;gap:12px;align-items:flex-start;background:rgba(242,217,121,0.09);border:1.5px dashed rgba(242,217,121,0.45);border-radius:12px;padding:13px 18px;margin:10px 0;}
+.tip .ic{font-size:24px;line-height:1;}.tip .tx{font-size:18px;line-height:1.7;}
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:18px;}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.26);padding:10px 14px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.two{display:flex;gap:20px;}.two>div{flex:1;}
+svg{display:block;margin:6px auto;max-width:100%;}
+@media print{
+ body{background:#0a130d;padding:0;}
+ .deck{max-width:none;}
+ .print-hint{display:none;}
+ .slide{margin:0;border-radius:0;box-shadow:none;min-height:100vh;
+  page-break-after:always;break-after:page;padding:32px 44px;justify-content:center;}
+ .slide:last-child{page-break-after:auto;break-after:auto;}
+ .slide h1{font-size:40px;}
+ .slide h2{font-size:27px;margin-bottom:13px;padding-bottom:8px;}
+ .slide p{font-size:17px;line-height:1.55;margin-bottom:6px;}
+ li{font-size:17px;line-height:1.55;margin-bottom:1px;padding-left:26px;}
+ .eyebrow{font-size:21px;margin-bottom:5px;}
+ .big-center .lead,.lead{font-size:26px;}
+ .box{font-size:16px;padding:10px 16px;margin:6px 0;line-height:1.5;}
+ .eg{font-size:16px;padding:11px 16px;margin:6px 0;}
+ .tip{font-size:16px;padding:10px 14px;margin:6px 0;}
+ .tbl{font-size:15px;margin:6px 0;}
+ .tbl th,.tbl td{padding:6px 10px;}
+ svg{max-height:210px;}
+}
+</style></head><body><div class="deck">
+<div class="print-hint">共 <b>30</b> 張・列印時每張一頁（Ctrl+P → 橫向 → 背景圖形）</div>
+
+
+<!-- 1 -->
+<div class="slide" data-pg="1 / 30"><div class="tag">Start!</div><div class="big-center">
+<div class="eyebrow">國一上學期・第二章 分數運算</div>
+<h1>2-3　分數的四則運算</h1>
+<div class="lead">GCD 拿來約分、LCM 拿來通分 —— 上一節的工具，這節天天用</div>
+<svg viewBox="0 0 560 150" width="72%" style="margin-top:24px;">
+  <text x="90" y="52" font-family="Noto Serif TC" font-size="30" fill="#98c9dc" text-anchor="middle">18</text>
+  <line x1="55" y1="66" x2="125" y2="66" stroke="#f3efe2" stroke-width="2.5"/>
+  <text x="90" y="102" font-family="Noto Serif TC" font-size="30" fill="#98c9dc" text-anchor="middle">24</text>
+  <text x="175" y="82" font-family="Noto Serif TC" font-size="28" fill="#f3efe2" text-anchor="middle">=</text>
+  <text x="285" y="52" font-family="Noto Serif TC" font-size="30" fill="#a6d6a0" text-anchor="middle">3</text>
+  <line x1="255" y1="66" x2="315" y2="66" stroke="#f3efe2" stroke-width="2.5"/>
+  <text x="285" y="102" font-family="Noto Serif TC" font-size="30" fill="#a6d6a0" text-anchor="middle">4</text>
+  <text x="285" y="132" font-family="Caveat" font-size="21" fill="#f2d979" text-anchor="middle">÷ GCD(18,24)=6</text>
+  <text x="410" y="60" font-family="Caveat" font-size="23" fill="#eda0a8" text-anchor="middle">約分</text>
+  <path d="M355 78 q40 -18 75 -6" stroke="#eda0a8" stroke-width="1.8" fill="none" stroke-dasharray="3 5"/>
+  <path d="M430 72 l-10 -1 M430 72 l-5 -8" stroke="#eda0a8" stroke-width="1.8" fill="none"/>
+</svg>
+</div></div>
+
+<!-- 2 -->
+<div class="slide" data-pg="2 / 30"><div class="tag">目標</div><div class="body">
+<h2>本節學習目標</h2>
+<ul>
+<li>理解<span class="hl">等值分數</span>：擴分與約分不改變分數的值</li>
+<li>能用 <span class="hl-b">GCD 約分</span>、<span class="hl-g">LCM 通分</span>（呼應 2-2！）</li>
+<li>能<span class="hl">比較分數大小</span>，包含負分數</li>
+<li>能做含正負號的分數<span class="hl">加減</span>（先通分、符號同整數）</li>
+<li>能做含正負號的分數<span class="hl">乘除</span>（先定符號、再約分）</li>
+<li>能做分數的<span class="hl">四則混合運算</span>（括號 → 乘除 → 加減）</li>
+</ul>
+<div class="box y">一句話：<span class="hl">分數的規則不變，只是多了正負號要顧。</span></div>
+</div></div>
+
+<!-- 3 -->
+<div class="slide" data-pg="3 / 30"><div class="tag">地圖</div><div class="body">
+<h2>這一節的五個細目</h2>
+<table class="tbl">
+<tr><th style="width:16%;">細目</th><th style="width:34%;">主題</th><th>關鍵動作</th></tr>
+<tr><td class="hl" style="font-size:24px;">①</td><td><b>相等與比較大小</b></td><td>擴分・<span class="hl-b">約分用 GCD</span>・<span class="hl-g">通分用 LCM</span></td></tr>
+<tr><td class="hl" style="font-size:24px;">②</td><td><b>加減運算</b></td><td><span class="hl">先通分</span>，再加減分子</td></tr>
+<tr><td class="hl" style="font-size:24px;">③</td><td><b>乘法運算</b></td><td><span class="hl">先定符號</span>，斜向約分再乘</td></tr>
+<tr><td class="hl" style="font-size:24px;">④</td><td><b>除法運算</b></td><td>除以分數 = <span class="hl">乘以倒數</span></td></tr>
+<tr><td class="hl" style="font-size:24px;">⑤</td><td><b>四則運算</b></td><td><span class="hl">括號 → 乘除 → 加減</span></td></tr>
+</table>
+<div class="box">前面 2-2 學的 <span class="hl-b">GCD</span> 和 <span class="hl-g">LCM</span>，
+在細目 ① 就會全部用上：<span class="hl">約分用 GCD、通分用 LCM</span>。</div>
+</div></div>
+
+<!-- 4 -->
+<div class="slide" data-pg="4 / 30"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">細目 ①　分數的相等與比較大小</div>
+<h2>等值分數：擴分與約分</h2>
+<div class="box y" style="text-align:center;font-size:23px;">
+分子分母<span class="hl">同乘</span>（或<span class="hl">同除</span>）一個<b>非 0</b> 的數，<br>分數的值<span class="hl">不變</span></div>
+<div class="two">
+<div class="box"><span class="hl-b">擴分</span>（乘）<br>
+<span class="fm" style="font-size:22px;">2/3 = (2×4)/(3×4) = <span class="hl">8/12</span></span></div>
+<div class="box g"><span class="hl-g">約分</span>（除）<br>
+<span class="fm" style="font-size:22px;">18/24 = (18÷6)/(24÷6) = <span class="hl">3/4</span></span></div>
+</div>
+<div class="box r" style="text-align:center;">⚠️ 一定是<span class="hl-r">分子分母「一起」</span>乘或除，只動一邊就變成別的數了！</div>
+</div></div>
+
+<!-- 5 -->
+<div class="slide" data-pg="5 / 30"><div class="tag">GCD</div><div class="body">
+<div class="eyebrow">細目 ①</div>
+<h2>約分要用 GCD —— 2-2 派上用場</h2>
+<div class="box y" style="text-align:center;font-size:22px;">
+一次除以 <span class="hl">GCD</span>，直接化到<span class="hl">最簡分數</span></div>
+<div class="two">
+<div class="box r"><span class="hl-r">慢方法</span>（除很多次）<br>
+<span class="fm">18/24 → ÷2 → 9/12 → ÷3 → 3/4</span><br>
+<span style="color:var(--chalk-soft);font-size:17px;">除了兩次，還要想下一步除幾</span></div>
+<div class="box g"><span class="hl-g">快方法</span>（除 GCD）<br>
+<span class="fm">GCD(18,24) = 6</span><br>
+<span class="fm">18/24 → ÷6 → <span class="hl">3/4</span></span><br>
+<span style="color:var(--chalk-soft);font-size:17px;">一步到位</span></div>
+</div>
+<div class="box"><span class="hl">最簡分數</span>：分子與分母<span class="hl-b">互質</span>（GCD = 1）。
+3 與 4 的 GCD = 1 → <span class="fm">3/4</span> 已是最簡 ✓</div>
+</div></div>
+
+<!-- 6 -->
+<div class="slide" data-pg="6 / 30"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 1　難度 ★☆☆</div>
+<h2>化簡 <span class="fm">18/24</span></h2>
+<div class="eg">
+<div class="stp"><b>Step 1</b>　分解：18 = 2×3²　；　24 = 2³×3</div>
+<div class="stp"><b>Step 2</b>　GCD：公共取小 → 2¹×3¹ = <span class="hl">6</span></div>
+<div class="stp"><b>Step 3</b>　同除 6：<span class="fm">(18÷6)/(24÷6) = 3/4</span></div>
+<div class="stp"><b>Step 4</b>　檢查：GCD(3,4) = 1 → 互質 → 最簡 ✓</div>
+<div class="a">答：<span class="fm">3/4</span></div>
+</div>
+</div></div>
+
+<!-- 7 -->
+<div class="slide" data-pg="7 / 30"><div class="tag">LCM</div><div class="body">
+<div class="eyebrow">細目 ①</div>
+<h2>比較大小要通分 —— LCM 派上用場</h2>
+<div class="box y" style="text-align:center;font-size:22px;">
+<span class="hl">通分</span>：把分母化成相同（取分母的 <span class="hl">LCM</span> 當公分母），再比分子</div>
+<div class="box"><b>比較 <span class="fm">2/3</span> 與 <span class="fm">3/5</span></b><br>
+<span class="fm">LCM(3,5) = 15</span><br>
+<span class="fm">2/3 = <span class="hl-b">10/15</span>　；　3/5 = <span class="hl-r">9/15</span></span><br>
+<span class="fm">10/15 > 9/15 → <span class="hl">2/3 > 3/5</span></span></div>
+<div class="tip"><div class="ic">📌</div><div class="tx"><b>為什麼要通分才能比？</b>分母不同＝<b>單位不同</b>，就像不能直接比「3 個蘋果」和「5 個橘子」。
+通分後單位一樣（都是 1/15），才能比數量。</div></div>
+</div></div>
+
+<!-- 8 -->
+<div class="slide" data-pg="8 / 30"><div class="tag">陷阱</div><div class="body">
+<div class="eyebrow">細目 ①　⚠️ 最容易錯</div>
+<h2>負分數比大小：負得越多，值越小</h2>
+<div class="box r" style="text-align:center;font-size:21px;">
+❌ 錯誤直覺：「<span class="fm">3/4 > 2/3</span>，所以 <span class="fm">−3/4 > −2/3</span>」</div>
+<div class="box g"><b>正確做法：通分後比</b><br>
+<span class="fm" style="font-size:21px;">−3/4 = <span class="hl-r">−9/12</span>　；　−2/3 = <span class="hl-b">−8/12</span></span><br>
+<span class="fm" style="font-size:21px;">−9/12 <span class="hl">&lt;</span> −8/12 → <span class="hl">−3/4 &lt; −2/3</span></span></div>
+<svg viewBox="0 0 700 92" width="94%" style="margin:8px auto 0;display:block;">
+<line x1="40" y1="52" x2="660" y2="52" stroke="#f3efe2" stroke-width="2"/>
+<path d="M660 52 l-11 -6 M660 52 l-11 6" stroke="#f3efe2" stroke-width="2" fill="none"/>
+<line x1="580" y1="45" x2="580" y2="59" stroke="#f3efe2" stroke-width="2"/>
+<text x="580" y="78" font-family="Noto Serif TC" font-size="19" fill="#f3efe2" text-anchor="middle">0</text>
+<line x1="180" y1="45" x2="180" y2="59" stroke="#eda0a8" stroke-width="3"/>
+<text x="180" y="78" font-family="Noto Serif TC" font-size="18" fill="#eda0a8" text-anchor="middle">−9/12</text>
+<text x="180" y="34" font-family="Caveat" font-size="20" fill="#eda0a8" text-anchor="middle">−3/4</text>
+<line x1="225" y1="45" x2="225" y2="59" stroke="#98c9dc" stroke-width="3"/>
+<text x="225" y="96" font-family="Noto Serif TC" font-size="18" fill="#98c9dc" text-anchor="middle">−8/12</text>
+<text x="238" y="34" font-family="Caveat" font-size="20" fill="#98c9dc" text-anchor="middle">−2/3</text>
+<text x="400" y="30" font-family="Caveat" font-size="21" fill="#f2d979" text-anchor="middle">越靠近 0 → 越大</text>
+<path d="M300 40 q60 -8 110 -4" stroke="#f2d979" stroke-width="1.6" fill="none" stroke-dasharray="3 5"/>
+</svg>
+<div class="box y" style="text-align:center;">數線上<span class="hl">越右邊越大</span> —— 這規則從 1-1 到現在都沒變。</div>
+</div></div>
+
+<!-- 9 -->
+<div class="slide" data-pg="9 / 30"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 2　難度 ★★☆</div>
+<h2>比較 <span class="fm">−5/6</span> 與 <span class="fm">−7/8</span>，哪個大？</h2>
+<div class="eg">
+<div class="stp"><b>Step 1</b>　通分：LCM(6,8) = <span class="hl">24</span></div>
+<div class="stp"><b>Step 2</b>　<span class="fm">−5/6 = −20/24　；　−7/8 = −21/24</span></div>
+<div class="stp"><b>Step 3</b>　比分子：<span class="fm">−20 > −21</span>（−20 離 0 比較近）</div>
+<div class="stp"><b>Step 4</b>　所以 <span class="fm">−20/24 > −21/24</span></div>
+<div class="a">答：<span class="fm">−5/6</span> 比較大</div>
+</div>
+<div class="tip"><div class="ic">📌</div><div class="tx"><b>追問句：</b>「−20 和 −21 哪個大？」把問題拉回<b>整數</b>比大小 —— 學生就不會被分數嚇到。</div></div>
+</div></div>
+
+<!-- 10 -->
+<div class="slide" data-pg="10 / 30"><div class="tag">寫法</div><div class="body">
+<div class="eyebrow">細目 ①</div>
+<h2>負分數的三種寫法（值都一樣）</h2>
+<div class="box y" style="text-align:center;font-size:26px;padding:20px;">
+<span class="fm"><span class="hl">−(a/b) = (−a)/b = a/(−b)</span></span></div>
+<div class="two">
+<div class="box"><span class="fm" style="font-size:24px;">−2/3</span><br>
+<span style="color:var(--chalk-soft);font-size:17px;">負號在最前面</span><br><span class="hl-g">👍 建議用這個</span></div>
+<div class="box"><span class="fm" style="font-size:24px;">(−2)/3</span><br>
+<span style="color:var(--chalk-soft);font-size:17px;">負號在分子</span></div>
+<div class="box"><span class="fm" style="font-size:24px;">2/(−3)</span><br>
+<span style="color:var(--chalk-soft);font-size:17px;">負號在分母</span></div>
+</div>
+<div class="box g" style="text-align:center;">三個都等於 <span class="fm hl">−0.666…</span>，值完全相同</div>
+<div class="tip"><div class="ic">📌</div><div class="tx"><b>為什麼建議寫最前面？</b>負號藏在分子或分母裡，做加減乘除時<b>很容易漏看</b>。
+統一提到最前面，符號一目了然。</div></div>
+</div></div>
+
+<!-- 11 -->
+<div class="slide" data-pg="11 / 30"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">細目 ②　分數的加減運算</div>
+<h2>三步驟：通分 → 加減 → 約分</h2>
+<div class="eg">
+<div class="stp"><b>① 先通分</b>　取分母的 <span class="hl-g">LCM</span> 當公分母</div>
+<div class="stp"><b>② 分子加減</b>　符號規則<span class="hl">和整數完全一樣</span></div>
+<div class="stp"><b>③ 約分化簡</b>　除以 <span class="hl-b">GCD</span></div>
+</div>
+<div class="box y"><b>符號規則（複習 1-2）</b><br>
+<span class="hl">同號相加</span>：取同號，絕對值<b>相加</b><br>
+<span class="hl">異號相加</span>：取<b>絕對值大者</b>的符號，絕對值<b>相減</b><br>
+<span class="hl">減法轉加法</span>：<span class="fm">a − b = a + (−b)</span></div>
+</div></div>
+
+<!-- 12 -->
+<div class="slide" data-pg="12 / 30"><div class="tag">對照</div><div class="body">
+<div class="eyebrow">細目 ②</div>
+<h2>同號相加 vs 異號相加</h2>
+<div class="two">
+<div class="box"><b class="hl-b">同號</b>　<span class="fm">(−2/3) + (−1/4)</span><br>
+<span class="fm">・都是負 → 取<span class="hl">負</span>號</span><br>
+<span class="fm">・通分 LCM(3,4)=12：8/12、3/12</span><br>
+<span class="fm">・絕對值<b>相加</b>：8+3 = 11</span><br>
+<span class="fm hl-g" style="font-size:21px;">= −11/12</span></div>
+<div class="box g"><b class="hl-r">異號</b>　<span class="fm">(+3/5) + (−1/2)</span><br>
+<span class="fm">・通分 LCM(5,2)=10：6/10、5/10</span><br>
+<span class="fm">・比絕對值：6/10 > 5/10 → 取<span class="hl">正</span>號</span><br>
+<span class="fm">・絕對值<b>相減</b>：6−5 = 1</span><br>
+<span class="fm hl-g" style="font-size:21px;">= +1/10</span></div>
+</div>
+<div class="box y" style="text-align:center;">同號<span class="hl">加</span>、異號<span class="hl">減</span> —— 和 1-2 學的一模一樣，只是先通分而已</div>
+</div></div>
+
+<!-- 13 -->
+<div class="slide" data-pg="13 / 30"><div class="tag">避雷</div><div class="body">
+<div class="eyebrow">細目 ②　⚠️ 最常見錯誤</div>
+<h2>通分時，分子要「跟著乘」</h2>
+<div class="two">
+<div class="box r"><b class="hl-r">❌ 錯</b><br>
+<span class="fm" style="font-size:21px;">1/2 − 1/3 = (1−1)/6 = 0</span><br>
+<span style="color:var(--chalk-soft);font-size:17px;">只把分母通分了，分子原封不動</span></div>
+<div class="box g"><b class="hl-g">✓ 對</b><br>
+<span class="fm" style="font-size:21px;">1/2 = <span class="hl">3</span>/6　（分母×3，分子也×3）</span><br>
+<span class="fm" style="font-size:21px;">1/3 = <span class="hl">2</span>/6　（分母×2，分子也×2）</span><br>
+<span class="fm" style="font-size:21px;">3/6 − 2/6 = <span class="hl">1/6</span></span></div>
+</div>
+<div class="box y" style="text-align:center;font-size:21px;">
+通分＝<span class="hl">擴分</span> —— 分子分母要<b>一起</b>乘，值才不變！</div>
+<div class="tip"><div class="ic">📌</div><div class="tx"><b>教學提示：</b>可以問「<b>1/2 − 1/3 大概是多少？</b>」讓學生先估算 —— 大約 0.5−0.33 ≈ 0.17，
+就知道答案不可能是 0。<b>估算是最好的檢查工具。</b></div></div>
+</div></div>
+
+<!-- 14 -->
+<div class="slide" data-pg="14 / 30"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 3　難度 ★☆☆</div>
+<h2>計算 <span class="fm">1/3 + (−2/5)</span></h2>
+<div class="eg">
+<div class="stp"><b>Step 1</b>　通分：LCM(3,5) = <span class="hl">15</span></div>
+<div class="stp"><b>Step 2</b>　<span class="fm">1/3 = 5/15　；　−2/5 = −6/15</span></div>
+<div class="stp"><b>Step 3</b>　異號 → 比絕對值：6/15 > 5/15 → 取<span class="hl-r">負</span>號</div>
+<div class="stp"><b>Step 4</b>　<span class="fm">(5 − 6)/15 = −1/15</span></div>
+<div class="a">答：<span class="fm">−1/15</span></div>
+</div>
+</div></div>
+
+<!-- 15 -->
+<div class="slide" data-pg="15 / 30"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">細目 ③　分數的乘法運算</div>
+<h2>三步驟：定符號 → 相乘 → 約分</h2>
+<div class="eg">
+<div class="stp"><b>① 先定符號</b>　<span class="hl">同號得正、異號得負</span>（和整數一樣）</div>
+<div class="stp"><b>② 分子×分子、分母×分母</b></div>
+<div class="stp"><b>③ 約分</b>　—— 但更聰明的是<span class="hl">先約分再乘</span>！</div>
+</div>
+<div class="box y" style="text-align:center;font-size:23px;">
+<span class="fm">(a/b) × (c/d) = (a×c)/(b×d)</span></div>
+<div class="box"><b>乘法不用通分！</b>這是學生常搞混的地方 ——
+<span class="hl-r">加減才要通分</span>，<span class="hl-g">乘除不用</span>。</div>
+</div></div>
+
+<!-- 16 -->
+<div class="slide" data-pg="16 / 30"><div class="tag">技巧</div><div class="body">
+<div class="eyebrow">細目 ③　技巧</div>
+<h2>先斜向約分，數字小很多</h2>
+<div class="two">
+<div class="box r"><b class="hl-r">先乘再約</b>（辛苦）<br>
+<span class="fm">(3/4) × (8/9) = 24/36</span><br>
+<span class="fm">GCD(24,36) = 12 → 24/36 = 2/3</span><br>
+<span style="color:var(--chalk-soft);font-size:17px;">要處理 24、36 這種大數字</span></div>
+<div class="box g"><b class="hl-g">先斜向約分</b>（輕鬆）<br>
+<span class="fm">3 與 9 同除 3 → 1 與 3</span><br>
+<span class="fm">8 與 4 同除 4 → 2 與 1</span><br>
+<span class="fm">(1/1) × (2/3) = <span class="hl">2/3</span></span><br>
+<span style="color:var(--chalk-soft);font-size:17px;">數字全是個位數</span></div>
+</div>
+<svg viewBox="0 0 560 118" width="80%" style="margin:6px auto 0;display:block;">
+<text x="90" y="42" font-family="Noto Serif TC" font-size="27" fill="#eda0a8" text-anchor="middle">3</text>
+<line x1="58" y1="56" x2="122" y2="56" stroke="#f3efe2" stroke-width="2.2"/>
+<text x="90" y="90" font-family="Noto Serif TC" font-size="27" fill="#98c9dc" text-anchor="middle">4</text>
+<text x="155" y="68" font-family="Noto Serif TC" font-size="24" fill="#f3efe2" text-anchor="middle">×</text>
+<text x="225" y="42" font-family="Noto Serif TC" font-size="27" fill="#98c9dc" text-anchor="middle">8</text>
+<line x1="193" y1="56" x2="257" y2="56" stroke="#f3efe2" stroke-width="2.2"/>
+<text x="225" y="90" font-family="Noto Serif TC" font-size="27" fill="#eda0a8" text-anchor="middle">9</text>
+<path d="M105 36 q60 -14 108 46" stroke="#eda0a8" stroke-width="1.8" fill="none" stroke-dasharray="4 4"/>
+<text x="160" y="22" font-family="Caveat" font-size="19" fill="#eda0a8" text-anchor="middle">÷3</text>
+<path d="M108 92 q60 14 105 -44" stroke="#98c9dc" stroke-width="1.8" fill="none" stroke-dasharray="4 4"/>
+<text x="162" y="114" font-family="Caveat" font-size="19" fill="#98c9dc" text-anchor="middle">÷4</text>
+<text x="310" y="68" font-family="Noto Serif TC" font-size="24" fill="#f3efe2" text-anchor="middle">=</text>
+<text x="380" y="42" font-family="Noto Serif TC" font-size="27" fill="#a6d6a0" text-anchor="middle">2</text>
+<line x1="350" y1="56" x2="410" y2="56" stroke="#f3efe2" stroke-width="2.2"/>
+<text x="380" y="90" font-family="Noto Serif TC" font-size="27" fill="#a6d6a0" text-anchor="middle">3</text>
+<text x="480" y="68" font-family="Caveat" font-size="22" fill="#f2d979" text-anchor="middle">斜向約分</text>
+</svg>
+</div></div>
+
+<!-- 17 -->
+<div class="slide" data-pg="17 / 30"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 4　難度 ★★☆</div>
+<h2>計算 <span class="fm">(−3/4) × (8/9)</span></h2>
+<div class="eg">
+<div class="stp"><b>Step 1　定符號</b>　異號（一負一正）→ 結果為<span class="hl-r">負</span></div>
+<div class="stp"><b>Step 2　斜向約分</b>　3 與 9 同除 3；8 與 4 同除 4</div>
+<div class="stp"><b>Step 3　相乘</b>　<span class="fm">(1/1) × (2/3) = 2/3</span></div>
+<div class="stp"><b>Step 4　加符號</b>　<span class="fm">−2/3</span></div>
+<div class="a">答：<span class="fm">−2/3</span></div>
+</div>
+<div class="tip"><div class="ic">📌</div><div class="tx"><b>順序很重要：</b>先把符號<b>拍板定案</b>，剩下的就只是「正的數字在算」，不會算到一半被負號搞亂。</div></div>
+</div></div>
+
+<!-- 18 -->
+<div class="slide" data-pg="18 / 30"><div class="tag">避雷</div><div class="body">
+<div class="eyebrow">細目 ③　⚠️ 高頻錯誤</div>
+<h2>負分數的乘方：看指數奇偶</h2>
+<div class="two">
+<div class="box g"><b class="hl-g">偶次方 → 正</b><br>
+<span class="fm" style="font-size:22px;">(−1/2)² = (−1/2)×(−1/2) = <span class="hl">+1/4</span></span><br>
+<span class="fm" style="font-size:22px;">(−2/3)² = <span class="hl">+4/9</span></span><br>
+<span style="color:var(--chalk-soft);font-size:17px;">兩個負號相乘 → 正</span></div>
+<div class="box"><b class="hl-r">奇次方 → 負</b><br>
+<span class="fm" style="font-size:22px;">(−1/3)³ = <span class="hl">−1/27</span></span><br>
+<span class="fm" style="font-size:22px;">(−1/2)⁵ = <span class="hl">−1/32</span></span><br>
+<span style="color:var(--chalk-soft);font-size:17px;">三個負號相乘 → 負</span></div>
+</div>
+<div class="box r" style="text-align:center;font-size:21px;">
+❌ 最常錯：<span class="fm">(−2/3)² 寫成 −4/9</span>　→　✓ 正確 <span class="fm hl-g">+4/9</span></div>
+<div class="box y" style="text-align:center;">口訣：<span class="hl">負號數個數 —— 偶數個得正，奇數個得負</span>
+　例：<span class="fm">(−3/8)×(−4/9)×(−1/2)</span> 有 <b>3</b> 個負號 → <span class="hl-r">負</span></div>
+</div></div>
+
+<!-- 19 -->
+<div class="slide" data-pg="19 / 30"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">細目 ④　分數的除法運算</div>
+<h2>除以一個分數 = 乘以它的倒數</h2>
+<div class="box y" style="text-align:center;font-size:26px;padding:20px;">
+<span class="fm"><span class="hl">(a/b) ÷ (c/d) = (a/b) × (d/c)</span></span></div>
+<div class="box"><b>什麼是倒數？</b>把分子分母<span class="hl">上下顛倒</span>。
+<span class="fm">3/4 的倒數是 4/3</span>；<span class="fm">5 的倒數是 1/5</span>。<br>
+兩數相乘 = 1 → 互為倒數。</div>
+<div class="box g"><b>為什麼可以這樣？</b>「÷ 3/4」問的是「裡面有幾個 3/4」——
+把 3/4 翻過來乘，剛好就是在數這個。<br>
+<span style="color:var(--chalk-soft);font-size:17px;">和整數「÷2 = ×1/2」是同一件事。</span></div>
+<div class="box r" style="text-align:center;">⚠️ 絕對<span class="hl-r">不能</span>分子除分子、分母除分母！</div>
+</div></div>
+
+<!-- 20 -->
+<div class="slide" data-pg="20 / 30"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 5　難度 ★★☆</div>
+<h2>計算 <span class="fm">(−5/6) ÷ (−15/8)</span></h2>
+<div class="eg">
+<div class="stp"><b>Step 1　定符號</b>　同號（兩個負）→ 結果為<span class="hl-g">正</span></div>
+<div class="stp"><b>Step 2　化除為乘</b>　取絕對值：<span class="fm">(5/6) × (8/15)</span></div>
+<div class="stp"><b>Step 3　斜向約分</b>　5 與 15 同除 5；8 與 6 同除 2</div>
+<div class="stp"><b>Step 4　相乘</b>　<span class="fm">(1/3) × (4/3) = 4/9</span></div>
+<div class="a">答：<span class="fm">+4/9</span></div>
+</div>
+<div class="tip"><div class="ic">📌</div><div class="tx"><b>最常見錯誤：</b>取倒數時<b>連負號一起翻</b>，符號就亂了。
+建議<b>第一步先把符號定死</b>，後面只算絕對值。</div></div>
+</div></div>
+
+<!-- 21 -->
+<div class="slide" data-pg="21 / 30"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">細目 ⑤　分數的四則運算</div>
+<h2>運算順序：和整數完全一樣</h2>
+<div class="box y" style="text-align:center;font-size:27px;padding:20px;">
+<span class="hl">① 括號　→　② 乘除　→　③ 加減</span><br>
+<span style="font-size:19px;color:var(--chalk-soft);">同一級由左往右</span></div>
+<div class="box r"><b class="hl-r">最常見錯誤：</b>看到分數就慌，直接<b>從左往右</b>算。<br>
+<span class="fm">1/2 − 2/3 × 3/4</span> ❌ 不是 <span class="fm">(1/2 − 2/3) × 3/4</span>，
+✓ 是 <span class="fm">1/2 − (2/3 × 3/4)</span></div>
+<div class="box"><b>帶分數怎麼辦？</b>計算前<span class="hl">先化成假分數</span>，算完再視需要化回去。
+<span class="fm">1又3/4 = 7/4</span></div>
+</div></div>
+
+<!-- 22 -->
+<div class="slide" data-pg="22 / 30"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 6　難度 ★★★</div>
+<h2>計算 <span class="fm">1/2 − (−2/3) × (3/4) + (−1/6)</span></h2>
+<div class="eg">
+<div class="stp"><b>Step 1　先乘</b>　<span class="fm">(−2/3) × (3/4)</span>：異號 → 負；約分 2與4÷2、3與3÷3 → <span class="fm hl">−1/2</span></div>
+<div class="stp"><b>Step 2　整理</b>　<span class="fm">1/2 − (−1/2) + (−1/6) = 1/2 + 1/2 − 1/6</span></div>
+<div class="stp"><b>Step 3　通分</b>　LCM = 6：<span class="fm">3/6 + 3/6 − 1/6</span></div>
+<div class="stp"><b>Step 4　加減</b>　<span class="fm">(3 + 3 − 1)/6 = 5/6</span></div>
+<div class="a">答：<span class="fm">5/6</span></div>
+</div>
+<div class="tip"><div class="ic">📌</div><div class="tx"><b>Step 2 的陷阱：</b><span class="fm">− (−1/2)</span> 要變成 <span class="fm">+ 1/2</span>。
+<b>減去一個負數 = 加上正數</b>（1-2 學過）。</div></div>
+</div></div>
+
+<!-- 23 -->
+<div class="slide" data-pg="23 / 30"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 7　難度 ★★★</div>
+<h2>計算 <span class="fm">[2/3 + (−1/4)] ÷ (−5/6) × (−3/2)</span></h2>
+<div class="eg">
+<div class="stp"><b>Step 1　括號優先</b>　<span class="fm">2/3 − 1/4 = 8/12 − 3/12 = 5/12</span></div>
+<div class="stp"><b>Step 2　÷ 與 × 同級，由左往右</b>　先做除法</div>
+<div class="stp"><b>Step 3</b>　<span class="fm">5/12 ÷ (−5/6) = 5/12 × (−6/5)</span>；異號 → 負；約分 5與5、6與12÷6 → <span class="fm hl">−1/2</span></div>
+<div class="stp"><b>Step 4</b>　<span class="fm">(−1/2) × (−3/2)</span>：同號 → 正 → <span class="fm hl">+3/4</span></div>
+<div class="a">答：<span class="fm">3/4</span></div>
+</div>
+<div class="tip"><div class="ic">📌</div><div class="tx"><b>關鍵：</b>÷ 和 × 是<b>同一級</b>，必須<b>由左往右</b>，不能先算右邊的乘法！</div></div>
+</div></div>
+
+<!-- 24 -->
+<div class="slide" data-pg="24 / 30"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 8　難度 ★★★</div>
+<h2>已知 <span class="fm">x = −2/3、y = 3/4</span>，求 <span class="fm">2x − 3y²</span></h2>
+<div class="eg">
+<div class="stp"><b>Step 1　先算次方</b>　<span class="fm">y² = (3/4)² = 9/16</span></div>
+<div class="stp"><b>Step 2　代入</b>　<span class="fm">2 × (−2/3) − 3 × (9/16)</span></div>
+<div class="stp"><b>Step 3　算乘法</b>　<span class="fm">−4/3 − 27/16</span></div>
+<div class="stp"><b>Step 4　通分</b>　LCM(3,16) = 48：<span class="fm">−64/48 − 81/48</span></div>
+<div class="stp"><b>Step 5</b>　同號相加 → <span class="fm">−145/48</span></div>
+<div class="a">答：<span class="fm">−145/48</span></div>
+</div>
+<div class="tip"><div class="ic">📌</div><div class="tx"><b>代入時務必加括號：</b><span class="fm">2x</span> 要寫成 <span class="fm">2×(−2/3)</span>，
+不加括號寫成 <span class="fm">2×−2/3</span> 很容易漏掉負號。</div></div>
+</div></div>
+
+<!-- 25 -->
+<div class="slide" data-pg="25 / 30"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 1</div>
+<h2>水庫水位 —— 分數加減與絕對值</h2>
+<div class="box">連續三週水位變化（公尺）：第一週 <span class="fm hl-r">−3/8</span>、第二週 <span class="fm hl-g">+1/4</span>、第三週 <span class="fm hl-r">−1/6</span></div>
+<div class="eg">
+<div class="stp"><b>(1) 三週總變化？</b>　通分 24：<span class="fm">−9/24 + 6/24 − 4/24 = <span class="hl">−7/24</span></span> 公尺</div>
+<div class="stp"><b>(2) 原水位 10 公尺，三週後？</b>　<span class="fm">10 − 7/24 = 240/24 − 7/24 = 233/24 = <span class="hl">9又17/24</span></span> 公尺</div>
+<div class="stp"><b>(3) 哪週變化<u>幅度</u>最大？</b>　比<span class="hl">絕對值</span>：9/24、6/24、4/24 → <span class="hl">第一週</span></div>
+</div>
+<div class="box y">💡 (3) 呼應 <span class="hl">1-1 絕對值</span>：問「<b>幅度</b>」就是比絕對值，<b>不看正負</b>。
+第二週是唯一上升的，但幅度只排第二。</div>
+</div></div>
+
+<!-- 26 -->
+<div class="slide" data-pg="26 / 30"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 2</div>
+<h2>基金投資 —— 分數乘法</h2>
+<div class="box">兩支基金各投入 <span class="hl">30000</span> 元。甲報酬率 <span class="fm hl-r">−2/15</span>、乙報酬率 <span class="fm hl-g">+3/10</span></div>
+<div class="eg">
+<div class="stp"><b>(1) 各賺賠多少？</b><br>
+　甲：<span class="fm">30000 × (−2/15) = <span class="hl-r">−4000</span></span> 元（虧）<br>
+　乙：<span class="fm">30000 × (+3/10) = <span class="hl-g">+9000</span></span> 元（賺）</div>
+<div class="stp"><b>(2) 整體賺賠？</b>　<span class="fm">(−4000) + (+9000) = <span class="hl">+5000</span></span> 元 → <span class="hl-g">獲利</span></div>
+<div class="stp"><b>(3) 整體報酬率？</b>　<span class="fm">5000 ÷ 60000 = 5/60 = <span class="hl">1/12</span></span></div>
+</div>
+<div class="tip"><div class="ic">📌</div><div class="tx"><b>(3) 的陷阱：</b>整體報酬率<b>不是</b> (−2/15 + 3/10) ÷ 2！
+必須用<b>總損益 ÷ 總投入</b>。（本題兩邊投入剛好相等才碰巧接近，投入不同時差很多。）</div></div>
+</div></div>
+
+<!-- 27 -->
+<div class="slide" data-pg="27 / 30"><div class="tag">避雷</div><div class="body">
+<h2>避雷指南：五個最常見錯誤</h2>
+<table class="tbl">
+<tr><th style="width:47%;">❌ 錯誤</th><th>✓ 正確</th></tr>
+<tr><td>通分時分子沒跟著乘<br><span class="fm">1/2 − 1/3 = (1−1)/6</span></td><td><span class="fm hl-g">3/6 − 2/6 = 1/6</span></td></tr>
+<tr><td>分數除法忘記取倒數</td><td><span class="fm hl-g">÷(c/d) = ×(d/c)</span></td></tr>
+<tr><td><span class="fm">(−2/3)²</span> 算成 <span class="fm">−4/9</span></td><td><span class="fm hl-g">+4/9</span>（偶次方得正）</td></tr>
+<tr><td>以為 <span class="fm">−3/4 > −2/3</span></td><td><span class="fm hl-g">−9/12 &lt; −8/12</span> → −3/4 較小</td></tr>
+<tr><td>混合運算由左往右算</td><td><span class="hl-g">括號 → 乘除 → 加減</span></td></tr>
+</table>
+<div class="box y" style="text-align:center;">萬用檢查法：<span class="hl">先估算</span>。
+<span class="fm">1/2 − 1/3</span> 大約 0.5 − 0.33 ≈ 0.17，答案絕不可能是 0。</div>
+</div></div>
+
+<!-- 28 -->
+<div class="slide" data-pg="28 / 30"><div class="tag">補充</div><div class="body">
+<div class="eyebrow">補充　小數的四則運算</div>
+<h2>小數不是新東西 —— 它就是分數</h2>
+<div class="box y" style="text-align:center;font-size:22px;">
+<span class="hl">小數 = 分母為 10 的次方的分數</span></div>
+<table class="tbl">
+<tr><th>小數</th><th>分數形式</th><th>最簡分數</th></tr>
+<tr><td class="fm">0.4</td><td class="fm">4/10</td><td class="fm hl-g">2/5</td></tr>
+<tr><td class="fm">0.25</td><td class="fm">25/100</td><td class="fm hl-g">1/4</td></tr>
+<tr><td class="fm">3.45</td><td class="fm">345/100</td><td class="fm hl-g">69/20</td></tr>
+<tr><td class="fm">−0.75</td><td class="fm">−75/100</td><td class="fm hl-g">−3/4</td></tr>
+</table>
+<div class="box g" style="text-align:center;font-size:20px;">
+所以小數的四則運算<span class="hl">沒有任何新規則</span> ——<br>
+符號規則、運算順序，全部和前面<span class="hl">一模一樣</span>。</div>
+</div></div>
+
+<!-- 29 -->
+<div class="slide" data-pg="29 / 30"><div class="tag">避雷</div><div class="body">
+<div class="eyebrow">補充　小數的四則運算</div>
+<h2>規則相同，但有兩個專屬陷阱</h2>
+<div class="two">
+<div class="box"><b class="hl-b">加減</b>　小數點<span class="hl">對齊</span>（位數不足補 0）<br>
+<span class="fm">(−3.45)+(−2.6) = −6.05</span>（同號）<br>
+<span class="fm">(+4.7)+(−6.2) = −1.5</span>（異號）</div>
+<div class="box g"><b class="hl-g">乘除</b>　先算絕對值，再定符號<br>
+<span class="fm">(−1.2)×(−0.34) = +0.408</span><br>
+<span style="font-size:15px;color:var(--chalk-soft);">12×34=408；1位+2位=3位小數</span><br>
+<span class="fm">(−12.6)÷(−0.07) = +180</span></div>
+</div>
+<div class="box r"><b class="hl-r">⚠️ 陷阱一</b>　注意力全在判斷正負號，<span class="hl-r">忘記小數點對齊</span>。
+「正負號」和「小數點對齊」是<b>兩件分開要顧的事</b>。</div>
+<div class="box r"><b class="hl-r">⚠️ 陷阱二</b>　比較 <span class="fm">−3.45</span> 與 <span class="fm">−3.4</span>：
+以為「3.45 > 3.4 所以 −3.45 > −3.4」→ <span class="hl-r">錯</span>！<br>
+化成分數看：<span class="fm">−69/20 &lt; −68/20</span> → <span class="fm hl-g">−3.45 &lt; −3.4</span>。
+這和 <span class="fm">−3/4 &lt; −2/3</span> 是<b>同一個陷阱</b>，只是換了小數的外衣。</div>
+</div></div>
+
+<!-- 30 -->
+<div class="slide" data-pg="30 / 30"><div class="tag">總結</div><div class="body">
+<h2>本節總結</h2>
+<ul>
+<li><span class="hl">① 相等與比大小</span>：擴分約分不改值；<b>約分用 GCD、通分用 LCM</b>；負分數負得越多值越小</li>
+<li><span class="hl">② 加減</span>：先<b>通分</b> → 分子加減（符號同整數）→ 約分</li>
+<li><span class="hl">③ 乘法</span>：先<b>定符號</b> → 分子分母各自相乘 → <b>先斜向約分更快</b>；乘除<b>不用通分</b></li>
+<li><span class="hl">④ 除法</span>：<b>除以分數 = 乘以倒數</b>；先定符號再取倒數</li>
+<li><span class="hl">⑤ 四則</span>：括號 → 乘除 → 加減（和整數一樣）</li>
+<li><span class="hl">補充 小數</span>：小數就是分母 10 次方的分數，<b>規則完全相同</b>；小心小數點對齊與負小數比大小</li>
+</ul>
+<div class="box g" style="text-align:center;font-size:21px;">
+🔗 這節把 <span class="hl">2-2 的 GCD／LCM 真正用起來了</span>：<br>
+<span class="hl-b">約分用 GCD</span>　·　<span class="hl-g">通分用 LCM</span></div>
+<div class="box y" style="text-align:center;">下一節：<span class="hl">2-4 指數律</span> —— 把「同底數連乘」變成更快的寫法</div>
+</div></div>
+
+</div></body></html>

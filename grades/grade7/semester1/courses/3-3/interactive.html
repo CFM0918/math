@@ -1,0 +1,1119 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>七上 3-3 應用問題｜互動教學平台</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;--wood:#6b4a32;}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);overscroll-behavior:none;}
+.topbar{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:10px 16px;background:linear-gradient(180deg,#1b2f21,#132218);border-bottom:2px solid var(--wood);box-shadow:0 4px 18px rgba(0,0,0,0.5);}
+.brand{font-family:'Noto Serif TC',serif;font-weight:900;font-size:clamp(15px,2.2vw,20px);color:var(--yellow);white-space:nowrap;}
+.brand small{display:block;font-family:'Caveat',cursive;font-size:14px;color:var(--soft);font-weight:400;}
+.spacer{flex:1;}
+.btn{background:rgba(243,239,226,0.08);border:1.5px solid rgba(243,239,226,0.28);color:var(--chalk);
+  border-radius:10px;padding:7px 13px;font-family:inherit;font-size:14px;cursor:pointer;white-space:nowrap;transition:.15s;}
+.btn:hover{background:rgba(243,239,226,0.16);}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:10px 16px 0;scrollbar-width:none;}
+.tabs::-webkit-scrollbar{display:none;}
+.tab{background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.2);border-bottom:none;
+  color:var(--soft);border-radius:10px 10px 0 0;padding:9px 15px;font-size:14px;cursor:pointer;white-space:nowrap;font-family:inherit;}
+.tab.on{background:var(--board);border-color:var(--yellow);color:var(--yellow);font-weight:700;}
+.tab .n{font-family:'Caveat',cursive;font-size:18px;margin-right:5px;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px 60px;}
+.panel{display:none;}.panel.on{display:block;}
+.card{background:radial-gradient(ellipse at 20% 10%,rgba(255,255,255,0.05),transparent 45%),
+   linear-gradient(160deg,var(--board),var(--board2));
+  border:1.5px solid rgba(242,217,121,0.16);border-radius:14px;padding:18px;margin-bottom:16px;
+  box-shadow:0 8px 26px rgba(0,0,0,0.45);position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 38px,rgba(255,255,255,0.012) 38px,rgba(255,255,255,0.012) 39px);}
+.card>*{position:relative;}
+.card h3{font-family:'Noto Serif TC',serif;font-size:clamp(17px,2.4vw,21px);color:var(--yellow);
+  margin-bottom:12px;padding-bottom:8px;border-bottom:2px dashed rgba(242,217,121,0.35);display:flex;align-items:center;gap:8px;}
+.card h3 .ic{font-size:20px;}
+.goals{display:flex;flex-wrap:wrap;gap:9px;}
+.goal{display:flex;align-items:center;gap:9px;background:rgba(242,217,121,0.07);
+  border:1.5px dashed rgba(242,217,121,0.4);border-radius:22px;padding:8px 15px 8px 8px;
+  font-size:clamp(13.5px,1.8vw,15px);color:var(--yellow);line-height:1.5;}
+.goal .bdg{width:24px;height:24px;border-radius:50%;background:var(--yellow);color:#16281c;
+  font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;flex:none;}
+.deck{position:relative;background:rgba(0,0,0,0.22);border-radius:12px;padding:clamp(16px,3vw,30px);
+  min-height:clamp(260px,42vh,380px);display:flex;flex-direction:column;justify-content:center;}
+.sl{display:none;animation:fade .25s;}.sl.on{display:block;}
+@keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+.sl .eyebrow{font-family:'Caveat',cursive;font-size:20px;color:var(--yellow);margin-bottom:6px;}
+.sl h4{font-family:'Noto Serif TC',serif;font-size:clamp(19px,3vw,27px);margin-bottom:12px;line-height:1.35;}
+.sl p{font-size:clamp(15px,2vw,18px);line-height:1.8;margin-bottom:9px;}
+.sl ul{list-style:none;}
+.sl li{font-size:clamp(15px,2vw,18px);line-height:1.85;padding-left:26px;position:relative;margin-bottom:4px;}
+.sl li::before{content:'✦';position:absolute;left:2px;color:var(--yellow);font-size:14px;top:3px;}
+.nav{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:14px;}
+.nav .pg{font-family:'Caveat',cursive;font-size:20px;color:var(--soft);min-width:64px;text-align:center;}
+.dots{display:flex;gap:6px;justify-content:center;margin-top:10px;flex-wrap:wrap;}
+.dot{width:9px;height:9px;border-radius:50%;background:rgba(243,239,226,0.25);cursor:pointer;border:none;padding:0;}
+.dot.on{background:var(--yellow);transform:scale(1.3);}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.32);border-radius:10px;
+  padding:11px 15px;margin:9px 0;font-size:clamp(14px,1.9vw,17px);line-height:1.7;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.36);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.36);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.32);}
+.two{display:flex;gap:12px;flex-wrap:wrap;}.two>*{flex:1;min-width:220px;}
+.teach{background:rgba(201,174,224,0.12);border:1.5px dashed rgba(201,174,224,0.5);
+  border-radius:10px;padding:11px 15px;margin:9px 0;font-size:clamp(14px,1.8vw,15px);line-height:1.7;}
+.teach b{color:var(--purple);}
+.tbl{width:100%;border-collapse:collapse;margin:9px 0;font-size:clamp(13.5px,1.8vw,16px);}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.24);padding:8px 11px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.cv-wrap{background:rgba(0,0,0,0.25);border-radius:12px;padding:10px;}
+canvas.viz{width:100%;display:block;border-radius:8px;touch-action:none;}
+.ctrl{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center;}
+.readout{font-family:'Noto Serif TC',serif;font-size:clamp(14px,1.9vw,18px);color:var(--chalk);
+  background:rgba(242,217,121,0.1);border:1px solid rgba(242,217,121,0.3);border-radius:8px;
+  padding:7px 12px;flex:1;min-width:220px;}
+.readout b{color:var(--yellow);}
+.q{background:rgba(0,0,0,0.2);border:1px solid rgba(242,217,121,0.18);border-radius:10px;padding:13px 15px;margin:10px 0;}
+.q .qt{font-size:clamp(15px,2vw,17px);margin-bottom:10px;line-height:1.7;}
+.q .qt .qn{font-family:'Caveat',cursive;color:var(--yellow);font-size:20px;margin-right:6px;}
+.opts{display:flex;flex-direction:column;gap:7px;}
+.opt{text-align:left;background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.22);
+  color:var(--chalk);border-radius:9px;padding:9px 13px;font-family:inherit;font-size:15px;cursor:pointer;transition:.15s;line-height:1.5;}
+.opt:hover:not(:disabled){background:rgba(243,239,226,0.13);}
+.opt.right{background:rgba(166,214,160,0.24);border-color:var(--green);color:#fff;font-weight:700;}
+.opt.wrong{background:rgba(237,160,168,0.22);border-color:var(--pink);}
+.opt:disabled{cursor:default;}
+.fb{display:none;margin-top:9px;padding:9px 13px;border-radius:8px;font-size:14.5px;line-height:1.65;}
+.fb.on{display:block;}
+.fb.ok{background:rgba(166,214,160,0.14);border-left:3px solid var(--green);}
+.fb.no{background:rgba(237,160,168,0.14);border-left:3px solid var(--pink);}
+.fill{display:inline-block;background:rgba(0,0,0,0.3);border:none;border-bottom:2px solid var(--yellow);
+  color:var(--yellow);font-family:'Noto Serif TC',serif;font-size:17px;width:110px;text-align:center;padding:3px 5px;margin:0 4px;}
+.fill:focus{outline:none;background:rgba(242,217,121,0.12);}
+.exq{background:rgba(0,0,0,0.26);border:1.5px solid rgba(242,217,121,0.28);border-radius:11px;padding:13px 15px;margin:10px 0;position:relative;}
+.exq::before{content:'';position:absolute;top:-8px;left:32px;width:54px;height:14px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.exq .exq-q{font-size:clamp(14.5px,1.9vw,17px);line-height:1.75;margin-bottom:11px;}
+.exo{text-align:left;background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.22);
+  color:var(--chalk);border-radius:9px;padding:9px 13px;font-family:inherit;font-size:clamp(14px,1.8vw,15.5px);
+  cursor:pointer;transition:.15s;line-height:1.55;width:100%;margin-bottom:6px;display:block;}
+.exo:hover:not(:disabled){background:rgba(243,239,226,0.13);}
+.exo.right{background:rgba(166,214,160,0.26);border-color:var(--green);color:#fff;font-weight:700;}
+.exo.wrong{background:rgba(237,160,168,0.2);border-color:var(--pink);opacity:.75;}
+.exo:disabled{cursor:default;}
+@keyframes shake{10%,90%{transform:translateX(-2px);}30%,70%{transform:translateX(4px);}50%{transform:translateX(-4px);}}
+.exo.shake{animation:shake .4s;}
+.exsol{display:none;margin-top:10px;padding:11px 14px;border-radius:9px;
+  background:rgba(166,214,160,0.13);border-left:3px solid var(--green);font-size:clamp(14px,1.8vw,15.5px);line-height:1.75;}
+.exsol.on{display:block;animation:fade .3s;}
+.exsol .st{color:var(--soft);margin:3px 0;}
+.exsol .an{color:var(--green);font-weight:700;margin-top:6px;}
+.exlock{display:flex;align-items:center;gap:7px;margin-top:9px;font-size:13.5px;color:rgba(243,239,226,0.45);}
+.exlock.hide{display:none;}
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:11px;}
+.icard{background:rgba(0,0,0,0.22);border:1.5px solid rgba(242,217,121,0.22);border-radius:11px;padding:14px;text-align:center;}
+.icard .big{font-family:'Noto Serif TC',serif;font-size:clamp(17px,2.6vw,23px);font-weight:900;margin:6px 0;}
+.icard .cap{font-size:13.5px;color:var(--soft);line-height:1.6;}
+.frow{display:flex;gap:12px;align-items:center;padding:9px 12px;border-bottom:1px dashed rgba(243,239,226,0.16);}
+.frow:last-child{border-bottom:none;}
+.flab{color:var(--blue);font-weight:700;min-width:150px;font-size:clamp(13.5px,1.8vw,15.5px);flex:none;}
+.fval{color:var(--yellow);font-weight:700;font-family:'Noto Serif TC',serif;font-size:clamp(14px,1.9vw,17px);}
+@media(max-width:560px){.frow{flex-direction:column;align-items:flex-start;gap:3px;}.flab{min-width:0;}}
+.hud{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:12px;}
+.hud .st{background:rgba(0,0,0,0.3);border:1.5px solid rgba(242,217,121,0.28);border-radius:9px;
+  padding:7px 13px;font-size:14px;flex:1;min-width:88px;text-align:center;}
+.hud .st b{display:block;font-family:'Noto Serif TC',serif;font-size:20px;color:var(--yellow);}
+.tbar{height:8px;background:rgba(0,0,0,0.35);border-radius:5px;overflow:hidden;margin-bottom:12px;}
+.tfill{height:100%;background:linear-gradient(90deg,var(--green),var(--yellow),var(--pink));width:100%;transition:width .1s linear;}
+.gscreen{display:none;}.gscreen.on{display:block;}
+.lvchips{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin:14px 0;}
+.lvchip{background:rgba(152,201,220,0.12);border:1.5px solid rgba(152,201,220,0.35);border-radius:18px;
+  padding:6px 13px;font-size:13.5px;color:var(--blue);}
+.lvchip.done{background:rgba(166,214,160,0.2);border-color:var(--green);color:var(--green);}
+.lvchip.now{background:rgba(242,217,121,0.22);border-color:var(--yellow);color:var(--yellow);font-weight:700;}
+.gq{font-size:clamp(16px,2.2vw,20px);line-height:1.7;margin:14px 0;text-align:center;font-family:'Noto Serif TC',serif;}
+.gopts{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+@media(max-width:560px){.gopts{grid-template-columns:1fr;}}
+.gopt{background:rgba(243,239,226,0.07);border:1.5px solid rgba(243,239,226,0.25);color:var(--chalk);
+  border-radius:10px;padding:12px;font-family:'Noto Serif TC',serif;font-size:17px;cursor:pointer;transition:.15s;min-height:48px;}
+.gopt:hover:not(:disabled){background:rgba(243,239,226,0.15);}
+.gopt.right{background:rgba(166,214,160,0.3);border-color:var(--green);font-weight:900;}
+.gopt.wrong{background:rgba(237,160,168,0.25);border-color:var(--pink);}
+.gfb{margin-top:11px;padding:10px 13px;border-radius:8px;font-size:14.5px;line-height:1.6;display:none;}
+.gfb.on{display:block;}
+.gfb.ok{background:rgba(166,214,160,0.15);border-left:3px solid var(--green);}
+.gfb.no{background:rgba(237,160,168,0.15);border-left:3px solid var(--pink);}
+.rank{font-size:54px;text-align:center;margin:10px 0;}
+.hint{text-align:center;color:rgba(243,239,226,0.35);font-size:12.5px;padding:8px 0 0;}
+@media (max-width:640px){.topbar{padding:8px 10px;gap:8px;}.wrap{padding:0 10px 70px;}.card{padding:13px;}}
+</style></head><body>
+
+<div class="topbar">
+  <div class="brand">3-3　應用問題<small>七上 · 第3章 · 七上完結篇</small></div>
+  <div class="spacer"></div>
+</div>
+
+<div class="tabs" id="tabs">
+  <button class="tab on" data-p="0"><span class="n">🔑</span>五步驟與不變量</button>
+  <button class="tab" data-p="1"><span class="n">🚗</span>行程問題</button>
+  <button class="tab" data-p="2"><span class="n">🧪</span>工作與濃度</button>
+  <button class="tab" data-p="3"><span class="n">★</span>題型測驗</button>
+  <button class="tab" data-p="4"><span class="n">🎮</span>闖關遊戲</button>
+</div>
+
+<div class="wrap">
+  <div class="card" id="goalCard">
+    <h3><span class="ic">🎯</span>本節學習目標</h3>
+    <div class="goals" id="goals"></div>
+  </div>
+  <div id="wrap"></div>
+</div>
+
+<script>
+const GOALS = [
+  '掌握應用問題的五步驟解題流程',
+  '能正確設未知數，寫出「設…為 x」',
+  '能抓住每種題型的關鍵不變量',
+  '能處理數字、行程、工作、分配、濃度五大題型',
+  '能分辨相向（速度相加）與追及（速度相減）',
+  '解完後能檢查合理性（人數不能是小數或負數）',
+];
+
+const DATA = [
+{ key:'invar', viz:'invar', vizTitle:'不變量偵測器 —— 先自己想，想好再按「揭曉」（9 題涵蓋全部題型）',
+  slides:[
+    {eb:'細目 ①', h:'應用問題五步驟', html:`
+      <div class="box y" style="text-align:center;font-size:17px;padding:14px;">
+        <span class="hl">① 設未知數　→　② 找不變量　→　③ 列式　→　④ 解方程式　→　⑤ 檢查合理性</span></div>
+      <table class="tbl">
+        <tr><th style="width:9%;">　</th><th style="width:28%;">動作</th><th>關鍵</th></tr>
+        <tr><td class="hl" style="font-size:18px;">①</td><td><b>設未知數</b></td><td>一定要寫出「<span class="hl-r">設…為 x</span>」</td></tr>
+        <tr><td class="hl" style="font-size:18px;">②</td><td><b>找不變量</b></td><td class="hl">「這題真正<b>不會變</b>的東西是什麼？」</td></tr>
+        <tr><td class="hl" style="font-size:18px;">③</td><td><b>列式</b></td><td>把不變量寫成<b>等式的兩邊</b></td></tr>
+        <tr><td class="hl" style="font-size:18px;">④</td><td><b>解方程式</b></td><td>3-2 的五步驟</td></tr>
+        <tr><td class="hl" style="font-size:18px;">⑤</td><td><b>檢查合理性</b></td><td>人數不能是<b>負數或小數</b></td></tr>
+      </table>`},
+    {eb:'細目 ① 🔑', h:'第 ② 步是整節的靈魂', html:`
+      <div class="box y" style="text-align:center;font-size:21px;padding:16px;"><span class="hl">「這題真正不會變的東西是什麼？」</span></div>
+      <table class="tbl">
+        <tr><th style="width:34%;">題型</th><th>不變量</th></tr>
+        <tr><td class="hl-b">行程（相向）</td><td class="hl"><b>總距離</b></td></tr>
+        <tr><td class="hl-b">行程（追及）</td><td class="hl"><b>追上時兩人的位置</b></td></tr>
+        <tr><td class="hl-b">工作</td><td class="hl"><b>總工作量 = 1</b></td></tr>
+        <tr><td class="hl-b">分配</td><td class="hl"><b>總金額</b></td></tr>
+        <tr><td class="hl-b">濃度</td><td class="hl"><b>溶質的重量</b></td></tr>
+      </table>
+      <div class="box g" style="text-align:center;">💡 找到不變量 → <span class="hl">它就是等號</span>。方程式就寫出來了。</div>`},
+    {eb:'細目 ① ⚠️', h:'千萬不要跳過「設…為 x」', html:`
+      <div class="box r" style="text-align:center;font-size:18px;">
+        ❌ 直接列式 → 解出 <span class="fm">x = 30</span> → <span class="hl-r">「所以 30 是什麼？人數？錢？天數？」</span></div>
+      <div class="box g"><b class="hl-g">✓ 正確做法</b><br>
+        「<span class="hl">設原本預計參加的人數為 x 人</span>」← 寫下這句話，只要三秒<br>
+        解出 x = 30 → 立刻知道：<b>原本預計 30 人</b></div>
+      <div class="box y" style="text-align:center;"><span class="hl">設未知數不是形式，是在幫未來的自己。</span>題目越長，這句話越重要。</div>
+      <div class="teach"><b>而且「設」還要寫單位。</b>「設 x」和「設兒子現在 <b>x 歲</b>」差很多 —— 後者讓你在列式時自動想到「5 年後是 x+5」。</div>`},
+    {eb:'題型 1', h:'數字問題：連續整數怎麼設', html:`
+      <div class="two">
+        <div class="box"><b class="hl-b">連續整數</b><br><span class="fm" style="font-size:18px;">x、x+1、x+2</span></div>
+        <div class="box g"><b class="hl-g">連續偶數（或奇數）</b><br><span class="fm" style="font-size:18px;">x、x+2、x+4</span></div>
+      </div>
+      <div class="box"><b>兩個連續整數的和是 47</b><br>
+        設較小的為 <span class="fm hl">x</span> → 較大的是 <span class="fm hl">x+1</span><br>
+        <span class="fm">x + (x+1) = 47 → 2x = 46 → x = 23</span> → <b>23 和 24</b></div>
+      <div class="box y"><b>為什麼連續偶數是 x、x+2 而不是 x、x+1？</b>因為偶數之間差 <span class="hl">2</span>（2, 4, 6, 8…）。連續奇數也是差 2。</div>`},
+    {eb:'細目 ① 第⑤步', h:'不是每個「數學上正確」的答案都對', html:`
+      <table class="tbl">
+        <tr><th style="width:38%;">量</th><th style="width:30%;">可以是小數嗎？</th><th>可以是負數嗎？</th></tr>
+        <tr><td class="hl-b"><b>人數、個數、袋數</b></td><td class="hl-r">❌ 必須是<b>整數</b></td><td class="hl-r">❌</td></tr>
+        <tr><td class="hl-b"><b>年齡</b></td><td class="hl-r">❌ 通常是整數</td><td class="hl-r">❌</td></tr>
+        <tr><td class="hl-b"><b>時間</b></td><td class="hl-g">✅（如 3.6 小時）</td><td class="hl-r">❌</td></tr>
+        <tr><td class="hl-b"><b>距離、重量</b></td><td class="hl-g">✅</td><td class="hl-r">❌</td></tr>
+      </table>
+      <div class="box y" style="text-align:center;">💡 解出 <span class="fm hl-r">x = 30.5 人</span> → <span class="hl">一定是算錯了</span>！</div>
+      <div class="box g"><b>檢查合理性是抓計算錯誤的好方法。</b>它不花時間，但能救你 —— <b>因為答案荒謬的時候，人會停下來重算</b>。</div>`},
+    {eb:'例題 1 ★☆☆', h:'數字問題', html:`
+      <div class="exq" data-a="1">
+        <div class="exq-q"><span class="hl">Q</span>　兩個<b>連續偶數</b>之和是 50，求這兩個數</div>
+        <button class="exo" data-i="0">24 和 25</button>
+        <button class="exo" data-i="1">24 和 26</button>
+        <button class="exo" data-i="2">25 和 25</button>
+        <button class="exo" data-i="3">23 和 27</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">設較小的偶數為 x → 下一個偶數是 <b>x + 2</b>（偶數之間差 2！）</div>
+          <div class="st fm">x + (x+2) = 50 → 2x + 2 = 50 → 2x = 48 → x = 24</div>
+          <div class="st fm">兩數：24 和 26。驗算：24 + 26 = 50 ✓</div>
+          <div class="st">(A) 是把「連續偶數」當成「連續整數」設成 x、x+1 —— <span class="hl-r">25 不是偶數！</span></div>
+          <div class="an">答：24 和 26</div>
+        </div>
+      </div>`},
+    {eb:'例題 2 ★★☆', h:'分配問題', html:`
+      <div class="exq" data-a="2">
+        <div class="exq-q"><span class="hl">Q</span>　原本預計 x 人包車，每人 150 元；後來 <b>5 人取消</b>，剩下的人每人要付 180 元（<b>總車費不變</b>）。原本預計幾人？</div>
+        <button class="exo" data-i="0">25 人</button>
+        <button class="exo" data-i="1">20 人</button>
+        <button class="exo" data-i="2">30 人</button>
+        <button class="exo" data-i="3">35 人</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st"><b>② 不變量：總車費</b> —— 不管幾個人分攤，總數固定</div>
+          <div class="st fm"><b>③ 列式</b>：150x = 180(x − 5)　← 左邊是總車費，右邊也是總車費</div>
+          <div class="st fm"><b>④ 解</b>：150x = 180x − 900 → −30x = −900 → x = 30</div>
+          <div class="st fm"><b>驗算</b>：150 × 30 = 4500；剩 25 人 → 4500 ÷ 25 = 180 ✓</div>
+          <div class="st">(A) 25 人是<b>取消後</b>的人數，不是原本的 —— 題目問「<b>原本</b>預計幾人」！</div>
+          <div class="st">💡 列式訣竅：「<b>總車費 = 總車費</b>」—— 用兩種方式表達同一個東西。</div>
+          <div class="an">答：原本預計 30 人</div>
+        </div>
+      </div>`}
+  ],
+  fa:[
+    {q:'某數的 3 倍加 5 等於 26，求這個數', o:['7','9','21','31/3'], a:0, e:'3x + 5 = 26 → 3x = 21 → x = 7。'},
+    {q:'甲比乙多 12 歲，年齡和 48 歲，乙幾歲？', o:['30 歲','18 歲','24 歲','36 歲'], a:1, e:'設乙 x：x + (x+12) = 48 → 2x = 36 → x = 18（甲 30）。'},
+    {q:'解出「x = 30.5 人」該怎麼辦？', o:['四捨五入成 31','就寫 30.5','一定算錯了，要重算','無條件進位'], a:2, e:'人數必須是整數 → 出現小數就是算錯了（或題目有問題）。'}
+  ],
+  info:[
+    {big:'找不變量', cap:'它就是等號<br>方程式就出來了', c:'var(--yellow)'},
+    {big:'一定要「設」', cap:'不然解完<br>不知道是什麼', c:'var(--blue)'},
+    {big:'檢查合理性', cap:'人數不能是<br>小數或負數', c:'var(--green)'}
+  ]
+},
+{ key:'trip', viz:'trip', vizTitle:'行程動態模擬 —— 按時間鍵看兩人怎麼靠近；三種模式可切換',
+  slides:[
+    {eb:'題型 2 ⚠️ 最常搞混', h:'相向「相加」，追及「相減」', html:`
+      <div class="box y" style="text-align:center;font-size:19px;"><span class="fm hl">距離 = 速度 × 時間</span></div>
+      <table class="tbl">
+        <tr><th style="width:24%;">情況</th><th style="width:40%;">關係</th><th>速度</th></tr>
+        <tr><td class="hl-g"><b>相向而行</b><br><span style="font-size:13px;">（面對面接近）</span></td><td>兩者距離之<b>和</b> = 總距離</td><td class="hl-g" style="font-size:17px;">相<b>加</b></td></tr>
+        <tr><td class="hl-r"><b>同向追及</b><br><span style="font-size:13px;">（後面追前面）</span></td><td>追上時兩人<b>位置相同</b></td><td class="hl-r" style="font-size:17px;">相<b>減</b></td></tr>
+        <tr><td class="hl-b"><b>反向而行</b><br><span style="font-size:13px;">（背對背遠離）</span></td><td>兩者距離之<b>和</b> = 相距</td><td class="hl-b" style="font-size:17px;">相<b>加</b></td></tr>
+      </table>
+      <div class="box g"><b>💡 為什麼？用想的不用背：</b><br>
+        <span class="hl-g">相向</span>是「<b>一起把距離吃掉</b>」→ 兩人的速度<b>都在幫忙</b> → <b>相加</b><br>
+        <span class="hl-r">追及</span>是「<b>後面比前面快多少</b>」→ 只有<b>速度差</b>在縮短距離 → <b>相減</b></div>`},
+    {eb:'例題 3 ★★☆', h:'相向而行', html:`
+      <div class="exq" data-a="1">
+        <div class="exq-q"><span class="hl">Q</span>　兩地相距 360 公里，甲車時速 60、乙車時速 40，同時出發<b>相向而行</b>，幾小時後相遇？</div>
+        <button class="exo" data-i="0">18 小時</button>
+        <button class="exo" data-i="1">3.6 小時</button>
+        <button class="exo" data-i="2">6 小時</button>
+        <button class="exo" data-i="3">9 小時</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st"><b>② 不變量</b>：總距離 360 公里</div>
+          <div class="st fm"><b>③ 列式</b>：60t + 40t = 360　（相向 → 速度<b>相加</b>）</div>
+          <div class="st fm"><b>④ 解</b>：100t = 360 → t = 3.6</div>
+          <div class="st fm"><b>⑤ 檢查</b>：時間<b>可以</b>是小數 ✓</div>
+          <div class="st">(A) 18 小時是用「速度<b>相減</b>」算的（360 ÷ 20）—— <span class="hl-r">相向要相加！</span></div>
+          <div class="st">💡 到下方的<b>行程動態模擬</b>按「時間 +」，親眼看兩台車怎麼靠近。</div>
+          <div class="an">答：3.6 小時後相遇</div>
+        </div>
+      </div>`},
+    {eb:'例題 4 ★★★', h:'追及問題（本節最難）', html:`
+      <div class="box">家到學校 4.8 公里。弟弟先走（時速 4），哥哥<b>晚 10 分鐘</b>出發（時速 16）。</div>
+      <div class="exq" data-a="0">
+        <div class="exq-q"><span class="hl">Q</span>　哥哥出發後多久<b>追上</b>弟弟？</div>
+        <button class="exo" data-i="0">1/18 小時（約 3.3 分鐘）</button>
+        <button class="exo" data-i="1">1/6 小時（10 分鐘）</button>
+        <button class="exo" data-i="2">1/3 小時（20 分鐘）</button>
+        <button class="exo" data-i="3">追不上</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st"><b>先算「頭」</b>：哥哥出發時，弟弟已走 10 分 = 1/6 小時 → 已走 <b>4 × 1/6 = 2/3 公里</b></div>
+          <div class="st"><b>② 不變量</b>：<b>追上 = 兩人位置相同</b></div>
+          <div class="st fm">哥哥走的 = 16t　；　弟弟的位置 = 2/3 + 4t</div>
+          <div class="st fm"><b>③ 列式</b>：16t = 2/3 + 4t　→　12t = 2/3　→　t = 1/18 小時 ≈ 3.3 分</div>
+          <div class="st fm"><b>⑤ 檢查</b>：追上時哥哥走 16 × 1/18 = 8/9 ≈ 0.89 km &lt; 4.8 ✓ 確實在到校前追上</div>
+          <div class="an">答：約 1/18 小時（約 3.3 分鐘）後追上</div>
+        </div>
+      </div>`},
+    {eb:'💡 重要觀念', h:'追及的兩種寫法，其實是同一個', html:`
+      <div class="two">
+        <div class="box"><b class="hl-b">寫法一：位置相等</b><br>
+          <span class="fm" style="font-size:17px;">16t = 2/3 + 4t</span><br><span style="font-size:13px;color:var(--soft)">哥哥走的 = 弟弟的位置</span></div>
+        <div class="box g"><b class="hl-g">寫法二：速度差追頭</b><br>
+          <span class="fm" style="font-size:17px;">(16 − 4)t = 2/3</span><br><span style="font-size:13px;color:var(--soft)">用速度差把「頭」吃掉</span></div>
+      </div>
+      <div class="box y" style="text-align:center;">
+        把寫法一的 <span class="fm">4t</span> 移到左邊 → <span class="fm">16t − 4t = 2/3</span> → <span class="fm">12t = 2/3</span><br>
+        <span class="hl">就是寫法二。兩式完全相同。</span></div>
+      <div class="box g"><b>這就是「追及速度相減」的由來 ——</b>它不是一條要背的公式，是<span class="hl">移項的結果</span>。</div>
+      <div class="teach"><b>這是整節最值得帶走的觀念：</b>那些看起來要背的「題型公式」，其實都是<b>基本原理 + 移項</b>推出來的。<b>懂原理的人不用背公式。</b></div>`},
+    {eb:'例題 5 ★★☆', h:'反向而行', html:`
+      <div class="exq" data-a="2">
+        <div class="exq-q"><span class="hl">Q</span>　兩車同時從<b>同一地點</b>出發、<b>反方向</b>而行，甲時速 50、乙時速 70，幾小時後相距 480 公里？</div>
+        <button class="exo" data-i="0">24 小時</button>
+        <button class="exo" data-i="1">6 小時</button>
+        <button class="exo" data-i="2">4 小時</button>
+        <button class="exo" data-i="3">9.6 小時</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st"><b>② 不變量</b>：相距 480 公里</div>
+          <div class="st fm"><b>③ 列式</b>：50t + 70t = 480　（反向 → 速度<b>相加</b>）</div>
+          <div class="st fm"><b>④ 解</b>：120t = 480 → t = 4</div>
+          <div class="st">(A) 24 小時是用速度<b>相減</b>（480 ÷ 20）—— 反向和相向一樣要<b>相加</b>！</div>
+          <div class="st">💡 <b>反向和相向的數學是一樣的</b>：都是「兩人一起改變距離」→ 相加。<br>
+            差別只在相向是「把距離吃掉」、反向是「把距離拉開」。</div>
+          <div class="an">答：4 小時</div>
+        </div>
+      </div>`}
+  ],
+  fa:[
+    {q:'相向而行時，兩車速度要？', o:['相加','相減','相乘','相除'], a:0, e:'相向是「一起把距離吃掉」→ 兩人的速度都在幫忙 → 相加。'},
+    {q:'同向追及時，兩車速度要？', o:['相加','相減','相乘','不用管'], a:1, e:'追及是「後面比前面快多少」→ 只有速度差在縮短距離 → 相減。'},
+    {q:'判斷：「相向速度相減、追及速度相加」', o:['對','錯，剛好相反','對，但要看題目','不一定'], a:1, e:'錯！剛好相反：相向相加、追及相減。'}
+  ],
+  info:[
+    {big:'相向・反向 → 加', cap:'兩人一起<br>改變距離', c:'var(--green)'},
+    {big:'追及 → 減', cap:'只有速度差<br>在縮短距離', c:'var(--pink)'},
+    {big:'公式是推出來的', cap:'「速度相減」<br>就是移項的結果', c:'var(--yellow)'}
+  ]
+},
+{ key:'conc', viz:'conc', vizTitle:'濃度杯 —— 切換「加水／加純糖」，看溶質到底變不變',
+  slides:[
+    {eb:'題型 3', h:'工作問題：把整件工作看成「1」', html:`
+      <div class="box y" style="text-align:center;font-size:18px;">甲 n 天完成　→　甲<b>每天</b>做 <span class="fm hl" style="font-size:21px;">1/n</span></div>
+      <div class="box"><b>甲單獨 8 天、乙單獨 12 天，合作幾天完成？</b><br>
+        <b>② 不變量</b>：總工作量 = <span class="hl">1</span><br>
+        甲每天 <span class="fm">1/8</span>、乙每天 <span class="fm">1/12</span><br>
+        <b>③ 列式</b>：<span class="fm">t × (1/8 + 1/12) = 1</span><br>
+        <b>④ 解</b>：通分（<span class="hl">LCM = 24</span>）→ <span class="fm">5/24</span>；<span class="fm">t × 5/24 = 1 → t = 24/5 = 4.8</span></div>
+      <div class="box g"><b>為什麼是「1」？</b>因為<b>整件工作</b>就是 100% = <span class="hl">1</span>。<br>
+        💡 這裡用到 <span class="hl">2-2 的 LCM</span> 和 <span class="hl">2-3 的分數加法</span> —— 老朋友又出現了。</div>`},
+    {eb:'題型 5', h:'濃度問題：不變量是溶質重量', html:`
+      <div class="box y" style="text-align:center;font-size:19px;"><span class="fm hl">濃度 = 溶質 ÷ 溶液總重</span></div>
+      <div class="box"><b>300 克食鹽水，含鹽率 8%，加多少克<b>水</b>才降到 5%？</b><br>
+        <b>② 不變量</b>：<span class="hl">鹽的重量</span> —— <b class="hl-r">加水不會讓鹽變多！</b><br>
+        原本鹽量 = <span class="fm">300 × 8% = 24 克</span><br>
+        <b>③ 列式</b>：<span class="fm">24 ÷ (300 + x) = 5%</span><br>
+        <b>④ 解</b>：<span class="fm">24 = 15 + 0.05x → x = 180</span>；驗算 <span class="fm">24 ÷ 480 = 5%</span> ✓</div>
+      <div class="box r" style="text-align:center;">⚠️ <b class="hl-r">最常見誤解：以為「加水會讓鹽也跟著變多」。</b><br>
+        <span class="hl">加的是水，鹽的重量完全不變</span> —— 這就是不變量。</div>`},
+    {eb:'題型 5 ⚠️ 關鍵區別', h:'加「水」和加「純糖」完全不一樣', html:`
+      <div class="two">
+        <div class="box"><b class="hl-b">加水</b>　300g 鹽水 8% → 5%<br>
+          鹽：<span class="hl-g">不變</span>（24g）<br>總重：<span class="hl-r">變</span>（300 → 300+x）<br>
+          <span class="fm" style="font-size:16px;">24 / (300+x) = 0.05</span><br>
+          <span style="font-size:13px;color:var(--soft)">只有<b>分母</b>加 x</span></div>
+        <div class="box g"><b class="hl-g">加純糖</b>　200g 糖水 10% → 20%<br>
+          糖：<span class="hl-r">變</span>（20 → 20+x）<br>總重：<span class="hl-r">也變</span>（200 → 200+x）<br>
+          <span class="fm" style="font-size:16px;">(20+x) / (200+x) = 0.2</span><br>
+          <span style="font-size:13px;color:var(--soft)">分子分母<b>都</b>加 x</span></div>
+      </div>
+      <div class="box y" style="text-align:center;">👉 用下方的<b>濃度杯</b>切換兩種模式，<span class="hl">親眼看溶質到底變不變</span>。</div>`},
+    {eb:'例題 6 ★★★', h:'濃度：加水', html:`
+      <div class="exq" data-a="3">
+        <div class="exq-q"><span class="hl">Q</span>　300 克食鹽水含鹽率 8%，要加多少克<b>水</b>才能降到 5%？</div>
+        <button class="exo" data-i="0">120 克</button>
+        <button class="exo" data-i="1">300 克</button>
+        <button class="exo" data-i="2">480 克</button>
+        <button class="exo" data-i="3">180 克</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st"><b>② 不變量：鹽的重量</b>（加水鹽不變！）</div>
+          <div class="st fm">原本鹽量 = 300 × 8% = 24 克</div>
+          <div class="st fm"><b>③ 列式</b>：24 ÷ (300 + x) = 0.05</div>
+          <div class="st fm"><b>④ 解</b>：24 = 0.05(300+x) → 24 = 15 + 0.05x → 9 = 0.05x → x = 180</div>
+          <div class="st fm"><b>驗算</b>：24 ÷ (300+180) = 24/480 = 5% ✓</div>
+          <div class="st">(C) 480 是<b>加水後的總重</b>，不是加了多少水 —— 題目問「<b>加多少</b>」！</div>
+          <div class="an">答：加 180 克水</div>
+        </div>
+      </div>`},
+    {eb:'例題 7 ★★★', h:'濃度：加純糖（分子分母都變）', html:`
+      <div class="exq" data-a="0">
+        <div class="exq-q"><span class="hl">Q</span>　200 克糖水含糖率 10%，加多少克<b>純糖</b>可提高到 20%？</div>
+        <button class="exo" data-i="0">25 克</button>
+        <button class="exo" data-i="1">20 克</button>
+        <button class="exo" data-i="2">40 克</button>
+        <button class="exo" data-i="3">50 克</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st fm">原糖量 = 200 × 10% = 20 克</div>
+          <div class="st"><b>⚠️ 關鍵</b>：加的是<b>純糖</b> → 糖變成 (20+x)，總重變成 (200+x) —— <span class="hl-r">兩邊都變！</span></div>
+          <div class="st fm"><b>③ 列式</b>：(20 + x) ÷ (200 + x) = 0.2</div>
+          <div class="st fm"><b>④ 解</b>：20 + x = 0.2(200+x) = 40 + 0.2x → 0.8x = 20 → x = 25</div>
+          <div class="st fm"><b>驗算</b>：(20+25) ÷ 225 = 45/225 = 20% ✓</div>
+          <div class="st">(C) 40 克是只改分子的錯誤做法（把分母當成不變的 200）。</div>
+          <div class="an">答：加 25 克純糖</div>
+        </div>
+      </div>`},
+    {eb:'素養 ★★★', h:'橡膠溶液混合 —— 溶質守恆', html:`
+      <div class="box">濃度 20% 的橡膠溶液 400 公斤，與另一種未知濃度的溶液混合，要調出 <b>15%</b>、總重 <b>600 公斤</b>。</div>
+      <div class="exq" data-a="1">
+        <div class="exq-q"><span class="hl">Q</span>　加入的溶液<b>濃度</b>應該是多少？</div>
+        <button class="exo" data-i="0">10%</button>
+        <button class="exo" data-i="1">5%</button>
+        <button class="exo" data-i="2">7.5%</button>
+        <button class="exo" data-i="3">2.5%</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st fm">加入的重量 = 600 − 400 = 200 公斤</div>
+          <div class="st"><b>② 不變量</b>：混合前後<b>橡膠原料總重相等</b>（溶質守恆）</div>
+          <div class="st fm"><b>③ 列式</b>：400×0.2 + 200×c = 600×0.15</div>
+          <div class="st fm"><b>④ 解</b>：80 + 200c = 90 → 200c = 10 → c = 0.05 = 5%</div>
+          <div class="st fm"><b>驗算</b>：80 + 200×0.05 = 90；600 × 15% = 90 ✓</div>
+          <div class="st">💡 <b>混合問題的通式</b>：<b>A的溶質 + B的溶質 = 混合後的溶質</b><br>
+            這就是<b>溶質守恆</b> —— 混合只是把東西倒在一起，<b>溶質不會憑空生出來或消失</b>。</div>
+          <div class="an">答：5%</div>
+        </div>
+      </div>`},
+    {eb:'🎓 七上完結', h:'五大題型，其實是同一套步驟', html:`
+      <table class="tbl">
+        <tr><th style="width:22%;">題型</th><th style="width:32%;">不變量（＝等號）</th><th>列式長相</th></tr>
+        <tr><td class="hl-b">數字</td><td>題目給的和／差</td><td class="fm">x + (x+1) = 47</td></tr>
+        <tr><td class="hl-b">相向</td><td><b>總距離</b></td><td class="fm">60t + 40t = 360</td></tr>
+        <tr><td class="hl-b">追及</td><td><b>位置相同</b></td><td class="fm">16t = 2/3 + 4t</td></tr>
+        <tr><td class="hl-b">工作</td><td><b>總工作量 = 1</b></td><td class="fm">t(1/8 + 1/12) = 1</td></tr>
+        <tr><td class="hl-b">分配</td><td><b>總金額</b></td><td class="fm">150x = 180(x−5)</td></tr>
+        <tr><td class="hl-b">濃度</td><td><b>溶質重量</b></td><td class="fm">24 = 0.05(300+x)</td></tr>
+      </table>
+      <div class="box y" style="text-align:center;font-size:19px;">
+        六種題型、六個式子，<span class="hl">但只有一個做法</span>：<br><b>找到那個不會變的東西，把它寫成等號兩邊。</b></div>`}
+  ],
+  fa:[
+    {q:'A 管 6 小時、B 管 9 小時注滿，齊開幾小時？', o:['3.6 小時','7.5 小時','15 小時','2.5 小時'], a:0, e:'1/6 + 1/9 = 3/18 + 2/18 = 5/18；t = 18/5 = 3.6。'},
+    {q:'甲乙合作 4 天，甲單獨 6 天，乙單獨幾天？', o:['2 天','10 天','12 天','24 天'], a:2, e:'1/6 + 1/y = 1/4 → 1/y = 1/4 − 1/6 = 1/12 → y = 12。'},
+    {q:'加「水」時，溶質重量會？', o:['變多','不變','變少','看情況'], a:1, e:'加的是水，溶質完全不變 —— 這就是不變量。'}
+  ],
+  info:[
+    {big:'工作總量 = 1', cap:'n 天完成<br>→ 每天 1/n', c:'var(--blue)'},
+    {big:'加水 → 溶質不變', cap:'只有分母加 x', c:'var(--green)'},
+    {big:'加純糖 → 都變', cap:'分子分母<br>都要加 x', c:'var(--pink)'}
+  ]
+}];
+
+const QUIZ = [
+  {type:'choice', q:'兩個<b>連續偶數</b>之和是 50', o:['24 和 25','24 和 26','25 和 25','23 和 27'], a:1, e:'設 x、x+2（偶數差 2）→ 2x+2 = 50 → x = 24。'},
+  {type:'fill', q:'某數的 3 倍加 5 等於 26，這個數 = ', a:['7'], e:'3x + 5 = 26 → x = 7。'},
+  {type:'choice', q:'甲比乙多 12 歲，年齡和 48 歲，乙幾歲？', o:['30','18','24','36'], a:1, e:'x + (x+12) = 48 → x = 18。'},
+  {type:'choice', q:'長方形長比寬多 5cm，周長 38cm，寬是？', o:['7 cm','12 cm','9.5 cm','14 cm'], a:0, e:'2[x + (x+5)] = 38 → 4x + 10 = 38 → x = 7（長 12）。'},
+  {type:'choice', q:'小明的錢是小華的 2 倍，共 90 元，小華有？', o:['45 元','60 元','30 元','20 元'], a:2, e:'x + 2x = 90 → x = 30（小明 60）。'},
+  {type:'choice', q:'兩地 360km，時速 60 與 40 <b>相向</b>，幾小時相遇？', o:['18','3.6','6','9'], a:1, e:'60t + 40t = 360 → t = 3.6。相向速度相加！'},
+  {type:'fill', q:'同地出發<b>反方向</b>，時速 50 與 70，幾小時相距 480km？（填數字）', a:['4'], e:'50t + 70t = 480 → 120t = 480 → t = 4。'},
+  {type:'tf', q:'判斷：「相向而行速度相減，同向追及速度相加。」', a:false, e:'錯，<b>剛好相反</b>！相向相加、追及相減。'},
+  {type:'choice', q:'A 管 6 小時、B 管 9 小時注滿，齊開幾小時？', o:['3.6','7.5','15','2.5'], a:0, e:'1/6 + 1/9 = 5/18 → t = 18/5 = 3.6。'},
+  {type:'choice', q:'甲乙合作 4 天，甲單獨 6 天，乙單獨幾天？', o:['2','10','12','24'], a:2, e:'1/y = 1/4 − 1/6 = 1/12 → y = 12。'},
+  {type:'choice', q:'原 x 人每人 800 元，多 4 人後每人 640 元（團費不變），原本幾人？', o:['16','20','12','24'], a:0, e:'800x = 640(x+4) → 160x = 2560 → x = 16。'},
+  {type:'choice', q:'300g 食鹽水 8%，加多少<b>水</b>降到 5%？', o:['120 g','300 g','480 g','180 g'], a:3, e:'鹽 24g 不變；24 = 0.05(300+x) → x = 180。'},
+  {type:'choice', q:'200g 糖水 10%，加多少<b>純糖</b>升到 20%？', o:['25 g','20 g','40 g','50 g'], a:0, e:'(20+x)/(200+x) = 0.2 → 0.8x = 20 → x = 25。分子分母都要加 x！'},
+  {type:'choice', q:'某商品打 8 折前後<b>差價</b>是 60 元，原價是？', o:['75 元','300 元','480 元','48 元'], a:1, e:'差價 = p − 0.8p = 0.2p = 60 → p = 300。「差價」不是售價！'},
+  {type:'choice', q:'400kg 的 20% 溶液混成 600kg 的 15%，加的濃度是？', o:['10%','5%','7.5%','2.5%'], a:1, e:'400(0.2) + 200c = 600(0.15) → 80 + 200c = 90 → c = 5%。'},
+  {type:'choice', q:'弟弟先走（時速4）10分鐘，哥哥（時速16）追，多久追上？', o:['1/18 小時','1/6 小時','1/3 小時','追不上'], a:0, e:'頭 = 4×(1/6) = 2/3；16t = 2/3 + 4t → 12t = 2/3 → t = 1/18。'},
+  {type:'tf', q:'判斷：「解出 x = 30.5 人，四捨五入寫 31 人就好。」', a:false, e:'錯。人數必須是整數 → 出現小數代表<b>算錯了</b>，要重算而不是硬湊。'},
+  {type:'tf', q:'判斷：「加水時，鹽的重量會跟著變多。」', a:false, e:'錯。<b>加的是水，鹽完全不變</b> —— 這正是濃度題的不變量。'}
+];
+
+const GAME = [
+  {name:'五步驟', qs:[
+    {q:'應用問題的第 ① 步是？', o:['列式','設未知數','解方程式','驗算'], a:1, e:'一定要先寫「設…為 x」，否則解完不知道答案是什麼。'},
+    {q:'第 ② 步「找不變量」的追問句是？', o:['x 是多少？','這題不會變的東西是什麼？','答案是幾？','要用哪個公式？'], a:1, e:'找到不變量 → 它就是等號。'},
+    {q:'為什麼一定要寫「設…為 x」？', o:['老師規定','不然解完不知道 x 是什麼','為了湊字數','讓答案更好看'], a:1, e:'設未知數不是形式，是在幫未來的自己。'},
+    {q:'最後一步「檢查合理性」在檢查什麼？', o:['計算有沒有錯','人數是不是整數、是不是正的','字有沒有寫錯','時間夠不夠'], a:1, e:'人數不能是小數或負數。數學上算對 ≠ 答案合理。'}
+  ]},
+  {name:'數字問題', qs:[
+    {q:'連續三個整數怎麼設？', o:['x, x+1, x+2','x, x+2, x+4','x, 2x, 3x','x, x², x³'], a:0, e:'整數之間差 1。'},
+    {q:'連續三個偶數怎麼設？', o:['x, x+1, x+2','x, x+2, x+4','x, 2x, 4x','x, x+2, x+3'], a:1, e:'偶數之間差 2（2,4,6…）。'},
+    {q:'兩個連續整數的和是 47', o:['22 和 25','23 和 24','20 和 27','23 和 25'], a:1, e:'x + (x+1) = 47 → x = 23。'},
+    {q:'兩個連續偶數之和是 50', o:['24 和 25','24 和 26','25 和 25','22 和 28'], a:1, e:'x + (x+2) = 50 → x = 24。'}
+  ]},
+  {name:'行程：方向', qs:[
+    {q:'相向而行，速度要？', o:['相加','相減','相乘','相除'], a:0, e:'兩人一起把距離吃掉 → 都在幫忙 → 相加。'},
+    {q:'同向追及，速度要？', o:['相加','相減','相乘','不用管'], a:1, e:'只有速度差在縮短距離 → 相減。'},
+    {q:'反向而行（背對背），速度要？', o:['相加','相減','相乘','相除'], a:0, e:'兩人一起把距離拉開 → 相加（和相向的數學一樣）。'},
+    {q:'「追及速度相減」是怎麼來的？', o:['背起來的','由「位置相等」移項推出來','老師規定','猜的'], a:1, e:'16t = 2/3+4t 移項 → 12t = 2/3。公式是推出來的，不是背的。'}
+  ]},
+  {name:'行程：計算', qs:[
+    {q:'360km 相向，時速 60 與 40，幾小時相遇？', o:['18','3.6','6','9'], a:1, e:'60t + 40t = 360 → t = 3.6。'},
+    {q:'反方向時速 50 與 70，幾小時相距 480km？', o:['24','6','4','9.6'], a:2, e:'120t = 480 → t = 4。'},
+    {q:'弟弟時速4先走10分，哥哥時速16追，多久追上？', o:['1/18 小時','1/6 小時','1/3 小時','追不上'], a:0, e:'頭 2/3 公里；12t = 2/3 → t = 1/18。'},
+    {q:'行程問題的基本式？', o:['距離 = 速度 × 時間','距離 = 速度 ÷ 時間','速度 = 距離 × 時間','時間 = 距離 × 速度'], a:0, e:'距離 = 速度 × 時間。'}
+  ]},
+  {name:'工作問題', qs:[
+    {q:'工作問題把整件工作看成？', o:['0','1','100','總天數'], a:1, e:'整件工作 = 100% = 1。'},
+    {q:'甲 8 天完成，甲每天做多少？', o:['8','1/8','1','80%'], a:1, e:'n 天完成 → 每天 1/n。'},
+    {q:'甲8天、乙12天，合作幾天？', o:['4.8','10','20','2.4'], a:0, e:'1/8+1/12 = 5/24；t = 24/5 = 4.8。'},
+    {q:'甲乙合作4天，甲單獨6天，乙單獨？', o:['2 天','10 天','12 天','24 天'], a:2, e:'1/y = 1/4 − 1/6 = 1/12 → y = 12。'}
+  ]},
+  {name:'濃度問題', qs:[
+    {q:'濃度 = ?', o:['溶質 ÷ 總重','總重 ÷ 溶質','溶質 × 總重','溶質 + 總重'], a:0, e:'濃度 = 溶質 ÷ 溶液總重。'},
+    {q:'加「水」時，溶質會？', o:['變多','不變','變少','看情況'], a:1, e:'加的是水，溶質完全不變 —— 這是不變量。'},
+    {q:'加「純糖」時，分子分母？', o:['只有分子加x','只有分母加x','都加x','都不變'], a:2, e:'糖和總重都會變 → (20+x)/(200+x)。'},
+    {q:'300g 鹽水8%，加多少水降到5%？', o:['120','300','480','180'], a:3, e:'24 = 0.05(300+x) → x = 180。'}
+  ]},
+  {name:'分配與混合', qs:[
+    {q:'分配問題的不變量是？', o:['人數','總金額','每人金額','時間'], a:1, e:'不管幾個人分攤，總金額固定。'},
+    {q:'原x人每人150，5人取消後每人180，原本幾人？', o:['25','20','30','35'], a:2, e:'150x = 180(x−5) → x = 30。'},
+    {q:'混合問題的通式？', o:['A溶質+B溶質=混合後溶質','A濃度+B濃度=混合後濃度','A重量=B重量','濃度會平均'], a:0, e:'溶質守恆 —— 溶質不會憑空生出來或消失。'},
+    {q:'打8折前後差價60元，原價？', o:['75','300','480','48'], a:1, e:'差價 = p − 0.8p = 0.2p = 60 → p = 300。差價不是售價！'}
+  ]}
+];
+
+document.getElementById('goals').innerHTML = GOALS.map((g,i)=>
+  `<div class="goal"><div class="bdg">${i+1}</div>${g}</div>`).join('');
+
+const wrap = document.getElementById('wrap');
+DATA.forEach((sec, si)=>{
+  const p = document.createElement('div');
+  p.className = 'panel' + (si===0?' on':'');
+  p.dataset.p = si;
+  p.innerHTML = `
+    <div class="card">
+      <h3><span class="ic">📽</span>簡報翻頁器</h3>
+      <div class="deck" data-deck="${si}">
+        ${sec.slides.map((s,i)=>`<div class="sl${i===0?' on':''}" data-i="${i}">
+          <div class="eyebrow">${s.eb}</div><h4>${s.h}</h4>${s.html}</div>`).join('')}
+      </div>
+      <div class="nav">
+        <button class="btn" data-nav="prev" data-s="${si}">◀ 上一張</button>
+        <span class="pg" id="pg-${si}">1 / ${sec.slides.length}</span>
+        <button class="btn" data-nav="next" data-s="${si}">下一張 ▶</button>
+      </div>
+      <div class="dots" id="dots-${si}">
+        ${sec.slides.map((_,i)=>`<button class="dot${i===0?' on':''}" data-s="${si}" data-i="${i}"></button>`).join('')}
+      </div>
+    </div>
+    <div class="card">
+      <h3><span class="ic">🎯</span>Canvas 互動視覺化<span style="font-size:14px;color:var(--soft);font-weight:400;">　${sec.vizTitle}</span></h3>
+      <div class="cv-wrap">
+        <canvas class="viz" data-viz="${sec.viz}" data-si="${si}"></canvas>
+        <div class="ctrl" data-ctrl="${si}"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3><span class="ic">✅</span>形成性評量</h3>
+      ${sec.fa.map((f,i)=>`<div class="q" data-fa="${si}-${i}">
+        <div class="qt"><span class="qn">Q${i+1}</span>${f.q}</div>
+        <div class="opts">${f.o.map((o,oi)=>`<button class="opt" data-si="${si}" data-qi="${i}" data-oi="${oi}">${o}</button>`).join('')}</div>
+        <div class="fb" id="fb-${si}-${i}"></div>
+      </div>`).join('')}
+    </div>
+    <div class="card">
+      <h3><span class="ic">📊</span>資訊圖表</h3>
+      <div class="info">
+        ${sec.info.map(c=>`<div class="icard"><div class="big" style="color:${c.c}">${c.big}</div><div class="cap">${c.cap}</div></div>`).join('')}
+      </div>
+    </div>`;
+  wrap.appendChild(p);
+});
+
+const qp = document.createElement('div');
+qp.className='panel'; qp.dataset.p='3';
+qp.innerHTML = `<div class="card"><h3><span class="ic">📝</span>題型測驗　<span style="font-size:14px;color:var(--soft);font-weight:400;">單選 · 是非 · 填充，共 ${QUIZ.length} 題</span></h3>
+  <div id="quizBox"></div>
+  <div style="display:flex;gap:10px;align-items:center;margin-top:14px;flex-wrap:wrap;">
+    <button class="btn" id="gradeBtn" style="background:rgba(242,217,121,.2);border-color:var(--yellow);color:var(--yellow);font-weight:700;">📊 批改並看成績</button>
+    <button class="btn" id="resetQuiz">🔄 重做</button>
+    <div class="readout" id="score" style="display:none;"></div>
+  </div></div>
+  <div class="card"><h3><span class="ic">📋</span>公式速查表</h3>
+    <div class="frow"><div class="flab">🔑 五步驟</div><div class="fval">① 設未知數 → ② <b>找不變量</b> → ③ 列式 → ④ 解 → ⑤ 檢查合理性</div></div>
+    <div class="frow"><div class="flab">🔑 靈魂追問句</div><div class="fval">「這題真正<b>不會變</b>的東西是什麼？」</div></div>
+    <div class="frow"><div class="flab">連續整數</div><div class="fval">x、x+1、x+2</div></div>
+    <div class="frow"><div class="flab">連續偶（奇）數</div><div class="fval">x、x+2、x+4　（差 2！）</div></div>
+    <div class="frow"><div class="flab">行程基本式</div><div class="fval">距離 = 速度 × 時間</div></div>
+    <div class="frow"><div class="flab">相向而行</div><div class="fval">距離<b>和</b> = 總距離；速度<b>相加</b></div></div>
+    <div class="frow"><div class="flab">同向追及</div><div class="fval">追上時<b>位置相同</b>；速度<b>相減</b></div></div>
+    <div class="frow"><div class="flab">反向而行</div><div class="fval">距離<b>和</b> = 相距；速度<b>相加</b></div></div>
+    <div class="frow"><div class="flab">工作問題</div><div class="fval">總量看成 <b>1</b>；n 天完成 → 每天 <b>1/n</b></div></div>
+    <div class="frow"><div class="flab">分配問題</div><div class="fval">不變量 = <b>總金額</b></div></div>
+    <div class="frow"><div class="flab">濃度</div><div class="fval">濃度 = 溶質 ÷ 溶液總重</div></div>
+    <div class="frow"><div class="flab">加水</div><div class="fval">溶質<b>不變</b>，總重變　→　只有<b>分母</b>加 x</div></div>
+    <div class="frow"><div class="flab">加純溶質</div><div class="fval">溶質<b>和</b>總重<b>都變</b>　→　<b>分子分母都</b>加 x</div></div>
+    <div class="frow"><div class="flab">混合</div><div class="fval">A的溶質 + B的溶質 = 混合後的溶質（<b>溶質守恆</b>）</div></div>
+    <div class="frow"><div class="flab">打折差價</div><div class="fval">差價 = 原價 − 售價；打 8 折 → 差價 = <b>0.2p</b></div></div>
+    <div class="frow"><div class="flab">檢查合理性</div><div class="fval">人數／個數必須是<b>正整數</b>；時間、距離可以是小數</div></div>
+  </div>`;
+wrap.appendChild(qp);
+
+const gp = document.createElement('div');
+gp.className='panel'; gp.dataset.p='4';
+gp.innerHTML = `<div class="card"><h3><span class="ic">🎮</span>闖關遊戲　<span style="font-size:14px;color:var(--soft);font-weight:400;">6 關挑戰 · 每題 20 秒 · 連擊與速度都有加分</span></h3>
+  <div class="gscreen on" id="gStart">
+    <div style="text-align:center;font-size:clamp(15px,2vw,18px);line-height:1.8;">
+      闖過 <b class="hl">7</b> 關，每關 1 題，每題 <b class="hl">20 秒</b>。<br>
+      計分：基礎 <b class="hl">10</b> 分 + 連擊獎勵（最多 <b class="hl">5</b>）+ 速度獎勵（最多 <b class="hl">5</b>）＝ 單題最高 <b class="hl">20</b> 分</div>
+    <div class="lvchips" id="gStartChips"></div>
+    <div style="text-align:center;"><button class="btn" id="gGo" style="background:rgba(242,217,121,.25);border-color:var(--yellow);color:var(--yellow);font-weight:700;font-size:16px;padding:10px 24px;">🚀 開始挑戰</button></div>
+  </div>
+  <div class="gscreen" id="gPlay">
+    <div class="hud">
+      <div class="st">關卡<b id="hLv">1/7</b></div>
+      <div class="st">分數<b id="hSc">0</b></div>
+      <div class="st">連擊<b id="hStk">0</b></div>
+      <div class="st">剩餘<b id="hT">20</b></div>
+    </div>
+    <div class="tbar"><div class="tfill" id="tFill"></div></div>
+    <div class="lvchips" id="gChips"></div>
+    <div class="gq" id="gQ"></div>
+    <div class="gopts" id="gO"></div>
+    <div class="gfb" id="gFb"></div>
+    <div style="text-align:center;margin-top:12px;"><button class="btn" id="gNext" style="display:none;">下一關 ▶</button></div>
+  </div>
+  <div class="gscreen" id="gEnd">
+    <div class="rank" id="gRank">🏆</div>
+    <div style="text-align:center;font-size:clamp(17px,2.6vw,22px);font-family:'Noto Serif TC';" id="gFinal"></div>
+    <div style="text-align:center;color:var(--soft);margin-top:8px;" id="gStats"></div>
+    <div style="text-align:center;margin-top:16px;"><button class="btn" id="gAgain" style="background:rgba(242,217,121,.25);border-color:var(--yellow);color:var(--yellow);font-weight:700;">🔄 再挑戰一次</button></div>
+  </div></div>`;
+wrap.appendChild(gp);
+document.getElementById('gStartChips').innerHTML = GAME.map((g,i)=>`<div class="lvchip">第${i+1}關 ${g.name}</div>`).join('');
+
+const qb = document.getElementById('quizBox');
+QUIZ.forEach((q,i)=>{
+  const d = document.createElement('div'); d.className='q';
+  let body='';
+  if(q.type==='choice') body = `<div class="opts">${q.o.map((o,oi)=>`<button class="opt" data-quiz="${i}" data-oi="${oi}">${o}</button>`).join('')}</div>`;
+  else if(q.type==='tf') body = `<div class="opts" style="flex-direction:row;gap:10px;">
+      <button class="opt" data-quiz="${i}" data-oi="1" style="flex:1;">⭕ 對</button>
+      <button class="opt" data-quiz="${i}" data-oi="0" style="flex:1;">❌ 錯</button></div>`;
+  else body = `<div><input class="fill" data-quiz="${i}" placeholder="?"></div>`;
+  d.innerHTML = `<div class="qt"><span class="qn">${i+1}</span>
+    <span style="font-size:12px;color:var(--soft);border:1px solid rgba(243,239,226,.25);border-radius:6px;padding:1px 6px;margin-right:6px;">
+    ${q.type==='choice'?'單選':q.type==='tf'?'是非':'填充'}</span>${q.q}</div>${body}
+    <div class="fb" id="qfb-${i}"></div>`;
+  qb.appendChild(d);
+});
+
+document.getElementById('tabs').addEventListener('click', e=>{
+  const t = e.target.closest('.tab'); if(!t) return;
+  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on', x===t));
+  document.querySelectorAll('.panel').forEach(x=>x.classList.toggle('on', x.dataset.p===t.dataset.p));
+  document.getElementById('goalCard').style.display = (t.dataset.p==='4')?'none':'';
+  window.scrollTo({top:0,behavior:'smooth'});
+  setTimeout(resizeAll, 60);
+});
+
+const cur = DATA.map(()=>0);
+function showSlide(si, i){
+  const deck = document.querySelector(`[data-deck="${si}"]`);
+  const sl = deck.querySelectorAll('.sl');
+  i = Math.max(0, Math.min(sl.length-1, i));
+  cur[si] = i;
+  sl.forEach((s,k)=>s.classList.toggle('on', k===i));
+  document.getElementById('pg-'+si).textContent = `${i+1} / ${sl.length}`;
+  document.querySelectorAll(`#dots-${si} .dot`).forEach((d,k)=>d.classList.toggle('on', k===i));
+}
+document.addEventListener('click', e=>{
+  const n = e.target.closest('[data-nav]');
+  if(n){ const si=+n.dataset.s; showSlide(si, cur[si] + (n.dataset.nav==='next'?1:-1)); return; }
+  const d = e.target.closest('.dot');
+  if(d){ showSlide(+d.dataset.s, +d.dataset.i); return; }
+});
+document.addEventListener('keydown', e=>{
+  const p = document.querySelector('.panel.on'); if(!p) return;
+  const si = +p.dataset.p; if(si>=DATA.length) return;
+  if(e.key==='ArrowRight') showSlide(si, cur[si]+1);
+  if(e.key==='ArrowLeft') showSlide(si, cur[si]-1);
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.opt[data-si]'); if(!o) return;
+  const si=+o.dataset.si, qi=+o.dataset.qi, oi=+o.dataset.oi;
+  const f = DATA[si].fa[qi];
+  const box = document.querySelector(`[data-fa="${si}-${qi}"]`);
+  box.querySelectorAll('.opt').forEach((b,k)=>{
+    b.disabled = true;
+    if(k===f.a) b.classList.add('right'); else if(k===oi) b.classList.add('wrong');
+  });
+  const fb = document.getElementById(`fb-${si}-${qi}`);
+  const ok = oi===f.a;
+  fb.className = 'fb on ' + (ok?'ok':'no');
+  fb.innerHTML = (ok?'✅ <b>答對了！</b> ':'❌ <b>再想想。</b> ') + f.e;
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.exo');
+  if(o && !o.disabled){
+    const box = o.closest('.exq');
+    const ans = +box.dataset.a, pick = +o.dataset.i;
+    if(pick === ans){
+      box.querySelectorAll('.exo').forEach(b=>{ b.disabled=true; if(+b.dataset.i===ans) b.classList.add('right'); });
+      box.querySelector('.exsol').classList.add('on');
+      box.querySelector('.exlock').classList.add('hide');
+    } else {
+      o.classList.add('wrong','shake');
+      setTimeout(()=>o.classList.remove('shake'), 420);
+      o.disabled = true;
+      const lock = box.querySelector('.exlock');
+      lock.innerHTML = '🔒 再想想 —— 答對才會顯示詳解'; lock.style.color='var(--pink)';
+    }
+  }
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.opt[data-quiz]'); if(!o) return;
+  const i = +o.dataset.quiz;
+  o.parentElement.querySelectorAll('.opt').forEach(b=>b.classList.remove('right','wrong'));
+  o.classList.add('right'); o.dataset.sel='1';
+  o.parentElement.querySelectorAll('.opt').forEach(b=>{ if(b!==o) delete b.dataset.sel; });
+});
+document.getElementById('gradeBtn').addEventListener('click', ()=>{
+  let right=0;
+  QUIZ.forEach((q,i)=>{
+    const fb = document.getElementById('qfb-'+i);
+    let ok=false, picked=null;
+    if(q.type==='fill'){
+      const inp = document.querySelector(`.fill[data-quiz="${i}"]`);
+      const v = (inp.value||'').trim().replace(/−/g,'-').replace(/\s/g,'');
+      ok = q.a.some(a=>a.replace(/−/g,'-').replace(/\s/g,'')===v);
+      inp.style.borderBottomColor = ok?'var(--green)':'var(--pink)';
+    } else {
+      const sel = document.querySelector(`.opt[data-quiz="${i}"][data-sel="1"]`);
+      if(sel){ picked=+sel.dataset.oi; ok = (q.type==='tf') ? (picked===1)===q.a : picked===q.a; }
+      document.querySelectorAll(`.opt[data-quiz="${i}"]`).forEach(b=>{
+        b.classList.remove('right','wrong');
+        const bi=+b.dataset.oi;
+        const isAns = (q.type==='tf') ? ((bi===1)===q.a) : (bi===q.a);
+        if(isAns) b.classList.add('right'); else if(picked===bi) b.classList.add('wrong');
+      });
+    }
+    if(ok) right++;
+    fb.className='fb on '+(ok?'ok':'no');
+    fb.innerHTML = (ok?'✅ <b>正確</b> ':'❌ <b>錯誤</b> ') + q.e;
+  });
+  const s = document.getElementById('score');
+  const pct = Math.round(right/QUIZ.length*100);
+  s.style.display='block';
+  s.innerHTML = `成績：<b>${right} / ${QUIZ.length}</b>　（${pct} 分）　${pct>=80?'🏆 很棒！':pct>=60?'💪 再加油':'📖 建議重看重點'}`;
+});
+document.getElementById('resetQuiz').addEventListener('click', ()=>{
+  document.querySelectorAll('.opt[data-quiz]').forEach(b=>{b.classList.remove('right','wrong'); delete b.dataset.sel;});
+  document.querySelectorAll('.fill').forEach(i=>{i.value=''; i.style.borderBottomColor='var(--yellow)';});
+  document.querySelectorAll('[id^="qfb-"]').forEach(f=>f.className='fb');
+  document.getElementById('score').style.display='none';
+});
+
+/* ===== 闖關遊戲 ===== */
+const G = {lv:0, score:0, streak:0, best:0, t:20, timer:null, cur:null, answered:false};
+function gShow(id){ ['gStart','gPlay','gEnd'].forEach(x=>document.getElementById(x).classList.toggle('on', x===id)); }
+function gChips(){
+  document.getElementById('gChips').innerHTML = GAME.map((g,i)=>
+    `<div class="lvchip ${i<G.lv?'done':i===G.lv?'now':''}">${i+1}. ${g.name}</div>`).join('');
+}
+function gLoad(){
+  if(G.lv>=GAME.length){ gFinish(); return; }
+  G.answered=false; G.t=20;
+  const bank = GAME[G.lv].qs;
+  G.cur = bank[Math.floor(Math.random()*bank.length)];
+  document.getElementById('hLv').textContent = (G.lv+1)+'/'+GAME.length;
+  document.getElementById('hSc').textContent = G.score;
+  document.getElementById('hStk').textContent = G.streak;
+  document.getElementById('gQ').innerHTML = `<span style="color:var(--blue);font-size:15px;">第 ${G.lv+1} 關 · ${GAME[G.lv].name}</span><br>${G.cur.q}`;
+  document.getElementById('gO').innerHTML = G.cur.o.map((o,i)=>
+    `<button class="gopt" data-g="${i}">${'ABCD'[i]}. ${o}</button>`).join('');
+  document.getElementById('gFb').className='gfb';
+  document.getElementById('gNext').style.display='none';
+  gChips();
+  clearInterval(G.timer);
+  G.timer = setInterval(()=>{
+    G.t -= 0.1;
+    document.getElementById('hT').textContent = Math.max(0,G.t).toFixed(0);
+    document.getElementById('tFill').style.width = Math.max(0,G.t/20*100)+'%';
+    if(G.t<=0){ clearInterval(G.timer); gAnswer(-1); }
+  },100);
+}
+function gAnswer(pick){
+  if(G.answered) return;
+  G.answered = true; clearInterval(G.timer);
+  const ans = G.cur.a, ok = pick===ans;
+  document.querySelectorAll('.gopt').forEach((b,i)=>{
+    b.disabled=true;
+    if(i===ans) b.classList.add('right'); else if(i===pick) b.classList.add('wrong');
+  });
+  let gain=0, sb=0, tb=0;
+  if(ok){
+    G.streak++; G.best=Math.max(G.best,G.streak);
+    sb = Math.min(5, G.streak-1); tb = Math.min(5, Math.floor(G.t/4));
+    gain = 10+sb+tb; G.score += gain;
+  } else { G.streak = 0; }
+  document.getElementById('hSc').textContent = G.score;
+  document.getElementById('hStk').textContent = G.streak;
+  const fb = document.getElementById('gFb');
+  fb.className = 'gfb on '+(ok?'ok':'no');
+  fb.innerHTML = (ok? `✅ <b>答對！+${gain} 分</b>（基礎10 + 連擊${sb} + 速度${tb}）<br>`
+                    : (pick===-1?'⏰ <b>時間到！</b><br>':'❌ <b>答錯了</b><br>')) + G.cur.e;
+  document.getElementById('gNext').style.display='inline-block';
+  document.getElementById('gNext').textContent = (G.lv>=GAME.length-1)?'看成績 🏁':'下一關 ▶';
+}
+function gFinish(){
+  clearInterval(G.timer);
+  const max = GAME.length*20, pct = Math.round(G.score/max*100);
+  const rank = pct>=85?['🏆','數論大師']:pct>=70?['🥇','高手']:pct>=50?['🥈','不錯']:['📖','再加油'];
+  document.getElementById('gRank').textContent = rank[0];
+  document.getElementById('gFinal').innerHTML = `<b class="hl">${G.score}</b> / ${max} 分　·　${rank[1]}`;
+  document.getElementById('gStats').innerHTML = `最高連擊 <b class="hl">${G.best}</b>　·　完成 ${GAME.length} 關`;
+  gShow('gEnd');
+}
+document.getElementById('gGo').addEventListener('click', ()=>{ G.lv=0;G.score=0;G.streak=0;G.best=0; gShow('gPlay'); gLoad(); });
+document.getElementById('gAgain').addEventListener('click', ()=>{ G.lv=0;G.score=0;G.streak=0;G.best=0; gShow('gPlay'); gLoad(); });
+document.getElementById('gNext').addEventListener('click', ()=>{ G.lv++; gLoad(); });
+document.addEventListener('click', e=>{ const b=e.target.closest('.gopt'); if(!b||b.disabled) return; gAnswer(+b.dataset.g); });
+
+/* ===== Canvas ===== */
+const VIZ = {}; let DPR=1;
+function fmtN(v){ return Math.abs(v-Math.round(v))<1e-9 ? String(Math.round(v)) : (Math.round(v*100)/100).toString(); }
+
+/* ① 不變量偵測器 */
+const INV=[
+  {q:'兩個連續整數的和是 47', iv:'題目給的和（47）', eq:'x + (x+1) = 47', ans:'23 和 24', k:'數字'},
+  {q:'兩地相距 360km，時速 60 與 40 相向而行，幾小時相遇？', iv:'總距離（360km）', eq:'60t + 40t = 360', ans:'t = 3.6 小時', k:'相向'},
+  {q:'同地出發反方向，時速 50 與 70，幾小時相距 480km？', iv:'相距（480km）', eq:'50t + 70t = 480', ans:'t = 4 小時', k:'反向'},
+  {q:'弟弟先走（時速4）10分鐘，哥哥騎車（時速16）追，多久追上？', iv:'追上時兩人「位置相同」', eq:'16t = 2/3 + 4t', ans:'t = 1/18 小時', k:'追及'},
+  {q:'甲8天、乙12天，合作幾天完成？', iv:'總工作量 = 1', eq:'t × (1/8 + 1/12) = 1', ans:'t = 4.8 天', k:'工作'},
+  {q:'原 x 人每人150元，5人取消後每人180元（總車費不變）', iv:'總車費', eq:'150x = 180(x − 5)', ans:'x = 30 人', k:'分配'},
+  {q:'300g 食鹽水 8%，加多少水降到 5%？', iv:'鹽的重量（24g，加水不變）', eq:'24 = 0.05(300 + x)', ans:'x = 180 克', k:'濃度'},
+  {q:'200g 糖水 10%，加多少純糖升到 20%？', iv:'—（糖和總重都會變！）', eq:'(20 + x) = 0.2(200 + x)', ans:'x = 25 克', k:'濃度'},
+  {q:'400kg 的 20% 溶液，混合成 600kg 的 15%，加的濃度是？', iv:'溶質守恆（混合前後溶質總重相等）', eq:'400×0.2 + 200c = 600×0.15', ans:'c = 5%', k:'混合'},
+];
+
+function initViz(cv){
+  const si=+cv.dataset.si, kind=cv.dataset.viz;
+  const ctx=cv.getContext('2d');
+  const st = VIZ[si] = {kind, cv, ctx};
+  const ctrl = document.querySelector(`[data-ctrl="${si}"]`);
+  if(kind==='invar'){
+    st.i=0; st.show=false;
+    ctrl.innerHTML = `<div class="readout" id="ro-${si}"></div>
+      <button class="btn" data-t="reveal" data-si="${si}" style="background:rgba(242,217,121,.2);border-color:var(--yellow);color:var(--yellow);font-weight:700;">🔍 揭曉不變量</button>
+      <button class="btn" data-t="next" data-si="${si}">下一題 ▶</button>
+      <button class="btn" data-t="prev" data-si="${si}">◀ 上一題</button>`;
+  } else if(kind==='trip'){
+    st.mode=0; st.t=0;
+    ctrl.innerHTML = `<div class="readout" id="ro-${si}"></div>
+      <button class="btn" data-t="mode" data-si="${si}" style="background:rgba(152,201,220,.18);border-color:var(--blue);color:var(--blue);font-weight:700;">🔀 換模式</button>
+      <button class="btn" data-t="tm" data-si="${si}">◀ 時間 −</button>
+      <button class="btn" data-t="tp" data-si="${si}">時間 + ▶</button>
+      <button class="btn" data-t="jump" data-si="${si}" style="background:rgba(166,214,160,.18);border-color:var(--green);color:var(--green);font-weight:700;">⏭ 跳到答案時刻</button>
+      <button class="btn" data-t="rst" data-si="${si}">↩ 重設</button>`;
+  } else {                    // conc
+    st.mode=0; st.added=0;    // 0 = 加水（300g 8%）；1 = 加純糖（200g 10%）
+    ctrl.innerHTML = `<div class="readout" id="ro-${si}"></div>
+      <button class="btn" data-t="mode" data-si="${si}" style="background:rgba(152,201,220,.18);border-color:var(--blue);color:var(--blue);font-weight:700;">🔀 加水 / 加純糖</button>
+      <button class="btn" data-t="add" data-si="${si}" style="background:rgba(242,217,121,.2);border-color:var(--yellow);color:var(--yellow);font-weight:700;" id="addBtn-${si}">＋ 加</button>
+      <button class="btn" data-t="sub" data-si="${si}">− 減</button>
+      <button class="btn" data-t="goal" data-si="${si}" style="background:rgba(166,214,160,.18);border-color:var(--green);color:var(--green);font-weight:700;">🎯 跳到目標濃度</button>
+      <button class="btn" data-t="rst" data-si="${si}">↩ 重設</button>`;
+  }
+  draw(si);
+}
+
+function drawInvar(st, ctx, w, h, ro){
+  const E=INV[st.i];
+  ctx.textAlign='center';
+  ctx.fillStyle='rgba(242,217,121,.85)'; ctx.font='bold 13px "Noto Sans TC"';
+  ctx.fillText(`第 ${st.i+1} / ${INV.length} 題　·　【${E.k}】　問問自己：這題真正不會變的東西是什麼？`, w/2, 16);
+  // 題目
+  ctx.fillStyle='rgba(243,239,226,.9)'; ctx.font='15px "Noto Sans TC"';
+  const maxw=w-44; let line='', ly=42;
+  for(const ch of E.q){
+    if(ctx.measureText(line+ch).width>maxw){ ctx.fillText(line, w/2, ly); line=ch; ly+=21; }
+    else line+=ch;
+  }
+  ctx.fillText(line, w/2, ly);
+  const y0=ly+20;
+  if(!st.show){
+    ctx.fillStyle='rgba(243,239,226,.06)';
+    ctx.strokeStyle='rgba(243,239,226,.25)'; ctx.lineWidth=1.5; ctx.setLineDash([5,4]);
+    ctx.beginPath(); ctx.roundRect(24, y0, w-48, 60, 8); ctx.fill(); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle='rgba(243,239,226,.4)'; ctx.font='14px "Noto Sans TC"';
+    ctx.fillText('🔒 先自己想 —— 想好再按「揭曉不變量」', w/2, y0+35);
+  } else {
+    ctx.fillStyle='rgba(242,217,121,.14)';
+    ctx.strokeStyle='rgba(242,217,121,.6)'; ctx.lineWidth=1.5;
+    ctx.beginPath(); ctx.roundRect(24, y0, w-48, 30, 7); ctx.fill(); ctx.stroke();
+    ctx.fillStyle='#f2d979'; ctx.font='bold 15px "Noto Sans TC"';
+    ctx.fillText('不變量：' + E.iv, w/2, y0+20);
+    ctx.fillStyle='#a6d6a0'; ctx.font='bold 18px "Noto Serif TC"';
+    ctx.fillText(E.eq, w/2, y0+56);
+    ctx.fillStyle='rgba(166,214,160,.75)'; ctx.font='14px "Noto Sans TC"';
+    ctx.fillText('→ ' + E.ans, w/2, y0+78);
+  }
+  ro.innerHTML = st.show
+    ? `【${E.k}】<b>不變量：${E.iv}</b>　→　列式 <b>${E.eq}</b>　→　${E.ans}`
+    : `【${E.k}】${E.q}　<span style="color:rgba(243,239,226,.5)">—— 先自己想「不變量是什麼？」再按揭曉</span>`;
+}
+
+const TRIP=[
+  {n:'相向而行', D:360, v1:60, v2:40, head:0, ans:3.6, unit:'小時',
+   eq:'60t + 40t = 360', why:'兩人一起把距離吃掉 → 速度相加', goal:'相遇'},
+  {n:'反向而行', D:480, v1:50, v2:70, head:0, ans:4, unit:'小時',
+   eq:'50t + 70t = 480', why:'兩人一起把距離拉開 → 速度相加', goal:'相距 480km'},
+  {n:'同向追及', D:4.8, v1:4, v2:16, head:2/3, ans:1/18, unit:'小時',
+   eq:'16t = 2/3 + 4t', why:'只有速度差在縮短距離 → 速度相減', goal:'追上'},
+];
+function drawTrip(st, ctx, w, h, ro){
+  const T=TRIP[st.mode], t=st.t;
+  const isChase = st.mode===2;
+  ctx.textAlign='center';
+  ctx.fillStyle='#98c9dc'; ctx.font='bold 14px "Noto Sans TC"';
+  ctx.fillText(`【${T.n}】　${T.why}`, w/2, 16);
+  const L=36, R=w-36, Y=74;
+  const span = isChase ? T.D : T.D;
+  const X = d => L + (d/span)*(R-L);
+  // 路線
+  ctx.strokeStyle='rgba(243,239,226,.55)'; ctx.lineWidth=2;
+  ctx.beginPath(); ctx.moveTo(L,Y); ctx.lineTo(R,Y); ctx.stroke();
+  [[L,'起點'],[R, isChase?'學校':'終點']].forEach(([x,lab])=>{
+    ctx.strokeStyle='rgba(243,239,226,.55)'; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.moveTo(x,Y-7); ctx.lineTo(x,Y+7); ctx.stroke();
+    ctx.fillStyle='rgba(243,239,226,.6)'; ctx.font='12px "Noto Sans TC"';
+    ctx.fillText(lab, x, Y+24);
+  });
+  ctx.fillStyle='rgba(242,217,121,.7)'; ctx.font='12px "Noto Serif TC"';
+  ctx.fillText(`${T.D} ${isChase?'公里':'公里'}`, w/2, Y+24);
+  let p1, p2, gap, meet=false;
+  if(st.mode===0){ p1 = T.v1*t; p2 = T.D - T.v2*t; gap = p2-p1; meet = gap<=0.001; }
+  else if(st.mode===1){ p1 = 0; p2 = 0; gap = (T.v1+T.v2)*t; meet = gap>=T.D-0.001; }
+  else { p1 = T.head + T.v1*t; p2 = T.v2*t; gap = p1-p2; meet = gap<=0.001; }
+  const clamp=v=>Math.max(0, Math.min(T.D, v));
+  if(st.mode===1){
+    // 反向：一個往右、一個「往左」用虛線表示往反方向（畫在同一條線上以距離和呈現）
+    const half = Math.min(T.D, T.v1*t), half2 = Math.min(T.D, T.v2*t);
+    ctx.fillStyle='#98c9dc'; ctx.font='bold 20px "Noto Sans TC"';
+    ctx.fillText('🚗', X(clamp(gap*T.v1/(T.v1+T.v2))), Y-12);
+    ctx.fillStyle='#eda0a8';
+    ctx.fillText('🚙', X(0), Y-12);
+    ctx.strokeStyle='#f2d979'; ctx.lineWidth=2.5;
+    ctx.beginPath(); ctx.moveTo(X(0),Y-30); ctx.lineTo(X(clamp(gap)),Y-30); ctx.stroke();
+    ctx.fillStyle='#f2d979'; ctx.font='bold 13px "Noto Serif TC"';
+    ctx.fillText(`相距 ${fmtN(gap)} km`, X(clamp(gap))/2+X(0)/2, Y-36);
+  } else {
+    ctx.font='bold 20px "Noto Sans TC"';
+    ctx.fillText(isChase?'🚴':'🚗', X(clamp(isChase?p2:p1)), Y-12);
+    ctx.fillText(isChase?'🚶':'🚙', X(clamp(isChase?p1:p2)), Y-12);
+    if(!meet){
+      const a=X(clamp(Math.min(p1,p2))), b=X(clamp(Math.max(p1,p2)));
+      ctx.strokeStyle='rgba(242,217,121,.7)'; ctx.lineWidth=2;
+      ctx.setLineDash([3,3]); ctx.beginPath(); ctx.moveTo(a,Y-32); ctx.lineTo(b,Y-32); ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle='#f2d979'; ctx.font='bold 13px "Noto Serif TC"';
+      ctx.fillText(`相距 ${fmtN(Math.abs(gap))} km`, (a+b)/2, Y-38);
+    } else {
+      ctx.fillStyle='#a6d6a0'; ctx.font='bold 14px "Noto Sans TC"';
+      ctx.fillText('✓ ' + T.goal + '！', X(clamp(p1)), Y-38);
+    }
+  }
+  // 資訊
+  ctx.fillStyle='rgba(243,239,226,.8)'; ctx.font='14px "Noto Serif TC"';
+  ctx.fillText(`t = ${fmtN(t)} ${T.unit}`, w/2, Y+50);
+  ctx.fillStyle='#f2d979'; ctx.font='bold 16px "Noto Serif TC"';
+  ctx.fillText(T.eq, w/2, Y+74);
+  ctx.fillStyle= meet?'#a6d6a0':'rgba(243,239,226,.5)'; ctx.font='13px "Noto Sans TC"';
+  ctx.fillText(meet?`✓ 答案：t = ${fmtN(T.ans)} ${T.unit}`:`（按「跳到答案時刻」看 t = ${fmtN(T.ans)}）`, w/2, Y+94);
+  ro.innerHTML = `【${T.n}】<b>${T.eq}</b>　｜　t = <b>${fmtN(t)}</b> ${T.unit}　｜　`
+    + (st.mode===1 ? `相距 <b>${fmtN(gap)}</b> km` : `相距 <b>${fmtN(Math.abs(gap))}</b> km`)
+    + (meet ? `　<span style="color:var(--green)">✓ ${T.goal}！答案 t = ${fmtN(T.ans)} ${T.unit}</span>` : '')
+    + `　｜　<span style="color:var(--blue)">${T.why}</span>`;
+}
+
+const CONC=[
+  {n:'加水（鹽不變）', base:300, pct:0.08, step:20, goal:0.05, ansAdd:180, what:'水', solute:'鹽',
+   eq:'24 ÷ (300 + x) = 5%', note:'加的是水 → 鹽的重量完全不變'},
+  {n:'加純糖（都變）', base:200, pct:0.10, step:5, goal:0.20, ansAdd:25, what:'純糖', solute:'糖',
+   eq:'(20 + x) ÷ (200 + x) = 20%', note:'加的是純糖 → 糖和總重「都」變'},
+];
+function drawConc(st, ctx, w, h, ro){
+  const C=CONC[st.mode], x=st.added;
+  const s0 = C.base*C.pct;                       // 原溶質
+  const solute = st.mode===0 ? s0 : s0 + x;      // 加水→不變；加純糖→變
+  const total  = C.base + x;
+  const pct = solute/total;
+  const btn = document.getElementById('addBtn-'+st.cvsi);
+  ctx.textAlign='center';
+  ctx.fillStyle='#98c9dc'; ctx.font='bold 14px "Noto Sans TC"';
+  ctx.fillText(`【${C.n}】　${C.note}`, w/2, 16);
+  // 燒杯
+  const bw=76, bx=44, byTop=32, byBot=h-30, bh=byBot-byTop;
+  const maxTotal = C.base + C.step*14;
+  const fillH = Math.min(bh, bh*total/maxTotal);
+  const fy = byBot - fillH;
+  const soluteH = fillH * (solute/total);
+  ctx.fillStyle='rgba(152,201,220,.20)';
+  ctx.fillRect(bx, fy, bw, fillH);
+  ctx.fillStyle='rgba(242,217,121,.62)';
+  ctx.fillRect(bx, byBot-soluteH, bw, soluteH);
+  ctx.strokeStyle='#f3efe2'; ctx.lineWidth=2;
+  ctx.beginPath(); ctx.moveTo(bx,byTop); ctx.lineTo(bx,byBot); ctx.lineTo(bx+bw,byBot); ctx.lineTo(bx+bw,byTop); ctx.stroke();
+  ctx.fillStyle='#f2d979'; ctx.font='bold 11px "Noto Sans TC"';
+  ctx.fillText(C.solute, bx+bw/2, byBot-soluteH/2+4);
+  ctx.fillStyle='rgba(152,201,220,.9)';
+  if(fillH-soluteH>16) ctx.fillText('水', bx+bw/2, fy+(fillH-soluteH)/2+4);
+  // 右側數據
+  const tx=bx+bw+26; ctx.textAlign='left';
+  const rows=[
+    [`${C.solute}的重量`, `${fmtN(solute)} g`, st.mode===0?'#a6d6a0':'#eda0a8', st.mode===0?'（不變 ✓）':'（跟著變）'],
+    ['溶液總重', `${fmtN(total)} g`, '#eda0a8', '（變）'],
+    ['濃度', `${fmtN(Math.round(pct*10000)/100)} %`, '#f2d979', ''],
+    [`已加${C.what}`, `${fmtN(x)} g`, 'rgba(243,239,226,.8)', ''],
+  ];
+  rows.forEach(([k,v,col,nt],i)=>{
+    const y=52+i*30;
+    ctx.fillStyle='rgba(243,239,226,.6)'; ctx.font='12px "Noto Sans TC"';
+    ctx.fillText(k, tx, y-11);
+    ctx.fillStyle=col; ctx.font='bold 17px "Noto Serif TC"';
+    ctx.fillText(v, tx, y+7);
+    if(nt){ ctx.fillStyle='rgba(243,239,226,.4)'; ctx.font='11px "Noto Sans TC"';
+      ctx.fillText(nt, tx+ctx.measureText(v).width+34, y+6); }
+  });
+  const hit = Math.abs(pct-C.goal)<0.0005;
+  ctx.textAlign='center';
+  ctx.fillStyle= hit?'#a6d6a0':'rgba(242,217,121,.75)'; ctx.font='bold 13px "Noto Sans TC"';
+  ctx.fillText(hit ? `✓ 達到目標 ${fmtN(C.goal*100)}%！加了 ${fmtN(C.ansAdd)} g` : `目標：${fmtN(C.goal*100)}%　（${C.eq}）`, w/2, h-8);
+  ro.innerHTML = `【${C.n}】${C.solute} <b>${fmtN(solute)}g</b>${st.mode===0?'<span style="color:var(--green)">（不變 ✓）</span>':'<span style="color:var(--pink)">（跟著變）</span>'}`
+    + `　｜　總重 <b>${fmtN(total)}g</b>　｜　濃度 <b>${fmtN(Math.round(pct*10000)/100)}%</b>`
+    + (hit ? `　<span style="color:var(--green)">✓ 達標！加了 ${fmtN(C.ansAdd)}g</span>` : `　｜　目標 ${fmtN(C.goal*100)}%`);
+}
+
+function draw(si){
+  const st=VIZ[si]; if(!st) return;
+  st.cvsi=si;
+  const {cv,ctx,kind}=st, w=cv.width/DPR, h=cv.height/DPR;
+  ctx.clearRect(0,0,w,h);
+  const ro=document.getElementById('ro-'+si);
+  if(kind==='invar') drawInvar(st,ctx,w,h,ro);
+  else if(kind==='trip') drawTrip(st,ctx,w,h,ro);
+  else if(kind==='conc') drawConc(st,ctx,w,h,ro);
+}
+
+document.addEventListener('click', e=>{
+  const btn=e.target.closest('[data-t]'); if(!btn) return;
+  const si=+btn.dataset.si, st=VIZ[si]; if(!st) return;
+  const t=btn.dataset.t;
+  if(st.kind==='invar'){
+    if(t==='reveal') st.show=true;
+    if(t==='next'){ st.i=(st.i+1)%INV.length; st.show=false; }
+    if(t==='prev'){ st.i=(st.i-1+INV.length)%INV.length; st.show=false; }
+  } else if(st.kind==='trip'){
+    const T=TRIP[st.mode];
+    const dt = st.mode===2 ? 1/90 : 0.3;
+    if(t==='mode'){ st.mode=(st.mode+1)%TRIP.length; st.t=0; }
+    if(t==='tp') st.t=Math.min(TRIP[st.mode].ans*1.6, st.t+dt);
+    if(t==='tm') st.t=Math.max(0, st.t-dt);
+    if(t==='jump') st.t=TRIP[st.mode].ans;
+    if(t==='rst') st.t=0;
+  } else {
+    const C=CONC[st.mode];
+    if(t==='mode'){ st.mode=(st.mode+1)%CONC.length; st.added=0; }
+    if(t==='add') st.added=Math.min(CONC[st.mode].step*14, st.added+CONC[st.mode].step);
+    if(t==='sub') st.added=Math.max(0, st.added-CONC[st.mode].step);
+    if(t==='goal') st.added=CONC[st.mode].ansAdd;
+    if(t==='rst') st.added=0;
+  }
+  draw(si);
+});
+
+function resizeAll(){
+  DPR = Math.min(2, window.devicePixelRatio||1);
+  document.querySelectorAll('canvas.viz').forEach(cv=>{
+    const w = cv.clientWidth || cv.parentElement.clientWidth;
+    const h = (cv.dataset.viz==='invar') ? 208 : (cv.dataset.viz==='conc' ? 200 : 192);
+    cv.width=w*DPR; cv.height=h*DPR; cv.style.height=h+'px';
+    cv.getContext('2d').setTransform(DPR,0,0,DPR,0,0);
+  });
+  Object.keys(VIZ).forEach(k=>draw(+k));
+}
+document.querySelectorAll('canvas.viz').forEach(initViz);
+window.addEventListener('resize', resizeAll);
+resizeAll();
+</script>
+<div class="hint">← → 鍵可翻頁　·　Canvas 用按鈕互動　·　支援平板觸控</div>
+</body></html>

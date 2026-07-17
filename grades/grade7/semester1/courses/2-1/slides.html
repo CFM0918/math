@@ -1,0 +1,395 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>七上 2-1 因數、倍數｜授課簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--chalk-soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);padding:24px 14px;}
+.deck{max-width:1060px;margin:0 auto;}
+.print-hint{text-align:center;color:rgba(243,239,226,0.4);font-size:13px;padding:6px 0 22px;}
+.print-hint b{color:var(--yellow);}
+.slide{position:relative;min-height:576px;margin:0 auto 26px;padding:44px 52px;
+ background:radial-gradient(ellipse at 18% 12%,rgba(255,255,255,0.05),transparent 45%),
+  radial-gradient(ellipse at 82% 88%,rgba(255,255,255,0.035),transparent 45%),
+  radial-gradient(ellipse at 60% 40%,rgba(120,160,130,0.10),transparent 60%),
+  linear-gradient(160deg,var(--board) 0%,var(--board2) 100%);
+ border-radius:14px;box-shadow:0 10px 34px rgba(0,0,0,0.55);
+ border:1px solid rgba(242,217,121,0.14);overflow:hidden;display:flex;flex-direction:column;}
+.slide::before{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;
+ background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.014) 40px,rgba(255,255,255,0.014) 41px),
+  radial-gradient(circle at 30% 72%,rgba(255,255,255,0.03),transparent 8%),
+  radial-gradient(circle at 76% 24%,rgba(255,255,255,0.025),transparent 7%);}
+.slide::after{content:attr(data-pg);position:absolute;bottom:15px;right:26px;font-family:'Caveat',cursive;font-size:20px;color:rgba(243,239,226,0.4);}
+.tag{position:absolute;top:20px;right:26px;font-family:'Caveat',cursive;font-size:22px;color:var(--pink);transform:rotate(4deg);}
+.eyebrow{font-family:'Caveat',cursive;font-size:25px;color:var(--yellow);letter-spacing:1px;margin-bottom:8px;opacity:0.92;}
+.slide h1{font-family:'Noto Serif TC',serif;font-size:50px;font-weight:900;line-height:1.28;letter-spacing:1px;
+ text-shadow:0 0 1px rgba(243,239,226,0.5),1px 1px 0 rgba(0,0,0,0.2);}
+.slide h2{font-family:'Noto Serif TC',serif;font-size:33px;font-weight:900;color:var(--yellow);
+ margin-bottom:20px;padding-bottom:11px;border-bottom:2px dashed rgba(242,217,121,0.4);
+ text-shadow:0 0 1px rgba(242,217,121,0.4);}
+.slide p{font-size:20px;line-height:1.85;margin-bottom:12px;}
+.big-center{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;}
+.big-center .lead,.lead{font-family:'Caveat',cursive;font-size:30px;color:var(--blue);letter-spacing:1px;margin-top:12px;}
+ul{list-style:none;margin:8px 0;}
+li{font-size:21px;line-height:1.95;padding-left:32px;position:relative;margin-bottom:4px;}
+li::before{content:'\2726';position:absolute;left:4px;color:var(--yellow);font-size:17px;top:3px;}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.34);border-radius:12px;padding:15px 21px;margin:12px 0;font-size:19px;line-height:1.8;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.38);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.38);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.34);}
+.eg{position:relative;background:rgba(0,0,0,0.24);border:1px solid rgba(242,217,121,0.2);border-radius:10px;padding:17px 22px;margin:12px 0;font-size:19px;}
+.eg::before{content:'';position:absolute;top:-8px;left:38px;width:58px;height:15px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.eg .q{color:var(--blue);font-weight:700;margin-bottom:8px;font-size:19px;}
+.eg .a{color:var(--green);font-weight:700;margin-top:6px;}
+.eg .stp{color:var(--chalk-soft);font-size:18px;margin:3px 0;}
+.tip{display:flex;gap:12px;align-items:flex-start;background:rgba(242,217,121,0.09);border:1.5px dashed rgba(242,217,121,0.45);border-radius:12px;padding:13px 18px;margin:10px 0;}
+.tip .ic{font-size:24px;line-height:1;}.tip .tx{font-size:18px;line-height:1.7;}
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:18px;}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.26);padding:10px 14px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.two{display:flex;gap:20px;}.two>div{flex:1;}
+svg{display:block;margin:6px auto;max-width:100%;}
+@media print{
+ body{background:#0a130d;padding:0;}
+ .deck{max-width:none;}
+ .print-hint{display:none;}
+ .slide{margin:0;border-radius:0;box-shadow:none;min-height:100vh;
+  page-break-after:always;break-after:page;padding:32px 44px;justify-content:center;}
+ .slide:last-child{page-break-after:auto;break-after:auto;}
+ .slide h1{font-size:42px;}
+ .slide h2{font-size:27px;margin-bottom:13px;padding-bottom:8px;}
+ .slide p{font-size:17px;line-height:1.55;margin-bottom:6px;}
+ li{font-size:17px;line-height:1.55;margin-bottom:1px;padding-left:26px;}
+ .eyebrow{font-size:21px;margin-bottom:5px;}
+ .big-center .lead,.lead{font-size:26px;}
+ .box{font-size:16px;padding:10px 16px;margin:6px 0;line-height:1.5;}
+ .eg{font-size:16px;padding:11px 16px;margin:6px 0;}
+ .tip{font-size:16px;padding:10px 14px;margin:6px 0;}
+ .tbl{font-size:15px;margin:6px 0;}
+ .tbl th,.tbl td{padding:6px 10px;}
+ svg{max-height:210px;}
+}
+</style></head><body><div class="deck">
+<div class="print-hint">📽 共 <b>28</b> 張投影片　·　七上 第2章 分數運算　·　按 <b>Ctrl+P</b> 可列印或轉存 PDF</div>
+
+<!-- 1 封面 -->
+<div class="slide" data-pg="1 / 28"><div class="big-center">
+<svg viewBox="0 0 880 120" width="88%" style="opacity:0.9;">
+<text x="50" y="46" font-family="Caveat" font-size="40" fill="#98c9dc" transform="rotate(-6 50 46)">1×36  2×18</text>
+<text x="290" y="38" font-family="Caveat" font-size="42" fill="#a6d6a0" transform="rotate(5 290 38)">2,3,5,7,11…</text>
+<text x="580" y="48" font-family="Caveat" font-size="42" fill="#f2d979" transform="rotate(-4 580 48)">84 = 2²×3×7</text>
+<line x1="40" y1="88" x2="840" y2="88" stroke="#f2d979" stroke-width="2" stroke-dasharray="3 9" opacity="0.6"/>
+<text x="150" y="112" font-family="Caveat" font-size="19" fill="rgba(243,239,226,.5)">因數倍數</text>
+<text x="400" y="112" font-family="Caveat" font-size="19" fill="rgba(243,239,226,.5)">質數合數</text>
+<text x="680" y="112" font-family="Caveat" font-size="19" fill="rgba(243,239,226,.5)">標準分解式</text>
+</svg>
+<div class="eyebrow">國一上學期 · 第2章 分數運算</div>
+<h1>2-1　因數、倍數</h1>
+<div class="lead">從整除出發，一路走到標準分解式</div>
+</div></div>
+
+<!-- 2 導覽 -->
+<div class="slide" data-pg="2 / 28"><div class="eyebrow">本節導覽</div><h2>今天要學會四件事</h2><div class="body">
+<ul>
+<li><span class="hl">① 因數與倍數</span>　同一件事的兩種說法</li>
+<li><span class="hl-b">② 倍數判別法</span>　不用除，看特徵就知道</li>
+<li><span class="hl-r">③ 質數與合數</span>　1 是特例！</li>
+<li><span class="hl-g">④ 質因數分解與標準分解式</span>　短除法 + 因數個數公式</li>
+</ul>
+<div class="box y">這一節是<span class="hl">第 2 章的地基</span> —— 學會了，2-2 的最大公因數、最小公倍數就水到渠成。</div>
+</div></div>
+
+<!-- 3 因數與倍數定義 -->
+<div class="slide" data-pg="3 / 28"><div class="eyebrow">核心 ①</div><h2>因數與倍數：同一件事的兩種說法</h2><div class="body big-center">
+<div class="box y" style="font-size:22px;padding:18px 30px;">
+若 <span class="fm hl">a ÷ b 整除</span>（餘數為 0）</div>
+<div style="font-size:34px;margin:10px 0;color:var(--yellow);">↓</div>
+<div class="two" style="width:100%;">
+<div class="box" style="text-align:center;"><span class="hl-b" style="font-size:22px;">b 是 a 的因數</span></div>
+<div class="box r" style="text-align:center;"><span class="hl-r" style="font-size:22px;">a 是 b 的倍數</span></div>
+</div>
+<div class="box g" style="max-width:820px;"><span class="fm" style="font-size:20px;">12 ÷ 3 = 4</span>（整除）→ 3 是 12 的<span class="hl-b">因數</span>；12 是 3 的<span class="hl-r">倍數</span></div>
+</div></div>
+
+<!-- 4 四個性質 -->
+<div class="slide" data-pg="4 / 28"><div class="eyebrow">核心 ①</div><h2>四個重要性質</h2><div class="body">
+<ul>
+<li><span class="hl">1 是所有數的因數</span></li>
+<li>每個數都是<span class="hl-b">自己的因數</span>，也是<span class="hl-r">自己的倍數</span></li>
+<li>最小的因數是 <span class="hl">1</span>，最大的因數是<span class="hl">本身</span></li>
+<li>最小的倍數是<span class="hl">本身</span>，<span class="hl-r">沒有最大的倍數</span></li>
+</ul>
+<div class="two">
+<div class="box">12 的<span class="hl-b">因數</span>：<span class="fm">1, 2, 3, 4, 6, 12</span><br><span style="font-size:15px;">（有限，6 個）</span></div>
+<div class="box r">12 的<span class="hl-r">倍數</span>：<span class="fm">12, 24, 36, 48, …</span><br><span style="font-size:15px;">（無限多）</span></div>
+</div>
+</div></div>
+
+<!-- 5 成對找因數 -->
+<div class="slide" data-pg="5 / 28"><div class="eyebrow">核心 ①</div><h2>找因數的技巧：成對找</h2><div class="body">
+<div class="box">求 36 的所有因數 → <span class="hl">成對配對</span>：</div>
+<table class="tbl">
+<tr><td class="fm">1 × 36</td><td class="fm">2 × 18</td><td class="fm">3 × 12</td><td class="fm">4 × 9</td><td class="fm hl-g">6 × 6</td></tr>
+</table>
+<div class="box g">→ 36 的因數：<span class="fm hl-g">1, 2, 3, 4, 6, 9, 12, 18, 36</span>（共 <span class="hl">9</span> 個）</div>
+<div class="tip"><div class="ic">🔑</div><div class="tx">技巧：只要試到 <span class="hl fm">√36 = 6</span> 就可以停 —— 後面的會自動配對出來。<br>
+<span class="hl-g">6×6 是平方數，6 只算一次</span> → 平方數的因數個數是<span class="hl">奇數</span>個！</div></div>
+</div></div>
+
+<!-- 6 例題1 -->
+<div class="slide" data-pg="6 / 28"><div class="tag">例題 1 ★★☆</div><div class="eyebrow">換你試試看</div><h2>找出所有因數</h2><div class="body">
+<div class="eg"><div class="q">36 總共有幾個因數？</div>
+<div class="stp fm">成對找：1×36、2×18、3×12、4×9、6×6</div>
+<div class="stp">注意 <span class="hl-g">6×6</span> 是平方數，6 只算<span class="hl">一次</span></div>
+<div class="stp fm">因數：1, 2, 3, 4, 6, 9, 12, 18, 36</div>
+<div class="a">答：9 個</div></div>
+<div class="tip"><div class="ic">⚠️</div><div class="tx">陷阱：平方數（36 = 6²）的因數個數是<span class="hl">奇數</span>個，因為中間那對重複了。</div></div>
+</div></div>
+
+<!-- 7 倍數判別法 個位 -->
+<div class="slide" data-pg="7 / 28"><div class="eyebrow">核心 ②　倍數判別法</div><h2>看個位就知道</h2><div class="body">
+<table class="tbl">
+<tr><th>判別</th><th>方法</th><th>例子</th></tr>
+<tr><td class="hl" style="font-size:22px;">2</td><td>個位是 <span class="hl">0, 2, 4, 6, 8</span></td><td class="fm">13<span class="hl">8</span> ✓</td></tr>
+<tr><td class="hl" style="font-size:22px;">5</td><td>個位是 <span class="hl">0 或 5</span></td><td class="fm">24<span class="hl">5</span> ✓</td></tr>
+<tr><td class="hl" style="font-size:22px;">10</td><td>個位是 <span class="hl">0</span></td><td class="fm">47<span class="hl">0</span> ✓</td></tr>
+<tr><td class="hl-b" style="font-size:22px;">4</td><td><span class="hl-b">末兩位</span>是 4 的倍數</td><td class="fm">1<span class="hl-b">16</span> → 16÷4=4 ✓</td></tr>
+</table>
+<div class="box y">不用實際除，<span class="hl">看數字特徵</span>就能判斷 —— 又快又不會算錯。</div>
+</div></div>
+
+<!-- 8 3和9 -->
+<div class="slide" data-pg="8 / 28"><div class="eyebrow">核心 ②　倍數判別法</div><h2>3 和 9：看各位數字和</h2><div class="body">
+<div class="box"><span class="hl">3 的倍數</span>：各位數字<span class="hl">和</span>是 3 的倍數<br>
+<span class="fm" style="font-size:21px;">138 → 1+3+8 = 12 → 12÷3 = 4 ✓</span></div>
+<div class="box y"><span class="hl">9 的倍數</span>：各位數字<span class="hl">和</span>是 9 的倍數<br>
+<span class="fm" style="font-size:21px;">279 → 2+7+9 = 18 → 18÷9 = 2 ✓</span></div>
+<div class="tip"><div class="ic">💡</div><div class="tx">小發現：<span class="hl-g">9 的倍數一定是 3 的倍數</span>（因為 9 = 3×3）；<span class="hl-r">反之不一定</span>（6 是 3 的倍數但不是 9 的倍數）。</div></div>
+</div></div>
+
+<!-- 9 例題2 -->
+<div class="slide" data-pg="9 / 28"><div class="tag">例題 2 ★★☆</div><div class="eyebrow">換你試試看</div><h2>綜合判別</h2><div class="body">
+<div class="eg"><div class="q">2376 是 2、3、4、5、9 中哪些數的倍數？</div>
+<div class="stp">2？個位 <span class="hl">6</span> → <span class="hl-g">✓</span></div>
+<div class="stp">4？末兩位 <span class="hl">76</span>，76÷4 = 19 → <span class="hl-g">✓</span></div>
+<div class="stp">5？個位不是 0 或 5 → <span class="hl-r">✗</span></div>
+<div class="stp">3？2+3+7+6 = <span class="hl">18</span>，18÷3 = 6 → <span class="hl-g">✓</span></div>
+<div class="stp">9？數字和 <span class="hl">18</span>，18÷9 = 2 → <span class="hl-g">✓</span></div>
+<div class="a">答：2、3、4、9 的倍數</div></div>
+</div></div>
+
+<!-- 10 質數合數定義 -->
+<div class="slide" data-pg="10 / 28"><div class="eyebrow">核心 ③</div><h2>質數、合數與 1</h2><div class="body">
+<table class="tbl">
+<tr><th>類別</th><th>定義</th><th>例子</th></tr>
+<tr><td class="hl-b">質數</td><td><span class="hl-b">恰好 2 個</span>因數（1 和自己）</td><td class="fm">2, 3, 5, 7, 11…</td></tr>
+<tr><td class="hl-r">合數</td><td>因數<span class="hl-r">超過 2 個</span></td><td class="fm">4, 6, 8, 9, 10…</td></tr>
+<tr><td class="hl">1</td><td>只有 <span class="hl">1 個</span>因數（自己）</td><td class="hl">既非質數也非合數</td></tr>
+</table>
+<div class="box r" style="text-align:center;font-size:21px;">
+⚠️ 最常錯：把 <span class="hl-r">1 當成質數</span></div>
+<div class="tip"><div class="ic">❓</div><div class="tx">質數的定義是「<span class="hl">恰好兩個</span>因數」，1 只有一個 → 它是<span class="hl">特例</span>，兩邊都不算。</div></div>
+</div></div>
+
+<!-- 11 50以內質數 -->
+<div class="slide" data-pg="11 / 28"><div class="eyebrow">核心 ③</div><h2>50 以內的質數（要背！）</h2><div class="body big-center">
+<div class="box y" style="font-family:'Noto Serif TC';font-size:28px;line-height:2;max-width:880px;">
+<span class="hl">2</span>, 3, 5, 7, 11, 13, 17, 19, 23,<br>29, 31, 37, 41, 43, 47</div>
+<div class="box g" style="max-width:400px;text-align:center;font-size:22px;">共 <span class="hl-g">15</span> 個</div>
+<div class="box" style="max-width:820px;">💡 <span class="hl">2 是唯一的偶質數</span> —— 其他偶數都能被 2 整除，一定有第 3 個因數 → 是合數。</div>
+</div></div>
+
+<!-- 12 例題3 -->
+<div class="slide" data-pg="12 / 28"><div class="tag">例題 3 ★☆☆</div><div class="eyebrow">換你試試看</div><h2>質數、合數判斷</h2><div class="body">
+<div class="eg"><div class="q">判斷 1、11、15、23、49 是質數、合數還是都不是</div>
+<div class="stp"><span class="hl">1</span>：只有 1 個因數 → <span class="hl">都不是</span>（特例）</div>
+<div class="stp"><span class="hl-b">11</span>：因數 1, 11 → <span class="hl-b">質數</span></div>
+<div class="stp"><span class="hl-r">15</span>：因數 1, 3, 5, 15（4 個）→ <span class="hl-r">合數</span></div>
+<div class="stp"><span class="hl-b">23</span>：因數 1, 23 → <span class="hl-b">質數</span></div>
+<div class="stp"><span class="hl-r">49</span> = 7×7：因數 1, 7, 49（3 個）→ <span class="hl-r">合數</span></div>
+<div class="a">答：1→都不是；11、23→質數；15、49→合數</div></div>
+</div></div>
+
+<!-- 13 例題4 質數搜尋 -->
+<div class="slide" data-pg="13 / 28"><div class="tag">例題 4 ★★★</div><div class="eyebrow">換你試試看</div><h2>質數搜尋（小心漏掉！）</h2><div class="body">
+<div class="eg"><div class="q">某機台每 N 分鐘檢查一次，N 是 100 到 150 之間的質數。列出所有可能的 N。</div>
+<div class="stp">排除合數：105=3×5×7、111=3×37、117=9×13、119=7×17、121=11²、143=11×13</div>
+<div class="stp fm">101、103、107、109、113、127、131、137、139、<span class="hl">149</span></div>
+<div class="a">答：共 10 個</div></div>
+<div class="box r"><span class="hl-r">⚠️ 最容易漏掉 149</span>！它是質數：<span class="fm">√149 ≈ 12.2</span>，不被 2、3、5、7、11 整除。</div>
+<div class="tip"><div class="ic">🔑</div><div class="tx">檢查技巧：判斷 N 是不是質數，只要用<span class="hl">小於 √N 的質數</span>去試除就夠了。</div></div>
+</div></div>
+
+<!-- 14 短除法 -->
+<div class="slide" data-pg="14 / 28"><div class="eyebrow">核心 ④</div><h2>短除法四步驟</h2><div class="body">
+<ul>
+<li>從<span class="hl">最小質因數 2</span> 開始試除</li>
+<li>除不盡就換<span class="hl-b">下一個質數</span>（3、5、7…）</li>
+<li>除到<span class="hl-r">商是質數</span>才停止</li>
+<li>把除過的質因數<span class="hl-g">全部相乘</span></li>
+</ul>
+<div class="box y" style="font-family:'Noto Serif TC';font-size:20px;line-height:2;text-align:center;">
+2 ) 84　→　2 ) 42　→　3 ) 21　→　<span class="hl">7</span>（質數，停）<br>
+84 = 2 × 2 × 3 × 7 = <span class="hl" style="font-size:24px;">2² × 3 × 7</span></div>
+<div class="tip"><div class="ic">⚠️</div><div class="tx">最常錯：<span class="hl-r">停太早</span> —— 把 21 直接當因數，忘了它還能分解成 3×7。<br>
+每步都問：「<span class="hl">這個商還是質數嗎？還能再分解嗎？</span>」</div></div>
+</div></div>
+
+<!-- 15 標準分解式 -->
+<div class="slide" data-pg="15 / 28"><div class="eyebrow">核心 ④</div><h2>標準分解式</h2><div class="body">
+<div class="box g" style="font-size:22px;">✓ <span class="hl-g">標準</span>（指數形式，質數由小到大）：<span class="fm hl">84 = 2² × 3 × 7</span></div>
+<div class="box r" style="font-size:22px;">✗ 展開形式（不標準）：<span class="fm">84 = 2 × 2 × 3 × 7</span></div>
+<div class="box y"><span class="hl">唯一性</span>：每個大於 1 的整數，質因數分解結果<span class="hl">唯一</span>（只有書寫順序可以不同）。</div>
+<div class="tip"><div class="ic">📐</div><div class="tx">這個「唯一性」是<span class="hl">算術基本定理</span> —— 整個數論的基石。</div></div>
+</div></div>
+
+<!-- 16 因數個數公式 -->
+<div class="slide" data-pg="16 / 28"><div class="eyebrow">核心 ④</div><h2>因數個數公式</h2><div class="body big-center">
+<div class="box y" style="font-size:24px;padding:18px 30px;">
+<span class="fm">N = p<sup>a</sup> × q<sup>b</sup> × r<sup>c</sup>…　→　因數個數 = <span class="hl">(a+1)(b+1)(c+1)…</span></span></div>
+<div class="box" style="max-width:860px;"><span class="hl-b">為什麼？</span>每個質因數可以取 <span class="hl">0 次 ~ a 次</span>，共 <span class="hl">(a+1)</span> 種選擇，互相搭配。</div>
+<div class="box g" style="max-width:860px;"><span class="fm" style="font-size:20px;">360 = 2³ × 3² × 5¹</span><br>
+因數個數 = (3+1)(2+1)(1+1) = 4×3×2 = <span class="hl-g" style="font-size:22px;">24 個</span></div>
+</div></div>
+
+<!-- 17 例題5 -->
+<div class="slide" data-pg="17 / 28"><div class="tag">例題 5 ★★☆</div><div class="eyebrow">換你試試看</div><h2>短除法 + 因數個數</h2><div class="body">
+<div class="eg"><div class="q">將 360 做質因數分解，並求它共有幾個因數</div>
+<div class="stp fm">分解：360÷2=180 → ÷2=90 → ÷2=45 → ÷3=15 → ÷3=5（質數）</div>
+<div class="stp fm">標準分解式：360 = <span class="hl">2³ × 3² × 5</span></div>
+<div class="stp fm">因數個數 = (3+1)(2+1)(1+1) = 4×3×2 = 24</div>
+<div class="a">答：360 = 2³×3²×5，共 24 個因數</div></div>
+</div></div>
+
+<!-- 18 例題6 反推 -->
+<div class="slide" data-pg="18 / 28"><div class="tag">例題 6 ★★★</div><div class="eyebrow">換你試試看</div><h2>反推</h2><div class="body">
+<div class="eg"><div class="q">已知 N = 2³ × 3 × 7²，求 N 的值、質因數與因數個數</div>
+<div class="stp fm">N = 8 × 3 × 49 = 8 × 147 = <span class="hl">1176</span></div>
+<div class="stp">質因數（標準分解式中出現的質數）：<span class="hl-b">2、3、7</span>（3 個不同）</div>
+<div class="stp fm">因數個數 = (3+1)(1+1)(2+1) = 4×2×3 = <span class="hl">24</span></div>
+<div class="a">答：N=1176；質因數 2、3、7；共 24 個因數</div></div>
+</div></div>
+
+<!-- 19 隨堂基礎 -->
+<div class="slide" data-pg="19 / 28"><div class="eyebrow">隨堂練習</div><h2>小試身手（基礎）</h2><div class="body">
+<table class="tbl">
+<tr><th>題目</th><th>答案</th></tr>
+<tr><td>50 以內的質數有哪些？</td><td class="hl">2,3,5,7,11,13,17,19,23,29,31,37,41,43,47（15 個）</td></tr>
+<tr><td>求 36 的所有因數</td><td class="hl">1,2,3,4,6,9,12,18,36（9 個）</td></tr>
+<tr><td class="fm">120 的標準分解式</td><td class="hl fm">2³×3×5</td></tr>
+<tr><td class="fm">225 的標準分解式</td><td class="hl fm">3²×5²</td></tr>
+<tr><td class="fm">1000 的標準分解式</td><td class="hl fm">2³×5³</td></tr>
+<tr><td class="fm">N=2²×5，有幾個因數？</td><td class="hl">6 個</td></tr>
+</table>
+</div></div>
+
+<!-- 20 隨堂進階 -->
+<div class="slide" data-pg="20 / 28"><div class="eyebrow">隨堂練習</div><h2>小試身手（進階）</h2><div class="body">
+<table class="tbl">
+<tr><th>題目</th><th>答案</th></tr>
+<tr><td class="fm">2310 的標準分解式</td><td class="hl fm">2×3×5×7×11</td></tr>
+<tr><td class="fm">2³×3² 有幾個因數？</td><td class="hl">12 個（1,2,3,4,6,8,9,12,18,24,36,72）</td></tr>
+<tr><td>判斷：兩個質數的積一定是合數</td><td class="hl">對（至少 4 個因數）</td></tr>
+<tr><td class="fm">N=2ᵃ×3 有 6 個因數，求 a</td><td class="hl">a = 2</td></tr>
+<tr><td class="fm">504=2³×3²×7，偶數因數有幾個？</td><td class="hl">18 個</td></tr>
+<tr><td class="fm">144 的標準分解式與 √144</td><td class="hl fm">2⁴×3²；√144 = 2²×3 = 12</td></tr>
+</table>
+</div></div>
+
+<!-- 21 素養1 RSA -->
+<div class="slide" data-pg="21 / 28"><div class="tag">素養 · 資安</div><div class="eyebrow">生活應用</div><h2>RSA 加密的原理</h2><div class="body">
+<div class="eg"><div class="q">密碼系統用 N = p × q（p、q 都是大質數）。</div>
+<div class="stp fm">(1) 143 ÷ 11 = 13 → 143 = <span class="hl">11 × 13</span></div>
+<div class="stp fm">(2) 323 ÷ 17 = 19 → 323 = <span class="hl">17 × 19</span></div>
+<div class="stp">(3) 為什麼安全？當 p、q 是<span class="hl">數百位數</span>的大質數時，即使知道 N，要找出 p 和 q 必須嘗試<span class="hl-r">天文數字般多</span>的除法 —— 現有電腦無法在合理時間內完成。</div>
+<div class="a">核心：「相乘很容易，分解很困難」</div></div>
+<div class="tip"><div class="ic">🔐</div><div class="tx">你每天用的網路銀行、HTTPS 網頁，背後就是這個<span class="hl">國中數學</span>概念在保護。</div></div>
+</div></div>
+
+<!-- 22 素養2 -->
+<div class="slide" data-pg="22 / 28"><div class="tag">素養 · 排程</div><div class="eyebrow">生活應用</div><h2>生產線保養排程</h2><div class="body">
+<div class="eg"><div class="q">A 機台每 N 分鐘保養（N 是 60 的因數）；B 機台要求 N 是 72 的因數。</div>
+<div class="stp fm">(1) 60 = <span class="hl">2²×3×5</span>；72 = <span class="hl">2³×3²</span></div>
+<div class="stp fm">(2) 60 的因數 = (2+1)(1+1)(1+1) = <span class="hl">12</span> 個；72 的因數 = (3+1)(2+1) = <span class="hl">12</span> 個</div>
+<div class="stp">(3) 同時是兩者因數（<span class="hl-g">公因數</span>）→ 取共同質因數的<span class="hl">較小次方</span>：GCD = 2²×3 = <span class="hl-g">12</span></div>
+<div class="a">公因數 = 12 的因數：1, 2, 3, 4, 6, 12</div></div>
+<div class="tip"><div class="ic">🔗</div><div class="tx">這題正好<span class="hl">預告下一節 2-2</span>：最大公因數與最小公倍數。</div></div>
+</div></div>
+
+<!-- 23 避雷 -->
+<div class="slide" data-pg="23 / 28"><div class="eyebrow">避雷指南</div><h2>四個最常見錯誤</h2><div class="body">
+<table class="tbl">
+<tr><th>❌ 錯誤</th><th>✓ 正確</th></tr>
+<tr><td>把 <span class="fm">1</span> 當成質數</td><td class="hl">1 只有 1 個因數 → 既非質數也非合數</td></tr>
+<tr><td>短除法停太早（21 直接當因數）</td><td class="hl fm">要除到商是質數：21 = 3×7</td></tr>
+<tr><td class="fm">標準分解式寫成 2×2×3×7</td><td class="hl fm">要用指數形式：2²×3×7</td></tr>
+<tr><td>找質數時漏掉（100~150 漏 149）</td><td class="hl fm">逐一檢查到 √N 為止</td></tr>
+</table>
+</div></div>
+
+<!-- 24 速查表1 -->
+<div class="slide" data-pg="24 / 28"><div class="eyebrow">公式速查</div><h2>倍數判別法總表</h2><div class="body">
+<table class="tbl">
+<tr><th>判別</th><th>方法</th></tr>
+<tr><td class="hl">2</td><td>個位是 0, 2, 4, 6, 8</td></tr>
+<tr><td class="hl">3</td><td>各位數字和是 3 的倍數</td></tr>
+<tr><td class="hl">4</td><td>末兩位是 4 的倍數</td></tr>
+<tr><td class="hl">5</td><td>個位是 0 或 5</td></tr>
+<tr><td class="hl">9</td><td>各位數字和是 9 的倍數</td></tr>
+<tr><td class="hl">10</td><td>個位是 0</td></tr>
+</table>
+<div class="box g" style="text-align:center;">9 的倍數<span class="hl-g">一定</span>是 3 的倍數；反之不一定</div>
+</div></div>
+
+<!-- 25 速查表2 -->
+<div class="slide" data-pg="25 / 28"><div class="eyebrow">公式速查</div><h2>質數與分解總表</h2><div class="body">
+<table class="tbl">
+<tr><th>項目</th><th>內容</th></tr>
+<tr><td>質數</td><td class="hl">恰好 2 個因數</td></tr>
+<tr><td>合數</td><td class="hl">因數超過 2 個</td></tr>
+<tr><td class="hl-r">1</td><td class="hl-r">既非質數也非合數（特例）</td></tr>
+<tr><td>50 以內質數</td><td class="hl fm">2,3,5,7,11,13,17,19,23,29,31,37,41,43,47（15 個）</td></tr>
+<tr><td>標準分解式</td><td class="hl fm">N = p<sup>a</sup> × q<sup>b</sup> ×…（指數形式）</td></tr>
+<tr><td>因數個數</td><td class="hl fm">(a+1)(b+1)(c+1)…</td></tr>
+</table>
+</div></div>
+
+<!-- 26 總結 -->
+<div class="slide" data-pg="26 / 28"><div class="eyebrow">本節總結</div><h2>四句話記住全部</h2><div class="body">
+<div class="box"><span class="hl-b">① 因數與倍數：</span><span class="fm">a÷b</span> 整除 → b 是 a 的因數、a 是 b 的倍數（同一件事的兩種說法）</div>
+<div class="box y"><span class="hl">② 倍數判別法：</span>2 看個位、3 看數字和、4 看末兩位、5 看個位、9 看數字和</div>
+<div class="box r"><span class="hl-r">③ 質數與合數：</span>質數恰好 2 個因數；⚠️ <span class="hl-r">1 既非質數也非合數</span>；50 以內 15 個</div>
+<div class="box g"><span class="hl-g">④ 標準分解式：</span>短除法除到商是質數；用指數形式；<span class="fm hl">因數個數 = (a+1)(b+1)…</span></div>
+</div></div>
+
+<!-- 27 課後 -->
+<div class="slide" data-pg="27 / 28"><div class="eyebrow">課後任務</div><h2>回家練習方向</h2><div class="body">
+<ul>
+<li><span class="hl">基礎</span>：找因數、倍數判別、質數合數判斷</li>
+<li><span class="hl-b">進階</span>：短除法、標準分解式、因數個數公式</li>
+<li><span class="hl-r">素養</span>：RSA 加密、生產排程</li>
+</ul>
+<div class="box y">自我檢查句：<span class="hl">「這個商還是質數嗎？還能繼續分解嗎？」</span></div>
+<div class="box">💡 別忘了：找質數時<span class="hl-r">逐一檢查到 √N</span>，不要跳過（149 就是這樣被漏掉的）。</div>
+</div></div>
+
+<!-- 28 下節預告 -->
+<div class="slide" data-pg="28 / 28"><div class="big-center">
+<div class="eyebrow">下節預告</div>
+<h1 style="font-size:42px;">2-2　最大公因數、最小公倍數</h1>
+<div class="lead">學會了分解，就能找出兩數的共同基因</div>
+<svg viewBox="0 0 520 60" width="56%" style="margin-top:18px;">
+<line x1="20" y1="30" x2="480" y2="30" stroke="#f2d979" stroke-width="2" stroke-dasharray="2 10" opacity="0.7"/>
+<path d="M480 30 l-12 -7 M480 30 l-12 7" stroke="#f2d979" stroke-width="2" fill="none"/>
+</svg>
+<div class="box y" style="max-width:760px;margin-top:20px;">預習提示：<span class="fm">60 = 2²×3×5、72 = 2³×3²</span> → 共同的部分取<span class="hl">較小次方</span> = GCD</div>
+</div></div>
+
+</div></body></html>

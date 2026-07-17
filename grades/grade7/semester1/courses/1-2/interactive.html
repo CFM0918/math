@@ -1,0 +1,901 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>七上 1-2 整數的加減運算｜互動教學平台</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;--wood:#6b4a32;}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);overscroll-behavior:none;}
+.topbar{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:10px 16px;background:linear-gradient(180deg,#1b2f21,#132218);border-bottom:2px solid var(--wood);
+  box-shadow:0 4px 18px rgba(0,0,0,0.5);}
+.brand{font-family:'Noto Serif TC',serif;font-weight:900;font-size:clamp(15px,2.2vw,20px);color:var(--yellow);white-space:nowrap;}
+.brand small{display:block;font-family:'Caveat',cursive;font-size:14px;color:var(--soft);font-weight:400;}
+.spacer{flex:1;}
+.btn{background:rgba(243,239,226,0.08);border:1.5px solid rgba(243,239,226,0.28);color:var(--chalk);
+  border-radius:10px;padding:7px 13px;font-family:inherit;font-size:14px;cursor:pointer;white-space:nowrap;transition:.15s;}
+.btn:hover{background:rgba(243,239,226,0.16);}
+.btn.on{background:rgba(242,217,121,0.22);border-color:var(--yellow);color:var(--yellow);font-weight:700;}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:10px 16px 0;scrollbar-width:none;}
+.tabs::-webkit-scrollbar{display:none;}
+.tab{background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.2);border-bottom:none;
+  color:var(--soft);border-radius:10px 10px 0 0;padding:9px 15px;font-size:14px;cursor:pointer;white-space:nowrap;font-family:inherit;}
+.tab.on{background:var(--board);border-color:var(--yellow);color:var(--yellow);font-weight:700;}
+.tab .n{font-family:'Caveat',cursive;font-size:18px;margin-right:5px;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px 60px;}
+.panel{display:none;}.panel.on{display:block;}
+.card{background:radial-gradient(ellipse at 20% 10%,rgba(255,255,255,0.05),transparent 45%),
+   linear-gradient(160deg,var(--board),var(--board2));
+  border:1.5px solid rgba(242,217,121,0.16);border-radius:14px;padding:18px;margin-bottom:16px;
+  box-shadow:0 8px 26px rgba(0,0,0,0.45);position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 38px,rgba(255,255,255,0.012) 38px,rgba(255,255,255,0.012) 39px);}
+.card>*{position:relative;}
+.card h3{font-family:'Noto Serif TC',serif;font-size:clamp(17px,2.4vw,21px);color:var(--yellow);
+  margin-bottom:12px;padding-bottom:8px;border-bottom:2px dashed rgba(242,217,121,0.35);display:flex;align-items:center;gap:8px;}
+.card h3 .ic{font-size:20px;}
+.deck{position:relative;background:rgba(0,0,0,0.22);border-radius:12px;padding:clamp(16px,3vw,30px);
+  min-height:clamp(260px,42vh,380px);display:flex;flex-direction:column;justify-content:center;}
+.sl{display:none;animation:fade .25s;}.sl.on{display:block;}
+@keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+.sl .eyebrow{font-family:'Caveat',cursive;font-size:20px;color:var(--yellow);margin-bottom:6px;}
+.sl h4{font-family:'Noto Serif TC',serif;font-size:clamp(19px,3vw,27px);margin-bottom:12px;line-height:1.35;}
+.sl p{font-size:clamp(15px,2vw,18px);line-height:1.8;margin-bottom:9px;}
+.sl ul{list-style:none;}
+.sl li{font-size:clamp(15px,2vw,18px);line-height:1.85;padding-left:26px;position:relative;margin-bottom:4px;}
+.sl li::before{content:'✦';position:absolute;left:2px;color:var(--yellow);font-size:14px;top:3px;}
+.nav{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:14px;}
+.nav .pg{font-family:'Caveat',cursive;font-size:20px;color:var(--soft);min-width:64px;text-align:center;}
+.dots{display:flex;gap:6px;justify-content:center;margin-top:10px;flex-wrap:wrap;}
+.dot{width:9px;height:9px;border-radius:50%;background:rgba(243,239,226,0.25);cursor:pointer;border:none;padding:0;}
+.dot.on{background:var(--yellow);transform:scale(1.3);}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.32);border-radius:10px;
+  padding:11px 15px;margin:9px 0;font-size:clamp(14px,1.9vw,17px);line-height:1.7;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.36);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.36);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.32);}
+.two{display:flex;gap:12px;flex-wrap:wrap;}.two>*{flex:1;min-width:220px;}
+.teach{background:rgba(201,174,224,0.12);border:1.5px dashed rgba(201,174,224,0.5);
+  border-radius:10px;padding:11px 15px;margin:9px 0;font-size:clamp(14px,1.8vw,15px);line-height:1.7;}
+.teach b{color:var(--purple);}
+.cv-wrap{background:rgba(0,0,0,0.25);border-radius:12px;padding:10px;}
+canvas.viz{width:100%;display:block;border-radius:8px;touch-action:none;cursor:crosshair;}
+.ctrl{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center;}
+.readout{font-family:'Noto Serif TC',serif;font-size:clamp(15px,2vw,19px);color:var(--chalk);
+  background:rgba(242,217,121,0.1);border:1px solid rgba(242,217,121,0.3);border-radius:8px;
+  padding:7px 12px;flex:1;min-width:220px;}
+.readout b{color:var(--yellow);}
+.q{background:rgba(0,0,0,0.2);border:1px solid rgba(242,217,121,0.18);border-radius:10px;padding:13px 15px;margin:10px 0;}
+.q .qt{font-size:clamp(15px,2vw,17px);margin-bottom:10px;line-height:1.7;}
+.q .qt .qn{font-family:'Caveat',cursive;color:var(--yellow);font-size:20px;margin-right:6px;}
+.opts{display:flex;flex-direction:column;gap:7px;}
+.opt{text-align:left;background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.22);
+  color:var(--chalk);border-radius:9px;padding:9px 13px;font-family:inherit;font-size:15px;cursor:pointer;transition:.15s;line-height:1.5;}
+.opt:hover:not(:disabled){background:rgba(243,239,226,0.13);}
+.opt.right{background:rgba(166,214,160,0.24);border-color:var(--green);color:#fff;font-weight:700;}
+.opt.wrong{background:rgba(237,160,168,0.22);border-color:var(--pink);}
+.opt:disabled{cursor:default;}
+.fb{display:none;margin-top:9px;padding:9px 13px;border-radius:8px;font-size:14.5px;line-height:1.65;}
+.fb.on{display:block;}
+.fb.ok{background:rgba(166,214,160,0.14);border-left:3px solid var(--green);}
+.fb.no{background:rgba(237,160,168,0.14);border-left:3px solid var(--pink);}
+.fill{display:inline-block;background:rgba(0,0,0,0.3);border:none;border-bottom:2px solid var(--yellow);
+  color:var(--yellow);font-family:'Noto Serif TC',serif;font-size:17px;width:90px;text-align:center;padding:3px 5px;margin:0 4px;}
+.fill:focus{outline:none;background:rgba(242,217,121,0.12);}
+.exq{background:rgba(0,0,0,0.26);border:1.5px solid rgba(242,217,121,0.28);border-radius:11px;padding:13px 15px;margin:10px 0;position:relative;}
+.exq::before{content:'';position:absolute;top:-8px;left:32px;width:54px;height:14px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.exq .exq-q{font-size:clamp(14.5px,1.9vw,17px);line-height:1.75;margin-bottom:11px;}
+.exo{text-align:left;background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.22);
+  color:var(--chalk);border-radius:9px;padding:9px 13px;font-family:inherit;font-size:clamp(14px,1.8vw,15.5px);
+  cursor:pointer;transition:.15s;line-height:1.55;width:100%;margin-bottom:6px;display:block;}
+.exo:hover:not(:disabled){background:rgba(243,239,226,0.13);}
+.exo.right{background:rgba(166,214,160,0.26);border-color:var(--green);color:#fff;font-weight:700;}
+.exo.wrong{background:rgba(237,160,168,0.2);border-color:var(--pink);opacity:.75;}
+.exo:disabled{cursor:default;}
+@keyframes shake{10%,90%{transform:translateX(-2px);}30%,70%{transform:translateX(4px);}50%{transform:translateX(-4px);}}
+.exo.shake{animation:shake .4s;}
+.exsol{display:none;margin-top:10px;padding:11px 14px;border-radius:9px;
+  background:rgba(166,214,160,0.13);border-left:3px solid var(--green);font-size:clamp(14px,1.8vw,15.5px);line-height:1.75;}
+.exsol.on{display:block;animation:fade .3s;}
+.exsol .st{color:var(--soft);margin:3px 0;}
+.exsol .an{color:var(--green);font-weight:700;margin-top:6px;}
+.exlock{display:flex;align-items:center;gap:7px;margin-top:9px;font-size:13.5px;color:rgba(243,239,226,0.45);}
+.exlock.hide{display:none;}
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:11px;}
+.icard{background:rgba(0,0,0,0.22);border:1.5px solid rgba(242,217,121,0.22);border-radius:11px;padding:14px;text-align:center;}
+.icard .big{font-family:'Noto Serif TC',serif;font-size:clamp(19px,3vw,26px);font-weight:900;margin:6px 0;}
+.icard .cap{font-size:13.5px;color:var(--soft);line-height:1.6;}
+
+/* ===== v2：學習目標 chips ===== */
+.goals{display:flex;flex-wrap:wrap;gap:9px;}
+.goal{display:flex;align-items:center;gap:9px;background:rgba(242,217,121,0.07);
+  border:1.5px dashed rgba(242,217,121,0.4);border-radius:22px;padding:8px 15px 8px 8px;
+  font-size:clamp(13.5px,1.8vw,15px);color:var(--yellow);line-height:1.5;}
+.goal .bdg{width:24px;height:24px;border-radius:50%;background:var(--yellow);color:#16281c;
+  font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;flex:none;}
+/* ===== v2：公式速查表 ===== */
+.frow{display:flex;gap:12px;align-items:center;padding:9px 12px;border-bottom:1px dashed rgba(243,239,226,0.16);}
+.frow:last-child{border-bottom:none;}
+.flab{color:var(--blue);font-weight:700;min-width:150px;font-size:clamp(13.5px,1.8vw,15.5px);flex:none;}
+.fval{color:var(--yellow);font-weight:700;font-family:'Noto Serif TC',serif;font-size:clamp(14px,1.9vw,17px);}
+@media(max-width:560px){.frow{flex-direction:column;align-items:flex-start;gap:3px;}.flab{min-width:0;}}
+/* ===== v2：闖關遊戲 ===== */
+.hud{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:12px;}
+.hud .st{background:rgba(0,0,0,0.3);border:1.5px solid rgba(242,217,121,0.28);border-radius:9px;
+  padding:7px 13px;font-size:14px;flex:1;min-width:88px;text-align:center;}
+.hud .st b{display:block;font-family:'Noto Serif TC',serif;font-size:20px;color:var(--yellow);}
+.tbar{height:8px;background:rgba(0,0,0,0.35);border-radius:5px;overflow:hidden;margin-bottom:12px;}
+.tfill{height:100%;background:linear-gradient(90deg,var(--green),var(--yellow),var(--pink));width:100%;transition:width .1s linear;}
+.gscreen{display:none;}.gscreen.on{display:block;}
+.lvchips{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin:14px 0;}
+.lvchip{background:rgba(152,201,220,0.12);border:1.5px solid rgba(152,201,220,0.35);border-radius:18px;
+  padding:6px 13px;font-size:13.5px;color:var(--blue);}
+.lvchip.done{background:rgba(166,214,160,0.2);border-color:var(--green);color:var(--green);}
+.lvchip.now{background:rgba(242,217,121,0.22);border-color:var(--yellow);color:var(--yellow);font-weight:700;}
+.gq{font-size:clamp(16px,2.2vw,20px);line-height:1.7;margin:14px 0;text-align:center;font-family:'Noto Serif TC',serif;}
+.gopts{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+@media(max-width:560px){.gopts{grid-template-columns:1fr;}}
+.gopt{background:rgba(243,239,226,0.07);border:1.5px solid rgba(243,239,226,0.25);color:var(--chalk);
+  border-radius:10px;padding:12px;font-family:'Noto Serif TC',serif;font-size:17px;cursor:pointer;transition:.15s;min-height:48px;}
+.gopt:hover:not(:disabled){background:rgba(243,239,226,0.15);}
+.gopt.right{background:rgba(166,214,160,0.3);border-color:var(--green);font-weight:900;}
+.gopt.wrong{background:rgba(237,160,168,0.25);border-color:var(--pink);}
+.gfb{margin-top:11px;padding:10px 13px;border-radius:8px;font-size:14.5px;line-height:1.6;display:none;}
+.gfb.on{display:block;}
+.gfb.ok{background:rgba(166,214,160,0.15);border-left:3px solid var(--green);}
+.gfb.no{background:rgba(237,160,168,0.15);border-left:3px solid var(--pink);}
+.rank{font-size:54px;text-align:center;margin:10px 0;}
+
+.hint{text-align:center;color:rgba(243,239,226,0.35);font-size:12.5px;padding:8px 0 0;}
+@media (max-width:640px){.topbar{padding:8px 10px;gap:8px;}.wrap{padding:0 10px 70px;}.card{padding:13px;}}
+</style></head><body>
+
+<div class="topbar">
+  <div class="brand">1-2　整數的加減運算<small>七上 · 第1章 整數運算</small></div>
+  <div class="spacer"></div>
+</div>
+
+<div class="tabs" id="tabs">
+  <button class="tab on" data-p="0"><span class="n">①</span>加法及加法性質</button>
+  <button class="tab" data-p="1"><span class="n">②</span>減法及減法性質</button>
+  <button class="tab" data-p="2"><span class="n">③</span>加減混合運算</button>
+  <button class="tab" data-p="3"><span class="n">④</span>數線上兩點的距離</button>
+  <button class="tab" data-p="4"><span class="n">★</span>題型測驗</button>
+
+  <button class="tab" data-p="5"><span class="n">🎮</span>闖關遊戲</button>
+</div>
+
+<div class="wrap">
+<div class="card" id="goalCard"><h3><span class="ic">🎯</span>本節學習目標</h3><div class="goals"><div class="goal"><div class="bdg">1</div>用數線解釋加法：加正往右、加負往左</div><div class="goal"><div class="bdg">2</div>同號相加：符號照抄、絕對值相加</div><div class="goal"><div class="bdg">3</div>異號相加：取大者符號、絕對值相減</div><div class="goal"><div class="bdg">4</div>運用加法交換律、結合律「湊整」</div><div class="goal"><div class="bdg">5</div>減法轉加法：a − b = a + (−b)</div><div class="goal"><div class="bdg">6</div>知道減法沒有交換律與結合律</div><div class="goal"><div class="bdg">7</div>用 d = |a − b| 求數線上兩點距離</div></div></div>
+<div id="wrap"></div>
+</div>
+
+<script>
+const DATA = [
+{ key:'add', viz:'add', vizTitle:'互動加法 —— 拖曳起點 a，用按鈕調加數 b',
+  slides:[
+    {eb:'核心 ①', h:'加法 = 在數線上移動', html:`
+      <div class="two">
+        <div class="box"><span class="hl-b">加正數</span> → 往<span class="hl-b">右</span>走</div>
+        <div class="box r"><span class="hl-r">加負數</span> → 往<span class="hl-r">左</span>走</div>
+      </div>
+      <div class="box g" style="text-align:center;font-size:19px;">
+        <span class="fm">(−2) + (+5) = <span class="hl">+3</span></span>　　從 −2 出發，往右走 5 格</div>
+      <div class="teach"><b>動手試：</b>用下方<b>互動加法</b>拖曳起點、改變加數，看箭頭往哪走。</div>`},
+    {eb:'核心 ①', h:'同號相加：符號照抄', html:`
+      <div class="box y" style="text-align:center;font-size:19px;"><span class="hl">符號不變</span>，<span class="hl">絕對值相加</span></div>
+      <div class="two">
+        <div class="box" style="text-align:center;"><div class="fm" style="font-size:22px;color:var(--blue);">(+5)+(+3) = +8</div>
+        <div style="font-size:14px;margin-top:6px;">都是正號 → 5+3=8，取正</div></div>
+        <div class="box r" style="text-align:center;"><div class="fm" style="font-size:22px;color:var(--pink);">(−5)+(−3) = −8</div>
+        <div style="font-size:14px;margin-top:6px;">都是負號 → 5+3=8，取負</div></div>
+      </div>
+      <div class="teach"><b>口訣：</b>同號一國，符號照抄，絕對值相加。</div>`},
+    {eb:'例題 1 ★☆☆', h:'同號相加', html:`
+      <div class="exq" data-a="2">
+        <div class="exq-q"><span class="hl">Q</span>　計算 <span class="fm">(−5) + (−3)</span></div>
+        <button class="exo" data-i="0">−2</button>
+        <button class="exo" data-i="1">+8</button>
+        <button class="exo" data-i="2">−8</button>
+        <button class="exo" data-i="3">+2</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">兩個都是<b>負號</b> → 同號相加</div>
+          <div class="st">符號照抄：取 <span class="hl-r">負號</span>；絕對值相加：5 + 3 = 8</div>
+          <div class="an">答：(−5)+(−3) = −8</div>
+        </div>
+      </div>`},
+    {eb:'核心 ①', h:'異號相加：大的決定符號', html:`
+      <div class="box y" style="text-align:center;font-size:18px;">取<span class="hl">絕對值較大者</span>的符號，絕對值<span class="hl">大減小</span></div>
+      <div class="two">
+        <div class="box" style="text-align:center;"><div class="fm" style="font-size:21px;color:var(--blue);">(+8)+(−3) = +5</div>
+        <div style="font-size:14px;margin-top:6px;">|8| &gt; |−3| → 取<span class="hl-b">正</span>，8−3=5</div></div>
+        <div class="box r" style="text-align:center;"><div class="fm" style="font-size:21px;color:var(--pink);">(−8)+(+3) = −5</div>
+        <div style="font-size:14px;margin-top:6px;">|−8| &gt; |3| → 取<span class="hl-r">負</span>，8−3=5</div></div>
+      </div>
+      <div class="teach"><b>口訣：</b>異號打架，<b>絕對值大的贏</b>（決定符號），然後大減小。</div>`},
+    {eb:'例題 2 ★★☆', h:'異號相加', html:`
+      <div class="exq" data-a="1">
+        <div class="exq-q"><span class="hl">Q</span>　計算 <span class="fm">(−8) + (+3)</span></div>
+        <button class="exo" data-i="0">+5</button>
+        <button class="exo" data-i="1">−5</button>
+        <button class="exo" data-i="2">−11</button>
+        <button class="exo" data-i="3">+11</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">一負一正 → <b>異號</b>相加</div>
+          <div class="st">比絕對值：|−8| = 8 &gt; |+3| = 3 → 取 <span class="hl-r">負號</span></div>
+          <div class="st">絕對值大減小：8 − 3 = 5</div>
+          <div class="an">答：(−8)+(+3) = −5</div>
+        </div>
+      </div>
+      <div class="teach"><b>最常錯：</b>直接用前面那個數的符號。一定要<b>先比絕對值</b>！</div>`},
+    {eb:'核心 ①　加法運算性質', h:'交換律與結合律', html:`
+      <div class="box y"><span class="hl">交換律</span>　<span class="fm">a + b = b + a</span><br>
+        <span class="fm" style="font-size:15px;">(+3)+(−7) = −4　；　(−7)+(+3) = −4　← 位置對調，答案一樣</span></div>
+      <div class="box"><span class="hl-b">結合律</span>　<span class="fm">(a + b) + c = a + (b + c)</span><br>
+        <span class="fm" style="font-size:15px;">[(−2)+(+5)]+(−6) = −3　；　(−2)+[(+5)+(−6)] = −3</span></div>
+      <div class="two">
+        <div class="box"><span class="hl-b">加法單位元</span><br><span class="fm">a + 0 = a</span></div>
+        <div class="box g"><span class="hl-g">相反數相加為 0</span><br><span class="fm">a + (−a) = 0</span></div>
+      </div>`},
+    {eb:'核心 ①', h:'用性質「湊整」簡化計算', html:`
+      <div class="exq" data-a="0">
+        <div class="exq-q"><span class="hl">Q</span>　計算 <span class="fm">(−15) + (+8) + (−3) + (+10)</span></div>
+        <button class="exo" data-i="0">0</button>
+        <button class="exo" data-i="1">−36</button>
+        <button class="exo" data-i="2">+36</button>
+        <button class="exo" data-i="3">−10</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">用<b>交換律 + 結合律</b>把同號湊在一起：</div>
+          <div class="st fm">= [(−15)+(−3)] + [(+8)+(+10)]</div>
+          <div class="st fm">= (−18) + (+18)</div>
+          <div class="st">−18 和 +18 <b>互為相反數</b> → 相加為 0</div>
+          <div class="an">答：0</div>
+        </div>
+      </div>
+      <div class="teach"><b>這就是性質的威力：</b>看到互為相反數的組合，直接得 0，不必硬算。</div>`}
+  ],
+  fa:[
+    {q:'計算 <span class="fm">(+5) + (+3)</span>', o:['+8','−8','+2','−2'], a:0, e:'同號相加：符號照抄（正），絕對值相加 5+3=8 → +8。'},
+    {q:'<span class="fm">(+8) + (−3)</span> 的結果<b>取什麼符號</b>？', o:['正號','負號','沒有符號','看前面那個數'], a:0, e:'異號相加取絕對值較大者的符號：|8|=8 > |−3|=3，所以取正號 → +5。'},
+    {q:'下列哪一個是<b>加法交換律</b>？', o:['a + b = b + a','(a+b)+c = a+(b+c)','a + 0 = a','a + (−a) = 0'], a:0, e:'交換律＝交換位置結果不變：a+b = b+a。第二個是結合律。'}
+  ],
+  info:[
+    {big:'同號', cap:'符號照抄<br>絕對值相加', c:'var(--blue)'},
+    {big:'異號', cap:'大的決定符號<br>絕對值大減小', c:'var(--pink)'},
+    {big:'a+b=b+a', cap:'交換律、結合律<br>可以湊整', c:'var(--yellow)'}
+  ]
+},
+{ key:'sub', viz:'sub', vizTitle:'互動減法 —— 看 a − b 如何變成 a + (−b)',
+  slides:[
+    {eb:'核心 ②', h:'減法轉加法（本節最重要）', html:`
+      <div class="box y" style="text-align:center;font-size:24px;padding:16px;">
+        <span class="fm"><span class="hl">a − b　=　a + (−b)</span></span></div>
+      <div class="box" style="text-align:center;"><span class="hl">減去一個數　＝　加上它的相反數</span></div>
+      <div class="box g">這樣一來，<span class="hl-g">所有減法都能用加法的規則處理</span> —— 不必另外背一套減法規則。</div>
+      <div class="teach"><b>動手試：</b>用下方<b>互動減法</b>看 a − b 怎麼「翻轉」成 a + (−b)。</div>`},
+    {eb:'例題 3 ★★☆', h:'減法轉加法', html:`
+      <div class="exq" data-a="3">
+        <div class="exq-q"><span class="hl">Q</span>　計算 <span class="fm">(+6) − (−9)</span></div>
+        <button class="exo" data-i="0">−3</button>
+        <button class="exo" data-i="1">−15</button>
+        <button class="exo" data-i="2">+3</button>
+        <button class="exo" data-i="3">+15</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">Step 1　減法轉加法：<span class="fm">(+6) − (−9) = (+6) + (+9)</span></div>
+          <div class="st">（−9 的相反數是 +9）</div>
+          <div class="st">Step 2　變成<b>同號</b>相加：6 + 9 = 15，取正號</div>
+          <div class="an">答：+15</div>
+        </div>
+      </div>
+      <div class="teach"><b>最常錯：</b>6 − (−9) 算成 6 − 9。<b>減負數要變號</b>，先轉成加法再做！</div>`},
+    {eb:'核心 ②　減法運算性質', h:'減法「沒有」交換律', html:`
+      <div class="box r" style="text-align:center;font-size:19px;">減法 <span class="hl-r">不能</span>隨便交換位置！</div>
+      <div class="two">
+        <div class="box" style="text-align:center;"><div class="fm" style="font-size:22px;color:var(--blue);">5 − 3 = 2</div></div>
+        <div class="box r" style="text-align:center;"><div class="fm" style="font-size:22px;color:var(--pink);">3 − 5 = −2</div></div>
+      </div>
+      <div class="box y" style="text-align:center;font-size:19px;">2 ≠ −2　→　<span class="hl-r">減法沒有交換律</span></div>
+      <div class="teach"><b>對比：</b>加法 (+3)+(−7) = (−7)+(+3) 成立；但減法一換位置，答案就變成<b>相反數</b>。</div>`},
+    {eb:'核心 ②　減法運算性質', h:'減法也「沒有」結合律', html:`
+      <div class="box">
+        <div class="fm">(8 − 3) − 2 = 5 − 2 = <span class="hl-b">3</span></div>
+        <div class="fm">8 − (3 − 2) = 8 − 1 = <span class="hl-r">7</span></div>
+      </div>
+      <div class="box r" style="text-align:center;">3 ≠ 7　→　<span class="hl-r">減法沒有結合律</span></div>
+      <div class="box y"><span class="hl">但是！</span>先把減法<span class="hl">轉成加法</span>，就能自由使用加法的性質：<br>
+        <span class="fm" style="font-size:15px;">8 − 3 − 2 = 8 + (−3) + (−2) = 8 + [(−3)+(−2)] = 8 + (−5) = 3</span></div>
+      <div class="teach"><b>這就是「減法轉加法」真正的價值：</b>把<b>沒有性質</b>的減法，變成<b>有性質</b>的加法。</div>`},
+    {eb:'例題 4 ★★☆', h:'減法性質判斷', html:`
+      <div class="exq" data-a="1">
+        <div class="exq-q"><span class="hl">Q</span>　下列敘述何者<b>正確</b>？</div>
+        <button class="exo" data-i="0">減法有交換律，5 − 3 = 3 − 5</button>
+        <button class="exo" data-i="1">減法沒有交換律，但轉成加法後可用加法的性質</button>
+        <button class="exo" data-i="2">減法有結合律，(8−3)−2 = 8−(3−2)</button>
+        <button class="exo" data-i="3">減法和加法的性質完全一樣</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">(A) <span class="hl-r">錯</span> —— 5−3 = 2，3−5 = −2，兩者互為相反數，不相等。</div>
+          <div class="st">(B) <span class="hl-g">對</span> —— 這正是 <span class="fm">a − b = a + (−b)</span> 的價值。</div>
+          <div class="st">(C) <span class="hl-r">錯</span> —— (8−3)−2 = 3，但 8−(3−2) = 7。</div>
+          <div class="st">(D) <span class="hl-r">錯</span> —— 加法有交換律與結合律，減法都沒有。</div>
+          <div class="an">答：(B)</div>
+        </div>
+      </div>`}
+  ],
+  fa:[
+    {q:'計算 <span class="fm">(−7) − (−12)</span>', o:['−19','+5','−5','+19'], a:1, e:'減法轉加法：(−7)+(+12)。異號相加，|12|>|−7| 取正，12−7=5 → +5。'},
+    {q:'<span class="fm">5 − 3</span> 和 <span class="fm">3 − 5</span> 相等嗎？', o:['相等，都是 2','不相等，一個是 2 一個是 −2','相等，都是 −2','無法比較'], a:1, e:'5−3=2，3−5=−2。兩者互為相反數 → 減法沒有交換律。'}
+  ],
+  info:[
+    {big:'a−b=a+(−b)', cap:'減法轉加法<br>減去＝加相反數', c:'var(--yellow)'},
+    {big:'✗ 交換律', cap:'5−3 ≠ 3−5', c:'var(--pink)'},
+    {big:'✗ 結合律', cap:'(8−3)−2 ≠ 8−(3−2)', c:'var(--pink)'}
+  ]
+},
+{ key:'mix', viz:'chain', vizTitle:'互動混合運算 —— 按「下一步」逐步走完算式',
+  slides:[
+    {eb:'核心 ③', h:'去括號口訣', html:`
+      <div class="box g">括號前是「<span class="hl-g">+</span>」→ 括號內<span class="hl-g">每項符號不變</span><br>
+        <span class="fm" style="font-size:19px;">+(3 − 8) = 3 − 8</span></div>
+      <div class="box r">括號前是「<span class="hl-r">−</span>」→ 括號內<span class="hl-r">每一項都要變號</span><br>
+        <span class="fm" style="font-size:19px;">−(3 − 8) = −3 <span class="hl">+</span> 8</span></div>
+      <div class="teach"><b>最常錯：</b>只變第一項，把 −(3−8) 寫成 −3−8 —— <b>後面那項忘了變號</b>！</div>`},
+    {eb:'核心 ③', h:'計算四步驟', html:`
+      <ul>
+        <li><span class="hl">① 先算括號內</span></li>
+        <li><span class="hl-b">② 減法轉加法</span>（全部變成加法）</li>
+        <li><span class="hl-g">③ 用交換律／結合律湊整</span></li>
+        <li><span class="hl-r">④ 由左往右算</span></li>
+      </ul>
+      <div class="box y">照這四步走，再長的算式都不會亂。</div>`},
+    {eb:'例題 5 ★★★', h:'混合運算', html:`
+      <div class="exq" data-a="2">
+        <div class="exq-q"><span class="hl">Q</span>　計算 <span class="fm">5 − (3 − 8) + (−2 − 1)</span></div>
+        <button class="exo" data-i="0">−3</button>
+        <button class="exo" data-i="1">13</button>
+        <button class="exo" data-i="2">7</button>
+        <button class="exo" data-i="3">−7</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">Step 1　先算括號內：(3−8) = <span class="hl-r">−5</span>；(−2−1) = <span class="hl-r">−3</span></div>
+          <div class="st fm">Step 2　原式 = 5 − (−5) + (−3)</div>
+          <div class="st fm">Step 3　5 − (−5) = 5 + 5 = 10</div>
+          <div class="st fm">Step 4　10 + (−3) = 7</div>
+          <div class="an">答：7</div>
+        </div>
+      </div>`},
+    {eb:'例題 6 ★★★', h:'去括號陷阱', html:`
+      <div class="exq" data-a="0">
+        <div class="exq-q"><span class="hl">Q</span>　計算 <span class="fm">−(4 − 9) + (−6 + 2)</span></div>
+        <button class="exo" data-i="0">1</button>
+        <button class="exo" data-i="1">−9</button>
+        <button class="exo" data-i="2">9</button>
+        <button class="exo" data-i="3">−1</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">Step 1　先算括號內：(4−9) = <span class="hl-r">−5</span>；(−6+2) = <span class="hl-r">−4</span></div>
+          <div class="st fm">Step 2　原式 = −(−5) + (−4)</div>
+          <div class="st">Step 3　−(−5) = <span class="hl">+5</span>（負負得正）</div>
+          <div class="st fm">Step 4　5 + (−4) = 1</div>
+          <div class="an">答：1</div>
+        </div>
+      </div>
+      <div class="teach"><b>陷阱：</b>若直接去括號 −(4−9)，要<b>兩項都變號</b> → −4 + 9 = 5，結果一樣。兩種做法都對，別只變一項！</div>`}
+  ],
+  fa:[
+    {q:'<span class="fm">−(3 − 8)</span> 去括號後是？', o:['−3 − 8','−3 + 8','3 − 8','3 + 8'], a:1, e:'括號前是「−」→ 每項都變號：3 變 −3、−8 變 +8 → −3 + 8（= 5）。'},
+    {q:'計算 <span class="fm">5 − (3 − 8)</span>', o:['0','10','−10','6'], a:1, e:'先算括號 (3−8) = −5；5 − (−5) = 5 + 5 = 10。'}
+  ],
+  info:[
+    {big:'+( )', cap:'括號前是＋<br>每項不變號', c:'var(--green)'},
+    {big:'−( )', cap:'括號前是−<br>每項都變號', c:'var(--pink)'},
+    {big:'①②③④', cap:'算括號→減轉加<br>→湊整→左到右', c:'var(--yellow)'}
+  ]
+},
+{ key:'dist', viz:'dist', vizTitle:'互動兩點距離 —— 拖曳 A、B 兩點看 |a − b|',
+  slides:[
+    {eb:'核心 ④', h:'數線上兩點的距離', html:`
+      <div class="box y" style="text-align:center;font-size:24px;padding:16px;">
+        <span class="fm"><span class="hl">d = |a − b| = |b − a|</span></span></div>
+      <div class="box g">距離<span class="hl-g">不分方向</span>，所以取絕對值。<span class="fm">a−b</span> 和 <span class="fm">b−a</span> 互為相反數，<span class="hl">絕對值相同</span>。</div>
+      <div class="teach"><b>動手試：</b>用下方<b>互動兩點距離</b>拖曳 A、B，觀察 |a−b| 怎麼變。</div>`},
+    {eb:'核心 ④', h:'三種情況', html:`
+      <div class="box"><span class="hl-b">兩點都是正數</span>　A=+2、B=+9 → <span class="fm">|2−9| = |−7| = <span class="hl">7</span></span></div>
+      <div class="box r"><span class="hl-r">兩點都是負數</span>　A=−8、B=−3 → <span class="fm">|−8−(−3)| = |−5| = <span class="hl">5</span></span></div>
+      <div class="box g"><span class="hl-g">一正一負</span>　A=−8、B=+5 → <span class="fm">|−8−5| = |−13| = <span class="hl">13</span></span></div>
+      <div class="teach"><b>小技巧：</b>一正一負時，<b>距離 = 兩數絕對值相加</b>（|−8|+|5| = 13）—— 因為要先走回原點，再走出去。</div>`},
+    {eb:'串起 1-1', h:'絕對值原來是「距離」的特例', html:`
+      <div class="box">一個數 a 到<span class="hl">原點</span>的距離：<span class="fm" style="font-size:19px;">d = |a − 0| = <span class="hl">|a|</span></span></div>
+      <div class="box y" style="text-align:center;font-size:19px;">
+        <span class="hl">絕對值 = 兩點距離的特例</span>（其中一點正好是原點）</div>
+      <div class="teach"><b>觀念串聯：</b>1-1 學的絕對值，和這一節的距離公式，其實是<b>同一件事</b>。</div>`},
+    {eb:'例題 7 ★★☆', h:'求兩點距離', html:`
+      <div class="exq" data-a="2">
+        <div class="exq-q"><span class="hl">Q</span>　數線上 A 點是 <span class="fm">−8</span>，B 點是 <span class="fm">+5</span>，求 A、B 兩點的距離</div>
+        <button class="exo" data-i="0">3</button>
+        <button class="exo" data-i="1">−13</button>
+        <button class="exo" data-i="2">13</button>
+        <button class="exo" data-i="3">40</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st fm">d = |a − b| = |−8 − 5| = |−13| = 13</div>
+          <div class="st">驗算（一正一負 → 絕對值相加）：|−8| + |5| = 8 + 5 = 13 ✓</div>
+          <div class="st">換順序也一樣：|5 − (−8)| = |13| = 13 ✓</div>
+          <div class="st">注意：距離<b>不會是負的</b>，所以 −13 是陷阱選項。</div>
+          <div class="an">答：13</div>
+        </div>
+      </div>`}
+  ],
+  fa:[
+    {q:'數線上 A=+2、B=+9，兩點距離是？', o:['7','11','−7','5'], a:0, e:'d = |2−9| = |−7| = 7。'},
+    {q:'數線上 A=−8、B=−3，兩點距離是？', o:['11','−5','5','−11'], a:2, e:'d = |−8−(−3)| = |−8+3| = |−5| = 5。距離不會是負的。'},
+    {q:'<span class="fm">|a|</span> 代表什麼距離？', o:['a 到 1 的距離','a 到原點的距離','a 到 b 的距離','a 的相反數'], a:1, e:'|a| = |a − 0|，就是 a 到原點的距離 —— 絕對值是兩點距離的特例。'}
+  ],
+  info:[
+    {big:'d = |a−b|', cap:'兩點距離<br>取絕對值', c:'var(--yellow)'},
+    {big:'一正一負', cap:'距離＝<br>兩絕對值相加', c:'var(--green)'},
+    {big:'|a| = |a−0|', cap:'絕對值是<br>距離的特例', c:'var(--blue)'}
+  ]
+}];
+
+const QUIZ = [
+  {type:'choice', q:'計算 <span class="fm">(+7) + (+4)</span>', o:['+11','−11','+3','−3'], a:0, e:'同號相加：符號照抄（正），7+4=11 → +11。'},
+  {type:'choice', q:'計算 <span class="fm">(−6) + (−5)</span>', o:['−1','+11','−11','+1'], a:2, e:'同號相加：都是負號，6+5=11，取負 → −11。'},
+  {type:'choice', q:'計算 <span class="fm">(+9) + (−4)</span>', o:['+13','−5','−13','+5'], a:3, e:'異號相加：|9|>|−4| 取正號，9−4=5 → +5。'},
+  {type:'tf', q:'判斷：「減法和加法一樣有交換律。」', a:false, e:'錯。5−3 = 2，但 3−5 = −2，兩者互為相反數 → 減法沒有交換律。'},
+  {type:'choice', q:'計算 <span class="fm">(+6) − (−9)</span>', o:['−3','+15','+3','−15'], a:1, e:'減法轉加法：(+6)+(+9) = +15。減負數要變號！'},
+  {type:'fill', q:'計算 <span class="fm">(−7) − (−12)</span> = ', a:['5','+5'], e:'(−7)+(+12)；異號，|12|>|−7| 取正，12−7=5 → +5。'},
+  {type:'choice', q:'計算 <span class="fm">−(4 − 9) + (−6 + 2)</span>', o:['1','−1','9','−9'], a:0, e:'括號內：(4−9)=−5、(−6+2)=−4；−(−5)+(−4) = 5−4 = 1。'},
+  {type:'choice', q:'數線上 A 點是 −8、B 點是 +5，兩點距離是？', o:['3','13','−13','40'], a:1, e:'d = |−8−5| = |−13| = 13。距離不會是負的。'},
+  {type:'choice', q:'計算 <span class="fm">(−15) + (+8) + (−3) + (+10)</span>', o:['0','−36','+36','−10'], a:0, e:'湊整：[(−15)+(−3)] + [(+8)+(+10)] = (−18)+(+18) = 0。'},
+  {type:'fill', q:'數線上 A=−8、B=−3，兩點距離 = ', a:['5'], e:'d = |−8−(−3)| = |−5| = 5。'}
+];
+
+const wrap = document.getElementById('wrap');
+DATA.forEach((sec, si)=>{
+  const p = document.createElement('div');
+  p.className = 'panel' + (si===0?' on':'');
+  p.dataset.p = si;
+  p.innerHTML = `
+    <div class="card">
+      <h3><span class="ic">📽</span>簡報翻頁器</h3>
+      <div class="deck" data-deck="${si}">
+        ${sec.slides.map((s,i)=>`<div class="sl${i===0?' on':''}" data-i="${i}">
+          <div class="eyebrow">${s.eb}</div><h4>${s.h}</h4>${s.html}</div>`).join('')}
+      </div>
+      <div class="nav">
+        <button class="btn" data-nav="prev" data-s="${si}">◀ 上一張</button>
+        <span class="pg" id="pg-${si}">1 / ${sec.slides.length}</span>
+        <button class="btn" data-nav="next" data-s="${si}">下一張 ▶</button>
+      </div>
+      <div class="dots" id="dots-${si}">
+        ${sec.slides.map((_,i)=>`<button class="dot${i===0?' on':''}" data-s="${si}" data-i="${i}"></button>`).join('')}
+      </div>
+    </div>
+    <div class="card">
+      <h3><span class="ic">🎯</span>Canvas 互動視覺化<span style="font-size:14px;color:var(--soft);font-weight:400;">　${sec.vizTitle}</span></h3>
+      <div class="cv-wrap">
+        <canvas class="viz" data-viz="${sec.viz}" data-si="${si}"></canvas>
+        <div class="ctrl" data-ctrl="${si}"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3><span class="ic">✅</span>形成性評量</h3>
+      ${sec.fa.map((f,i)=>`<div class="q" data-fa="${si}-${i}">
+        <div class="qt"><span class="qn">Q${i+1}</span>${f.q}</div>
+        <div class="opts">${f.o.map((o,oi)=>`<button class="opt" data-si="${si}" data-qi="${i}" data-oi="${oi}">${o}</button>`).join('')}</div>
+        <div class="fb" id="fb-${si}-${i}"></div>
+      </div>`).join('')}
+    </div>
+    <div class="card">
+      <h3><span class="ic">📊</span>資訊圖表</h3>
+      <div class="info">
+        ${sec.info.map(c=>`<div class="icard"><div class="big" style="color:${c.c}">${c.big}</div><div class="cap">${c.cap}</div></div>`).join('')}
+      </div>
+    </div>`;
+  wrap.appendChild(p);
+});
+
+const qp = document.createElement('div');
+qp.className='panel'; qp.dataset.p='4';
+qp.innerHTML = `<div class="card"><h3><span class="ic">📝</span>題型測驗　<span style="font-size:14px;color:var(--soft);font-weight:400;">單選 · 是非 · 填充，共 ${QUIZ.length} 題</span></h3>
+  <div id="quizBox"></div>
+  <div style="display:flex;gap:10px;align-items:center;margin-top:14px;flex-wrap:wrap;">
+    <button class="btn" id="gradeBtn" style="background:rgba(242,217,121,.2);border-color:var(--yellow);color:var(--yellow);font-weight:700;">📊 批改並看成績</button>
+    <button class="btn" id="resetQuiz">🔄 重做</button>
+    <div class="readout" id="score" style="display:none;"></div>
+  </div></div>`;
+wrap.appendChild(qp);
+/* v2：公式速查表 */
+qp.insertAdjacentHTML('beforeend', "<div class=\"card\"><h3><span class=\"ic\">📋</span>公式速查表</h3><div class=\"frow\"><div class=\"flab\">同號相加</div><div class=\"fval\">符號不變，絕對值相加：(−5)+(−3) = −8</div></div><div class=\"frow\"><div class=\"flab\">異號相加</div><div class=\"fval\">取絕對值大者的符號，絕對值大減小：(−8)+(+3) = −5</div></div><div class=\"frow\"><div class=\"flab\">加法交換律</div><div class=\"fval\">a + b = b + a</div></div><div class=\"frow\"><div class=\"flab\">加法結合律</div><div class=\"fval\">(a + b) + c = a + (b + c)</div></div><div class=\"frow\"><div class=\"flab\">加法單位元</div><div class=\"fval\">a + 0 = a</div></div><div class=\"frow\"><div class=\"flab\">相反數相加</div><div class=\"fval\">a + (−a) = 0</div></div><div class=\"frow\"><div class=\"flab\">減法轉加法</div><div class=\"fval\">a − b = a + (−b)</div></div><div class=\"frow\"><div class=\"flab\">減法性質</div><div class=\"fval\">沒有交換律（5−3 ≠ 3−5）、沒有結合律</div></div><div class=\"frow\"><div class=\"flab\">去括號</div><div class=\"fval\">前面是 + → 不變號；前面是 − → 每項都變號</div></div><div class=\"frow\"><div class=\"flab\">兩點距離</div><div class=\"fval\">d = |a − b| = |b − a|；|a| 是到原點的距離特例</div></div></div>");
+/* v2：闖關遊戲面板 */
+const GAME_PANEL = 5;
+const GAME = [{"name": "同號相加", "qs": [{"q": "(+7) + (+4) = ?", "o": ["+11", "−11", "+3", "−3"], "a": 0, "e": "同號相加：符號照抄（正），7+4=11。"}, {"q": "(−6) + (−5) = ?", "o": ["−1", "+11", "−11", "+1"], "a": 2, "e": "都是負號，6+5=11，取負 → −11。"}, {"q": "(−5) + (−3) = ?", "o": ["−2", "+8", "−8", "+2"], "a": 2, "e": "同號相加：取負號，5+3=8 → −8。"}, {"q": "同號相加的規則是？", "o": ["符號照抄、絕對值相加", "絕對值相減", "取大的符號", "一律取正"], "a": 0, "e": "同號一國，符號照抄，絕對值相加。"}]}, {"name": "異號相加", "qs": [{"q": "(+9) + (−4) = ?", "o": ["+13", "−5", "−13", "+5"], "a": 3, "e": "|9|>|−4| 取正，9−4=5 → +5。"}, {"q": "(−8) + (+3) = ?", "o": ["+5", "−5", "−11", "+11"], "a": 1, "e": "|−8|>|3| 取負，8−3=5 → −5。"}, {"q": "異號相加，符號取決於？", "o": ["前面那個數", "後面那個數", "絕對值大的那個", "一律取負"], "a": 2, "e": "異號打架，絕對值大的贏（決定符號）。"}, {"q": "(+8) + (−3) 的符號是？", "o": ["正", "負", "0", "不一定"], "a": 0, "e": "|8|=8 > |−3|=3 → 取正號 → +5。"}]}, {"name": "加法性質", "qs": [{"q": "哪個是加法交換律？", "o": ["a+b = b+a", "(a+b)+c = a+(b+c)", "a+0 = a", "a+(−a) = 0"], "a": 0, "e": "交換律＝交換位置結果不變。"}, {"q": "(−15)+(+8)+(−3)+(+10) = ?", "o": ["0", "−36", "+36", "−10"], "a": 0, "e": "湊整：[(−15)+(−3)]+[(+8)+(+10)] = −18+18 = 0。"}, {"q": "a + (−a) = ?", "o": ["2a", "0", "a", "−2a"], "a": 1, "e": "互為相反數相加為 0。"}, {"q": "用交換律結合律的好處是？", "o": ["可以湊整簡化計算", "答案會變大", "可以改變答案", "沒有用"], "a": 0, "e": "把同號或相反數湊在一起，計算更快。"}]}, {"name": "減法轉加法", "qs": [{"q": "(+6) − (−9) = ?", "o": ["−3", "+15", "+3", "−15"], "a": 1, "e": "轉加法：(+6)+(+9) = +15。減負數要變號！"}, {"q": "(−7) − (−12) = ?", "o": ["−19", "+5", "−5", "+19"], "a": 1, "e": "(−7)+(+12)；|12|>|−7| 取正，12−7=5。"}, {"q": "a − b 等於？", "o": ["a + b", "a + (−b)", "−a + b", "b − a"], "a": 1, "e": "減去一個數＝加上它的相反數。"}, {"q": "(+10) − (+15) = ?", "o": ["+5", "−5", "+25", "−25"], "a": 1, "e": "(+10)+(−15)；|−15|>|10| 取負，15−10=5 → −5。"}]}, {"name": "混合運算", "qs": [{"q": "5 − (3 − 8) = ?", "o": ["0", "10", "−10", "6"], "a": 1, "e": "括號 (3−8)=−5；5−(−5) = 5+5 = 10。"}, {"q": "−(3 − 8) 去括號 = ?", "o": ["−3 − 8", "−3 + 8", "3 − 8", "3 + 8"], "a": 1, "e": "括號前是「−」→ 每項都變號。"}, {"q": "−(4−9) + (−6+2) = ?", "o": ["1", "−9", "9", "−1"], "a": 0, "e": "−(−5)+(−4) = 5−4 = 1。"}, {"q": "5 − (3−8) + (−2−1) = ?", "o": ["−3", "13", "7", "−7"], "a": 2, "e": "5−(−5)+(−3) = 5+5−3 = 7。"}]}, {"name": "兩點距離", "qs": [{"q": "A=+2、B=+9，兩點距離？", "o": ["7", "11", "−7", "5"], "a": 0, "e": "d = |2−9| = |−7| = 7。"}, {"q": "A=−8、B=+5，兩點距離？", "o": ["3", "13", "−13", "40"], "a": 1, "e": "d = |−8−5| = |−13| = 13。"}, {"q": "A=−8、B=−3，兩點距離？", "o": ["11", "−5", "5", "−11"], "a": 2, "e": "d = |−8−(−3)| = |−5| = 5。距離不會是負的。"}, {"q": "|a| 代表什麼距離？", "o": ["a 到 1", "a 到原點", "a 到 b", "a 的相反數"], "a": 1, "e": "|a| = |a−0|，是兩點距離的特例。"}]}];
+const gp = document.createElement('div');
+gp.className='panel'; gp.dataset.p=String(GAME_PANEL);
+gp.innerHTML = "<div class=\"card\"><h3><span class=\"ic\">🎮</span>闖關遊戲　<span style=\"font-size:14px;color:var(--soft);font-weight:400;\">6 關挑戰 · 每題 20 秒 · 連擊與速度都有加分</span></h3>\n  <div class=\"gscreen on\" id=\"gStart\">\n    <div style=\"text-align:center;font-size:clamp(15px,2vw,18px);line-height:1.8;\">\n      闖過 <b class=\"hl\">6</b> 關，每關 1 題，每題 <b class=\"hl\">20 秒</b>。<br>\n      計分：基礎 <b class=\"hl\">10</b> 分 + 連擊獎勵（最多 <b class=\"hl\">5</b>）+ 速度獎勵（最多 <b class=\"hl\">5</b>）＝ 單題最高 <b class=\"hl\">20</b> 分</div>\n    <div class=\"lvchips\" id=\"gStartChips\"></div>\n    <div style=\"text-align:center;\"><button class=\"btn\" id=\"gGo\" style=\"background:rgba(242,217,121,.25);border-color:var(--yellow);color:var(--yellow);font-weight:700;font-size:16px;padding:10px 24px;\">🚀 開始挑戰</button></div>\n  </div>\n  <div class=\"gscreen\" id=\"gPlay\">\n    <div class=\"hud\">\n      <div class=\"st\">關卡<b id=\"hLv\">1/6</b></div>\n      <div class=\"st\">分數<b id=\"hSc\">0</b></div>\n      <div class=\"st\">連擊<b id=\"hStk\">0</b></div>\n      <div class=\"st\">剩餘<b id=\"hT\">20</b></div>\n    </div>\n    <div class=\"tbar\"><div class=\"tfill\" id=\"tFill\"></div></div>\n    <div class=\"lvchips\" id=\"gChips\"></div>\n    <div class=\"gq\" id=\"gQ\"></div>\n    <div class=\"gopts\" id=\"gO\"></div>\n    <div class=\"gfb\" id=\"gFb\"></div>\n    <div style=\"text-align:center;margin-top:12px;\"><button class=\"btn\" id=\"gNext\" style=\"display:none;\">下一關 ▶</button></div>\n  </div>\n  <div class=\"gscreen\" id=\"gEnd\">\n    <div class=\"rank\" id=\"gRank\">🏆</div>\n    <div style=\"text-align:center;font-size:clamp(17px,2.6vw,22px);font-family:'Noto Serif TC';\" id=\"gFinal\"></div>\n    <div style=\"text-align:center;color:var(--soft);margin-top:8px;\" id=\"gStats\"></div>\n    <div style=\"text-align:center;margin-top:16px;\"><button class=\"btn\" id=\"gAgain\" style=\"background:rgba(242,217,121,.25);border-color:var(--yellow);color:var(--yellow);font-weight:700;\">🔄 再挑戰一次</button></div>\n  </div></div>";
+wrap.appendChild(gp);
+document.getElementById('gStartChips').innerHTML = GAME.map((g,i)=>`<div class="lvchip">第${i+1}關 ${g.name}</div>`).join('');
+
+
+const qb = document.getElementById('quizBox');
+QUIZ.forEach((q,i)=>{
+  const d = document.createElement('div'); d.className='q';
+  let body='';
+  if(q.type==='choice') body = `<div class="opts">${q.o.map((o,oi)=>`<button class="opt" data-quiz="${i}" data-oi="${oi}">${o}</button>`).join('')}</div>`;
+  else if(q.type==='tf') body = `<div class="opts" style="flex-direction:row;gap:10px;">
+      <button class="opt" data-quiz="${i}" data-oi="1" style="flex:1;">⭕ 對</button>
+      <button class="opt" data-quiz="${i}" data-oi="0" style="flex:1;">❌ 錯</button></div>`;
+  else body = `<div><input class="fill" data-quiz="${i}" placeholder="?"></div>`;
+  d.innerHTML = `<div class="qt"><span class="qn">${i+1}</span>
+    <span style="font-size:12px;color:var(--soft);border:1px solid rgba(243,239,226,.25);border-radius:6px;padding:1px 6px;margin-right:6px;">
+    ${q.type==='choice'?'單選':q.type==='tf'?'是非':'填充'}</span>${q.q}</div>${body}
+    <div class="fb" id="qfb-${i}"></div>`;
+  qb.appendChild(d);
+});
+
+document.getElementById('tabs').addEventListener('click', e=>{
+  const t = e.target.closest('.tab'); if(!t) return;
+  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on', x===t));
+  document.querySelectorAll('.panel').forEach(x=>x.classList.toggle('on', x.dataset.p===t.dataset.p));
+  window.scrollTo({top:0,behavior:'smooth'});
+  setTimeout(resizeAll, 60);
+});
+
+const cur = DATA.map(()=>0);
+function showSlide(si, i){
+  const deck = document.querySelector(`[data-deck="${si}"]`);
+  const sl = deck.querySelectorAll('.sl');
+  i = Math.max(0, Math.min(sl.length-1, i));
+  cur[si] = i;
+  sl.forEach((s,k)=>s.classList.toggle('on', k===i));
+  document.getElementById('pg-'+si).textContent = `${i+1} / ${sl.length}`;
+  document.querySelectorAll(`#dots-${si} .dot`).forEach((d,k)=>d.classList.toggle('on', k===i));
+}
+document.addEventListener('click', e=>{
+  const n = e.target.closest('[data-nav]');
+  if(n){ const si=+n.dataset.s; showSlide(si, cur[si] + (n.dataset.nav==='next'?1:-1)); return; }
+  const d = e.target.closest('.dot');
+  if(d){ showSlide(+d.dataset.s, +d.dataset.i); return; }
+});
+document.addEventListener('keydown', e=>{
+  const p = document.querySelector('.panel.on'); if(!p) return;
+  const si = +p.dataset.p; if(si>=DATA.length) return;
+  if(e.key==='ArrowRight') showSlide(si, cur[si]+1);
+  if(e.key==='ArrowLeft') showSlide(si, cur[si]-1);
+});
+
+/* 形成性評量 */
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.opt[data-si]'); if(!o) return;
+  const si=+o.dataset.si, qi=+o.dataset.qi, oi=+o.dataset.oi;
+  const f = DATA[si].fa[qi];
+  const box = document.querySelector(`[data-fa="${si}-${qi}"]`);
+  box.querySelectorAll('.opt').forEach((b,k)=>{
+    b.disabled = true;
+    if(k===f.a) b.classList.add('right');
+    else if(k===oi) b.classList.add('wrong');
+  });
+  const fb = document.getElementById(`fb-${si}-${qi}`);
+  const ok = oi===f.a;
+  fb.className = 'fb on ' + (ok?'ok':'no');
+  fb.innerHTML = (ok?'✅ <b>答對了！</b> ':'❌ <b>再想想。</b> ') + f.e;
+});
+
+/* 互動例題：答對才解鎖詳解 */
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.exo');
+  if(o && !o.disabled){
+    const box = o.closest('.exq');
+    const ans = +box.dataset.a, pick = +o.dataset.i;
+    if(pick === ans){
+      box.querySelectorAll('.exo').forEach(b=>{
+        b.disabled = true;
+        if(+b.dataset.i === ans) b.classList.add('right');
+      });
+      box.querySelector('.exsol').classList.add('on');
+      box.querySelector('.exlock').classList.add('hide');
+    } else {
+      o.classList.add('wrong','shake');
+      setTimeout(()=>o.classList.remove('shake'), 420);
+      o.disabled = true;
+      const lock = box.querySelector('.exlock');
+      lock.innerHTML = '🔒 再想想 —— 答對才會顯示詳解';
+      lock.style.color = 'var(--pink)';
+    }
+  }
+});
+
+/* 測驗 */
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.opt[data-quiz]'); if(!o) return;
+  const i = +o.dataset.quiz;
+  o.parentElement.querySelectorAll('.opt').forEach(b=>b.classList.remove('right','wrong'));
+  o.classList.add('right'); o.dataset.sel = '1';
+  o.parentElement.querySelectorAll('.opt').forEach(b=>{ if(b!==o) delete b.dataset.sel; });
+});
+document.getElementById('gradeBtn').addEventListener('click', ()=>{
+  let right=0;
+  QUIZ.forEach((q,i)=>{
+    const fb = document.getElementById('qfb-'+i);
+    let ok=false, picked=null;
+    if(q.type==='fill'){
+      const inp = document.querySelector(`.fill[data-quiz="${i}"]`);
+      const v = (inp.value||'').trim().replace(/−/g,'-');
+      ok = q.a.some(a=>a.replace(/−/g,'-')===v);
+      inp.style.borderBottomColor = ok?'var(--green)':'var(--pink)';
+    } else {
+      const sel = document.querySelector(`.opt[data-quiz="${i}"][data-sel="1"]`);
+      if(sel){ picked = +sel.dataset.oi; ok = (q.type==='tf') ? (picked===1)===q.a : picked===q.a; }
+      document.querySelectorAll(`.opt[data-quiz="${i}"]`).forEach(b=>{
+        b.classList.remove('right','wrong');
+        const bi=+b.dataset.oi;
+        const isAns = (q.type==='tf') ? ((bi===1)===q.a) : (bi===q.a);
+        if(isAns) b.classList.add('right');
+        else if(picked===bi) b.classList.add('wrong');
+      });
+    }
+    if(ok) right++;
+    fb.className='fb on '+(ok?'ok':'no');
+    fb.innerHTML = (ok?'✅ <b>正確</b> ':'❌ <b>錯誤</b> ') + q.e;
+  });
+  const s = document.getElementById('score');
+  const pct = Math.round(right/QUIZ.length*100);
+  s.style.display='block';
+  s.innerHTML = `成績：<b>${right} / ${QUIZ.length}</b>　（${pct} 分）　${pct>=80?'🏆 很棒！':pct>=60?'💪 再加油':'📖 建議重看重點'}`;
+});
+document.getElementById('resetQuiz').addEventListener('click', ()=>{
+  document.querySelectorAll('.opt[data-quiz]').forEach(b=>{b.classList.remove('right','wrong'); delete b.dataset.sel;});
+  document.querySelectorAll('.fill').forEach(i=>{i.value=''; i.style.borderBottomColor='var(--yellow)';});
+  document.querySelectorAll('[id^="qfb-"]').forEach(f=>f.className='fb');
+  document.getElementById('score').style.display='none';
+});
+
+/* ===== Canvas ===== */
+const VIZ = {};
+let DPR = 1;
+function nlGeom(c){ const w=c.width/DPR, h=c.height/DPR; return {w,h,cy:h*0.58,x0:w*0.07,x1:w*0.93,min:-10,max:10}; }
+function toX(g,v){ return g.x0 + (v-g.min)/(g.max-g.min)*(g.x1-g.x0); }
+function toV(g,x){ return Math.round((x-g.x0)/(g.x1-g.x0)*(g.max-g.min)+g.min); }
+function sgn(v){ return v>0?'+'+v:''+v; }
+
+function drawAxis(ctx,g){
+  ctx.clearRect(0,0,g.w,g.h);
+  ctx.strokeStyle='#f3efe2'; ctx.lineWidth=2; ctx.lineCap='round';
+  ctx.beginPath(); ctx.moveTo(g.x0,g.cy); ctx.lineTo(g.x1,g.cy); ctx.stroke();
+  [[g.x0,1],[g.x1,-1]].forEach(([x,d])=>{ ctx.beginPath();
+    ctx.moveTo(x,g.cy); ctx.lineTo(x+10*d,g.cy-6); ctx.moveTo(x,g.cy); ctx.lineTo(x+10*d,g.cy+6); ctx.stroke(); });
+  ctx.font='13px "Noto Sans TC"'; ctx.textAlign='center';
+  for(let v=g.min; v<=g.max; v++){
+    const x=toX(g,v), zero=(v===0);
+    ctx.strokeStyle = zero?'#f2d979':'rgba(243,239,226,0.7)';
+    ctx.lineWidth = zero?3.5:1.5;
+    ctx.beginPath(); ctx.moveTo(x,g.cy-(zero?11:7)); ctx.lineTo(x,g.cy+(zero?11:7)); ctx.stroke();
+    ctx.fillStyle = zero?'#f2d979':(v<0?'rgba(237,160,168,0.9)':'rgba(152,201,220,0.9)');
+    if(g.w>520 || v%2===0 || zero) ctx.fillText(sgn(v), x, g.cy+28);
+  }
+}
+function dot(ctx,x,y,color,label){
+  ctx.beginPath(); ctx.arc(x,y,8,0,7); ctx.fillStyle=color; ctx.fill();
+  ctx.strokeStyle='rgba(255,255,255,.5)'; ctx.lineWidth=1.5; ctx.stroke();
+  if(label){ ctx.fillStyle=color; ctx.font='bold 16px "Noto Serif TC"'; ctx.textAlign='center'; ctx.fillText(label,x,y-16); }
+}
+function jump(ctx,x1,x2,y,color,label){
+  const up = y-40;
+  ctx.strokeStyle=color; ctx.lineWidth=2.5; ctx.setLineDash([]);
+  ctx.beginPath(); ctx.moveTo(x1,y-10); ctx.quadraticCurveTo((x1+x2)/2, up, x2, y-10); ctx.stroke();
+  const dir = x2>x1?1:-1;
+  ctx.beginPath(); ctx.moveTo(x2,y-10); ctx.lineTo(x2-9*dir,y-18); ctx.moveTo(x2,y-10); ctx.lineTo(x2-9*dir,y-2); ctx.stroke();
+  if(label){ ctx.fillStyle=color; ctx.font='bold 15px "Noto Sans TC"'; ctx.textAlign='center';
+    ctx.fillText(label,(x1+x2)/2, up-4); }
+}
+
+const CHAIN = {expr:'5 − (3 − 8) + (−2 − 1)', steps:[
+  {v:5,  t:'起點：5'},
+  {v:10, t:'5 − (3−8) = 5 − (−5) = 5 + 5 = 10　（往右 5）'},
+  {v:7,  t:'10 + (−2−1) = 10 + (−3) = 7　（往左 3）'}
+]};
+
+function initViz(cv){
+  const si = +cv.dataset.si, kind = cv.dataset.viz;
+  const ctx = cv.getContext('2d');
+  const st = VIZ[si] = {kind, cv, ctx, a:(kind==='dist'?-8:-2), b:(kind==='dist'?5:5), step:0, drag:false, grab:null};
+  const ctrl = document.querySelector(`[data-ctrl="${si}"]`);
+  if(kind==='add'||kind==='sub'){
+    ctrl.innerHTML = `<div class="readout" id="ro-${si}"></div>
+      <button class="btn" data-t="bm" data-si="${si}">b − 1</button>
+      <button class="btn" data-t="bp" data-si="${si}">b + 1</button>
+      <button class="btn" data-t="rnd" data-si="${si}">🎲 隨機</button>`;
+  } else if(kind==='chain'){
+    ctrl.innerHTML = `<div class="readout" id="ro-${si}"></div>
+      <button class="btn" data-t="next" data-si="${si}">▶ 下一步</button>
+      <button class="btn" data-t="reset" data-si="${si}">↺ 重來</button>`;
+  } else if(kind==='dist'){
+    ctrl.innerHTML = `<div class="readout" id="ro-${si}"></div>
+      <button class="btn" data-t="rnd2" data-si="${si}">🎲 隨機兩點</button>`;
+  }
+  const pick=(e)=>{
+    const r=cv.getBoundingClientRect(), g=nlGeom(cv);
+    const x=(e.clientX-r.left)*(g.w/r.width);
+    const v=Math.max(g.min,Math.min(g.max,toV(g,x)));
+    if(kind==='dist'){
+      if(st.grab===null) st.grab = (Math.abs(v-st.a)<=Math.abs(v-st.b))?'a':'b';
+      st[st.grab]=v;
+    } else if(kind==='add'||kind==='sub'){ st.a=v; }
+    draw(si);
+  };
+  if(kind!=='chain'){
+    cv.addEventListener('pointerdown',e=>{ e.preventDefault(); st.drag=true; st.grab=null; cv.setPointerCapture(e.pointerId); pick(e); });
+    cv.addEventListener('pointermove',e=>{ if(st.drag) pick(e); });
+    // 不監聽 pointerleave：setPointerCapture 會在 pointerdown 立刻觸發它，導致拖不動
+    ['pointerup','pointercancel'].forEach(k=>cv.addEventListener(k,()=>{ st.drag=false; st.grab=null; }));
+  } else { cv.style.cursor='default'; }
+  draw(si);
+}
+
+function draw(si){
+  const st=VIZ[si]; if(!st) return;
+  const {cv,ctx,kind}=st, g=nlGeom(cv), ro=document.getElementById('ro-'+si);
+  drawAxis(ctx,g);
+
+  if(kind==='add'){
+    const a=st.a, b=st.b, r=a+b;
+    const xa=toX(g,a), xr=toX(g,Math.max(g.min,Math.min(g.max,r)));
+    jump(ctx,xa,xr,g.cy, b>=0?'#a6d6a0':'#eda0a8', (b>=0?'往右 ':'往左 ')+Math.abs(b)+' 格');
+    dot(ctx,xa,g.cy,'#98c9dc','a');
+    dot(ctx,xr,g.cy,'#f2d979','a+b');
+    const same = (a>0&&b>0)||(a<0&&b<0);
+    const rule = (a===0||b===0) ? '有一個是 0 → 結果就是另一個數（加法單位元）'
+      : same ? `<b>同號</b>相加 → 符號照抄，絕對值相加：${Math.abs(a)}+${Math.abs(b)}=${Math.abs(r)}`
+      : `<b>異號</b>相加 → 取絕對值大者的符號，大減小：|${a}|=${Math.abs(a)}、|${b}|=${Math.abs(b)}`;
+    ro.innerHTML = `<b>(${sgn(a)}) + (${sgn(b)}) = ${sgn(r)}</b>　｜　${rule}`;
+  }
+  else if(kind==='sub'){
+    const a=st.a, b=st.b, r=a-b;
+    const xa=toX(g,a), xr=toX(g,Math.max(g.min,Math.min(g.max,r)));
+    jump(ctx,xa,xr,g.cy, (-b)>=0?'#a6d6a0':'#eda0a8', '加上 '+sgn(-b));
+    dot(ctx,xa,g.cy,'#98c9dc','a');
+    dot(ctx,xr,g.cy,'#f2d979','a−b');
+    ro.innerHTML = `<b>(${sgn(a)}) − (${sgn(b)})</b> = <b>(${sgn(a)}) + (${sgn(-b)})</b> = <b>${sgn(r)}</b>`
+      + `　｜　減 ${sgn(b)} ＝ 加它的相反數 ${sgn(-b)}`;
+  }
+  else if(kind==='chain'){
+    const s=CHAIN.steps, k=st.step;
+    for(let i=0;i<=k && i<s.length;i++){
+      const x=toX(g,s[i].v);
+      if(i>0){ const px=toX(g,s[i-1].v);
+        jump(ctx,px,x,g.cy, s[i].v>s[i-1].v?'#a6d6a0':'#eda0a8', ''); }
+      dot(ctx,x,g.cy, i===k?'#f2d979':'rgba(152,201,220,.55)', i===k?sgn(s[i].v):'');
+    }
+    ctx.fillStyle='#f3efe2'; ctx.font='bold 17px "Noto Serif TC"'; ctx.textAlign='center';
+    ctx.fillText(CHAIN.expr, g.w/2, 24);
+    ro.innerHTML = `步驟 <b>${k+1} / ${s.length}</b>　｜　${s[k].t}`;
+  }
+  else if(kind==='dist'){
+    const a=st.a,b=st.b, xa=toX(g,a), xb=toX(g,b), d=Math.abs(a-b);
+    if(a!==b){
+      ctx.strokeStyle='#a6d6a0'; ctx.lineWidth=3;
+      ctx.beginPath(); ctx.moveTo(xa,g.cy-26); ctx.lineTo(xb,g.cy-26); ctx.stroke();
+      [xa,xb].forEach(px=>{ ctx.beginPath(); ctx.moveTo(px,g.cy-32); ctx.lineTo(px,g.cy-20); ctx.stroke(); });
+      ctx.fillStyle='#a6d6a0'; ctx.font='bold 16px "Noto Serif TC"'; ctx.textAlign='center';
+      ctx.fillText('d = '+d, (xa+xb)/2, g.cy-38);
+    }
+    dot(ctx,xa,g.cy,'#98c9dc','A');
+    dot(ctx,xb,g.cy,'#eda0a8','B');
+    const mixed = (a<0&&b>0)||(a>0&&b<0);
+    ro.innerHTML = `A = <b>${sgn(a)}</b>，B = <b>${sgn(b)}</b>　｜　<b>d = |${a} − ${b}| = ${d}</b>`
+      + (mixed ? `　<span style="color:var(--green)">一正一負 → |${a}|+|${b}| = ${Math.abs(a)}+${Math.abs(b)} = ${d} ✓</span>` : '');
+  }
+}
+document.addEventListener('click', e=>{
+  const btn = e.target.closest('[data-t]'); if(!btn) return;
+  const si=+btn.dataset.si, st=VIZ[si], t=btn.dataset.t;
+  if(t==='bp') st.b = Math.min(10, st.b+1);
+  if(t==='bm') st.b = Math.max(-10, st.b-1);
+  if(t==='rnd'){ st.a=Math.floor(Math.random()*21)-10; st.b=Math.floor(Math.random()*21)-10; }
+  if(t==='rnd2'){ st.a=Math.floor(Math.random()*21)-10; st.b=Math.floor(Math.random()*21)-10; }
+  if(t==='next') st.step = Math.min(CHAIN.steps.length-1, st.step+1);
+  if(t==='reset') st.step = 0;
+  draw(si);
+});
+
+function resizeAll(){
+  DPR = Math.min(2, window.devicePixelRatio||1);
+  document.querySelectorAll('canvas.viz').forEach(cv=>{
+    const w = cv.clientWidth || cv.parentElement.clientWidth;
+    const h = 200;
+    cv.width = w*DPR; cv.height = h*DPR; cv.style.height = h+'px';
+    cv.getContext('2d').setTransform(DPR,0,0,DPR,0,0);
+  });
+  Object.keys(VIZ).forEach(k=>draw(+k));
+}
+
+/* ===== v2 闖關遊戲 ===== */
+const G = {lv:0, score:0, streak:0, best:0, t:20, timer:null, cur:null, answered:false};
+function gShow(id){ ['gStart','gPlay','gEnd'].forEach(x=>document.getElementById(x).classList.toggle('on', x===id)); }
+function gChips(){
+  document.getElementById('gChips').innerHTML = GAME.map((g,i)=>
+    `<div class="lvchip ${i<G.lv?'done':i===G.lv?'now':''}">${i+1}. ${g.name}</div>`).join('');
+}
+function gLoad(){
+  if(G.lv>=GAME.length){ gFinish(); return; }
+  G.answered=false; G.t=20;
+  const bank = GAME[G.lv].qs;
+  G.cur = bank[Math.floor(Math.random()*bank.length)];
+  document.getElementById('hLv').textContent = (G.lv+1)+'/'+GAME.length;
+  document.getElementById('hSc').textContent = G.score;
+  document.getElementById('hStk').textContent = G.streak;
+  document.getElementById('gQ').innerHTML = `<span style="color:var(--blue);font-size:15px;">第 ${G.lv+1} 關 · ${GAME[G.lv].name}</span><br>${G.cur.q}`;
+  document.getElementById('gO').innerHTML = G.cur.o.map((o,i)=>
+    `<button class="gopt" data-g="${i}">${'ABCD'[i]}. ${o}</button>`).join('');
+  document.getElementById('gFb').className='gfb';
+  document.getElementById('gNext').style.display='none';
+  gChips();
+  clearInterval(G.timer);
+  G.timer = setInterval(()=>{
+    G.t -= 0.1;
+    document.getElementById('hT').textContent = Math.max(0,G.t).toFixed(0);
+    document.getElementById('tFill').style.width = Math.max(0,G.t/20*100)+'%';
+    if(G.t<=0){ clearInterval(G.timer); gAnswer(-1); }
+  },100);
+}
+function gAnswer(pick){
+  if(G.answered) return;
+  G.answered = true; clearInterval(G.timer);
+  const ans = G.cur.a, ok = pick===ans;
+  document.querySelectorAll('.gopt').forEach((b,i)=>{
+    b.disabled=true;
+    if(i===ans) b.classList.add('right'); else if(i===pick) b.classList.add('wrong');
+  });
+  let gain=0, sb=0, tb=0;
+  if(ok){
+    G.streak++; G.best=Math.max(G.best,G.streak);
+    sb = Math.min(5, G.streak-1); tb = Math.min(5, Math.floor(G.t/4));
+    gain = 10+sb+tb; G.score += gain;
+  } else { G.streak = 0; }
+  document.getElementById('hSc').textContent = G.score;
+  document.getElementById('hStk').textContent = G.streak;
+  const fb = document.getElementById('gFb');
+  fb.className = 'gfb on '+(ok?'ok':'no');
+  fb.innerHTML = (ok? `✅ <b>答對！+${gain} 分</b>（基礎10 + 連擊${sb} + 速度${tb}）<br>`
+                    : (pick===-1?'⏰ <b>時間到！</b><br>':'❌ <b>答錯了</b><br>')) + G.cur.e;
+  document.getElementById('gNext').style.display='inline-block';
+  document.getElementById('gNext').textContent = (G.lv>=GAME.length-1)?'看成績 🏁':'下一關 ▶';
+}
+function gFinish(){
+  clearInterval(G.timer);
+  const max = GAME.length*20, pct = Math.round(G.score/max*100);
+  const rank = pct>=85?['🏆','數學大師']:pct>=70?['🥇','高手']:pct>=50?['🥈','不錯']:['📖','再加油'];
+  document.getElementById('gRank').textContent = rank[0];
+  document.getElementById('gFinal').innerHTML = `<b class="hl">${G.score}</b> / ${max} 分　·　${rank[1]}`;
+  document.getElementById('gStats').innerHTML = `最高連擊 <b class="hl">${G.best}</b>　·　完成 ${GAME.length} 關`;
+  gShow('gEnd');
+}
+document.getElementById('gGo').addEventListener('click', ()=>{ G.lv=0;G.score=0;G.streak=0;G.best=0; gShow('gPlay'); gLoad(); });
+document.getElementById('gAgain').addEventListener('click', ()=>{ G.lv=0;G.score=0;G.streak=0;G.best=0; gShow('gPlay'); gLoad(); });
+document.getElementById('gNext').addEventListener('click', ()=>{ G.lv++; gLoad(); });
+document.addEventListener('click', e=>{ const b=e.target.closest('.gopt'); if(!b||b.disabled) return; gAnswer(+b.dataset.g); });
+/* 遊戲分頁時隱藏學習目標卡 */
+document.getElementById('tabs').addEventListener('click', e=>{
+  const t=e.target.closest('.tab'); if(!t) return;
+  const gc=document.getElementById('goalCard');
+  if(gc) gc.style.display = (t.dataset.p===String(GAME_PANEL))?'none':'';
+});
+
+document.querySelectorAll('canvas.viz').forEach(initViz);
+window.addEventListener('resize', resizeAll);
+resizeAll();
+</script>
+<div class="hint">← → 鍵可翻頁　·　Canvas 可點擊／拖曳互動　·　支援平板觸控</div>
+<!--V2-PATCHED-->
+</body></html>

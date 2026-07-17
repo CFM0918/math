@@ -1,0 +1,419 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>七上 1-4 科學記號｜授課簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--chalk-soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);padding:24px 14px;}
+.deck{max-width:1060px;margin:0 auto;}
+.print-hint{text-align:center;color:rgba(243,239,226,0.4);font-size:13px;padding:6px 0 22px;}
+.print-hint b{color:var(--yellow);}
+.slide{position:relative;min-height:576px;margin:0 auto 26px;padding:44px 52px;
+ background:radial-gradient(ellipse at 18% 12%,rgba(255,255,255,0.05),transparent 45%),
+  radial-gradient(ellipse at 82% 88%,rgba(255,255,255,0.035),transparent 45%),
+  radial-gradient(ellipse at 60% 40%,rgba(120,160,130,0.10),transparent 60%),
+  linear-gradient(160deg,var(--board) 0%,var(--board2) 100%);
+ border-radius:14px;box-shadow:0 10px 34px rgba(0,0,0,0.55);
+ border:1px solid rgba(242,217,121,0.14);overflow:hidden;display:flex;flex-direction:column;}
+.slide::before{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;
+ background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.014) 40px,rgba(255,255,255,0.014) 41px),
+  radial-gradient(circle at 30% 72%,rgba(255,255,255,0.03),transparent 8%),
+  radial-gradient(circle at 76% 24%,rgba(255,255,255,0.025),transparent 7%);}
+.slide::after{content:attr(data-pg);position:absolute;bottom:15px;right:26px;font-family:'Caveat',cursive;font-size:20px;color:rgba(243,239,226,0.4);}
+.tag{position:absolute;top:20px;right:26px;font-family:'Caveat',cursive;font-size:22px;color:var(--pink);transform:rotate(4deg);}
+.eyebrow{font-family:'Caveat',cursive;font-size:25px;color:var(--yellow);letter-spacing:1px;margin-bottom:8px;opacity:0.92;}
+.slide h1{font-family:'Noto Serif TC',serif;font-size:50px;font-weight:900;line-height:1.28;letter-spacing:1px;
+ text-shadow:0 0 1px rgba(243,239,226,0.5),1px 1px 0 rgba(0,0,0,0.2);}
+.slide h2{font-family:'Noto Serif TC',serif;font-size:33px;font-weight:900;color:var(--yellow);
+ margin-bottom:20px;padding-bottom:11px;border-bottom:2px dashed rgba(242,217,121,0.4);
+ text-shadow:0 0 1px rgba(242,217,121,0.4);}
+.slide p{font-size:20px;line-height:1.85;margin-bottom:12px;}
+.big-center{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;}
+.big-center .lead,.lead{font-family:'Caveat',cursive;font-size:30px;color:var(--blue);letter-spacing:1px;margin-top:12px;}
+ul{list-style:none;margin:8px 0;}
+li{font-size:21px;line-height:1.95;padding-left:32px;position:relative;margin-bottom:4px;}
+li::before{content:'\2726';position:absolute;left:4px;color:var(--yellow);font-size:17px;top:3px;}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.34);border-radius:12px;padding:15px 21px;margin:12px 0;font-size:19px;line-height:1.8;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.38);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.38);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.34);}
+.eg{position:relative;background:rgba(0,0,0,0.24);border:1px solid rgba(242,217,121,0.2);border-radius:10px;padding:17px 22px;margin:12px 0;font-size:19px;}
+.eg::before{content:'';position:absolute;top:-8px;left:38px;width:58px;height:15px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.eg .q{color:var(--blue);font-weight:700;margin-bottom:8px;font-size:19px;}
+.eg .a{color:var(--green);font-weight:700;margin-top:6px;}
+.eg .stp{color:var(--chalk-soft);font-size:18px;margin:3px 0;}
+.tip{display:flex;gap:12px;align-items:flex-start;background:rgba(242,217,121,0.09);border:1.5px dashed rgba(242,217,121,0.45);border-radius:12px;padding:13px 18px;margin:10px 0;}
+.tip .ic{font-size:24px;line-height:1;}.tip .tx{font-size:18px;line-height:1.7;}
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:18px;}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.26);padding:10px 14px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.two{display:flex;gap:20px;}.two>div{flex:1;}
+svg{display:block;margin:6px auto;max-width:100%;}
+@media print{
+ body{background:#0a130d;padding:0;}
+ .deck{max-width:none;}
+ .print-hint{display:none;}
+ .slide{margin:0;border-radius:0;box-shadow:none;min-height:100vh;
+  page-break-after:always;break-after:page;padding:32px 44px;justify-content:center;}
+ .slide:last-child{page-break-after:auto;break-after:auto;}
+ .slide h1{font-size:42px;}
+ .slide h2{font-size:27px;margin-bottom:13px;padding-bottom:8px;}
+ .slide p{font-size:17px;line-height:1.55;margin-bottom:6px;}
+ li{font-size:17px;line-height:1.55;margin-bottom:1px;padding-left:26px;}
+ .eyebrow{font-size:21px;margin-bottom:5px;}
+ .big-center .lead,.lead{font-size:26px;}
+ .box{font-size:16px;padding:10px 16px;margin:6px 0;line-height:1.5;}
+ .eg{font-size:16px;padding:11px 16px;margin:6px 0;}
+ .tip{font-size:16px;padding:10px 14px;margin:6px 0;}
+ .tbl{font-size:15px;margin:6px 0;}
+ .tbl th,.tbl td{padding:6px 10px;}
+ svg{max-height:210px;}
+}
+</style></head><body><div class="deck">
+<div class="print-hint">📽 共 <b>30</b> 張投影片　·　七上 第1章 整數運算（最後一節）　·　按 <b>Ctrl+P</b> 可列印或轉存 PDF</div>
+
+<!-- 1 封面 -->
+<div class="slide" data-pg="1 / 30"><div class="big-center">
+<svg viewBox="0 0 880 120" width="88%" style="opacity:0.9;">
+<text x="50" y="46" font-family="Caveat" font-size="42" fill="#98c9dc" transform="rotate(-6 50 46)">2⁴ = 16</text>
+<text x="230" y="38" font-family="Caveat" font-size="40" fill="#eda0a8" transform="rotate(5 230 38)">(−2)² ≠ −2²</text>
+<text x="480" y="48" font-family="Caveat" font-size="42" fill="#a6d6a0" transform="rotate(-4 480 48)">10⁶</text>
+<text x="620" y="40" font-family="Caveat" font-size="44" fill="#f2d979" transform="rotate(6 620 40)">a×10ⁿ</text>
+<line x1="40" y1="92" x2="840" y2="92" stroke="#f2d979" stroke-width="2" stroke-dasharray="3 9" opacity="0.6"/>
+<text x="140" y="116" font-family="Caveat" font-size="20" fill="rgba(243,239,226,.5)">乘方</text>
+<text x="440" y="116" font-family="Caveat" font-size="20" fill="rgba(243,239,226,.5)">10的次方</text>
+<text x="720" y="116" font-family="Caveat" font-size="20" fill="rgba(243,239,226,.5)">科學記號</text>
+</svg>
+<div class="eyebrow">國一上學期 · 第1章 整數運算</div>
+<h1>1-4　科學記號</h1>
+<div class="lead">從乘方出發，用 a×10ⁿ 寫下整個宇宙</div>
+</div></div>
+
+<!-- 2 導覽 -->
+<div class="slide" data-pg="2 / 30"><div class="eyebrow">本節導覽</div><h2>今天要學會三件事</h2><div class="body">
+<ul>
+<li><span class="hl">① 整數的乘方與乘方運算</span>　aⁿ 的意義、偶正奇負、(−2)² vs −2²</li>
+<li><span class="hl-b">② 10 的次方</span>　正次方＝幾個 0；負次方＝小數</li>
+<li><span class="hl-r">③ 科學記號</span>　a×10ⁿ，轉換、比較、乘除</li>
+</ul>
+<div class="box y">這三件事是<span class="hl">一條線</span>：乘方 → 10 的次方 → 科學記號。<br>
+學會了，就能讀懂從<span class="hl-b">宇宙尺度</span>到<span class="hl-r">原子大小</span>的所有數字。</div>
+</div></div>
+
+<!-- 3 乘方意義 -->
+<div class="slide" data-pg="3 / 30"><div class="eyebrow">核心 ①　乘方</div><h2>乘方 = 連續相乘</h2><div class="body big-center">
+<div class="box y" style="font-size:30px;padding:20px 40px;">
+<span class="fm"><span class="hl">aⁿ</span> ＝ <span class="hl">n 個 a</span> 連續相乘</span></div>
+<div class="box" style="max-width:820px;font-size:22px;">
+<span class="fm">2⁴ = 2×2×2×2 = <span class="hl">16</span></span>
+<span style="font-size:16px;">a 叫<span class="hl-b">底數</span>，n 叫<span class="hl-r">指數</span></span></div>
+<div class="box r" style="max-width:820px;">
+⚠️ 最常錯：把 aⁿ 算成 a×n —— <span class="fm">2⁴ <span class="hl-r">不是</span> 2×4 = 8</span>，而是 <span class="hl">16</span>！<br>
+<span style="font-size:16px;">乘方是「<span class="hl">連續相乘</span>」，不是「乘以指數」。</span></div>
+</div></div>
+
+<!-- 4 負數乘方 -->
+<div class="slide" data-pg="4 / 30"><div class="eyebrow">核心 ①　乘方</div><h2>負數的乘方：偶正奇負</h2><div class="body">
+<div class="two">
+<div class="box g" style="text-align:center;"><div style="font-size:24px;font-weight:900;color:var(--green);">偶數次方</div>
+<div class="fm hl-g" style="font-size:30px;margin:8px 0;">→ 正</div>
+<div class="fm" style="font-size:17px;">(−3)⁴ = 81</div></div>
+<div class="box r" style="text-align:center;"><div style="font-size:24px;font-weight:900;color:var(--pink);">奇數次方</div>
+<div class="fm hl-r" style="font-size:30px;margin:8px 0;">→ 負</div>
+<div class="fm" style="font-size:17px;">(−3)³ = −27</div></div>
+</div>
+<div class="tip"><div class="ic">🔗</div><div class="tx">這和 <span class="hl">1-3 學的「連乘數負號」</span>是同一個道理 —— <span class="hl">乘方就是連乘</span>。</div></div>
+</div></div>
+
+<!-- 5 例題1 -->
+<div class="slide" data-pg="5 / 30"><div class="tag">例題 1 ★☆☆</div><div class="eyebrow">換你試試看</div><h2>偶數次方</h2><div class="body">
+<div class="eg"><div class="q">計算 3⁴ 與 (−3)⁴</div>
+<div class="stp fm">3⁴ = 3×3×3×3 = <span class="hl-b">81</span></div>
+<div class="stp fm">(−3)⁴：<span class="hl">4 個負號（偶數）</span> → 正；3⁴ = 81 → <span class="hl-g">81</span></div>
+<div class="a">答：兩者都是 81</div></div>
+<div class="tip"><div class="ic">💡</div><div class="tx">觀察：<span class="hl">偶數次方</span>時，負數的乘方會變得<span class="hl">和正數一樣大</span>。</div></div>
+</div></div>
+
+<!-- 6 例題2 -->
+<div class="slide" data-pg="6 / 30"><div class="tag">例題 2 ★★☆</div><div class="eyebrow">換你試試看</div><h2>奇數次方</h2><div class="body">
+<div class="eg"><div class="q">計算 (−3)³ 與 (−3)⁵</div>
+<div class="stp fm">(−3)³：3 個負號（<span class="hl-r">奇數</span>）→ 負；3³ = 27 → <span class="hl-r">−27</span></div>
+<div class="stp fm">(−3)⁵：5 個負號（<span class="hl-r">奇數</span>）→ 負；3⁵ = 243 → <span class="hl-r">−243</span></div>
+<div class="a">答：−27　與　−243</div></div>
+<div class="box">再看：(−1)¹⁰⁰ = <span class="hl-g">1</span>（偶）；(−1)¹⁰¹ = <span class="hl-r">−1</span>（奇）—— 只看指數奇偶！</div>
+</div></div>
+
+<!-- 7 括號差別 -->
+<div class="slide" data-pg="7 / 30"><div class="tag">本節最關鍵</div><div class="eyebrow">核心 ①　乘方</div><h2>(−2)² 和 −2² 不一樣！</h2><div class="body">
+<div class="two">
+<div class="box g" style="text-align:center;"><div class="fm" style="font-size:30px;color:var(--green);">(−2)² = 4</div>
+<div style="font-size:16px;margin-top:10px;">括號把負號<span class="hl-g">包進去</span><br>「−2 這個數」的平方<br><span class="fm">(−2)×(−2) = 4</span></div></div>
+<div class="box r" style="text-align:center;"><div class="fm" style="font-size:30px;color:var(--pink);">−2² = −4</div>
+<div style="font-size:16px;margin-top:10px;">沒有括號<br>「先算 2²，<span class="hl-r">再加負號</span>」<br><span class="fm">−(2×2) = −4</span></div></div>
+</div>
+<div class="box y" style="text-align:center;font-size:21px;">
+<span class="hl">括號有沒有把負號包住，結果完全不同！</span></div>
+<div class="tip"><div class="ic">❓</div><div class="tx">養成習慣：每次遇到負數的乘方，先問「<span class="hl">負號有沒有被括號包進去？</span>」</div></div>
+</div></div>
+
+<!-- 8 例題3 -->
+<div class="slide" data-pg="8 / 30"><div class="tag">例題 3 ★★★</div><div class="eyebrow">換你試試看</div><h2>括號的差別</h2><div class="body">
+<div class="eg"><div class="q">(−2)² 與 −2² 相等嗎？請分別算出來。</div>
+<div class="stp fm">(−2)²：括號包住負號 → (−2)×(−2) = <span class="hl-g">4</span></div>
+<div class="stp fm">−2²：沒括號 → −(2×2) = <span class="hl-r">−4</span></div>
+<div class="a">答：不相等！(−2)² = 4，−2² = −4</div></div>
+<div class="box">同理：(−5)² = <span class="hl-g">25</span>，但 −5² = <span class="hl-r">−25</span></div>
+</div></div>
+
+<!-- 9 同底數相乘 -->
+<div class="slide" data-pg="9 / 30"><div class="eyebrow">核心 ①　乘方運算</div><h2>同底數相乘：指數相加</h2><div class="body big-center">
+<div class="box y" style="font-size:30px;padding:20px 40px;">
+<span class="fm"><span class="hl">aᵐ × aⁿ = a<sup>m+n</sup></span></span></div>
+<div class="eg" style="max-width:820px;">
+<div class="stp fm">用規則：2³ × 2² = 2³⁺² = 2⁵ = <span class="hl">32</span></div>
+<div class="stp fm">驗證：2³ = 8，2² = 4 → 8×4 = <span class="hl">32</span> ✓ 相符</div></div>
+<div class="box r" style="max-width:820px;">⚠️ 常錯：把指數<span class="hl-r">相乘</span>（誤算成 2⁶）—— 是<span class="hl">相加</span>！</div>
+</div></div>
+
+<!-- 10 例題4 -->
+<div class="slide" data-pg="10 / 30"><div class="tag">例題 4 ★★☆</div><div class="eyebrow">換你試試看</div><h2>同底數相乘</h2><div class="body">
+<div class="eg"><div class="q">計算 2³ × 2²，並驗證它等於 2⁵</div>
+<div class="stp fm">直接計算：2³ = 8，2² = 4，8 × 4 = 32</div>
+<div class="stp fm">用指數律：2³ × 2² = 2<sup>(3+2)</sup> = 2⁵ = 32</div>
+<div class="stp">兩種算法都得 32 → <span class="hl-g">指數律成立</span></div>
+<div class="a">答：2³ × 2² = 32 = 2⁵</div></div>
+</div></div>
+
+<!-- 11 10的次方 正 -->
+<div class="slide" data-pg="11 / 30"><div class="tag">橋樑</div><div class="eyebrow">核心 ②　10 的次方</div><h2>正次方 = 幾個 0</h2><div class="body">
+<table class="tbl">
+<tr><th>算式</th><th>展開</th><th>結果</th></tr>
+<tr><td class="fm">10¹</td><td class="fm">10</td><td class="fm hl">10</td></tr>
+<tr><td class="fm">10²</td><td class="fm">10×10</td><td class="fm hl">100</td></tr>
+<tr><td class="fm">10³</td><td class="fm">10×10×10</td><td class="fm hl">1 000</td></tr>
+<tr><td class="fm">10⁶</td><td class="fm">10×…×10</td><td class="fm hl">1 000 000</td></tr>
+</table>
+<div class="box y" style="text-align:center;font-size:22px;">
+規律：<span class="fm hl">10ⁿ ＝ 1 後面接 n 個 0</span></div>
+</div></div>
+
+<!-- 12 10的次方 負與零 -->
+<div class="slide" data-pg="12 / 30"><div class="eyebrow">核心 ②　10 的次方</div><h2>負次方 = 小數；零次方 = 1</h2><div class="body">
+<table class="tbl">
+<tr><th>算式</th><th>意義</th><th>結果</th></tr>
+<tr><td class="fm hl">10⁰</td><td>特別規定</td><td class="fm hl">1</td></tr>
+<tr><td class="fm">10⁻¹</td><td class="fm">1/10</td><td class="fm hl-r">0.1</td></tr>
+<tr><td class="fm">10⁻²</td><td class="fm">1/100</td><td class="fm hl-r">0.01</td></tr>
+<tr><td class="fm">10⁻³</td><td class="fm">1/1000</td><td class="fm hl-r">0.001</td></tr>
+</table>
+<div class="box y" style="text-align:center;font-size:21px;">
+規律：<span class="fm hl">10⁻ⁿ ＝ 小數點後第 n 位是 1</span></div>
+</div></div>
+
+<!-- 13 為什麼需要 -->
+<div class="slide" data-pg="13 / 30"><div class="eyebrow">為什麼需要？</div><h2>太大太小，寫到手軟</h2><div class="body">
+<div class="two">
+<div class="box"><span class="hl-b">光速</span><br><span class="fm" style="font-size:22px;">299 792 458</span> m/s</div>
+<div class="box r"><span class="hl-r">電子質量</span><br><span class="fm" style="font-size:18px;">0.000…091</span> kg（小數點後 30 個 0）</div>
+</div>
+<div class="box y" style="text-align:center;font-size:21px;">
+有了 <span class="hl">10 的次方</span>，就能把它們寫成 <span class="fm hl">3×10⁸</span> 和 <span class="fm hl">9.1×10⁻³¹</span></div>
+<div class="tip"><div class="ic">🌟</div><div class="tx">這就是<span class="hl">科學記號</span> —— 科學、工程、天文的<span class="hl">通用語言</span>。</div></div>
+</div></div>
+
+<!-- 14 科學記號格式 -->
+<div class="slide" data-pg="14 / 30"><div class="eyebrow">核心 ③　科學記號</div><h2>格式</h2><div class="body big-center">
+<div style="font-family:'Noto Serif TC';font-size:70px;font-weight:900;color:var(--yellow);text-shadow:0 0 2px rgba(242,217,121,0.5);">a × 10<sup style="font-size:0.55em;">n</sup></div>
+<div class="two" style="width:100%;margin-top:20px;">
+<div class="box" style="text-align:center;"><span class="hl-b">a：係數</span><br><span class="fm" style="font-size:22px;">1 ≤ a &lt; 10</span></div>
+<div class="box r" style="text-align:center;"><span class="hl-r">n：指數</span><br>整數，可正可負可零</div>
+</div>
+<div class="box r" style="max-width:820px;">
+❌ <span class="fm">25×10⁴</span>（a ≥ 10）→ 應為 <span class="fm hl">2.5×10⁵</span>
+❌ <span class="fm">0.8×10³</span>（a &lt; 1）→ 應為 <span class="fm hl">8×10²</span></div>
+</div></div>
+
+<!-- 15 大數 -->
+<div class="slide" data-pg="15 / 30"><div class="eyebrow">核心 ③　科學記號</div><h2>大數 → 正次方</h2><div class="body">
+<div class="box">小數點<span class="hl">向左移 n 位</span>，n 為<span class="hl">正</span></div>
+<svg viewBox="0 0 900 120" width="100%">
+<text x="60" y="56" font-family="Noto Serif TC" font-size="32" fill="#f3efe2">4 8 0 0 0 0 0 0 .</text>
+<path d="M370 72 q-140 55 -290 8" fill="none" stroke="#f2d979" stroke-width="2.5" marker-end="url(#ar)"/>
+<defs><marker id="ar" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#f2d979"/></marker></defs>
+<text x="180" y="112" font-family="Caveat" font-size="24" fill="#f2d979">左移 7 位</text>
+<text x="560" y="56" font-family="Noto Serif TC" font-size="32" fill="#f2d979">= 4.8×10⁷</text>
+</svg>
+<div class="tip"><div class="ic">🔑</div><div class="tx">數幾位，<span class="hl">n 就是幾</span>。48000000 移 7 位 → 10<sup>7</sup></div></div>
+</div></div>
+
+<!-- 16 小數 -->
+<div class="slide" data-pg="16 / 30"><div class="eyebrow">核心 ③　科學記號</div><h2>小數 → 負次方</h2><div class="body">
+<div class="box r">小數點<span class="hl-r">向右移 |n| 位</span>，n 為<span class="hl-r">負</span></div>
+<svg viewBox="0 0 900 120" width="100%">
+<text x="60" y="56" font-family="Noto Serif TC" font-size="32" fill="#f3efe2">0 . 0 0 0 0 0 5 6</text>
+<path d="M90 72 q150 55 320 6" fill="none" stroke="#eda0a8" stroke-width="2.5" marker-end="url(#ar2)"/>
+<defs><marker id="ar2" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#eda0a8"/></marker></defs>
+<text x="250" y="112" font-family="Caveat" font-size="24" fill="#eda0a8">右移 6 位</text>
+<text x="560" y="56" font-family="Noto Serif TC" font-size="32" fill="#f2d979">= 5.6×10⁻⁶</text>
+</svg>
+<div class="box y" style="text-align:center;font-size:21px;">口訣：<span class="hl">大數正次方，小數負次方；移幾位，n 就是幾</span></div>
+</div></div>
+
+<!-- 17 例題 改寫 -->
+<div class="slide" data-pg="17 / 30"><div class="tag">例題 5 ★☆☆</div><div class="eyebrow">換你試試看</div><h2>改寫成科學記號</h2><div class="body">
+<div class="eg"><div class="q">把 48000000 與 0.0000056 改為科學記號</div>
+<div class="stp fm">48000000 → 小數點左移 7 位 → <span class="hl">4.8×10⁷</span></div>
+<div class="stp fm">0.0000056 → 小數點右移 6 位 → <span class="hl-r">5.6×10⁻⁶</span></div>
+<div class="a">答：4.8×10⁷　與　5.6×10⁻⁶</div></div>
+</div></div>
+
+<!-- 18 還原 -->
+<div class="slide" data-pg="18 / 30"><div class="tag">例題 6 ★☆☆</div><div class="eyebrow">換你試試看</div><h2>還原成一般數字</h2><div class="body">
+<div class="eg"><div class="q">還原 3.02×10⁵ 與 1.5×10⁻³</div>
+<div class="stp fm">3.02×10⁵ → 正次方 → 小數點<span class="hl">右</span>移 5 位 → <span class="hl">302000</span></div>
+<div class="stp fm">1.5×10⁻³ → 負次方 → 小數點<span class="hl-r">左</span>移 3 位 → <span class="hl-r">0.0015</span></div>
+<div class="a">答：302000　與　0.0015</div></div>
+<div class="tip"><div class="ic">↔️</div><div class="tx">還原和改寫是<span class="hl">反方向</span>：改寫時左移，還原就右移。</div></div>
+</div></div>
+
+<!-- 19 大小比較 -->
+<div class="slide" data-pg="19 / 30"><div class="eyebrow">核心 ③　科學記號</div><h2>大小比較：先比次方</h2><div class="body">
+<div class="box y" style="text-align:center;font-size:21px;">
+<span class="hl">先比次方</span>，次方大的就大；<span class="hl">次方相同</span>才比係數</div>
+<div class="eg"><div class="q">3.2×10⁷ 和 8.1×10⁶ 哪個大？</div>
+<div class="stp fm">次方：10⁷ &gt; 10⁶</div>
+<div class="a">→ 3.2×10⁷ 較大（別被 8.1 這個大係數騙了！）</div></div>
+<div class="box r">⚠️ 特例：<span class="fm">9.9×10⁵</span> 和 <span class="fm">1×10⁶</span> → <span class="fm">1×10⁶ = 10×10⁵ &gt; 9.9×10⁵</span> → <span class="hl">1×10⁶ 較大</span></div>
+</div></div>
+
+<!-- 20 乘除 -->
+<div class="slide" data-pg="20 / 30"><div class="eyebrow">核心 ③　科學記號</div><h2>乘除運算</h2><div class="body">
+<div class="two">
+<div class="box y" style="text-align:center;"><div style="font-size:24px;font-weight:900;color:var(--yellow);">乘法 ×</div>
+<div style="font-size:17px;margin:8px 0;">係數<span class="hl">相乘</span><br>次方<span class="hl">相加</span></div>
+<div class="fm" style="font-size:17px;">(3×10⁴)(2.5×10³)<br>= 7.5×10⁷</div></div>
+<div class="box" style="text-align:center;"><div style="font-size:24px;font-weight:900;color:var(--blue);">除法 ÷</div>
+<div style="font-size:17px;margin:8px 0;">係數<span class="hl-b">相除</span><br>次方<span class="hl-b">相減</span></div>
+<div class="fm" style="font-size:17px;">(6×10⁵)÷(4×10²)<br>= 1.5×10³</div></div>
+</div>
+<div class="tip"><div class="ic">✅</div><div class="tx">算完<span class="hl">一定要檢查</span>：係數是否仍在 1~10 之間？</div></div>
+</div></div>
+
+<!-- 21 例題 乘法 -->
+<div class="slide" data-pg="21 / 30"><div class="tag">例題 7 ★★☆</div><div class="eyebrow">換你試試看</div><h2>科學記號乘法</h2><div class="body">
+<div class="eg"><div class="q">計算 (3×10⁴) × (2.5×10³)</div>
+<div class="stp fm">係數相乘：3 × 2.5 = 7.5</div>
+<div class="stp fm">次方相加：10⁴⁺³ = 10⁷</div>
+<div class="stp">檢查：7.5 在 1~10 之間 ✓ 符合規範</div>
+<div class="a">答：7.5×10⁷</div></div>
+</div></div>
+
+<!-- 22 規範化 -->
+<div class="slide" data-pg="22 / 30"><div class="tag">例題 8 ★★★</div><div class="eyebrow">換你試試看</div><h2>規範化：係數超範圍要調整</h2><div class="body">
+<div class="eg"><div class="q">計算 (4×10³) × (5×10⁴)</div>
+<div class="stp fm">係數：4 × 5 = 20；次方：10³⁺⁴ = 10⁷ → 得 20×10⁷</div>
+<div class="stp">但 <span class="hl-r">20 ≥ 10</span>，不符合規範 → 要調整！</div>
+<div class="stp fm">20×10⁷ = 2×10¹ ×10⁷ = <span class="hl">2×10⁸</span></div>
+<div class="a">答：2×10⁸</div></div>
+<div class="box y">
+<span class="fm">20×10⁷ → 2×10⁸</span>（左移一位，次方 <span class="hl">+1</span>）
+<span class="fm">0.8×10³ → 8×10²</span>（右移一位，次方 <span class="hl">−1</span>）</div>
+</div></div>
+
+<!-- 23 例題 細胞 -->
+<div class="slide" data-pg="23 / 30"><div class="tag">例題 9 ★★☆</div><div class="eyebrow">生活應用</div><h2>細胞分裂</h2><div class="body">
+<div class="eg"><div class="q">某細胞每小時分裂成 2 倍，一開始只有 1 個，6 小時後共有幾個？</div>
+<div class="stp">想法：「每小時變 2 倍」連續 6 次 → 用<span class="hl">乘方</span></div>
+<div class="stp fm">列式：1 × 2⁶</div>
+<div class="stp fm">2⁶ = 2×2×2×2×2×2 = 64</div>
+<div class="a">答：64 個細胞</div></div>
+<div class="tip"><div class="ic">🦠</div><div class="tx">「連續變成幾倍」＝<span class="hl">乘方</span>的典型情境（1-3 的「連續固定變化」是乘法，這裡是<span class="hl">重複倍增</span>）。</div></div>
+</div></div>
+
+<!-- 24 隨堂 乘方 -->
+<div class="slide" data-pg="24 / 30"><div class="eyebrow">隨堂練習</div><h2>小試身手（乘方）</h2><div class="body">
+<table class="tbl">
+<tr><th>題目</th><th>答案</th><th>題目</th><th>答案</th></tr>
+<tr><td class="fm">5²</td><td class="hl">25</td><td class="fm">−4²</td><td class="hl">−16（沒括號）</td></tr>
+<tr><td class="fm">(−4)²</td><td class="hl">16</td><td class="fm">2⁵</td><td class="hl">32</td></tr>
+<tr><td class="fm">(−4)³</td><td class="hl">−64</td><td class="fm">(−1)¹⁰⁰</td><td class="hl">1（偶）</td></tr>
+<tr><td class="fm">3²×3³</td><td class="hl">243（=3⁵）</td><td class="fm">(−1)¹⁰¹</td><td class="hl">−1（奇）</td></tr>
+</table>
+<div class="box">比較 <span class="fm">2¹⁰</span> 與 <span class="fm">10²</span> 誰大？→ <span class="fm hl">2¹⁰ = 1024</span> &gt; <span class="fm">10² = 100</span>　指數成長遠超想像！</div>
+</div></div>
+
+<!-- 25 隨堂 科學記號 -->
+<div class="slide" data-pg="25 / 30"><div class="eyebrow">隨堂練習</div><h2>小試身手（科學記號）</h2><div class="body">
+<table class="tbl">
+<tr><th>題目</th><th>答案</th></tr>
+<tr><td class="fm">360000 寫成科學記號</td><td class="hl">3.6×10⁵</td></tr>
+<tr><td class="fm">0.00072 寫成科學記號</td><td class="hl">7.2×10⁻⁴</td></tr>
+<tr><td class="fm">5.8×10⁴ 還原</td><td class="hl">58000</td></tr>
+<tr><td class="fm">2.4×10⁻³ 還原</td><td class="hl">0.0024</td></tr>
+<tr><td class="fm">(9×10⁸)÷(3×10³)</td><td class="hl">3×10⁵</td></tr>
+<tr><td>判斷：25×10⁴ 是科學記號</td><td class="hl">錯（25≥10）→ 2.5×10⁵</td></tr>
+</table>
+</div></div>
+
+<!-- 26 素養1 -->
+<div class="slide" data-pg="26 / 30"><div class="tag">素養 · 防疫</div><div class="eyebrow">生活應用</div><h2>指數成長的威力</h2><div class="body">
+<div class="eg" style="font-size:17px;"><div class="q">第 0 天有 1 人感染。A：每天變 2 倍；B：每天變 1.5 倍。第 5 天各有幾人？</div>
+<div class="stp fm">(1) A：1×2⁵ = <span class="hl-r">32 人</span></div>
+<div class="stp fm">(2) B：1×1.5⁵ = 7.59375 → 無條件捨去 → 約 <span class="hl-g">7 人</span></div>
+<div class="stp">(3) 差距 <span class="hl">25 人</span></div>
+<div class="a">倍率只差 0.5，經過 5 天指數放大，結果差距巨大</div></div>
+<div class="tip"><div class="ic">😷</div><div class="tx">這正是防疫措施「<span class="hl">降低傳染倍率</span>」的關鍵意義 —— 小小的倍率差，指數會放大成天壤之別。</div></div>
+</div></div>
+
+<!-- 27 素養2 -->
+<div class="slide" data-pg="27 / 30"><div class="tag">素養 · 直覺挑戰</div><div class="eyebrow">生活應用</div><h2>對摺紙張 20 次</h2><div class="body">
+<div class="eg" style="font-size:17px;"><div class="q">一張紙厚 0.1 公釐，每對摺一次厚度變 2 倍。</div>
+<div class="stp fm">(1) 對摺 5 次：0.1×2⁵ = 0.1×32 = <span class="hl">3.2 公釐</span></div>
+<div class="stp fm">(2) 對摺 10 次：0.1×2¹⁰ = 0.1×1024 = <span class="hl">102.4 公釐 ≈ 10.24 公分</span></div>
+<div class="stp fm">(3) 對摺 20 次：0.1×2²⁰ = 0.1×1048576 = <span class="hl-r">104857.6 公釐 ≈ 104.86 公尺</span></div>
+<div class="a">相當於 35 層樓高！（104.86÷3 ≈ 35）</div></div>
+<div class="tip"><div class="ic">📄</div><div class="tx">結果違反直覺但<span class="hl">數學上正確</span>（現實中因紙張韌性摺不到 20 次）。</div></div>
+</div></div>
+
+<!-- 28 素養3 -->
+<div class="slide" data-pg="28 / 30"><div class="tag">素養 · 天文與奈米</div><div class="eyebrow">生活應用</div><h2>科學記號的舞台</h2><div class="body">
+<div class="eg" style="font-size:17px;"><div class="q">光速 3×10⁸ m/s，太陽到地球 1.5×10¹¹ m，光需時多久？</div>
+<div class="stp fm">時間 = 距離÷速度 = (1.5×10¹¹) ÷ (3×10⁸) = 0.5×10³</div>
+<div class="stp fm">規範化：0.5×10³ = 5×10² = <span class="hl">500 秒 ≈ 8 分 20 秒</span></div></div>
+<table class="tbl" style="font-size:16px;">
+<tr><th>光速</th><th>地球質量</th><th>台灣人口</th><th>1 奈米</th><th>電子質量</th></tr>
+<tr><td class="fm hl">3×10⁸</td><td class="fm hl">6×10²⁴</td><td class="fm hl">2.3×10⁷</td><td class="fm hl">10⁻⁹</td><td class="fm hl">9.1×10⁻³¹</td></tr>
+</table>
+<div class="tip"><div class="ic">🌌</div><div class="tx">從<span class="hl-b">宇宙尺度</span>到<span class="hl-r">原子大小</span>，科學記號無所不在。</div></div>
+</div></div>
+
+<!-- 29 避雷 + 總結 -->
+<div class="slide" data-pg="29 / 30"><div class="eyebrow">避雷指南</div><h2>五個最常見錯誤</h2><div class="body">
+<table class="tbl">
+<tr><th>❌ 錯誤</th><th>✓ 正確</th></tr>
+<tr><td class="fm">2⁴ = 2×4 = 8</td><td class="fm hl">2⁴ = 2×2×2×2 = 16</td></tr>
+<tr><td class="fm">(−2)² 和 −2² 一樣</td><td class="fm hl">(−2)²=4，−2²=−4</td></tr>
+<tr><td class="fm">2³×2² = 2⁶（指數相乘）</td><td class="fm hl">= 2⁵（指數相加）</td></tr>
+<tr><td class="fm">48000000 = 48×10⁶</td><td class="fm hl">= 4.8×10⁷（1≤a&lt;10）</td></tr>
+<tr><td class="fm">0.0056 = 5.6×10³</td><td class="fm hl">= 5.6×10⁻³（小數負次方）</td></tr>
+</table>
+</div></div>
+
+<!-- 30 總結 -->
+<div class="slide" data-pg="30 / 30"><div class="eyebrow">本節總結 · 第1章完結</div><h2>三句話記住全部</h2><div class="body">
+<div class="box"><span class="hl-b">① 乘方：</span><span class="fm">aⁿ</span> ＝ n 個 a 連續相乘；負數偶次方得正、奇次方得負；⚠️ <span class="fm">(−2)²=4 但 −2²=−4</span>；同底數相乘<span class="hl">指數相加</span></div>
+<div class="box y"><span class="hl">② 10 的次方：</span><span class="fm">10ⁿ</span> ＝ 1 後面 n 個 0；<span class="fm">10⁻ⁿ</span> ＝ 小數點後第 n 位是 1；<span class="fm">10⁰ = 1</span></div>
+<div class="box r"><span class="hl-r">③ 科學記號：</span><span class="fm">a×10ⁿ</span>（<span class="hl">1 ≤ a &lt; 10</span>）；大數正次方、小數負次方；乘法係數乘次方加、除法係數除次方減；算完要<span class="hl">規範化</span></div>
+<div class="box g" style="text-align:center;font-size:22px;margin-top:16px;">
+🎉 <span class="hl-g">第 1 章 整數運算　完整結束！</span><br>
+<span style="font-size:16px;">下一章：第 2 章 分數運算（2-1 因數、倍數）</span></div>
+</div></div>
+
+</div></body></html>

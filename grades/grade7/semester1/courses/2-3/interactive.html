@@ -1,0 +1,1370 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>七上 2-3 分數的四則運算｜互動教學平台</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;--wood:#6b4a32;}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);overscroll-behavior:none;}
+.topbar{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:10px 16px;background:linear-gradient(180deg,#1b2f21,#132218);border-bottom:2px solid var(--wood);box-shadow:0 4px 18px rgba(0,0,0,0.5);}
+.brand{font-family:'Noto Serif TC',serif;font-weight:900;font-size:clamp(15px,2.2vw,20px);color:var(--yellow);white-space:nowrap;}
+.brand small{display:block;font-family:'Caveat',cursive;font-size:14px;color:var(--soft);font-weight:400;}
+.spacer{flex:1;}
+.btn{background:rgba(243,239,226,0.08);border:1.5px solid rgba(243,239,226,0.28);color:var(--chalk);
+  border-radius:10px;padding:7px 13px;font-family:inherit;font-size:14px;cursor:pointer;white-space:nowrap;transition:.15s;}
+.btn:hover{background:rgba(243,239,226,0.16);}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:10px 16px 0;scrollbar-width:none;}
+.tabs::-webkit-scrollbar{display:none;}
+.tab{background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.2);border-bottom:none;
+  color:var(--soft);border-radius:10px 10px 0 0;padding:9px 15px;font-size:14px;cursor:pointer;white-space:nowrap;font-family:inherit;}
+.tab.on{background:var(--board);border-color:var(--yellow);color:var(--yellow);font-weight:700;}
+.tab .n{font-family:'Caveat',cursive;font-size:18px;margin-right:5px;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px 60px;}
+.panel{display:none;}.panel.on{display:block;}
+.card{background:radial-gradient(ellipse at 20% 10%,rgba(255,255,255,0.05),transparent 45%),
+   linear-gradient(160deg,var(--board),var(--board2));
+  border:1.5px solid rgba(242,217,121,0.16);border-radius:14px;padding:18px;margin-bottom:16px;
+  box-shadow:0 8px 26px rgba(0,0,0,0.45);position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 38px,rgba(255,255,255,0.012) 38px,rgba(255,255,255,0.012) 39px);}
+.card>*{position:relative;}
+.card h3{font-family:'Noto Serif TC',serif;font-size:clamp(17px,2.4vw,21px);color:var(--yellow);
+  margin-bottom:12px;padding-bottom:8px;border-bottom:2px dashed rgba(242,217,121,0.35);display:flex;align-items:center;gap:8px;}
+.card h3 .ic{font-size:20px;}
+.goals{display:flex;flex-wrap:wrap;gap:9px;}
+.goal{display:flex;align-items:center;gap:9px;background:rgba(242,217,121,0.07);
+  border:1.5px dashed rgba(242,217,121,0.4);border-radius:22px;padding:8px 15px 8px 8px;
+  font-size:clamp(13.5px,1.8vw,15px);color:var(--yellow);line-height:1.5;}
+.goal .bdg{width:24px;height:24px;border-radius:50%;background:var(--yellow);color:#16281c;
+  font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;flex:none;}
+.deck{position:relative;background:rgba(0,0,0,0.22);border-radius:12px;padding:clamp(16px,3vw,30px);
+  min-height:clamp(260px,42vh,380px);display:flex;flex-direction:column;justify-content:center;}
+.sl{display:none;animation:fade .25s;}.sl.on{display:block;}
+@keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+.sl .eyebrow{font-family:'Caveat',cursive;font-size:20px;color:var(--yellow);margin-bottom:6px;}
+.sl h4{font-family:'Noto Serif TC',serif;font-size:clamp(19px,3vw,27px);margin-bottom:12px;line-height:1.35;}
+.sl p{font-size:clamp(15px,2vw,18px);line-height:1.8;margin-bottom:9px;}
+.sl ul{list-style:none;}
+.sl li{font-size:clamp(15px,2vw,18px);line-height:1.85;padding-left:26px;position:relative;margin-bottom:4px;}
+.sl li::before{content:'✦';position:absolute;left:2px;color:var(--yellow);font-size:14px;top:3px;}
+.nav{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:14px;}
+.nav .pg{font-family:'Caveat',cursive;font-size:20px;color:var(--soft);min-width:64px;text-align:center;}
+.dots{display:flex;gap:6px;justify-content:center;margin-top:10px;flex-wrap:wrap;}
+.dot{width:9px;height:9px;border-radius:50%;background:rgba(243,239,226,0.25);cursor:pointer;border:none;padding:0;}
+.dot.on{background:var(--yellow);transform:scale(1.3);}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.32);border-radius:10px;
+  padding:11px 15px;margin:9px 0;font-size:clamp(14px,1.9vw,17px);line-height:1.7;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.36);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.36);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.32);}
+.two{display:flex;gap:12px;flex-wrap:wrap;}.two>*{flex:1;min-width:220px;}
+.teach{background:rgba(201,174,224,0.12);border:1.5px dashed rgba(201,174,224,0.5);
+  border-radius:10px;padding:11px 15px;margin:9px 0;font-size:clamp(14px,1.8vw,15px);line-height:1.7;}
+.teach b{color:var(--purple);}
+.tbl{width:100%;border-collapse:collapse;margin:9px 0;font-size:clamp(13.5px,1.8vw,16px);}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.24);padding:8px 11px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.cv-wrap{background:rgba(0,0,0,0.25);border-radius:12px;padding:10px;}
+canvas.viz{width:100%;display:block;border-radius:8px;touch-action:none;}
+.ctrl{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center;}
+.readout{font-family:'Noto Serif TC',serif;font-size:clamp(14px,1.9vw,18px);color:var(--chalk);
+  background:rgba(242,217,121,0.1);border:1px solid rgba(242,217,121,0.3);border-radius:8px;
+  padding:7px 12px;flex:1;min-width:220px;}
+.readout b{color:var(--yellow);}
+.q{background:rgba(0,0,0,0.2);border:1px solid rgba(242,217,121,0.18);border-radius:10px;padding:13px 15px;margin:10px 0;}
+.q .qt{font-size:clamp(15px,2vw,17px);margin-bottom:10px;line-height:1.7;}
+.q .qt .qn{font-family:'Caveat',cursive;color:var(--yellow);font-size:20px;margin-right:6px;}
+.opts{display:flex;flex-direction:column;gap:7px;}
+.opt{text-align:left;background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.22);
+  color:var(--chalk);border-radius:9px;padding:9px 13px;font-family:inherit;font-size:15px;cursor:pointer;transition:.15s;line-height:1.5;}
+.opt:hover:not(:disabled){background:rgba(243,239,226,0.13);}
+.opt.right{background:rgba(166,214,160,0.24);border-color:var(--green);color:#fff;font-weight:700;}
+.opt.wrong{background:rgba(237,160,168,0.22);border-color:var(--pink);}
+.opt:disabled{cursor:default;}
+.fb{display:none;margin-top:9px;padding:9px 13px;border-radius:8px;font-size:14.5px;line-height:1.65;}
+.fb.on{display:block;}
+.fb.ok{background:rgba(166,214,160,0.14);border-left:3px solid var(--green);}
+.fb.no{background:rgba(237,160,168,0.14);border-left:3px solid var(--pink);}
+.fill{display:inline-block;background:rgba(0,0,0,0.3);border:none;border-bottom:2px solid var(--yellow);
+  color:var(--yellow);font-family:'Noto Serif TC',serif;font-size:17px;width:110px;text-align:center;padding:3px 5px;margin:0 4px;}
+.fill:focus{outline:none;background:rgba(242,217,121,0.12);}
+.exq{background:rgba(0,0,0,0.26);border:1.5px solid rgba(242,217,121,0.28);border-radius:11px;padding:13px 15px;margin:10px 0;position:relative;}
+.exq::before{content:'';position:absolute;top:-8px;left:32px;width:54px;height:14px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.exq .exq-q{font-size:clamp(14.5px,1.9vw,17px);line-height:1.75;margin-bottom:11px;}
+.exo{text-align:left;background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.22);
+  color:var(--chalk);border-radius:9px;padding:9px 13px;font-family:inherit;font-size:clamp(14px,1.8vw,15.5px);
+  cursor:pointer;transition:.15s;line-height:1.55;width:100%;margin-bottom:6px;display:block;}
+.exo:hover:not(:disabled){background:rgba(243,239,226,0.13);}
+.exo.right{background:rgba(166,214,160,0.26);border-color:var(--green);color:#fff;font-weight:700;}
+.exo.wrong{background:rgba(237,160,168,0.2);border-color:var(--pink);opacity:.75;}
+.exo:disabled{cursor:default;}
+@keyframes shake{10%,90%{transform:translateX(-2px);}30%,70%{transform:translateX(4px);}50%{transform:translateX(-4px);}}
+.exo.shake{animation:shake .4s;}
+.exsol{display:none;margin-top:10px;padding:11px 14px;border-radius:9px;
+  background:rgba(166,214,160,0.13);border-left:3px solid var(--green);font-size:clamp(14px,1.8vw,15.5px);line-height:1.75;}
+.exsol.on{display:block;animation:fade .3s;}
+.exsol .st{color:var(--soft);margin:3px 0;}
+.exsol .an{color:var(--green);font-weight:700;margin-top:6px;}
+.exlock{display:flex;align-items:center;gap:7px;margin-top:9px;font-size:13.5px;color:rgba(243,239,226,0.45);}
+.exlock.hide{display:none;}
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:11px;}
+.icard{background:rgba(0,0,0,0.22);border:1.5px solid rgba(242,217,121,0.22);border-radius:11px;padding:14px;text-align:center;}
+.icard .big{font-family:'Noto Serif TC',serif;font-size:clamp(17px,2.6vw,23px);font-weight:900;margin:6px 0;}
+.icard .cap{font-size:13.5px;color:var(--soft);line-height:1.6;}
+.frow{display:flex;gap:12px;align-items:center;padding:9px 12px;border-bottom:1px dashed rgba(243,239,226,0.16);}
+.frow:last-child{border-bottom:none;}
+.flab{color:var(--blue);font-weight:700;min-width:150px;font-size:clamp(13.5px,1.8vw,15.5px);flex:none;}
+.fval{color:var(--yellow);font-weight:700;font-family:'Noto Serif TC',serif;font-size:clamp(14px,1.9vw,17px);}
+@media(max-width:560px){.frow{flex-direction:column;align-items:flex-start;gap:3px;}.flab{min-width:0;}}
+.hud{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:12px;}
+.hud .st{background:rgba(0,0,0,0.3);border:1.5px solid rgba(242,217,121,0.28);border-radius:9px;
+  padding:7px 13px;font-size:14px;flex:1;min-width:88px;text-align:center;}
+.hud .st b{display:block;font-family:'Noto Serif TC',serif;font-size:20px;color:var(--yellow);}
+.tbar{height:8px;background:rgba(0,0,0,0.35);border-radius:5px;overflow:hidden;margin-bottom:12px;}
+.tfill{height:100%;background:linear-gradient(90deg,var(--green),var(--yellow),var(--pink));width:100%;transition:width .1s linear;}
+.gscreen{display:none;}.gscreen.on{display:block;}
+.lvchips{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin:14px 0;}
+.lvchip{background:rgba(152,201,220,0.12);border:1.5px solid rgba(152,201,220,0.35);border-radius:18px;
+  padding:6px 13px;font-size:13.5px;color:var(--blue);}
+.lvchip.done{background:rgba(166,214,160,0.2);border-color:var(--green);color:var(--green);}
+.lvchip.now{background:rgba(242,217,121,0.22);border-color:var(--yellow);color:var(--yellow);font-weight:700;}
+.gq{font-size:clamp(16px,2.2vw,20px);line-height:1.7;margin:14px 0;text-align:center;font-family:'Noto Serif TC',serif;}
+.gopts{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+@media(max-width:560px){.gopts{grid-template-columns:1fr;}}
+.gopt{background:rgba(243,239,226,0.07);border:1.5px solid rgba(243,239,226,0.25);color:var(--chalk);
+  border-radius:10px;padding:12px;font-family:'Noto Serif TC',serif;font-size:17px;cursor:pointer;transition:.15s;min-height:48px;}
+.gopt:hover:not(:disabled){background:rgba(243,239,226,0.15);}
+.gopt.right{background:rgba(166,214,160,0.3);border-color:var(--green);font-weight:900;}
+.gopt.wrong{background:rgba(237,160,168,0.25);border-color:var(--pink);}
+.gfb{margin-top:11px;padding:10px 13px;border-radius:8px;font-size:14.5px;line-height:1.6;display:none;}
+.gfb.on{display:block;}
+.gfb.ok{background:rgba(166,214,160,0.15);border-left:3px solid var(--green);}
+.gfb.no{background:rgba(237,160,168,0.15);border-left:3px solid var(--pink);}
+.rank{font-size:54px;text-align:center;margin:10px 0;}
+.hint{text-align:center;color:rgba(243,239,226,0.35);font-size:12.5px;padding:8px 0 0;}
+@media (max-width:640px){.topbar{padding:8px 10px;gap:8px;}.wrap{padding:0 10px 70px;}.card{padding:13px;}}
+</style></head><body>
+
+<div class="topbar">
+  <div class="brand">2-3　分數的四則運算<small>七上 · 第2章 分數運算</small></div>
+  <div class="spacer"></div>
+</div>
+
+<div class="tabs" id="tabs">
+  <button class="tab on" data-p="0"><span class="n">①</span>相等與比較大小</button>
+  <button class="tab" data-p="1"><span class="n">②</span>加減運算</button>
+  <button class="tab" data-p="2"><span class="n">③</span>乘法與除法</button>
+  <button class="tab" data-p="3"><span class="n">④</span>四則運算</button>
+  <button class="tab" data-p="4"><span class="n">➕</span>補充：小數</button>
+  <button class="tab" data-p="5"><span class="n">★</span>題型測驗</button>
+  <button class="tab" data-p="6"><span class="n">🎮</span>闖關遊戲</button>
+</div>
+
+<div class="wrap">
+  <div class="card" id="goalCard">
+    <h3><span class="ic">🎯</span>本節學習目標</h3>
+    <div class="goals" id="goals"></div>
+  </div>
+  <div id="wrap"></div>
+</div>
+
+<script>
+const GOALS = [
+  '理解等值分數：擴分約分不改變值',
+  '約分用 GCD、通分用 LCM（呼應 2-2）',
+  '能比較分數大小，含負分數',
+  '能做含正負號的分數加減（先通分）',
+  '能做含正負號的分數乘除（先定符號）',
+  '能做四則混合運算（括號→乘除→加減）',
+];
+
+const DATA = [
+{ key:'equiv', viz:'equiv', vizTitle:'互動通分器 —— 調兩個分數，看通分後誰大（含負分數）',
+  slides:[
+    {eb:'細目 ①', h:'等值分數：擴分與約分', html:`
+      <div class="box y" style="text-align:center;">分子分母<span class="hl">同乘</span>（或<span class="hl">同除</span>）一個 <b>非 0</b> 的數，分數的值<span class="hl">不變</span></div>
+      <div class="two">
+        <div class="box"><span class="hl-b">擴分</span>（乘）<br><span class="fm">2/3 = (2×4)/(3×4) = <span class="hl">8/12</span></span></div>
+        <div class="box g"><span class="hl-g">約分</span>（除）<br><span class="fm">18/24 = (18÷6)/(24÷6) = <span class="hl">3/4</span></span></div>
+      </div>
+      <div class="box r" style="text-align:center;">⚠️ 一定是<span class="hl-r">分子分母「一起」</span>乘或除，只動一邊就變成別的數了！</div>`},
+    {eb:'細目 ①', h:'約分要用 GCD —— 2-2 派上用場', html:`
+      <div class="box y" style="text-align:center;">一次除以 <span class="hl">GCD</span>，直接化到<span class="hl">最簡分數</span></div>
+      <div class="two">
+        <div class="box r"><span class="hl-r">慢</span>：<span class="fm">18/24 →÷2→ 9/12 →÷3→ 3/4</span><br><span style="font-size:13px;color:var(--soft)">除兩次，還要想下一步除幾</span></div>
+        <div class="box g"><span class="hl-g">快</span>：<span class="fm">GCD(18,24)=6 → 18/24 →÷6→ <span class="hl">3/4</span></span><br><span style="font-size:13px;color:var(--soft)">一步到位</span></div>
+      </div>
+      <div class="box"><span class="hl">最簡分數</span>：分子與分母<span class="hl-b">互質</span>（GCD = 1）。GCD(3,4)=1 → <span class="fm">3/4</span> 已最簡 ✓</div>`},
+    {eb:'例題 1 ★☆☆', h:'化簡 3/4 的來源', html:`
+      <div class="exq" data-a="2">
+        <div class="exq-q"><span class="hl">Q</span>　化簡 <span class="fm">18/24</span> 到最簡分數</div>
+        <button class="exo" data-i="0">9/12</button>
+        <button class="exo" data-i="1">6/8</button>
+        <button class="exo" data-i="2">3/4</button>
+        <button class="exo" data-i="3">2/3</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st fm">18 = 2×3²　；　24 = 2³×3</div>
+          <div class="st fm">GCD 公共取小 → 2¹×3¹ = 6</div>
+          <div class="st fm">(18÷6)/(24÷6) = 3/4</div>
+          <div class="st">檢查：GCD(3,4) = 1 → 互質 → 最簡 ✓</div>
+          <div class="st">(A) 9/12、(B) 6/8 <span class="hl-r">值是對的，但還沒最簡</span>（還能再約）</div>
+          <div class="an">答：3/4</div>
+        </div>
+      </div>`},
+    {eb:'細目 ①', h:'比較大小要通分 —— LCM 派上用場', html:`
+      <div class="box y" style="text-align:center;"><span class="hl">通分</span>：分母取 <span class="hl">LCM</span> 當公分母，再比分子</div>
+      <div class="box"><b>比較 <span class="fm">2/3</span> 與 <span class="fm">3/5</span></b><br>
+        <span class="fm">LCM(3,5) = 15</span>　→　<span class="fm">2/3 = <span class="hl-b">10/15</span>、3/5 = <span class="hl-r">9/15</span></span><br>
+        <span class="fm">10/15 > 9/15 → <span class="hl">2/3 > 3/5</span></span></div>
+      <div class="teach"><b>為什麼要通分才能比？</b>分母不同＝<b>單位不同</b>，就像不能直接比「3 個蘋果」和「5 個橘子」。通分後單位一樣（都是 1/15），才能比數量。</div>`},
+    {eb:'細目 ① ⚠️', h:'負分數：負得越多，值越小', html:`
+      <div class="box r" style="text-align:center;">❌ 錯誤直覺：「<span class="fm">3/4 > 2/3</span>，所以 <span class="fm">−3/4 > −2/3</span>」</div>
+      <div class="box g"><b>正確：通分後比</b><br>
+        <span class="fm">−3/4 = <span class="hl-r">−9/12</span>　；　−2/3 = <span class="hl-b">−8/12</span></span><br>
+        <span class="fm">−9/12 <span class="hl">&lt;</span> −8/12 → <span class="hl">−3/4 &lt; −2/3</span></span></div>
+      <div class="box y" style="text-align:center;">數線上<span class="hl">越右邊越大</span>、越靠近 0 越大 —— 從 1-1 到現在都沒變</div>
+      <div class="teach"><b>追問句：</b>「−9 和 −8 哪個大？」把問題拉回<b>整數</b>比大小，學生就不會被分數嚇到。</div>`},
+    {eb:'例題 2 ★★☆', h:'比較 −5/6 與 −7/8', html:`
+      <div class="exq" data-a="1">
+        <div class="exq-q"><span class="hl">Q</span>　<span class="fm">−5/6</span> 與 <span class="fm">−7/8</span>，哪個<b>比較大</b>？</div>
+        <button class="exo" data-i="0">−7/8 比較大</button>
+        <button class="exo" data-i="1">−5/6 比較大</button>
+        <button class="exo" data-i="2">兩個一樣大</button>
+        <button class="exo" data-i="3">無法比較</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st fm">通分 LCM(6,8) = 24</div>
+          <div class="st fm">−5/6 = −20/24　；　−7/8 = −21/24</div>
+          <div class="st fm">比分子：−20 > −21（−20 離 0 比較近）</div>
+          <div class="st fm">所以 −20/24 > −21/24</div>
+          <div class="st">選 (A) 的話，就是被「7/8 > 5/6」的直覺騙了 —— 加負號後<b>大小顛倒</b>。</div>
+          <div class="an">答：−5/6 比較大</div>
+        </div>
+      </div>`},
+    {eb:'細目 ①', h:'負分數的三種寫法（值都一樣）', html:`
+      <div class="box y" style="text-align:center;font-size:20px;"><span class="fm"><span class="hl">−(a/b) = (−a)/b = a/(−b)</span></span></div>
+      <div class="two">
+        <div class="box"><span class="fm" style="font-size:19px;">−2/3</span><br><span style="font-size:13px;color:var(--soft)">負號在最前面</span><br><span class="hl-g">👍 建議</span></div>
+        <div class="box"><span class="fm" style="font-size:19px;">(−2)/3</span><br><span style="font-size:13px;color:var(--soft)">負號在分子</span></div>
+        <div class="box"><span class="fm" style="font-size:19px;">2/(−3)</span><br><span style="font-size:13px;color:var(--soft)">負號在分母</span></div>
+      </div>
+      <div class="teach"><b>為什麼建議寫最前面？</b>負號藏在分子或分母裡，做加減乘除時<b>很容易漏看</b>。統一提到最前面，符號一目了然。</div>`}
+  ],
+  fa:[
+    {q:'化簡 <span class="fm">24/36</span> 到最簡分數', o:['12/18','2/3','6/9','4/6'], a:1, e:'GCD(24,36)=12 → (24÷12)/(36÷12) = 2/3。其他選項值對但沒化到最簡。'},
+    {q:'比較 <span class="fm">−2/5</span> 與 <span class="fm">−1/3</span>', o:['−2/5 大','−1/3 大','一樣大','不能比'], a:1, e:'通分15：−6/15 與 −5/15；−5/15 > −6/15 → −1/3 較大。'},
+    {q:'下列哪個<b>不等於</b> <span class="fm">−3/5</span>？', o:['(−3)/5','3/(−5)','−(3/5)','(−3)/(−5)'], a:3, e:'(−3)/(−5) = +3/5（負負得正），是正數，不等於 −3/5。'}
+  ],
+  info:[
+    {big:'約分用 GCD', cap:'一步化到最簡<br>分子分母互質', c:'var(--blue)'},
+    {big:'通分用 LCM', cap:'分母化相同<br>才能比大小、加減', c:'var(--green)'},
+    {big:'負得越多越小', cap:'−3/4 &lt; −2/3<br>別被數字騙', c:'var(--pink)'}
+  ]
+},
+{ key:'plus', viz:'plus', vizTitle:'互動分數條 —— 看通分怎麼把兩條「切成一樣的格子」再相加',
+  slides:[
+    {eb:'細目 ②', h:'加減三步驟', html:`
+      <div class="box"><b>① 先通分</b>　取分母的 <span class="hl-g">LCM</span> 當公分母</div>
+      <div class="box"><b>② 分子加減</b>　符號規則<span class="hl">和整數完全一樣</span></div>
+      <div class="box"><b>③ 約分化簡</b>　除以 <span class="hl-b">GCD</span></div>
+      <div class="box y"><b>符號規則（複習 1-2）</b><br>
+        <span class="hl">同號相加</span>：取同號，絕對值<b>相加</b><br>
+        <span class="hl">異號相加</span>：取<b>絕對值大者</b>的符號，絕對值<b>相減</b><br>
+        <span class="hl">減法轉加法</span>：<span class="fm">a − b = a + (−b)</span></div>`},
+    {eb:'細目 ②', h:'同號相加 vs 異號相加', html:`
+      <div class="two">
+        <div class="box"><b class="hl-b">同號</b>　<span class="fm">(−2/3) + (−1/4)</span><br>
+          <span class="fm">・都負 → 取<span class="hl">負</span>號</span><br>
+          <span class="fm">・通分12：8/12、3/12</span><br>
+          <span class="fm">・絕對值<b>相加</b>：8+3 = 11</span><br>
+          <span class="fm hl-g" style="font-size:18px;">= −11/12</span></div>
+        <div class="box g"><b class="hl-r">異號</b>　<span class="fm">(+3/5) + (−1/2)</span><br>
+          <span class="fm">・通分10：6/10、5/10</span><br>
+          <span class="fm">・6/10 > 5/10 → 取<span class="hl">正</span>號</span><br>
+          <span class="fm">・絕對值<b>相減</b>：6−5 = 1</span><br>
+          <span class="fm hl-g" style="font-size:18px;">= +1/10</span></div>
+      </div>
+      <div class="box y" style="text-align:center;">同號<span class="hl">加</span>、異號<span class="hl">減</span> —— 和 1-2 一模一樣，只是先通分而已</div>`},
+    {eb:'細目 ② ⚠️', h:'通分時，分子要「跟著乘」', html:`
+      <div class="two">
+        <div class="box r"><b class="hl-r">❌ 錯</b><br><span class="fm" style="font-size:18px;">1/2 − 1/3 = (1−1)/6 = 0</span><br>
+          <span style="font-size:13px;color:var(--soft)">只通分母，分子原封不動</span></div>
+        <div class="box g"><b class="hl-g">✓ 對</b><br>
+          <span class="fm">1/2 = <span class="hl">3</span>/6（分母×3，分子也×3）</span><br>
+          <span class="fm">1/3 = <span class="hl">2</span>/6（分母×2，分子也×2）</span><br>
+          <span class="fm" style="font-size:18px;">3/6 − 2/6 = <span class="hl">1/6</span></span></div>
+      </div>
+      <div class="box y" style="text-align:center;">通分＝<span class="hl">擴分</span> —— 分子分母要<b>一起</b>乘，值才不變！</div>
+      <div class="teach"><b>萬用檢查法：</b>先<b>估算</b>。1/2 − 1/3 ≈ 0.5 − 0.33 ≈ 0.17，就知道答案不可能是 0。</div>`},
+    {eb:'例題 3 ★☆☆', h:'計算 1/3 + (−2/5)', html:`
+      <div class="exq" data-a="0">
+        <div class="exq-q"><span class="hl">Q</span>　計算 <span class="fm">1/3 + (−2/5)</span></div>
+        <button class="exo" data-i="0">−1/15</button>
+        <button class="exo" data-i="1">−1/2</button>
+        <button class="exo" data-i="2">11/15</button>
+        <button class="exo" data-i="3">1/15</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st fm">通分 LCM(3,5) = 15</div>
+          <div class="st fm">1/3 = 5/15　；　−2/5 = −6/15</div>
+          <div class="st">異號 → 比絕對值：6/15 > 5/15 → 取<b>負</b>號</div>
+          <div class="st fm">(5 − 6)/15 = −1/15</div>
+          <div class="st">(B) −1/2 是「分子相減、分母相減」的錯誤做法 —— <span class="hl-r">分母絕不能相減！</span></div>
+          <div class="an">答：−1/15</div>
+        </div>
+      </div>`},
+    {eb:'例題 4 ★★☆', h:'減去一個負數', html:`
+      <div class="exq" data-a="3">
+        <div class="exq-q"><span class="hl">Q</span>　計算 <span class="fm">3/5 − (−7/10)</span></div>
+        <button class="exo" data-i="0">−1/10</button>
+        <button class="exo" data-i="1">−13/10</button>
+        <button class="exo" data-i="2">1/10</button>
+        <button class="exo" data-i="3">13/10</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st fm">減法轉加法：3/5 − (−7/10) = 3/5 + 7/10</div>
+          <div class="st fm">通分 LCM(5,10) = 10：6/10 + 7/10</div>
+          <div class="st">同號（都正）→ 絕對值相加：6+7 = 13</div>
+          <div class="st fm">= 13/10（= 1又3/10）</div>
+          <div class="st">關鍵：<b>減去一個負數 = 加上正數</b>（1-2 學過）。</div>
+          <div class="an">答：13/10</div>
+        </div>
+      </div>`}
+  ],
+  fa:[
+    {q:'計算 <span class="fm">−2/3 + 1/4</span>', o:['−5/12','−1/12','5/12','−1/7'], a:0, e:'通分12：−8/12 + 3/12；異號取絕對值大者(8)的負號 → (−8+3)/12 = −5/12。'},
+    {q:'計算 <span class="fm">(−2/3) − (+1/6)</span>', o:['−1/2','−5/6','−1/3','5/6'], a:1, e:'轉加法：(−2/3)+(−1/6)；通分6：−4/6−1/6；同號相加 → −5/6。'},
+    {q:'<span class="fm">1/2 − 1/3</span> 等於？', o:['0','1/6','2/5','1/5'], a:1, e:'通分6：3/6 − 2/6 = 1/6。分子要跟著乘，不是 (1−1)/6！'}
+  ],
+  info:[
+    {big:'先通分', cap:'分母取 LCM<br>分子跟著乘', c:'var(--green)'},
+    {big:'同號加·異號減', cap:'符號規則<br>和整數一樣', c:'var(--yellow)'},
+    {big:'分母不相減', cap:'絕不是<br>(1−1)/(2−3)', c:'var(--pink)'}
+  ]
+},
+{ key:'times', viz:'times', vizTitle:'面積模型 —— 一個正方形怎麼「切兩次」變成兩分數的乘積',
+  slides:[
+    {eb:'細目 ③', h:'乘法三步驟：定符號 → 相乘 → 約分', html:`
+      <div class="box y" style="text-align:center;font-size:19px;"><span class="fm">(a/b) × (c/d) = (a×c)/(b×d)</span></div>
+      <div class="box"><b>① 先定符號</b>　<span class="hl">同號得正、異號得負</span>（和整數一樣）</div>
+      <div class="box"><b>② 分子×分子、分母×分母</b></div>
+      <div class="box"><b>③ 約分</b>　—— 更聰明的是<span class="hl">先約分再乘</span>！</div>
+      <div class="box r" style="text-align:center;"><b>乘法不用通分！</b>　<span class="hl-r">加減才要通分</span>，<span class="hl-g">乘除不用</span></div>`},
+    {eb:'細目 ③', h:'先斜向約分，數字小很多', html:`
+      <div class="two">
+        <div class="box r"><b class="hl-r">先乘再約</b>（辛苦）<br>
+          <span class="fm">(3/4)×(8/9) = 24/36</span><br>
+          <span class="fm">GCD(24,36)=12 → 2/3</span><br>
+          <span style="font-size:13px;color:var(--soft)">要處理 24、36 大數字</span></div>
+        <div class="box g"><b class="hl-g">先斜向約分</b>（輕鬆）<br>
+          <span class="fm">3 與 9 ÷3 → 1 與 3</span><br>
+          <span class="fm">8 與 4 ÷4 → 2 與 1</span><br>
+          <span class="fm">(1/1)×(2/3) = <span class="hl">2/3</span></span><br>
+          <span style="font-size:13px;color:var(--soft)">數字全是個位數</span></div>
+      </div>
+      <div class="box y" style="text-align:center;">斜向約分＝把「等一下反正要約掉的」<span class="hl">提前約掉</span></div>`},
+    {eb:'例題 5 ★★☆', h:'計算 (−3/4) × (8/9)', html:`
+      <div class="exq" data-a="1">
+        <div class="exq-q"><span class="hl">Q</span>　計算 <span class="fm">(−3/4) × (8/9)</span></div>
+        <button class="exo" data-i="0">2/3</button>
+        <button class="exo" data-i="1">−2/3</button>
+        <button class="exo" data-i="2">−24/36</button>
+        <button class="exo" data-i="3">−3/2</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st"><b>Step 1 定符號</b>：異號（一負一正）→ 結果為<b>負</b></div>
+          <div class="st"><b>Step 2 斜向約分</b>：3與9÷3；8與4÷4</div>
+          <div class="st fm"><b>Step 3 相乘</b>：(1/1) × (2/3) = 2/3</div>
+          <div class="st fm"><b>Step 4 加符號</b>：−2/3</div>
+          <div class="st">(C) −24/36 沒錯但<b>沒化簡</b>；(A) 漏了負號。</div>
+          <div class="an">答：−2/3</div>
+        </div>
+      </div>
+      <div class="teach"><b>順序很重要：</b>先把符號<b>拍板定案</b>，剩下就只是「正的數字在算」，不會算到一半被負號搞亂。</div>`},
+    {eb:'細目 ③ ⚠️', h:'負分數的乘方：看指數奇偶', html:`
+      <div class="two">
+        <div class="box g"><b class="hl-g">偶次方 → 正</b><br>
+          <span class="fm">(−1/2)² = (−1/2)×(−1/2) = <span class="hl">+1/4</span></span><br>
+          <span class="fm">(−2/3)² = <span class="hl">+4/9</span></span></div>
+        <div class="box"><b class="hl-r">奇次方 → 負</b><br>
+          <span class="fm">(−1/3)³ = <span class="hl">−1/27</span></span><br>
+          <span class="fm">(−1/2)⁵ = <span class="hl">−1/32</span></span></div>
+      </div>
+      <div class="box r" style="text-align:center;">❌ 最常錯：<span class="fm">(−2/3)² 寫成 −4/9</span>　→　✓ <span class="fm hl-g">+4/9</span></div>
+      <div class="box y" style="text-align:center;">口訣：<span class="hl">數負號個數 —— 偶數個得正，奇數個得負</span><br>
+        <span class="fm">(−3/8)×(−4/9)×(−1/2)</span> 有 <b>3</b> 個負號 → <span class="hl-r">負</span></div>`},
+    {eb:'細目 ④', h:'除法：除以一個分數 = 乘以它的倒數', html:`
+      <div class="box y" style="text-align:center;font-size:20px;"><span class="fm"><span class="hl">(a/b) ÷ (c/d) = (a/b) × (d/c)</span></span></div>
+      <div class="box"><b>什麼是倒數？</b>把分子分母<span class="hl">上下顛倒</span>。<span class="fm">3/4 的倒數是 4/3</span>；<span class="fm">5 的倒數是 1/5</span>。兩數相乘 = 1 → 互為倒數。</div>
+      <div class="box g"><b>為什麼可以這樣？</b>「÷ 3/4」問的是「裡面有幾個 3/4」—— 把 3/4 翻過來乘，剛好就是在數這個。和整數「÷2 = ×1/2」是同一件事。</div>
+      <div class="box r" style="text-align:center;">⚠️ 絕對<span class="hl-r">不能</span>分子除分子、分母除分母！</div>`},
+    {eb:'例題 6 ★★☆', h:'計算 (−5/6) ÷ (−15/8)', html:`
+      <div class="exq" data-a="2">
+        <div class="exq-q"><span class="hl">Q</span>　計算 <span class="fm">(−5/6) ÷ (−15/8)</span></div>
+        <button class="exo" data-i="0">−4/9</button>
+        <button class="exo" data-i="1">25/16</button>
+        <button class="exo" data-i="2">4/9</button>
+        <button class="exo" data-i="3">−25/16</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st"><b>Step 1 定符號</b>：同號（兩個負）→ 結果為<b>正</b></div>
+          <div class="st fm"><b>Step 2 化除為乘</b>：取絕對值 (5/6) × (8/15)</div>
+          <div class="st fm"><b>Step 3 斜向約分</b>：5與15÷5；8與6÷2</div>
+          <div class="st fm"><b>Step 4</b>：(1/3) × (4/3) = 4/9</div>
+          <div class="st">(A) 漏判符號；(B)(D) 是「忘記取倒數、直接相乘」的錯誤。</div>
+          <div class="an">答：+4/9</div>
+        </div>
+      </div>
+      <div class="teach"><b>最常見錯誤：</b>取倒數時<b>連負號一起翻</b>，符號就亂了。建議<b>第一步先把符號定死</b>，後面只算絕對值。</div>`}
+  ],
+  fa:[
+    {q:'計算 <span class="fm">(−4/7) × (−21/8)</span>', o:['−3/2','3/2','−84/56','2/3'], a:1, e:'同號得正；斜向約分 4與8÷4、21與7÷7 → (1/1)×(3/2) = 3/2。'},
+    {q:'計算 <span class="fm">(5/8) ÷ (−10/3)</span>', o:['−3/16','3/16','−16/3','−50/24'], a:0, e:'異號得負；(5/8)×(3/10)：5與10÷5 → (1/8)×(3/2) = 3/16 → −3/16。'},
+    {q:'<span class="fm">(−2/3)²</span> = ?', o:['−4/9','4/9','−2/3','4/6'], a:1, e:'偶次方 → 正。(−2/3)×(−2/3) = +4/9。'}
+  ],
+  info:[
+    {big:'先定符號', cap:'同號得正<br>異號得負', c:'var(--yellow)'},
+    {big:'乘除不通分', cap:'加減才通分<br>別搞混', c:'var(--blue)'},
+    {big:'除 = 乘倒數', cap:'÷(c/d) = ×(d/c)', c:'var(--green)'}
+  ]
+},
+{ key:'order', viz:'order', vizTitle:'運算順序逐步器 —— 按「下一步」，看電腦怎麼決定先算哪裡',
+  slides:[
+    {eb:'細目 ⑤', h:'運算順序：和整數完全一樣', html:`
+      <div class="box y" style="text-align:center;font-size:21px;padding:15px;">
+        <span class="hl">① 括號　→　② 乘除　→　③ 加減</span><br>
+        <span style="font-size:14px;color:var(--soft);">同一級由左往右</span></div>
+      <div class="box r"><b class="hl-r">最常見錯誤：</b>看到分數就慌，直接<b>從左往右</b>算。<br>
+        <span class="fm">1/2 − 2/3 × 3/4</span> ❌ 不是 <span class="fm">(1/2 − 2/3) × 3/4</span>，✓ 是 <span class="fm">1/2 − (2/3 × 3/4)</span></div>
+      <div class="box"><b>帶分數怎麼辦？</b>計算前<span class="hl">先化成假分數</span>，算完再視需要化回去。<span class="fm">1又3/4 = 7/4</span></div>`},
+    {eb:'例題 7 ★★★', h:'四則混合', html:`
+      <div class="exq" data-a="2">
+        <div class="exq-q"><span class="hl">Q</span>　計算 <span class="fm">1/2 − (−2/3) × (3/4) + (−1/6)</span></div>
+        <button class="exo" data-i="0">−1/6</button>
+        <button class="exo" data-i="1">1/6</button>
+        <button class="exo" data-i="2">5/6</button>
+        <button class="exo" data-i="3">−5/6</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st"><b>Step 1 先乘</b>：<span class="fm">(−2/3)×(3/4)</span>；異號→負；約分 2與4÷2、3與3÷3 → <span class="fm">−1/2</span></div>
+          <div class="st fm"><b>Step 2 整理</b>：1/2 − (−1/2) + (−1/6) = 1/2 + 1/2 − 1/6</div>
+          <div class="st fm"><b>Step 3 通分6</b>：3/6 + 3/6 − 1/6</div>
+          <div class="st fm"><b>Step 4</b>：(3+3−1)/6 = 5/6</div>
+          <div class="st"><b>Step 2 的陷阱</b>：<span class="fm">−(−1/2)</span> 要變 <span class="fm">+1/2</span>。減去一個負數 = 加上正數。</div>
+          <div class="an">答：5/6</div>
+        </div>
+      </div>`},
+    {eb:'例題 8 ★★★', h:'括號 + 同級由左往右', html:`
+      <div class="exq" data-a="0">
+        <div class="exq-q"><span class="hl">Q</span>　計算 <span class="fm">[2/3 + (−1/4)] ÷ (−5/6) × (−3/2)</span></div>
+        <button class="exo" data-i="0">3/4</button>
+        <button class="exo" data-i="1">−3/4</button>
+        <button class="exo" data-i="2">1/3</button>
+        <button class="exo" data-i="3">−1/3</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st fm"><b>Step 1 括號優先</b>：2/3 − 1/4 = 8/12 − 3/12 = 5/12</div>
+          <div class="st"><b>Step 2</b>：÷ 與 × <b>同級</b>，由左往右 → 先做除法</div>
+          <div class="st fm"><b>Step 3</b>：5/12 ÷ (−5/6) = 5/12 × (−6/5)；異號→負；約分 → −1/2</div>
+          <div class="st fm"><b>Step 4</b>：(−1/2) × (−3/2)；同號→正 → +3/4</div>
+          <div class="st"><span class="hl-r">關鍵</span>：÷ 和 × 同級，<b>不能先算右邊的乘法</b>！</div>
+          <div class="an">答：3/4</div>
+        </div>
+      </div>`},
+    {eb:'例題 9 ★★★', h:'代數式求值', html:`
+      <div class="exq" data-a="3">
+        <div class="exq-q"><span class="hl">Q</span>　已知 <span class="fm">x = −2/3、y = 3/4</span>，求 <span class="fm">2x − 3y²</span></div>
+        <button class="exo" data-i="0">−145/16</button>
+        <button class="exo" data-i="1">145/48</button>
+        <button class="exo" data-i="2">−17/48</button>
+        <button class="exo" data-i="3">−145/48</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st fm"><b>Step 1 先算次方</b>：y² = (3/4)² = 9/16</div>
+          <div class="st fm"><b>Step 2 代入</b>：2×(−2/3) − 3×(9/16)</div>
+          <div class="st fm"><b>Step 3 算乘法</b>：−4/3 − 27/16</div>
+          <div class="st fm"><b>Step 4 通分</b>：LCM(3,16)=48 → −64/48 − 81/48</div>
+          <div class="st fm"><b>Step 5</b>：同號相加 → −145/48</div>
+          <div class="st"><b>代入務必加括號</b>：2x 要寫 <span class="fm">2×(−2/3)</span>，不加括號很容易漏負號。</div>
+          <div class="an">答：−145/48</div>
+        </div>
+      </div>`},
+    {eb:'素養 ★★★', h:'水庫水位（分數加減 + 絕對值）', html:`
+      <div class="box">連三週水位變化（公尺）：第一週 <span class="fm hl-r">−3/8</span>、第二週 <span class="fm hl-g">+1/4</span>、第三週 <span class="fm hl-r">−1/6</span></div>
+      <div class="exq" data-a="1">
+        <div class="exq-q"><span class="hl">Q</span>　哪一週的「變化<b>幅度</b>」最大？</div>
+        <button class="exo" data-i="0">第二週（唯一上升的）</button>
+        <button class="exo" data-i="1">第一週</button>
+        <button class="exo" data-i="2">第三週</button>
+        <button class="exo" data-i="3">三週一樣</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">「<b>幅度</b>」= 比<b>絕對值</b>，不看正負（呼應 1-1）</div>
+          <div class="st fm">通分24：|−3/8| = 9/24；|+1/4| = 6/24；|−1/6| = 4/24</div>
+          <div class="st fm">9/24 最大 → 第一週</div>
+          <div class="st">順帶：三週總變化 = (−9+6−4)/24 = <b>−7/24</b> 公尺；原水位10m → 10 − 7/24 = <b>9又17/24</b> 公尺</div>
+          <div class="an">答：第一週（幅度 3/8）</div>
+        </div>
+      </div>`},
+    {eb:'素養 ★★★', h:'基金投資（分數乘法）', html:`
+      <div class="box">兩支基金各投入 <span class="hl">30000</span> 元。甲報酬率 <span class="fm hl-r">−2/15</span>、乙報酬率 <span class="fm hl-g">+3/10</span></div>
+      <div class="exq" data-a="2">
+        <div class="exq-q"><span class="hl">Q</span>　整體（兩支合計）<b>報酬率</b>是多少？</div>
+        <button class="exo" data-i="0">−2/15 + 3/10 = 13/30</button>
+        <button class="exo" data-i="1">(−2/15 + 3/10) ÷ 2 = 13/60</button>
+        <button class="exo" data-i="2">1/12</button>
+        <button class="exo" data-i="3">1/6</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st fm">甲：30000 × (−2/15) = −4000 元（虧）</div>
+          <div class="st fm">乙：30000 × (+3/10) = +9000 元（賺）</div>
+          <div class="st fm">整體損益：−4000 + 9000 = +5000 元</div>
+          <div class="st fm">整體報酬率 = 總損益 ÷ 總投入 = 5000 ÷ 60000 = <b>1/12</b></div>
+          <div class="st"><span class="hl-r">陷阱</span>：報酬率<b>不能直接相加或平均</b>！必須用<b>總損益 ÷ 總投入</b>。</div>
+          <div class="an">答：1/12</div>
+        </div>
+      </div>`},
+    {eb:'總結', h:'避雷指南：五個最常見錯誤', html:`
+      <table class="tbl">
+        <tr><th style="width:46%;">❌ 錯誤</th><th>✓ 正確</th></tr>
+        <tr><td>通分時分子沒跟著乘<br><span class="fm">1/2 − 1/3 = (1−1)/6</span></td><td><span class="fm hl-g">3/6 − 2/6 = 1/6</span></td></tr>
+        <tr><td>分數除法忘記取倒數</td><td><span class="fm hl-g">÷(c/d) = ×(d/c)</span></td></tr>
+        <tr><td><span class="fm">(−2/3)²</span> 算成 <span class="fm">−4/9</span></td><td><span class="fm hl-g">+4/9</span>（偶次方得正）</td></tr>
+        <tr><td>以為 <span class="fm">−3/4 > −2/3</span></td><td><span class="fm hl-g">−9/12 &lt; −8/12</span></td></tr>
+        <tr><td>混合運算由左往右算</td><td><span class="hl-g">括號 → 乘除 → 加減</span></td></tr>
+      </table>
+      <div class="box y" style="text-align:center;">萬用檢查法：<span class="hl">先估算</span>。<span class="fm">1/2 − 1/3</span> ≈ 0.17，答案絕不可能是 0。</div>`}
+  ],
+  fa:[
+    {q:'計算 <span class="fm">2/3 × (−9/4) − 1/2</span>', o:['−2','−1','−5/4','2'], a:0, e:'先乘：(2×9)/(3×4)=18/12=3/2 → −3/2；再減：−3/2 − 1/2 = −2。'},
+    {q:'計算 <span class="fm">(−1/3 + 1/2) × (−6)</span>', o:['1','−1','6','−6'], a:1, e:'括號：−2/6+3/6 = 1/6；1/6 × (−6) = −1。（此題原教材答案誤植為 1，已修正）'},
+    {q:'<span class="fm">1/2 − 2/3 × 3/4</span> 該先算哪個？', o:['先算 1/2 − 2/3','先算 2/3 × 3/4','由左往右','先算 3/4'], a:1, e:'先乘除後加減 → 先算 2/3 × 3/4 = 1/2；再 1/2 − 1/2 = 0。'}
+  ],
+  info:[
+    {big:'括號→乘除→加減', cap:'和整數<br>完全一樣', c:'var(--yellow)'},
+    {big:'同級左到右', cap:'× 和 ÷ 同級<br>+ 和 − 同級', c:'var(--blue)'},
+    {big:'先估算再檢查', cap:'答案合不合理<br>一眼就知道', c:'var(--green)'}
+  ]
+},
+{ key:'dec', viz:'dec', vizTitle:'小數↔分數互換器 —— 把小數還原成分數，陷阱就無所遁形',
+  slides:[
+    {eb:'補充', h:'小數不是新東西 —— 它就是分數', html:`
+      <div class="box y" style="text-align:center;font-size:19px;"><span class="hl">小數 = 分母為 10 的次方的分數</span></div>
+      <table class="tbl">
+        <tr><th>小數</th><th>分數形式</th><th>最簡分數</th></tr>
+        <tr><td class="fm">0.4</td><td class="fm">4/10</td><td class="fm hl-g">2/5</td></tr>
+        <tr><td class="fm">0.25</td><td class="fm">25/100</td><td class="fm hl-g">1/4</td></tr>
+        <tr><td class="fm">3.45</td><td class="fm">345/100</td><td class="fm hl-g">69/20</td></tr>
+        <tr><td class="fm">−0.75</td><td class="fm">−75/100</td><td class="fm hl-g">−3/4</td></tr>
+      </table>
+      <div class="box g" style="text-align:center;">所以小數的四則運算<span class="hl">沒有任何新規則</span> —— 符號規則、運算順序，全部和前面<span class="hl">一模一樣</span>。</div>`},
+    {eb:'補充', h:'小數的加減：小數點對齊', html:`
+      <div class="box"><b>① 先判斷同號異號 → ② 小數點對齊做加減（位數不足補 0）→ ③ 決定正負號</b></div>
+      <div class="two">
+        <div class="box"><b class="hl-b">同號</b>　<span class="fm">(−3.45) + (−2.6)</span><br>
+          <span class="fm">取負；3.45 + 2.6 = 6.05</span><br><span class="fm hl-g" style="font-size:18px;">= −6.05</span></div>
+        <div class="box g"><b class="hl-r">異號</b>　<span class="fm">(+4.7) + (−6.2)</span><br>
+          <span class="fm">6.2 > 4.7 取負；6.2 − 4.7 = 1.5</span><br><span class="fm hl-g" style="font-size:18px;">= −1.5</span></div>
+      </div>
+      <div class="box r"><b class="hl-r">⚠️ 最常錯：</b>注意力全放在判斷正負號，<b>忘記小數點要對齊</b>。<br>
+        「正負號判斷」和「小數點對齊」是<b>兩件分開要顧的事</b>。</div>`},
+    {eb:'補充', h:'小數的乘除：先絕對值，再定符號', html:`
+      <div class="box"><b class="hl-b">乘法</b>　先算絕對值（<span class="hl">小數位數相加</span>）→ 再定符號<br>
+        <span class="fm">(−1.2) × (−0.34)</span>：12 × 34 = 408；1.2 有 <b>1</b> 位、0.34 有 <b>2</b> 位 → 共 <b>3</b> 位 → 0.408<br>
+        <span class="fm">同號得正 → <span class="hl-g">+0.408</span></span>；若改 (−1.2)×(+0.34) → <span class="fm hl-r">−0.408</span></div>
+      <div class="box g"><b class="hl-g">除法</b>　把除數變<span class="hl">整數</span>（同乘 10 的次方）→ 再算 → 定符號<br>
+        <span class="fm">(−8.4) ÷ 0.4 = (−84) ÷ 4 = <span class="hl">−21</span></span>（異號）<br>
+        <span class="fm">(−12.6) ÷ (−0.07) = (−1260) ÷ (−7) = <span class="hl">+180</span></span>（同號）</div>
+      <div class="teach"><b>和分數完全對應：</b>分數乘法「分子×分子」對應小數「位數相加」；分數除法「乘倒數」對應小數「除數變整數」—— 都是<b>同一件事的不同寫法</b>。</div>`},
+    {eb:'補充 ⚠️', h:'負小數比大小 —— 換了外衣的同一個陷阱', html:`
+      <div class="box r" style="text-align:center;">❌ 錯誤直覺：「<span class="fm">3.45 > 3.4</span>，所以 <span class="fm">−3.45 > −3.4</span>」</div>
+      <div class="box g"><b>化成分數看就清楚了</b><br>
+        <span class="fm">−3.45 = −345/100 = <span class="hl-r">−69/20</span></span><br>
+        <span class="fm">−3.4 = −340/100 = −17/5 = <span class="hl-b">−68/20</span></span><br>
+        <span class="fm">−69/20 <span class="hl">&lt;</span> −68/20 → <span class="hl">−3.45 &lt; −3.4</span></span></div>
+      <div class="box y" style="text-align:center;">這和 <span class="fm">−3/4 &lt; −2/3</span> 是<span class="hl">完全同一個陷阱</span>，只是換成小數的外衣。<br>
+        數線上 −3.45 在 −3.4 的<b>左邊</b>（更負）。</div>`},
+    {eb:'補充例題 ★★☆', h:'負小數比大小', html:`
+      <div class="exq" data-a="1">
+        <div class="exq-q"><span class="hl">Q</span>　<span class="fm">−3.45</span> 與 <span class="fm">−3.4</span>，哪個<b>比較大</b>？</div>
+        <button class="exo" data-i="0">−3.45 比較大</button>
+        <button class="exo" data-i="1">−3.4 比較大</button>
+        <button class="exo" data-i="2">兩個一樣大</button>
+        <button class="exo" data-i="3">無法比較</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st fm">−3.45 = −345/100 = −69/20</div>
+          <div class="st fm">−3.4 = −340/100 = −68/20</div>
+          <div class="st fm">−69/20 &lt; −68/20 → −3.45 &lt; −3.4</div>
+          <div class="st">數線上 −3.45 在 −3.4 的<b>左邊</b>（更負）→ 所以 <b>−3.4 比較大</b>。</div>
+          <div class="st">選 (A) 的話，就是被「3.45 > 3.4」的直覺騙了。<b>負得越多，值越小。</b></div>
+          <div class="an">答：−3.4 比較大</div>
+        </div>
+      </div>`},
+    {eb:'補充例題 ★★☆', h:'小數乘法的位數', html:`
+      <div class="exq" data-a="0">
+        <div class="exq-q"><span class="hl">Q</span>　計算 <span class="fm">(−2.05) × 1.3</span></div>
+        <button class="exo" data-i="0">−2.665</button>
+        <button class="exo" data-i="1">−26.65</button>
+        <button class="exo" data-i="2">2.665</button>
+        <button class="exo" data-i="3">−0.2665</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st"><b>Step 1 定符號</b>：異號 → 負</div>
+          <div class="st fm"><b>Step 2 絕對值</b>：205 × 13 = 2665</div>
+          <div class="st"><b>Step 3 數小數位數</b>：2.05 有 <b>2</b> 位、1.3 有 <b>1</b> 位 → 共 <b>3</b> 位</div>
+          <div class="st fm"><b>Step 4</b>：2665 → 2.665 → 加負號 → −2.665</div>
+          <div class="st"><b>估算檢查</b>：約 2 × 1.3 ≈ 2.6，所以 −2.665 合理；−26.65 差 10 倍、−0.2665 差 10 倍，都是<b>小數點數錯位</b>。</div>
+          <div class="an">答：−2.665</div>
+        </div>
+      </div>`},
+    {eb:'補充素養 ★★★', h:'股票五日漲跌', html:`
+      <div class="box">每日漲跌（元）：週一 <span class="fm hl-g">+1.25</span>、週二 <span class="fm hl-r">−2.80</span>、週三 <span class="fm hl-g">+0.95</span>、週四 <span class="fm hl-r">−1.45</span>、週五 <span class="fm hl-g">+3.10</span></div>
+      <div class="exq" data-a="2">
+        <div class="exq-q"><span class="hl">Q</span>　哪一天的<b>跌幅</b>最大？</div>
+        <button class="exo" data-i="0">週五（+3.10 變化最大）</button>
+        <button class="exo" data-i="1">週四</button>
+        <button class="exo" data-i="2">週二</button>
+        <button class="exo" data-i="3">週一</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">「<b>跌幅</b>」只看<b>下跌</b>的日子，再比<b>絕對值</b></div>
+          <div class="st fm">下跌日：週二 |−2.80| = 2.80；週四 |−1.45| = 1.45</div>
+          <div class="st fm">2.80 > 1.45 → 週二跌幅最大</div>
+          <div class="st">(A) 週五是<b>漲</b>幅最大，不是跌幅 —— 看清楚題目問什麼！</div>
+          <div class="st">順帶：五天總計 1.25−2.80+0.95−1.45+3.10 = <b>+1.05 元</b>；平均 1.05÷5 = <b>+0.21 元/天</b></div>
+          <div class="an">答：週二（跌 2.80 元）</div>
+        </div>
+      </div>`}
+  ],
+  fa:[
+    {q:'計算 <span class="fm">(−12.6) ÷ (−0.07)</span>', o:['180','−180','1.8','−1.8'], a:0, e:'同號得正；除數變整數：(−1260)÷(−7) = 180。'},
+    {q:'<span class="fm">(−0.9) × (−0.9) × (−1)</span> = ?', o:['0.81','−0.81','0.081','−1.8'], a:1, e:'3 個負號（奇數個）→ 負；0.9×0.9×1 = 0.81 → −0.81。'},
+    {q:'判斷：<span class="fm">(−0.5)²</span> 是負數', o:['對','錯，等於 0.25','錯，等於 −0.25','錯，等於 1'], a:1, e:'偶次方得正 → (−0.5)² = +0.25。'}
+  ],
+  info:[
+    {big:'小數 = 分數', cap:'分母是 10 的次方<br>沒有新規則', c:'var(--yellow)'},
+    {big:'小數點對齊', cap:'加減時<br>位數不足補 0', c:'var(--blue)'},
+    {big:'−3.45 &lt; −3.4', cap:'負得越多越小<br>同一個陷阱', c:'var(--pink)'}
+  ]
+}];
+
+const QUIZ = [
+  {type:'choice', q:'化簡 <span class="fm">24/36</span> 到最簡分數', o:['12/18','2/3','6/9','4/6'], a:1, e:'GCD(24,36)=12 → 2/3。其他值對但未最簡。'},
+  {type:'choice', q:'比較 <span class="fm">−5/6</span> 與 <span class="fm">−7/8</span>', o:['−7/8 大','−5/6 大','一樣大','不能比'], a:1, e:'通分24：−20/24 > −21/24 → −5/6 較大。'},
+  {type:'fill', q:'計算 <span class="fm">−2/3 + 1/4</span> = ', a:['-5/12','−5/12'], e:'通分12：−8/12 + 3/12 = −5/12。'},
+  {type:'choice', q:'計算 <span class="fm">(−4/7) × (−21/8)</span>', o:['−3/2','3/2','−84/56','2/3'], a:1, e:'同號得正；斜向約分 → (1/1)×(3/2) = 3/2。'},
+  {type:'fill', q:'計算 <span class="fm">(5/8) ÷ (−10/3)</span> = ', a:['-3/16','−3/16'], e:'異號得負；(5/8)×(3/10) = 3/16 → −3/16。'},
+  {type:'tf', q:'判斷：「<span class="fm">(−2/3)² = −4/9</span>」', a:false, e:'錯。負數的<b>偶次方得正</b> → (−2/3)² = +4/9。'},
+  {type:'tf', q:'判斷：「<span class="fm">−(a/b) = (−a)/b = a/(−b)</span>，三種寫法等價。」', a:true, e:'對。負號放分子、分母或整個分數前面，值都相同。'},
+  {type:'choice', q:'計算 <span class="fm">(−1/3 + 1/2) × (−6)</span>', o:['1','−1','6','−6'], a:1, e:'括號 = 1/6；1/6 × (−6) = −1。'},
+  {type:'choice', q:'計算 <span class="fm">(−3/4) ÷ (−3/8) + (−1/2)</span>', o:['3/2','−3/2','5/2','1/2'], a:0, e:'先除：(−3/4)×(−8/3) = 2（同號正）；2 + (−1/2) = 3/2。'},
+  {type:'choice', q:'計算 <span class="fm">−1/6 ÷ (2/3 − 5/4)</span>', o:['−2/7','2/7','7/2','−7/2'], a:1, e:'括號：8/12−15/12 = −7/12；(−1/6)×(−12/7) = 12/42 = 2/7（同號正）。'},
+  {type:'fill', q:'<span class="fm">a = −1/2、b = 2/3</span>，求 <span class="fm">2a² − 3b</span> = ', a:['-3/2','−3/2'], e:'a² = 1/4 → 2×1/4 = 1/2；3b = 2；1/2 − 2 = −3/2。'},
+  {type:'choice', q:'計算 <span class="fm">[(−2/5)+(3/10)] × (−5/2) ÷ (1/4)</span>', o:['1','−1','1/4','4'], a:0, e:'括號：−4/10+3/10 = −1/10；×(−5/2) = 1/4（同號正）；÷(1/4) = 1。'},
+  {type:'choice', q:'<span style="color:var(--pink)">［補充］</span>比較 <span class="fm">−3.45</span> 與 <span class="fm">−3.4</span>', o:['−3.45 大','−3.4 大','一樣大','不能比'], a:1, e:'−3.45 = −69/20、−3.4 = −68/20；−69/20 < −68/20 → −3.4 較大。負得越多值越小。'},
+  {type:'fill', q:'<span style="color:var(--pink)">［補充］</span>計算 <span class="fm">(−2.05) × 1.3</span> = ', a:['-2.665','−2.665'], e:'異號得負；205×13 = 2665；小數 2 位 + 1 位 = 3 位 → −2.665。'},
+  {type:'choice', q:'<span style="color:var(--pink)">［補充］</span>計算 <span class="fm">(−12.6) ÷ (−0.07)</span>', o:['180','−180','1.8','−1.8'], a:0, e:'同號得正；除數變整數 → (−1260)÷(−7) = 180。'},
+  {type:'tf', q:'<span style="color:var(--pink)">［補充］</span>判斷：「小數的四則運算有一套和分數不同的新規則。」', a:false, e:'錯。小數就是分母為 10 次方的分數，<b>規則完全相同</b>，只是寫法不同。'}
+];
+
+const GAME = [
+  {name:'等值與約分', qs:[
+    {q:'化簡 18/24', o:['9/12','3/4','6/8','2/3'], a:1, e:'GCD(18,24)=6 → 3/4（最簡）。'},
+    {q:'化簡 24/36', o:['2/3','12/18','6/9','3/4'], a:0, e:'GCD(24,36)=12 → 2/3。'},
+    {q:'2/3 擴分成分母 12，分子是？', o:['4','6','8','2'], a:2, e:'分母×4，分子也要×4 → 2×4 = 8 → 8/12。'},
+    {q:'最簡分數的條件是？', o:['分子小於分母','分子分母互質','分母是質數','分子是1'], a:1, e:'分子與分母 GCD = 1（互質）。'}
+  ]},
+  {name:'比較大小', qs:[
+    {q:'−3/4 與 −2/3 哪個大？', o:['−3/4','−2/3','一樣','不能比'], a:1, e:'通分12：−9/12 < −8/12 → −2/3 較大。'},
+    {q:'−5/6 與 −7/8 哪個大？', o:['−5/6','−7/8','一樣','不能比'], a:0, e:'通分24：−20/24 > −21/24 → −5/6 較大。'},
+    {q:'比較 2/3 與 3/5', o:['2/3 大','3/5 大','一樣','不能比'], a:0, e:'通分15：10/15 > 9/15 → 2/3 大。'},
+    {q:'負分數比大小的規則？', o:['分子大的大','負得越多越小','分母大的大','和正數一樣'], a:1, e:'越靠近 0 越大；負得越多值越小。'}
+  ]},
+  {name:'加減運算', qs:[
+    {q:'1/3 + (−2/5) = ?', o:['−1/15','1/15','−1/2','11/15'], a:0, e:'通分15：5/15 − 6/15 = −1/15。'},
+    {q:'−2/3 + 1/4 = ?', o:['−5/12','5/12','−1/12','−1/7'], a:0, e:'通分12：−8/12 + 3/12 = −5/12。'},
+    {q:'3/5 − (−7/10) = ?', o:['−1/10','13/10','1/10','−13/10'], a:1, e:'減負轉加正：6/10 + 7/10 = 13/10。'},
+    {q:'1/2 − 1/3 = ?', o:['0','1/6','2/5','1/5'], a:1, e:'3/6 − 2/6 = 1/6。分子要跟著乘！'}
+  ]},
+  {name:'乘法運算', qs:[
+    {q:'(−3/4) × (8/9) = ?', o:['2/3','−2/3','−24/36','−3/2'], a:1, e:'異號得負；斜向約分 → −2/3。'},
+    {q:'(−4/7) × (−21/8) = ?', o:['−3/2','3/2','−2/3','2/3'], a:1, e:'同號得正 → 3/2。'},
+    {q:'(−2/3)² = ?', o:['−4/9','4/9','−2/3','4/6'], a:1, e:'偶次方得正 → +4/9。'},
+    {q:'(−3/8)×(−4/9)×(−1/2) 的符號？', o:['正','負','零','看數字'], a:1, e:'3 個負號（奇數個）→ 負。答案 −1/12。'}
+  ]},
+  {name:'除法運算', qs:[
+    {q:'(−5/6) ÷ (−15/8) = ?', o:['−4/9','4/9','25/16','−25/16'], a:1, e:'同號得正；(5/6)×(8/15) = 4/9。'},
+    {q:'(5/8) ÷ (−10/3) = ?', o:['−3/16','3/16','−16/3','−50/24'], a:0, e:'異號得負；(5/8)×(3/10) = 3/16 → −3/16。'},
+    {q:'除以一個分數等於？', o:['乘以它本身','乘以它的倒數','除以它的倒數','分子除分子'], a:1, e:'÷(c/d) = ×(d/c)。'},
+    {q:'3/4 的倒數是？', o:['−3/4','4/3','−4/3','3/4'], a:1, e:'上下顛倒 → 4/3。（3/4 × 4/3 = 1）'}
+  ]},
+  {name:'四則運算', qs:[
+    {q:'1/2 − 2/3 × 3/4 該先算什麼？', o:['1/2 − 2/3','2/3 × 3/4','由左往右','3/4'], a:1, e:'先乘除後加減 → 先算 2/3 × 3/4。'},
+    {q:'1/2 − (−2/3) × (3/4) + (−1/6) = ?', o:['−1/6','1/6','5/6','−5/6'], a:2, e:'先乘 = −1/2；1/2+1/2−1/6 = 5/6。'},
+    {q:'(−1/3 + 1/2) × (−6) = ?', o:['1','−1','6','−6'], a:1, e:'括號 = 1/6；1/6 × (−6) = −1。'},
+    {q:'[2/3 + (−1/4)] ÷ (−5/6) × (−3/2) = ?', o:['3/4','−3/4','1/3','−1/3'], a:0, e:'括號5/12；÷(−5/6) = −1/2；×(−3/2) = +3/4。'}
+  ]},
+  {name:'補充：小數', qs:[
+    {q:'0.25 化成最簡分數是？', o:['25/100','1/4','1/5','2/5'], a:1, e:'0.25 = 25/100 = 1/4（除以 GCD 25）。'},
+    {q:'−3.45 與 −3.4 哪個大？', o:['−3.45','−3.4','一樣','不能比'], a:1, e:'−69/20 < −68/20 → −3.4 較大。負得越多值越小。'},
+    {q:'(−2.05) × 1.3 = ?', o:['−2.665','−26.65','2.665','−0.2665'], a:0, e:'205×13 = 2665；小數 2+1 = 3 位 → −2.665。'},
+    {q:'(−8.4) ÷ 0.4 = ?', o:['−21','21','−2.1','−210'], a:0, e:'異號得負；除數變整數 → (−84)÷4 = −21。'}
+  ]}
+];
+
+document.getElementById('goals').innerHTML = GOALS.map((g,i)=>
+  `<div class="goal"><div class="bdg">${i+1}</div>${g}</div>`).join('');
+
+const wrap = document.getElementById('wrap');
+DATA.forEach((sec, si)=>{
+  const p = document.createElement('div');
+  p.className = 'panel' + (si===0?' on':'');
+  p.dataset.p = si;
+  p.innerHTML = `
+    <div class="card">
+      <h3><span class="ic">📽</span>簡報翻頁器</h3>
+      <div class="deck" data-deck="${si}">
+        ${sec.slides.map((s,i)=>`<div class="sl${i===0?' on':''}" data-i="${i}">
+          <div class="eyebrow">${s.eb}</div><h4>${s.h}</h4>${s.html}</div>`).join('')}
+      </div>
+      <div class="nav">
+        <button class="btn" data-nav="prev" data-s="${si}">◀ 上一張</button>
+        <span class="pg" id="pg-${si}">1 / ${sec.slides.length}</span>
+        <button class="btn" data-nav="next" data-s="${si}">下一張 ▶</button>
+      </div>
+      <div class="dots" id="dots-${si}">
+        ${sec.slides.map((_,i)=>`<button class="dot${i===0?' on':''}" data-s="${si}" data-i="${i}"></button>`).join('')}
+      </div>
+    </div>
+    <div class="card">
+      <h3><span class="ic">🎯</span>Canvas 互動視覺化<span style="font-size:14px;color:var(--soft);font-weight:400;">　${sec.vizTitle}</span></h3>
+      <div class="cv-wrap">
+        <canvas class="viz" data-viz="${sec.viz}" data-si="${si}"></canvas>
+        <div class="ctrl" data-ctrl="${si}"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3><span class="ic">✅</span>形成性評量</h3>
+      ${sec.fa.map((f,i)=>`<div class="q" data-fa="${si}-${i}">
+        <div class="qt"><span class="qn">Q${i+1}</span>${f.q}</div>
+        <div class="opts">${f.o.map((o,oi)=>`<button class="opt" data-si="${si}" data-qi="${i}" data-oi="${oi}">${o}</button>`).join('')}</div>
+        <div class="fb" id="fb-${si}-${i}"></div>
+      </div>`).join('')}
+    </div>
+    <div class="card">
+      <h3><span class="ic">📊</span>資訊圖表</h3>
+      <div class="info">
+        ${sec.info.map(c=>`<div class="icard"><div class="big" style="color:${c.c}">${c.big}</div><div class="cap">${c.cap}</div></div>`).join('')}
+      </div>
+    </div>`;
+  wrap.appendChild(p);
+});
+
+const qp = document.createElement('div');
+qp.className='panel'; qp.dataset.p='5';
+qp.innerHTML = `<div class="card"><h3><span class="ic">📝</span>題型測驗　<span style="font-size:14px;color:var(--soft);font-weight:400;">單選 · 是非 · 填充，共 ${QUIZ.length} 題</span></h3>
+  <div id="quizBox"></div>
+  <div style="display:flex;gap:10px;align-items:center;margin-top:14px;flex-wrap:wrap;">
+    <button class="btn" id="gradeBtn" style="background:rgba(242,217,121,.2);border-color:var(--yellow);color:var(--yellow);font-weight:700;">📊 批改並看成績</button>
+    <button class="btn" id="resetQuiz">🔄 重做</button>
+    <div class="readout" id="score" style="display:none;"></div>
+  </div></div>
+  <div class="card"><h3><span class="ic">📋</span>公式速查表</h3>
+    <div class="frow"><div class="flab">等值分數</div><div class="fval">分子分母同乘／同除非 0 的數，值不變</div></div>
+    <div class="frow"><div class="flab">約分</div><div class="fval">分子分母同除 <b>GCD</b> → 最簡分數（分子分母互質）</div></div>
+    <div class="frow"><div class="flab">通分</div><div class="fval">分母取 <b>LCM</b> 當公分母（分子要跟著乘！）</div></div>
+    <div class="frow"><div class="flab">比較大小</div><div class="fval">通分後比分子；負分數：負得越多值越小</div></div>
+    <div class="frow"><div class="flab">負分數寫法</div><div class="fval">−(a/b) = (−a)/b = a/(−b)　三者等價</div></div>
+    <div class="frow"><div class="flab">加減</div><div class="fval">先通分 → 分子加減（符號同整數）→ 約分</div></div>
+    <div class="frow"><div class="flab">乘法</div><div class="fval">先定符號 → 分子×分子、分母×分母 → 先斜向約分更快</div></div>
+    <div class="frow"><div class="flab">除法</div><div class="fval">a/b ÷ c/d = a/b × d/c（乘倒數）</div></div>
+    <div class="frow"><div class="flab">負分數乘方</div><div class="fval">偶次方 → 正；奇次方 → 負</div></div>
+    <div class="frow"><div class="flab">運算順序</div><div class="fval">括號 → 乘除 → 加減（同級由左往右）</div></div>
+    <div class="frow"><div class="flab">乘除不通分</div><div class="fval">只有<b>加減</b>要通分，乘除不用</div></div>
+    <div class="frow"><div class="flab">［補充］小數 = 分數</div><div class="fval">分母為 10 的次方　例：0.25 = 25/100 = 1/4</div></div>
+    <div class="frow"><div class="flab">［補充］小數加減</div><div class="fval">小數點<b>對齊</b>（位數不足補 0），符號規則同上</div></div>
+    <div class="frow"><div class="flab">［補充］小數乘法</div><div class="fval">絕對值相乘，<b>小數位數相加</b>；再定符號</div></div>
+    <div class="frow"><div class="flab">［補充］小數除法</div><div class="fval">除數同乘 10 的次方變<b>整數</b>；再定符號</div></div>
+    <div class="frow"><div class="flab">［補充］負小數比大小</div><div class="fval">−3.45 &lt; −3.4　（和負分數同一個陷阱）</div></div>
+    <div class="frow"><div class="flab">萬用檢查</div><div class="fval">先估算：1/2 − 1/3 ≈ 0.17，絕不可能是 0</div></div>
+  </div>`;
+wrap.appendChild(qp);
+
+const gp = document.createElement('div');
+gp.className='panel'; gp.dataset.p='6';
+gp.innerHTML = `<div class="card"><h3><span class="ic">🎮</span>闖關遊戲　<span style="font-size:14px;color:var(--soft);font-weight:400;">6 關挑戰 · 每題 20 秒 · 連擊與速度都有加分</span></h3>
+  <div class="gscreen on" id="gStart">
+    <div style="text-align:center;font-size:clamp(15px,2vw,18px);line-height:1.8;">
+      闖過 <b class="hl">7</b> 關，每關 1 題，每題 <b class="hl">20 秒</b>。<br>
+      計分：基礎 <b class="hl">10</b> 分 + 連擊獎勵（最多 <b class="hl">5</b>）+ 速度獎勵（最多 <b class="hl">5</b>）＝ 單題最高 <b class="hl">20</b> 分</div>
+    <div class="lvchips" id="gStartChips"></div>
+    <div style="text-align:center;"><button class="btn" id="gGo" style="background:rgba(242,217,121,.25);border-color:var(--yellow);color:var(--yellow);font-weight:700;font-size:16px;padding:10px 24px;">🚀 開始挑戰</button></div>
+  </div>
+  <div class="gscreen" id="gPlay">
+    <div class="hud">
+      <div class="st">關卡<b id="hLv">1/7</b></div>
+      <div class="st">分數<b id="hSc">0</b></div>
+      <div class="st">連擊<b id="hStk">0</b></div>
+      <div class="st">剩餘<b id="hT">20</b></div>
+    </div>
+    <div class="tbar"><div class="tfill" id="tFill"></div></div>
+    <div class="lvchips" id="gChips"></div>
+    <div class="gq" id="gQ"></div>
+    <div class="gopts" id="gO"></div>
+    <div class="gfb" id="gFb"></div>
+    <div style="text-align:center;margin-top:12px;"><button class="btn" id="gNext" style="display:none;">下一關 ▶</button></div>
+  </div>
+  <div class="gscreen" id="gEnd">
+    <div class="rank" id="gRank">🏆</div>
+    <div style="text-align:center;font-size:clamp(17px,2.6vw,22px);font-family:'Noto Serif TC';" id="gFinal"></div>
+    <div style="text-align:center;color:var(--soft);margin-top:8px;" id="gStats"></div>
+    <div style="text-align:center;margin-top:16px;"><button class="btn" id="gAgain" style="background:rgba(242,217,121,.25);border-color:var(--yellow);color:var(--yellow);font-weight:700;">🔄 再挑戰一次</button></div>
+  </div></div>`;
+wrap.appendChild(gp);
+document.getElementById('gStartChips').innerHTML = GAME.map((g,i)=>`<div class="lvchip">第${i+1}關 ${g.name}</div>`).join('');
+
+const qb = document.getElementById('quizBox');
+QUIZ.forEach((q,i)=>{
+  const d = document.createElement('div'); d.className='q';
+  let body='';
+  if(q.type==='choice') body = `<div class="opts">${q.o.map((o,oi)=>`<button class="opt" data-quiz="${i}" data-oi="${oi}">${o}</button>`).join('')}</div>`;
+  else if(q.type==='tf') body = `<div class="opts" style="flex-direction:row;gap:10px;">
+      <button class="opt" data-quiz="${i}" data-oi="1" style="flex:1;">⭕ 對</button>
+      <button class="opt" data-quiz="${i}" data-oi="0" style="flex:1;">❌ 錯</button></div>`;
+  else body = `<div><input class="fill" data-quiz="${i}" placeholder="?"></div>`;
+  d.innerHTML = `<div class="qt"><span class="qn">${i+1}</span>
+    <span style="font-size:12px;color:var(--soft);border:1px solid rgba(243,239,226,.25);border-radius:6px;padding:1px 6px;margin-right:6px;">
+    ${q.type==='choice'?'單選':q.type==='tf'?'是非':'填充'}</span>${q.q}</div>${body}
+    <div class="fb" id="qfb-${i}"></div>`;
+  qb.appendChild(d);
+});
+
+document.getElementById('tabs').addEventListener('click', e=>{
+  const t = e.target.closest('.tab'); if(!t) return;
+  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on', x===t));
+  document.querySelectorAll('.panel').forEach(x=>x.classList.toggle('on', x.dataset.p===t.dataset.p));
+  document.getElementById('goalCard').style.display = (t.dataset.p==='6')?'none':'';
+  window.scrollTo({top:0,behavior:'smooth'});
+  setTimeout(resizeAll, 60);
+});
+
+const cur = DATA.map(()=>0);
+function showSlide(si, i){
+  const deck = document.querySelector(`[data-deck="${si}"]`);
+  const sl = deck.querySelectorAll('.sl');
+  i = Math.max(0, Math.min(sl.length-1, i));
+  cur[si] = i;
+  sl.forEach((s,k)=>s.classList.toggle('on', k===i));
+  document.getElementById('pg-'+si).textContent = `${i+1} / ${sl.length}`;
+  document.querySelectorAll(`#dots-${si} .dot`).forEach((d,k)=>d.classList.toggle('on', k===i));
+}
+document.addEventListener('click', e=>{
+  const n = e.target.closest('[data-nav]');
+  if(n){ const si=+n.dataset.s; showSlide(si, cur[si] + (n.dataset.nav==='next'?1:-1)); return; }
+  const d = e.target.closest('.dot');
+  if(d){ showSlide(+d.dataset.s, +d.dataset.i); return; }
+});
+document.addEventListener('keydown', e=>{
+  const p = document.querySelector('.panel.on'); if(!p) return;
+  const si = +p.dataset.p; if(si>=DATA.length) return;
+  if(e.key==='ArrowRight') showSlide(si, cur[si]+1);
+  if(e.key==='ArrowLeft') showSlide(si, cur[si]-1);
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.opt[data-si]'); if(!o) return;
+  const si=+o.dataset.si, qi=+o.dataset.qi, oi=+o.dataset.oi;
+  const f = DATA[si].fa[qi];
+  const box = document.querySelector(`[data-fa="${si}-${qi}"]`);
+  box.querySelectorAll('.opt').forEach((b,k)=>{
+    b.disabled = true;
+    if(k===f.a) b.classList.add('right'); else if(k===oi) b.classList.add('wrong');
+  });
+  const fb = document.getElementById(`fb-${si}-${qi}`);
+  const ok = oi===f.a;
+  fb.className = 'fb on ' + (ok?'ok':'no');
+  fb.innerHTML = (ok?'✅ <b>答對了！</b> ':'❌ <b>再想想。</b> ') + f.e;
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.exo');
+  if(o && !o.disabled){
+    const box = o.closest('.exq');
+    const ans = +box.dataset.a, pick = +o.dataset.i;
+    if(pick === ans){
+      box.querySelectorAll('.exo').forEach(b=>{ b.disabled=true; if(+b.dataset.i===ans) b.classList.add('right'); });
+      box.querySelector('.exsol').classList.add('on');
+      box.querySelector('.exlock').classList.add('hide');
+    } else {
+      o.classList.add('wrong','shake');
+      setTimeout(()=>o.classList.remove('shake'), 420);
+      o.disabled = true;
+      const lock = box.querySelector('.exlock');
+      lock.innerHTML = '🔒 再想想 —— 答對才會顯示詳解'; lock.style.color='var(--pink)';
+    }
+  }
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.opt[data-quiz]'); if(!o) return;
+  const i = +o.dataset.quiz;
+  o.parentElement.querySelectorAll('.opt').forEach(b=>b.classList.remove('right','wrong'));
+  o.classList.add('right'); o.dataset.sel='1';
+  o.parentElement.querySelectorAll('.opt').forEach(b=>{ if(b!==o) delete b.dataset.sel; });
+});
+document.getElementById('gradeBtn').addEventListener('click', ()=>{
+  let right=0;
+  QUIZ.forEach((q,i)=>{
+    const fb = document.getElementById('qfb-'+i);
+    let ok=false, picked=null;
+    if(q.type==='fill'){
+      const inp = document.querySelector(`.fill[data-quiz="${i}"]`);
+      const v = (inp.value||'').trim().replace(/−/g,'-').replace(/\s/g,'');
+      ok = q.a.some(a=>a.replace(/−/g,'-').replace(/\s/g,'')===v);
+      inp.style.borderBottomColor = ok?'var(--green)':'var(--pink)';
+    } else {
+      const sel = document.querySelector(`.opt[data-quiz="${i}"][data-sel="1"]`);
+      if(sel){ picked=+sel.dataset.oi; ok = (q.type==='tf') ? (picked===1)===q.a : picked===q.a; }
+      document.querySelectorAll(`.opt[data-quiz="${i}"]`).forEach(b=>{
+        b.classList.remove('right','wrong');
+        const bi=+b.dataset.oi;
+        const isAns = (q.type==='tf') ? ((bi===1)===q.a) : (bi===q.a);
+        if(isAns) b.classList.add('right'); else if(picked===bi) b.classList.add('wrong');
+      });
+    }
+    if(ok) right++;
+    fb.className='fb on '+(ok?'ok':'no');
+    fb.innerHTML = (ok?'✅ <b>正確</b> ':'❌ <b>錯誤</b> ') + q.e;
+  });
+  const s = document.getElementById('score');
+  const pct = Math.round(right/QUIZ.length*100);
+  s.style.display='block';
+  s.innerHTML = `成績：<b>${right} / ${QUIZ.length}</b>　（${pct} 分）　${pct>=80?'🏆 很棒！':pct>=60?'💪 再加油':'📖 建議重看重點'}`;
+});
+document.getElementById('resetQuiz').addEventListener('click', ()=>{
+  document.querySelectorAll('.opt[data-quiz]').forEach(b=>{b.classList.remove('right','wrong'); delete b.dataset.sel;});
+  document.querySelectorAll('.fill').forEach(i=>{i.value=''; i.style.borderBottomColor='var(--yellow)';});
+  document.querySelectorAll('[id^="qfb-"]').forEach(f=>f.className='fb');
+  document.getElementById('score').style.display='none';
+});
+
+/* ===== 闖關遊戲 ===== */
+const G = {lv:0, score:0, streak:0, best:0, t:20, timer:null, cur:null, answered:false};
+function gShow(id){ ['gStart','gPlay','gEnd'].forEach(x=>document.getElementById(x).classList.toggle('on', x===id)); }
+function gChips(){
+  document.getElementById('gChips').innerHTML = GAME.map((g,i)=>
+    `<div class="lvchip ${i<G.lv?'done':i===G.lv?'now':''}">${i+1}. ${g.name}</div>`).join('');
+}
+function gLoad(){
+  if(G.lv>=GAME.length){ gFinish(); return; }
+  G.answered=false; G.t=20;
+  const bank = GAME[G.lv].qs;
+  G.cur = bank[Math.floor(Math.random()*bank.length)];
+  document.getElementById('hLv').textContent = (G.lv+1)+'/'+GAME.length;
+  document.getElementById('hSc').textContent = G.score;
+  document.getElementById('hStk').textContent = G.streak;
+  document.getElementById('gQ').innerHTML = `<span style="color:var(--blue);font-size:15px;">第 ${G.lv+1} 關 · ${GAME[G.lv].name}</span><br>${G.cur.q}`;
+  document.getElementById('gO').innerHTML = G.cur.o.map((o,i)=>
+    `<button class="gopt" data-g="${i}">${'ABCD'[i]}. ${o}</button>`).join('');
+  document.getElementById('gFb').className='gfb';
+  document.getElementById('gNext').style.display='none';
+  gChips();
+  clearInterval(G.timer);
+  G.timer = setInterval(()=>{
+    G.t -= 0.1;
+    document.getElementById('hT').textContent = Math.max(0,G.t).toFixed(0);
+    document.getElementById('tFill').style.width = Math.max(0,G.t/20*100)+'%';
+    if(G.t<=0){ clearInterval(G.timer); gAnswer(-1); }
+  },100);
+}
+function gAnswer(pick){
+  if(G.answered) return;
+  G.answered = true; clearInterval(G.timer);
+  const ans = G.cur.a, ok = pick===ans;
+  document.querySelectorAll('.gopt').forEach((b,i)=>{
+    b.disabled=true;
+    if(i===ans) b.classList.add('right'); else if(i===pick) b.classList.add('wrong');
+  });
+  let gain=0, sb=0, tb=0;
+  if(ok){
+    G.streak++; G.best=Math.max(G.best,G.streak);
+    sb = Math.min(5, G.streak-1); tb = Math.min(5, Math.floor(G.t/4));
+    gain = 10+sb+tb; G.score += gain;
+  } else { G.streak = 0; }
+  document.getElementById('hSc').textContent = G.score;
+  document.getElementById('hStk').textContent = G.streak;
+  const fb = document.getElementById('gFb');
+  fb.className = 'gfb on '+(ok?'ok':'no');
+  fb.innerHTML = (ok? `✅ <b>答對！+${gain} 分</b>（基礎10 + 連擊${sb} + 速度${tb}）<br>`
+                    : (pick===-1?'⏰ <b>時間到！</b><br>':'❌ <b>答錯了</b><br>')) + G.cur.e;
+  document.getElementById('gNext').style.display='inline-block';
+  document.getElementById('gNext').textContent = (G.lv>=GAME.length-1)?'看成績 🏁':'下一關 ▶';
+}
+function gFinish(){
+  clearInterval(G.timer);
+  const max = GAME.length*20, pct = Math.round(G.score/max*100);
+  const rank = pct>=85?['🏆','數論大師']:pct>=70?['🥇','高手']:pct>=50?['🥈','不錯']:['📖','再加油'];
+  document.getElementById('gRank').textContent = rank[0];
+  document.getElementById('gFinal').innerHTML = `<b class="hl">${G.score}</b> / ${max} 分　·　${rank[1]}`;
+  document.getElementById('gStats').innerHTML = `最高連擊 <b class="hl">${G.best}</b>　·　完成 ${GAME.length} 關`;
+  gShow('gEnd');
+}
+document.getElementById('gGo').addEventListener('click', ()=>{ G.lv=0;G.score=0;G.streak=0;G.best=0; gShow('gPlay'); gLoad(); });
+document.getElementById('gAgain').addEventListener('click', ()=>{ G.lv=0;G.score=0;G.streak=0;G.best=0; gShow('gPlay'); gLoad(); });
+document.getElementById('gNext').addEventListener('click', ()=>{ G.lv++; gLoad(); });
+document.addEventListener('click', e=>{ const b=e.target.closest('.gopt'); if(!b||b.disabled) return; gAnswer(+b.dataset.g); });
+
+/* ===== Canvas ===== */
+const VIZ = {}; let DPR=1;
+function gcd(a,b){ a=Math.abs(a); b=Math.abs(b); while(b){ [a,b]=[b,a%b]; } return a||1; }
+function lcm(a,b){ return Math.abs(a*b)/gcd(a,b); }
+function red(n,d){ if(d<0){ n=-n; d=-d; } const g=gcd(n,d)||1; return [n/g, d/g]; }
+function fs(n,d){ const [a,b]=red(n,d); if(b===1) return (a<0?'−':'')+Math.abs(a);
+  return (a<0?'−':'')+Math.abs(a)+'/'+b; }
+function fsH(n,d){ const [a,b]=red(n,d); if(b===1) return (a<0?'−':'')+Math.abs(a);
+  return (a<0?'−':'')+Math.abs(a)+'/'+b; }
+
+const EXPRS = [
+ {name:'先乘除後加減',
+  fr:[
+   {t:['1/2','−','(−2/3)','×','(3/4)','+','(−1/6)'], hi:null, note:'運算順序：括號 → 乘除 → 加減。這裡沒有括號，先找乘除。'},
+   {t:['1/2','−','(−2/3)','×','(3/4)','+','(−1/6)'], hi:[2,4], note:'① 先乘：(−2/3)×(3/4)　異號→負；約分 2與4÷2、3與3÷3 → −1/2'},
+   {t:['1/2','−','(−1/2)','+','(−1/6)'], hi:[1,2], note:'② 剩下只有加減，由左往右。注意 −(−1/2) 要變成 +1/2'},
+   {t:['1/2','+','1/2','−','1/6'], hi:null, note:'③ 通分 6：3/6 + 3/6 − 1/6'},
+   {t:['5/6'], hi:[0,0], note:'✓ 答案：5/6'}
+  ]},
+ {name:'括號優先＋同級由左往右',
+  fr:[
+   {t:['[2/3 + (−1/4)]','÷','(−5/6)','×','(−3/2)'], hi:null, note:'有括號 → 括號最優先。'},
+   {t:['[2/3 + (−1/4)]','÷','(−5/6)','×','(−3/2)'], hi:[0,0], note:'① 括號：2/3 − 1/4 = 8/12 − 3/12 = 5/12'},
+   {t:['5/12','÷','(−5/6)','×','(−3/2)'], hi:[0,2], note:'② ÷ 與 × 同級 → 由左往右，先做除法（不能先算右邊的乘法！）'},
+   {t:['(−1/2)','×','(−3/2)'], hi:[0,2], note:'③ 5/12 × (−6/5) = −1/2；再 (−1/2)×(−3/2) 同號→正'},
+   {t:['3/4'], hi:[0,0], note:'✓ 答案：3/4'}
+  ]},
+ {name:'最經典的陷阱',
+  fr:[
+   {t:['1/2','−','2/3','×','3/4'], hi:null, note:'很多人直接從左往右算 1/2 − 2/3 → 錯！'},
+   {t:['1/2','−','2/3','×','3/4'], hi:[2,4], note:'① 先乘除後加減 → 先算 2/3 × 3/4 = 6/12 = 1/2'},
+   {t:['1/2','−','1/2'], hi:[0,2], note:'② 再做減法'},
+   {t:['0'], hi:[0,0], note:'✓ 答案：0（若由左往右算會得到 −1/8，完全錯）'}
+  ]}
+];
+
+function initViz(cv){
+  const si=+cv.dataset.si, kind=cv.dataset.viz;
+  const ctx=cv.getContext('2d');
+  const st = VIZ[si] = {kind, cv, ctx};
+  const ctrl = document.querySelector(`[data-ctrl="${si}"]`);
+  if(kind==='order'){
+    st.ei=0; st.fi=0;
+    ctrl.innerHTML = `<div class="readout" id="ro-${si}"></div>
+      <button class="btn" data-t="next" data-si="${si}" style="background:rgba(242,217,121,.2);border-color:var(--yellow);color:var(--yellow);font-weight:700;">下一步 ▶</button>
+      <button class="btn" data-t="reset" data-si="${si}">↩ 重設</button>
+      <button class="btn" data-t="swap" data-si="${si}">🔀 換一題</button>`;
+  } else if(kind==='dec'){
+    st.c1=-345; st.c2=-340;   // 預設就是課本那個經典陷阱
+    ctrl.innerHTML = `<div class="readout" id="ro-${si}"></div>
+      <button class="btn" data-t="c1m" data-si="${si}">小數1 −0.05</button>
+      <button class="btn" data-t="c1p" data-si="${si}">小數1 +0.05</button>
+      <button class="btn" data-t="c2m" data-si="${si}">小數2 −0.05</button>
+      <button class="btn" data-t="c2p" data-si="${si}">小數2 +0.05</button>
+      <button class="btn" data-t="trap" data-si="${si}">⚠️ 回到陷阱題</button>`;
+  } else {
+    st.n1=(kind==='equiv')?-3:1; st.d1=4;
+    st.n2=(kind==='equiv')?-2:(kind==='times'?3:-2); st.d2=(kind==='times')?4:3;
+    if(kind==='plus'){ st.n1=1; st.d1=3; st.n2=-2; st.d2=5; }
+    if(kind==='times'){ st.n1=3; st.d1=4; st.n2=2; st.d2=3; }
+    ctrl.innerHTML = `<div class="readout" id="ro-${si}"></div>
+      <button class="btn" data-t="n1" data-si="${si}">分子1 ±</button>
+      <button class="btn" data-t="d1" data-si="${si}">分母1 +</button>
+      <button class="btn" data-t="n2" data-si="${si}">分子2 ±</button>
+      <button class="btn" data-t="d2" data-si="${si}">分母2 +</button>
+      <button class="btn" data-t="rnd" data-si="${si}">🎲 隨機</button>`;
+  }
+  draw(si);
+}
+
+function drawEquiv(st, ctx, w, h, ro){
+  const {n1,d1,n2,d2}=st;
+  const L=lcm(d1,d2), k1=L/d1, k2=L/d2, N1=n1*k1, N2=n2*k2;
+  const v1=n1/d1, v2=n2/d2;
+  ctx.textAlign='center';
+  ctx.fillStyle='#f2d979'; ctx.font='bold 15px "Noto Sans TC"';
+  ctx.fillText(`通分：LCM(${d1}, ${d2}) = ${L}`, w/2, 22);
+  ctx.font='bold 17px "Noto Serif TC"';
+  ctx.fillStyle='#98c9dc';
+  ctx.fillText(`${fsH(n1,d1)}  =  ${fsH(N1,L)}`, w/2-90, 50);
+  ctx.fillStyle='#eda0a8';
+  ctx.fillText(`${fsH(n2,d2)}  =  ${fsH(N2,L)}`, w/2+90, 50);
+  ctx.fillStyle='rgba(243,239,226,.5)'; ctx.font='13px "Noto Sans TC"';
+  ctx.fillText(`（分子分母同乘 ${k1}）`, w/2-90, 68);
+  ctx.fillText(`（分子分母同乘 ${k2}）`, w/2+90, 68);
+  const sign = N1>N2 ? '>' : (N1<N2 ? '<' : '=');
+  ctx.fillStyle='#f2d979'; ctx.font='bold 19px "Noto Serif TC"';
+  ctx.fillText(`比分子：${N1} ${sign} ${N2}　→　${fsH(n1,d1)} ${sign} ${fsH(n2,d2)}`, w/2, 96);
+  // 數線
+  const lo=Math.min(v1,v2,0)-0.35, hi=Math.max(v1,v2,0)+0.35;
+  const X=t=>40+(t-lo)/(hi-lo)*(w-80), Y=150;
+  ctx.strokeStyle='#f3efe2'; ctx.lineWidth=2;
+  ctx.beginPath(); ctx.moveTo(30,Y); ctx.lineTo(w-30,Y); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(w-30,Y); ctx.lineTo(w-41,Y-6); ctx.moveTo(w-30,Y); ctx.lineTo(w-41,Y+6); ctx.stroke();
+  // 0
+  ctx.beginPath(); ctx.moveTo(X(0),Y-7); ctx.lineTo(X(0),Y+7); ctx.stroke();
+  ctx.fillStyle='#f3efe2'; ctx.font='14px "Noto Serif TC"'; ctx.fillText('0', X(0), Y+24);
+  const mk=(v,txt,col,up)=>{
+    ctx.strokeStyle=col; ctx.lineWidth=3;
+    ctx.beginPath(); ctx.moveTo(X(v),Y-8); ctx.lineTo(X(v),Y+8); ctx.stroke();
+    ctx.fillStyle=col; ctx.font='bold 15px "Noto Serif TC"';
+    ctx.fillText(txt, X(v), up?Y-16:Y+28);
+  };
+  mk(v1, fsH(n1,d1), '#98c9dc', true);
+  mk(v2, fsH(n2,d2), '#eda0a8', false);
+  ctx.fillStyle='rgba(242,217,121,.75)'; ctx.font='13px "Caveat"';
+  ctx.fillText('數線上越右邊越大', w/2, 190);
+  const big = N1>N2 ? fsH(n1,d1) : (N1<N2 ? fsH(n2,d2) : '兩者相等');
+  ro.innerHTML = `通分 LCM(${d1},${d2}) = <b>${L}</b>　｜　<b>${fsH(n1,d1)}</b> = ${fsH(N1,L)}、<b>${fsH(n2,d2)}</b> = ${fsH(N2,L)}`
+    + `　｜　${N1===N2?'<b>兩者相等</b>':'較大的是 <b>'+big+'</b>'}`;
+}
+
+function drawPlus(st, ctx, w, h, ro){
+  const {n1,d1,n2,d2}=st;
+  const L=lcm(d1,d2), N1=n1*(L/d1), N2=n2*(L/d2), S=N1+N2;
+  const v1=n1/d1, v2=n2/d2, sum=v1+v2;
+  ctx.textAlign='center';
+  ctx.fillStyle='#f2d979'; ctx.font='bold 16px "Noto Serif TC"';
+  ctx.fillText(`${fsH(n1,d1)} + ${fsH(n2,d2)}　=　${fsH(N1,L)} + ${fsH(N2,L)}　=　${fsH(S,L)}`, w/2, 24);
+  ctx.fillStyle='rgba(243,239,226,.5)'; ctx.font='13px "Noto Sans TC"';
+  ctx.fillText(`通分 LCM(${d1}, ${d2}) = ${L}　→　分子 ${N1} + ${N2} = ${S}`, w/2, 44);
+  const lo=Math.min(0,v1,sum)-0.4, hi=Math.max(0,v1,sum)+0.4;
+  const X=t=>44+(t-lo)/(hi-lo)*(w-88), Y=125;
+  // LCM 刻度
+  ctx.strokeStyle='rgba(243,239,226,.16)'; ctx.lineWidth=1;
+  const t0=Math.ceil(lo*L), t1=Math.floor(hi*L);
+  if(t1-t0<=60){ for(let t=t0;t<=t1;t++){ ctx.beginPath(); ctx.moveTo(X(t/L),Y-4); ctx.lineTo(X(t/L),Y+4); ctx.stroke(); } }
+  ctx.strokeStyle='#f3efe2'; ctx.lineWidth=2;
+  ctx.beginPath(); ctx.moveTo(32,Y); ctx.lineTo(w-32,Y); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(w-32,Y); ctx.lineTo(w-43,Y-6); ctx.moveTo(w-32,Y); ctx.lineTo(w-43,Y+6); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(X(0),Y-8); ctx.lineTo(X(0),Y+8); ctx.stroke();
+  ctx.fillStyle='#f3efe2'; ctx.font='14px "Noto Serif TC"'; ctx.fillText('0', X(0), Y+24);
+  const arrow=(a,b,col,yo,lab)=>{
+    ctx.strokeStyle=col; ctx.lineWidth=2.5;
+    ctx.beginPath(); ctx.moveTo(X(a),Y+yo); ctx.lineTo(X(b),Y+yo); ctx.stroke();
+    const dir=(b>=a)?1:-1;
+    ctx.beginPath(); ctx.moveTo(X(b),Y+yo); ctx.lineTo(X(b)-9*dir,Y+yo-5); ctx.moveTo(X(b),Y+yo); ctx.lineTo(X(b)-9*dir,Y+yo+5); ctx.stroke();
+    ctx.setLineDash([2,4]); ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(X(b),Y+yo); ctx.lineTo(X(b),Y); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle=col; ctx.font='bold 14px "Noto Serif TC"';
+    ctx.fillText(lab, (X(a)+X(b))/2, Y+yo-8);
+  };
+  arrow(0, v1, '#98c9dc', -30, fsH(n1,d1));
+  arrow(v1, sum, '#eda0a8', -58, fsH(n2,d2));
+  ctx.strokeStyle='#a6d6a0'; ctx.lineWidth=3;
+  ctx.beginPath(); ctx.moveTo(X(sum),Y-9); ctx.lineTo(X(sum),Y+9); ctx.stroke();
+  ctx.fillStyle='#a6d6a0'; ctx.font='bold 16px "Noto Serif TC"';
+  ctx.fillText(fsH(S,L), X(sum), Y+42);
+  ctx.fillStyle='rgba(242,217,121,.75)'; ctx.font='13px "Caveat"';
+  ctx.fillText('先走藍色，再從那裡走粉色 → 終點就是和', w/2, Y+66);
+  const same = (N1>=0)===(N2>=0);
+  ro.innerHTML = `<b>${fsH(n1,d1)} + ${fsH(n2,d2)} = ${fsH(S,L)}</b>　｜　通分 ${L}：${N1} + ${N2} = ${S}`
+    + `　｜　${same?'<span style="color:var(--blue)">同號</span> → 絕對值相加':'<span style="color:var(--pink)">異號</span> → 絕對值相減，取大者的符號'}`;
+}
+
+function drawTimes(st, ctx, w, h, ro){
+  const {n1,d1,n2,d2}=st;
+  const a=Math.abs(n1), b=d1, c=Math.abs(n2), d=d2;
+  const neg = (n1<0)!==(n2<0);
+  const S=Math.min(150, h-56), x0=26, y0=34;
+  // 底
+  ctx.fillStyle='rgba(243,239,226,.05)'; ctx.fillRect(x0,y0,S,S);
+  // c/d 直向（粉，切成 d 欄，取 c 欄）
+  ctx.fillStyle='rgba(237,160,168,.30)'; ctx.fillRect(x0, y0, S*c/d, S);
+  // a/b 橫向（藍，切成 b 列，取 a 列）
+  ctx.fillStyle='rgba(152,201,220,.30)'; ctx.fillRect(x0, y0, S, S*a/b);
+  // 重疊（綠）
+  ctx.fillStyle='rgba(166,214,160,.72)'; ctx.fillRect(x0, y0, S*c/d, S*a/b);
+  // 格線
+  ctx.strokeStyle='rgba(243,239,226,.28)'; ctx.lineWidth=1;
+  for(let i=1;i<d;i++){ ctx.beginPath(); ctx.moveTo(x0+S*i/d,y0); ctx.lineTo(x0+S*i/d,y0+S); ctx.stroke(); }
+  for(let i=1;i<b;i++){ ctx.beginPath(); ctx.moveTo(x0,y0+S*i/b); ctx.lineTo(x0+S,y0+S*i/b); ctx.stroke(); }
+  ctx.strokeStyle='#f3efe2'; ctx.lineWidth=2; ctx.strokeRect(x0,y0,S,S);
+  ctx.textAlign='center';
+  ctx.fillStyle='#eda0a8'; ctx.font='bold 14px "Noto Serif TC"';
+  ctx.fillText(fsH(c,d), x0+S*c/d/2, y0-10);
+  ctx.save(); ctx.translate(x0-12, y0+S*a/b/2); ctx.rotate(-Math.PI/2);
+  ctx.fillStyle='#98c9dc'; ctx.fillText(fsH(a,b), 0, 0); ctx.restore();
+  ctx.fillStyle='rgba(243,239,226,.45)'; ctx.font='12px "Caveat"';
+  ctx.fillText('1', x0+S+11, y0+S+15);
+  // 右側說明
+  const tx=x0+S+34; ctx.textAlign='left';
+  ctx.fillStyle='#f2d979'; ctx.font='bold 15px "Noto Sans TC"';
+  ctx.fillText('面積模型', tx, y0+6);
+  ctx.fillStyle='rgba(243,239,226,.72)'; ctx.font='13px "Noto Sans TC"';
+  ctx.fillText(`一個邊長 1 的正方形`, tx, y0+28);
+  ctx.fillStyle='#eda0a8'; ctx.fillText(`直向切 ${d} 欄，取 ${c} 欄`, tx, y0+48);
+  ctx.fillStyle='#98c9dc'; ctx.fillText(`橫向切 ${b} 列，取 ${a} 列`, tx, y0+66);
+  ctx.fillStyle='#a6d6a0'; ctx.font='bold 14px "Noto Sans TC"';
+  ctx.fillText(`綠色重疊 = 乘積`, tx, y0+88);
+  ctx.fillStyle='rgba(243,239,226,.6)'; ctx.font='13px "Noto Serif TC"';
+  ctx.fillText(`${a}×${c} = ${a*c} 格 ／ 全部 ${b}×${d} = ${b*d} 格`, tx, y0+108);
+  ctx.fillStyle= neg?'#eda0a8':'#a6d6a0'; ctx.font='bold 17px "Noto Serif TC"';
+  ctx.fillText(`${fsH(n1,d1)} × ${fsH(n2,d2)} = ${fsH((neg?-1:1)*a*c, b*d)}`, tx, y0+134);
+  ctx.fillStyle='rgba(242,217,121,.8)'; ctx.font='13px "Noto Sans TC"';
+  ctx.fillText(neg?'異號 → 積為負':'同號 → 積為正', tx, y0+154);
+  ro.innerHTML = `<b>${fsH(n1,d1)} × ${fsH(n2,d2)} = ${fsH((neg?-1:1)*a*c, b*d)}</b>`
+    + `　｜　分子×分子 = ${a}×${c} = ${a*c}；分母×分母 = ${b}×${d} = ${b*d}`
+    + `　｜　${neg?'<span style="color:var(--pink)">異號得負</span>':'<span style="color:var(--green)">同號得正</span>'}`;
+}
+
+function drawOrder(st, ctx, w, h, ro){
+  const E=EXPRS[st.ei], F=E.fr[st.fi];
+  ctx.textAlign='center';
+  ctx.fillStyle='rgba(242,217,121,.85)'; ctx.font='bold 14px "Noto Sans TC"';
+  ctx.fillText(`第 ${st.ei+1} 題 · ${E.name}　（步驟 ${st.fi+1} / ${E.fr.length}）`, w/2, 22);
+  // 版面
+  ctx.font='bold 21px "Noto Serif TC"';
+  const gap=11, ws=F.t.map(t=>ctx.measureText(t).width);
+  const total=ws.reduce((a,b)=>a+b,0)+gap*(F.t.length-1);
+  let x=(w-total)/2; const Y=76;
+  if(F.hi){
+    let hx=(w-total)/2, s=0, e=0;
+    for(let i=0;i<F.t.length;i++){ if(i===F.hi[0]) s=hx; hx+=ws[i]+gap; if(i===F.hi[1]) e=hx-gap; }
+    ctx.fillStyle='rgba(242,217,121,.22)';
+    ctx.strokeStyle='rgba(242,217,121,.7)'; ctx.lineWidth=1.5;
+    const rx=s-9, rw=e-s+18;
+    ctx.beginPath(); ctx.roundRect(rx, Y-27, rw, 40, 8); ctx.fill(); ctx.stroke();
+  }
+  F.t.forEach((t,i)=>{
+    const inHi = F.hi && i>=F.hi[0] && i<=F.hi[1];
+    ctx.fillStyle = inHi ? '#f2d979' : 'rgba(243,239,226,.82)';
+    ctx.font = (inHi?'bold ':'')+'21px "Noto Serif TC"';
+    ctx.textAlign='left'; ctx.fillText(t, x, Y);
+    x+=ws[i]+gap;
+  });
+  ctx.textAlign='center';
+  // 說明
+  ctx.fillStyle='rgba(243,239,226,.8)'; ctx.font='14px "Noto Sans TC"';
+  const words=F.note; const maxw=w-56;
+  let line='', ly=118;
+  for(const ch of words){
+    if(ctx.measureText(line+ch).width>maxw){ ctx.fillText(line, w/2, ly); line=ch; ly+=21; }
+    else line+=ch;
+  }
+  ctx.fillText(line, w/2, ly);
+  // 進度點
+  const n=E.fr.length, dx=14, sx=w/2-(n-1)*dx/2;
+  for(let i=0;i<n;i++){
+    ctx.beginPath(); ctx.arc(sx+i*dx, h-16, 4.5, 0, 7);
+    ctx.fillStyle = i<=st.fi ? '#f2d979' : 'rgba(243,239,226,.22)'; ctx.fill();
+  }
+  ro.innerHTML = `<b>${E.name}</b>　｜　步驟 ${st.fi+1}/${E.fr.length}：${F.note}`
+    + (st.fi===E.fr.length-1 ? '　<span style="color:var(--green)">✓ 完成，按「換一題」試下一個</span>' : '');
+}
+
+function decStr(c){
+  let s=(Math.abs(c)/100).toFixed(2).replace(/(\.\d*?)0+$/,'$1').replace(/\.$/,'');
+  return (c<0?'−':'')+s;
+}
+function drawDec(st, ctx, w, h, ro){
+  const {c1,c2}=st;                       // 以「百分之一」為單位的整數，避免浮點誤差
+  const [a1,b1]=red(c1,100), [a2,b2]=red(c2,100);
+  const L=lcm(b1,b2), N1=a1*(L/b1), N2=a2*(L/b2);
+  const v1=c1/100, v2=c2/100;
+  ctx.textAlign='center';
+  ctx.fillStyle='#f2d979'; ctx.font='bold 15px "Noto Sans TC"';
+  ctx.fillText('小數 → 分數 → 通分 → 比大小', w/2, 20);
+  ctx.font='bold 16px "Noto Serif TC"';
+  ctx.fillStyle='#98c9dc';
+  ctx.fillText(`${decStr(c1)} = ${c1<0?'−':''}${Math.abs(c1)}/100 = ${fsH(a1,b1)} = ${fsH(N1,L)}`, w/2, 46);
+  ctx.fillStyle='#eda0a8';
+  ctx.fillText(`${decStr(c2)} = ${c2<0?'−':''}${Math.abs(c2)}/100 = ${fsH(a2,b2)} = ${fsH(N2,L)}`, w/2, 70);
+  const sign = N1>N2 ? '>' : (N1<N2 ? '<' : '=');
+  ctx.fillStyle='#f2d979'; ctx.font='bold 18px "Noto Serif TC"';
+  ctx.fillText(`比分子：${N1} ${sign} ${N2}　→　${decStr(c1)} ${sign} ${decStr(c2)}`, w/2, 98);
+  // 數線（放大到小數點後兩位看得見的尺度）
+  const lo=Math.min(v1,v2)-0.12, hi=Math.max(v1,v2)+0.12;
+  const X=t=>44+(t-lo)/(hi-lo)*(w-88), Y=150;
+  ctx.strokeStyle='rgba(243,239,226,.16)'; ctx.lineWidth=1;
+  const t0=Math.ceil(lo*20), t1=Math.floor(hi*20);
+  if(t1-t0<=60){ for(let t=t0;t<=t1;t++){ ctx.beginPath(); ctx.moveTo(X(t/20),Y-4); ctx.lineTo(X(t/20),Y+4); ctx.stroke(); } }
+  ctx.strokeStyle='#f3efe2'; ctx.lineWidth=2;
+  ctx.beginPath(); ctx.moveTo(30,Y); ctx.lineTo(w-30,Y); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(w-30,Y); ctx.lineTo(w-41,Y-6); ctx.moveTo(w-30,Y); ctx.lineTo(w-41,Y+6); ctx.stroke();
+  const mk=(v,txt,col,up)=>{
+    ctx.strokeStyle=col; ctx.lineWidth=3;
+    ctx.beginPath(); ctx.moveTo(X(v),Y-8); ctx.lineTo(X(v),Y+8); ctx.stroke();
+    ctx.fillStyle=col; ctx.font='bold 15px "Noto Serif TC"';
+    ctx.fillText(txt, X(v), up?Y-16:Y+28);
+  };
+  mk(v1, decStr(c1), '#98c9dc', true);
+  mk(v2, decStr(c2), '#eda0a8', false);
+  ctx.fillStyle='rgba(242,217,121,.75)'; ctx.font='13px "Caveat"';
+  ctx.fillText('數線上越右邊越大 —— 和分數、整數完全一樣', w/2, 190);
+  const big = N1>N2 ? decStr(c1) : (N1<N2 ? decStr(c2) : '兩者相等');
+  const trap = (c1<0 && c2<0 && Math.abs(c1)!==Math.abs(c2));
+  ro.innerHTML = `<b>${decStr(c1)}</b> = ${fsH(a1,b1)}　·　<b>${decStr(c2)}</b> = ${fsH(a2,b2)}`
+    + `　｜　通分 ${L}：${N1} ${sign} ${N2}　｜　${N1===N2?'<b>兩者相等</b>':'較大的是 <b>'+big+'</b>'}`
+    + (trap ? '　<span style="color:var(--pink)">兩個都是負數 → 絕對值大的反而小！</span>' : '');
+}
+
+function draw(si){
+  const st=VIZ[si]; if(!st) return;
+  const {cv,ctx,kind}=st, w=cv.width/DPR, h=cv.height/DPR;
+  ctx.clearRect(0,0,w,h);
+  const ro=document.getElementById('ro-'+si);
+  if(kind==='equiv') drawEquiv(st,ctx,w,h,ro);
+  else if(kind==='plus') drawPlus(st,ctx,w,h,ro);
+  else if(kind==='times') drawTimes(st,ctx,w,h,ro);
+  else if(kind==='order') drawOrder(st,ctx,w,h,ro);
+  else if(kind==='dec') drawDec(st,ctx,w,h,ro);
+}
+
+document.addEventListener('click', e=>{
+  const btn=e.target.closest('[data-t]'); if(!btn) return;
+  const si=+btn.dataset.si, st=VIZ[si]; if(!st) return;
+  const t=btn.dataset.t, k=st.kind;
+  const allowNeg = (k!=='times');
+  const bump=(v)=>{ v++; if(v===0&&!allowNeg) v=1; if(v>5) v=allowNeg?-5:1; if(v===0&&!allowNeg) v=1; return v; };
+  if(t==='next'){ st.fi=Math.min(EXPRS[st.ei].fr.length-1, st.fi+1); }
+  if(t==='reset'){ st.fi=0; }
+  if(t==='swap'){ st.ei=(st.ei+1)%EXPRS.length; st.fi=0; }
+  const cl=v=>Math.max(-800, Math.min(800, v));
+  if(t==='c1m') st.c1=cl(st.c1-5);
+  if(t==='c1p') st.c1=cl(st.c1+5);
+  if(t==='c2m') st.c2=cl(st.c2-5);
+  if(t==='c2p') st.c2=cl(st.c2+5);
+  if(t==='trap'){ st.c1=-345; st.c2=-340; }
+  if(t==='n1') st.n1=bump(st.n1);
+  if(t==='n2') st.n2=bump(st.n2);
+  if(t==='d1') st.d1 = st.d1>=9 ? 2 : st.d1+1;
+  if(t==='d2') st.d2 = st.d2>=9 ? 2 : st.d2+1;
+  if(t==='rnd'){
+    const r=(lo,hi)=>Math.floor(Math.random()*(hi-lo+1))+lo;
+    st.d1=r(2,8); st.d2=r(2,8);
+    st.n1=r(1,st.d1*2-1)*(allowNeg&&Math.random()<0.5?-1:1);
+    st.n2=r(1,st.d2*2-1)*(allowNeg&&Math.random()<0.5?-1:1);
+  }
+  draw(si);
+});
+
+function resizeAll(){
+  DPR = Math.min(2, window.devicePixelRatio||1);
+  document.querySelectorAll('canvas.viz').forEach(cv=>{
+    const w = cv.clientWidth || cv.parentElement.clientWidth;
+    const h = (cv.dataset.viz==='times') ? 232 : 205;
+    cv.width=w*DPR; cv.height=h*DPR; cv.style.height=h+'px';
+    cv.getContext('2d').setTransform(DPR,0,0,DPR,0,0);
+  });
+  Object.keys(VIZ).forEach(k=>draw(+k));
+}
+document.querySelectorAll('canvas.viz').forEach(initViz);
+window.addEventListener('resize', resizeAll);
+resizeAll();
+</script>
+<div class="hint">← → 鍵可翻頁　·　Canvas 用按鈕互動　·　支援平板觸控</div>
+</body></html>
