@@ -1,0 +1,258 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>八下 4-1 平行｜授課簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--chalk-soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);padding:24px 14px;}
+.deck{max-width:1060px;margin:0 auto;}
+.print-hint{text-align:center;color:rgba(243,239,226,0.4);font-size:13px;padding:6px 0 22px;}
+.print-hint b{color:var(--yellow);}
+.slide{position:relative;min-height:576px;margin:0 auto 26px;padding:44px 52px;
+ background:radial-gradient(ellipse at 18% 12%,rgba(255,255,255,0.05),transparent 45%),
+  radial-gradient(ellipse at 82% 88%,rgba(255,255,255,0.035),transparent 45%),
+  radial-gradient(ellipse at 60% 40%,rgba(120,160,130,0.10),transparent 60%),
+  linear-gradient(160deg,var(--board) 0%,var(--board2) 100%);
+ border-radius:14px;box-shadow:0 10px 34px rgba(0,0,0,0.55);
+ border:1px solid rgba(242,217,121,0.14);overflow:hidden;display:flex;flex-direction:column;}
+.slide::before{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;
+ background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.014) 40px,rgba(255,255,255,0.014) 41px),
+  radial-gradient(circle at 30% 72%,rgba(255,255,255,0.03),transparent 8%),
+  radial-gradient(circle at 76% 24%,rgba(255,255,255,0.025),transparent 7%);}
+.slide::after{content:attr(data-pg);position:absolute;bottom:15px;right:26px;font-family:'Caveat',cursive;font-size:20px;color:rgba(243,239,226,0.4);}
+.tag{position:absolute;top:20px;right:26px;font-family:'Caveat',cursive;font-size:22px;color:var(--pink);transform:rotate(4deg);}
+.eyebrow{font-family:'Caveat',cursive;font-size:25px;color:var(--yellow);letter-spacing:1px;margin-bottom:8px;opacity:0.92;}
+.slide h1{font-family:'Noto Serif TC',serif;font-size:46px;font-weight:900;line-height:1.28;letter-spacing:1px;
+ text-shadow:0 0 1px rgba(243,239,226,0.5),1px 1px 0 rgba(0,0,0,0.2);}
+.slide h2{font-family:'Noto Serif TC',serif;font-size:33px;font-weight:900;color:var(--yellow);
+ margin-bottom:20px;padding-bottom:11px;border-bottom:2px dashed rgba(242,217,121,0.4);
+ text-shadow:0 0 1px rgba(242,217,121,0.4);}
+.slide p{font-size:20px;line-height:1.85;margin-bottom:12px;}
+.big-center{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;}
+.big-center .lead,.lead{font-family:'Caveat',cursive;font-size:30px;color:var(--blue);letter-spacing:1px;margin-top:12px;}
+ul{list-style:none;margin:8px 0;}
+li{font-size:21px;line-height:1.95;padding-left:32px;position:relative;margin-bottom:4px;}
+li::before{content:'\2726';position:absolute;left:4px;color:var(--yellow);font-size:17px;top:3px;}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.34);border-radius:12px;padding:15px 21px;margin:12px 0;font-size:19px;line-height:1.8;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.38);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.38);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.34);}
+.eg{position:relative;background:rgba(0,0,0,0.24);border:1px solid rgba(242,217,121,0.2);border-radius:10px;padding:17px 22px;margin:12px 0;font-size:19px;}
+.eg::before{content:'';position:absolute;top:-8px;left:38px;width:58px;height:15px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.eg .q{color:var(--blue);font-weight:700;margin-bottom:8px;font-size:19px;}
+.eg .a{color:var(--green);font-weight:700;margin-top:6px;}
+.eg .stp{color:var(--chalk-soft);font-size:18px;margin:3px 0;}
+.tip{display:flex;gap:12px;align-items:flex-start;background:rgba(242,217,121,0.09);border:1.5px dashed rgba(242,217,121,0.45);border-radius:12px;padding:13px 18px;margin:10px 0;}
+.tip .ic{font-size:24px;line-height:1;}.tip .tx{font-size:18px;line-height:1.7;}
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:18px;}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.26);padding:10px 14px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.two{display:flex;gap:20px;}.two>div{flex:1;}
+svg{display:block;margin:6px auto;max-width:100%;}
+@media print{
+ body{background:#0a130d;padding:0;}
+ .deck{max-width:none;}
+ .print-hint{display:none;}
+ .slide{margin:0;border-radius:0;box-shadow:none;min-height:100vh;
+  page-break-after:always;break-after:page;padding:32px 44px;justify-content:center;}
+ .slide:last-child{page-break-after:auto;break-after:auto;}
+ .slide h1{font-size:40px;}
+ .slide h2{font-size:27px;margin-bottom:13px;padding-bottom:8px;}
+ .slide p{font-size:17px;line-height:1.55;margin-bottom:6px;}
+ li{font-size:17px;line-height:1.55;margin-bottom:1px;padding-left:26px;}
+ .eyebrow{font-size:21px;margin-bottom:5px;}
+ .big-center .lead,.lead{font-size:26px;}
+ .box{font-size:16px;padding:10px 16px;margin:6px 0;line-height:1.5;}
+ .eg{font-size:16px;padding:11px 16px;margin:6px 0;}
+ .tip{font-size:16px;padding:10px 14px;margin:6px 0;}
+ .tbl{font-size:15px;margin:6px 0;}
+ .tbl th,.tbl td{padding:6px 10px;}
+ svg{max-height:210px;}
+}
+</style></head><body><div class="deck">
+<div class="print-hint">共 <b>14</b> 張・列印時每張一頁（Ctrl+P → 橫向 → 背景圖形）</div>
+
+
+<!-- 1 -->
+<div class="slide" data-pg="1 / 14"><div class="tag">Start!</div><div class="big-center">
+<div class="eyebrow">國二下學期・第四章 平行與四邊形</div>
+<h1>4-1　平行</h1>
+<div class="lead">平行線的角度性質七年級學過<br>
+這節用<span style="color:#f2d979;">全等三角形</span>「證明」為什麼成立</div>
+<div class="box y" style="max-width:660px;margin:16px auto 0;text-align:center;font-size:18px;">
+同位角 F 形・內錯角 Z 形・同側內角 U 形</div>
+</div></div>
+
+<!-- 2 -->
+<div class="slide" data-pg="2 / 14"><div class="tag">目標</div><div class="body">
+<h2>本節學習目標</h2>
+<ul>
+<li>從全等三角形「證明」<span class="hl">平行線角度性質</span></li>
+<li>理解<span class="hl-b">平行判定</span>:同位角相等、內錯角相等、同側內角互補</li>
+<li>用平行性質結合<span class="hl">全等</span>解題</li>
+<li>理解平行的<span class="hl">傳遞性</span></li>
+</ul>
+<div class="box y">一句話:<span class="hl">同位角、內錯角相等 → 平行;同側內角互補 → 平行。遇折線角就作平行輔助線。</span></div>
+</div></div>
+
+<!-- 3 -->
+<div class="slide" data-pg="3 / 14"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心　三種角</div>
+<h2>F 形、Z 形、U 形</h2><svg viewBox="0 0 300 160" width="300" height="160" style="display:block;margin:0 auto;"><line x1="20" y1="45" x2="280" y2="45" stroke="#98c9dc" stroke-width="2"/><line x1="20" y1="115" x2="280" y2="115" stroke="#98c9dc" stroke-width="2"/><text x="286" y="49" font-size="12" fill="#98c9dc">AB</text><text x="286" y="119" font-size="12" fill="#98c9dc">CD</text><line x1="105.0" y1="20" x2="195.0" y2="140" stroke="#f2d979" stroke-width="2"/><circle cx="124" cy="45" r="3" fill="#eda0a8"/><circle cx="176" cy="115" r="3" fill="#eda0a8"/><text x="102" y="39" font-size="11" fill="#a6d6a0">同位</text><text x="132" y="109" font-size="11" fill="#a6d6a0">內錯</text></svg><table class="tbl" style="margin-top:2px;">
+<tr><td class="hl-b">同位角 F 形</td><td>平行時<b>相等</b></td></tr>
+<tr><td class="hl-b">內錯角 Z 形</td><td>平行時<b>相等</b></td></tr>
+<tr><td class="hl-b">同側內角 U 形</td><td>平行時<b>互補</b>（和 180°）</td></tr>
+</table>
+</div></div>
+
+<!-- 4 -->
+<div class="slide" data-pg="4 / 14"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心　判定與傳遞性</div>
+<h2>逆過來也成立</h2>
+<div class="box"><b>判定（逆定理）:</b><br>
+同位角相等 → 平行;內錯角相等 → 平行;同側內角<b>互補</b> → 平行。</div>
+<div class="box g" style="text-align:center;">
+<b>傳遞性:</b>l₁∥l₂ 且 l₂∥l₃ → l₁∥l₃</div>
+<div class="box r" style="text-align:center;">
+⚠️ 內錯角<b>互補</b>不能判平行!內錯角<b>相等</b>才平行（互補是同側內角的條件）。</div>
+</div></div>
+
+<!-- 5 -->
+<div class="slide" data-pg="5 / 14"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 1、2　難度 ★☆☆~★★☆</div>
+<h2>求角與判定</h2>
+<div class="eg">
+<div class="q">AB∥CD，∠APE=65°</div>
+<div class="stp">同位角 ∠PQD=65°;內錯角 ∠PQC=65°</div>
+</div>
+<div class="eg">
+<div class="q">∠1=∠2（同位）? ∠3+∠4=180°（同側內角）?</div>
+<div class="stp">兩種都能判斷兩線平行</div>
+</div>
+<div class="box y" style="text-align:center;">F 形看同位、Z 形看內錯、U 形看同側。</div>
+</div></div>
+
+<!-- 6 -->
+<div class="slide" data-pg="6 / 14"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 3　難度 ★★☆　🔑 輔助線</div>
+<h2>折線角的解法</h2>
+<div class="eg">
+<div class="q">AB∥CD，P 在兩線間，∠PAB=40°、∠PCD=65°，求 ∠APC</div>
+<div class="stp"><b>過 P 作 PE∥AB</b>（也∥CD）</div>
+<div class="stp"><b>∠APE</b>　內錯角 = ∠PAB = 40°</div>
+<div class="stp"><b>∠CPE</b>　內錯角 = ∠PCD = 65°</div>
+<div class="a">∠APC = 40°+65° = 105°</div>
+</div>
+<div class="box r" style="text-align:center;">
+⚠️ <span class="hl">遇折線角，過折點作平行輔助線</span> —— 本節最重要的策略!</div>
+</div></div>
+
+<!-- 7 -->
+<div class="slide" data-pg="7 / 14"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 4　難度 ★★★　平行截比例</div>
+<h2>DE∥BC 分割比例</h2>
+<div class="eg">
+<div class="q">DE∥BC，AD=3、DB=6、AE=4，求 EC</div>
+<div class="stp"><b>比例分割</b>　AD/DB = AE/EC</div>
+<div class="stp"><b>代入</b>　3/6 = 4/EC → EC=8</div>
+</div>
+<div class="box g" style="text-align:center;">
+💡 平行線截三角形兩邊 → <span class="hl">對應線段成比例</span>（相似形的預備）。</div>
+</div></div>
+
+<!-- 8 -->
+<div class="slide" data-pg="8 / 14"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 5　難度 ★★★　輔助線＋內錯角</div>
+<h2>綜合應用</h2>
+<div class="eg">
+<div class="q">AB∥EF，∠ABC=115°、∠CEF=30°，求 ∠BCE</div>
+<div class="stp"><b>過 C 作 CG∥AB</b>　同側內角 → ∠BCG=180−115=65°</div>
+<div class="stp"><b>EF∥CG</b>　內錯角 → ∠ECG=30°</div>
+<div class="a">∠BCE = 65°−30° = 35°</div>
+</div>
+</div></div>
+
+<!-- 9 -->
+<div class="slide" data-pg="9 / 14"><div class="tag">精選</div><div class="body">
+<div class="eyebrow">隨堂精選</div>
+<h2>快速檢查</h2>
+<table class="tbl">
+<tr><th style="width:56%;">題目</th><th>答案</th></tr>
+<tr><td>同側內角 70°，另一角?</td><td class="fm hl">110°</td></tr>
+<tr><td>P 在兩線間 50°、70°，∠APC?</td><td class="fm hl">120°</td></tr>
+<tr><td>DE∥BC，AD=4,AB=12,DE=3，BC?</td><td class="fm hl">9</td></tr>
+<tr><td>內錯角互補能判平行?</td><td class="hl-r">不能</td></tr>
+<tr><td>同側內角 92°、91°，平行?</td><td class="hl-r">不（183°）</td></tr>
+</table>
+<div class="box y" style="text-align:center;">內錯角互補≠平行;要「相等」才平行。</div>
+</div></div>
+
+<!-- 10 -->
+<div class="slide" data-pg="10 / 14"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 1　【鐵軌驗測】</div>
+<h2>誤差範圍內視為平行</h2>
+<div class="box">同位角 89.5° 與 89.8°</div>
+<div class="eg">
+<div class="stp"><b>(1) 平行?</b>　89.5≠89.8 → 嚴格不平行</div>
+<div class="stp"><b>(2) 偏差</b>　0.3°</div>
+<div class="stp"><b>(3) 誤差 ±0.5°</b>　0.3&lt;0.5 → 工程上視為平行</div>
+</div>
+</div></div>
+
+<!-- 11 -->
+<div class="slide" data-pg="11 / 14"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 2　【中位線定理】</div>
+<h2>中點連線 ∥ 第三邊且一半</h2>
+<div class="box">D、E 是 AB、AC 中點</div>
+<div class="eg">
+<div class="stp"><b>(1) 定理</b>　中位線定理:DE∥BC 且 DE=BC/2</div>
+<div class="stp"><b>(2) BC=40</b>　DE=20 公尺</div>
+<div class="stp"><b>(3) 比值</b>　AD/AB=AE/AC=DE/BC=1/2</div>
+</div>
+</div></div>
+
+<!-- 12 -->
+<div class="slide" data-pg="12 / 14"><div class="tag">避雷</div><div class="body">
+<h2>避雷指南</h2>
+<table class="tbl">
+<tr><th style="width:46%;">❌ 錯誤</th><th>✓ 正確</th></tr>
+<tr><td>F/Z/U 形認錯</td><td>看角在截線同側/兩側</td></tr>
+<tr><td>內錯角互補判平行</td><td>內錯角<b class="hl-g">相等</b>才平行</td></tr>
+<tr><td>折線角不作輔助線</td><td>過折點<b class="hl-g">作平行輔助線</b></td></tr>
+<tr><td class="fm">平行截比例寫反</td><td class="fm hl-g">AD/DB = AE/EC</td></tr>
+</table>
+<div class="box y" style="text-align:center;">追問:同側還兩側?被截線之間還外側?F、Z 還是 U?</div>
+</div></div>
+
+<!-- 13 -->
+<div class="slide" data-pg="13 / 14"><div class="tag">總結</div><div class="body">
+<h2>本節總結</h2>
+<ul>
+<li><span class="hl">性質</span>:同位角相等、內錯角相等、同側內角互補</li>
+<li><span class="hl">判定</span>:上述逆定理都能推出平行;平行有<span class="hl">傳遞性</span></li>
+<li><span class="hl-r">折線角</span>:過折點作平行輔助線，拆成兩內錯角</li>
+<li><span class="hl">平行截比例</span>:AD/DB=AE/EC;<span class="hl">中位線</span>:中點連線 ∥ 第三邊且一半</li>
+</ul>
+<div class="box g" style="text-align:center;font-size:20px;">
+🔗 <b>承先</b>:七下角度、3-3 全等<br>
+🔗 <b>啟後</b>:<span class="hl">4-2 平行四邊形 —— 兩組對邊平行的四邊形。</span></div>
+</div></div>
+
+<!-- 14 -->
+<div class="slide" data-pg="14 / 14"><div class="tag">Next</div><div class="big-center">
+<div class="eyebrow">下節預告</div>
+<h1 style="font-size:40px;">4-2　平行四邊形</h1>
+<div class="lead">兩組對邊平行的四邊形<br>
+<span style="color:#eda0a8;">對邊相等、對角相等、對角線互相平分</span></div>
+<div class="box y" style="max-width:800px;margin:20px auto 0;font-size:20px;text-align:center;">
+平行四邊形的性質與判定，全靠全等三角形證明。<span class="hl">幾何的實戰應用。</span></div>
+</div></div>
+
+</div></body></html>

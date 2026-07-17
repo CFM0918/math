@@ -1,0 +1,262 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>八下 1-3 等比數列｜授課簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--chalk-soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);padding:24px 14px;}
+.deck{max-width:1060px;margin:0 auto;}
+.print-hint{text-align:center;color:rgba(243,239,226,0.4);font-size:13px;padding:6px 0 22px;}
+.print-hint b{color:var(--yellow);}
+.slide{position:relative;min-height:576px;margin:0 auto 26px;padding:44px 52px;
+ background:radial-gradient(ellipse at 18% 12%,rgba(255,255,255,0.05),transparent 45%),
+  radial-gradient(ellipse at 82% 88%,rgba(255,255,255,0.035),transparent 45%),
+  radial-gradient(ellipse at 60% 40%,rgba(120,160,130,0.10),transparent 60%),
+  linear-gradient(160deg,var(--board) 0%,var(--board2) 100%);
+ border-radius:14px;box-shadow:0 10px 34px rgba(0,0,0,0.55);
+ border:1px solid rgba(242,217,121,0.14);overflow:hidden;display:flex;flex-direction:column;}
+.slide::before{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;
+ background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.014) 40px,rgba(255,255,255,0.014) 41px),
+  radial-gradient(circle at 30% 72%,rgba(255,255,255,0.03),transparent 8%),
+  radial-gradient(circle at 76% 24%,rgba(255,255,255,0.025),transparent 7%);}
+.slide::after{content:attr(data-pg);position:absolute;bottom:15px;right:26px;font-family:'Caveat',cursive;font-size:20px;color:rgba(243,239,226,0.4);}
+.tag{position:absolute;top:20px;right:26px;font-family:'Caveat',cursive;font-size:22px;color:var(--pink);transform:rotate(4deg);}
+.eyebrow{font-family:'Caveat',cursive;font-size:25px;color:var(--yellow);letter-spacing:1px;margin-bottom:8px;opacity:0.92;}
+.slide h1{font-family:'Noto Serif TC',serif;font-size:46px;font-weight:900;line-height:1.28;letter-spacing:1px;
+ text-shadow:0 0 1px rgba(243,239,226,0.5),1px 1px 0 rgba(0,0,0,0.2);}
+.slide h2{font-family:'Noto Serif TC',serif;font-size:33px;font-weight:900;color:var(--yellow);
+ margin-bottom:20px;padding-bottom:11px;border-bottom:2px dashed rgba(242,217,121,0.4);
+ text-shadow:0 0 1px rgba(242,217,121,0.4);}
+.slide p{font-size:20px;line-height:1.85;margin-bottom:12px;}
+.big-center{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;}
+.big-center .lead,.lead{font-family:'Caveat',cursive;font-size:30px;color:var(--blue);letter-spacing:1px;margin-top:12px;}
+ul{list-style:none;margin:8px 0;}
+li{font-size:21px;line-height:1.95;padding-left:32px;position:relative;margin-bottom:4px;}
+li::before{content:'\2726';position:absolute;left:4px;color:var(--yellow);font-size:17px;top:3px;}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.34);border-radius:12px;padding:15px 21px;margin:12px 0;font-size:19px;line-height:1.8;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.38);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.38);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.34);}
+.eg{position:relative;background:rgba(0,0,0,0.24);border:1px solid rgba(242,217,121,0.2);border-radius:10px;padding:17px 22px;margin:12px 0;font-size:19px;}
+.eg::before{content:'';position:absolute;top:-8px;left:38px;width:58px;height:15px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.eg .q{color:var(--blue);font-weight:700;margin-bottom:8px;font-size:19px;}
+.eg .a{color:var(--green);font-weight:700;margin-top:6px;}
+.eg .stp{color:var(--chalk-soft);font-size:18px;margin:3px 0;}
+.tip{display:flex;gap:12px;align-items:flex-start;background:rgba(242,217,121,0.09);border:1.5px dashed rgba(242,217,121,0.45);border-radius:12px;padding:13px 18px;margin:10px 0;}
+.tip .ic{font-size:24px;line-height:1;}.tip .tx{font-size:18px;line-height:1.7;}
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:18px;}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.26);padding:10px 14px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.two{display:flex;gap:20px;}.two>div{flex:1;}
+svg{display:block;margin:6px auto;max-width:100%;}
+@media print{
+ body{background:#0a130d;padding:0;}
+ .deck{max-width:none;}
+ .print-hint{display:none;}
+ .slide{margin:0;border-radius:0;box-shadow:none;min-height:100vh;
+  page-break-after:always;break-after:page;padding:32px 44px;justify-content:center;}
+ .slide:last-child{page-break-after:auto;break-after:auto;}
+ .slide h1{font-size:40px;}
+ .slide h2{font-size:27px;margin-bottom:13px;padding-bottom:8px;}
+ .slide p{font-size:17px;line-height:1.55;margin-bottom:6px;}
+ li{font-size:17px;line-height:1.55;margin-bottom:1px;padding-left:26px;}
+ .eyebrow{font-size:21px;margin-bottom:5px;}
+ .big-center .lead,.lead{font-size:26px;}
+ .box{font-size:16px;padding:10px 16px;margin:6px 0;line-height:1.5;}
+ .eg{font-size:16px;padding:11px 16px;margin:6px 0;}
+ .tip{font-size:16px;padding:10px 14px;margin:6px 0;}
+ .tbl{font-size:15px;margin:6px 0;}
+ .tbl th,.tbl td{padding:6px 10px;}
+ svg{max-height:210px;}
+}
+</style></head><body><div class="deck">
+<div class="print-hint">共 <b>14</b> 張・列印時每張一頁（Ctrl+P → 橫向 → 背景圖形）</div>
+
+
+<!-- 1 -->
+<div class="slide" data-pg="1 / 14"><div class="tag">Start!</div><div class="big-center">
+<div class="eyebrow">國二下學期・第一章 數列與級數</div>
+<h1>1-3　等比數列</h1>
+<div class="lead">每次乘一個固定的數 ——<br>
+等比的威力是<span style="color:#f2d979;">指數級增長</span></div>
+<div class="box y" style="max-width:640px;margin:16px auto 0;text-align:center;font-size:20px;">
+<span class="fm">aₙ = a₁ · rⁿ⁻¹</span></div>
+</div></div>
+
+<!-- 2 -->
+<div class="slide" data-pg="2 / 14"><div class="tag">目標</div><div class="body">
+<h2>本節學習目標</h2>
+<ul>
+<li>理解<span class="hl">等比數列</span>，求公比 r</li>
+<li>應用通項公式 <span class="fm hl">aₙ = a₁·rⁿ⁻¹</span></li>
+<li>應用等比級數 <span class="fm hl">Sₙ = a₁(1−rⁿ)/(1−r)</span></li>
+<li>解<span class="hl">複利、倍增、折舊</span>等問題</li>
+</ul>
+<div class="box y">一句話:<span class="hl">等差是「加」，等比是「乘」。乘出來的是指數增長，快得驚人。</span></div>
+</div></div>
+
+<!-- 3 -->
+<div class="slide" data-pg="3 / 14"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心　等比數列</div>
+<h2>相鄰兩項比固定</h2>
+<div class="box y" style="text-align:center;font-size:19px;">
+公比 r = 後項 ÷ 前項;通項 aₙ = a₁·rⁿ⁻¹</div>
+<div class="box"><b>判斷等比:</b>a₂/a₁ = a₃/a₂ = … = r;或 aₙ² = aₙ₋₁·aₙ₊₁（等比中項）</div>
+<div class="box r" style="text-align:center;">
+⚠️ 指數是 (n−1) 不是 n!⚠️ 公比 r <b>可以是負數</b>（如 1,−2,4,−8），但 r≠0。</div>
+</div></div>
+
+<!-- 4 -->
+<div class="slide" data-pg="4 / 14"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心　等差 vs 等比</div>
+<h2>加 vs 乘</h2>
+<table class="tbl">
+<tr><th style="width:26%;">　</th><th>等差</th><th>等比</th></tr>
+<tr><td>每次</td><td class="hl-b">加 d</td><td class="hl-g">乘 r</td></tr>
+<tr><td>通項</td><td class="fm">a₁+(n−1)d</td><td class="fm">a₁·rⁿ⁻¹</td></tr>
+<tr><td>增長</td><td>線性</td><td class="hl">指數（超快）</td></tr>
+</table>
+<div class="box y" style="text-align:center;">
+1,2,4,8,16… 每次乘 2 → 指數增長;紙折 42 次可達月球!</div>
+</div></div>
+
+<!-- 5 -->
+<div class="slide" data-pg="5 / 14"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 1、3　難度 ★☆☆~★★☆</div>
+<h2>求公比與指定項</h2>
+<div class="eg">
+<div class="q">2, 6, 18, 54, …</div>
+<div class="stp">r=3 → aₙ=2·3ⁿ⁻¹ → a₇=2·3⁶=1458</div>
+</div>
+<div class="eg">
+<div class="q">a₂=6、a₅=162，求 r、a₁</div>
+<div class="stp">a₅/a₂ = r³ = 27 → r=3;a₁=6/3=2</div>
+</div>
+<div class="box g" style="text-align:center;">已知兩項 → 相除得 rⁿ，開方求 r。</div>
+</div></div>
+
+<!-- 6 -->
+<div class="slide" data-pg="6 / 14"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 2　難度 ★★☆　等比級數</div>
+<h2>前 n 項和公式</h2>
+<div class="box y" style="text-align:center;font-size:20px;">
+Sₙ = a₁(1−rⁿ)/(1−r)（r≠1）</div>
+<div class="eg">
+<div class="q">a₁=4、r=1/2，求 S₅</div>
+<div class="stp">S₅ = 4(1−1/32)/(1−1/2) = 8×31/32 = 31/4 = 7.75</div>
+<div class="stp">驗算:4+2+1+1/2+1/4 = 7.75 ✓</div>
+</div>
+<div class="box r" style="text-align:center;">⚠️ 分母 (1−r)、分子 (1−rⁿ)，別寫反!</div>
+</div></div>
+
+<!-- 7 -->
+<div class="slide" data-pg="7 / 14"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 4　難度 ★★★　倍增</div>
+<h2>細菌翻倍</h2>
+<div class="eg">
+<div class="q">每小時翻倍、初始 100 個</div>
+<div class="stp"><b>通項</b>　aₙ=100·2ⁿ⁻¹</div>
+<div class="stp"><b>8 小時後</b>　a₈=100·2⁷=12800 個</div>
+<div class="stp"><b>超過 10 萬</b>　2ⁿ⁻¹>1000 → 2¹⁰=1024 → 第 11 小時後</div>
+</div>
+<div class="box y" style="text-align:center;">指數增長:8 小時就破萬，11 小時破十萬。</div>
+</div></div>
+
+<!-- 8 -->
+<div class="slide" data-pg="8 / 14"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心　無窮等比級數</div>
+<h2>|r| &lt; 1 時總和收斂</h2>
+<div class="box y" style="text-align:center;font-size:20px;">
+當 |r| &lt; 1:S = a₁ / (1−r)</div>
+<div class="eg">
+<div class="q">a₁=6、r=1/3 的無窮和</div>
+<div class="stp">S = 6/(1−1/3) = 6/(2/3) = 9</div>
+</div>
+<div class="box g" style="text-align:center;">
+💡 |r|&lt;1 時 rⁿ → 0，無限多項加起來竟是有限值。</div>
+</div></div>
+
+<!-- 9 -->
+<div class="slide" data-pg="9 / 14"><div class="tag">精選</div><div class="body">
+<div class="eyebrow">隨堂精選</div>
+<h2>快速檢查</h2>
+<table class="tbl">
+<tr><th style="width:52%;">題目</th><th>答案</th></tr>
+<tr><td>a₁=2,r=3，S₄</td><td class="fm hl">80</td></tr>
+<tr><td>1, x, 9 成等比，x?</td><td class="fm hl">3（中項）</td></tr>
+<tr><td>a₃=12,a₆=96，r?、a₁?</td><td class="fm hl">r=2、a₁=3</td></tr>
+<tr><td>本金5000、10%複利、5年</td><td class="fm hl">≈8055</td></tr>
+<tr><td>「公比一定正」?</td><td class="hl-r">錯（可負）</td></tr>
+</table>
+<div class="box y" style="text-align:center;">等比中項:中間項² = 前後項之積。</div>
+</div></div>
+
+<!-- 10 -->
+<div class="slide" data-pg="10 / 14"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 1　【設備折舊】</div>
+<h2>殘值遞減</h2>
+<div class="box">機台 100 萬、每年殘值為前一年 80%</div>
+<div class="eg">
+<div class="stp"><b>(1) 公比</b>　r=0.8</div>
+<div class="stp"><b>(2) 5 年後</b>　100×0.8⁵≈32.8 萬元</div>
+<div class="stp"><b>(3) 低於 10 萬</b>　0.8ⁿ&lt;0.1 → 第 11 年後</div>
+</div>
+<div class="box y" style="text-align:center;">0&lt;r&lt;1 → 遞減（指數縮減）。</div>
+</div></div>
+
+<!-- 11 -->
+<div class="slide" data-pg="11 / 14"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 2　【紙張對折】</div>
+<h2>指數增長有多驚人?</h2>
+<div class="box">紙厚 0.1 mm、每折翻倍</div>
+<div class="eg">
+<div class="stp"><b>(1) 折 10 次</b>　0.1×2¹⁰=102.4 mm ≈ 10 公分</div>
+<div class="stp"><b>(2) 折 42 次</b>　0.1×2⁴²≈44 萬公里（超過地月距離!）</div>
+<div class="stp"><b>(3) 為何難</b>　指數增長使紙迅速變厚，7、8 次後幾乎折不動</div>
+</div>
+</div></div>
+
+<!-- 12 -->
+<div class="slide" data-pg="12 / 14"><div class="tag">避雷</div><div class="body">
+<h2>避雷指南</h2>
+<table class="tbl">
+<tr><th style="width:46%;">❌ 錯誤</th><th>✓ 正確</th></tr>
+<tr><td class="fm">aₙ = a₁·rⁿ</td><td class="fm hl-g">a₁·rⁿ⁻¹（n=1 驗算）</td></tr>
+<tr><td>級數分母寫 (r−1) 又用 (1−rⁿ)</td><td>統一 (1−rⁿ)/(1−r)</td></tr>
+<tr><td>認為公比一定正</td><td>r 可為負（r≠0）</td></tr>
+<tr><td>忘記等比中項</td><td>中間項² = 前後項積</td></tr>
+</table>
+<div class="box y" style="text-align:center;">追問:相鄰兩項的比固定嗎?那就是公比 r。</div>
+</div></div>
+
+<!-- 13 -->
+<div class="slide" data-pg="13 / 14"><div class="tag">總結</div><div class="body">
+<h2>本節總結</h2>
+<ul>
+<li><span class="hl">等比數列</span>:相鄰兩項比固定 = 公比 r（可正可負，r≠0）</li>
+<li><span class="hl-r">通項</span>:aₙ = a₁·rⁿ⁻¹;等比中項 aₙ² = aₙ₋₁·aₙ₊₁</li>
+<li><span class="hl">級數</span>:Sₙ = a₁(1−rⁿ)/(1−r);<span class="hl">無窮</span>（|r|&lt;1）:S = a₁/(1−r)</li>
+<li><span class="hl">應用</span>:複利、倍增、折舊 —— 指數增長/縮減</li>
+</ul>
+<div class="box g" style="text-align:center;font-size:20px;">
+🎉 <b>八下第 1 章完成!</b> 🔗 <b>啟後</b>:<span class="hl">2-1 函數與函數圖形 —— 變數之間的對應關係。</span></div>
+</div></div>
+
+<!-- 14 -->
+<div class="slide" data-pg="14 / 14"><div class="tag">Next</div><div class="big-center">
+<div class="eyebrow">下章預告</div>
+<h1 style="font-size:40px;">2-1　函數與函數圖形</h1>
+<div class="lead">一個 x 對應一個 y<br>
+<span style="color:#eda0a8;">在坐標平面上畫出關係</span></div>
+<div class="box y" style="max-width:800px;margin:20px auto 0;font-size:20px;text-align:center;">
+函數是「對應規則」，圖形讓關係看得見。<span class="hl">從數列走向函數。</span></div>
+</div></div>
+
+</div></body></html>

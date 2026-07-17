@@ -1,0 +1,248 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>八下 1-2 等差級數｜授課簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--chalk-soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);padding:24px 14px;}
+.deck{max-width:1060px;margin:0 auto;}
+.print-hint{text-align:center;color:rgba(243,239,226,0.4);font-size:13px;padding:6px 0 22px;}
+.print-hint b{color:var(--yellow);}
+.slide{position:relative;min-height:576px;margin:0 auto 26px;padding:44px 52px;
+ background:radial-gradient(ellipse at 18% 12%,rgba(255,255,255,0.05),transparent 45%),
+  radial-gradient(ellipse at 82% 88%,rgba(255,255,255,0.035),transparent 45%),
+  radial-gradient(ellipse at 60% 40%,rgba(120,160,130,0.10),transparent 60%),
+  linear-gradient(160deg,var(--board) 0%,var(--board2) 100%);
+ border-radius:14px;box-shadow:0 10px 34px rgba(0,0,0,0.55);
+ border:1px solid rgba(242,217,121,0.14);overflow:hidden;display:flex;flex-direction:column;}
+.slide::before{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;
+ background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.014) 40px,rgba(255,255,255,0.014) 41px),
+  radial-gradient(circle at 30% 72%,rgba(255,255,255,0.03),transparent 8%),
+  radial-gradient(circle at 76% 24%,rgba(255,255,255,0.025),transparent 7%);}
+.slide::after{content:attr(data-pg);position:absolute;bottom:15px;right:26px;font-family:'Caveat',cursive;font-size:20px;color:rgba(243,239,226,0.4);}
+.tag{position:absolute;top:20px;right:26px;font-family:'Caveat',cursive;font-size:22px;color:var(--pink);transform:rotate(4deg);}
+.eyebrow{font-family:'Caveat',cursive;font-size:25px;color:var(--yellow);letter-spacing:1px;margin-bottom:8px;opacity:0.92;}
+.slide h1{font-family:'Noto Serif TC',serif;font-size:46px;font-weight:900;line-height:1.28;letter-spacing:1px;
+ text-shadow:0 0 1px rgba(243,239,226,0.5),1px 1px 0 rgba(0,0,0,0.2);}
+.slide h2{font-family:'Noto Serif TC',serif;font-size:33px;font-weight:900;color:var(--yellow);
+ margin-bottom:20px;padding-bottom:11px;border-bottom:2px dashed rgba(242,217,121,0.4);
+ text-shadow:0 0 1px rgba(242,217,121,0.4);}
+.slide p{font-size:20px;line-height:1.85;margin-bottom:12px;}
+.big-center{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;}
+.big-center .lead,.lead{font-family:'Caveat',cursive;font-size:30px;color:var(--blue);letter-spacing:1px;margin-top:12px;}
+ul{list-style:none;margin:8px 0;}
+li{font-size:21px;line-height:1.95;padding-left:32px;position:relative;margin-bottom:4px;}
+li::before{content:'\2726';position:absolute;left:4px;color:var(--yellow);font-size:17px;top:3px;}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.34);border-radius:12px;padding:15px 21px;margin:12px 0;font-size:19px;line-height:1.8;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.38);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.38);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.34);}
+.eg{position:relative;background:rgba(0,0,0,0.24);border:1px solid rgba(242,217,121,0.2);border-radius:10px;padding:17px 22px;margin:12px 0;font-size:19px;}
+.eg::before{content:'';position:absolute;top:-8px;left:38px;width:58px;height:15px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.eg .q{color:var(--blue);font-weight:700;margin-bottom:8px;font-size:19px;}
+.eg .a{color:var(--green);font-weight:700;margin-top:6px;}
+.eg .stp{color:var(--chalk-soft);font-size:18px;margin:3px 0;}
+.tip{display:flex;gap:12px;align-items:flex-start;background:rgba(242,217,121,0.09);border:1.5px dashed rgba(242,217,121,0.45);border-radius:12px;padding:13px 18px;margin:10px 0;}
+.tip .ic{font-size:24px;line-height:1;}.tip .tx{font-size:18px;line-height:1.7;}
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:18px;}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.26);padding:10px 14px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.two{display:flex;gap:20px;}.two>div{flex:1;}
+svg{display:block;margin:6px auto;max-width:100%;}
+@media print{
+ body{background:#0a130d;padding:0;}
+ .deck{max-width:none;}
+ .print-hint{display:none;}
+ .slide{margin:0;border-radius:0;box-shadow:none;min-height:100vh;
+  page-break-after:always;break-after:page;padding:32px 44px;justify-content:center;}
+ .slide:last-child{page-break-after:auto;break-after:auto;}
+ .slide h1{font-size:40px;}
+ .slide h2{font-size:27px;margin-bottom:13px;padding-bottom:8px;}
+ .slide p{font-size:17px;line-height:1.55;margin-bottom:6px;}
+ li{font-size:17px;line-height:1.55;margin-bottom:1px;padding-left:26px;}
+ .eyebrow{font-size:21px;margin-bottom:5px;}
+ .big-center .lead,.lead{font-size:26px;}
+ .box{font-size:16px;padding:10px 16px;margin:6px 0;line-height:1.5;}
+ .eg{font-size:16px;padding:11px 16px;margin:6px 0;}
+ .tip{font-size:16px;padding:10px 14px;margin:6px 0;}
+ .tbl{font-size:15px;margin:6px 0;}
+ .tbl th,.tbl td{padding:6px 10px;}
+ svg{max-height:210px;}
+}
+</style></head><body><div class="deck">
+<div class="print-hint">共 <b>13</b> 張・列印時每張一頁（Ctrl+P → 橫向 → 背景圖形）</div>
+
+
+<!-- 1 -->
+<div class="slide" data-pg="1 / 13"><div class="tag">Start!</div><div class="big-center">
+<div class="eyebrow">國二下學期・第一章 數列與級數</div>
+<h1>1-2　等差級數</h1>
+<div class="lead">前 n 項的總和 ——<br>
+高斯加 1 到 100 的技巧，就是<span style="color:#f2d979;">首尾配對</span></div>
+<div class="box y" style="max-width:660px;margin:16px auto 0;text-align:center;font-size:19px;">
+<span class="fm">Sₙ = n(a₁+aₙ)/2</span></div>
+</div></div>
+
+<!-- 2 -->
+<div class="slide" data-pg="2 / 13"><div class="tag">目標</div><div class="body">
+<h2>本節學習目標</h2>
+<ul>
+<li>理解<span class="hl">等差級數</span>（前 n 項和）</li>
+<li>應用前 n 項和公式 <span class="fm hl">Sₙ = n(a₁+aₙ)/2</span></li>
+<li>從 <span class="hl-b">Sₙ 反推</span>各項或公差</li>
+<li>應用等差級數解<span class="hl">累積總量</span>問題</li>
+</ul>
+<div class="box y">一句話:<span class="hl">把等差數列加起來 = 項數 × 首末項的平均。高斯的配對法。</span></div>
+</div></div>
+
+<!-- 3 -->
+<div class="slide" data-pg="3 / 13"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心　高斯的配對法</div>
+<h2>1+2+…+100 = 5050</h2>
+<div class="box y" style="text-align:center;font-size:19px;">
+首 1 + 末 100 = 101;共 100 項 → 50 組 101<br>
+S = 100 × (1+100) / 2 = 5050</div>
+<div class="box g"><b>兩個公式:</b><br>
+首末項式:<span class="fm">Sₙ = n(a₁+aₙ)/2</span>（項數 × 首末平均）<br>
+首項公差式:<span class="fm">Sₙ = n[2a₁+(n−1)d]/2</span></div>
+<div class="box r" style="text-align:center;">已知首末 → 用公式一;已知首項公差 → 用公式二。</div>
+</div></div>
+
+<!-- 4 -->
+<div class="slide" data-pg="4 / 13"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 1、3　難度 ★☆☆~★★☆</div>
+<h2>求區間內的和</h2>
+<div class="eg">
+<div class="q">2, 5, 8, …, 50 的總和</div>
+<div class="stp">項數 3n−1=50 → n=17;S₁₇=17×(2+50)/2 = 442</div>
+</div>
+<div class="eg">
+<div class="q">1~100 的奇數和</div>
+<div class="stp">1,3,…,99 共 50 項 → S=50×(1+99)/2 = 2500</div>
+</div>
+<div class="box r" style="text-align:center;">⚠️ 先算<b>項數</b> n = (末−首)/d + 1，別數錯!</div>
+</div></div>
+
+<!-- 5 -->
+<div class="slide" data-pg="5 / 13"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 2　難度 ★★☆　公式二</div>
+<h2>已知首項公差</h2>
+<div class="eg">
+<div class="q">a₁=3、d=4，求前 20 項和</div>
+<div class="stp"><b>公式二</b>　S₂₀ = 20×[2×3+(20−1)×4]/2 = 20×[6+76]/2 = 20×41 = 820</div>
+<div class="stp"><b>驗算（公式一）</b>　a₂₀=79;S=20×(3+79)/2 = 820 ✓</div>
+</div>
+<div class="box y" style="text-align:center;">
+💡 先算 [2a₁+(n−1)d]，再乘 n、除 2 —— 減少算錯。</div>
+</div></div>
+
+<!-- 6 -->
+<div class="slide" data-pg="6 / 13"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 4　難度 ★★★　由 Sₙ 求通項</div>
+<h2>Sₙ 與 aₙ 的關係</h2>
+<div class="box y" style="text-align:center;font-size:19px;">
+aₙ = Sₙ − Sₙ₋₁（n≥2）;a₁ = S₁</div>
+<div class="eg">
+<div class="q">Sₙ = 3n²+2n，求 a₁、d、aₙ</div>
+<div class="stp"><b>a₁</b>　= S₁ = 5</div>
+<div class="stp"><b>a₂</b>　= S₂−S₁ = 16−5 = 11 → d = 6</div>
+<div class="stp"><b>aₙ</b>　= Sₙ−Sₙ₋₁ = 6n−1（n=1 代入 =5 ✓）</div>
+</div>
+</div></div>
+
+<!-- 7 -->
+<div class="slide" data-pg="7 / 13"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 5　難度 ★★★　兩和聯立</div>
+<h2>已知兩個 Sₙ 求 a₁、d</h2>
+<div class="eg">
+<div class="q">S₅=55、S₁₀=210，求 a₁、d</div>
+<div class="stp"><b>S₅</b>　5a₁+10d=55 → a₁+2d=11 …①</div>
+<div class="stp"><b>S₁₀</b>　10a₁+45d=210 → 2a₁+9d=42 …②</div>
+<div class="stp"><b>②−2×①</b>　5d=20 → d=4;代回 a₁=3</div>
+</div>
+</div></div>
+
+<!-- 8 -->
+<div class="slide" data-pg="8 / 13"><div class="tag">精選</div><div class="body">
+<div class="eyebrow">隨堂精選</div>
+<h2>快速檢查</h2>
+<table class="tbl">
+<tr><th style="width:56%;">題目</th><th>答案</th></tr>
+<tr><td>1+2+…+50</td><td class="fm hl">1275</td></tr>
+<tr><td>2+4+…+100</td><td class="fm hl">2550</td></tr>
+<tr><td>1~200 中 3 的倍數和</td><td class="fm hl">6633</td></tr>
+<tr><td>Sₙ=2n²−n，a₅?</td><td class="fm hl">17</td></tr>
+<tr><td>「Sₙ 一定是二次式」?</td><td class="hl-r">d=0 時是一次式</td></tr>
+</table>
+<div class="box y" style="text-align:center;">aₙ = Sₙ − Sₙ₋₁;項數 n = (末−首)/d + 1。</div>
+</div></div>
+
+<!-- 9 -->
+<div class="slide" data-pg="9 / 13"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 1　【梯田面積】</div>
+<h2>累積總面積</h2>
+<div class="box">第 1 塊 100 m²、每塊多 20 m²、共 10 塊</div>
+<div class="eg">
+<div class="stp"><b>(1) 第 10 塊</b>　a₁₀=100+9×20=280 m²</div>
+<div class="stp"><b>(2) 總面積</b>　S₁₀=10×(100+280)/2=1900 m²</div>
+<div class="stp"><b>(3) 年收益</b>　1900×15=28500 元</div>
+</div>
+</div></div>
+
+<!-- 10 -->
+<div class="slide" data-pg="10 / 13"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 2　【存款計畫】</div>
+<h2>逐月遞增的存款</h2>
+<div class="box">第 1 月 1000 元、每月多存 100 元、共 12 個月</div>
+<div class="eg">
+<div class="stp"><b>(1) 第 12 月</b>　a₁₂=1000+11×100=2100 元</div>
+<div class="stp"><b>(2) 12 個月共存</b>　S₁₂=12×(1000+2100)/2=18600 元</div>
+<div class="stp"><b>(3) 加 1% 單利</b>　約 20832 元（粗估）</div>
+</div>
+</div></div>
+
+<!-- 11 -->
+<div class="slide" data-pg="11 / 13"><div class="tag">避雷</div><div class="body">
+<h2>避雷指南</h2>
+<table class="tbl">
+<tr><th style="width:46%;">❌ 錯誤</th><th>✓ 正確</th></tr>
+<tr><td class="fm">n(n−1)d/2 算錯</td><td>先算 [2a₁+(n−1)d]，再乘 n 除 2</td></tr>
+<tr><td>由 Sₙ 求 aₙ 忘記驗 n=1</td><td>a₁ = S₁ 單獨確認</td></tr>
+<tr><td>項數數錯</td><td class="fm hl-g">n = (末−首)/d + 1</td></tr>
+<tr><td class="fm">Sₙ 一律當二次式</td><td>d=0 時是一次式</td></tr>
+</table>
+<div class="box y" style="text-align:center;">記兩公式:已知首末用一、已知首項公差用二。</div>
+</div></div>
+
+<!-- 12 -->
+<div class="slide" data-pg="12 / 13"><div class="tag">總結</div><div class="body">
+<h2>本節總結</h2>
+<ul>
+<li><span class="hl-r">Sₙ = n(a₁+aₙ)/2</span>（項數 × 首末平均）</li>
+<li><span class="hl">Sₙ = n[2a₁+(n−1)d]/2</span>（已知首項公差）</li>
+<li><span class="hl">aₙ = Sₙ − Sₙ₋₁</span>（n≥2）;a₁ = S₁</li>
+<li><span class="hl">兩和聯立</span>求 a₁、d;應用於累積總量</li>
+</ul>
+<div class="box g" style="text-align:center;font-size:20px;">
+🔗 <b>承先</b>:1-1 等差數列通項<br>
+🔗 <b>啟後</b>:<span class="hl">1-3 等比數列 —— 每次「乘」固定倍數的數列。</span></div>
+</div></div>
+
+<!-- 13 -->
+<div class="slide" data-pg="13 / 13"><div class="tag">Next</div><div class="big-center">
+<div class="eyebrow">下節預告</div>
+<h1 style="font-size:40px;">1-3　等比數列</h1>
+<div class="lead">每次<span style="color:#eda0a8;">乘</span>一個固定的數<br>
+aₙ = a₁ · r^(n−1)</div>
+<div class="box y" style="max-width:800px;margin:20px auto 0;font-size:20px;text-align:center;">
+等差是「加」，等比是「乘」。<span class="hl">1, 2, 4, 8, 16… 公比 r=2。</span></div>
+</div></div>
+
+</div></body></html>

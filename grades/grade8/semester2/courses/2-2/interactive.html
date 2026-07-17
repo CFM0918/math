@@ -1,0 +1,824 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>八下 2-2 中點坐標與坐標幾何｜互動教學平台</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;--wood:#6b4a32;}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);overscroll-behavior:none;}
+.topbar{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:10px 16px;background:linear-gradient(180deg,#1b2f21,#132218);border-bottom:2px solid var(--wood);box-shadow:0 4px 18px rgba(0,0,0,0.5);}
+.brand{font-family:'Noto Serif TC',serif;font-weight:900;font-size:clamp(15px,2.2vw,20px);color:var(--yellow);white-space:nowrap;}
+.brand small{display:block;font-family:'Caveat',cursive;font-size:14px;color:var(--soft);font-weight:400;}
+.spacer{flex:1;}
+.btn{background:rgba(243,239,226,0.08);border:1.5px solid rgba(243,239,226,0.28);color:var(--chalk);
+  border-radius:10px;padding:7px 13px;font-family:inherit;font-size:14px;cursor:pointer;white-space:nowrap;transition:.15s;}
+.btn:hover{background:rgba(243,239,226,0.16);}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:10px 16px 0;scrollbar-width:none;}
+.tabs::-webkit-scrollbar{display:none;}
+.tab{background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.2);border-bottom:none;
+  color:var(--soft);border-radius:10px 10px 0 0;padding:9px 15px;font-size:14px;cursor:pointer;white-space:nowrap;font-family:inherit;}
+.tab.on{background:var(--board);border-color:var(--yellow);color:var(--yellow);font-weight:700;}
+.tab .n{font-family:'Caveat',cursive;font-size:18px;margin-right:5px;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px 60px;}
+.panel{display:none;}.panel.on{display:block;}
+.card{background:radial-gradient(ellipse at 20% 10%,rgba(255,255,255,0.05),transparent 45%),
+   linear-gradient(160deg,var(--board),var(--board2));
+  border:1.5px solid rgba(242,217,121,0.16);border-radius:14px;padding:18px;margin-bottom:16px;
+  box-shadow:0 8px 26px rgba(0,0,0,0.45);position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 38px,rgba(255,255,255,0.012) 38px,rgba(255,255,255,0.012) 39px);}
+.card>*{position:relative;}
+.card h3{font-family:'Noto Serif TC',serif;font-size:clamp(17px,2.4vw,21px);color:var(--yellow);
+  margin-bottom:12px;padding-bottom:8px;border-bottom:2px dashed rgba(242,217,121,0.35);display:flex;align-items:center;gap:8px;}
+.card h3 .ic{font-size:20px;}
+.goals{display:flex;flex-wrap:wrap;gap:9px;}
+.goal{display:flex;align-items:center;gap:9px;background:rgba(242,217,121,0.07);
+  border:1.5px dashed rgba(242,217,121,0.4);border-radius:22px;padding:8px 15px 8px 8px;
+  font-size:clamp(13.5px,1.8vw,15px);color:var(--yellow);line-height:1.5;}
+.goal .bdg{width:24px;height:24px;border-radius:50%;background:var(--yellow);color:#16281c;
+  font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;flex:none;}
+.deck{position:relative;background:rgba(0,0,0,0.22);border-radius:12px;padding:clamp(16px,3vw,30px);
+  min-height:clamp(260px,42vh,380px);display:flex;flex-direction:column;justify-content:center;}
+.sl{display:none;animation:fade .25s;}.sl.on{display:block;}
+@keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+.sl .eyebrow{font-family:'Caveat',cursive;font-size:20px;color:var(--yellow);margin-bottom:6px;}
+.sl h4{font-family:'Noto Serif TC',serif;font-size:clamp(19px,3vw,27px);margin-bottom:12px;line-height:1.35;}
+.sl p{font-size:clamp(15px,2vw,18px);line-height:1.8;margin-bottom:9px;}
+.sl ul{list-style:none;}
+.sl li{font-size:clamp(15px,2vw,18px);line-height:1.85;padding-left:26px;position:relative;margin-bottom:4px;}
+.sl li::before{content:'✦';position:absolute;left:2px;color:var(--yellow);font-size:14px;top:3px;}
+.nav{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:14px;}
+.nav .pg{font-family:'Caveat',cursive;font-size:20px;color:var(--soft);min-width:64px;text-align:center;}
+.dots{display:flex;gap:6px;justify-content:center;margin-top:10px;flex-wrap:wrap;}
+.dot{width:9px;height:9px;border-radius:50%;background:rgba(243,239,226,0.25);cursor:pointer;border:none;padding:0;}
+.dot.on{background:var(--yellow);transform:scale(1.3);}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.32);border-radius:10px;
+  padding:11px 15px;margin:9px 0;font-size:clamp(14px,1.9vw,17px);line-height:1.7;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.36);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.36);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.32);}
+.two{display:flex;gap:12px;flex-wrap:wrap;}.two>*{flex:1;min-width:220px;}
+.teach{background:rgba(201,174,224,0.12);border:1.5px dashed rgba(201,174,224,0.5);
+  border-radius:10px;padding:11px 15px;margin:9px 0;font-size:clamp(14px,1.8vw,15px);line-height:1.7;}
+.teach b{color:var(--purple);}
+.tbl{width:100%;border-collapse:collapse;margin:9px 0;font-size:clamp(13.5px,1.8vw,16px);}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.24);padding:8px 11px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.cv-wrap{background:rgba(0,0,0,0.25);border-radius:12px;padding:10px;}
+canvas.viz{width:100%;display:block;border-radius:8px;touch-action:none;}
+.ctrl{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center;}
+.readout{font-family:'Noto Serif TC',serif;font-size:clamp(14px,1.9vw,18px);color:var(--chalk);
+  background:rgba(242,217,121,0.1);border:1px solid rgba(242,217,121,0.3);border-radius:8px;
+  padding:7px 12px;flex:1;min-width:220px;}
+.readout b{color:var(--yellow);}
+.q{background:rgba(0,0,0,0.2);border:1px solid rgba(242,217,121,0.18);border-radius:10px;padding:13px 15px;margin:10px 0;}
+.q .qt{font-size:clamp(15px,2vw,17px);margin-bottom:10px;line-height:1.7;}
+.q .qt .qn{font-family:'Caveat',cursive;color:var(--yellow);font-size:20px;margin-right:6px;}
+.opts{display:flex;flex-direction:column;gap:7px;}
+.opt{text-align:left;background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.22);
+  color:var(--chalk);border-radius:9px;padding:9px 13px;font-family:inherit;font-size:15px;cursor:pointer;transition:.15s;line-height:1.5;}
+.opt:hover:not(:disabled){background:rgba(243,239,226,0.13);}
+.opt.right{background:rgba(166,214,160,0.24);border-color:var(--green);color:#fff;font-weight:700;}
+.opt.wrong{background:rgba(237,160,168,0.22);border-color:var(--pink);}
+.opt:disabled{cursor:default;}
+.fb{display:none;margin-top:9px;padding:9px 13px;border-radius:8px;font-size:14.5px;line-height:1.65;}
+.fb.on{display:block;}
+.fb.ok{background:rgba(166,214,160,0.14);border-left:3px solid var(--green);}
+.fb.no{background:rgba(237,160,168,0.14);border-left:3px solid var(--pink);}
+.fill{display:inline-block;background:rgba(0,0,0,0.3);border:none;border-bottom:2px solid var(--yellow);
+  color:var(--yellow);font-family:'Noto Serif TC',serif;font-size:17px;width:110px;text-align:center;padding:3px 5px;margin:0 4px;}
+.fill:focus{outline:none;background:rgba(242,217,121,0.12);}
+.exq{background:rgba(0,0,0,0.26);border:1.5px solid rgba(242,217,121,0.28);border-radius:11px;padding:13px 15px;margin:10px 0;position:relative;}
+.exq::before{content:'';position:absolute;top:-8px;left:32px;width:54px;height:14px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.exq .exq-q{font-size:clamp(14.5px,1.9vw,17px);line-height:1.75;margin-bottom:11px;}
+.exo{text-align:left;background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.22);
+  color:var(--chalk);border-radius:9px;padding:9px 13px;font-family:inherit;font-size:clamp(14px,1.8vw,15.5px);
+  cursor:pointer;transition:.15s;line-height:1.55;width:100%;margin-bottom:6px;display:block;}
+.exo:hover:not(:disabled){background:rgba(243,239,226,0.13);}
+.exo.right{background:rgba(166,214,160,0.26);border-color:var(--green);color:#fff;font-weight:700;}
+.exo.wrong{background:rgba(237,160,168,0.2);border-color:var(--pink);opacity:.75;}
+.exo:disabled{cursor:default;}
+@keyframes shake{10%,90%{transform:translateX(-2px);}30%,70%{transform:translateX(4px);}50%{transform:translateX(-4px);}}
+.exo.shake{animation:shake .4s;}
+.exsol{display:none;margin-top:10px;padding:11px 14px;border-radius:9px;
+  background:rgba(166,214,160,0.13);border-left:3px solid var(--green);font-size:clamp(14px,1.8vw,15.5px);line-height:1.75;}
+.exsol.on{display:block;animation:fade .3s;}
+.exsol .st{color:var(--soft);margin:3px 0;}
+.exsol .an{color:var(--green);font-weight:700;margin-top:6px;}
+.exlock{display:flex;align-items:center;gap:7px;margin-top:9px;font-size:13.5px;color:rgba(243,239,226,0.45);}
+.exlock.hide{display:none;}
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:11px;}
+.icard{background:rgba(0,0,0,0.22);border:1.5px solid rgba(242,217,121,0.22);border-radius:11px;padding:14px;text-align:center;}
+.icard .big{font-family:'Noto Serif TC',serif;font-size:clamp(17px,2.6vw,23px);font-weight:900;margin:6px 0;}
+.icard .cap{font-size:13.5px;color:var(--soft);line-height:1.6;}
+.frow{display:flex;gap:12px;align-items:center;padding:9px 12px;border-bottom:1px dashed rgba(243,239,226,0.16);}
+.frow:last-child{border-bottom:none;}
+.flab{color:var(--blue);font-weight:700;min-width:150px;font-size:clamp(13.5px,1.8vw,15.5px);flex:none;}
+.fval{color:var(--yellow);font-weight:700;font-family:'Noto Serif TC',serif;font-size:clamp(14px,1.9vw,17px);}
+@media(max-width:560px){.frow{flex-direction:column;align-items:flex-start;gap:3px;}.flab{min-width:0;}}
+.hud{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:12px;}
+.hud .st{background:rgba(0,0,0,0.3);border:1.5px solid rgba(242,217,121,0.28);border-radius:9px;
+  padding:7px 13px;font-size:14px;flex:1;min-width:88px;text-align:center;}
+.hud .st b{display:block;font-family:'Noto Serif TC',serif;font-size:20px;color:var(--yellow);}
+.tbar{height:8px;background:rgba(0,0,0,0.35);border-radius:5px;overflow:hidden;margin-bottom:12px;}
+.tfill{height:100%;background:linear-gradient(90deg,var(--green),var(--yellow),var(--pink));width:100%;transition:width .1s linear;}
+.gscreen{display:none;}.gscreen.on{display:block;}
+.lvchips{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin:14px 0;}
+.lvchip{background:rgba(152,201,220,0.12);border:1.5px solid rgba(152,201,220,0.35);border-radius:18px;
+  padding:6px 13px;font-size:13.5px;color:var(--blue);}
+.lvchip.done{background:rgba(166,214,160,0.2);border-color:var(--green);color:var(--green);}
+.lvchip.now{background:rgba(242,217,121,0.22);border-color:var(--yellow);color:var(--yellow);font-weight:700;}
+.gq{font-size:clamp(16px,2.2vw,20px);line-height:1.7;margin:14px 0;text-align:center;font-family:'Noto Serif TC',serif;}
+.gopts{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+@media(max-width:560px){.gopts{grid-template-columns:1fr;}}
+.gopt{background:rgba(243,239,226,0.07);border:1.5px solid rgba(243,239,226,0.25);color:var(--chalk);
+  border-radius:10px;padding:12px;font-family:'Noto Serif TC',serif;font-size:17px;cursor:pointer;transition:.15s;min-height:48px;}
+.gopt:hover:not(:disabled){background:rgba(243,239,226,0.15);}
+.gopt.right{background:rgba(166,214,160,0.3);border-color:var(--green);font-weight:900;}
+.gopt.wrong{background:rgba(237,160,168,0.25);border-color:var(--pink);}
+.gfb{margin-top:11px;padding:10px 13px;border-radius:8px;font-size:14.5px;line-height:1.6;display:none;}
+.gfb.on{display:block;}
+.gfb.ok{background:rgba(166,214,160,0.15);border-left:3px solid var(--green);}
+.gfb.no{background:rgba(237,160,168,0.15);border-left:3px solid var(--pink);}
+.rank{font-size:54px;text-align:center;margin:10px 0;}
+.hint{text-align:center;color:rgba(243,239,226,0.35);font-size:12.5px;padding:8px 0 0;}
+@media (max-width:640px){.topbar{padding:8px 10px;gap:8px;}.wrap{padding:0 10px 70px;}.card{padding:13px;}}
+</style></head><body>
+
+<div class="topbar">
+  <div class="brand">2-2　中點坐標<small>八下 · 第2章 函數</small></div>
+  <div class="spacer"></div>
+</div>
+
+<div class="tabs" id="tabs">
+  <button class="tab on" data-p="0"><span class="n">📍</span>中點</button>
+  <button class="tab" data-p="1"><span class="n">📏</span>距離</button>
+  <button class="tab" data-p="2"><span class="n">📐</span>坐標幾何</button>
+  <button class="tab" data-p="3"><span class="n">★</span>題型測驗</button>
+  <button class="tab" data-p="4"><span class="n">🎮</span>闖關遊戲</button>
+</div>
+
+<div class="wrap">
+  <div class="card" id="goalCard">
+    <h3><span class="ic">🎯</span>本節學習目標</h3>
+    <div class="goals" id="goals"></div>
+  </div>
+  <div id="wrap"></div>
+</div>
+
+<script>
+const GOALS = [
+  '用中點公式求兩點的中點',
+  '複習距離公式（來自畢氏定理）',
+  '應用兩公式解坐標幾何問題',
+  '已知中點求端點（反用公式）',
+  '理解等距點 → 中垂線',
+];
+
+const DATA = [
+{ key:'midpt', viz:'midpt', vizTitle:'中點 —— M=((x₁+x₂)/2,(y₁+y₂)/2)（4 題）',
+  slides:[
+    {eb:'核心 兩公式', h:'距離開根號、中點取平均', html:`
+      <table class="tbl">
+        <tr><td class="hl-b">距離</td><td class="fm">d=√[(Δx)²+(Δy)²]</td></tr>
+        <tr><td class="hl-b">中點</td><td class="fm">M=((x₁+x₂)/2,(y₁+y₂)/2)</td></tr>
+      </table>
+      <div class="box r" style="text-align:center;">⚠️ 距離要平方；中點是「加」再除 2，不是相減！</div>
+      <div class="box g">👉 用下方 Canvas：求中點。</div>`},
+    {eb:'例題 ★☆☆', h:'求中點', html:`
+      <div class="exq" data-a="2">
+        <div class="exq-q"><span class="hl">Q</span>　A(2,1)、B(8,9) 的中點？</div>
+        <button class="exo" data-i="0">(3,4)</button>
+        <button class="exo" data-i="1">(6,8)</button>
+        <button class="exo" data-i="2">(5,5)</button>
+        <button class="exo" data-i="3">(10,10)</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">((2+8)/2,(1+9)/2)=(5,5)</div>
+          <div class="an">答：(5,5)</div>
+        </div>
+      </div>`},
+    {eb:'例題 ★★☆　已知中點', h:'反求端點', html:`
+      <div class="exq" data-a="1">
+        <div class="exq-q"><span class="hl">Q</span>　中點 M(4,3)、A(2,1)，B = ？</div>
+        <button class="exo" data-i="0">(3,2)</button>
+        <button class="exo" data-i="1">(6,5)</button>
+        <button class="exo" data-i="2">(2,2)</button>
+        <button class="exo" data-i="3">(8,7)</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">(2+a)/2=4→a=6；(1+b)/2=3→b=5</div>
+          <div class="an">答：(6,5)</div>
+        </div>
+      </div>`}
+  ],
+  fa:[
+    {q:'中點公式？', o:['(x₁−x₂,y₁−y₂)','((x₁+x₂)/2,(y₁+y₂)/2)','(x₁+x₂,y₁+y₂)','(x₁x₂,y₁y₂)'], a:1, e:'取平均。'},
+    {q:'A(0,0)B(6,8)中點？', o:['(3,4)','(6,8)','(3,8)','(6,4)'], a:0, e:'(3,4)。'},
+    {q:'中點是加還減？', o:['加除2','減','乘','除2'], a:0, e:'平均。'}
+  ],
+  info:[
+    {big:'取平均', cap:'各坐標', c:'var(--yellow)'},
+    {big:'加除2', cap:'不是相減', c:'var(--pink)'},
+    {big:'反求端點', cap:'分母是2', c:'var(--blue)'}
+  ]
+},
+{ key:'dcalc', viz:'dcalc', vizTitle:'距離 —— d=√[(Δx)²+(Δy)²]（4 題）',
+  slides:[
+    {eb:'核心 距離公式', h:'來自畢氏定理', html:`
+      <div class="box y" style="text-align:center;font-size:19px;">d = √[(x₂−x₁)²+(y₂−y₁)²]</div>
+      <div class="box">以 AB 為斜邊作直角三角形，水平 |Δx|、垂直 |Δy| → 畢氏定理。<br>同水平線 → |Δx|；同鉛直線 → |Δy|。</div>
+      <div class="box r" style="text-align:center;">⚠️ Δx、Δy 都要平方（別寫 |Δx|+|Δy|）。</div>
+      <div class="box g">👉 用下方 Canvas：求兩點距離。</div>`},
+    {eb:'例題 ★☆☆', h:'求距離', html:`
+      <div class="exq" data-a="1">
+        <div class="exq-q"><span class="hl">Q</span>　A(1,3)、B(7,11) 的距離？</div>
+        <button class="exo" data-i="0">14</button>
+        <button class="exo" data-i="1">10</button>
+        <button class="exo" data-i="2">√14</button>
+        <button class="exo" data-i="3">100</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">√(6²+8²)=√(36+64)=√100=10</div>
+          <div class="an">答：10</div>
+        </div>
+      </div>`},
+    {eb:'例題 ★★☆　含根號', h:'不是整數', html:`
+      <div class="exq" data-a="0">
+        <div class="exq-q"><span class="hl">Q</span>　A(2,5) 到原點 O 的距離？</div>
+        <button class="exo" data-i="0">√29</button>
+        <button class="exo" data-i="1">7</button>
+        <button class="exo" data-i="2">√7</button>
+        <button class="exo" data-i="3">29</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">√(2²+5²)=√(4+25)=√29</div>
+          <div class="an">答：√29</div>
+        </div>
+      </div>`}
+  ],
+  fa:[
+    {q:'距離公式？', o:['|Δx|+|Δy|','√[(Δx)²+(Δy)²]','Δx·Δy','Δx+Δy'], a:1, e:'畢氏。'},
+    {q:'A(0,0)B(3,4)距離？', o:['5','7','√7','12'], a:0, e:'√25。'},
+    {q:'同水平線距離？', o:['|Δx|','|Δy|','0','Δx+Δy'], a:0, e:'|Δx|。'}
+  ],
+  info:[
+    {big:'√[Δx²+Δy²]', cap:'距離公式', c:'var(--green)'},
+    {big:'畢氏定理', cap:'斜邊', c:'var(--blue)'},
+    {big:'都要平方', cap:'非曼哈頓', c:'var(--pink)'}
+  ]
+},
+{ key:'coordgeo', viz:'coordgeo', vizTitle:'坐標幾何 —— 等腰/中垂線/菱形（4 題）',
+  slides:[
+    {eb:'核心 應用', h:'距離＋中點解幾何', html:`
+      <div class="box">算三邊距離 → 判斷等腰/等邊；到兩端等距的點 → 中垂線。</div>
+      <div class="box y" style="text-align:center;">菱形面積 = 對角線乘積 ÷ 2。</div>
+      <div class="box g">👉 用下方 Canvas：看坐標幾何的解法。</div>`},
+    {eb:'例題 ★★★', h:'等距軌跡', html:`
+      <div class="exq" data-a="0">
+        <div class="exq-q"><span class="hl">Q</span>　P 到 A(0,0)、B(6,0) 等距的軌跡？</div>
+        <button class="exo" data-i="0">x=3（中垂線）</button>
+        <button class="exo" data-i="1">y=3</button>
+        <button class="exo" data-i="2">x=6</button>
+        <button class="exo" data-i="3">y=x</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">x²+y²=(x−6)²+y² → 12x=36 → x=3</div>
+          <div class="st">即 AB 的中垂線。</div>
+          <div class="an">答：x=3</div>
+        </div>
+      </div>`},
+    {eb:'例題 ★★★　等腰', h:'算三邊判斷', html:`
+      <div class="exq" data-a="1">
+        <div class="exq-q"><span class="hl">Q</span>　A(0,0),B(6,0),C(3,4) 的周長？</div>
+        <button class="exo" data-i="0">15</button>
+        <button class="exo" data-i="1">16</button>
+        <button class="exo" data-i="2">18</button>
+        <button class="exo" data-i="3">14</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">AB=6, AC=5, BC=5（等腰）；周長 5+5+6=16</div>
+          <div class="an">答：16</div>
+        </div>
+      </div>`}
+  ],
+  fa:[
+    {q:'到兩端等距的點？', o:['中點','中垂線','平行線','圓'], a:1, e:'中垂線。'},
+    {q:'菱形面積？', o:['對角線積/2','邊²','底×高','對角線和'], a:0, e:'d₁d₂/2。'},
+    {q:'判斷等腰用？', o:['角度','距離公式','中點','面積'], a:1, e:'算兩邊相等。'}
+  ],
+  info:[
+    {big:'等距→中垂線', cap:'軌跡', c:'var(--green)'},
+    {big:'算距離判斷', cap:'等腰/等邊', c:'var(--blue)'},
+    {big:'菱形 d₁d₂/2', cap:'面積', c:'var(--yellow)'}
+  ]
+}];
+
+const QUIZ = [
+  {type:'choice', q:'中點公式？', o:['(x₁−x₂,y₁−y₂)','((x₁+x₂)/2,(y₁+y₂)/2)','(x₁+x₂,y₁+y₂)','(x₁x₂,y₁y₂)'], a:1, e:'取平均。'},
+  {type:'choice', q:'A(2,1)B(8,9)中點？', o:['(3,4)','(6,8)','(5,5)','(10,10)'], a:2, e:'(5,5)。'},
+  {type:'choice', q:'A(0,0)B(6,8)中點？', o:['(3,4)','(6,8)','(3,8)','(6,4)'], a:0, e:'(3,4)。'},
+  {type:'choice', q:'中點M(4,3)A(2,1)求B？', o:['(3,2)','(6,5)','(2,2)','(8,7)'], a:1, e:'反求。'},
+  {type:'choice', q:'距離公式？', o:['|Δx|+|Δy|','√[(Δx)²+(Δy)²]','Δx·Δy','Δx+Δy'], a:1, e:'畢氏。'},
+  {type:'choice', q:'A(1,3)B(7,11)距離？', o:['14','10','√14','100'], a:1, e:'√100。'},
+  {type:'choice', q:'A(0,0)B(3,4)距離？', o:['5','7','√7','12'], a:0, e:'√25。'},
+  {type:'choice', q:'A(2,5)到O距離？', o:['√29','7','√7','29'], a:0, e:'√29。'},
+  {type:'choice', q:'A(-1,2)B(5,2)距離（同水平）？', o:['6','4','√6','8'], a:0, e:'|Δx|。'},
+  {type:'choice', q:'P(x,3)到O距離5，x？', o:['±4','4','±3','±5'], a:0, e:'x²=16。'},
+  {type:'choice', q:'A(0,0)B(6,0)C(3,4)是？', o:['等腰','等邊','直角','鈍角'], a:0, e:'AC=BC。'},
+  {type:'choice', q:'上題周長？', o:['15','16','18','14'], a:1, e:'16。'},
+  {type:'choice', q:'到A、B等距的軌跡？', o:['中點','中垂線','平行線','圓'], a:1, e:'中垂線。'},
+  {type:'choice', q:'菱形對角線6,8面積？', o:['24','48','14','12'], a:0, e:'d₁d₂/2。'},
+  {type:'choice', q:'長方形對角線互相？', o:['垂直','平分','平行','相等且平分'], a:3, e:'平分。'},
+  {type:'choice', q:'A(3,4)到B(3+t,4+t)=√50,t(t>0)？', o:['5','25','√5','10'], a:0, e:'2t²=50。'},
+  {type:'tf', q:'判斷：「中點是兩坐標相減除2。」', a:false, e:'錯。是相加。'},
+  {type:'choice', q:'BC中點,B(8,6)C(16,0)？', o:['(12,3)','(24,6)','(4,3)','(12,6)'], a:0, e:'平均。'}
+];
+
+const GAME = [
+  {name:'中點', qs:[
+    {q:'中點公式？', o:['減','((x₁+x₂)/2,..)','和','積'], a:1, e:'平均。'},
+    {q:'A(2,1)B(8,9)?', o:['(3,4)','(6,8)','(5,5)','(10,10)'], a:2, e:'(5,5)。'},
+    {q:'A(0,0)B(6,8)?', o:['(3,4)','(6,8)','(3,8)','(6,4)'], a:0, e:'(3,4)。'},
+    {q:'中點加還減？', o:['加除2','減','乘','除2'], a:0, e:'平均。'}
+  ]},
+  {name:'反求端點', qs:[
+    {q:'M(4,3)A(2,1)B?', o:['(3,2)','(6,5)','(2,2)','(8,7)'], a:1, e:'(6,5)。'},
+    {q:'M(3,-1)A(1,5)B?', o:['(5,-7)','(2,2)','(5,7)','(4,4)'], a:0, e:'(5,-7)。'},
+    {q:'反求分母？', o:['1','2','3','4'], a:1, e:'2。'},
+    {q:'x₁+a=?（M=Mₓ）', o:['Mₓ','2Mₓ','Mₓ/2','a'], a:1, e:'2Mₓ。'}
+  ]},
+  {name:'距離', qs:[
+    {q:'公式？', o:['|Δx|+|Δy|','√[Δx²+Δy²]','Δx·Δy','Δx+Δy'], a:1, e:'畢氏。'},
+    {q:'A(1,3)B(7,11)?', o:['14','10','√14','100'], a:1, e:'10。'},
+    {q:'A(0,0)B(3,4)?', o:['5','7','√7','12'], a:0, e:'5。'},
+    {q:'A(2,5)到O?', o:['√29','7','√7','29'], a:0, e:'√29。'}
+  ]},
+  {name:'特殊位置', qs:[
+    {q:'同水平線距離？', o:['|Δx|','|Δy|','0','Δx+Δy'], a:0, e:'|Δx|。'},
+    {q:'A(-1,2)B(5,2)?', o:['6','4','√6','8'], a:0, e:'6。'},
+    {q:'P(x,3)到O=5,x?', o:['±4','4','±3','±5'], a:0, e:'±4。'},
+    {q:'A(1,-2)到O?', o:['√5','5','3','√3'], a:0, e:'√5。'}
+  ]},
+  {name:'判斷形狀', qs:[
+    {q:'A(0,0)B(6,0)C(3,4)?', o:['等腰','等邊','直角','鈍角'], a:0, e:'等腰。'},
+    {q:'上題周長?', o:['15','16','18','14'], a:1, e:'16。'},
+    {q:'判斷等腰用?', o:['角','距離','中點','面積'], a:1, e:'算邊。'},
+    {q:'菱形面積?', o:['對角線積/2','邊²','底高','和'], a:0, e:'d₁d₂/2。'}
+  ]},
+  {name:'軌跡與應用', qs:[
+    {q:'等距兩點軌跡?', o:['中點','中垂線','平行','圓'], a:1, e:'中垂線。'},
+    {q:'到A,B等距 A(0,0)B(6,0)?', o:['x=3','y=3','x=6','y=x'], a:0, e:'x=3。'},
+    {q:'長方形對角線?', o:['垂直','相等且平分','平行','無'], a:1, e:'平分。'},
+    {q:'BC中點B(8,6)C(16,0)?', o:['(12,3)','(24,6)','(4,3)','(12,6)'], a:0, e:'(12,3)。'}
+  ]}
+];
+
+document.getElementById('goals').innerHTML = GOALS.map((g,i)=>
+  `<div class="goal"><div class="bdg">${i+1}</div>${g}</div>`).join('');
+
+const wrap = document.getElementById('wrap');
+DATA.forEach((sec, si)=>{
+  const p = document.createElement('div');
+  p.className = 'panel' + (si===0?' on':'');
+  p.dataset.p = si;
+  p.innerHTML = `
+    <div class="card">
+      <h3><span class="ic">📽</span>簡報翻頁器</h3>
+      <div class="deck" data-deck="${si}">
+        ${sec.slides.map((s,i)=>`<div class="sl${i===0?' on':''}" data-i="${i}">
+          <div class="eyebrow">${s.eb}</div><h4>${s.h}</h4>${s.html}</div>`).join('')}
+      </div>
+      <div class="nav">
+        <button class="btn" data-nav="prev" data-s="${si}">◀ 上一張</button>
+        <span class="pg" id="pg-${si}">1 / ${sec.slides.length}</span>
+        <button class="btn" data-nav="next" data-s="${si}">下一張 ▶</button>
+      </div>
+      <div class="dots" id="dots-${si}">
+        ${sec.slides.map((_,i)=>`<button class="dot${i===0?' on':''}" data-s="${si}" data-i="${i}"></button>`).join('')}
+      </div>
+    </div>
+    <div class="card">
+      <h3><span class="ic">🎯</span>Canvas 互動視覺化<span style="font-size:14px;color:var(--soft);font-weight:400;">　${sec.vizTitle}</span></h3>
+      <div class="cv-wrap">
+        <canvas class="viz" data-viz="${sec.viz}" data-si="${si}"></canvas>
+        <div class="ctrl" data-ctrl="${si}"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3><span class="ic">✅</span>形成性評量</h3>
+      ${sec.fa.map((f,i)=>`<div class="q" data-fa="${si}-${i}">
+        <div class="qt"><span class="qn">Q${i+1}</span>${f.q}</div>
+        <div class="opts">${f.o.map((o,oi)=>`<button class="opt" data-si="${si}" data-qi="${i}" data-oi="${oi}">${o}</button>`).join('')}</div>
+        <div class="fb" id="fb-${si}-${i}"></div>
+      </div>`).join('')}
+    </div>
+    <div class="card">
+      <h3><span class="ic">📊</span>資訊圖表</h3>
+      <div class="info">
+        ${sec.info.map(c=>`<div class="icard"><div class="big" style="color:${c.c}">${c.big}</div><div class="cap">${c.cap}</div></div>`).join('')}
+      </div>
+    </div>`;
+  wrap.appendChild(p);
+});
+
+const qp = document.createElement('div');
+qp.className='panel'; qp.dataset.p='3';
+qp.innerHTML = `<div class="card"><h3><span class="ic">📝</span>題型測驗　<span style="font-size:14px;color:var(--soft);font-weight:400;">單選 · 是非 · 填充，共 ${QUIZ.length} 題</span></h3>
+  <div id="quizBox"></div>
+  <div style="display:flex;gap:10px;align-items:center;margin-top:14px;flex-wrap:wrap;">
+    <button class="btn" id="gradeBtn" style="background:rgba(242,217,121,.2);border-color:var(--yellow);color:var(--yellow);font-weight:700;">📊 批改並看成績</button>
+    <button class="btn" id="resetQuiz">🔄 重做</button>
+    <div class="readout" id="score" style="display:none;"></div>
+  </div></div>
+  <div class="card"><h3><span class="ic">📋</span>公式速查表</h3>
+    <div class="frow"><div class="flab">距離公式</div><div class="fval">d = √[(x₂−x₁)²+(y₂−y₁)²]</div></div>
+    <div class="frow"><div class="flab">來源</div><div class="fval">畢氏定理（AB 為斜邊）</div></div>
+    <div class="frow"><div class="flab">中點公式</div><div class="fval">M = ((x₁+x₂)/2,(y₁+y₂)/2)</div></div>
+    <div class="frow"><div class="flab">中點</div><div class="fval">各坐標取平均</div></div>
+    <div class="frow"><div class="flab">⚠️ 距離</div><div class="fval">要平方（非 |Δx|+|Δy|）</div></div>
+    <div class="frow"><div class="flab">⚠️ 中點</div><div class="fval">加再除 2（不是相減）</div></div>
+    <div class="frow"><div class="flab">同水平線</div><div class="fval">距離 = |Δx|</div></div>
+    <div class="frow"><div class="flab">已知中點求端點</div><div class="fval">(x₁+a)/2 = Mₓ</div></div>
+    <div class="frow"><div class="flab">等距軌跡</div><div class="fval">到兩端等距 → 中垂線</div></div>
+    <div class="frow"><div class="flab">菱形面積</div><div class="fval">對角線乘積 ÷ 2</div></div>
+    <div class="frow"><div class="flab">判斷形狀</div><div class="fval">算三邊距離看是否相等</div></div>
+  </div>`;
+wrap.appendChild(qp);
+
+const gp = document.createElement('div');
+gp.className='panel'; gp.dataset.p='4';
+gp.innerHTML = `<div class="card"><h3><span class="ic">🎮</span>闖關遊戲　<span style="font-size:14px;color:var(--soft);font-weight:400;">6 關挑戰 · 每題 20 秒 · 連擊與速度都有加分</span></h3>
+  <div class="gscreen on" id="gStart">
+    <div style="text-align:center;font-size:clamp(15px,2vw,18px);line-height:1.8;">
+      闖過 <b class="hl">6</b> 關，每關 1 題，每題 <b class="hl">20 秒</b>。<br>
+      計分：基礎 <b class="hl">10</b> 分 + 連擊獎勵（最多 <b class="hl">5</b>）+ 速度獎勵（最多 <b class="hl">5</b>）＝ 單題最高 <b class="hl">20</b> 分</div>
+    <div class="lvchips" id="gStartChips"></div>
+    <div style="text-align:center;"><button class="btn" id="gGo" style="background:rgba(242,217,121,.25);border-color:var(--yellow);color:var(--yellow);font-weight:700;font-size:16px;padding:10px 24px;">🚀 開始挑戰</button></div>
+  </div>
+  <div class="gscreen" id="gPlay">
+    <div class="hud">
+      <div class="st">關卡<b id="hLv">1/6</b></div>
+      <div class="st">分數<b id="hSc">0</b></div>
+      <div class="st">連擊<b id="hStk">0</b></div>
+      <div class="st">剩餘<b id="hT">20</b></div>
+    </div>
+    <div class="tbar"><div class="tfill" id="tFill"></div></div>
+    <div class="lvchips" id="gChips"></div>
+    <div class="gq" id="gQ"></div>
+    <div class="gopts" id="gO"></div>
+    <div class="gfb" id="gFb"></div>
+    <div style="text-align:center;margin-top:12px;"><button class="btn" id="gNext" style="display:none;">下一關 ▶</button></div>
+  </div>
+  <div class="gscreen" id="gEnd">
+    <div class="rank" id="gRank">🏆</div>
+    <div style="text-align:center;font-size:clamp(17px,2.6vw,22px);font-family:'Noto Serif TC';" id="gFinal"></div>
+    <div style="text-align:center;color:var(--soft);margin-top:8px;" id="gStats"></div>
+    <div style="text-align:center;margin-top:16px;"><button class="btn" id="gAgain" style="background:rgba(242,217,121,.25);border-color:var(--yellow);color:var(--yellow);font-weight:700;">🔄 再挑戰一次</button></div>
+  </div></div>`;
+wrap.appendChild(gp);
+document.getElementById('gStartChips').innerHTML = GAME.map((g,i)=>`<div class="lvchip">第${i+1}關 ${g.name}</div>`).join('');
+
+const qb = document.getElementById('quizBox');
+QUIZ.forEach((q,i)=>{
+  const d = document.createElement('div'); d.className='q';
+  let body='';
+  if(q.type==='choice') body = `<div class="opts">${q.o.map((o,oi)=>`<button class="opt" data-quiz="${i}" data-oi="${oi}">${o}</button>`).join('')}</div>`;
+  else if(q.type==='tf') body = `<div class="opts" style="flex-direction:row;gap:10px;">
+      <button class="opt" data-quiz="${i}" data-oi="1" style="flex:1;">⭕ 對</button>
+      <button class="opt" data-quiz="${i}" data-oi="0" style="flex:1;">❌ 錯</button></div>`;
+  else body = `<div><input class="fill" data-quiz="${i}" placeholder="?"></div>`;
+  d.innerHTML = `<div class="qt"><span class="qn">${i+1}</span>
+    <span style="font-size:12px;color:var(--soft);border:1px solid rgba(243,239,226,.25);border-radius:6px;padding:1px 6px;margin-right:6px;">
+    ${q.type==='choice'?'單選':q.type==='tf'?'是非':'填充'}</span>${q.q}</div>${body}
+    <div class="fb" id="qfb-${i}"></div>`;
+  qb.appendChild(d);
+});
+
+document.getElementById('tabs').addEventListener('click', e=>{
+  const t = e.target.closest('.tab'); if(!t) return;
+  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on', x===t));
+  document.querySelectorAll('.panel').forEach(x=>x.classList.toggle('on', x.dataset.p===t.dataset.p));
+  document.getElementById('goalCard').style.display = (t.dataset.p==='4')?'none':'';
+  window.scrollTo({top:0,behavior:'smooth'});
+  setTimeout(resizeAll, 60);
+});
+
+const cur = DATA.map(()=>0);
+function showSlide(si, i){
+  const deck = document.querySelector(`[data-deck="${si}"]`);
+  const sl = deck.querySelectorAll('.sl');
+  i = Math.max(0, Math.min(sl.length-1, i));
+  cur[si] = i;
+  sl.forEach((s,k)=>s.classList.toggle('on', k===i));
+  document.getElementById('pg-'+si).textContent = `${i+1} / ${sl.length}`;
+  document.querySelectorAll(`#dots-${si} .dot`).forEach((d,k)=>d.classList.toggle('on', k===i));
+}
+document.addEventListener('click', e=>{
+  const n = e.target.closest('[data-nav]');
+  if(n){ const si=+n.dataset.s; showSlide(si, cur[si] + (n.dataset.nav==='next'?1:-1)); return; }
+  const d = e.target.closest('.dot');
+  if(d){ showSlide(+d.dataset.s, +d.dataset.i); return; }
+});
+document.addEventListener('keydown', e=>{
+  const p = document.querySelector('.panel.on'); if(!p) return;
+  const si = +p.dataset.p; if(si>=DATA.length) return;
+  if(e.key==='ArrowRight') showSlide(si, cur[si]+1);
+  if(e.key==='ArrowLeft') showSlide(si, cur[si]-1);
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.opt[data-si]'); if(!o) return;
+  const si=+o.dataset.si, qi=+o.dataset.qi, oi=+o.dataset.oi;
+  const f = DATA[si].fa[qi];
+  const box = document.querySelector(`[data-fa="${si}-${qi}"]`);
+  box.querySelectorAll('.opt').forEach((b,k)=>{
+    b.disabled = true;
+    if(k===f.a) b.classList.add('right'); else if(k===oi) b.classList.add('wrong');
+  });
+  const fb = document.getElementById(`fb-${si}-${qi}`);
+  const ok = oi===f.a;
+  fb.className = 'fb on ' + (ok?'ok':'no');
+  fb.innerHTML = (ok?'✅ <b>答對了！</b> ':'❌ <b>再想想。</b> ') + f.e;
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.exo');
+  if(o && !o.disabled){
+    const box = o.closest('.exq');
+    const ans = +box.dataset.a, pick = +o.dataset.i;
+    if(pick === ans){
+      box.querySelectorAll('.exo').forEach(b=>{ b.disabled=true; if(+b.dataset.i===ans) b.classList.add('right'); });
+      box.querySelector('.exsol').classList.add('on');
+      box.querySelector('.exlock').classList.add('hide');
+    } else {
+      o.classList.add('wrong','shake');
+      setTimeout(()=>o.classList.remove('shake'), 420);
+      o.disabled = true;
+      const lock = box.querySelector('.exlock');
+      lock.innerHTML = '🔒 再想想 —— 答對才會顯示詳解'; lock.style.color='var(--pink)';
+    }
+  }
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.opt[data-quiz]'); if(!o) return;
+  const i = +o.dataset.quiz;
+  o.parentElement.querySelectorAll('.opt').forEach(b=>b.classList.remove('right','wrong'));
+  o.classList.add('right'); o.dataset.sel='1';
+  o.parentElement.querySelectorAll('.opt').forEach(b=>{ if(b!==o) delete b.dataset.sel; });
+});
+document.getElementById('gradeBtn').addEventListener('click', ()=>{
+  let right=0;
+  QUIZ.forEach((q,i)=>{
+    const fb = document.getElementById('qfb-'+i);
+    let ok=false, picked=null;
+    if(q.type==='fill'){
+      const inp = document.querySelector(`.fill[data-quiz="${i}"]`);
+      const v = (inp.value||'').trim().replace(/−/g,'-').replace(/\s/g,'');
+      ok = q.a.some(a=>a.replace(/−/g,'-').replace(/\s/g,'')===v);
+      inp.style.borderBottomColor = ok?'var(--green)':'var(--pink)';
+    } else {
+      const sel = document.querySelector(`.opt[data-quiz="${i}"][data-sel="1"]`);
+      if(sel){ picked=+sel.dataset.oi; ok = (q.type==='tf') ? (picked===1)===q.a : picked===q.a; }
+      document.querySelectorAll(`.opt[data-quiz="${i}"]`).forEach(b=>{
+        b.classList.remove('right','wrong');
+        const bi=+b.dataset.oi;
+        const isAns = (q.type==='tf') ? ((bi===1)===q.a) : (bi===q.a);
+        if(isAns) b.classList.add('right'); else if(picked===bi) b.classList.add('wrong');
+      });
+    }
+    if(ok) right++;
+    fb.className='fb on '+(ok?'ok':'no');
+    fb.innerHTML = (ok?'✅ <b>正確</b> ':'❌ <b>錯誤</b> ') + q.e;
+  });
+  const s = document.getElementById('score');
+  const pct = Math.round(right/QUIZ.length*100);
+  s.style.display='block';
+  s.innerHTML = `成績：<b>${right} / ${QUIZ.length}</b>　（${pct} 分）　${pct>=80?'🏆 很棒！':pct>=60?'💪 再加油':'📖 建議重看重點'}`;
+});
+document.getElementById('resetQuiz').addEventListener('click', ()=>{
+  document.querySelectorAll('.opt[data-quiz]').forEach(b=>{b.classList.remove('right','wrong'); delete b.dataset.sel;});
+  document.querySelectorAll('.fill').forEach(i=>{i.value=''; i.style.borderBottomColor='var(--yellow)';});
+  document.querySelectorAll('[id^="qfb-"]').forEach(f=>f.className='fb');
+  document.getElementById('score').style.display='none';
+});
+
+/* ===== 闖關遊戲 ===== */
+const G = {lv:0, score:0, streak:0, best:0, t:20, timer:null, cur:null, answered:false};
+function gShow(id){ ['gStart','gPlay','gEnd'].forEach(x=>document.getElementById(x).classList.toggle('on', x===id)); }
+function gChips(){
+  document.getElementById('gChips').innerHTML = GAME.map((g,i)=>
+    `<div class="lvchip ${i<G.lv?'done':i===G.lv?'now':''}">${i+1}. ${g.name}</div>`).join('');
+}
+function gLoad(){
+  if(G.lv>=GAME.length){ gFinish(); return; }
+  G.answered=false; G.t=20;
+  const bank = GAME[G.lv].qs;
+  G.cur = bank[Math.floor(Math.random()*bank.length)];
+  document.getElementById('hLv').textContent = (G.lv+1)+'/'+GAME.length;
+  document.getElementById('hSc').textContent = G.score;
+  document.getElementById('hStk').textContent = G.streak;
+  document.getElementById('gQ').innerHTML = `<span style="color:var(--blue);font-size:15px;">第 ${G.lv+1} 關 · ${GAME[G.lv].name}</span><br>${G.cur.q}`;
+  document.getElementById('gO').innerHTML = G.cur.o.map((o,i)=>
+    `<button class="gopt" data-g="${i}">${'ABCD'[i]}. ${o}</button>`).join('');
+  document.getElementById('gFb').className='gfb';
+  document.getElementById('gNext').style.display='none';
+  gChips();
+  clearInterval(G.timer);
+  G.timer = setInterval(()=>{
+    G.t -= 0.1;
+    document.getElementById('hT').textContent = Math.max(0,G.t).toFixed(0);
+    document.getElementById('tFill').style.width = Math.max(0,G.t/20*100)+'%';
+    if(G.t<=0){ clearInterval(G.timer); gAnswer(-1); }
+  },100);
+}
+function gAnswer(pick){
+  if(G.answered) return;
+  G.answered = true; clearInterval(G.timer);
+  const ans = G.cur.a, ok = pick===ans;
+  document.querySelectorAll('.gopt').forEach((b,i)=>{
+    b.disabled=true;
+    if(i===ans) b.classList.add('right'); else if(i===pick) b.classList.add('wrong');
+  });
+  let gain=0, sb=0, tb=0;
+  if(ok){
+    G.streak++; G.best=Math.max(G.best,G.streak);
+    sb = Math.min(5, G.streak-1); tb = Math.min(5, Math.floor(G.t/4));
+    gain = 10+sb+tb; G.score += gain;
+  } else { G.streak = 0; }
+  document.getElementById('hSc').textContent = G.score;
+  document.getElementById('hStk').textContent = G.streak;
+  const fb = document.getElementById('gFb');
+  fb.className = 'gfb on '+(ok?'ok':'no');
+  fb.innerHTML = (ok? `✅ <b>答對！+${gain} 分</b>（基礎10 + 連擊${sb} + 速度${tb}）<br>`
+                    : (pick===-1?'⏰ <b>時間到！</b><br>':'❌ <b>答錯了</b><br>')) + G.cur.e;
+  document.getElementById('gNext').style.display='inline-block';
+  document.getElementById('gNext').textContent = (G.lv>=GAME.length-1)?'看成績 🏁':'下一關 ▶';
+}
+function gFinish(){
+  clearInterval(G.timer);
+  const max = GAME.length*20, pct = Math.round(G.score/max*100);
+  const rank = pct>=85?['🏆','數論大師']:pct>=70?['🥇','高手']:pct>=50?['🥈','不錯']:['📖','再加油'];
+  document.getElementById('gRank').textContent = rank[0];
+  document.getElementById('gFinal').innerHTML = `<b class="hl">${G.score}</b> / ${max} 分　·　${rank[1]}`;
+  document.getElementById('gStats').innerHTML = `最高連擊 <b class="hl">${G.best}</b>　·　完成 ${GAME.length} 關`;
+  gShow('gEnd');
+}
+document.getElementById('gGo').addEventListener('click', ()=>{ G.lv=0;G.score=0;G.streak=0;G.best=0; gShow('gPlay'); gLoad(); });
+document.getElementById('gAgain').addEventListener('click', ()=>{ G.lv=0;G.score=0;G.streak=0;G.best=0; gShow('gPlay'); gLoad(); });
+document.getElementById('gNext').addEventListener('click', ()=>{ G.lv++; gLoad(); });
+document.addEventListener('click', e=>{ const b=e.target.closest('.gopt'); if(!b||b.disabled) return; gAnswer(+b.dataset.g); });
+
+/* ===== Canvas ===== */
+const VIZ = {}; let DPR=1;
+
+/* ① 中點 */
+const MID=[
+  {A:[1,3], B:[7,11], m:[4,7]},
+  {A:[2,1], B:[8,9], m:[5,5]},
+  {A:[-3,4], B:[5,-2], m:[1,1]},
+  {A:[0,0], B:[6,8], m:[3,4]},
+];
+/* ② 距離 */
+const DC=[
+  {A:[1,3], B:[7,11], dx:6, dy:8, d:'10'},
+  {A:[0,0], B:[3,4], dx:3, dy:4, d:'5'},
+  {A:[2,5], B:[-1,1], dx:-3, dy:-4, d:'5'},
+  {A:[1,-2], B:[0,0], dx:-1, dy:2, d:'√5'},
+];
+/* ③ 坐標幾何 */
+const CG=[
+  {q:'A(0,0),B(6,0),C(3,4) 是等腰？', steps:['AB=6, AC=5, BC=5','AC=BC → 等腰'], r:'等腰，周長 16'},
+  {q:'P 到 A(0,0)、B(6,0) 等距的軌跡', steps:['x²+y²=(x−6)²+y²','12x=36'], r:'x=3（中垂線）'},
+  {q:'菱形 (0,3)(4,0)(0,−3)(−4,0) 面積', steps:['對角線 6、8','6×8/2'], r:'24'},
+  {q:'中點 M(3,−1)、A(1,5)，求 B', steps:['(1+a)/2=3→a=5','(5+b)/2=−1→b=−7'], r:'B=(5,−7)'},
+];
+
+function initViz(cv){
+  const si=+cv.dataset.si, kind=cv.dataset.viz;
+  const ctx=cv.getContext('2d');
+  const st=VIZ[si]={kind,cv,ctx};
+  const ctrl=document.querySelector(`[data-ctrl="${si}"]`);
+  const revLabel = kind==='midpt' ? '🔍 求中點'
+                 : kind==='dcalc' ? '🔍 求距離' : '🔍 揭曉解法';
+  st.i=0; st.show=false;
+  ctrl.innerHTML=`<div class="readout" id="ro-${si}"></div>
+    <button class="btn" data-t="rev" data-si="${si}" style="background:rgba(242,217,121,.2);border-color:var(--yellow);color:var(--yellow);font-weight:700;">${revLabel}</button>
+    <button class="btn" data-t="next" data-si="${si}">下一題 ▶</button>`;
+  draw(si);
+}
+
+function plane(ctx, w, h, A, B, M){
+  const ox=w/2, oy=h/2+6, u=Math.min((w-40)/14,(h-40)/14);
+  ctx.strokeStyle='rgba(243,239,226,.35)'; ctx.lineWidth=1;
+  ctx.beginPath(); ctx.moveTo(ox-6*u,oy); ctx.lineTo(ox+6*u,oy); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(ox,oy-6*u); ctx.lineTo(ox,oy+6*u); ctx.stroke();
+  const P=(x,y)=>[ox+x*u, oy-y*u];
+  const [ax,ay]=P(A[0],A[1]), [bx,by]=P(B[0],B[1]);
+  ctx.strokeStyle='#98c9dc'; ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(ax,ay); ctx.lineTo(bx,by); ctx.stroke();
+  [[ax,ay,'#a6d6a0','A'],[bx,by,'#a6d6a0','B']].forEach(([x,y,c,l])=>{
+    ctx.fillStyle=c; ctx.beginPath(); ctx.arc(x,y,4,0,7); ctx.fill();
+    ctx.font='11px "Noto Serif TC"'; ctx.textAlign='center'; ctx.fillText(l,x,y-8);
+  });
+  if(M){ const [mx,my]=P(M[0],M[1]); ctx.fillStyle='#f2d979'; ctx.beginPath(); ctx.arc(mx,my,4.5,0,7); ctx.fill();
+    ctx.fillStyle='#f2d979'; ctx.fillText('M',mx+8,my); }
+}
+
+function drawMid(st, ctx, w, h, ro){
+  const E=MID[st.i];
+  ctx.textAlign='center';
+  ctx.fillStyle='rgba(242,217,121,.85)'; ctx.font='bold 13px "Noto Sans TC"';
+  ctx.fillText(`中點：A(${E.A})、B(${E.B})`, w/2, 15);
+  plane(ctx, w, h, E.A, E.B, st.show?E.m:null);
+  ctx.textAlign='center';
+  if(!st.show){
+    ctx.fillStyle='rgba(243,239,226,.4)'; ctx.font='12px "Noto Sans TC"';
+    ctx.fillText('🔒 M = ((x₁+x₂)/2, (y₁+y₂)/2)', w/2, h-8);
+  } else {
+    ctx.fillStyle='#f2d979'; ctx.font='bold 15px "Noto Serif TC"';
+    ctx.fillText(`M = (${E.m[0]}, ${E.m[1]})`, w/2, h-8);
+  }
+  ro.innerHTML = st.show ? `A(${E.A})、B(${E.B}) → 中點 <b style="color:var(--yellow)">(${E.m[0]}, ${E.m[1]})</b>`
+    : `A(${E.A})、B(${E.B})　<span style="color:rgba(243,239,226,.5)">—— 取平均</span>`;
+}
+
+function drawDc(st, ctx, w, h, ro){
+  const E=DC[st.i];
+  ctx.textAlign='center';
+  ctx.fillStyle='rgba(242,217,121,.85)'; ctx.font='bold 13px "Noto Sans TC"';
+  ctx.fillText(`距離：A(${E.A})、B(${E.B})`, w/2, 15);
+  plane(ctx, w, h, E.A, E.B, null);
+  ctx.textAlign='center';
+  if(!st.show){
+    ctx.fillStyle='rgba(243,239,226,.4)'; ctx.font='12px "Noto Sans TC"';
+    ctx.fillText('🔒 d = √[(Δx)²+(Δy)²]', w/2, h-8);
+  } else {
+    ctx.fillStyle='#a6d6a0'; ctx.font='bold 14px "Noto Serif TC"';
+    ctx.fillText(`d = √(${E.dx}²+${E.dy}²) = ${E.d}`, w/2, h-8);
+  }
+  ro.innerHTML = st.show ? `A(${E.A})、B(${E.B})：d = √(${E.dx}²+${E.dy}²) = <b style="color:var(--green)">${E.d}</b>`
+    : `A(${E.A})、B(${E.B})　<span style="color:rgba(243,239,226,.5)">—— 距離</span>`;
+}
+
+function drawCg(st, ctx, w, h, ro){
+  const E=CG[st.i];
+  ctx.textAlign='center';
+  ctx.fillStyle='rgba(242,217,121,.85)'; ctx.font='bold 13px "Noto Sans TC"';
+  ctx.fillText('坐標幾何', w/2, 16);
+  ctx.fillStyle='#f3efe2'; ctx.font='14px "Noto Serif TC"';
+  ctx.fillText(E.q, w/2, 42);
+  if(!st.show){
+    ctx.fillStyle='rgba(243,239,226,.4)'; ctx.font='13px "Noto Sans TC"';
+    ctx.fillText('🔒 用距離/中點公式解', w/2, 86);
+  } else {
+    ctx.font='13px "Noto Serif TC"'; ctx.textAlign='left'; let y=66;
+    E.steps.forEach(s=>{ ctx.fillStyle='rgba(243,239,226,.8)'; ctx.fillText('· '+s, 24, y); y+=20; });
+    ctx.textAlign='center';
+    ctx.fillStyle='#a6d6a0'; ctx.font='bold 17px "Noto Serif TC"';
+    ctx.fillText('→ ' + E.r, w/2, h-12);
+  }
+  ro.innerHTML = st.show ? `${E.q} → <b style="color:var(--green)">${E.r}</b>`
+    : `${E.q}　<span style="color:rgba(243,239,226,.5)">—— 算算看</span>`;
+}
+
+function draw(si){
+  const st=VIZ[si]; if(!st) return;
+  const {cv,ctx,kind}=st, w=cv.width/DPR, h=cv.height/DPR;
+  ctx.clearRect(0,0,w,h);
+  const ro=document.getElementById('ro-'+si);
+  if(kind==='midpt') drawMid(st,ctx,w,h,ro);
+  else if(kind==='dcalc') drawDc(st,ctx,w,h,ro);
+  else if(kind==='coordgeo') drawCg(st,ctx,w,h,ro);
+}
+
+document.addEventListener('click', e=>{
+  const btn=e.target.closest('[data-t]'); if(!btn) return;
+  const si=+btn.dataset.si, st=VIZ[si]; if(!st) return;
+  const t=btn.dataset.t;
+  const arr = st.kind==='midpt'?MID : st.kind==='dcalc'?DC : CG;
+  if(t==='rev') st.show=true;
+  if(t==='next'){ st.i=(st.i+1)%arr.length; st.show=false; }
+  draw(si);
+});
+
+function resizeAll(){
+  DPR = Math.min(2, window.devicePixelRatio||1);
+  document.querySelectorAll('canvas.viz').forEach(cv=>{
+    const w = cv.clientWidth || cv.parentElement.clientWidth;
+    const h = (cv.dataset.viz==='dcalc') ? 180 : (cv.dataset.viz==='coordgeo' ? 176 : 180);
+    cv.width=w*DPR; cv.height=h*DPR; cv.style.height=h+'px';
+    cv.getContext('2d').setTransform(DPR,0,0,DPR,0,0);
+  });
+  Object.keys(VIZ).forEach(k=>draw(+k));
+}
+document.querySelectorAll('canvas.viz').forEach(initViz);
+window.addEventListener('resize', resizeAll);
+resizeAll();
+</script>
+<div class="hint">← → 鍵可翻頁　·　Canvas 用按鈕互動　·　支援平板觸控</div>
+</body></html>

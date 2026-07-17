@@ -1,0 +1,253 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>八下 3-3 三角形的全等性質｜授課簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--chalk-soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);padding:24px 14px;}
+.deck{max-width:1060px;margin:0 auto;}
+.print-hint{text-align:center;color:rgba(243,239,226,0.4);font-size:13px;padding:6px 0 22px;}
+.print-hint b{color:var(--yellow);}
+.slide{position:relative;min-height:576px;margin:0 auto 26px;padding:44px 52px;
+ background:radial-gradient(ellipse at 18% 12%,rgba(255,255,255,0.05),transparent 45%),
+  radial-gradient(ellipse at 82% 88%,rgba(255,255,255,0.035),transparent 45%),
+  radial-gradient(ellipse at 60% 40%,rgba(120,160,130,0.10),transparent 60%),
+  linear-gradient(160deg,var(--board) 0%,var(--board2) 100%);
+ border-radius:14px;box-shadow:0 10px 34px rgba(0,0,0,0.55);
+ border:1px solid rgba(242,217,121,0.14);overflow:hidden;display:flex;flex-direction:column;}
+.slide::before{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;
+ background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.014) 40px,rgba(255,255,255,0.014) 41px),
+  radial-gradient(circle at 30% 72%,rgba(255,255,255,0.03),transparent 8%),
+  radial-gradient(circle at 76% 24%,rgba(255,255,255,0.025),transparent 7%);}
+.slide::after{content:attr(data-pg);position:absolute;bottom:15px;right:26px;font-family:'Caveat',cursive;font-size:20px;color:rgba(243,239,226,0.4);}
+.tag{position:absolute;top:20px;right:26px;font-family:'Caveat',cursive;font-size:22px;color:var(--pink);transform:rotate(4deg);}
+.eyebrow{font-family:'Caveat',cursive;font-size:25px;color:var(--yellow);letter-spacing:1px;margin-bottom:8px;opacity:0.92;}
+.slide h1{font-family:'Noto Serif TC',serif;font-size:46px;font-weight:900;line-height:1.28;letter-spacing:1px;
+ text-shadow:0 0 1px rgba(243,239,226,0.5),1px 1px 0 rgba(0,0,0,0.2);}
+.slide h2{font-family:'Noto Serif TC',serif;font-size:33px;font-weight:900;color:var(--yellow);
+ margin-bottom:20px;padding-bottom:11px;border-bottom:2px dashed rgba(242,217,121,0.4);
+ text-shadow:0 0 1px rgba(242,217,121,0.4);}
+.slide p{font-size:20px;line-height:1.85;margin-bottom:12px;}
+.big-center{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;}
+.big-center .lead,.lead{font-family:'Caveat',cursive;font-size:30px;color:var(--blue);letter-spacing:1px;margin-top:12px;}
+ul{list-style:none;margin:8px 0;}
+li{font-size:21px;line-height:1.95;padding-left:32px;position:relative;margin-bottom:4px;}
+li::before{content:'\2726';position:absolute;left:4px;color:var(--yellow);font-size:17px;top:3px;}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.34);border-radius:12px;padding:15px 21px;margin:12px 0;font-size:19px;line-height:1.8;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.38);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.38);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.34);}
+.eg{position:relative;background:rgba(0,0,0,0.24);border:1px solid rgba(242,217,121,0.2);border-radius:10px;padding:17px 22px;margin:12px 0;font-size:19px;}
+.eg::before{content:'';position:absolute;top:-8px;left:38px;width:58px;height:15px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.eg .q{color:var(--blue);font-weight:700;margin-bottom:8px;font-size:19px;}
+.eg .a{color:var(--green);font-weight:700;margin-top:6px;}
+.eg .stp{color:var(--chalk-soft);font-size:18px;margin:3px 0;}
+.tip{display:flex;gap:12px;align-items:flex-start;background:rgba(242,217,121,0.09);border:1.5px dashed rgba(242,217,121,0.45);border-radius:12px;padding:13px 18px;margin:10px 0;}
+.tip .ic{font-size:24px;line-height:1;}.tip .tx{font-size:18px;line-height:1.7;}
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:18px;}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.26);padding:10px 14px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.two{display:flex;gap:20px;}.two>div{flex:1;}
+svg{display:block;margin:6px auto;max-width:100%;}
+@media print{
+ body{background:#0a130d;padding:0;}
+ .deck{max-width:none;}
+ .print-hint{display:none;}
+ .slide{margin:0;border-radius:0;box-shadow:none;min-height:100vh;
+  page-break-after:always;break-after:page;padding:32px 44px;justify-content:center;}
+ .slide:last-child{page-break-after:auto;break-after:auto;}
+ .slide h1{font-size:40px;}
+ .slide h2{font-size:27px;margin-bottom:13px;padding-bottom:8px;}
+ .slide p{font-size:17px;line-height:1.55;margin-bottom:6px;}
+ li{font-size:17px;line-height:1.55;margin-bottom:1px;padding-left:26px;}
+ .eyebrow{font-size:21px;margin-bottom:5px;}
+ .big-center .lead,.lead{font-size:26px;}
+ .box{font-size:16px;padding:10px 16px;margin:6px 0;line-height:1.5;}
+ .eg{font-size:16px;padding:11px 16px;margin:6px 0;}
+ .tip{font-size:16px;padding:10px 14px;margin:6px 0;}
+ .tbl{font-size:15px;margin:6px 0;}
+ .tbl th,.tbl td{padding:6px 10px;}
+ svg{max-height:210px;}
+}
+</style></head><body><div class="deck">
+<div class="print-hint">共 <b>13</b> 張・列印時每張一頁（Ctrl+P → 橫向 → 背景圖形）</div>
+
+
+<!-- 1 -->
+<div class="slide" data-pg="1 / 13"><div class="tag">Start!</div><div class="big-center">
+<div class="eyebrow">國二下學期・第三章 三角形的基本性質</div>
+<h1>3-3　三角形的全等性質</h1>
+<div class="lead">全等 = 完全一樣的形狀和大小<br>
+只需驗證<span style="color:#f2d979;">特定三個條件</span></div><svg viewBox="0 0 300 150" width="300" height="150" style="display:block;margin:0 auto;"><polygon points="20,126 120,126 50,30" fill="rgba(243,239,226,.08)" stroke="#98c9dc" stroke-width="2"/><polygon points="160,126 260,126 190,30" fill="rgba(243,239,226,.08)" stroke="#a6d6a0" stroke-width="2"/><text x="70" y="142" font-size="12" fill="#98c9dc" text-anchor="middle" font-family="Noto Serif TC">△ABC</text><text x="210" y="142" font-size="12" fill="#a6d6a0" text-anchor="middle" font-family="Noto Serif TC">△DEF</text><text x="150.0" y="80" font-size="20" fill="#f2d979" text-anchor="middle">≅</text></svg><div class="box y" style="max-width:640px;margin:8px auto 0;text-align:center;font-size:18px;">SSS、SAS、ASA、AAS、HL</div>
+</div></div>
+
+<!-- 2 -->
+<div class="slide" data-pg="2 / 13"><div class="tag">目標</div><div class="body">
+<h2>本節學習目標</h2>
+<ul>
+<li>理解全等:<span class="hl">對應邊相等且對應角相等</span></li>
+<li>記住四個判定:<span class="hl-b">SSS、SAS、ASA、AAS</span></li>
+<li>理解 <span class="hl">HL</span>（斜邊直角邊）專用於直角三角形</li>
+<li>用全等推導<span class="hl">未知邊長與角度</span></li>
+</ul>
+<div class="box y">一句話:<span class="hl">不必量全部六個邊角，符合三個特定條件就能保證全等。</span></div>
+</div></div>
+
+<!-- 3 -->
+<div class="slide" data-pg="3 / 13"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心　五個判定條件</div>
+<h2>全等的驗證方式</h2>
+<table class="tbl">
+<tr><th style="width:20%;">判定</th><th>條件</th></tr>
+<tr><td class="hl-b">SSS</td><td>三組對應邊相等</td></tr>
+<tr><td class="hl-b">SAS</td><td>兩邊 + <b>夾角</b>（角在兩邊之間）</td></tr>
+<tr><td class="hl-b">ASA</td><td>兩角 + <b>夾邊</b></td></tr>
+<tr><td class="hl-b">AAS</td><td>兩角 + 非夾邊</td></tr>
+<tr><td class="hl-b">HL</td><td>直角三角形:斜邊 + 一直角邊</td></tr>
+</table>
+<div class="box g" style="text-align:center;">全等記法:<span class="fm">△ABC ≅ △DEF</span>，對應頂點順序要對!</div>
+</div></div>
+
+<!-- 4 -->
+<div class="slide" data-pg="4 / 13"><div class="tag">避雷</div><div class="body">
+<div class="eyebrow">🔑 三個致命重點</div>
+<h2>不成立的組合</h2>
+<table class="tbl">
+<tr><th style="width:34%;">組合</th><th>能否全等</th></tr>
+<tr><td class="fm">SAS 的角非夾角</td><td class="hl-r">❌ 角必須在兩邊之間</td></tr>
+<tr><td class="fm">SSA（兩邊非夾角）</td><td class="hl-r">❌ 可能兩解（歧義）</td></tr>
+<tr><td class="fm">AAA（三角相等）</td><td class="hl-r">❌ 只保證相似</td></tr>
+</table>
+<div class="box y" style="text-align:center;">
+⚠️ SSA 不成立，但直角三角形的 <span class="hl">HL 是特例</span>（斜邊+直角邊確實全等）。</div>
+</div></div>
+
+<!-- 5 -->
+<div class="slide" data-pg="5 / 13"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 1、2　難度 ★☆☆~★★☆</div>
+<h2>辨識條件</h2>
+<div class="eg">
+<div class="q">AB=DE、BC=EF、AC=DF</div>
+<div class="stp">三組對應邊相等 → SSS</div>
+</div>
+<div class="eg">
+<div class="q">AB=DE、∠B=∠E、BC=EF</div>
+<div class="stp">∠B 夾住 AB 和 BC → SAS（兩邊夾角）</div>
+</div>
+<div class="box r" style="text-align:center;">⚠️ 用 SAS 前先確認:角是不是在那兩邊「之間」?</div>
+</div></div>
+
+<!-- 6 -->
+<div class="slide" data-pg="6 / 13"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 3　難度 ★★☆　等腰的頂角高</div>
+<h2>全等推垂直</h2>
+<div class="eg">
+<div class="q">等腰 △ABC（AB=AC），M 是 BC 中點，證 △ABM≅△ACM</div>
+<div class="stp"><b>SSS</b>　AB=AC、BM=CM、AM 公共邊</div>
+<div class="stp"><b>推論</b>　∠AMB=∠AMC，且和 180° → 各 90° → AM⊥BC</div>
+</div>
+<div class="box y" style="text-align:center;">
+💡 等腰三角形:頂角平分線＝底邊中線＝底邊上的高（三線合一）。</div>
+</div></div>
+
+<!-- 7 -->
+<div class="slide" data-pg="7 / 13"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 4、5　難度 ★★★</div>
+<h2>對應順序 & HL</h2>
+<div class="eg">
+<div class="q">∠A=∠D、∠B=∠E、AB=EF</div>
+<div class="stp">AB 對應 EF → 對應順序調成 △ABC≅△FED（AAS）</div>
+</div>
+<div class="eg">
+<div class="q">直角 △，斜邊 AB=DE、直角邊 BC=EF</div>
+<div class="stp">直角+斜邊+直角邊 → HL</div>
+</div>
+<div class="box r" style="text-align:center;">⚠️ 對應頂點順序寫對，後續推論才不會搞混!</div>
+</div></div>
+
+<!-- 8 -->
+<div class="slide" data-pg="8 / 13"><div class="tag">精選</div><div class="body">
+<div class="eyebrow">隨堂精選</div>
+<h2>快速檢查</h2>
+<table class="tbl">
+<tr><th style="width:56%;">條件</th><th>判定</th></tr>
+<tr><td>三邊對應相等</td><td class="fm hl">SSS</td></tr>
+<tr><td>∠B=∠E、∠C=∠F、BC=EF</td><td class="fm hl">ASA</td></tr>
+<tr><td>SSA 能全等嗎?</td><td class="hl-r">不能（歧義）</td></tr>
+<tr><td>AAA 能全等嗎?</td><td class="hl-r">只相似</td></tr>
+<tr><td>全等三角形周長</td><td class="fm hl">相等</td></tr>
+</table>
+<div class="box y" style="text-align:center;">全等 → 對應邊、對應角、周長、面積全都相等。</div>
+</div></div>
+
+<!-- 9 -->
+<div class="slide" data-pg="9 / 13"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 1　【測量河寬】</div>
+<h2>全等把「量不到」變「量得到」</h2>
+<div class="box">BC⊥AB、CD=BC、DE⊥AB → DE=AB（河寬）</div>
+<div class="eg">
+<div class="stp"><b>(1) 條件</b>　∠ABC=∠EDC=90°、BC=DC、∠BCA=∠DCE（對頂角）</div>
+<div class="stp"><b>(2) 判定</b>　BC 是 ∠B、∠C 的夾邊 → <b class="hl">ASA</b></div>
+<div class="stp"><b>(3) 巧妙</b>　不必過河，把 AB 轉成量得到的 DE</div>
+</div>
+<div class="box r" style="text-align:center;">⚠️ 兩角+夾邊 = ASA（不是 AAS）!</div>
+</div></div>
+
+<!-- 10 -->
+<div class="slide" data-pg="10 / 13"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 2　【橋樑支架】</div>
+<h2>對稱結構的全等</h2>
+<div class="box">AB=CD、AP=CQ、∠A=∠C=90°</div>
+<div class="eg">
+<div class="stp"><b>(1) 判定</b>　AB、AP 是兩股，∠A 是夾角（直角）→ <b class="hl">SAS</b></div>
+<div class="stp"><b>(2) 推論</b>　BP=DQ、∠ABP=∠CDQ、∠APB=∠CQD</div>
+<div class="stp"><b>(3) 工程</b>　兩側受力對稱 → 結構穩定</div>
+</div>
+<div class="box r" style="text-align:center;">⚠️ 兩股夾直角 = SAS!HL 要的是「斜邊+直角邊」。</div>
+</div></div>
+
+<!-- 11 -->
+<div class="slide" data-pg="11 / 13"><div class="tag">避雷</div><div class="body">
+<h2>避雷指南</h2>
+<table class="tbl">
+<tr><th style="width:44%;">❌ 錯誤</th><th>✓ 正確</th></tr>
+<tr><td>SAS 用非夾角</td><td>角必須在<b class="hl-g">兩邊之間</b></td></tr>
+<tr><td>用 SSA 判全等</td><td>SSA <b class="hl-g">不成立</b>（歧義）</td></tr>
+<tr><td>AAA 當全等</td><td>只保證<b class="hl-g">相似</b></td></tr>
+<tr><td>兩股夾直角當 HL</td><td>是 <b class="hl-g">SAS</b>（HL 要斜邊+直角邊）</td></tr>
+</table>
+<div class="box y" style="text-align:center;">追問:三個條件是哪個判定?角是夾角嗎?對應順序對嗎?</div>
+</div></div>
+
+<!-- 12 -->
+<div class="slide" data-pg="12 / 13"><div class="tag">總結</div><div class="body">
+<h2>本節總結</h2>
+<ul>
+<li><span class="hl">全等</span>:六個對應元素相等;判定只需三個特定條件</li>
+<li><span class="hl-r">SSS、SAS、ASA、AAS</span>;直角三角形加 <span class="hl-r">HL</span></li>
+<li><span class="hl">不成立</span>:SSA（歧義）、AAA（只相似）;SAS 的角要夾角</li>
+<li><span class="hl">應用</span>:全等推未知邊角;對應頂點順序要對</li>
+</ul>
+<div class="box g" style="text-align:center;font-size:20px;">
+🔗 <b>承先</b>:3-2 尺規作圖（原理是全等）<br>
+🔗 <b>啟後</b>:<span class="hl">3-4 中垂線與角平分線的性質 —— 用全等來證明。</span></div>
+</div></div>
+
+<!-- 13 -->
+<div class="slide" data-pg="13 / 13"><div class="tag">Next</div><div class="big-center">
+<div class="eyebrow">下節預告</div>
+<h1 style="font-size:38px;">3-4　中垂線與角平分線的性質</h1>
+<div class="lead">中垂線上的點到<span style="color:#eda0a8;">兩端等距</span><br>
+角平分線上的點到<span style="color:#f2d979;">兩邊等距</span></div>
+<div class="box y" style="max-width:800px;margin:20px auto 0;font-size:20px;text-align:center;">
+用全等證明這兩條性質，並認識三角形的外心、內心。<span class="hl">幾何證明的實戰。</span></div>
+</div></div>
+
+</div></body></html>

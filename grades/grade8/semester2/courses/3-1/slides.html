@@ -1,0 +1,256 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>八下 3-1 三角形與多邊形的內角與外角｜授課簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--chalk-soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);padding:24px 14px;}
+.deck{max-width:1060px;margin:0 auto;}
+.print-hint{text-align:center;color:rgba(243,239,226,0.4);font-size:13px;padding:6px 0 22px;}
+.print-hint b{color:var(--yellow);}
+.slide{position:relative;min-height:576px;margin:0 auto 26px;padding:44px 52px;
+ background:radial-gradient(ellipse at 18% 12%,rgba(255,255,255,0.05),transparent 45%),
+  radial-gradient(ellipse at 82% 88%,rgba(255,255,255,0.035),transparent 45%),
+  radial-gradient(ellipse at 60% 40%,rgba(120,160,130,0.10),transparent 60%),
+  linear-gradient(160deg,var(--board) 0%,var(--board2) 100%);
+ border-radius:14px;box-shadow:0 10px 34px rgba(0,0,0,0.55);
+ border:1px solid rgba(242,217,121,0.14);overflow:hidden;display:flex;flex-direction:column;}
+.slide::before{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;
+ background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.014) 40px,rgba(255,255,255,0.014) 41px),
+  radial-gradient(circle at 30% 72%,rgba(255,255,255,0.03),transparent 8%),
+  radial-gradient(circle at 76% 24%,rgba(255,255,255,0.025),transparent 7%);}
+.slide::after{content:attr(data-pg);position:absolute;bottom:15px;right:26px;font-family:'Caveat',cursive;font-size:20px;color:rgba(243,239,226,0.4);}
+.tag{position:absolute;top:20px;right:26px;font-family:'Caveat',cursive;font-size:22px;color:var(--pink);transform:rotate(4deg);}
+.eyebrow{font-family:'Caveat',cursive;font-size:25px;color:var(--yellow);letter-spacing:1px;margin-bottom:8px;opacity:0.92;}
+.slide h1{font-family:'Noto Serif TC',serif;font-size:46px;font-weight:900;line-height:1.28;letter-spacing:1px;
+ text-shadow:0 0 1px rgba(243,239,226,0.5),1px 1px 0 rgba(0,0,0,0.2);}
+.slide h2{font-family:'Noto Serif TC',serif;font-size:33px;font-weight:900;color:var(--yellow);
+ margin-bottom:20px;padding-bottom:11px;border-bottom:2px dashed rgba(242,217,121,0.4);
+ text-shadow:0 0 1px rgba(242,217,121,0.4);}
+.slide p{font-size:20px;line-height:1.85;margin-bottom:12px;}
+.big-center{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;}
+.big-center .lead,.lead{font-family:'Caveat',cursive;font-size:30px;color:var(--blue);letter-spacing:1px;margin-top:12px;}
+ul{list-style:none;margin:8px 0;}
+li{font-size:21px;line-height:1.95;padding-left:32px;position:relative;margin-bottom:4px;}
+li::before{content:'\2726';position:absolute;left:4px;color:var(--yellow);font-size:17px;top:3px;}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.34);border-radius:12px;padding:15px 21px;margin:12px 0;font-size:19px;line-height:1.8;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.38);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.38);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.34);}
+.eg{position:relative;background:rgba(0,0,0,0.24);border:1px solid rgba(242,217,121,0.2);border-radius:10px;padding:17px 22px;margin:12px 0;font-size:19px;}
+.eg::before{content:'';position:absolute;top:-8px;left:38px;width:58px;height:15px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.eg .q{color:var(--blue);font-weight:700;margin-bottom:8px;font-size:19px;}
+.eg .a{color:var(--green);font-weight:700;margin-top:6px;}
+.eg .stp{color:var(--chalk-soft);font-size:18px;margin:3px 0;}
+.tip{display:flex;gap:12px;align-items:flex-start;background:rgba(242,217,121,0.09);border:1.5px dashed rgba(242,217,121,0.45);border-radius:12px;padding:13px 18px;margin:10px 0;}
+.tip .ic{font-size:24px;line-height:1;}.tip .tx{font-size:18px;line-height:1.7;}
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:18px;}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.26);padding:10px 14px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.two{display:flex;gap:20px;}.two>div{flex:1;}
+svg{display:block;margin:6px auto;max-width:100%;}
+@media print{
+ body{background:#0a130d;padding:0;}
+ .deck{max-width:none;}
+ .print-hint{display:none;}
+ .slide{margin:0;border-radius:0;box-shadow:none;min-height:100vh;
+  page-break-after:always;break-after:page;padding:32px 44px;justify-content:center;}
+ .slide:last-child{page-break-after:auto;break-after:auto;}
+ .slide h1{font-size:40px;}
+ .slide h2{font-size:27px;margin-bottom:13px;padding-bottom:8px;}
+ .slide p{font-size:17px;line-height:1.55;margin-bottom:6px;}
+ li{font-size:17px;line-height:1.55;margin-bottom:1px;padding-left:26px;}
+ .eyebrow{font-size:21px;margin-bottom:5px;}
+ .big-center .lead,.lead{font-size:26px;}
+ .box{font-size:16px;padding:10px 16px;margin:6px 0;line-height:1.5;}
+ .eg{font-size:16px;padding:11px 16px;margin:6px 0;}
+ .tip{font-size:16px;padding:10px 14px;margin:6px 0;}
+ .tbl{font-size:15px;margin:6px 0;}
+ .tbl th,.tbl td{padding:6px 10px;}
+ svg{max-height:210px;}
+}
+</style></head><body><div class="deck">
+<div class="print-hint">共 <b>14</b> 張・列印時每張一頁（Ctrl+P → 橫向 → 背景圖形）</div>
+
+
+<!-- 1 -->
+<div class="slide" data-pg="1 / 14"><div class="tag">Start!</div><div class="big-center">
+<div class="eyebrow">國二下學期・第三章 三角形的基本性質</div>
+<h1>3-1　內角與外角</h1>
+<div class="lead">三角形內角和 180° 是幾何的起點<br>
+外角定理是它的<span style="color:#f2d979;">直接推論</span></div>
+<div class="box y" style="max-width:660px;margin:16px auto 0;text-align:center;font-size:19px;">
+n 邊形內角和 = <span class="fm">(n−2) × 180°</span></div>
+</div></div>
+
+<!-- 2 -->
+<div class="slide" data-pg="2 / 14"><div class="tag">目標</div><div class="body">
+<h2>本節學習目標</h2>
+<ul>
+<li>三角形<span class="hl">內角和 = 180°</span>，計算未知內角</li>
+<li><span class="hl-b">外角定理</span>:外角 = 不相鄰兩內角之和</li>
+<li>多邊形<span class="hl">內角和 = (n−2)×180°</span></li>
+<li>多邊形<span class="hl">外角和恆 360°</span>（與邊數無關）</li>
+</ul>
+<div class="box y">一句話:<span class="hl">內角和隨邊數變 (n−2)×180°；外角和永遠是 360°。</span></div>
+</div></div>
+
+<!-- 3 -->
+<div class="slide" data-pg="3 / 14"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心　三角形</div>
+<h2>內角和 & 外角定理</h2>
+<div class="box y" style="text-align:center;font-size:19px;">
+∠A + ∠B + ∠C = 180°</div>
+<div class="box"><b>外角定理:</b>三角形任一外角 = <b>不相鄰</b>兩內角之和。<br>
+<span class="fm">∠ACD（外角）= ∠A + ∠B</span></div>
+<div class="box r" style="text-align:center;">
+⚠️ 是「不相鄰」兩內角，不是相鄰!外角與相鄰內角互為鄰補角（和 180°）。</div>
+</div></div>
+
+<!-- 4 -->
+<div class="slide" data-pg="4 / 14"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心　多邊形內角和</div>
+<h2>切成 (n−2) 個三角形</h2><div class="two" style="flex-direction:row;justify-content:space-around;"><svg viewBox="0 0 170 160" width="170" height="160" style="display:block;margin:0 auto;"><polygon points="85,24 140,64 119,129 51,129 30,64" fill="rgba(152,201,220,.18)" stroke="#98c9dc" stroke-width="2"/><line x1="85" y1="24" x2="119" y2="129" stroke="rgba(242,217,121,.6)" stroke-width="1" stroke-dasharray="3 2"/><line x1="85" y1="24" x2="51" y2="129" stroke="rgba(242,217,121,.6)" stroke-width="1" stroke-dasharray="3 2"/><text x="85.0" y="154" font-size="12" fill="#f2d979" text-anchor="middle">五邊形 = 3 個三角形</text></svg><svg viewBox="0 0 170 160" width="170" height="160" style="display:block;margin:0 auto;"><polygon points="85,24 135,53 135,111 85,140 35,111 35,53" fill="rgba(152,201,220,.18)" stroke="#98c9dc" stroke-width="2"/><line x1="85" y1="24" x2="135" y2="111" stroke="rgba(242,217,121,.6)" stroke-width="1" stroke-dasharray="3 2"/><line x1="85" y1="24" x2="85" y2="140" stroke="rgba(242,217,121,.6)" stroke-width="1" stroke-dasharray="3 2"/><line x1="85" y1="24" x2="35" y2="111" stroke="rgba(242,217,121,.6)" stroke-width="1" stroke-dasharray="3 2"/><text x="85.0" y="154" font-size="12" fill="#f2d979" text-anchor="middle">六邊形 = 4 個三角形</text></svg></div><div class="box y" style="text-align:center;font-size:18px;">
+n 邊形內角和 = (n−2) × 180°　（n=5→540°、n=6→720°）</div>
+<div class="box r" style="text-align:center;">⚠️ 是 (n−2)×180°，不是 n×180°!</div>
+</div></div>
+
+<!-- 5 -->
+<div class="slide" data-pg="5 / 14"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心　外角和恆 360°</div>
+<h2>與邊數無關</h2>
+<div class="box y" style="text-align:center;font-size:20px;">
+任何凸多邊形，外角和 = 360°</div>
+<div class="box g"><b>正 n 邊形:</b><br>
+每個外角 = 360° ÷ n;每個內角 = (n−2)×180° ÷ n = 180° − 外角</div>
+<div class="box r" style="text-align:center;">
+⚠️ 外角和不隨邊數變!三角形、百邊形的外角和都是 360°。</div>
+</div></div>
+
+<!-- 6 -->
+<div class="slide" data-pg="6 / 14"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 1、2　難度 ★☆☆~★★☆</div>
+<h2>三角形角度</h2>
+<div class="eg">
+<div class="q">∠A=55°、∠B=70°，求 ∠C 和外角</div>
+<div class="stp">∠C=180−55−70=55°;外角=180−55=125°（=55+70 ✓）</div>
+</div>
+<div class="eg">
+<div class="q">∠A 外角 115°、∠B=50°，求 ∠A、∠C</div>
+<div class="stp">∠A=65°;外角定理 115=50+∠C → ∠C=65°</div>
+</div>
+<div class="box y" style="text-align:center;">外角可用「180−內角」或「不相鄰兩內角和」求。</div>
+</div></div>
+
+<!-- 7 -->
+<div class="slide" data-pg="7 / 14"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 3、4　難度 ★★☆~★★★</div>
+<h2>正多邊形與求邊數</h2>
+<div class="eg">
+<div class="q">正十二邊形</div>
+<div class="stp">內角和 (12−2)×180=1800°;每內角 150°;每外角 30°</div>
+</div>
+<div class="eg">
+<div class="q">內角和 1440°，是幾邊形?</div>
+<div class="stp">(n−2)×180=1440 → n=10;正十邊形每內角 144°</div>
+</div>
+<div class="box g" style="text-align:center;">求邊數:(內角和÷180)+2 = n。</div>
+</div></div>
+
+<!-- 8 -->
+<div class="slide" data-pg="8 / 14"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 5　難度 ★★★</div>
+<h2>已知多角求剩一角</h2>
+<div class="eg">
+<div class="q">五邊形 ∠A=100°、∠B=80°、∠C=120°、∠D=90°，求 ∠E</div>
+<div class="stp"><b>內角和</b>　(5−2)×180=540°</div>
+<div class="stp"><b>∠E</b>　540−100−80−120−90=150°</div>
+</div>
+<div class="box y" style="text-align:center;">多邊形已知多角 → 用內角和減去已知角。</div>
+</div></div>
+
+<!-- 9 -->
+<div class="slide" data-pg="9 / 14"><div class="tag">精選</div><div class="body">
+<div class="eyebrow">隨堂精選</div>
+<h2>快速檢查</h2>
+<table class="tbl">
+<tr><th style="width:56%;">題目</th><th>答案</th></tr>
+<tr><td>八邊形內角和</td><td class="fm hl">1080°</td></tr>
+<tr><td>正九邊形每外角</td><td class="fm hl">40°</td></tr>
+<tr><td>∠A:∠B:∠C=2:3:4，三角?</td><td class="fm hl">40,60,80 銳角</td></tr>
+<tr><td>正多邊形內角 140°，幾邊?</td><td class="fm hl">九邊形</td></tr>
+<tr><td>等腰頂角 40°，底角?</td><td class="fm hl">70°</td></tr>
+</table>
+<div class="box y" style="text-align:center;">內角 140° → 外角 40° → 360/40 = 9 邊。</div>
+</div></div>
+
+<!-- 10 -->
+<div class="slide" data-pg="10 / 14"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 1　【蜂巢密鋪】</div>
+<h2>為何六邊形能鋪滿?</h2>
+<div class="box">正六邊形密鋪</div>
+<div class="eg">
+<div class="stp"><b>(1) 每內角</b>　(6−2)×180÷6 = 120°</div>
+<div class="stp"><b>(2) 三個共頂點</b>　120×3 = 360° → 恰好填滿一圈，完美密鋪</div>
+<div class="stp"><b>(3) 正五邊形</b>　108×3 = 324° &lt; 360° → 有空隙，不能密鋪</div>
+</div>
+<div class="box g" style="text-align:center;">密鋪條件:內角能整除 360°。</div>
+</div></div>
+
+<!-- 11 -->
+<div class="slide" data-pg="11 / 14"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 2　【建築樓面】</div>
+<h2>凸七邊形</h2>
+<div class="box">六個角:120°,135°,115°,125°,130°,140°</div>
+<div class="eg">
+<div class="stp"><b>(1) 內角和</b>　(7−2)×180=900°</div>
+<div class="stp"><b>(2) 第七角</b>　900−765=135°</div>
+<div class="stp"><b>(3) 規範 ≤150°</b>　最大 140°≤150° → 符合</div>
+</div>
+</div></div>
+
+<!-- 12 -->
+<div class="slide" data-pg="12 / 14"><div class="tag">避雷</div><div class="body">
+<h2>避雷指南</h2>
+<table class="tbl">
+<tr><th style="width:46%;">❌ 錯誤</th><th>✓ 正確</th></tr>
+<tr><td class="fm">內角和 = n×180°</td><td class="fm hl-g">(n−2)×180°</td></tr>
+<tr><td>外角和隨邊數變</td><td>外角和<b class="hl-g">恆 360°</b></td></tr>
+<tr><td>外角 = 相鄰兩內角和</td><td><b class="hl-g">不相鄰</b>兩內角之和</td></tr>
+<tr><td>正n邊形外角算錯</td><td class="fm hl-g">每外角 = 360°÷n</td></tr>
+</table>
+<div class="box y" style="text-align:center;">追問:幾條邊?代入 (n−2)，n−2 = 幾?×180° 等於多少?</div>
+</div></div>
+
+<!-- 13 -->
+<div class="slide" data-pg="13 / 14"><div class="tag">總結</div><div class="body">
+<h2>本節總結</h2>
+<ul>
+<li><span class="hl">三角形內角和</span> = 180°;<span class="hl-r">外角 = 不相鄰兩內角之和</span></li>
+<li><span class="hl">n 邊形內角和</span> = (n−2)×180°（切成 n−2 個三角形）</li>
+<li><span class="hl">外角和恆 360°</span>（與邊數無關）</li>
+<li><span class="hl">正 n 邊形</span>:每外角 360°÷n、每內角 180°−外角</li>
+</ul>
+<div class="box g" style="text-align:center;font-size:20px;">
+🔗 <b>承先</b>:七下 6-1 幾何基礎<br>
+🔗 <b>啟後</b>:<span class="hl">3-2 尺規作圖、3-3 三角形全等。</span></div>
+</div></div>
+
+<!-- 14 -->
+<div class="slide" data-pg="14 / 14"><div class="tag">Next</div><div class="big-center">
+<div class="eyebrow">下節預告</div>
+<h1 style="font-size:40px;">3-2　尺規作圖</h1>
+<div class="lead">只用圓規和直尺<br>
+<span style="color:#eda0a8;">作出線段、角、中垂線、角平分線</span></div>
+<div class="box y" style="max-width:800px;margin:20px auto 0;font-size:20px;text-align:center;">
+不用量角器和刻度，純粹幾何作圖。<span class="hl">古希臘的智慧。</span></div>
+</div></div>
+
+</div></body></html>
