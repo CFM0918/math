@@ -1,0 +1,447 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>七下 1-1 認識二元一次方程式｜授課簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--chalk-soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);padding:24px 14px;}
+.deck{max-width:1060px;margin:0 auto;}
+.print-hint{text-align:center;color:rgba(243,239,226,0.4);font-size:13px;padding:6px 0 22px;}
+.print-hint b{color:var(--yellow);}
+.slide{position:relative;min-height:576px;margin:0 auto 26px;padding:44px 52px;
+ background:radial-gradient(ellipse at 18% 12%,rgba(255,255,255,0.05),transparent 45%),
+  radial-gradient(ellipse at 82% 88%,rgba(255,255,255,0.035),transparent 45%),
+  radial-gradient(ellipse at 60% 40%,rgba(120,160,130,0.10),transparent 60%),
+  linear-gradient(160deg,var(--board) 0%,var(--board2) 100%);
+ border-radius:14px;box-shadow:0 10px 34px rgba(0,0,0,0.55);
+ border:1px solid rgba(242,217,121,0.14);overflow:hidden;display:flex;flex-direction:column;}
+.slide::before{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;
+ background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.014) 40px,rgba(255,255,255,0.014) 41px),
+  radial-gradient(circle at 30% 72%,rgba(255,255,255,0.03),transparent 8%),
+  radial-gradient(circle at 76% 24%,rgba(255,255,255,0.025),transparent 7%);}
+.slide::after{content:attr(data-pg);position:absolute;bottom:15px;right:26px;font-family:'Caveat',cursive;font-size:20px;color:rgba(243,239,226,0.4);}
+.tag{position:absolute;top:20px;right:26px;font-family:'Caveat',cursive;font-size:22px;color:var(--pink);transform:rotate(4deg);}
+.eyebrow{font-family:'Caveat',cursive;font-size:25px;color:var(--yellow);letter-spacing:1px;margin-bottom:8px;opacity:0.92;}
+.slide h1{font-family:'Noto Serif TC',serif;font-size:46px;font-weight:900;line-height:1.28;letter-spacing:1px;
+ text-shadow:0 0 1px rgba(243,239,226,0.5),1px 1px 0 rgba(0,0,0,0.2);}
+.slide h2{font-family:'Noto Serif TC',serif;font-size:33px;font-weight:900;color:var(--yellow);
+ margin-bottom:20px;padding-bottom:11px;border-bottom:2px dashed rgba(242,217,121,0.4);
+ text-shadow:0 0 1px rgba(242,217,121,0.4);}
+.slide p{font-size:20px;line-height:1.85;margin-bottom:12px;}
+.big-center{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;}
+.big-center .lead,.lead{font-family:'Caveat',cursive;font-size:30px;color:var(--blue);letter-spacing:1px;margin-top:12px;}
+ul{list-style:none;margin:8px 0;}
+li{font-size:21px;line-height:1.95;padding-left:32px;position:relative;margin-bottom:4px;}
+li::before{content:'\2726';position:absolute;left:4px;color:var(--yellow);font-size:17px;top:3px;}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.34);border-radius:12px;padding:15px 21px;margin:12px 0;font-size:19px;line-height:1.8;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.38);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.38);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.34);}
+.eg{position:relative;background:rgba(0,0,0,0.24);border:1px solid rgba(242,217,121,0.2);border-radius:10px;padding:17px 22px;margin:12px 0;font-size:19px;}
+.eg::before{content:'';position:absolute;top:-8px;left:38px;width:58px;height:15px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.eg .q{color:var(--blue);font-weight:700;margin-bottom:8px;font-size:19px;}
+.eg .a{color:var(--green);font-weight:700;margin-top:6px;}
+.eg .stp{color:var(--chalk-soft);font-size:18px;margin:3px 0;}
+.tip{display:flex;gap:12px;align-items:flex-start;background:rgba(242,217,121,0.09);border:1.5px dashed rgba(242,217,121,0.45);border-radius:12px;padding:13px 18px;margin:10px 0;}
+.tip .ic{font-size:24px;line-height:1;}.tip .tx{font-size:18px;line-height:1.7;}
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:18px;}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.26);padding:10px 14px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.two{display:flex;gap:20px;}.two>div{flex:1;}
+svg{display:block;margin:6px auto;max-width:100%;}
+@media print{
+ body{background:#0a130d;padding:0;}
+ .deck{max-width:none;}
+ .print-hint{display:none;}
+ .slide{margin:0;border-radius:0;box-shadow:none;min-height:100vh;
+  page-break-after:always;break-after:page;padding:32px 44px;justify-content:center;}
+ .slide:last-child{page-break-after:auto;break-after:auto;}
+ .slide h1{font-size:40px;}
+ .slide h2{font-size:27px;margin-bottom:13px;padding-bottom:8px;}
+ .slide p{font-size:17px;line-height:1.55;margin-bottom:6px;}
+ li{font-size:17px;line-height:1.55;margin-bottom:1px;padding-left:26px;}
+ .eyebrow{font-size:21px;margin-bottom:5px;}
+ .big-center .lead,.lead{font-size:26px;}
+ .box{font-size:16px;padding:10px 16px;margin:6px 0;line-height:1.5;}
+ .eg{font-size:16px;padding:11px 16px;margin:6px 0;}
+ .tip{font-size:16px;padding:10px 14px;margin:6px 0;}
+ .tbl{font-size:15px;margin:6px 0;}
+ .tbl th,.tbl td{padding:6px 10px;}
+ svg{max-height:210px;}
+}
+</style></head><body><div class="deck">
+<div class="print-hint">共 <b>21</b> 張・列印時每張一頁（Ctrl+P → 橫向 → 背景圖形）</div>
+
+
+<!-- 1 -->
+<div class="slide" data-pg="1 / 21"><div class="tag">Start!</div><div class="big-center">
+<div class="eyebrow">國一下學期・第一章 二元一次聯立方程式</div>
+<h1>1-1　認識二元一次方程式</h1>
+<div class="lead">一個方程式、兩個未知數 ——<br>解<span style="color:#f2d979;">不只一組</span>，這是跟上學期最大的不同</div>
+<svg viewBox="0 0 620 116" width="82%" style="margin-top:16px;">
+<rect x="16" y="18" width="248" height="80" rx="10" fill="rgba(152,201,220,0.13)" stroke="#98c9dc" stroke-width="1.5"/>
+<text x="140" y="42" font-family="Noto Sans TC" font-size="14" fill="#98c9dc" text-anchor="middle">七上</text>
+<text x="140" y="66" font-family="Noto Serif TC" font-size="20" fill="#f3efe2" text-anchor="middle">2x + 3 = 11</text>
+<text x="140" y="88" font-family="Caveat" font-size="18" fill="#a6d6a0" text-anchor="middle">唯一解　x = 4</text>
+<path d="M280 58 L338 58" stroke="#f2d979" stroke-width="2" stroke-dasharray="3 5"/>
+<path d="M338 58 l-10 -6 M338 58 l-10 6" stroke="#f2d979" stroke-width="2" fill="none"/>
+<rect x="356" y="18" width="248" height="80" rx="10" fill="rgba(237,160,168,0.13)" stroke="#eda0a8" stroke-width="1.5"/>
+<text x="480" y="42" font-family="Noto Sans TC" font-size="14" fill="#eda0a8" text-anchor="middle">七下</text>
+<text x="480" y="66" font-family="Noto Serif TC" font-size="20" fill="#f3efe2" text-anchor="middle">2x + y = 10</text>
+<text x="480" y="88" font-family="Caveat" font-size="18" fill="#f2d979" text-anchor="middle">無限多組解！</text>
+</svg>
+</div></div>
+
+<!-- 2 -->
+<div class="slide" data-pg="2 / 21"><div class="tag">目標</div><div class="body">
+<h2>本節學習目標</h2>
+<ul>
+<li>能判斷一個式子是不是<span class="hl-b">二元一次式／二元一次方程式</span></li>
+<li>能<span class="hl">化簡</span>二元一次式（合併同類項、去括號、約公因數）</li>
+<li>能把方程式<span class="hl">解出某一個未知數</span>（y = …）—— 為 1-2 鋪路</li>
+<li>理解二元一次方程式<span class="hl">通常有無限多組解</span>，並知道<b>為什麼</b></li>
+<li>能<span class="hl">代入數對 (x, y) 驗證</span>它是不是解</li>
+<li>能把生活情境的等量關係<span class="hl">列成方程式</span></li>
+</ul>
+<div class="box y">一句話：<span class="hl">這節不解方程式 —— 這節只教你「認識」它。解法留給 1-2。</span></div>
+</div></div>
+
+<!-- 3 -->
+<div class="slide" data-pg="3 / 21"><div class="tag">地圖</div><div class="body">
+<h2>這一節的三個細目</h2>
+<table class="tbl">
+<tr><th style="width:14%;">細目</th><th style="width:34%;">主題</th><th>核心</th></tr>
+<tr><td class="hl" style="font-size:24px;">①</td><td><b>二元一次式</b></td><td>怎麼<span class="hl-b">判斷</span>（⚠️ xy 是二次！）</td></tr>
+<tr><td class="hl" style="font-size:24px;">②</td><td><b>二元一次式的化簡</b></td><td>合併・去括號・約公因數・<span class="hl">解出 y = …</span></td></tr>
+<tr><td class="hl" style="font-size:24px;">③</td><td><b>方程式及其解的意義</b></td><td><span class="hl-r">為什麼有無限多組解</span></td></tr>
+</table>
+<div class="tip"><div class="ic">🔗</div><div class="tx"><b>細目 ② 的「解出 y = …」是本節的隱藏重點</b> ——
+它看起來只是化簡，其實是 <b>1-2 代入消去法的第一步</b>。<br>
+這節做熟，下一節會非常輕鬆。</div></div>
+</div></div>
+
+<!-- 4 -->
+<div class="slide" data-pg="4 / 21"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">細目 ①</div>
+<h2>「式」和「方程式」差在一個等號</h2>
+<table class="tbl">
+<tr><th style="width:34%;">名稱</th><th style="width:22%;">有等號？</th><th>例</th></tr>
+<tr><td>二元一次<b>式</b></td><td class="hl-r">❌</td><td class="fm hl-b" style="font-size:20px;">2x + 3y</td></tr>
+<tr><td>二元一次<b>方程式</b></td><td class="hl-g">✅</td><td class="fm hl-g" style="font-size:20px;">2x + 3y = 10</td></tr>
+</table>
+<div class="box y" style="text-align:center;font-size:20px;">
+💡 這個差別，和<span class="hl">七上 3-1 vs 3-2</span> 完全一樣 ——<br>
+加了等號，就從<b>描述</b>變成<b>問題</b>。</div>
+<div class="box"><b>二元一次的定義</b><br>
+<span class="hl">二元</span>：含有 <b>2 個</b>未知數（如 x、y）<br>
+<span class="hl">一次</span>：每一項的未知數<b>次方合計都是 1</b></div>
+</div></div>
+
+<!-- 5 -->
+<div class="slide" data-pg="5 / 21"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">細目 ①</div>
+<h2>判斷：是不是二元一次方程式？</h2>
+<table class="tbl">
+<tr><th style="width:32%;">式子</th><th style="width:16%;">判斷</th><th>理由</th></tr>
+<tr><td class="fm">2x + 3y = 10</td><td class="hl-g">✅</td><td>兩個未知數，每項都是一次</td></tr>
+<tr><td class="fm">3x − y + 2 = 0</td><td class="hl-g">✅</td><td>同上</td></tr>
+<tr><td class="fm">x² + y = 5</td><td class="hl-r">❌</td><td>x 的次方是 <b>2</b></td></tr>
+<tr><td class="fm" style="font-size:20px;">xy = 6</td><td class="hl-r">❌</td><td>⚠️ x 和 y 相乘，這項次方<b>合計是 2</b></td></tr>
+<tr><td class="fm">2x + 3y</td><td class="hl-r">❌</td><td>沒有<b>等號</b>（是「式」不是「方程式」）</td></tr>
+<tr><td class="fm">x + y + z = 5</td><td class="hl-r">❌</td><td><b>三個</b>未知數（三元）</td></tr>
+</table>
+</div></div>
+
+<!-- 6 -->
+<div class="slide" data-pg="6 / 21"><div class="tag">避雷</div><div class="body">
+<div class="eyebrow">細目 ①　⚠️ 最容易錯</div>
+<h2>xy 為什麼不是一次？</h2>
+<div class="box y" style="text-align:center;font-size:23px;padding:20px;">
+<span class="hl">次方要「合計」，不是分別算</span><br>
+<span class="fm" style="font-size:20px;">xy = x¹ × y¹ → 次方合計 = 1 + 1 = <span class="hl-r">2</span></span></div>
+<div class="box r" style="text-align:center;font-size:20px;">
+所以 <span class="fm">xy = 6</span> 是<span class="hl-r">二元二次</span>方程式，<b>不是一次</b>。</div>
+<div class="two">
+<div class="box g"><b class="hl-g">✓ 一次</b><br>
+<span class="fm" style="font-size:19px;">2x + 3y</span><br>
+<span style="font-size:16px;color:var(--chalk-soft);">x 那項次方 1、y 那項次方 1<br>（<b>各自獨立的項</b>）</span></div>
+<div class="box r"><b class="hl-r">❌ 二次</b><br>
+<span class="fm" style="font-size:19px;">xy</span><br>
+<span style="font-size:16px;color:var(--chalk-soft);"><b>同一項裡</b> x 和 y 相乘<br>→ 合計 2</span></div>
+</div>
+<div class="box y" style="text-align:center;">關鍵：<span class="hl">看「同一項裡」的次方加起來是多少</span></div>
+</div></div>
+
+<!-- 7 -->
+<div class="slide" data-pg="7 / 21"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">細目 ②　化簡</div>
+<h2>合併同類項與去括號（七上 3-1 的延伸）</h2>
+<div class="box"><b class="hl-b">① 合併同類項</b>　只把係數加減，未知數的部分不動<br>
+<span class="fm" style="font-size:19px;">3x + 2y + 5x − y = (3+5)x + (2−1)y = <span class="hl">8x + y</span></span><br>
+<span class="hl-r">⚠️ x 和 y 不是同類項，不能合併！</span></div>
+<div class="box g"><b class="hl-g">② 去括號</b>（分配律）<br>
+<span class="fm" style="font-size:19px;">2(x + y) + 3(x − y) = 2x + 2y + 3x − 3y = <span class="hl">5x − y</span></span><br>
+<span class="hl-r">⚠️ 括號前是負號 → 每一項都要變號</span>：<span class="fm">−(2x − 3y) = −2x + 3y</span></div>
+<div class="box y" style="text-align:center;">
+這兩招<span class="hl">完全就是七上 3-1 學過的</span> —— 只是現在有兩個字母。</div>
+</div></div>
+
+<!-- 8 -->
+<div class="slide" data-pg="8 / 21"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">細目 ②　化簡</div>
+<h2>兩邊約掉公因數：讓數字變小</h2>
+<div class="box y" style="text-align:center;font-size:21px;">
+<span class="fm">4x + 2y = 20</span>　→　兩邊同除以 <span class="hl">2</span>　→　<span class="fm hl" style="font-size:24px;">2x + y = 10</span></div>
+<div class="box g"><b>根據是什麼？<span class="hl">等量公理</span>（七上 3-2）</b> ——
+兩邊同除以同一個非 0 的數，等式不變。</div>
+<table class="tbl">
+<tr><th style="width:38%;">原式</th><th style="width:18%;">公因數</th><th>化簡後</th></tr>
+<tr><td class="fm">4x + 2y = 20</td><td class="hl">2</td><td class="fm hl-g">2x + y = 10</td></tr>
+<tr><td class="fm">6x − 9y = 15</td><td class="hl">3</td><td class="fm hl-g">2x − 3y = 5</td></tr>
+<tr><td class="fm">10x + 5y = 35</td><td class="hl">5</td><td class="fm hl-g">2x + y = 7</td></tr>
+<tr><td class="fm">6x + 4y = 9</td><td class="hl-r">不能約</td><td class="hl-r">9 不能被 2 整除</td></tr>
+</table>
+<div class="box r" style="text-align:center;">
+⚠️ <b>三個數都要能整除才能約</b> —— 漏掉右邊那個是最常見的錯。</div>
+</div></div>
+
+<!-- 9 -->
+<div class="slide" data-pg="9 / 21"><div class="tag">重點</div><div class="body">
+<div class="eyebrow">細目 ②　🔑 本節隱藏重點</div>
+<h2>解出某一個未知數：y = …</h2>
+<div class="two">
+<div class="box"><span class="fm" style="font-size:19px;">2x + y = 10</span><br>
+移項 → <span class="fm hl" style="font-size:20px;">y = 10 − 2x</span></div>
+<div class="box g"><span class="fm" style="font-size:19px;">3x − y = 7</span><br>
+<span class="fm">−y = 7 − 3x</span> → 兩邊 ×(−1)<br>
+→ <span class="fm hl" style="font-size:20px;">y = 3x − 7</span></div>
+</div>
+<div class="box y"><b>💡 為什麼要這樣做？兩個用途：</b><br>
+<b>1. 列舉解</b>　給一個 x，馬上算出 y（等一下的例題就是這樣做）<br>
+<b>2. 代入消去法</b>　<span class="hl">1-2 的第一步就是把某一條化成 y = …，再代入另一條</span></div>
+<div class="box g" style="text-align:center;font-size:21px;">
+<span class="hl">所以這個動作不是為了好看 —— 它是下一節的入場券。</span></div>
+</div></div>
+
+<!-- 10 -->
+<div class="slide" data-pg="10 / 21"><div class="tag">技巧</div><div class="body">
+<div class="eyebrow">細目 ②　技巧</div>
+<h2>選哪一個未知數來解？</h2>
+<div class="box y" style="text-align:center;font-size:22px;padding:16px;">
+<span class="hl">選係數是 1（或 −1）的那個</span><br>
+<span style="font-size:17px;color:var(--chalk-soft);">這樣不會出現分數</span></div>
+<table class="tbl">
+<tr><th style="width:32%;">方程式</th><th style="width:26%;">建議解</th><th>結果</th></tr>
+<tr><td class="fm">2x + <span class="hl">y</span> = 10</td><td class="hl-g">解 <b>y</b>（係數 1）</td><td class="fm hl-g">y = 10 − 2x</td></tr>
+<tr><td class="fm"><span class="hl">x</span> − 3y = 4</td><td class="hl-g">解 <b>x</b>（係數 1）</td><td class="fm hl-g">x = 4 + 3y</td></tr>
+<tr><td class="fm">2x + 3y = 12</td><td class="hl-r">都不是 1</td><td class="fm hl-r">y = (12−2x)/3 → 有分數</td></tr>
+</table>
+<div class="tip"><div class="ic">📌</div><div class="tx"><b>這個習慣會在 1-2 救你一命。</b>
+代入消去法時，選錯了要處理一堆分數；選對了，全程都是整數。<br>
+<b>先看一眼再動手 —— 三秒鐘，省十分鐘。</b></div></div>
+</div></div>
+
+<!-- 11 -->
+<div class="slide" data-pg="11 / 21"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">細目 ③</div>
+<h2>什麼是「解」？</h2>
+<div class="box y" style="text-align:center;font-size:22px;">
+<span class="hl">解</span>：能讓方程式<b>成立</b>的一組<span class="hl">數對 (x, y)</span></div>
+<div class="eg">
+<div class="q">驗證 <span class="fm">(3, 4)</span> 是不是 <span class="fm">2x − y = 2</span> 的解</div>
+<div class="stp"><b>代入左邊</b>　<span class="fm">2×3 − 4 = 6 − 4 = 2</span></div>
+<div class="stp"><b>右邊</b>　<span class="fm">= 2</span></div>
+<div class="stp"><b>比較</b>　左 = 右 ✓</div>
+<div class="a">是，(3, 4) 是這個方程式的解</div>
+</div>
+<div class="box g" style="text-align:center;">
+💡 驗證的方法<span class="hl">和七上 3-2 完全一樣</span> —— 代回去，看左右相等嗎。<br>
+差別只在：這次要代<b>一組</b>數（兩個值），不是一個。</div>
+</div></div>
+
+<!-- 12 -->
+<div class="slide" data-pg="12 / 21"><div class="tag">重點</div><div class="body">
+<div class="eyebrow">細目 ③　🔑 本節最重要</div>
+<h2>為什麼通常有無限多組解？</h2>
+<div class="box y" style="text-align:center;font-size:21px;">
+因為<span class="hl">未知數比方程式多，自由度就多</span></div>
+<div class="box"><span class="fm" style="font-size:19px;">2x + y = 10</span> → 整理成 <span class="fm hl">y = 10 − 2x</span><br>
+x <span class="hl">可以隨便選</span> → 每選一個 x，就配出一個 y<br>
+<span class="fm">x = 0 → y = 10 → (0, 10)</span>　<span class="fm">x = 1 → y = 8 → (1, 8)</span><br>
+<span class="fm">x = 2 → y = 6 → (2, 6)</span>　<span class="fm">x = 100 → y = −190 → (100, −190)</span><br>
+<span class="hl-r">… 無限多組</span></div>
+<table class="tbl">
+<tr><th style="width:34%;">　</th><th style="width:16%;">未知數</th><th style="width:16%;">方程式</th><th style="width:14%;">自由度</th><th>解</th></tr>
+<tr><td class="fm">七上 2x + 3 = 11</td><td>1</td><td>1</td><td class="hl-b"><b>0</b></td><td class="hl-b"><b>唯一一個</b></td></tr>
+<tr><td class="fm">七下 2x + y = 10</td><td class="hl-r"><b>2</b></td><td>1</td><td class="hl-r"><b>1</b></td><td class="hl-r"><b>無限多組</b></td></tr>
+</table>
+</div></div>
+
+<!-- 13 -->
+<div class="slide" data-pg="13 / 21"><div class="tag">啟後</div><div class="body">
+<div class="eyebrow">細目 ③</div>
+<h2>要鎖定唯一解 —— 再給一條方程式</h2>
+<div class="box r"><b class="hl-r">只有一條</b>　<span class="fm">x + y = 8</span><br>
+<span class="fm">(0,8)、(1,7)、(2,6)、(3,5)…</span> → <span class="hl-r">無限多組，鎖不定</span></div>
+<div class="box g"><b class="hl-g">再給一條</b>　<span class="fm">10x + 50y = 320</span><br>
+兩條<b>同時成立</b> → 鎖定<span class="hl">唯一一組</span> <span class="fm">(2, 6)</span></div>
+<div class="box y" style="text-align:center;font-size:22px;">
+這兩條合在一起，就叫 <span class="hl">聯立方程式</span><br>
+<span style="font-size:17px;color:var(--chalk-soft);">1-2 教你怎麼解它</span></div>
+<div class="tip"><div class="ic">💡</div><div class="tx"><b>這個「自由度」的觀念，會一路跟著你：</b><br>
+・1-2 [補給站] 會告訴你 —— 兩條方程式也可能<b>無解</b>或<b>無限多解</b>（如果它們不獨立）<br>
+・1-3 的核心規則就是「<b>有幾個未知數就要幾條方程式</b>」<br>
+・2-2 會讓你<b>看見</b>：兩條方程式是兩條直線，唯一解就是<b>交點</b></div></div>
+</div></div>
+
+<!-- 14 -->
+<div class="slide" data-pg="14 / 21"><div class="tag">精選</div><div class="body">
+<div class="eyebrow">細目 ③　💡 有趣的轉折</div>
+<h2>加上限制，無限多組會縮成有限幾組</h2>
+<div class="eg">
+<div class="q">寫出 <span class="fm">2x + y = 8</span> 的<b>非負整數解</b>（x、y 都是 0 或正整數）</div>
+<div class="stp"><b>解出 y</b>　<span class="fm">y = 8 − 2x</span></div>
+<div class="stp"><b>要 y ≥ 0</b>　<span class="fm">8 − 2x ≥ 0 → x ≤ 4</span></div>
+<div class="stp"><b>又要 x ≥ 0</b>　→　<span class="fm hl">0 ≤ x ≤ 4</span></div>
+<div class="stp"><b>所以</b>　x = 0, 1, 2, 3, 4 → 只有 <span class="hl">5 組</span></div>
+<div class="a">(0,8)、(1,6)、(2,4)、(3,2)、(4,0)</div>
+</div>
+<div class="box y" style="text-align:center;font-size:20px;">
+💡 <span class="hl">加上「非負整數」的限制，無限多組就縮成有限的 5 組。</span></div>
+<div class="box g">這就是為什麼<b>應用題常常「一個方程式也能解出來」</b> ——
+因為<span class="hl">情境本身加了限制</span>（個數不能是負的、不能是小數）。</div>
+</div></div>
+
+<!-- 15 -->
+<div class="slide" data-pg="15 / 21"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題　難度 ★★☆　【細目 ②】</div>
+<h2>化簡三連發</h2>
+<div class="eg">
+<div class="q">(1) 化簡 <span class="fm">4x + 2y = 20</span></div>
+<div class="stp">係數 4、2、20 的公因數是 <span class="hl">2</span> → 兩邊同除以 2</div>
+<div class="stp">檢查：三個數都能被 2 整除 ✓</div>
+<div class="a">2x + y = 10</div>
+</div>
+<div class="eg">
+<div class="q">(2) 把 <span class="fm">2x + y = 10</span> 解出 y</div>
+<div class="stp">移項：<span class="fm">y = 10 − 2x</span></div>
+<div class="a">y = 10 − 2x　（這就是 1-2 代入消去法的第一步）</div>
+</div>
+<div class="eg">
+<div class="q">(3) 用 (2) 的結果，寫出三組解</div>
+<div class="stp"><span class="fm">x = 0 → y = 10</span>；<span class="fm">x = 1 → y = 8</span>；<span class="fm">x = 2 → y = 6</span></div>
+<div class="a">(0,10)、(1,8)、(2,6)　（還有無限多組）</div>
+</div>
+</div></div>
+
+<!-- 16 -->
+<div class="slide" data-pg="16 / 21"><div class="tag">避雷</div><div class="body">
+<div class="eyebrow">隨堂精選　⚠️ 高頻錯誤</div>
+<h2>負數代入，一定要加括號</h2>
+<div class="eg">
+<div class="q">已知 <span class="fm">x − 2y = 5</span>，當 <span class="fm">y = −1</span> 時，求 x</div>
+<div class="stp"><b>代入（加括號！）</b>　<span class="fm">x − 2 × <span class="hl">(−1)</span> = 5</span></div>
+<div class="stp"><b>算</b>　<span class="fm">−2 × (−1) = <span class="hl-g">+2</span></span>（負負得正）</div>
+<div class="stp"><b>所以</b>　<span class="fm">x + 2 = 5 → x = 3</span></div>
+<div class="a">x = 3</div>
+</div>
+<div class="box r" style="text-align:center;font-size:20px;">
+⚠️ 這裡最多人算成 <span class="fm hl-r">x − 2 = 5 → x = 7</span><br>
+—— 把 <span class="fm">−2×(−1)</span> 看成 <span class="fm">−2</span> 了。</div>
+<div class="box y" style="text-align:center;">
+<span class="hl">負數代入一定要加括號</span> —— 七上 3-1 的鐵則，在這裡再次上場。</div>
+</div></div>
+
+<!-- 17 -->
+<div class="slide" data-pg="17 / 21"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 1　【雞兔同籠】</div>
+<h2>列式＋驗證</h2>
+<div class="box">雞兔共 <span class="hl">35 隻</span>，腳共 <span class="hl">94 隻</span>。設雞 x 隻、兔 y 隻。</div>
+<div class="eg">
+<div class="stp"><b>(1) 總數量</b>　<span class="fm hl">x + y = 35</span></div>
+<div class="stp"><b>(2) 腳的總數</b>　<span class="fm hl">2x + 4y = 94</span>（雞 2 腳、兔 4 腳）</div>
+<div class="stp"><b>(3) 驗證 (23, 12)</b></div>
+<div class="stp">　　代入 (1)：<span class="fm">23 + 12 = 35</span> ✓</div>
+<div class="stp">　　代入 (2)：<span class="fm">2×23 + 4×12 = 46 + 48 = 94</span> ✓</div>
+<div class="a">兩條都成立 → (23, 12) 是這個聯立方程式的解</div>
+</div>
+<div class="box y">💡 <b>(2) 可以化簡成 <span class="fm hl">x + 2y = 47</span></b>（兩邊同除以 2）—— 數字小很多。<br>
+驗證：<span class="fm">23 + 2×12 = 23 + 24 = 47</span> ✓</div>
+</div></div>
+
+<!-- 18 -->
+<div class="slide" data-pg="18 / 21"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 2　【售票】</div>
+<h2>化簡的價值</h2>
+<div class="box">全票半票共 <span class="hl">150 張</span>，全票 200 元、半票 100 元，總收入 <span class="hl">24000 元</span>。設全票 x 張、半票 y 張。</div>
+<div class="eg">
+<div class="stp"><b>(1) 票數</b>　<span class="fm hl">x + y = 150</span></div>
+<div class="stp"><b>(2) 總收入</b>　<span class="fm hl">200x + 100y = 24000</span></div>
+<div class="stp"><b>(3) 驗證 (90, 60)</b>　<span class="fm">90 + 60 = 150</span> ✓；<span class="fm">200×90 + 100×60 = 24000</span> ✓</div>
+</div>
+<div class="box g" style="font-size:20px;"><b>💡 (2) 可以化簡成 <span class="fm hl">2x + y = 240</span></b>（兩邊同除以 <b>100</b>）<br>
+驗證：<span class="fm">2×90 + 60 = 180 + 60 = 240</span> ✓</div>
+<div class="box y" style="text-align:center;font-size:20px;">
+<span class="hl">這就是化簡的價值：</span><br>
+<span class="fm">200x + 100y = 24000</span> 和 <span class="fm">2x + y = 240</span> <b>完全等價</b>，<br>
+但<span class="hl">後者你可以心算</span>。</div>
+</div></div>
+
+<!-- 19 -->
+<div class="slide" data-pg="19 / 21"><div class="tag">避雷</div><div class="body">
+<h2>避雷指南：五個最常見錯誤</h2>
+<table class="tbl">
+<tr><th style="width:46%;">❌ 錯誤</th><th>✓ 正確</th></tr>
+<tr><td>把 <span class="fm">xy = 6</span> 當成二元一次</td><td>次方要<b class="hl-g">合計</b>：xy 的次方 = 1+1 = <b>2</b> → 二次</td></tr>
+<tr><td>困惑「為什麼一個方程式有無限多組解」</td><td><b class="hl-g">未知數比方程式多 → 自由度多 → 解不只一組</b></td></tr>
+<tr><td>化簡時只有部分數字能整除還硬約</td><td><b class="hl-g">三個數都要能整除</b>（6x+4y=9 不能約）</td></tr>
+<tr><td>負數代入忘記加括號</td><td><span class="fm hl-g">x − 2(−1) = x + 2</span>（七上 3-1 的鐵則）</td></tr>
+<tr><td>列式時只列一條就急著解</td><td>兩個未知數要<b class="hl-g">兩條</b>（1-3 會反覆強調）</td></tr>
+</table>
+<div class="box y" style="text-align:center;">
+自我檢查句：<span class="hl">「這一項裡，x 和 y 的次方加起來是多少？」</span></div>
+</div></div>
+
+<!-- 20 -->
+<div class="slide" data-pg="20 / 21"><div class="tag">總結</div><div class="body">
+<h2>本節總結</h2>
+<ul>
+<li><span class="hl">二元一次</span>：2 個未知數、每項次方<b>合計</b>為 1；⚠️ <b>xy 是二次不是一次</b></li>
+<li><span class="hl">化簡</span>：合併同類項 → 去括號 → 約公因數 → <b>解出 y = …</b>（1-2 的入場券）</li>
+<li><span class="hl">解是一組數對 (x, y)</span>；驗證就是代回去看左右相等嗎</li>
+<li><span class="hl-r">通常有無限多組解</span>，因為<b>未知數比方程式多</b>；要唯一解 → <b>再給一條</b></li>
+<li><span class="hl">加上限制</span>（非負整數）→ 無限多組會縮成有限幾組</li>
+</ul>
+<div class="box g" style="text-align:center;font-size:20px;">
+🔗 <b>承先</b>：七上 3-1 的合併同類項與去括號、七上 3-2 的等量公理與移項<br>
+🔗 <b>啟後</b>：<span class="hl">1-2 代入消去法的第一步，就是本節的「解出 y = …」</span></div>
+</div></div>
+
+<!-- 21 -->
+<div class="slide" data-pg="21 / 21"><div class="tag">Next</div><div class="big-center">
+<div class="eyebrow">下節預告</div>
+<h1 style="font-size:40px;">1-2　二元一次聯立方程式的解</h1>
+<div class="lead">兩條方程式綁在一起 ——<br>就能從<span style="color:#eda0a8;">無限多組</span>鎖定成<span style="color:#a6d6a0;">唯一一組</span></div>
+<svg viewBox="0 0 600 100" width="74%" style="margin-top:14px;">
+<text x="130" y="30" font-family="Noto Serif TC" font-size="19" fill="#eda0a8" text-anchor="middle">x + y = 8</text>
+<text x="130" y="56" font-family="Caveat" font-size="17" fill="rgba(243,239,226,0.6)" text-anchor="middle">無限多組</text>
+<text x="130" y="80" font-family="Noto Serif TC" font-size="14" fill="rgba(243,239,226,0.5)" text-anchor="middle">(0,8) (1,7) (2,6)…</text>
+<text x="300" y="46" font-family="Caveat" font-size="26" fill="#f2d979" text-anchor="middle">＋</text>
+<text x="470" y="30" font-family="Noto Serif TC" font-size="19" fill="#98c9dc" text-anchor="middle">10x + 50y = 320</text>
+<text x="470" y="56" font-family="Caveat" font-size="17" fill="rgba(243,239,226,0.6)" text-anchor="middle">也是無限多組</text>
+<line x1="60" y1="90" x2="540" y2="90" stroke="rgba(243,239,226,0.2)" stroke-width="1"/>
+</svg>
+<div class="box y" style="max-width:800px;margin-top:8px;font-size:21px;">
+兩條各自都有無限多組解 ——<br>
+但<span class="hl">同時滿足兩條</span>的，<span class="hl">只有 (2, 6) 一組</span>。<br>
+<span style="font-size:17px;color:var(--chalk-soft);">1-2 教你怎麼把它找出來：代入消去法、加減消去法</span></div>
+</div></div>
+
+</div></body></html>

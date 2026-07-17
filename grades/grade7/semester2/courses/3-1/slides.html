@@ -1,0 +1,401 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>七下 3-1 比與比例式｜授課簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--chalk-soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);padding:24px 14px;}
+.deck{max-width:1060px;margin:0 auto;}
+.print-hint{text-align:center;color:rgba(243,239,226,0.4);font-size:13px;padding:6px 0 22px;}
+.print-hint b{color:var(--yellow);}
+.slide{position:relative;min-height:576px;margin:0 auto 26px;padding:44px 52px;
+ background:radial-gradient(ellipse at 18% 12%,rgba(255,255,255,0.05),transparent 45%),
+  radial-gradient(ellipse at 82% 88%,rgba(255,255,255,0.035),transparent 45%),
+  radial-gradient(ellipse at 60% 40%,rgba(120,160,130,0.10),transparent 60%),
+  linear-gradient(160deg,var(--board) 0%,var(--board2) 100%);
+ border-radius:14px;box-shadow:0 10px 34px rgba(0,0,0,0.55);
+ border:1px solid rgba(242,217,121,0.14);overflow:hidden;display:flex;flex-direction:column;}
+.slide::before{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;
+ background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.014) 40px,rgba(255,255,255,0.014) 41px),
+  radial-gradient(circle at 30% 72%,rgba(255,255,255,0.03),transparent 8%),
+  radial-gradient(circle at 76% 24%,rgba(255,255,255,0.025),transparent 7%);}
+.slide::after{content:attr(data-pg);position:absolute;bottom:15px;right:26px;font-family:'Caveat',cursive;font-size:20px;color:rgba(243,239,226,0.4);}
+.tag{position:absolute;top:20px;right:26px;font-family:'Caveat',cursive;font-size:22px;color:var(--pink);transform:rotate(4deg);}
+.eyebrow{font-family:'Caveat',cursive;font-size:25px;color:var(--yellow);letter-spacing:1px;margin-bottom:8px;opacity:0.92;}
+.slide h1{font-family:'Noto Serif TC',serif;font-size:46px;font-weight:900;line-height:1.28;letter-spacing:1px;
+ text-shadow:0 0 1px rgba(243,239,226,0.5),1px 1px 0 rgba(0,0,0,0.2);}
+.slide h2{font-family:'Noto Serif TC',serif;font-size:33px;font-weight:900;color:var(--yellow);
+ margin-bottom:20px;padding-bottom:11px;border-bottom:2px dashed rgba(242,217,121,0.4);
+ text-shadow:0 0 1px rgba(242,217,121,0.4);}
+.slide p{font-size:20px;line-height:1.85;margin-bottom:12px;}
+.big-center{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;}
+.big-center .lead,.lead{font-family:'Caveat',cursive;font-size:30px;color:var(--blue);letter-spacing:1px;margin-top:12px;}
+ul{list-style:none;margin:8px 0;}
+li{font-size:21px;line-height:1.95;padding-left:32px;position:relative;margin-bottom:4px;}
+li::before{content:'\2726';position:absolute;left:4px;color:var(--yellow);font-size:17px;top:3px;}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.34);border-radius:12px;padding:15px 21px;margin:12px 0;font-size:19px;line-height:1.8;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.38);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.38);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.34);}
+.eg{position:relative;background:rgba(0,0,0,0.24);border:1px solid rgba(242,217,121,0.2);border-radius:10px;padding:17px 22px;margin:12px 0;font-size:19px;}
+.eg::before{content:'';position:absolute;top:-8px;left:38px;width:58px;height:15px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.eg .q{color:var(--blue);font-weight:700;margin-bottom:8px;font-size:19px;}
+.eg .a{color:var(--green);font-weight:700;margin-top:6px;}
+.eg .stp{color:var(--chalk-soft);font-size:18px;margin:3px 0;}
+.tip{display:flex;gap:12px;align-items:flex-start;background:rgba(242,217,121,0.09);border:1.5px dashed rgba(242,217,121,0.45);border-radius:12px;padding:13px 18px;margin:10px 0;}
+.tip .ic{font-size:24px;line-height:1;}.tip .tx{font-size:18px;line-height:1.7;}
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:18px;}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.26);padding:10px 14px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.two{display:flex;gap:20px;}.two>div{flex:1;}
+svg{display:block;margin:6px auto;max-width:100%;}
+@media print{
+ body{background:#0a130d;padding:0;}
+ .deck{max-width:none;}
+ .print-hint{display:none;}
+ .slide{margin:0;border-radius:0;box-shadow:none;min-height:100vh;
+  page-break-after:always;break-after:page;padding:32px 44px;justify-content:center;}
+ .slide:last-child{page-break-after:auto;break-after:auto;}
+ .slide h1{font-size:40px;}
+ .slide h2{font-size:27px;margin-bottom:13px;padding-bottom:8px;}
+ .slide p{font-size:17px;line-height:1.55;margin-bottom:6px;}
+ li{font-size:17px;line-height:1.55;margin-bottom:1px;padding-left:26px;}
+ .eyebrow{font-size:21px;margin-bottom:5px;}
+ .big-center .lead,.lead{font-size:26px;}
+ .box{font-size:16px;padding:10px 16px;margin:6px 0;line-height:1.5;}
+ .eg{font-size:16px;padding:11px 16px;margin:6px 0;}
+ .tip{font-size:16px;padding:10px 14px;margin:6px 0;}
+ .tbl{font-size:15px;margin:6px 0;}
+ .tbl th,.tbl td{padding:6px 10px;}
+ svg{max-height:210px;}
+}
+</style></head><body><div class="deck">
+<div class="print-hint">共 <b>21</b> 張・列印時每張一頁（Ctrl+P → 橫向 → 背景圖形）</div>
+
+
+<!-- 1 -->
+<div class="slide" data-pg="1 / 21"><div class="tag">Start!</div><div class="big-center">
+<div class="eyebrow">國一下學期・第三章 比與比例式</div>
+<h1>3-1　比與比例式</h1>
+<div class="lead">比是「相對關係」，比值是「除法的結果」<br>比例式:<span style="color:#f2d979;">內項積 = 外項積</span>，一招解決所有問題</div>
+<svg viewBox="0 0 520 96" width="72%" style="margin-top:20px;">
+<text x="130" y="52" font-family="Noto Serif TC" font-size="30" fill="#98c9dc" text-anchor="middle">a : b = c : d</text>
+<path d="M92 44 Q130 10 168 44" stroke="#eda0a8" stroke-width="1.8" fill="none"/>
+<text x="130" y="16" font-family="Caveat" font-size="18" fill="#eda0a8" text-anchor="middle">外項</text>
+<path d="M118 60 Q130 76 146 60" stroke="#a6d6a0" stroke-width="1.8" fill="none"/>
+<text x="132" y="92" font-family="Caveat" font-size="18" fill="#a6d6a0" text-anchor="middle">內項</text>
+<text x="380" y="52" font-family="Noto Serif TC" font-size="22" fill="#f2d979" text-anchor="middle">a×d = b×c</text>
+</svg>
+</div></div>
+
+<!-- 2 -->
+<div class="slide" data-pg="2 / 21"><div class="tag">目標</div><div class="body">
+<h2>本節學習目標</h2>
+<ul>
+<li>能說出<span class="hl-b">比</span>與<span class="hl-b">比值</span>的定義，並理解兩者關係</li>
+<li>能<span class="hl">化簡比</span>（整數、分數、小數、含負號）</li>
+<li>能處理<span class="hl">連比</span>與<span class="hl">按比例分配</span></li>
+<li>理解比例式與「<span class="hl">內項積 = 外項積</span>」性質</li>
+<li>能解含未知數的<span class="hl">比例式</span>、<span class="hl">等比中項</span></li>
+<li>能應用在<span class="hl">比例尺</span>等實際情境</li>
+</ul>
+<div class="box y">一句話:<span class="hl">比例式只有一個性質「內積=外積」，但它解決這一整章的問題。</span></div>
+</div></div>
+
+<!-- 3 -->
+<div class="slide" data-pg="3 / 21"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">細目 ①　⚠️ 最容易混淆</div>
+<h2>比 vs 比值:兩者不同！</h2>
+<table class="tbl">
+<tr><th style="width:20%;">　</th><th style="width:40%;">是什麼</th><th>例</th></tr>
+<tr><td class="hl-b"><b>比</b></td><td>兩個數的<b>關係</b>，寫成 a:b</td><td class="fm" style="font-size:20px;">3 : 4</td></tr>
+<tr><td class="hl-g"><b>比值</b></td><td><b>一個數</b>（除法的結果 a÷b）</td><td class="fm" style="font-size:20px;">3/4（=0.75）</td></tr>
+</table>
+<div class="box r" style="text-align:center;font-size:20px;">
+⚠️ 別把 <span class="fm">3:4</span> 說成「比值」，也別把 <span class="fm">3/4</span> 說成「一個比」</div>
+<div class="box y"><b>等值的比:</b>不同的比可以有相同的比值。<br>
+<span class="fm">3:4</span> 和 <span class="fm">6:8</span> 的比值都是 <span class="fm">3/4</span> → 它們是<span class="hl">等值的比</span>。</div>
+</div></div>
+
+<!-- 4 -->
+<div class="slide" data-pg="4 / 21"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">細目 ①　化簡比</div>
+<h2>四種比，各有化簡法</h2>
+<table class="tbl">
+<tr><th style="width:24%;">類型</th><th style="width:30%;">方法</th><th>例</th></tr>
+<tr><td class="hl-b">整數比</td><td>同除以 <b>GCD</b></td><td class="fm">36:48 → 3:4</td></tr>
+<tr><td class="hl-b">分數比</td><td>同乘分母 <b>LCM</b></td><td class="fm">1/2:3/4 → 2:3</td></tr>
+<tr><td class="hl-b">小數比</td><td>同乘 <b>10 的次方</b></td><td class="fm">0.6:1.5 → 2:5</td></tr>
+<tr><td class="hl-r">負數比</td><td>規則相同，<b>負號別弄丟</b></td><td class="fm">(−8):6 → (−4):3</td></tr>
+</table>
+<div class="box r" style="text-align:center;">
+⚠️ 最常錯:<span class="fm">(−6):4</span> 化簡成 <span class="fm hl-r">3:2</span>（少了負號）→ 正確 <span class="fm hl-g">(−3):2</span></div>
+<div class="box g" style="text-align:center;">💡 化簡比用到 <span class="hl">七上 2-2 的 GCD/LCM</span> —— 老工具新用途。</div>
+</div></div>
+
+<!-- 5 -->
+<div class="slide" data-pg="5 / 21"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 1、2　難度 ★☆☆～★★☆</div>
+<h2>化為最簡整數比</h2>
+<div class="eg">
+<div class="q">化簡 36:48 並求比值</div>
+<div class="stp">GCD(36,48)=12 → 同除 12 → <span class="fm hl">3:4</span>；比值 = <span class="fm">3÷4 = 3/4</span></div>
+</div>
+<div class="eg">
+<div class="q">化為最簡整數比:(1) 1/2:3/4　(2) 0.6:1.5　(3) (−8):6</div>
+<div class="stp">(1) 分母 LCM=4，各項 ×4 → <span class="fm hl">2:3</span></div>
+<div class="stp">(2) ×10 消小數 → 6:15，÷3 → <span class="fm hl">2:5</span></div>
+<div class="stp">(3) GCD(8,6)=2，同除 2 → <span class="fm hl">(−4):3</span>（負號保留！）</div>
+</div>
+</div></div>
+
+<!-- 6 -->
+<div class="slide" data-pg="6 / 21"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">細目 ①　連比</div>
+<h2>按比例分配:用「份數」思考</h2>
+<div class="box y" style="text-align:center;font-size:19px;">
+把總量分成「<span class="hl">總份數</span>」份，每份相等</div>
+<div class="eg">
+<div class="q">甲乙丙身高比 5:6:7，甲 150 公分，求乙丙</div>
+<div class="stp"><b>甲是 5 份</b> → 每份 = 150 ÷ 5 = <span class="hl">30</span></div>
+<div class="stp">乙 = 6×30 = <span class="fm hl">180</span>;丙 = 7×30 = <span class="fm hl">210</span></div>
+</div>
+<div class="box g"><b>按比例分配公式:</b><br>
+<span class="hl">某項 = 總量 × (該項份數 ÷ 總份數)</span></div>
+</div></div>
+
+<!-- 7 -->
+<div class="slide" data-pg="7 / 21"><div class="tag">避雷</div><div class="body">
+<div class="eyebrow">細目 ①　⚠️ 連比最常錯</div>
+<h2>合併兩個比 → 統一中間量</h2>
+<div class="eg">
+<div class="q">甲:乙 = 3:4，乙:丙 = 2:5，求甲:乙:丙</div>
+<div class="stp"><b>關鍵:統一「乙」的份數</b></div>
+<div class="stp">乙在兩個比裡是 4 和 2 → LCM(4,2) = <span class="hl">4</span></div>
+<div class="stp">乙:丙 = 2:5 → ×2 → <span class="fm">4:10</span></div>
+<div class="stp"><b>合併</b> → 甲:乙:丙 = <span class="fm hl">3 : 4 : 10</span></div>
+</div>
+<div class="box r" style="text-align:center;font-size:20px;">
+⚠️ <b>最常錯:</b>直接把 3:4 和 2:5 拼成 <span class="fm hl-r">3:4:5</span>（沒統一乙！）</div>
+</div></div>
+
+<!-- 8 -->
+<div class="slide" data-pg="8 / 21"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 5　難度 ★★★</div>
+<h2>按比例分配求差</h2>
+<div class="eg">
+<div class="q">蛋糕 A:B:C = 2:3:5 分配，總重 500 克，C 比 A 多幾克？</div>
+<div class="stp"><b>總份數</b>　2+3+5 = 10 → 每份 = 500÷10 = <span class="hl">50 克</span></div>
+<div class="stp"><b>A</b> = 2×50 = 100;<b>C</b> = 5×50 = 250</div>
+<div class="stp"><b>差</b>　250 − 100 = <span class="hl">150 克</span></div>
+<div class="a">C 比 A 多 150 克</div>
+</div>
+<div class="box y" style="text-align:center;">
+💡 <span class="hl">先算「每份多少」，剩下都是乘法。</span>這是按比例分配的通用步驟。</div>
+</div></div>
+
+<!-- 9 -->
+<div class="slide" data-pg="9 / 21"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">細目 ②　比例式</div>
+<h2>內項積 = 外項積</h2>
+<div class="box y" style="text-align:center;font-size:20px;">
+<span class="hl">比例式</span> a:b = c:d 表示<b>兩個比相等</b>，也可寫成 <span class="fm">a/b = c/d</span></div>
+<svg viewBox="0 0 460 100" width="60%" style="margin:8px auto;display:block;">
+<text x="230" y="56" font-family="Noto Serif TC" font-size="34" fill="#f3efe2" text-anchor="middle">a : b = c : d</text>
+<path d="M150 46 Q230 8 322 46" stroke="#eda0a8" stroke-width="2" fill="none"/>
+<text x="236" y="14" font-family="Caveat" font-size="19" fill="#eda0a8" text-anchor="middle">外項 a、d</text>
+<path d="M188 64 Q230 92 280 64" stroke="#a6d6a0" stroke-width="2" fill="none"/>
+<text x="234" y="98" font-family="Caveat" font-size="19" fill="#a6d6a0" text-anchor="middle">內項 b、c</text>
+</svg>
+<div class="box g" style="text-align:center;font-size:22px;">
+<b class="hl">a × d = b × c</b>（外積 = 內積）</div>
+<div class="box y" style="text-align:center;">口訣:<span class="hl">外外相乘 = 內內相乘</span></div>
+</div></div>
+
+<!-- 10 -->
+<div class="slide" data-pg="10 / 21"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 6、7　難度 ★☆☆～★★☆</div>
+<h2>解含未知數的比例式</h2>
+<div class="eg">
+<div class="q">x : 6 = 4 : 8</div>
+<div class="stp"><b>內積=外積</b>　6×4 = x×8 → 24 = 8x → <span class="fm hl">x = 3</span></div>
+<div class="stp"><b>驗算</b>　3:6 = 1:2 = 4:8 ✓</div>
+</div>
+<div class="eg">
+<div class="q">(2x+1) : 5 = 3 : 1</div>
+<div class="stp"><b>內積=外積</b>　(2x+1)×1 = 5×3 → 2x+1 = 15 → <span class="fm hl">x = 7</span></div>
+</div>
+<div class="tip"><div class="ic">📌</div><div class="tx"><b>追問句:</b>「外項是哪兩個?內項是哪兩個?」列式前先確認四個位置，再乘。</div></div>
+</div></div>
+
+<!-- 11 -->
+<div class="slide" data-pg="11 / 21"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">細目 ②　等比中項</div>
+<h2>a:b = b:c 時，b² = ac</h2>
+<div class="box y" style="text-align:center;font-size:20px;">
+若 <span class="fm">a:b = b:c</span>（中間項重複）→ <span class="fm hl">b² = a × c</span><br>
+稱 <b>b 是 a 和 c 的等比中項</b></div>
+<div class="eg">
+<div class="q">3 : x = x : 12，求 x</div>
+<div class="stp"><b>內積=外積</b>　x × x = 3 × 12 → <span class="fm">x² = 36</span></div>
+<div class="stp"><b>解</b>　x = 6 <span class="hl">或</span> x = −6</div>
+</div>
+<div class="box r" style="text-align:center;font-size:20px;">
+⚠️ <b>別漏負根!</b>　情境是長度 → 取 x=6;允許負數 → x = ±6</div>
+</div></div>
+
+<!-- 12 -->
+<div class="slide" data-pg="12 / 21"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">細目 ②　比例式的變形</div>
+<h2>更比與合比</h2>
+<div class="two">
+<div class="box"><b class="hl-b">更比</b><br>
+<span class="fm">a:b = c:d</span><br>→ <span class="fm hl">a:c = b:d</span><br>
+<span style="font-size:15px;color:var(--chalk-soft);">前項比前項、後項比後項</span></div>
+<div class="box g"><b class="hl-g">合比</b><br>
+<span class="fm">a:b = c:d</span><br>→ <span class="fm hl">(a+b):b = (c+d):d</span></div>
+</div>
+<div class="eg">
+<div class="q">a:b = 3:5，求 (a+b):b</div>
+<div class="stp">設 <span class="fm">a=3k、b=5k</span> → a+b = 8k</div>
+<div class="stp"><span class="fm">(a+b):b = 8k:5k = 8:5</span></div>
+</div>
+<div class="box y" style="text-align:center;">💡 <span class="hl">用「份數 k」設未知數</span> —— 比例問題的萬用技巧。</div>
+</div></div>
+
+<!-- 13 -->
+<div class="slide" data-pg="13 / 21"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">細目 ②　應用</div>
+<h2>比例尺:圖上 : 實際</h2>
+<div class="eg">
+<div class="q">地圖比例尺 1:250000，圖上量得 4.8 公分，求實際距離</div>
+<div class="stp"><b>列式</b>　圖上:實際 = 1:250000 → <span class="fm">4.8 : x = 1 : 250000</span></div>
+<div class="stp"><b>解</b>　x = 4.8 × 250000 = 1200000 公分</div>
+<div class="stp"><b>⚠️ 單位換算</b>　1200000 公分 = 12000 公尺 = <span class="hl">12 公里</span></div>
+</div>
+<div class="box r" style="text-align:center;font-size:20px;">
+⚠️ <b>最常錯:算完忘記單位換算</b>，把公分當公里報答案。</div>
+</div></div>
+
+<!-- 14 -->
+<div class="slide" data-pg="14 / 21"><div class="tag">避雷</div><div class="body">
+<div class="eyebrow">細目 ②　⚠️ 最容易忘</div>
+<h2>面積比例尺 = 長度比例尺的平方</h2>
+<div class="box y" style="text-align:center;font-size:21px;">
+長度比例尺 <span class="fm">1:200</span> → 面積比例尺 = <span class="fm hl">200² = 40000</span></div>
+<div class="box g"><b>為什麼要平方?</b><br>
+面積 = 長 × 寬。兩個長度<b>各放大 200 倍</b> → 面積放大 <span class="fm">200 × 200 = 200²</span> 倍。</div>
+<svg viewBox="0 0 420 80" width="70%" style="margin:6px auto;display:block;">
+<rect x="30" y="30" width="30" height="20" fill="rgba(152,201,220,0.3)" stroke="#98c9dc"/>
+<text x="45" y="68" font-family="Noto Sans TC" font-size="12" fill="#98c9dc" text-anchor="middle">圖上 1cm²</text>
+<text x="130" y="46" font-family="Caveat" font-size="20" fill="#f2d979" text-anchor="middle">×40000</text>
+<rect x="200" y="14" width="180" height="52" fill="rgba(242,217,121,0.15)" stroke="#f2d979"/>
+<text x="290" y="44" font-family="Noto Sans TC" font-size="13" fill="#f2d979" text-anchor="middle">實際 40000cm² = 4m²</text>
+</svg>
+<div class="box y" style="text-align:center;">記住:<span class="hl">長度平方 → 面積比例尺</span></div>
+</div></div>
+
+<!-- 15 -->
+<div class="slide" data-pg="15 / 21"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 1　【橡膠配方・按比例分配】</div>
+<h2>配方 5:3:2</h2>
+<div class="box">天然:合成:碳黑 = 5:3:2，製作 <span class="hl">400 公斤</span></div>
+<div class="eg">
+<div class="stp"><b>(1)</b>　總份數 10，每份 40 → 天然 <span class="fm">200</span>、合成 <span class="fm">120</span>、碳黑 <span class="fm">80</span> 公斤</div>
+<div class="stp"><b>(2) 成本</b>（天然80、合成60、碳黑40 元/kg）</div>
+<div class="stp">　　200×80 + 120×60 + 80×40 = 16000+7200+3200 = <span class="hl">26400 元</span></div>
+<div class="stp"><b>(3) 天然比例 5→4</b>（總量不變）　新天然 = 400×4/9 ≈ 177.8 kg</div>
+<div class="stp">　　省下 (200 − 1600/9)×80 = (200/9)×80 ≈ <span class="hl">1778 元</span></div>
+</div>
+</div></div>
+
+<!-- 16 -->
+<div class="slide" data-pg="16 / 21"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 2　【及格率】<span style="color:#eda0a8;font-size:13px;">（來源數字不整除，已改為整除版）</span></div>
+<h2>比的應用:及格率比較</h2>
+<div class="box">甲乙兩班,及格人數比 <span class="hl">4:3</span>、不及格人數比 <span class="hl">1:2</span>。甲班及格 40 人、不及格 5 人。</div>
+<div class="eg">
+<div class="stp"><b>(1) 乙班</b>　及格比 4:3，甲 40=4 份 → 每份 10 → 乙 3×10 = <span class="fm">30 人</span></div>
+<div class="stp">　　不及格比 1:2，甲 5 → 乙 5×2 = <span class="fm">10 人</span></div>
+<div class="stp"><b>(2) 及格率</b>　甲 = 40/45 ≈ <span class="hl">88.9%</span>;乙 = 30/40 = <span class="hl">75%</span></div>
+<div class="stp"><b>(3)</b>　<span class="hl">甲班及格率較高</span></div>
+</div>
+<div class="box y" style="text-align:center;">💡 用「份數」推:甲 40 人 = 4 份 → 每份 10 → 乙 3 份 = 30 人。</div>
+</div></div>
+
+<!-- 17 -->
+<div class="slide" data-pg="17 / 21"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 3　【比例尺・面積】</div>
+<h2>平面圖與實際</h2>
+<div class="box">比例尺 <span class="hl">1:200</span> 的平面圖，客廳長 12.5 公分、寬 8 公分</div>
+<div class="eg">
+<div class="stp"><b>(1) 實際長寬</b>　圖上 1cm = 實際 200cm = 2m → 長 <span class="fm">25m</span>、寬 <span class="fm">16m</span></div>
+<div class="stp"><b>(2) 實際面積</b>　25 × 16 = <span class="hl">400 平方公尺</span></div>
+<div class="stp"><b>(3) 圖上 15cm² 的書房</b>　面積比例尺 = 200² = 40000</div>
+<div class="stp">　　實際 = 15 × 40000 = 600000 cm² = <span class="hl">60 平方公尺</span></div>
+</div>
+<div class="box r" style="text-align:center;">⚠️ (3) 用<b>面積比例尺 40000</b>，不是長度比例尺 200。</div>
+</div></div>
+
+<!-- 18 -->
+<div class="slide" data-pg="18 / 21"><div class="tag">避雷</div><div class="body">
+<h2>避雷指南:六個最常見錯誤</h2>
+<table class="tbl">
+<tr><th style="width:46%;">❌ 錯誤</th><th>✓ 正確</th></tr>
+<tr><td>把「3:4」說成比值</td><td><b class="hl-g">比是 a:b、比值是 a÷b</b>（一個數）</td></tr>
+<tr><td>(−6):4 化簡成 3:2</td><td><b class="hl-g">(−3):2</b>（負號別弄丟）</td></tr>
+<tr><td>3:4 和 2:5 拼成 3:4:5</td><td>先<b class="hl-g">統一中間量</b>（用 LCM）</td></tr>
+<tr><td>等比中項只寫正根</td><td>x²=36 → <b class="hl-g">x = ±6</b>（看情境）</td></tr>
+<tr><td>比例尺算完忘記單位換算</td><td>公分 → 公尺 → 公里</td></tr>
+<tr><td>面積用長度比例尺</td><td>面積比例尺 = <b class="hl-g">長度比例尺²</b></td></tr>
+</table>
+<div class="box y" style="text-align:center;">
+自我檢查句:<span class="hl">「我說的是『比』還是『比值』?外項內項各是哪兩個?」</span></div>
+</div></div>
+
+<!-- 19 -->
+<div class="slide" data-pg="19 / 21"><div class="tag">連結</div><div class="body">
+<h2>這節用到了前面哪些東西?</h2>
+<table class="tbl">
+<tr><th style="width:30%;">來自</th><th>用在哪</th></tr>
+<tr><td class="hl-b">七上 2-2 GCD/LCM</td><td>化簡整數比（GCD）、分數比（LCM）</td></tr>
+<tr><td class="hl-b">七上 2-3 分數</td><td>比值 = a÷b、分數比化簡</td></tr>
+<tr><td class="hl-b">七下 1-2 解方程式</td><td>解比例式（內積=外積後就是一元一次）</td></tr>
+<tr><td class="hl-b">七上 1-4 乘方</td><td>面積比例尺 = 長度²</td></tr>
+</table>
+<div class="box y" style="text-align:center;font-size:20px;">
+<span class="hl">比例式沒有一個新的計算</span> —— 「內積=外積」只是把比例式<b>翻成一元一次方程式</b>。</div>
+</div></div>
+
+<!-- 20 -->
+<div class="slide" data-pg="20 / 21"><div class="tag">總結</div><div class="body">
+<h2>本節總結</h2>
+<ul>
+<li><span class="hl">比 vs 比值</span>:比是 a:b（關係）、比值是 a÷b（一個數）—— 別混！</li>
+<li><span class="hl">化簡</span>:整數同除 GCD、分數同乘 LCM、小數同乘 10 次方;⚠️ 負號別弄丟</li>
+<li><span class="hl">比例式</span>:<b>內積 = 外積</b>（a×d = b×c）—— 一個性質解決所有問題</li>
+<li><span class="hl">應用</span>:分配用「份數」、比例尺記得單位換算、面積比例尺要平方</li>
+</ul>
+<div class="box g" style="text-align:center;font-size:20px;">
+🔗 <b>承先</b>:七上 2-2 GCD/LCM、2-3 分數、七下 1-2 解方程式<br>
+🔗 <b>啟後</b>:<span class="hl">3-2 正比反比（y/x=k 就是比值恆定）</span>;九上「相似形」用比例式求邊長</div>
+</div></div>
+
+<!-- 21 -->
+<div class="slide" data-pg="21 / 21"><div class="tag">Next</div><div class="big-center">
+<div class="eyebrow">下節預告</div>
+<h1 style="font-size:42px;">3-2　正比和反比</h1>
+<div class="lead">比值恆定 → 正比;乘積恆定 → 反比<br>你在這節學的「比值」，下節變成 y = kx 的 k</div>
+<div class="box y" style="max-width:820px;margin:20px auto 0;font-size:20px;">
+<span class="fm">y/x = k</span>（y 與 x 的比值固定）—— 這就是<span class="hl">正比</span>。<br>
+你這節學的<b>比值</b>，在下節有了名字:<span class="hl">比例常數 k</span>。</div>
+</div></div>
+
+</div></body></html>

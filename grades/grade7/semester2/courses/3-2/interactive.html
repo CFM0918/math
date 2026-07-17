@@ -1,0 +1,1057 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>七下 3-2 正比和反比｜互動教學平台</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;--wood:#6b4a32;}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);overscroll-behavior:none;}
+.topbar{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:10px 16px;background:linear-gradient(180deg,#1b2f21,#132218);border-bottom:2px solid var(--wood);box-shadow:0 4px 18px rgba(0,0,0,0.5);}
+.brand{font-family:'Noto Serif TC',serif;font-weight:900;font-size:clamp(15px,2.2vw,20px);color:var(--yellow);white-space:nowrap;}
+.brand small{display:block;font-family:'Caveat',cursive;font-size:14px;color:var(--soft);font-weight:400;}
+.spacer{flex:1;}
+.btn{background:rgba(243,239,226,0.08);border:1.5px solid rgba(243,239,226,0.28);color:var(--chalk);
+  border-radius:10px;padding:7px 13px;font-family:inherit;font-size:14px;cursor:pointer;white-space:nowrap;transition:.15s;}
+.btn:hover{background:rgba(243,239,226,0.16);}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:10px 16px 0;scrollbar-width:none;}
+.tabs::-webkit-scrollbar{display:none;}
+.tab{background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.2);border-bottom:none;
+  color:var(--soft);border-radius:10px 10px 0 0;padding:9px 15px;font-size:14px;cursor:pointer;white-space:nowrap;font-family:inherit;}
+.tab.on{background:var(--board);border-color:var(--yellow);color:var(--yellow);font-weight:700;}
+.tab .n{font-family:'Caveat',cursive;font-size:18px;margin-right:5px;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px 60px;}
+.panel{display:none;}.panel.on{display:block;}
+.card{background:radial-gradient(ellipse at 20% 10%,rgba(255,255,255,0.05),transparent 45%),
+   linear-gradient(160deg,var(--board),var(--board2));
+  border:1.5px solid rgba(242,217,121,0.16);border-radius:14px;padding:18px;margin-bottom:16px;
+  box-shadow:0 8px 26px rgba(0,0,0,0.45);position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 38px,rgba(255,255,255,0.012) 38px,rgba(255,255,255,0.012) 39px);}
+.card>*{position:relative;}
+.card h3{font-family:'Noto Serif TC',serif;font-size:clamp(17px,2.4vw,21px);color:var(--yellow);
+  margin-bottom:12px;padding-bottom:8px;border-bottom:2px dashed rgba(242,217,121,0.35);display:flex;align-items:center;gap:8px;}
+.card h3 .ic{font-size:20px;}
+.goals{display:flex;flex-wrap:wrap;gap:9px;}
+.goal{display:flex;align-items:center;gap:9px;background:rgba(242,217,121,0.07);
+  border:1.5px dashed rgba(242,217,121,0.4);border-radius:22px;padding:8px 15px 8px 8px;
+  font-size:clamp(13.5px,1.8vw,15px);color:var(--yellow);line-height:1.5;}
+.goal .bdg{width:24px;height:24px;border-radius:50%;background:var(--yellow);color:#16281c;
+  font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;flex:none;}
+.deck{position:relative;background:rgba(0,0,0,0.22);border-radius:12px;padding:clamp(16px,3vw,30px);
+  min-height:clamp(260px,42vh,380px);display:flex;flex-direction:column;justify-content:center;}
+.sl{display:none;animation:fade .25s;}.sl.on{display:block;}
+@keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+.sl .eyebrow{font-family:'Caveat',cursive;font-size:20px;color:var(--yellow);margin-bottom:6px;}
+.sl h4{font-family:'Noto Serif TC',serif;font-size:clamp(19px,3vw,27px);margin-bottom:12px;line-height:1.35;}
+.sl p{font-size:clamp(15px,2vw,18px);line-height:1.8;margin-bottom:9px;}
+.sl ul{list-style:none;}
+.sl li{font-size:clamp(15px,2vw,18px);line-height:1.85;padding-left:26px;position:relative;margin-bottom:4px;}
+.sl li::before{content:'✦';position:absolute;left:2px;color:var(--yellow);font-size:14px;top:3px;}
+.nav{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:14px;}
+.nav .pg{font-family:'Caveat',cursive;font-size:20px;color:var(--soft);min-width:64px;text-align:center;}
+.dots{display:flex;gap:6px;justify-content:center;margin-top:10px;flex-wrap:wrap;}
+.dot{width:9px;height:9px;border-radius:50%;background:rgba(243,239,226,0.25);cursor:pointer;border:none;padding:0;}
+.dot.on{background:var(--yellow);transform:scale(1.3);}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.32);border-radius:10px;
+  padding:11px 15px;margin:9px 0;font-size:clamp(14px,1.9vw,17px);line-height:1.7;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.36);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.36);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.32);}
+.two{display:flex;gap:12px;flex-wrap:wrap;}.two>*{flex:1;min-width:220px;}
+.teach{background:rgba(201,174,224,0.12);border:1.5px dashed rgba(201,174,224,0.5);
+  border-radius:10px;padding:11px 15px;margin:9px 0;font-size:clamp(14px,1.8vw,15px);line-height:1.7;}
+.teach b{color:var(--purple);}
+.tbl{width:100%;border-collapse:collapse;margin:9px 0;font-size:clamp(13.5px,1.8vw,16px);}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.24);padding:8px 11px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.cv-wrap{background:rgba(0,0,0,0.25);border-radius:12px;padding:10px;}
+canvas.viz{width:100%;display:block;border-radius:8px;touch-action:none;}
+.ctrl{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center;}
+.readout{font-family:'Noto Serif TC',serif;font-size:clamp(14px,1.9vw,18px);color:var(--chalk);
+  background:rgba(242,217,121,0.1);border:1px solid rgba(242,217,121,0.3);border-radius:8px;
+  padding:7px 12px;flex:1;min-width:220px;}
+.readout b{color:var(--yellow);}
+.q{background:rgba(0,0,0,0.2);border:1px solid rgba(242,217,121,0.18);border-radius:10px;padding:13px 15px;margin:10px 0;}
+.q .qt{font-size:clamp(15px,2vw,17px);margin-bottom:10px;line-height:1.7;}
+.q .qt .qn{font-family:'Caveat',cursive;color:var(--yellow);font-size:20px;margin-right:6px;}
+.opts{display:flex;flex-direction:column;gap:7px;}
+.opt{text-align:left;background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.22);
+  color:var(--chalk);border-radius:9px;padding:9px 13px;font-family:inherit;font-size:15px;cursor:pointer;transition:.15s;line-height:1.5;}
+.opt:hover:not(:disabled){background:rgba(243,239,226,0.13);}
+.opt.right{background:rgba(166,214,160,0.24);border-color:var(--green);color:#fff;font-weight:700;}
+.opt.wrong{background:rgba(237,160,168,0.22);border-color:var(--pink);}
+.opt:disabled{cursor:default;}
+.fb{display:none;margin-top:9px;padding:9px 13px;border-radius:8px;font-size:14.5px;line-height:1.65;}
+.fb.on{display:block;}
+.fb.ok{background:rgba(166,214,160,0.14);border-left:3px solid var(--green);}
+.fb.no{background:rgba(237,160,168,0.14);border-left:3px solid var(--pink);}
+.fill{display:inline-block;background:rgba(0,0,0,0.3);border:none;border-bottom:2px solid var(--yellow);
+  color:var(--yellow);font-family:'Noto Serif TC',serif;font-size:17px;width:110px;text-align:center;padding:3px 5px;margin:0 4px;}
+.fill:focus{outline:none;background:rgba(242,217,121,0.12);}
+.exq{background:rgba(0,0,0,0.26);border:1.5px solid rgba(242,217,121,0.28);border-radius:11px;padding:13px 15px;margin:10px 0;position:relative;}
+.exq::before{content:'';position:absolute;top:-8px;left:32px;width:54px;height:14px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.exq .exq-q{font-size:clamp(14.5px,1.9vw,17px);line-height:1.75;margin-bottom:11px;}
+.exo{text-align:left;background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.22);
+  color:var(--chalk);border-radius:9px;padding:9px 13px;font-family:inherit;font-size:clamp(14px,1.8vw,15.5px);
+  cursor:pointer;transition:.15s;line-height:1.55;width:100%;margin-bottom:6px;display:block;}
+.exo:hover:not(:disabled){background:rgba(243,239,226,0.13);}
+.exo.right{background:rgba(166,214,160,0.26);border-color:var(--green);color:#fff;font-weight:700;}
+.exo.wrong{background:rgba(237,160,168,0.2);border-color:var(--pink);opacity:.75;}
+.exo:disabled{cursor:default;}
+@keyframes shake{10%,90%{transform:translateX(-2px);}30%,70%{transform:translateX(4px);}50%{transform:translateX(-4px);}}
+.exo.shake{animation:shake .4s;}
+.exsol{display:none;margin-top:10px;padding:11px 14px;border-radius:9px;
+  background:rgba(166,214,160,0.13);border-left:3px solid var(--green);font-size:clamp(14px,1.8vw,15.5px);line-height:1.75;}
+.exsol.on{display:block;animation:fade .3s;}
+.exsol .st{color:var(--soft);margin:3px 0;}
+.exsol .an{color:var(--green);font-weight:700;margin-top:6px;}
+.exlock{display:flex;align-items:center;gap:7px;margin-top:9px;font-size:13.5px;color:rgba(243,239,226,0.45);}
+.exlock.hide{display:none;}
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:11px;}
+.icard{background:rgba(0,0,0,0.22);border:1.5px solid rgba(242,217,121,0.22);border-radius:11px;padding:14px;text-align:center;}
+.icard .big{font-family:'Noto Serif TC',serif;font-size:clamp(17px,2.6vw,23px);font-weight:900;margin:6px 0;}
+.icard .cap{font-size:13.5px;color:var(--soft);line-height:1.6;}
+.frow{display:flex;gap:12px;align-items:center;padding:9px 12px;border-bottom:1px dashed rgba(243,239,226,0.16);}
+.frow:last-child{border-bottom:none;}
+.flab{color:var(--blue);font-weight:700;min-width:150px;font-size:clamp(13.5px,1.8vw,15.5px);flex:none;}
+.fval{color:var(--yellow);font-weight:700;font-family:'Noto Serif TC',serif;font-size:clamp(14px,1.9vw,17px);}
+@media(max-width:560px){.frow{flex-direction:column;align-items:flex-start;gap:3px;}.flab{min-width:0;}}
+.hud{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:12px;}
+.hud .st{background:rgba(0,0,0,0.3);border:1.5px solid rgba(242,217,121,0.28);border-radius:9px;
+  padding:7px 13px;font-size:14px;flex:1;min-width:88px;text-align:center;}
+.hud .st b{display:block;font-family:'Noto Serif TC',serif;font-size:20px;color:var(--yellow);}
+.tbar{height:8px;background:rgba(0,0,0,0.35);border-radius:5px;overflow:hidden;margin-bottom:12px;}
+.tfill{height:100%;background:linear-gradient(90deg,var(--green),var(--yellow),var(--pink));width:100%;transition:width .1s linear;}
+.gscreen{display:none;}.gscreen.on{display:block;}
+.lvchips{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin:14px 0;}
+.lvchip{background:rgba(152,201,220,0.12);border:1.5px solid rgba(152,201,220,0.35);border-radius:18px;
+  padding:6px 13px;font-size:13.5px;color:var(--blue);}
+.lvchip.done{background:rgba(166,214,160,0.2);border-color:var(--green);color:var(--green);}
+.lvchip.now{background:rgba(242,217,121,0.22);border-color:var(--yellow);color:var(--yellow);font-weight:700;}
+.gq{font-size:clamp(16px,2.2vw,20px);line-height:1.7;margin:14px 0;text-align:center;font-family:'Noto Serif TC',serif;}
+.gopts{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+@media(max-width:560px){.gopts{grid-template-columns:1fr;}}
+.gopt{background:rgba(243,239,226,0.07);border:1.5px solid rgba(243,239,226,0.25);color:var(--chalk);
+  border-radius:10px;padding:12px;font-family:'Noto Serif TC',serif;font-size:17px;cursor:pointer;transition:.15s;min-height:48px;}
+.gopt:hover:not(:disabled){background:rgba(243,239,226,0.15);}
+.gopt.right{background:rgba(166,214,160,0.3);border-color:var(--green);font-weight:900;}
+.gopt.wrong{background:rgba(237,160,168,0.25);border-color:var(--pink);}
+.gfb{margin-top:11px;padding:10px 13px;border-radius:8px;font-size:14.5px;line-height:1.6;display:none;}
+.gfb.on{display:block;}
+.gfb.ok{background:rgba(166,214,160,0.15);border-left:3px solid var(--green);}
+.gfb.no{background:rgba(237,160,168,0.15);border-left:3px solid var(--pink);}
+.rank{font-size:54px;text-align:center;margin:10px 0;}
+.hint{text-align:center;color:rgba(243,239,226,0.35);font-size:12.5px;padding:8px 0 0;}
+@media (max-width:640px){.topbar{padding:8px 10px;gap:8px;}.wrap{padding:0 10px 70px;}.card{padding:13px;}}
+</style></head><body>
+
+<div class="topbar">
+  <div class="brand">3-2　正比和反比<small>七下 · 第3章 比例</small></div>
+  <div class="spacer"></div>
+</div>
+
+<div class="tabs" id="tabs">
+  <button class="tab on" data-p="0"><span class="n">🔍</span>判斷正比反比</button>
+  <button class="tab" data-p="1"><span class="n">📈</span>圖形與陷阱</button>
+  <button class="tab" data-p="2"><span class="n">🔗</span>倍數與應用</button>
+  <button class="tab" data-p="3"><span class="n">★</span>題型測驗</button>
+  <button class="tab" data-p="4"><span class="n">🎮</span>闖關遊戲</button>
+</div>
+
+<div class="wrap">
+  <div class="card" id="goalCard">
+    <h3><span class="ic">🎯</span>本節學習目標</h3>
+    <div class="goals" id="goals"></div>
+  </div>
+  <div id="wrap"></div>
+</div>
+
+<script>
+const GOALS = [
+  '能從情境寫出關係式',
+  '能判斷正比（y/x 恆為 k）並寫出 y = kx',
+  '能判斷反比（x×y 恆為 k）並寫出 y = k/x',
+  '能從數表中識別正比或反比',
+  '能用「已知一組對應值」求另一組',
+  '知道 y=kx 過原點；y=k/x 不過原點且 x≠0',
+];
+
+const DATA = [
+{ key:'judge', viz:'judge', vizTitle:'正比／反比判定器 —— 先自己判斷，再按「試相除」「試相乘」驗證（8 題）',
+  slides:[
+    {eb:'細目 ①', h:'什麼是關係式？', html:`
+      <div class="box y" style="text-align:center;font-size:18px;">用式子把<span class="hl">兩個量之間的關係</span>寫下來</div>
+      <table class="tbl">
+        <tr><th style="width:48%;">情境</th><th>關係式</th></tr>
+        <tr><td>一顆 42 元，買 x 顆</td><td class="fm hl">y = 42x</td></tr>
+        <tr><td>距離固定 300 公里</td><td class="fm hl">速度 × 時間 = 300</td></tr>
+        <tr><td>每小時耗油 3 公升</td><td class="fm hl">油耗 = 3 × 時間</td></tr>
+      </table>
+      <div class="box g">💡 <b>關係式是列式的延伸</b>（七上 3-1 學過）—— 差別在這裡有<span class="hl">兩個變數在動</span>。</div>`},
+    {eb:'細目 ①', h:'正比：相除固定', html:`
+      <div class="box y" style="text-align:center;font-size:20px;padding:14px;">
+        <span class="fm"><span class="hl">y/x = k</span></span>（k ≠ 0）　→　<span class="fm" style="font-size:22px;"><span class="hl">y = kx</span></span></div>
+      <table class="tbl">
+        <tr><th style="width:22%;">x</th><td class="fm">2</td><td class="fm">4</td><td class="fm">6</td></tr>
+        <tr><th>y</th><td class="fm">6</td><td class="fm">12</td><td class="fm">18</td></tr>
+        <tr><th class="hl-b">y/x</th><td class="fm hl-g" style="font-size:18px;">3</td><td class="fm hl-g" style="font-size:18px;">3</td><td class="fm hl-g" style="font-size:18px;">3</td></tr>
+      </table>
+      <div class="box g" style="text-align:center;">比值恆為 3 → <span class="hl">正比，y = 3x</span>　·　<b>k 叫比例常數</b></div>`},
+    {eb:'細目 ②', h:'反比：相乘固定', html:`
+      <div class="box y" style="text-align:center;font-size:20px;padding:14px;">
+        <span class="fm"><span class="hl">x × y = k</span></span>（k ≠ 0）　→　<span class="fm" style="font-size:22px;"><span class="hl">y = k/x</span></span></div>
+      <table class="tbl">
+        <tr><th style="width:22%;">x</th><td class="fm">2</td><td class="fm">4</td><td class="fm">6</td></tr>
+        <tr><th>y</th><td class="fm">12</td><td class="fm">6</td><td class="fm">4</td></tr>
+        <tr><th class="hl-r">x×y</th><td class="fm hl-g" style="font-size:18px;">24</td><td class="fm hl-g" style="font-size:18px;">24</td><td class="fm hl-g" style="font-size:18px;">24</td></tr>
+      </table>
+      <div class="box g" style="text-align:center;">乘積恆為 24 → <span class="hl">反比，y = 24/x</span></div>
+      <div class="box r" style="text-align:center;">⚠️ <span class="fm">y = k/x</span> <span class="hl-r">不過原點</span>，而且 <span class="hl-r">x ≠ 0</span>（七上 1-3 的鐵則）</div>`},
+    {eb:'🔑 本節唯一要記的事', h:'判斷方法：先除、再乘', html:`
+      <div class="box y" style="text-align:center;font-size:23px;padding:20px;">
+        <span class="hl">正比「相除」固定</span><br><span class="hl">反比「相乘」固定</span></div>
+      <div class="box"><b>給一張數表時：</b><br>
+        <span class="hl-b">① 先試 y/x 是否都一樣</span> → 是 → <b>正比</b><br>
+        <span class="hl-r">② 再試 x×y 是否都一樣</span> → 是 → <b>反比</b><br>
+        <span class="hl">③ 兩個都不恆定</span> → <b>都不是</b></div>
+      <div class="box g">👉 用下方的<b>判定器</b>：先自己判斷，再按「① 試相除」「② 試相乘」驗證。<b>8 題涵蓋全部情況，包含陷阱題。</b></div>`},
+    {eb:'例題 1 ★☆☆', h:'判斷數表', html:`
+      <div class="exq" data-a="1">
+        <div class="exq-q"><span class="hl">Q</span>　<span class="fm">x = 2, 4, 6　；　y = 12, 6, 4</span>　是正比、反比還是都不是？</div>
+        <button class="exo" data-i="0">正比，k = 24</button>
+        <button class="exo" data-i="1">反比，k = 24</button>
+        <button class="exo" data-i="2">正比，k = 6</button>
+        <button class="exo" data-i="3">都不是</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st"><b>① 先試相除</b>：<span class="fm">12/2 = 6、6/4 = 1.5</span> → <b>不恆定</b> → 不是正比</div>
+          <div class="st"><b>② 再試相乘</b>：<span class="fm">2×12 = 24、4×6 = 24、6×4 = 24</span> → <b>恆為 24</b> ✓</div>
+          <div class="st fm">→ 反比，k = 24，y = 24/x</div>
+          <div class="st">(A) 是把「正比／反比」搞反了 —— <b>正比相除、反比相乘</b>。</div>
+          <div class="an">答：反比，k = 24</div>
+        </div>
+      </div>`},
+    {eb:'例題 2 ★★☆', h:'通用解法：先求 k', html:`
+      <div class="exq" data-a="2">
+        <div class="exq-q"><span class="hl">Q</span>　y 與 x 成<b>反比</b>，x = 3 時 y = 8。求 x = 12 時的 y。</div>
+        <button class="exo" data-i="0">32</button>
+        <button class="exo" data-i="1">2/3</button>
+        <button class="exo" data-i="2">2</button>
+        <button class="exo" data-i="3">24</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st"><b>求 k</b>（反比 → <b>相乘</b>）：<span class="fm">k = x×y = 3×8 = 24</span></div>
+          <div class="st fm"><b>代入</b>：y = 24/12 = 2</div>
+          <div class="st">(A) 32 是把它當成<b>正比</b>算的（k = 8/3，y = (8/3)×12 = 32）—— <span class="hl-r">看清楚是反比！</span></div>
+          <div class="st">💡 <b>通用解法</b>：先用已知那組求出 <b>k</b>，再拿 k 去算新的。<br>
+            差別只在「求 k 的時候是<b>除</b>還是<b>乘</b>」。</div>
+          <div class="an">答：y = 2</div>
+        </div>
+      </div>`},
+    {eb:'隨堂精選', h:'「都不是」也是一種答案', html:`
+      <div class="exq" data-a="3">
+        <div class="exq-q"><span class="hl">Q</span>　<span class="fm">x = 1, 2, 3　；　y = 2, 5, 10</span></div>
+        <button class="exo" data-i="0">正比，k = 2</button>
+        <button class="exo" data-i="1">反比，k = 2</button>
+        <button class="exo" data-i="2">正比，k = 5</button>
+        <button class="exo" data-i="3">都不是</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st"><b>① 試相除</b>：<span class="fm">2/1 = 2、5/2 = 2.5、10/3 ≈ 3.33</span> → <b>不恆定</b></div>
+          <div class="st"><b>② 試相乘</b>：<span class="fm">1×2 = 2、2×5 = 10、3×10 = 30</span> → <b>不恆定</b></div>
+          <div class="st">兩個都不恆定 → <b>都不是</b></div>
+          <div class="st">💡 <b>兩個都要試過</b>，才能下「都不是」這個結論。只試一個是不夠的。</div>
+          <div class="st">📌 <b>這題的意義</b>：不是每兩個量都有比例關係。世界上大部分的關係<b>既不是正比也不是反比</b> —— 正比反比只是最簡單的兩種。</div>
+          <div class="an">答：都不是</div>
+        </div>
+      </div>`}
+  ],
+  fa:[
+    {q:'正比的判斷方法？', o:['y/x 恆定','x×y 恆定','y−x 恆定','y+x 恆定'], a:0, e:'正比「相除」固定 → y/x = k。'},
+    {q:'反比的判斷方法？', o:['y/x 恆定','x×y 恆定','y−x 恆定','y+x 恆定'], a:1, e:'反比「相乘」固定 → x×y = k。'},
+    {q:'判斷 <span class="fm">x=2,3,6；y=9,6,3</span>', o:['正比 k=18','反比 k=18','正比 k=4.5','都不是'], a:1, e:'x×y = 18,18,18 恆定 → 反比。'}
+  ],
+  info:[
+    {big:'正比相除固定', cap:'y/x = k<br>→ y = kx', c:'var(--blue)'},
+    {big:'反比相乘固定', cap:'x×y = k<br>→ y = k/x', c:'var(--pink)'},
+    {big:'先除・再乘', cap:'兩個都要試<br>才能說「都不是」', c:'var(--yellow)'}
+  ]
+},
+{ key:'graph', viz:'graph', vizTitle:'圖形對照 —— 切換正比／反比、調 k，看過不過原點',
+  slides:[
+    {eb:'細目 ①', h:'正比的行為與圖形', html:`
+      <div class="two">
+        <div class="box g"><b class="hl-g">k > 0</b><br>x 變大 → y <span class="hl">等比例變大</span><br><span class="fm">例：y = 3x</span></div>
+        <div class="box r"><b class="hl-r">k < 0</b><br>x 變大 → y <span class="hl-r">等比例變小</span><br><span class="fm">例：y = −x</span></div>
+      </div>
+      <div class="box r" style="text-align:center;">⚠️ <b>注意 k &lt; 0 這一點</b> —— 下一張的陷阱就在這裡。</div>
+      <div class="box y" style="text-align:center;font-size:19px;">
+        <span class="fm">y = kx</span> 的圖形是<span class="hl">通過原點的直線</span>（x = 0 時 y = 0）</div>
+      <div class="box g">👉 用下方 Canvas 按「🔀 正比 / 反比」和「± k 變號」，親眼看兩件事：<br>
+        <b>① 正比一定過原點、反比一定不過　② k 變負，正比的線會反過來斜 —— 但它還是正比</b></div>`},
+    {eb:'⚠️ 本節最重要的陷阱', h:'「y 隨 x 增大而減小」不等於反比', html:`
+      <div class="box r" style="text-align:center;font-size:18px;">❌ 以為只要「x 變大、y 變小」就是反比</div>
+      <div class="box g"><b class="hl-g">反例：y = −x</b>
+        <table class="tbl" style="margin-top:5px;">
+          <tr><th style="width:24%;">x</th><td class="fm">1</td><td class="fm">2</td><td class="fm">3</td></tr>
+          <tr><th>y</th><td class="fm">−1</td><td class="fm">−2</td><td class="fm">−3</td></tr>
+          <tr><th class="hl-b">y/x</th><td class="fm hl-g">−1</td><td class="fm hl-g">−1</td><td class="fm hl-g">−1</td></tr>
+          <tr><th class="hl-r">x×y</th><td class="fm hl-r">−1</td><td class="fm hl-r">−4</td><td class="fm hl-r">−9</td></tr>
+        </table></div>
+      <div class="box y">・y 確實隨 x 增大而<b>減小</b> ✓<br>
+        ・但 <span class="fm">y/x = −1</span> <span class="hl-g">恆定</span> → 這是<span class="hl">正比</span>（k = −1）！<br>
+        ・<span class="fm">x×y</span> <span class="hl-r">不恆定</span> → <b>不是反比</b></div>
+      <div class="box r" style="text-align:center;font-size:18px;"><span class="hl">一定要驗算比值或乘積，不能只看趨勢。</span></div>`},
+    {eb:'⚠️ 變形題', h:'「y 與 x² 成正比」', html:`
+      <div class="box y" style="text-align:center;font-size:19px;"><span class="hl">與什麼成正比，就對哪個量做除法</span></div>
+      <div class="box g"><b>y 與 <span class="hl">x²</span> 成正比</b> → 設 <span class="fm hl" style="font-size:18px;">y = k·x²</span>，且 <span class="fm">y/x² = k</span><br>
+        ⚠️ <b>不是</b> y 與 x 成正比！要把 <span class="hl">x² 當成一個整體</span>。</div>
+      <div class="box"><b>y 與 x² 成正比，x = 2 時 y = 12，求 x = 5 時的 y</b><br>
+        <span class="fm">12 = k × 2² = 4k → k = 3</span>　→　<span class="fm">y = 3 × 5² = 75</span></div>
+      <div class="box r"><b class="hl-r">若誤以為「y 與 x 成正比」：</b><span class="fm">k = 12/2 = 6 → y = 30</span> → <span class="hl-r">錯</span></div>`},
+    {eb:'例題 3 ★★★', h:'與 x² 成正比', html:`
+      <div class="exq" data-a="2">
+        <div class="exq-q"><span class="hl">Q</span>　y 與 <b>x²</b> 成正比，x = 3 時 y = 18。求 x = 5 時的 y。</div>
+        <button class="exo" data-i="0">30</button>
+        <button class="exo" data-i="1">90</button>
+        <button class="exo" data-i="2">50</button>
+        <button class="exo" data-i="3">10.8</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st fm"><b>設</b>：y = k·x²</div>
+          <div class="st fm"><b>求 k</b>：18 = k × 3² = 9k → k = 2</div>
+          <div class="st fm"><b>代入</b>：y = 2 × 5² = 2 × 25 = 50</div>
+          <div class="st">(A) 30 是<b>誤以為 y 與 x 成正比</b>（k = 18/3 = 6；y = 6×5 = 30）—— <span class="hl-r">最經典的錯</span>。</div>
+          <div class="st">💡 <b>與 x² 成正比，就要除以 x²</b>。把 x² 當成一整塊。</div>
+          <div class="an">答：y = 50</div>
+        </div>
+      </div>`},
+    {eb:'例題 4 ★★★', h:'正比＋反比一起來', html:`
+      <div class="box">汽車固定速度行駛。<span class="hl-b">行駛時間與油耗成正比</span>；<span class="hl-r">速度與所需時間成反比</span>（距離固定 300 公里）。已知時速 60 需 5 小時、耗油 15 公升。</div>
+      <div class="exq" data-a="1">
+        <div class="exq-q"><span class="hl">Q</span>　改以<b>時速 100 公里</b>，需幾小時？耗油幾公升？</div>
+        <button class="exo" data-i="0">3 小時，15 公升</button>
+        <button class="exo" data-i="1">3 小時，9 公升</button>
+        <button class="exo" data-i="2">5 小時，9 公升</button>
+        <button class="exo" data-i="3">1.8 小時，5.4 公升</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st"><b>先求時間</b>（速度與時間<b>反比</b>）：速度 × 時間 = 300 → <span class="fm">t = 300/100 = 3</span> 小時</div>
+          <div class="st"><span style="font-size:13px;color:var(--soft)">驗算 k：60 × 5 = 300 ✓</span></div>
+          <div class="st"><b>再求油耗</b>（時間與油耗<b>正比</b>）：<span class="fm">k = 15/5 = 3</span> 公升/小時 → <span class="fm">油耗 = 3 × 3 = 9</span> 公升</div>
+          <div class="st">(A) 15 公升是<b>沒發現時間變短、油耗也會變少</b>。</div>
+          <div class="st">💡 這題把<b>兩種比例</b>放在一起：先用<b>反比</b>求時間，再用<b>正比</b>求油耗。<br>
+            <b>關鍵是分清楚「誰跟誰成什麼比」。</b></div>
+          <div class="an">答：需 3 小時，耗油 9 公升</div>
+        </div>
+      </div>`}
+  ],
+  fa:[
+    {q:'判斷：「y 隨 x 增大而減小，就是反比」', o:['對','錯，y=−x 也是這樣但它是正比','對，一定是反比','不一定'], a:1, e:'要驗算 x×y 是否恆定！y=−x 的 y/x=−1 恆定 → 正比。'},
+    {q:'<span class="fm">y = kx</span> 的圖形？', o:['過原點的直線','不過原點的直線','曲線','水平線'], a:0, e:'x=0 時 y=0 → 過原點。'},
+    {q:'y 與 x² 成正比，該設什麼？', o:['y = kx','y = k/x','y = kx²','y = k/x²'], a:2, e:'與什麼成正比，就對哪個量做除法 → y/x² = k。'}
+  ],
+  info:[
+    {big:'正比過原點', cap:'反比不過<br>且 x ≠ 0', c:'var(--blue)'},
+    {big:'k<0 仍是正比', cap:'y=−x 是正比<br>不是反比！', c:'var(--pink)'},
+    {big:'與 x² 成正比', cap:'設 y = kx²<br>除以 x²', c:'var(--yellow)'}
+  ]
+},
+{ key:'scale', viz:'scale', vizTitle:'x 變幾倍？—— 拉倍率，看正比與反比的 y 各自怎麼回應',
+  slides:[
+    {eb:'💡 正比的本質', h:'x 變幾倍，y 就變幾倍', html:`
+      <div class="box"><b><span class="fm">y = kx</span>，若 x 增加 20%，y 怎麼變？</b><br>
+        x 增加 20% → <span class="fm">x 變成 1.2x</span><br>
+        <span class="fm">y' = k(1.2x) = 1.2(kx) = 1.2y</span> → y 也<span class="hl">增加 20%</span></div>
+      <div class="box y" style="text-align:center;font-size:21px;padding:16px;">
+        💡 這就是<span class="hl">正比的本質</span>：<br><span class="hl">x 變幾倍，y 就變幾倍。</span></div>
+      <div class="box g">同理：x 變 <b>2 倍</b> → y 變 <b>2 倍</b>；x 變 <b>一半</b> → y 變 <b>一半</b>。<br>
+        <span class="hl-r">反比則相反</span>：x 變 2 倍 → y 變 <b>一半</b>（因為乘積要維持定值）。</div>
+      <div class="box">👉 用下方 Canvas 拉倍率，<b>兩邊並排</b>看正比和反比的 y 各自怎麼回應。</div>`},
+    {eb:'總覽', h:'正比 vs 反比：一張表講完', html:`
+      <table class="tbl">
+        <tr><th style="width:24%;">　</th><th style="width:38%;">正比</th><th>反比</th></tr>
+        <tr><td>什麼固定</td><td class="hl-b" style="font-size:17px;"><b>相除</b> y/x = k</td><td class="hl-r" style="font-size:17px;"><b>相乘</b> x×y = k</td></tr>
+        <tr><td>關係式</td><td class="fm hl" style="font-size:17px;">y = kx</td><td class="fm hl" style="font-size:17px;">y = k/x</td></tr>
+        <tr><td>圖形</td><td><b>過原點</b>的直線</td><td><b>不過原點</b>的曲線</td></tr>
+        <tr><td>限制</td><td>k ≠ 0</td><td>k ≠ 0，且 <span class="hl-r">x ≠ 0</span></td></tr>
+        <tr><td>x 變 2 倍</td><td class="hl-g">y 變 <b>2 倍</b></td><td class="hl-r">y 變 <b>一半</b></td></tr>
+      </table>
+      <div class="box y" style="text-align:center;font-size:19px;">
+        <span class="hl">正比：一起變　·　反比：一個變大、另一個就要變小來補</span></div>`},
+    {eb:'💡 觀念', h:'比例常數 k 是有意義的', html:`
+      <table class="tbl">
+        <tr><th style="width:46%;">情境</th><th>k 的實際意義</th></tr>
+        <tr><td>採購量 與 總價 成正比</td><td class="hl">k = <b>每公斤單價</b></td></tr>
+        <tr><td>注水速度 與 注滿時間 成反比</td><td class="hl">k = <b>水箱容量</b></td></tr>
+        <tr><td>機台數 與 每台分攤電費 成反比</td><td class="hl">k = <b>每月總電費</b></td></tr>
+        <tr><td>生產速度 與 完成時間 成反比</td><td class="hl">k = <b>總件數</b></td></tr>
+      </table>
+      <div class="box y" style="text-align:center;font-size:19px;"><span class="hl">找到 k 的物理意義，題目就活了。</span></div>
+      <div class="teach">k 不是一個「為了算題目而存在的字母」—— 它<b>就是那個題目裡不變的東西</b>（呼應七上 3-3 的「找不變量」）。</div>`},
+    {eb:'素養 ★★☆', h:'碳黑採購（正比）', html:`
+      <table class="tbl">
+        <tr><th style="width:34%;">採購量 (kg)</th><td class="fm">100</td><td class="fm">250</td><td class="fm">500</td></tr>
+        <tr><th>總價 (元)</th><td class="fm">4200</td><td class="fm">10500</td><td class="fm">21000</td></tr>
+      </table>
+      <div class="exq" data-a="1">
+        <div class="exq-q"><span class="hl">Q</span>　本月需採購 <b>750 公斤</b>，預算是多少？</div>
+        <button class="exo" data-i="0">28000 元</button>
+        <button class="exo" data-i="1">31500 元</button>
+        <button class="exo" data-i="2">42000 元</button>
+        <button class="exo" data-i="3">21000 元</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st"><b>① 驗證正比</b>：<span class="fm">4200/100 = 42、10500/250 = 42、21000/500 = 42</span> → 恆定 ✓</div>
+          <div class="st fm"><b>② k = 42</b> 元/公斤 —— 就是<b>每公斤單價</b>！</div>
+          <div class="st fm"><b>③ 代入</b>：y = 42 × 750 = 31500 元</div>
+          <div class="st">💡 <b>k 的意義就是單價</b> —— 正比的比例常數幾乎都有實際意義。</div>
+          <div class="an">答：31500 元</div>
+        </div>
+      </div>`},
+    {eb:'素養 ★★★', h:'電費分攤（反比）', html:`
+      <div class="box">每月固定電費固定。<span class="hl">機台數量與每台分攤電費成反比</span>。目前開 <b>10 台</b>，每台分攤 <b>2400 元</b>。</div>
+      <div class="exq" data-a="2">
+        <div class="exq-q"><span class="hl">Q</span>　若希望每台分攤電費<b>不超過 1600 元</b>，至少要開幾台？</div>
+        <button class="exo" data-i="0">12 台</button>
+        <button class="exo" data-i="1">10 台</button>
+        <button class="exo" data-i="2">15 台</button>
+        <button class="exo" data-i="3">20 台</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st fm"><b>① 求 k</b>（總電費）：k = 10 × 2400 = 24000 元</div>
+          <div class="st fm"><b>② 列式</b>：24000/x ≤ 1600</div>
+          <div class="st fm"><b>③ 解</b>：x ≥ 24000/1600 = 15 → <b>至少 15 台</b></div>
+          <div class="st">💡 <b>k 的意義就是總電費</b> —— 不管開幾台，總電費<b>不變</b>，只是分攤的人變多。</div>
+          <div class="st">💡 這題用到<b>不等式</b> —— 這是 <b>4-1、4-2</b> 要學的東西，先感受一下。</div>
+          <div class="an">答：至少開 15 台</div>
+        </div>
+      </div>`},
+    {eb:'🔗 啟後', h:'y = kx 是函數的起點', html:`
+      <div class="box y" style="font-size:18px;"><span class="hl">正比就是「過原點的一次函數」的特例。</span><br><br>
+        八下 2-1 會告訴你：<span class="fm">y = kx + b</span> 叫做<b>一次函數</b>；<br>
+        當 <span class="fm">b = 0</span> 時，它就退化成 <span class="fm hl">y = kx</span> —— 也就是<b>正比</b>。</div>
+      <div class="box g" style="font-size:18px;">所以你今天學的不是一個孤立的東西 ——<br>
+        <span class="hl">你已經在學函數了，只是還沒被告知它叫函數。</span></div>
+      <div class="teach">數學課本很少直說：<b>很多「新東西」，其實是你早就會的東西換個名字。</b></div>`}
+  ],
+  fa:[
+    {q:'<span class="fm">y = kx</span>，x 增加 20%，y？', o:['增加 20%','減少 20%','不變','增加 120%'], a:0, e:'y\' = k(1.2x) = 1.2y → 增加 20%。'},
+    {q:'反比中 x 變 2 倍，y 變？', o:['2 倍','一半','不變','4 倍'], a:1, e:'x×y 要維持定值 → x 變2倍，y 就要變一半。'},
+    {q:'「注水速度與注滿時間成反比」的 k 是什麼？', o:['注水速度','注滿時間','水箱容量','水的密度'], a:2, e:'速度 × 時間 = 總水量 = 水箱容量。'}
+  ],
+  info:[
+    {big:'x 幾倍 → y 幾倍', cap:'正比的本質', c:'var(--blue)'},
+    {big:'反比：一個大<br>一個就小', cap:'乘積維持定值', c:'var(--pink)'},
+    {big:'k 有實際意義', cap:'單價・容量<br>總電費…', c:'var(--green)'}
+  ]
+}];
+
+const QUIZ = [
+  {type:'choice', q:'正比的判斷方法？', o:['y/x 恆定','x×y 恆定','y−x 恆定','y+x 恆定'], a:0, e:'正比「相除」固定。'},
+  {type:'choice', q:'反比的判斷方法？', o:['y/x 恆定','x×y 恆定','y−x 恆定','y+x 恆定'], a:1, e:'反比「相乘」固定。'},
+  {type:'fill', q:'y 與 x 成正比，k=5，x=8 時 y = ', a:['40'], e:'y = 5×8 = 40。'},
+  {type:'fill', q:'y 與 x 成反比，k=36，x=9 時 y = ', a:['4'], e:'y = 36/9 = 4。'},
+  {type:'choice', q:'y 與 x 成正比，x=5 時 y=20。x=8 時 y？', o:['32','12.5','25','50'], a:0, e:'k = 20/5 = 4；y = 4×8 = 32。'},
+  {type:'choice', q:'y 與 x 成反比，x=6 時 y=5。x=15 時 y？', o:['12.5','2','30','1/2'], a:1, e:'k = 6×5 = 30；y = 30/15 = 2。'},
+  {type:'choice', q:'判斷 <span class="fm">x=1,2,4；y=3,6,12</span>', o:['正比 k=3','反比 k=3','正比 k=12','都不是'], a:0, e:'y/x = 3 恆定 → 正比。'},
+  {type:'choice', q:'判斷 <span class="fm">x=2,3,6；y=9,6,3</span>', o:['正比 k=18','反比 k=18','正比 k=4.5','都不是'], a:1, e:'x×y = 18 恆定 → 反比。'},
+  {type:'choice', q:'判斷 <span class="fm">x=1,2,3；y=2,5,10</span>', o:['正比 k=2','反比 k=2','正比 k=5','都不是'], a:3, e:'y/x 和 x×y 都不恆定 → 都不是。'},
+  {type:'tf', q:'判斷：「y 隨 x 增大而減小，y 就和 x 成反比。」', a:false, e:'錯。<span class="fm">y = −x</span> 也是 y 隨 x 增大而減小，但 y/x = −1 恆定 → 它是<b>正比</b>！'},
+  {type:'choice', q:'y 與 <b>x²</b> 成正比，x=3 時 y=18。x=5 時 y？', o:['30','90','50','10.8'], a:2, e:'k = 18/9 = 2；y = 2×25 = 50。'},
+  {type:'choice', q:'生產速度 50 件/時需 20 小時，提升到 80 件/時需幾小時？', o:['32','12.5','8','25'], a:1, e:'反比 k = 50×20 = 1000；t = 1000/80 = 12.5。'},
+  {type:'choice', q:'10 公升/分注水需 30 分，改 15 公升/分需幾分？', o:['45','20','25','15'], a:1, e:'k = 10×30 = 300（水箱容量）；t = 300/15 = 20。'},
+  {type:'choice', q:'<span class="fm">y = kx</span>，若 x 增加 20%，y？', o:['增加 20%','減少 20%','不變','增加 120%'], a:0, e:'x 變 1.2 倍 → y 也變 1.2 倍。'},
+  {type:'choice', q:'<span class="fm">y = kx</span> 的圖形？', o:['過原點的直線','不過原點的直線','曲線','水平線'], a:0, e:'x=0 時 y=0。'},
+  {type:'tf', q:'判斷：「<span class="fm">y = k/x</span> 中，x 可以等於 0。」', a:false, e:'錯。分母不能為 0（七上 1-3 的鐵則）→ x ≠ 0。'},
+  {type:'choice', q:'採購量與總價成正比，100kg 要 4200 元。750kg 的預算？', o:['28000','31500','42000','21000'], a:1, e:'k = 42 元/kg；42 × 750 = 31500。'},
+  {type:'choice', q:'機台數與每台分攤電費成反比，10 台每台 2400 元。想每台 ≤ 1600 元至少開幾台？', o:['12','10','15','20'], a:2, e:'k = 24000；24000/x ≤ 1600 → x ≥ 15。'}
+];
+
+const GAME = [
+  {name:'正比定義', qs:[
+    {q:'正比的判斷方法？', o:['y/x 恆定','x×y 恆定','y−x 恆定','y+x 恆定'], a:0, e:'正比「相除」固定。'},
+    {q:'y 與 x 成正比的關係式？', o:['y = kx','y = k/x','y = x+k','y = kx²'], a:0, e:'y/x = k → y = kx。'},
+    {q:'y=kx 的圖形？', o:['過原點的直線','不過原點','曲線','水平線'], a:0, e:'x=0 時 y=0。'},
+    {q:'k 叫做什麼？', o:['係數','比例常數','斜率','截距'], a:1, e:'k 是比例常數。'}
+  ]},
+  {name:'反比定義', qs:[
+    {q:'反比的判斷方法？', o:['y/x 恆定','x×y 恆定','y−x 恆定','y+x 恆定'], a:1, e:'反比「相乘」固定。'},
+    {q:'y 與 x 成反比的關係式？', o:['y = kx','y = k/x','y = x−k','y = k−x'], a:1, e:'x×y = k → y = k/x。'},
+    {q:'y=k/x 中 x 可以是 0 嗎？', o:['可以','不可以','看 k','有時候'], a:1, e:'分母不能為 0！'},
+    {q:'y=k/x 過原點嗎？', o:['過','不過','看 k','有時候'], a:1, e:'不過原點。'}
+  ]},
+  {name:'判斷數表', qs:[
+    {q:'x=1,2,4；y=3,6,12', o:['正比 k=3','反比 k=3','正比 k=12','都不是'], a:0, e:'y/x = 3 恆定。'},
+    {q:'x=2,3,6；y=9,6,3', o:['正比 k=18','反比 k=18','正比 k=4.5','都不是'], a:1, e:'x×y = 18 恆定。'},
+    {q:'x=1,2,3；y=2,5,10', o:['正比','反比','都不是','兩者都是'], a:2, e:'兩個都不恆定。'},
+    {q:'判斷數表的順序？', o:['先乘再除','先除再乘','隨便','只試一個'], a:1, e:'先試 y/x（正比較常見），再試 x×y。'}
+  ]},
+  {name:'⚠️ 陷阱', qs:[
+    {q:'「y 隨 x 增大而減小」是反比嗎？', o:['一定是','不一定，要驗算','一定不是','看 k'], a:1, e:'y=−x 也是這樣，但它是正比！'},
+    {q:'y = −x 是什麼？', o:['正比 k=−1','反比 k=−1','都不是','看 x'], a:0, e:'y/x = −1 恆定 → 正比。'},
+    {q:'y 與 x² 成正比，該設？', o:['y = kx','y = k/x','y = kx²','y = k/x²'], a:2, e:'與什麼成正比就除以什麼。'},
+    {q:'只試了 y/x 不恆定，能說「都不是」嗎？', o:['能','不能，還要試 x×y','看情況','能，反正不是正比'], a:1, e:'兩個都要試過。'}
+  ]},
+  {name:'求值', qs:[
+    {q:'正比，x=4 時 y=10。x=6 時 y？', o:['15','12','20','6.7'], a:0, e:'k = 10/4 = 5/2；y = 15。'},
+    {q:'反比，x=3 時 y=8。x=12 時 y？', o:['32','2','24','2/3'], a:1, e:'k = 24；y = 24/12 = 2。'},
+    {q:'通用解法是？', o:['先求 k 再代入','直接比大小','畫圖','背公式'], a:0, e:'先用已知那組求 k。'},
+    {q:'y 與 x² 成正比，x=2 時 y=12。x=5 時 y？', o:['30','75','48','60'], a:1, e:'k = 12/4 = 3；y = 3×25 = 75。'}
+  ]},
+  {name:'倍數關係', qs:[
+    {q:'正比：x 變 2 倍，y 變？', o:['2 倍','一半','不變','4 倍'], a:0, e:'x 變幾倍，y 就變幾倍。'},
+    {q:'反比：x 變 2 倍，y 變？', o:['2 倍','一半','不變','4 倍'], a:1, e:'乘積要維持定值。'},
+    {q:'y=kx，x 增加 20%，y？', o:['增加 20%','減少 20%','不變','增加 120%'], a:0, e:'y 變 1.2 倍。'},
+    {q:'正比的本質是？', o:['x 變幾倍 y 就變幾倍','x+y 固定','x−y 固定','x×y 固定'], a:0, e:'這就是正比。'}
+  ]},
+  {name:'k 的意義・應用', qs:[
+    {q:'「注水速度 × 注滿時間 = k」，k 是？', o:['注水速度','水箱容量','時間','壓力'], a:1, e:'速度×時間 = 總水量。'},
+    {q:'「採購量與總價成正比」，k 是？', o:['總價','採購量','每公斤單價','折扣'], a:2, e:'k = 單價。'},
+    {q:'「機台數 × 每台分攤電費 = k」，k 是？', o:['機台數','每台電費','每月總電費','用電度數'], a:2, e:'不管開幾台，總電費不變。'},
+    {q:'10公升/分注水30分，改15公升/分需幾分？', o:['45','20','25','15'], a:1, e:'k=300；t=300/15=20。'}
+  ]}
+];
+
+document.getElementById('goals').innerHTML = GOALS.map((g,i)=>
+  `<div class="goal"><div class="bdg">${i+1}</div>${g}</div>`).join('');
+
+const wrap = document.getElementById('wrap');
+DATA.forEach((sec, si)=>{
+  const p = document.createElement('div');
+  p.className = 'panel' + (si===0?' on':'');
+  p.dataset.p = si;
+  p.innerHTML = `
+    <div class="card">
+      <h3><span class="ic">📽</span>簡報翻頁器</h3>
+      <div class="deck" data-deck="${si}">
+        ${sec.slides.map((s,i)=>`<div class="sl${i===0?' on':''}" data-i="${i}">
+          <div class="eyebrow">${s.eb}</div><h4>${s.h}</h4>${s.html}</div>`).join('')}
+      </div>
+      <div class="nav">
+        <button class="btn" data-nav="prev" data-s="${si}">◀ 上一張</button>
+        <span class="pg" id="pg-${si}">1 / ${sec.slides.length}</span>
+        <button class="btn" data-nav="next" data-s="${si}">下一張 ▶</button>
+      </div>
+      <div class="dots" id="dots-${si}">
+        ${sec.slides.map((_,i)=>`<button class="dot${i===0?' on':''}" data-s="${si}" data-i="${i}"></button>`).join('')}
+      </div>
+    </div>
+    <div class="card">
+      <h3><span class="ic">🎯</span>Canvas 互動視覺化<span style="font-size:14px;color:var(--soft);font-weight:400;">　${sec.vizTitle}</span></h3>
+      <div class="cv-wrap">
+        <canvas class="viz" data-viz="${sec.viz}" data-si="${si}"></canvas>
+        <div class="ctrl" data-ctrl="${si}"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3><span class="ic">✅</span>形成性評量</h3>
+      ${sec.fa.map((f,i)=>`<div class="q" data-fa="${si}-${i}">
+        <div class="qt"><span class="qn">Q${i+1}</span>${f.q}</div>
+        <div class="opts">${f.o.map((o,oi)=>`<button class="opt" data-si="${si}" data-qi="${i}" data-oi="${oi}">${o}</button>`).join('')}</div>
+        <div class="fb" id="fb-${si}-${i}"></div>
+      </div>`).join('')}
+    </div>
+    <div class="card">
+      <h3><span class="ic">📊</span>資訊圖表</h3>
+      <div class="info">
+        ${sec.info.map(c=>`<div class="icard"><div class="big" style="color:${c.c}">${c.big}</div><div class="cap">${c.cap}</div></div>`).join('')}
+      </div>
+    </div>`;
+  wrap.appendChild(p);
+});
+
+const qp = document.createElement('div');
+qp.className='panel'; qp.dataset.p='3';
+qp.innerHTML = `<div class="card"><h3><span class="ic">📝</span>題型測驗　<span style="font-size:14px;color:var(--soft);font-weight:400;">單選 · 是非 · 填充，共 ${QUIZ.length} 題</span></h3>
+  <div id="quizBox"></div>
+  <div style="display:flex;gap:10px;align-items:center;margin-top:14px;flex-wrap:wrap;">
+    <button class="btn" id="gradeBtn" style="background:rgba(242,217,121,.2);border-color:var(--yellow);color:var(--yellow);font-weight:700;">📊 批改並看成績</button>
+    <button class="btn" id="resetQuiz">🔄 重做</button>
+    <div class="readout" id="score" style="display:none;"></div>
+  </div></div>
+  <div class="card"><h3><span class="ic">📋</span>公式速查表</h3>
+    <div class="frow"><div class="flab">🔑 口訣</div><div class="fval"><b>正比「相除」固定　·　反比「相乘」固定</b></div></div>
+    <div class="frow"><div class="flab">正比定義</div><div class="fval">y/x = k（k ≠ 0）　⟺　<b>y = kx</b></div></div>
+    <div class="frow"><div class="flab">反比定義</div><div class="fval">x × y = k（k ≠ 0）　⟺　<b>y = k/x</b></div></div>
+    <div class="frow"><div class="flab">k 的名稱</div><div class="fval"><b>比例常數</b></div></div>
+    <div class="frow"><div class="flab">判斷步驟</div><div class="fval">① 先試 y/x → ② 再試 x×y → ③ 都不恆定 → <b>都不是</b></div></div>
+    <div class="frow"><div class="flab">正比圖形</div><div class="fval"><b>過原點</b>的直線</div></div>
+    <div class="frow"><div class="flab">反比圖形</div><div class="fval"><b>不過原點</b>，且 <b>x ≠ 0</b></div></div>
+    <div class="frow"><div class="flab">正比 k &gt; 0</div><div class="fval">x 變大 → y 變大（等比例）</div></div>
+    <div class="frow"><div class="flab">正比 k &lt; 0</div><div class="fval">x 變大 → y <b>變小</b>（⚠️ 但仍是<b>正比</b>！）</div></div>
+    <div class="frow"><div class="flab">反比 k &gt; 0</div><div class="fval">x 變大 → y 變小，<b>相乘維持定值</b></div></div>
+    <div class="frow"><div class="flab">通用解法</div><div class="fval">先用已知那組求 <b>k</b>，再拿 k 算新的</div></div>
+    <div class="frow"><div class="flab">⚠️ 變形</div><div class="fval">「y 與 <b>x²</b> 成正比」→ y = k<b>x²</b>，除以 <b>x²</b></div></div>
+    <div class="frow"><div class="flab">⚠️ 陷阱</div><div class="fval">「y 隨 x 增大而減小」<b>不等於</b>反比（y = −x 是正比！）</div></div>
+    <div class="frow"><div class="flab">正比的本質</div><div class="fval"><b>x 變幾倍，y 就變幾倍</b>（x +20% → y +20%）</div></div>
+    <div class="frow"><div class="flab">反比的本質</div><div class="fval">x 變 2 倍 → y 變 <b>一半</b>（乘積維持定值）</div></div>
+    <div class="frow"><div class="flab">k 的意義</div><div class="fval">通常有實際意義：單價、水箱容量、總電費、總件數…</div></div>
+  </div>`;
+wrap.appendChild(qp);
+
+const gp = document.createElement('div');
+gp.className='panel'; gp.dataset.p='4';
+gp.innerHTML = `<div class="card"><h3><span class="ic">🎮</span>闖關遊戲　<span style="font-size:14px;color:var(--soft);font-weight:400;">6 關挑戰 · 每題 20 秒 · 連擊與速度都有加分</span></h3>
+  <div class="gscreen on" id="gStart">
+    <div style="text-align:center;font-size:clamp(15px,2vw,18px);line-height:1.8;">
+      闖過 <b class="hl">7</b> 關，每關 1 題，每題 <b class="hl">20 秒</b>。<br>
+      計分：基礎 <b class="hl">10</b> 分 + 連擊獎勵（最多 <b class="hl">5</b>）+ 速度獎勵（最多 <b class="hl">5</b>）＝ 單題最高 <b class="hl">20</b> 分</div>
+    <div class="lvchips" id="gStartChips"></div>
+    <div style="text-align:center;"><button class="btn" id="gGo" style="background:rgba(242,217,121,.25);border-color:var(--yellow);color:var(--yellow);font-weight:700;font-size:16px;padding:10px 24px;">🚀 開始挑戰</button></div>
+  </div>
+  <div class="gscreen" id="gPlay">
+    <div class="hud">
+      <div class="st">關卡<b id="hLv">1/7</b></div>
+      <div class="st">分數<b id="hSc">0</b></div>
+      <div class="st">連擊<b id="hStk">0</b></div>
+      <div class="st">剩餘<b id="hT">20</b></div>
+    </div>
+    <div class="tbar"><div class="tfill" id="tFill"></div></div>
+    <div class="lvchips" id="gChips"></div>
+    <div class="gq" id="gQ"></div>
+    <div class="gopts" id="gO"></div>
+    <div class="gfb" id="gFb"></div>
+    <div style="text-align:center;margin-top:12px;"><button class="btn" id="gNext" style="display:none;">下一關 ▶</button></div>
+  </div>
+  <div class="gscreen" id="gEnd">
+    <div class="rank" id="gRank">🏆</div>
+    <div style="text-align:center;font-size:clamp(17px,2.6vw,22px);font-family:'Noto Serif TC';" id="gFinal"></div>
+    <div style="text-align:center;color:var(--soft);margin-top:8px;" id="gStats"></div>
+    <div style="text-align:center;margin-top:16px;"><button class="btn" id="gAgain" style="background:rgba(242,217,121,.25);border-color:var(--yellow);color:var(--yellow);font-weight:700;">🔄 再挑戰一次</button></div>
+  </div></div>`;
+wrap.appendChild(gp);
+document.getElementById('gStartChips').innerHTML = GAME.map((g,i)=>`<div class="lvchip">第${i+1}關 ${g.name}</div>`).join('');
+
+const qb = document.getElementById('quizBox');
+QUIZ.forEach((q,i)=>{
+  const d = document.createElement('div'); d.className='q';
+  let body='';
+  if(q.type==='choice') body = `<div class="opts">${q.o.map((o,oi)=>`<button class="opt" data-quiz="${i}" data-oi="${oi}">${o}</button>`).join('')}</div>`;
+  else if(q.type==='tf') body = `<div class="opts" style="flex-direction:row;gap:10px;">
+      <button class="opt" data-quiz="${i}" data-oi="1" style="flex:1;">⭕ 對</button>
+      <button class="opt" data-quiz="${i}" data-oi="0" style="flex:1;">❌ 錯</button></div>`;
+  else body = `<div><input class="fill" data-quiz="${i}" placeholder="?"></div>`;
+  d.innerHTML = `<div class="qt"><span class="qn">${i+1}</span>
+    <span style="font-size:12px;color:var(--soft);border:1px solid rgba(243,239,226,.25);border-radius:6px;padding:1px 6px;margin-right:6px;">
+    ${q.type==='choice'?'單選':q.type==='tf'?'是非':'填充'}</span>${q.q}</div>${body}
+    <div class="fb" id="qfb-${i}"></div>`;
+  qb.appendChild(d);
+});
+
+document.getElementById('tabs').addEventListener('click', e=>{
+  const t = e.target.closest('.tab'); if(!t) return;
+  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on', x===t));
+  document.querySelectorAll('.panel').forEach(x=>x.classList.toggle('on', x.dataset.p===t.dataset.p));
+  document.getElementById('goalCard').style.display = (t.dataset.p==='4')?'none':'';
+  window.scrollTo({top:0,behavior:'smooth'});
+  setTimeout(resizeAll, 60);
+});
+
+const cur = DATA.map(()=>0);
+function showSlide(si, i){
+  const deck = document.querySelector(`[data-deck="${si}"]`);
+  const sl = deck.querySelectorAll('.sl');
+  i = Math.max(0, Math.min(sl.length-1, i));
+  cur[si] = i;
+  sl.forEach((s,k)=>s.classList.toggle('on', k===i));
+  document.getElementById('pg-'+si).textContent = `${i+1} / ${sl.length}`;
+  document.querySelectorAll(`#dots-${si} .dot`).forEach((d,k)=>d.classList.toggle('on', k===i));
+}
+document.addEventListener('click', e=>{
+  const n = e.target.closest('[data-nav]');
+  if(n){ const si=+n.dataset.s; showSlide(si, cur[si] + (n.dataset.nav==='next'?1:-1)); return; }
+  const d = e.target.closest('.dot');
+  if(d){ showSlide(+d.dataset.s, +d.dataset.i); return; }
+});
+document.addEventListener('keydown', e=>{
+  const p = document.querySelector('.panel.on'); if(!p) return;
+  const si = +p.dataset.p; if(si>=DATA.length) return;
+  if(e.key==='ArrowRight') showSlide(si, cur[si]+1);
+  if(e.key==='ArrowLeft') showSlide(si, cur[si]-1);
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.opt[data-si]'); if(!o) return;
+  const si=+o.dataset.si, qi=+o.dataset.qi, oi=+o.dataset.oi;
+  const f = DATA[si].fa[qi];
+  const box = document.querySelector(`[data-fa="${si}-${qi}"]`);
+  box.querySelectorAll('.opt').forEach((b,k)=>{
+    b.disabled = true;
+    if(k===f.a) b.classList.add('right'); else if(k===oi) b.classList.add('wrong');
+  });
+  const fb = document.getElementById(`fb-${si}-${qi}`);
+  const ok = oi===f.a;
+  fb.className = 'fb on ' + (ok?'ok':'no');
+  fb.innerHTML = (ok?'✅ <b>答對了！</b> ':'❌ <b>再想想。</b> ') + f.e;
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.exo');
+  if(o && !o.disabled){
+    const box = o.closest('.exq');
+    const ans = +box.dataset.a, pick = +o.dataset.i;
+    if(pick === ans){
+      box.querySelectorAll('.exo').forEach(b=>{ b.disabled=true; if(+b.dataset.i===ans) b.classList.add('right'); });
+      box.querySelector('.exsol').classList.add('on');
+      box.querySelector('.exlock').classList.add('hide');
+    } else {
+      o.classList.add('wrong','shake');
+      setTimeout(()=>o.classList.remove('shake'), 420);
+      o.disabled = true;
+      const lock = box.querySelector('.exlock');
+      lock.innerHTML = '🔒 再想想 —— 答對才會顯示詳解'; lock.style.color='var(--pink)';
+    }
+  }
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.opt[data-quiz]'); if(!o) return;
+  const i = +o.dataset.quiz;
+  o.parentElement.querySelectorAll('.opt').forEach(b=>b.classList.remove('right','wrong'));
+  o.classList.add('right'); o.dataset.sel='1';
+  o.parentElement.querySelectorAll('.opt').forEach(b=>{ if(b!==o) delete b.dataset.sel; });
+});
+document.getElementById('gradeBtn').addEventListener('click', ()=>{
+  let right=0;
+  QUIZ.forEach((q,i)=>{
+    const fb = document.getElementById('qfb-'+i);
+    let ok=false, picked=null;
+    if(q.type==='fill'){
+      const inp = document.querySelector(`.fill[data-quiz="${i}"]`);
+      const v = (inp.value||'').trim().replace(/−/g,'-').replace(/\s/g,'');
+      ok = q.a.some(a=>a.replace(/−/g,'-').replace(/\s/g,'')===v);
+      inp.style.borderBottomColor = ok?'var(--green)':'var(--pink)';
+    } else {
+      const sel = document.querySelector(`.opt[data-quiz="${i}"][data-sel="1"]`);
+      if(sel){ picked=+sel.dataset.oi; ok = (q.type==='tf') ? (picked===1)===q.a : picked===q.a; }
+      document.querySelectorAll(`.opt[data-quiz="${i}"]`).forEach(b=>{
+        b.classList.remove('right','wrong');
+        const bi=+b.dataset.oi;
+        const isAns = (q.type==='tf') ? ((bi===1)===q.a) : (bi===q.a);
+        if(isAns) b.classList.add('right'); else if(picked===bi) b.classList.add('wrong');
+      });
+    }
+    if(ok) right++;
+    fb.className='fb on '+(ok?'ok':'no');
+    fb.innerHTML = (ok?'✅ <b>正確</b> ':'❌ <b>錯誤</b> ') + q.e;
+  });
+  const s = document.getElementById('score');
+  const pct = Math.round(right/QUIZ.length*100);
+  s.style.display='block';
+  s.innerHTML = `成績：<b>${right} / ${QUIZ.length}</b>　（${pct} 分）　${pct>=80?'🏆 很棒！':pct>=60?'💪 再加油':'📖 建議重看重點'}`;
+});
+document.getElementById('resetQuiz').addEventListener('click', ()=>{
+  document.querySelectorAll('.opt[data-quiz]').forEach(b=>{b.classList.remove('right','wrong'); delete b.dataset.sel;});
+  document.querySelectorAll('.fill').forEach(i=>{i.value=''; i.style.borderBottomColor='var(--yellow)';});
+  document.querySelectorAll('[id^="qfb-"]').forEach(f=>f.className='fb');
+  document.getElementById('score').style.display='none';
+});
+
+/* ===== 闖關遊戲 ===== */
+const G = {lv:0, score:0, streak:0, best:0, t:20, timer:null, cur:null, answered:false};
+function gShow(id){ ['gStart','gPlay','gEnd'].forEach(x=>document.getElementById(x).classList.toggle('on', x===id)); }
+function gChips(){
+  document.getElementById('gChips').innerHTML = GAME.map((g,i)=>
+    `<div class="lvchip ${i<G.lv?'done':i===G.lv?'now':''}">${i+1}. ${g.name}</div>`).join('');
+}
+function gLoad(){
+  if(G.lv>=GAME.length){ gFinish(); return; }
+  G.answered=false; G.t=20;
+  const bank = GAME[G.lv].qs;
+  G.cur = bank[Math.floor(Math.random()*bank.length)];
+  document.getElementById('hLv').textContent = (G.lv+1)+'/'+GAME.length;
+  document.getElementById('hSc').textContent = G.score;
+  document.getElementById('hStk').textContent = G.streak;
+  document.getElementById('gQ').innerHTML = `<span style="color:var(--blue);font-size:15px;">第 ${G.lv+1} 關 · ${GAME[G.lv].name}</span><br>${G.cur.q}`;
+  document.getElementById('gO').innerHTML = G.cur.o.map((o,i)=>
+    `<button class="gopt" data-g="${i}">${'ABCD'[i]}. ${o}</button>`).join('');
+  document.getElementById('gFb').className='gfb';
+  document.getElementById('gNext').style.display='none';
+  gChips();
+  clearInterval(G.timer);
+  G.timer = setInterval(()=>{
+    G.t -= 0.1;
+    document.getElementById('hT').textContent = Math.max(0,G.t).toFixed(0);
+    document.getElementById('tFill').style.width = Math.max(0,G.t/20*100)+'%';
+    if(G.t<=0){ clearInterval(G.timer); gAnswer(-1); }
+  },100);
+}
+function gAnswer(pick){
+  if(G.answered) return;
+  G.answered = true; clearInterval(G.timer);
+  const ans = G.cur.a, ok = pick===ans;
+  document.querySelectorAll('.gopt').forEach((b,i)=>{
+    b.disabled=true;
+    if(i===ans) b.classList.add('right'); else if(i===pick) b.classList.add('wrong');
+  });
+  let gain=0, sb=0, tb=0;
+  if(ok){
+    G.streak++; G.best=Math.max(G.best,G.streak);
+    sb = Math.min(5, G.streak-1); tb = Math.min(5, Math.floor(G.t/4));
+    gain = 10+sb+tb; G.score += gain;
+  } else { G.streak = 0; }
+  document.getElementById('hSc').textContent = G.score;
+  document.getElementById('hStk').textContent = G.streak;
+  const fb = document.getElementById('gFb');
+  fb.className = 'gfb on '+(ok?'ok':'no');
+  fb.innerHTML = (ok? `✅ <b>答對！+${gain} 分</b>（基礎10 + 連擊${sb} + 速度${tb}）<br>`
+                    : (pick===-1?'⏰ <b>時間到！</b><br>':'❌ <b>答錯了</b><br>')) + G.cur.e;
+  document.getElementById('gNext').style.display='inline-block';
+  document.getElementById('gNext').textContent = (G.lv>=GAME.length-1)?'看成績 🏁':'下一關 ▶';
+}
+function gFinish(){
+  clearInterval(G.timer);
+  const max = GAME.length*20, pct = Math.round(G.score/max*100);
+  const rank = pct>=85?['🏆','數論大師']:pct>=70?['🥇','高手']:pct>=50?['🥈','不錯']:['📖','再加油'];
+  document.getElementById('gRank').textContent = rank[0];
+  document.getElementById('gFinal').innerHTML = `<b class="hl">${G.score}</b> / ${max} 分　·　${rank[1]}`;
+  document.getElementById('gStats').innerHTML = `最高連擊 <b class="hl">${G.best}</b>　·　完成 ${GAME.length} 關`;
+  gShow('gEnd');
+}
+document.getElementById('gGo').addEventListener('click', ()=>{ G.lv=0;G.score=0;G.streak=0;G.best=0; gShow('gPlay'); gLoad(); });
+document.getElementById('gAgain').addEventListener('click', ()=>{ G.lv=0;G.score=0;G.streak=0;G.best=0; gShow('gPlay'); gLoad(); });
+document.getElementById('gNext').addEventListener('click', ()=>{ G.lv++; gLoad(); });
+document.addEventListener('click', e=>{ const b=e.target.closest('.gopt'); if(!b||b.disabled) return; gAnswer(+b.dataset.g); });
+
+/* ===== Canvas ===== */
+const VIZ = {}; let DPR=1;
+function fmtN(v){ if(Math.abs(v-Math.round(v))<1e-9) return String(Math.round(v));
+  return (Math.round(v*1000)/1000).toString().replace('-','−'); }
+
+/* ① 正比／反比判定器 */
+const TBL=[
+  {x:[2,4,6],  y:[6,12,18],  k:'正比 k=3',   eq:'y = 3x'},
+  {x:[2,4,6],  y:[12,6,4],   k:'反比 k=24',  eq:'y = 24/x'},
+  {x:[1,2,4],  y:[3,6,12],   k:'正比 k=3',   eq:'y = 3x'},
+  {x:[2,3,6],  y:[9,6,3],    k:'反比 k=18',  eq:'y = 18/x'},
+  {x:[1,2,3],  y:[2,5,10],   k:'都不是',     eq:'—'},
+  {x:[1,2,3],  y:[-1,-2,-3], k:'正比 k=−1',  eq:'y = −x　⚠️ 陷阱！'},
+  {x:[2,4,8],  y:[24,12,6],  k:'反比 k=48',  eq:'y = 48/x'},
+  {x:[1,2,3],  y:[1,4,9],    k:'都不是',     eq:'（但 y 與 x² 成正比，k=1）'},
+];
+/* ③ 正比反比對照（x 變幾倍） */
+const SCALE={k:12};
+
+function initViz(cv){
+  const si=+cv.dataset.si, kind=cv.dataset.viz;
+  const ctx=cv.getContext('2d');
+  const st = VIZ[si] = {kind, cv, ctx};
+  const ctrl = document.querySelector(`[data-ctrl="${si}"]`);
+  if(kind==='judge'){
+    st.i=0; st.step=0;   // 0=未判定 1=已試相除 2=已試相乘（揭曉）
+    ctrl.innerHTML = `<div class="readout" id="ro-${si}"></div>
+      <button class="btn" data-t="div" data-si="${si}" style="background:rgba(152,201,220,.2);border-color:var(--blue);color:var(--blue);font-weight:700;">① 試相除 y/x</button>
+      <button class="btn" data-t="mul" data-si="${si}" style="background:rgba(237,160,168,.2);border-color:var(--pink);color:var(--pink);font-weight:700;">② 試相乘 x×y</button>
+      <button class="btn" data-t="next" data-si="${si}">下一題 ▶</button>`;
+  } else if(kind==='graph'){
+    st.k=3; st.mode=0;   // 0=正比 1=反比
+    ctrl.innerHTML = `<div class="readout" id="ro-${si}"></div>
+      <button class="btn" data-t="mode" data-si="${si}" style="background:rgba(242,217,121,.2);border-color:var(--yellow);color:var(--yellow);font-weight:700;">🔀 正比 / 反比</button>
+      <button class="btn" data-t="km" data-si="${si}">k − 1</button>
+      <button class="btn" data-t="kp" data-si="${si}">k + 1</button>
+      <button class="btn" data-t="neg" data-si="${si}">± k 變號</button>`;
+  } else {              // scale：x 變幾倍
+    st.m=1;             // 倍率 index
+    ctrl.innerHTML = `<div class="readout" id="ro-${si}"></div>
+      <button class="btn" data-t="mm" data-si="${si}">◀ x 縮小</button>
+      <button class="btn" data-t="mp" data-si="${si}" style="background:rgba(242,217,121,.2);border-color:var(--yellow);color:var(--yellow);font-weight:700;">x 放大 ▶</button>
+      <button class="btn" data-t="rst" data-si="${si}">↩ 回到 1 倍</button>`;
+  }
+  draw(si);
+}
+
+function drawJudge(st, ctx, w, h, ro){
+  const E=TBL[st.i];
+  ctx.textAlign='center';
+  ctx.fillStyle='rgba(242,217,121,.85)'; ctx.font='bold 13px "Noto Sans TC"';
+  ctx.fillText(`第 ${st.i+1} / ${TBL.length} 題　·　先試相除、再試相乘`, w/2, 15);
+  // 數表
+  const n=E.x.length, cw=Math.min(78,(w-110)/n), x0=(w-cw*n)/2+22;
+  const rows=[['x',E.x.map(fmtN),'#f3efe2'],['y',E.y.map(fmtN),'#f3efe2']];
+  if(st.step>=1) rows.push(['y/x', E.x.map((v,i)=>fmtN(E.y[i]/v)), '#98c9dc']);
+  if(st.step>=2) rows.push(['x×y', E.x.map((v,i)=>fmtN(v*E.y[i])), '#eda0a8']);
+  rows.forEach((r,ri)=>{
+    const y=42+ri*26;
+    ctx.textAlign='right'; ctx.fillStyle=r[2]; ctx.font='bold 14px "Noto Serif TC"';
+    ctx.fillText(r[0], x0-10, y+5);
+    ctx.textAlign='center';
+    // 恆定判斷 → 高亮
+    const same = r[1].every(v=>v===r[1][0]);
+    r[1].forEach((v,ci)=>{
+      if(ri>=2 && same){
+        ctx.fillStyle= ri===2?'rgba(166,214,160,.22)':'rgba(166,214,160,.22)';
+        ctx.beginPath(); ctx.roundRect(x0+cw*ci+3, y-13, cw-6, 22, 5); ctx.fill();
+      }
+      ctx.fillStyle= (ri>=2 && same) ? '#a6d6a0' : r[2];
+      ctx.font=(ri>=2?'bold ':'')+'15px "Noto Serif TC"';
+      ctx.fillText(v, x0+cw*ci+cw/2, y+5);
+    });
+    if(ri>=2){
+      ctx.textAlign='left'; ctx.fillStyle= same?'#a6d6a0':'rgba(237,160,168,.8)';
+      ctx.font='bold 12px "Noto Sans TC"';
+      ctx.fillText(same?'✓ 恆定':'✗ 不恆定', x0+cw*n+8, y+5);
+      ctx.textAlign='center';
+    }
+  });
+  const yEnd=42+rows.length*26;
+  if(st.step>=2){
+    const isNone = E.k==='都不是';
+    ctx.fillStyle= isNone?'rgba(237,160,168,.16)':'rgba(242,217,121,.16)';
+    ctx.strokeStyle= isNone?'#eda0a8':'#f2d979'; ctx.lineWidth=1.5;
+    const bw=Math.min(w-60,300);
+    ctx.beginPath(); ctx.roundRect((w-bw)/2, yEnd, bw, 28, 7); ctx.fill(); ctx.stroke();
+    ctx.fillStyle= isNone?'#eda0a8':'#f2d979'; ctx.font='bold 15px "Noto Serif TC"';
+    ctx.fillText(E.k + '　' + E.eq, w/2, yEnd+19);
+  } else {
+    ctx.fillStyle='rgba(243,239,226,.4)'; ctx.font='13px "Noto Sans TC"';
+    ctx.fillText(st.step===0 ? '👉 按「① 試相除」看看 y/x 恆不恆定'
+                             : '👉 再按「② 試相乘」看看 x×y', w/2, yEnd+14);
+  }
+  ro.innerHTML = st.step>=2
+    ? `x = ${E.x.join(', ')}　；　y = ${E.y.join(', ')}　→　<b>${E.k}</b>　<b>${E.eq}</b>`
+    : `x = ${E.x.join(', ')}　；　y = ${E.y.join(', ')}　<span style="color:rgba(243,239,226,.5)">—— 先自己判斷，再按按鈕驗證</span>`;
+}
+
+function drawGraph(st, ctx, w, h, ro){
+  const k=st.k, isP=st.mode===0;
+  const M=8;
+  const L=30, R=w-14, B=h-22, T=14;
+  const cx=(L+R)/2, cy=(T+B)/2;
+  const X=v=>cx+(v/M)*((R-L)/2), Y=v=>cy-(v/M)*((B-T)/2);
+  ctx.textAlign='center';
+  ctx.fillStyle= isP?'#98c9dc':'#eda0a8'; ctx.font='bold 13px "Noto Sans TC"';
+  ctx.fillText(isP?`正比　y = ${k}x　·　通過原點`:`反比　y = ${k}/x　·　不過原點，x ≠ 0`, w/2, 11);
+  // 格線
+  ctx.strokeStyle='rgba(243,239,226,.08)'; ctx.lineWidth=1;
+  for(let g=-M;g<=M;g+=2){ ctx.beginPath(); ctx.moveTo(X(g),T); ctx.lineTo(X(g),B); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(L,Y(g)); ctx.lineTo(R,Y(g)); ctx.stroke(); }
+  // 軸
+  ctx.strokeStyle='rgba(243,239,226,.55)'; ctx.lineWidth=1.5;
+  ctx.beginPath(); ctx.moveTo(L,cy); ctx.lineTo(R,cy); ctx.moveTo(cx,T); ctx.lineTo(cx,B); ctx.stroke();
+  // 曲線
+  ctx.strokeStyle= isP?'#98c9dc':'#eda0a8'; ctx.lineWidth=2.4;
+  if(isP){
+    ctx.beginPath();
+    let started=false;
+    for(let i=0;i<=200;i++){ const x=-M+2*M*i/200, y=k*x;
+      if(y<-M||y>M){ started=false; continue; }
+      if(!started){ ctx.moveTo(X(x),Y(y)); started=true; } else ctx.lineTo(X(x),Y(y)); }
+    ctx.stroke();
+    ctx.beginPath(); ctx.arc(X(0),Y(0),4.5,0,7); ctx.fillStyle='#f2d979'; ctx.fill();
+    ctx.strokeStyle='#16281c'; ctx.lineWidth=1.3; ctx.stroke();
+    ctx.fillStyle='#f2d979'; ctx.font='bold 11px "Noto Sans TC"';
+    ctx.fillText('過原點 ✓', X(0)+38, Y(0)+16);
+  } else {
+    [[0.05,M],[-M,-0.05]].forEach(([a,b])=>{
+      ctx.beginPath(); let started=false;
+      for(let i=0;i<=200;i++){ const x=a+(b-a)*i/200, y=k/x;
+        if(y<-M||y>M){ started=false; continue; }
+        if(!started){ ctx.moveTo(X(x),Y(y)); started=true; } else ctx.lineTo(X(x),Y(y)); }
+      ctx.stroke();
+    });
+    ctx.beginPath(); ctx.arc(X(0),Y(0),4.5,0,7);
+    ctx.strokeStyle='#eda0a8'; ctx.lineWidth=1.5; ctx.setLineDash([2,2]); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle='#eda0a8'; ctx.font='bold 11px "Noto Sans TC"';
+    ctx.fillText('不過原點 ✗', X(0)+44, Y(0)+16);
+  }
+  ro.innerHTML = isP
+    ? `<b>y = ${k}x</b>　｜　<b>過原點</b>的直線　｜　${k>0?'k > 0 → x 變大 y <b>變大</b>':'<span style="color:var(--pink)">k < 0 → x 變大 y <b>變小</b> —— 但這仍然是「正比」！</span>'}`
+    : `<b>y = ${k}/x</b>　｜　<b>不過原點</b>，且 <b>x ≠ 0</b>　｜　x 變大 → y 變小，但 <b>x×y = ${k}</b> 永遠不變`;
+}
+
+const MULT=[0.25,0.5,1,1.2,2,3,4];
+function drawScale(st, ctx, w, h, ro){
+  const m=MULT[st.m], k=SCALE.k;
+  const x0=2, y0p=k*x0, y0r=k/x0;
+  const x1=x0*m, y1p=k*x1, y1r=k/x1;
+  ctx.textAlign='center';
+  ctx.fillStyle='rgba(242,217,121,.85)'; ctx.font='bold 13px "Noto Sans TC"';
+  ctx.fillText(`x 變成 ${fmtN(m)} 倍　→　正比與反比的 y 各自怎麼變？`, w/2, 15);
+  const bar=(cx, title, before, after, col, note)=>{
+    ctx.fillStyle=col; ctx.font='bold 14px "Noto Serif TC"';
+    ctx.fillText(title, cx, 38);
+    const maxV=Math.max(before, after, 1);
+    const BW=Math.min(120, w*0.32), BH=54;
+    const bh1=BH*before/maxV, bh2=BH*after/maxV;
+    const by=112;
+    ctx.fillStyle='rgba(243,239,226,.18)';
+    ctx.fillRect(cx-BW/2, by-bh1, BW*0.42, bh1);
+    ctx.fillStyle=col.replace('#98c9dc','rgba(152,201,220,.55)').replace('#eda0a8','rgba(237,160,168,.55)');
+    ctx.fillRect(cx+BW*0.06, by-bh2, BW*0.42, bh2);
+    ctx.strokeStyle='rgba(243,239,226,.3)'; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(cx-BW/2-4, by); ctx.lineTo(cx+BW/2+4, by); ctx.stroke();
+    ctx.fillStyle='rgba(243,239,226,.55)'; ctx.font='10px "Noto Sans TC"';
+    ctx.fillText('原本', cx-BW*0.29, by+13);
+    ctx.fillStyle=col; ctx.fillText('之後', cx+BW*0.27, by+13);
+    ctx.fillStyle='rgba(243,239,226,.75)'; ctx.font='11px "Noto Serif TC"';
+    ctx.fillText(fmtN(before), cx-BW*0.29, by-bh1-5);
+    ctx.fillStyle=col; ctx.font='bold 12px "Noto Serif TC"';
+    ctx.fillText(fmtN(after), cx+BW*0.27, by-bh2-5);
+    ctx.fillStyle=col; ctx.font='bold 12px "Noto Sans TC"';
+    ctx.fillText(note, cx, by+30);
+  };
+  bar(w*0.27, `正比 y = ${k}x`, y0p, y1p, '#98c9dc', `y 變 ${fmtN(m)} 倍`);
+  bar(w*0.73, `反比 y = ${k}/x`, y0r, y1r, '#eda0a8', `y 變 ${fmtN(1/m)} 倍`);
+  ctx.strokeStyle='rgba(243,239,226,.14)'; ctx.lineWidth=1;
+  ctx.beginPath(); ctx.moveTo(w/2, 28); ctx.lineTo(w/2, h-22); ctx.stroke();
+  ctx.fillStyle='rgba(242,217,121,.8)'; ctx.font='11px "Noto Sans TC"';
+  ctx.fillText(`反比驗算：x×y = ${fmtN(x1)} × ${fmtN(y1r)} = ${fmtN(x1*y1r)}　（永遠 = k = ${k}）`, w/2, h-6);
+  ro.innerHTML = `x 從 <b>${x0}</b> 變成 <b>${fmtN(x1)}</b>（<b>${fmtN(m)} 倍</b>）`
+    + `　｜　<span style="color:var(--blue)">正比 y：${fmtN(y0p)} → ${fmtN(y1p)}（也是 <b>${fmtN(m)} 倍</b>）</span>`
+    + `　｜　<span style="color:var(--pink)">反比 y：${fmtN(y0r)} → ${fmtN(y1r)}（變 <b>${fmtN(1/m)} 倍</b>）</span>`
+    + `　｜　x×y = <b>${fmtN(x1*y1r)}</b> 永遠不變`;
+}
+
+function draw(si){
+  const st=VIZ[si]; if(!st) return;
+  const {cv,ctx,kind}=st, w=cv.width/DPR, h=cv.height/DPR;
+  ctx.clearRect(0,0,w,h);
+  const ro=document.getElementById('ro-'+si);
+  if(kind==='judge') drawJudge(st,ctx,w,h,ro);
+  else if(kind==='graph') drawGraph(st,ctx,w,h,ro);
+  else if(kind==='scale') drawScale(st,ctx,w,h,ro);
+}
+
+document.addEventListener('click', e=>{
+  const btn=e.target.closest('[data-t]'); if(!btn) return;
+  const si=+btn.dataset.si, st=VIZ[si]; if(!st) return;
+  const t=btn.dataset.t;
+  if(st.kind==='judge'){
+    if(t==='div') st.step=Math.max(st.step,1);
+    if(t==='mul') st.step=2;
+    if(t==='next'){ st.i=(st.i+1)%TBL.length; st.step=0; }
+  } else if(st.kind==='graph'){
+    if(t==='mode') st.mode=1-st.mode;
+    if(t==='kp'){ st.k++; if(st.k===0) st.k=1; }
+    if(t==='km'){ st.k--; if(st.k===0) st.k=-1; }
+    if(t==='neg') st.k=-st.k;
+    if(st.k>6) st.k=6; if(st.k<-6) st.k=-6;
+  } else {
+    if(t==='mp') st.m=Math.min(MULT.length-1, st.m+1);
+    if(t==='mm') st.m=Math.max(0, st.m-1);
+    if(t==='rst') st.m=2;
+  }
+  draw(si);
+});
+
+function resizeAll(){
+  DPR = Math.min(2, window.devicePixelRatio||1);
+  document.querySelectorAll('canvas.viz').forEach(cv=>{
+    const w = cv.clientWidth || cv.parentElement.clientWidth;
+    const h = (cv.dataset.viz==='judge') ? 202 : (cv.dataset.viz==='graph' ? 198 : 190);
+    cv.width=w*DPR; cv.height=h*DPR; cv.style.height=h+'px';
+    cv.getContext('2d').setTransform(DPR,0,0,DPR,0,0);
+  });
+  Object.keys(VIZ).forEach(k=>draw(+k));
+}
+document.querySelectorAll('canvas.viz').forEach(initViz);
+window.addEventListener('resize', resizeAll);
+resizeAll();
+</script>
+<div class="hint">← → 鍵可翻頁　·　Canvas 用按鈕互動　·　支援平板觸控</div>
+</body></html>

@@ -1,0 +1,1013 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>七下 1-2 二元一次聯立方程式的解｜互動教學平台</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;--wood:#6b4a32;}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);overscroll-behavior:none;}
+.topbar{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:10px 16px;background:linear-gradient(180deg,#1b2f21,#132218);border-bottom:2px solid var(--wood);box-shadow:0 4px 18px rgba(0,0,0,0.5);}
+.brand{font-family:'Noto Serif TC',serif;font-weight:900;font-size:clamp(15px,2.2vw,20px);color:var(--yellow);white-space:nowrap;}
+.brand small{display:block;font-family:'Caveat',cursive;font-size:14px;color:var(--soft);font-weight:400;}
+.spacer{flex:1;}
+.btn{background:rgba(243,239,226,0.08);border:1.5px solid rgba(243,239,226,0.28);color:var(--chalk);
+  border-radius:10px;padding:7px 13px;font-family:inherit;font-size:14px;cursor:pointer;white-space:nowrap;transition:.15s;}
+.btn:hover{background:rgba(243,239,226,0.16);}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:10px 16px 0;scrollbar-width:none;}
+.tabs::-webkit-scrollbar{display:none;}
+.tab{background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.2);border-bottom:none;
+  color:var(--soft);border-radius:10px 10px 0 0;padding:9px 15px;font-size:14px;cursor:pointer;white-space:nowrap;font-family:inherit;}
+.tab.on{background:var(--board);border-color:var(--yellow);color:var(--yellow);font-weight:700;}
+.tab .n{font-family:'Caveat',cursive;font-size:18px;margin-right:5px;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px 60px;}
+.panel{display:none;}.panel.on{display:block;}
+.card{background:radial-gradient(ellipse at 20% 10%,rgba(255,255,255,0.05),transparent 45%),
+   linear-gradient(160deg,var(--board),var(--board2));
+  border:1.5px solid rgba(242,217,121,0.16);border-radius:14px;padding:18px;margin-bottom:16px;
+  box-shadow:0 8px 26px rgba(0,0,0,0.45);position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 38px,rgba(255,255,255,0.012) 38px,rgba(255,255,255,0.012) 39px);}
+.card>*{position:relative;}
+.card h3{font-family:'Noto Serif TC',serif;font-size:clamp(17px,2.4vw,21px);color:var(--yellow);
+  margin-bottom:12px;padding-bottom:8px;border-bottom:2px dashed rgba(242,217,121,0.35);display:flex;align-items:center;gap:8px;}
+.card h3 .ic{font-size:20px;}
+.goals{display:flex;flex-wrap:wrap;gap:9px;}
+.goal{display:flex;align-items:center;gap:9px;background:rgba(242,217,121,0.07);
+  border:1.5px dashed rgba(242,217,121,0.4);border-radius:22px;padding:8px 15px 8px 8px;
+  font-size:clamp(13.5px,1.8vw,15px);color:var(--yellow);line-height:1.5;}
+.goal .bdg{width:24px;height:24px;border-radius:50%;background:var(--yellow);color:#16281c;
+  font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;flex:none;}
+.deck{position:relative;background:rgba(0,0,0,0.22);border-radius:12px;padding:clamp(16px,3vw,30px);
+  min-height:clamp(260px,42vh,380px);display:flex;flex-direction:column;justify-content:center;}
+.sl{display:none;animation:fade .25s;}.sl.on{display:block;}
+@keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+.sl .eyebrow{font-family:'Caveat',cursive;font-size:20px;color:var(--yellow);margin-bottom:6px;}
+.sl h4{font-family:'Noto Serif TC',serif;font-size:clamp(19px,3vw,27px);margin-bottom:12px;line-height:1.35;}
+.sl p{font-size:clamp(15px,2vw,18px);line-height:1.8;margin-bottom:9px;}
+.sl ul{list-style:none;}
+.sl li{font-size:clamp(15px,2vw,18px);line-height:1.85;padding-left:26px;position:relative;margin-bottom:4px;}
+.sl li::before{content:'✦';position:absolute;left:2px;color:var(--yellow);font-size:14px;top:3px;}
+.nav{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:14px;}
+.nav .pg{font-family:'Caveat',cursive;font-size:20px;color:var(--soft);min-width:64px;text-align:center;}
+.dots{display:flex;gap:6px;justify-content:center;margin-top:10px;flex-wrap:wrap;}
+.dot{width:9px;height:9px;border-radius:50%;background:rgba(243,239,226,0.25);cursor:pointer;border:none;padding:0;}
+.dot.on{background:var(--yellow);transform:scale(1.3);}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.32);border-radius:10px;
+  padding:11px 15px;margin:9px 0;font-size:clamp(14px,1.9vw,17px);line-height:1.7;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.36);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.36);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.32);}
+.two{display:flex;gap:12px;flex-wrap:wrap;}.two>*{flex:1;min-width:220px;}
+.teach{background:rgba(201,174,224,0.12);border:1.5px dashed rgba(201,174,224,0.5);
+  border-radius:10px;padding:11px 15px;margin:9px 0;font-size:clamp(14px,1.8vw,15px);line-height:1.7;}
+.teach b{color:var(--purple);}
+.tbl{width:100%;border-collapse:collapse;margin:9px 0;font-size:clamp(13.5px,1.8vw,16px);}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.24);padding:8px 11px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.cv-wrap{background:rgba(0,0,0,0.25);border-radius:12px;padding:10px;}
+canvas.viz{width:100%;display:block;border-radius:8px;touch-action:none;}
+.ctrl{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center;}
+.readout{font-family:'Noto Serif TC',serif;font-size:clamp(14px,1.9vw,18px);color:var(--chalk);
+  background:rgba(242,217,121,0.1);border:1px solid rgba(242,217,121,0.3);border-radius:8px;
+  padding:7px 12px;flex:1;min-width:220px;}
+.readout b{color:var(--yellow);}
+.q{background:rgba(0,0,0,0.2);border:1px solid rgba(242,217,121,0.18);border-radius:10px;padding:13px 15px;margin:10px 0;}
+.q .qt{font-size:clamp(15px,2vw,17px);margin-bottom:10px;line-height:1.7;}
+.q .qt .qn{font-family:'Caveat',cursive;color:var(--yellow);font-size:20px;margin-right:6px;}
+.opts{display:flex;flex-direction:column;gap:7px;}
+.opt{text-align:left;background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.22);
+  color:var(--chalk);border-radius:9px;padding:9px 13px;font-family:inherit;font-size:15px;cursor:pointer;transition:.15s;line-height:1.5;}
+.opt:hover:not(:disabled){background:rgba(243,239,226,0.13);}
+.opt.right{background:rgba(166,214,160,0.24);border-color:var(--green);color:#fff;font-weight:700;}
+.opt.wrong{background:rgba(237,160,168,0.22);border-color:var(--pink);}
+.opt:disabled{cursor:default;}
+.fb{display:none;margin-top:9px;padding:9px 13px;border-radius:8px;font-size:14.5px;line-height:1.65;}
+.fb.on{display:block;}
+.fb.ok{background:rgba(166,214,160,0.14);border-left:3px solid var(--green);}
+.fb.no{background:rgba(237,160,168,0.14);border-left:3px solid var(--pink);}
+.fill{display:inline-block;background:rgba(0,0,0,0.3);border:none;border-bottom:2px solid var(--yellow);
+  color:var(--yellow);font-family:'Noto Serif TC',serif;font-size:17px;width:110px;text-align:center;padding:3px 5px;margin:0 4px;}
+.fill:focus{outline:none;background:rgba(242,217,121,0.12);}
+.exq{background:rgba(0,0,0,0.26);border:1.5px solid rgba(242,217,121,0.28);border-radius:11px;padding:13px 15px;margin:10px 0;position:relative;}
+.exq::before{content:'';position:absolute;top:-8px;left:32px;width:54px;height:14px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.exq .exq-q{font-size:clamp(14.5px,1.9vw,17px);line-height:1.75;margin-bottom:11px;}
+.exo{text-align:left;background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.22);
+  color:var(--chalk);border-radius:9px;padding:9px 13px;font-family:inherit;font-size:clamp(14px,1.8vw,15.5px);
+  cursor:pointer;transition:.15s;line-height:1.55;width:100%;margin-bottom:6px;display:block;}
+.exo:hover:not(:disabled){background:rgba(243,239,226,0.13);}
+.exo.right{background:rgba(166,214,160,0.26);border-color:var(--green);color:#fff;font-weight:700;}
+.exo.wrong{background:rgba(237,160,168,0.2);border-color:var(--pink);opacity:.75;}
+.exo:disabled{cursor:default;}
+@keyframes shake{10%,90%{transform:translateX(-2px);}30%,70%{transform:translateX(4px);}50%{transform:translateX(-4px);}}
+.exo.shake{animation:shake .4s;}
+.exsol{display:none;margin-top:10px;padding:11px 14px;border-radius:9px;
+  background:rgba(166,214,160,0.13);border-left:3px solid var(--green);font-size:clamp(14px,1.8vw,15.5px);line-height:1.75;}
+.exsol.on{display:block;animation:fade .3s;}
+.exsol .st{color:var(--soft);margin:3px 0;}
+.exsol .an{color:var(--green);font-weight:700;margin-top:6px;}
+.exlock{display:flex;align-items:center;gap:7px;margin-top:9px;font-size:13.5px;color:rgba(243,239,226,0.45);}
+.exlock.hide{display:none;}
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:11px;}
+.icard{background:rgba(0,0,0,0.22);border:1.5px solid rgba(242,217,121,0.22);border-radius:11px;padding:14px;text-align:center;}
+.icard .big{font-family:'Noto Serif TC',serif;font-size:clamp(17px,2.6vw,23px);font-weight:900;margin:6px 0;}
+.icard .cap{font-size:13.5px;color:var(--soft);line-height:1.6;}
+.frow{display:flex;gap:12px;align-items:center;padding:9px 12px;border-bottom:1px dashed rgba(243,239,226,0.16);}
+.frow:last-child{border-bottom:none;}
+.flab{color:var(--blue);font-weight:700;min-width:150px;font-size:clamp(13.5px,1.8vw,15.5px);flex:none;}
+.fval{color:var(--yellow);font-weight:700;font-family:'Noto Serif TC',serif;font-size:clamp(14px,1.9vw,17px);}
+@media(max-width:560px){.frow{flex-direction:column;align-items:flex-start;gap:3px;}.flab{min-width:0;}}
+.hud{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:12px;}
+.hud .st{background:rgba(0,0,0,0.3);border:1.5px solid rgba(242,217,121,0.28);border-radius:9px;
+  padding:7px 13px;font-size:14px;flex:1;min-width:88px;text-align:center;}
+.hud .st b{display:block;font-family:'Noto Serif TC',serif;font-size:20px;color:var(--yellow);}
+.tbar{height:8px;background:rgba(0,0,0,0.35);border-radius:5px;overflow:hidden;margin-bottom:12px;}
+.tfill{height:100%;background:linear-gradient(90deg,var(--green),var(--yellow),var(--pink));width:100%;transition:width .1s linear;}
+.gscreen{display:none;}.gscreen.on{display:block;}
+.lvchips{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin:14px 0;}
+.lvchip{background:rgba(152,201,220,0.12);border:1.5px solid rgba(152,201,220,0.35);border-radius:18px;
+  padding:6px 13px;font-size:13.5px;color:var(--blue);}
+.lvchip.done{background:rgba(166,214,160,0.2);border-color:var(--green);color:var(--green);}
+.lvchip.now{background:rgba(242,217,121,0.22);border-color:var(--yellow);color:var(--yellow);font-weight:700;}
+.gq{font-size:clamp(16px,2.2vw,20px);line-height:1.7;margin:14px 0;text-align:center;font-family:'Noto Serif TC',serif;}
+.gopts{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+@media(max-width:560px){.gopts{grid-template-columns:1fr;}}
+.gopt{background:rgba(243,239,226,0.07);border:1.5px solid rgba(243,239,226,0.25);color:var(--chalk);
+  border-radius:10px;padding:12px;font-family:'Noto Serif TC',serif;font-size:17px;cursor:pointer;transition:.15s;min-height:48px;}
+.gopt:hover:not(:disabled){background:rgba(243,239,226,0.15);}
+.gopt.right{background:rgba(166,214,160,0.3);border-color:var(--green);font-weight:900;}
+.gopt.wrong{background:rgba(237,160,168,0.25);border-color:var(--pink);}
+.gfb{margin-top:11px;padding:10px 13px;border-radius:8px;font-size:14.5px;line-height:1.6;display:none;}
+.gfb.on{display:block;}
+.gfb.ok{background:rgba(166,214,160,0.15);border-left:3px solid var(--green);}
+.gfb.no{background:rgba(237,160,168,0.15);border-left:3px solid var(--pink);}
+.rank{font-size:54px;text-align:center;margin:10px 0;}
+.hint{text-align:center;color:rgba(243,239,226,0.35);font-size:12.5px;padding:8px 0 0;}
+@media (max-width:640px){.topbar{padding:8px 10px;gap:8px;}.wrap{padding:0 10px 70px;}.card{padding:13px;}}
+</style></head><body>
+
+<div class="topbar">
+  <div class="brand">1-2　聯立方程式的解<small>七下 · 第1章 二元一次聯立方程式</small></div>
+  <div class="spacer"></div>
+</div>
+
+<div class="tabs" id="tabs">
+  <button class="tab on" data-p="0"><span class="n">🎯</span>消去法</button>
+  <button class="tab" data-p="1"><span class="n">➕➖</span>加減消去</button>
+  <button class="tab" data-p="2"><span class="n">🔀</span>三種解的情形</button>
+  <button class="tab" data-p="3"><span class="n">★</span>題型測驗</button>
+  <button class="tab" data-p="4"><span class="n">🎮</span>闖關遊戲</button>
+</div>
+
+<div class="wrap">
+  <div class="card" id="goalCard">
+    <h3><span class="ic">🎯</span>本節學習目標</h3>
+    <div class="goals" id="goals"></div>
+  </div>
+  <div id="wrap"></div>
+</div>
+
+<script>
+const GOALS = [
+  '理解聯立方程式的解：同時滿足兩條的唯一一組 (x,y)',
+  '能用代入消去法求解',
+  '能用加減消去法求解（含先乘倍數再消）',
+  '能判斷哪種方法比較快',
+  '知道三種情形：唯一解／無解／無限多解',
+  '知道三情形對應幾何：相交／平行／重合',
+];
+
+const DATA = [
+{ key:'pick', viz:'pick', vizTitle:'選方法建議器 —— 先自己想「哪個係數最好消？」，再揭曉（6 題）',
+  slides:[
+    {eb:'核心思想', h:'解聯立的唯一祕訣：消去', html:`
+      <div class="box y" style="text-align:center;font-size:19px;">
+        兩個未知數太難 → <span class="hl">先消掉一個</span> → 變成七上的一元一次方程式</div>
+      <table class="tbl">
+        <tr><th style="width:16%;">步驟</th><th>動作</th></tr>
+        <tr><td class="hl">① 消去</td><td>用<b>代入</b>或<b>加減</b>，把一個未知數消掉</td></tr>
+        <tr><td class="hl">② 解一元</td><td>剩下一個未知數 → 七上的一元一次</td></tr>
+        <tr><td class="hl">③ 回代</td><td>把解出的值代回去，<b>求另一個未知數</b></td></tr>
+        <tr><td class="hl">④ 驗算</td><td>代回<span class="hl-r">兩條</span>原方程式</td></tr>
+      </table>
+      <div class="box r" style="text-align:center;">⚠️ 最常漏的是 ③ <b>回代</b> —— 消去後解出一個，就以為做完了。</div>`},
+    {eb:'細目 ②', h:'代入消去法：從一條解出 y=…', html:`
+      <div class="box y"><b>適用：</b>其中一條<span class="hl">已經是</span> <span class="fm">y = …</span>，或<span class="hl">容易解出</span>（有係數 1 的未知數）</div>
+      <div class="box"><b>{ y = 2x，x + y = 12 }</b><br>
+        代入：<span class="fm">x + 2x = 12 → 3x = 12 → x = 4</span>；回代 y = 8</div>
+      <div class="box"><b>{ 2x + y = 10，x − y = 2 }</b><br>
+        第二式解出 <span class="fm">x = y+2</span> → 代入：<span class="fm">2(y+2)+y = 10 → 3y = 6 → y = 2</span>；x = 4</div>
+      <div class="box g" style="text-align:center;">💡 <span class="hl">這就是 1-1 的「解出 y = …」派上用場的地方</span> —— 那時的「入場券」，現在兌現了。</div>`},
+    {eb:'細目 ③', h:'加減消去法：同號相減、異號相加', html:`
+      <div class="box y" style="text-align:center;"><b>適用：</b>某未知數的<span class="hl">係數相同</span>或<span class="hl">互為相反數</span></div>
+      <table class="tbl">
+        <tr><th style="width:50%;">係數</th><th>怎麼消</th></tr>
+        <tr><td><b>相同</b>（都是 +2y）</td><td class="hl-g" style="font-size:18px;"><b>相減</b>（+2y − 2y = 0）</td></tr>
+        <tr><td><b>互為相反</b>（+3y 與 −3y）</td><td class="hl-g" style="font-size:18px;"><b>相加</b>（+3y + (−3y) = 0）</td></tr>
+      </table>
+      <div class="box r" style="text-align:center;font-size:19px;">
+        ⚠️ <b>最常搞反：同號要「減」、異號要「加」</b><br>
+        記法：<span class="hl">要讓那項變 0，就想「怎樣加減會抵消」。</span></div>`},
+    {eb:'細目 ③ 進階', h:'係數都很醜 → 先乘倍數', html:`
+      <div class="box r" style="text-align:center;">「加減消去法只能用在係數完全相同的情況」→ <span class="hl-r">錯</span></div>
+      <div class="box"><b>{ 3x + 2y = 7，2x + 3y = 8 }</b> —— y 係數 2 和 3，不同也不相反<br>
+        <b>先湊成一樣</b>：第一式 ×3、第二式 ×2 → y 係數都變 <span class="hl">6</span><br>
+        <span class="fm">9x + 6y = 21；4x + 6y = 16</span> → 相減 <span class="fm">5x = 5 → x = 1</span>；y = 2</div>
+      <div class="box y" style="text-align:center;">💡 這叫<span class="hl">擴分的逆用</span> —— 和 2-2 通分「湊成共同分母」是同一個腦子。<br>
+        所以加減消去法<b>幾乎任何聯立都能用</b>。</div>`},
+    {eb:'例題 1 ★☆☆', h:'代入（現成的 y=…）', html:`
+      <div class="exq" data-a="2">
+        <div class="exq-q"><span class="hl">Q</span>　解 { y = 3x，x + y = 16 }，x = ?</div>
+        <button class="exo" data-i="0">2</button>
+        <button class="exo" data-i="1">8</button>
+        <button class="exo" data-i="2">4</button>
+        <button class="exo" data-i="3">12</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st fm">y = 3x 直接代入 x + y = 16：x + 3x = 16</div>
+          <div class="st fm">4x = 16 → x = 4；回代 y = 12</div>
+          <div class="st">(D) 12 是 <b>y</b> 的值 —— 題目問 x！</div>
+          <div class="an">答：x = 4（y = 12）</div>
+        </div>
+      </div>`},
+    {eb:'例題 2 ★★☆', h:'加減（相同 → 相減）', html:`
+      <div class="exq" data-a="0">
+        <div class="exq-q"><span class="hl">Q</span>　解 { 2x + y = 11，x + y = 7 }，x = ?</div>
+        <button class="exo" data-i="0">4</button>
+        <button class="exo" data-i="1">3</button>
+        <button class="exo" data-i="2">7</button>
+        <button class="exo" data-i="3">18</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">y 係數都是 +1（相同）→ <b>相減</b>消 y</div>
+          <div class="st fm">(2x+y) − (x+y) = 11 − 7 → x = 4</div>
+          <div class="st fm">回代：4 + y = 7 → y = 3</div>
+          <div class="st">💡 到下方的<b>加減消去逐步器</b>按「下一步」，看消去怎麼發生。</div>
+          <div class="an">答：x = 4（y = 3）</div>
+        </div>
+      </div>`}
+  ],
+  fa:[
+    {q:'解聯立的核心思想是？', o:['消去一個未知數','兩個一起解','用猜的','畫圖'], a:0, e:'把兩個未知數變成一個，退化成七上的一元一次。'},
+    {q:'{ y=2x−1，x+y=8 } 用哪個方法？', o:['代入','加減（相加）','加減（相減）','都不行'], a:0, e:'第一式已是 y=…，直接代入最快。'},
+    {q:'消去解出 x 之後，接下來要做什麼？', o:['交卷','回代求 y','再消一次','換方法'], a:1, e:'一定要回代求另一個未知數！'}
+  ],
+  info:[
+    {big:'核心 = 消去', cap:'兩個未知數<br>變成一個', c:'var(--yellow)'},
+    {big:'代入 vs 加減', cap:'有 y=… 用代入<br>係數同/反用加減', c:'var(--blue)'},
+    {big:'別忘了回代', cap:'解出一個<br>還有一個', c:'var(--pink)'}
+  ]
+},
+{ key:'elim', viz:'elim', vizTitle:'加減消去逐步器 —— 按「下一步」，看兩式怎麼相加減把未知數消掉（3 題）',
+  slides:[
+    {eb:'⚠️ 減負變加', h:'相減時最容易錯的一步', html:`
+      <div class="box"><b>{ 3x + 2y = 19，3x − y = 13 }</b> —— x 係數都是 +3，相減消 x</div>
+      <div class="box y"><b>相減</b>：<span class="fm">(3x + 2y) − (3x − y) = 19 − 13</span><br>
+        <b>關鍵</b>：<span class="fm">2y − <span class="hl-r">(−y)</span> = 2y <span class="hl">+ y</span> = 3y</span>　<span class="hl-r">← 減去負的要變加！</span><br>
+        <span class="fm">3y = 6 → y = 2</span>；回代 <span class="fm">x = 5</span></div>
+      <div class="box r" style="text-align:center;font-size:19px;">
+        ⚠️ <span class="fm">2y − (−y)</span> 很多人算成 <span class="fm hl-r">2y − y = y</span> → 錯<br>
+        正確 <span class="fm hl-g">2y + y = 3y</span>（七上 1-2「減負變加」的鐵則）</div>`},
+    {eb:'例題 3 ★★☆', h:'加減（互為相反 → 相加）', html:`
+      <div class="exq" data-a="1">
+        <div class="exq-q"><span class="hl">Q</span>　解 { 5x + 2y = 16，3x − 2y = 0 }，x = ?</div>
+        <button class="exo" data-i="0">1</button>
+        <button class="exo" data-i="1">2</button>
+        <button class="exo" data-i="2">3</button>
+        <button class="exo" data-i="3">8</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">y 係數 +2 與 −2（互為相反）→ <b>相加</b>消 y</div>
+          <div class="st fm">(5x+2y) + (3x−2y) = 16 + 0 → 8x = 16 → x = 2</div>
+          <div class="st fm">回代：3×2 − 2y = 0 → 6 = 2y → y = 3</div>
+          <div class="an">答：x = 2（y = 3）</div>
+        </div>
+      </div>`},
+    {eb:'例題 4 ★★★', h:'加減（相減消 x）', html:`
+      <div class="exq" data-a="3">
+        <div class="exq-q"><span class="hl">Q</span>　解 { 4x + y = 17，4x − 3y = −3 }，y = ?</div>
+        <button class="exo" data-i="0">2</button>
+        <button class="exo" data-i="1">3</button>
+        <button class="exo" data-i="2">4</button>
+        <button class="exo" data-i="3">5</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">x 係數都是 +4（相同）→ <b>相減</b>消 x</div>
+          <div class="st fm">(4x+y) − (4x−3y) = 17 − (−3)</div>
+          <div class="st fm">y − (−3y) = y + 3y = 4y；17 − (−3) = 20</div>
+          <div class="st fm">4y = 20 → y = 5；回代 x = 3</div>
+          <div class="st">⚠️ 兩處「減負變加」：<b>y−(−3y) = 4y</b>、<b>17−(−3) = 20</b>。這裡最多人錯。</div>
+          <div class="an">答：y = 5（x = 3）</div>
+        </div>
+      </div>`},
+    {eb:'例題 5 ★★★', h:'硬幣問題（兌現 1-1 的伏筆）', html:`
+      <div class="box">10 元 x 個、50 元 y 個，共 8 個、320 元</div>
+      <div class="exq" data-a="0">
+        <div class="exq-q"><span class="hl">Q</span>　50 元硬幣有幾個？</div>
+        <button class="exo" data-i="0">6 個</button>
+        <button class="exo" data-i="1">2 個</button>
+        <button class="exo" data-i="2">4 個</button>
+        <button class="exo" data-i="3">8 個</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st fm">{ x + y = 8，10x + 50y = 320 }</div>
+          <div class="st fm">代入 x = 8 − y：10(8−y) + 50y = 320 → 40y = 240 → y = 6</div>
+          <div class="st fm">回代 x = 2</div>
+          <div class="st">(B) 2 是 10 元硬幣（x）的個數 —— 題目問 50 元的！</div>
+          <div class="st">💡 1-1 結尾叫你「先猜猜看」，答案就是 (2, 6) —— 現在你能算出來了。</div>
+          <div class="an">答：50 元硬幣 6 個（10 元 2 個）</div>
+        </div>
+      </div>`}
+  ],
+  fa:[
+    {q:'兩式某未知數係數<b>相同</b>，該？', o:['相加','相減','相乘','都可以'], a:1, e:'相同 → 相減才會消掉。'},
+    {q:'兩式某未知數係數<b>互為相反</b>，該？', o:['相加','相減','相乘','都可以'], a:0, e:'互為相反 → 相加才會消掉。'},
+    {q:'<span class="fm">2y − (−y)</span> = ?', o:['y','3y','−y','2y'], a:1, e:'減去負的要變加：2y + y = 3y。'}
+  ],
+  info:[
+    {big:'同號相減', cap:'+2y − 2y = 0', c:'var(--green)'},
+    {big:'異號相加', cap:'+3y + (−3y) = 0', c:'var(--blue)'},
+    {big:'⚠️ 減負變加', cap:'2y−(−y) = 3y', c:'var(--pink)'}
+  ]
+},
+{ key:'case', viz:'case', vizTitle:'三種解的情形 —— 換情形看兩直線相交／平行／重合，以及消去後的結果',
+  slides:[
+    {eb:'［補給站］⚠️ 新增', h:'聯立方程式不一定有唯一解', html:`
+      <div class="box g"><b class="hl-g">情形一：唯一解（最常見）</b><br>
+        <span class="fm">{ x + y = 8，x − y = 2 }</span> → <span class="hl">(5, 3)</span> 一組<br>
+        <span style="font-size:13px;color:var(--soft)">兩條互相獨立、資訊不同 → 鎖定一個點</span></div>
+      <div class="box r"><b class="hl-r">情形二：無解</b><br>
+        <span class="fm">{ x + y = 5，x + y = 8 }</span><br>
+        同樣的 x+y，<b>不可能既等於 5 又等於 8</b> → 矛盾 → <span class="hl-r">無解</span></div>
+      <div class="box"><b class="hl-b">情形三：無限多解</b><br>
+        <span class="fm">{ x + y = 5，2x + 2y = 10 }</span><br>
+        第二式 = 第一式 ×2 → <b>其實是同一條</b>（1-1 說的「不獨立」）→ <span class="hl-b">無限多解</span></div>`},
+    {eb:'［補給站］', h:'🔑 消去之後看結果', html:`
+      <table class="tbl">
+        <tr><th style="width:40%;">消去後得到</th><th style="width:22%;">情形</th><th>意思</th></tr>
+        <tr><td class="fm"><b>x = 某數</b>（正常）</td><td class="hl-g">唯一解</td><td>鎖定一組</td></tr>
+        <tr><td class="fm"><b>0 = 非零數</b>（如 0=−3）</td><td class="hl-r">無解</td><td>矛盾，不可能</td></tr>
+        <tr><td class="fm"><b>0 = 0</b>（恆成立）</td><td class="hl-b">無限多解</td><td>兩條其實同一條</td></tr>
+      </table>
+      <div class="box y">💡 <b>這正是 1-1「自由度」的延續：</b><br>
+        ・兩條<span class="hl">獨立</span> → 自由度 0 → <span class="hl-g">唯一解</span><br>
+        ・兩條<span class="hl">矛盾</span> → <span class="hl-r">無解</span><br>
+        ・兩條<span class="hl">不獨立</span>（其實一條）→ <span class="hl-b">無限多解</span></div>
+      <div class="box g">👉 用下方 Canvas 按「換一種情形」，看三種各長什麼樣、消去後得到什麼。</div>`},
+    {eb:'［補給站］🔗 2-2 伏筆', h:'2-2 會讓你「看見」這三種情形', html:`
+      <div class="box y" style="text-align:center;">每條二元一次方程式在坐標平面上是<span class="hl">一條直線</span></div>
+      <table class="tbl">
+        <tr><th style="width:34%;">代數（這節）</th><th>幾何（2-2 會講）</th></tr>
+        <tr><td class="hl-g">唯一解</td><td>兩直線<b>相交</b>於一點</td></tr>
+        <tr><td class="hl-r">無解</td><td>兩直線<b>平行</b>（永不相交）</td></tr>
+        <tr><td class="hl-b">無限多解</td><td>兩直線<b>重合</b>（完全疊在一起）</td></tr>
+      </table>
+      <div class="box g" style="text-align:center;font-size:18px;">
+        <span class="hl">代數的「無解」就是幾何的「平行」；「無限多解」就是「重合」。</span><br>
+        現在先記住，2-2 你會親眼看到。</div>`},
+    {eb:'例題 6 ★★☆', h:'判斷解的情形', html:`
+      <div class="exq" data-a="2">
+        <div class="exq-q"><span class="hl">Q</span>　{ x + y = 5，2x + 2y = 8 } 有幾組解？</div>
+        <button class="exo" data-i="0">唯一解</button>
+        <button class="exo" data-i="1">無限多解</button>
+        <button class="exo" data-i="2">無解</button>
+        <button class="exo" data-i="3">兩組解</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">第二式 ÷2 → x + y = 4</div>
+          <div class="st">但第一式說 x + y = 5 → <b>x+y 不可能既是 5 又是 4</b></div>
+          <div class="st fm">消去看看：x+y=5 減 x+y=4 → 0 = 1（矛盾！）</div>
+          <div class="st">→ <b>無解</b>（幾何上：兩直線平行）</div>
+          <div class="st">(B) 無限多解是「兩條完全相同」（如 2x+2y=10），但這裡右邊不成比例。</div>
+          <div class="an">答：無解</div>
+        </div>
+      </div>`},
+    {eb:'例題 7 ★★☆', h:'另一種情形', html:`
+      <div class="exq" data-a="1">
+        <div class="exq-q"><span class="hl">Q</span>　{ x + y = 5，3x + 3y = 15 } 有幾組解？</div>
+        <button class="exo" data-i="0">唯一解 (2,3)</button>
+        <button class="exo" data-i="1">無限多解</button>
+        <button class="exo" data-i="2">無解</button>
+        <button class="exo" data-i="3">一組解</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">第二式 ÷3 → x + y = 5</div>
+          <div class="st">和第一式<b>完全一樣</b> → 其實是同一條</div>
+          <div class="st fm">消去看看：兩條相減 → 0 = 0（恆成立）</div>
+          <div class="st">→ <b>無限多解</b>（幾何上：兩直線重合）</div>
+          <div class="st">💡 對照例題6：右邊<b>成比例</b>（15 = 5×3）→ 重合；<b>不成比例</b> → 平行（無解）。</div>
+          <div class="an">答：無限多解</div>
+        </div>
+      </div>`}
+  ],
+  fa:[
+    {q:'消去後得到 <span class="fm">0 = −3</span>，是哪種情形？', o:['唯一解','無解','無限多解','算錯了'], a:1, e:'0 = 非零數 → 矛盾 → 無解（平行）。'},
+    {q:'消去後得到 <span class="fm">0 = 0</span>，是哪種情形？', o:['唯一解','無解','無限多解','算錯了'], a:2, e:'0 = 0 恆成立 → 兩條其實同一條 → 無限多解（重合）。'},
+    {q:'「無解」在坐標平面上對應？', o:['相交','平行','重合','一個點'], a:1, e:'兩直線平行，永不相交。'}
+  ],
+  info:[
+    {big:'x=某數 → 唯一', cap:'兩直線相交', c:'var(--green)'},
+    {big:'0=非零 → 無解', cap:'兩直線平行', c:'var(--pink)'},
+    {big:'0=0 → 無限多', cap:'兩直線重合', c:'var(--blue)'}
+  ]
+}];
+
+const QUIZ = [
+  {type:'choice', q:'解 { y = 3x，x + y = 16 }，x = ?', o:['2','4','8','12'], a:1, e:'x + 3x = 16 → x = 4。'},
+  {type:'choice', q:'解 { x = y + 3，2x + y = 12 }，y = ?', o:['2','5','3','7'], a:0, e:'2(y+3)+y = 12 → 3y = 6 → y = 2。'},
+  {type:'choice', q:'解 { x + y = 10，x − y = 2 }（加減），x = ?', o:['6','4','8','5'], a:0, e:'相加消 y：2x = 12 → x = 6。'},
+  {type:'choice', q:'解 { 2x + y = 11，x + y = 7 }（加減），x = ?', o:['4','3','7','2'], a:0, e:'相減消 y：x = 4。'},
+  {type:'choice', q:'解 { y = 2x − 1，x + y = 8 }，x = ?', o:['3','5','2','4'], a:0, e:'x + 2x − 1 = 8 → 3x = 9 → x = 3。'},
+  {type:'choice', q:'解 { 3x + 2y = 19，3x − y = 13 }，y = ?', o:['2','3','5','6'], a:0, e:'相減消 x：2y−(−y)=3y=6 → y=2。'},
+  {type:'choice', q:'解 { 5x + 2y = 16，3x − 2y = 0 }，x = ?', o:['1','2','3','8'], a:1, e:'相加消 y：8x = 16 → x = 2。'},
+  {type:'tf', q:'判斷：「加減消去法只能用在係數完全相同的情況。」', a:false, e:'錯。相同→相減、相反→相加；都不是可先乘倍數湊。'},
+  {type:'choice', q:'解 { 2x + y = 9，y = x − 3 }，x = ?', o:['4','1','3','5'], a:0, e:'2x + (x−3) = 9 → 3x = 12 → x = 4。'},
+  {type:'choice', q:'解 { 4x + y = 17，4x − 3y = −3 }，y = ?', o:['2','3','4','5'], a:3, e:'相減消 x：y−(−3y)=4y=20 → y=5。'},
+  {type:'choice', q:'解 { x + 2y = 11，3x − 2y = 9 }，x = ?', o:['5','3','4','2'], a:0, e:'相加消 y：4x = 20 → x = 5。'},
+  {type:'choice', q:'消去後得到 <span class="fm">0 = 5</span>，是哪種情形？', o:['唯一解','無解','無限多解','算錯'], a:1, e:'0 = 非零 → 矛盾 → 無解。'},
+  {type:'choice', q:'消去後得到 <span class="fm">0 = 0</span>，是哪種情形？', o:['唯一解','無解','無限多解','算錯'], a:2, e:'0 = 0 → 兩條同一條 → 無限多解。'},
+  {type:'choice', q:'{ x + y = 5，2x + 2y = 8 } 有幾組解？', o:['唯一解','無限多解','無解','兩組'], a:2, e:'÷2 → x+y=4，和 x+y=5 矛盾 → 無解。'},
+  {type:'choice', q:'{ x + y = 5，3x + 3y = 15 } 有幾組解？', o:['唯一解','無限多解','無解','一組'], a:1, e:'÷3 → x+y=5，完全一樣 → 無限多解。'},
+  {type:'choice', q:'「無限多解」在坐標平面上對應？', o:['相交','平行','重合','一個點'], a:2, e:'兩直線重合。'},
+  {type:'choice', q:'雞兔共 35 隻、腳 94 隻，兔幾隻？', o:['12','23','10','15'], a:0, e:'代入 x=35−y：70+2y=94 → y=12。'},
+  {type:'choice', q:'售票共 150 張、收入 24000，全票幾張？', o:['60','90','75','100'], a:1, e:'化簡後 { x+y=150，2x+y=240 } → x=90。'}
+];
+
+const GAME = [
+  {name:'消去的觀念', qs:[
+    {q:'解聯立的核心是？', o:['消去一個未知數','兩個一起解','用猜的','畫圖'], a:0, e:'把兩個未知數變成一個。'},
+    {q:'消去後解出 x，接下來？', o:['交卷','回代求 y','再消','換方法'], a:1, e:'一定要回代！'},
+    {q:'驗算要代回幾條？', o:['1 條','2 條都要','不用','隨便'], a:1, e:'只驗一條可能矇對。'},
+    {q:'消去後剩下什麼？', o:['一元一次方程式','二元一次','三元','沒東西'], a:0, e:'退化成七上的一元一次。'}
+  ]},
+  {name:'代入消去法', qs:[
+    {q:'代入法適合什麼時候用？', o:['有 y=… 的形式','係數都很大','沒有規律','都不行'], a:0, e:'有現成 y=… 或係數 1 的未知數。'},
+    {q:'{ y=2x，x+y=12 } 代入後？', o:['x+2x=12','2x+x=y','x+y=2x','y=12'], a:0, e:'把 y=2x 代入第二式。'},
+    {q:'{ 2x+y=10，x−y=2 } 該先解哪個？', o:['解 x=y+2','解 2x','解 y=10','都不行'], a:0, e:'x 係數是 1，解出最方便。'},
+    {q:'代入法用到 1-1 學的什麼？', o:['解出 y=…','約公因數','判斷次方','驗證解'], a:0, e:'1-1 的「入場券」在這裡兌現。'}
+  ]},
+  {name:'加減：同減異加', qs:[
+    {q:'係數相同該？', o:['相加','相減','相乘','都可以'], a:1, e:'相同 → 相減。'},
+    {q:'係數互為相反該？', o:['相加','相減','相乘','都可以'], a:0, e:'互為相反 → 相加。'},
+    {q:'{ 3x+2y=16，x+2y=8 } 怎麼消 y？', o:['相加','相減','相乘','代入'], a:1, e:'y 係數都是 +2 → 相減。'},
+    {q:'{ 2x+3y=12，4x−3y=6 } 怎麼消 y？', o:['相加','相減','相乘','代入'], a:0, e:'y 係數 +3、−3 → 相加。'}
+  ]},
+  {name:'⚠️ 減負變加', qs:[
+    {q:'2y − (−y) = ?', o:['y','3y','−y','2y'], a:1, e:'減去負的要變加：2y+y=3y。'},
+    {q:'17 − (−3) = ?', o:['14','20','−20','17'], a:1, e:'減去負的要變加：17+3=20。'},
+    {q:'{ 3x+2y=19，3x−y=13 } 相減後 y 的係數？', o:['y','3y','2y','−y'], a:1, e:'2y−(−y)=3y。'},
+    {q:'相減最容易錯在哪？', o:['忘記減負變加','算錯乘法','看錯係數','寫錯答案'], a:0, e:'2y−(−y) 常被算成 2y−y。'}
+  ]},
+  {name:'選方法・進階', qs:[
+    {q:'{ y=2x−1，x+y=8 } 用哪個？', o:['代入','加減相加','加減相減','都不行'], a:0, e:'有現成 y=…。'},
+    {q:'{ 5x+2y=16，3x−2y=0 } 用哪個？', o:['加減相加','加減相減','代入','畫圖'], a:0, e:'y 係數 +2、−2 → 相加。'},
+    {q:'{ 3x+2y=7，2x+3y=8 } 怎麼辦？', o:['先乘倍數湊係數','不能用加減','只能猜','無解'], a:0, e:'第一式×3、第二式×2 → y 都變 6。'},
+    {q:'兩種方法的答案會一樣嗎？', o:['一樣','不一樣','看情況','看運氣'], a:0, e:'選錯只是慢，不會錯。'}
+  ]},
+  {name:'三種解的情形', qs:[
+    {q:'消去後 0 = −3 是？', o:['唯一解','無解','無限多解','算錯'], a:1, e:'矛盾 → 無解。'},
+    {q:'消去後 0 = 0 是？', o:['唯一解','無解','無限多解','算錯'], a:2, e:'恆成立 → 無限多解。'},
+    {q:'「無解」幾何上是？', o:['相交','平行','重合','一點'], a:1, e:'兩直線平行。'},
+    {q:'「無限多解」幾何上是？', o:['相交','平行','重合','一點'], a:2, e:'兩直線重合。'}
+  ]},
+  {name:'應用（閉環）', qs:[
+    {q:'雞兔共 35、腳 94，兔幾隻？', o:['12','23','10','15'], a:0, e:'2(35−y)+4y=94 → y=12。'},
+    {q:'承上，雞幾隻？', o:['12','23','20','25'], a:1, e:'x=35−12=23。'},
+    {q:'售票共 150、收入 24000，全票幾張？', o:['60','90','75','100'], a:1, e:'x=90。'},
+    {q:'1-1 和 1-2 的關係是？', o:['1-1 驗證、1-2 算出','完全無關','1-2 比較簡單','1-1 更難'], a:0, e:'1-1 教確認、1-2 教算出，答案一致。'}
+  ]}
+];
+
+document.getElementById('goals').innerHTML = GOALS.map((g,i)=>
+  `<div class="goal"><div class="bdg">${i+1}</div>${g}</div>`).join('');
+
+const wrap = document.getElementById('wrap');
+DATA.forEach((sec, si)=>{
+  const p = document.createElement('div');
+  p.className = 'panel' + (si===0?' on':'');
+  p.dataset.p = si;
+  p.innerHTML = `
+    <div class="card">
+      <h3><span class="ic">📽</span>簡報翻頁器</h3>
+      <div class="deck" data-deck="${si}">
+        ${sec.slides.map((s,i)=>`<div class="sl${i===0?' on':''}" data-i="${i}">
+          <div class="eyebrow">${s.eb}</div><h4>${s.h}</h4>${s.html}</div>`).join('')}
+      </div>
+      <div class="nav">
+        <button class="btn" data-nav="prev" data-s="${si}">◀ 上一張</button>
+        <span class="pg" id="pg-${si}">1 / ${sec.slides.length}</span>
+        <button class="btn" data-nav="next" data-s="${si}">下一張 ▶</button>
+      </div>
+      <div class="dots" id="dots-${si}">
+        ${sec.slides.map((_,i)=>`<button class="dot${i===0?' on':''}" data-s="${si}" data-i="${i}"></button>`).join('')}
+      </div>
+    </div>
+    <div class="card">
+      <h3><span class="ic">🎯</span>Canvas 互動視覺化<span style="font-size:14px;color:var(--soft);font-weight:400;">　${sec.vizTitle}</span></h3>
+      <div class="cv-wrap">
+        <canvas class="viz" data-viz="${sec.viz}" data-si="${si}"></canvas>
+        <div class="ctrl" data-ctrl="${si}"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3><span class="ic">✅</span>形成性評量</h3>
+      ${sec.fa.map((f,i)=>`<div class="q" data-fa="${si}-${i}">
+        <div class="qt"><span class="qn">Q${i+1}</span>${f.q}</div>
+        <div class="opts">${f.o.map((o,oi)=>`<button class="opt" data-si="${si}" data-qi="${i}" data-oi="${oi}">${o}</button>`).join('')}</div>
+        <div class="fb" id="fb-${si}-${i}"></div>
+      </div>`).join('')}
+    </div>
+    <div class="card">
+      <h3><span class="ic">📊</span>資訊圖表</h3>
+      <div class="info">
+        ${sec.info.map(c=>`<div class="icard"><div class="big" style="color:${c.c}">${c.big}</div><div class="cap">${c.cap}</div></div>`).join('')}
+      </div>
+    </div>`;
+  wrap.appendChild(p);
+});
+
+const qp = document.createElement('div');
+qp.className='panel'; qp.dataset.p='3';
+qp.innerHTML = `<div class="card"><h3><span class="ic">📝</span>題型測驗　<span style="font-size:14px;color:var(--soft);font-weight:400;">單選 · 是非 · 填充，共 ${QUIZ.length} 題</span></h3>
+  <div id="quizBox"></div>
+  <div style="display:flex;gap:10px;align-items:center;margin-top:14px;flex-wrap:wrap;">
+    <button class="btn" id="gradeBtn" style="background:rgba(242,217,121,.2);border-color:var(--yellow);color:var(--yellow);font-weight:700;">📊 批改並看成績</button>
+    <button class="btn" id="resetQuiz">🔄 重做</button>
+    <div class="readout" id="score" style="display:none;"></div>
+  </div></div>
+  <div class="card"><h3><span class="ic">📋</span>公式速查表</h3>
+    <div class="frow"><div class="flab">核心思想</div><div class="fval"><b>消去</b> —— 把兩個未知數變成一個</div></div>
+    <div class="frow"><div class="flab">四步驟</div><div class="fval">① 消去 → ② 解一元 → ③ <b>回代</b> → ④ 驗算<b>兩條</b></div></div>
+    <div class="frow"><div class="flab">代入消去法</div><div class="fval">從一條解出 y = …，代入另一條</div></div>
+    <div class="frow"><div class="flab">代入適用</div><div class="fval">有現成 <b>y = …</b>，或有係數 1 的未知數</div></div>
+    <div class="frow"><div class="flab">加減消去法</div><div class="fval">兩式相加或相減，消掉一個未知數</div></div>
+    <div class="frow"><div class="flab">🔑 加減口訣</div><div class="fval"><b>同號相減、異號相加</b>（要那項變 0）</div></div>
+    <div class="frow"><div class="flab">係數都很醜</div><div class="fval">先<b>乘倍數</b>湊成相同或相反（擴分的逆用）</div></div>
+    <div class="frow"><div class="flab">選方法</div><div class="fval">有 y=… → 代入；係數相同/相反 → 加減</div></div>
+    <div class="frow"><div class="flab">［補］唯一解</div><div class="fval">消去後 x = 某數（兩條獨立 → 相交）</div></div>
+    <div class="frow"><div class="flab">［補］無解</div><div class="fval">消去後 <b>0 = 非零數</b>（矛盾 → 平行）</div></div>
+    <div class="frow"><div class="flab">［補］無限多解</div><div class="fval">消去後 <b>0 = 0</b>（兩條同一條 → 重合）</div></div>
+    <div class="frow"><div class="flab">⚠️ 減負變加</div><div class="fval">2y − (−y) = 2y + y = 3y</div></div>
+    <div class="frow"><div class="flab">最常漏</div><div class="fval"><b>回代</b> —— 解出一個別忘了還有一個</div></div>
+  </div>`;
+wrap.appendChild(qp);
+
+const gp = document.createElement('div');
+gp.className='panel'; gp.dataset.p='4';
+gp.innerHTML = `<div class="card"><h3><span class="ic">🎮</span>闖關遊戲　<span style="font-size:14px;color:var(--soft);font-weight:400;">6 關挑戰 · 每題 20 秒 · 連擊與速度都有加分</span></h3>
+  <div class="gscreen on" id="gStart">
+    <div style="text-align:center;font-size:clamp(15px,2vw,18px);line-height:1.8;">
+      闖過 <b class="hl">7</b> 關，每關 1 題，每題 <b class="hl">20 秒</b>。<br>
+      計分：基礎 <b class="hl">10</b> 分 + 連擊獎勵（最多 <b class="hl">5</b>）+ 速度獎勵（最多 <b class="hl">5</b>）＝ 單題最高 <b class="hl">20</b> 分</div>
+    <div class="lvchips" id="gStartChips"></div>
+    <div style="text-align:center;"><button class="btn" id="gGo" style="background:rgba(242,217,121,.25);border-color:var(--yellow);color:var(--yellow);font-weight:700;font-size:16px;padding:10px 24px;">🚀 開始挑戰</button></div>
+  </div>
+  <div class="gscreen" id="gPlay">
+    <div class="hud">
+      <div class="st">關卡<b id="hLv">1/7</b></div>
+      <div class="st">分數<b id="hSc">0</b></div>
+      <div class="st">連擊<b id="hStk">0</b></div>
+      <div class="st">剩餘<b id="hT">20</b></div>
+    </div>
+    <div class="tbar"><div class="tfill" id="tFill"></div></div>
+    <div class="lvchips" id="gChips"></div>
+    <div class="gq" id="gQ"></div>
+    <div class="gopts" id="gO"></div>
+    <div class="gfb" id="gFb"></div>
+    <div style="text-align:center;margin-top:12px;"><button class="btn" id="gNext" style="display:none;">下一關 ▶</button></div>
+  </div>
+  <div class="gscreen" id="gEnd">
+    <div class="rank" id="gRank">🏆</div>
+    <div style="text-align:center;font-size:clamp(17px,2.6vw,22px);font-family:'Noto Serif TC';" id="gFinal"></div>
+    <div style="text-align:center;color:var(--soft);margin-top:8px;" id="gStats"></div>
+    <div style="text-align:center;margin-top:16px;"><button class="btn" id="gAgain" style="background:rgba(242,217,121,.25);border-color:var(--yellow);color:var(--yellow);font-weight:700;">🔄 再挑戰一次</button></div>
+  </div></div>`;
+wrap.appendChild(gp);
+document.getElementById('gStartChips').innerHTML = GAME.map((g,i)=>`<div class="lvchip">第${i+1}關 ${g.name}</div>`).join('');
+
+const qb = document.getElementById('quizBox');
+QUIZ.forEach((q,i)=>{
+  const d = document.createElement('div'); d.className='q';
+  let body='';
+  if(q.type==='choice') body = `<div class="opts">${q.o.map((o,oi)=>`<button class="opt" data-quiz="${i}" data-oi="${oi}">${o}</button>`).join('')}</div>`;
+  else if(q.type==='tf') body = `<div class="opts" style="flex-direction:row;gap:10px;">
+      <button class="opt" data-quiz="${i}" data-oi="1" style="flex:1;">⭕ 對</button>
+      <button class="opt" data-quiz="${i}" data-oi="0" style="flex:1;">❌ 錯</button></div>`;
+  else body = `<div><input class="fill" data-quiz="${i}" placeholder="?"></div>`;
+  d.innerHTML = `<div class="qt"><span class="qn">${i+1}</span>
+    <span style="font-size:12px;color:var(--soft);border:1px solid rgba(243,239,226,.25);border-radius:6px;padding:1px 6px;margin-right:6px;">
+    ${q.type==='choice'?'單選':q.type==='tf'?'是非':'填充'}</span>${q.q}</div>${body}
+    <div class="fb" id="qfb-${i}"></div>`;
+  qb.appendChild(d);
+});
+
+document.getElementById('tabs').addEventListener('click', e=>{
+  const t = e.target.closest('.tab'); if(!t) return;
+  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on', x===t));
+  document.querySelectorAll('.panel').forEach(x=>x.classList.toggle('on', x.dataset.p===t.dataset.p));
+  document.getElementById('goalCard').style.display = (t.dataset.p==='4')?'none':'';
+  window.scrollTo({top:0,behavior:'smooth'});
+  setTimeout(resizeAll, 60);
+});
+
+const cur = DATA.map(()=>0);
+function showSlide(si, i){
+  const deck = document.querySelector(`[data-deck="${si}"]`);
+  const sl = deck.querySelectorAll('.sl');
+  i = Math.max(0, Math.min(sl.length-1, i));
+  cur[si] = i;
+  sl.forEach((s,k)=>s.classList.toggle('on', k===i));
+  document.getElementById('pg-'+si).textContent = `${i+1} / ${sl.length}`;
+  document.querySelectorAll(`#dots-${si} .dot`).forEach((d,k)=>d.classList.toggle('on', k===i));
+}
+document.addEventListener('click', e=>{
+  const n = e.target.closest('[data-nav]');
+  if(n){ const si=+n.dataset.s; showSlide(si, cur[si] + (n.dataset.nav==='next'?1:-1)); return; }
+  const d = e.target.closest('.dot');
+  if(d){ showSlide(+d.dataset.s, +d.dataset.i); return; }
+});
+document.addEventListener('keydown', e=>{
+  const p = document.querySelector('.panel.on'); if(!p) return;
+  const si = +p.dataset.p; if(si>=DATA.length) return;
+  if(e.key==='ArrowRight') showSlide(si, cur[si]+1);
+  if(e.key==='ArrowLeft') showSlide(si, cur[si]-1);
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.opt[data-si]'); if(!o) return;
+  const si=+o.dataset.si, qi=+o.dataset.qi, oi=+o.dataset.oi;
+  const f = DATA[si].fa[qi];
+  const box = document.querySelector(`[data-fa="${si}-${qi}"]`);
+  box.querySelectorAll('.opt').forEach((b,k)=>{
+    b.disabled = true;
+    if(k===f.a) b.classList.add('right'); else if(k===oi) b.classList.add('wrong');
+  });
+  const fb = document.getElementById(`fb-${si}-${qi}`);
+  const ok = oi===f.a;
+  fb.className = 'fb on ' + (ok?'ok':'no');
+  fb.innerHTML = (ok?'✅ <b>答對了！</b> ':'❌ <b>再想想。</b> ') + f.e;
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.exo');
+  if(o && !o.disabled){
+    const box = o.closest('.exq');
+    const ans = +box.dataset.a, pick = +o.dataset.i;
+    if(pick === ans){
+      box.querySelectorAll('.exo').forEach(b=>{ b.disabled=true; if(+b.dataset.i===ans) b.classList.add('right'); });
+      box.querySelector('.exsol').classList.add('on');
+      box.querySelector('.exlock').classList.add('hide');
+    } else {
+      o.classList.add('wrong','shake');
+      setTimeout(()=>o.classList.remove('shake'), 420);
+      o.disabled = true;
+      const lock = box.querySelector('.exlock');
+      lock.innerHTML = '🔒 再想想 —— 答對才會顯示詳解'; lock.style.color='var(--pink)';
+    }
+  }
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.opt[data-quiz]'); if(!o) return;
+  const i = +o.dataset.quiz;
+  o.parentElement.querySelectorAll('.opt').forEach(b=>b.classList.remove('right','wrong'));
+  o.classList.add('right'); o.dataset.sel='1';
+  o.parentElement.querySelectorAll('.opt').forEach(b=>{ if(b!==o) delete b.dataset.sel; });
+});
+document.getElementById('gradeBtn').addEventListener('click', ()=>{
+  let right=0;
+  QUIZ.forEach((q,i)=>{
+    const fb = document.getElementById('qfb-'+i);
+    let ok=false, picked=null;
+    if(q.type==='fill'){
+      const inp = document.querySelector(`.fill[data-quiz="${i}"]`);
+      const v = (inp.value||'').trim().replace(/−/g,'-').replace(/\s/g,'');
+      ok = q.a.some(a=>a.replace(/−/g,'-').replace(/\s/g,'')===v);
+      inp.style.borderBottomColor = ok?'var(--green)':'var(--pink)';
+    } else {
+      const sel = document.querySelector(`.opt[data-quiz="${i}"][data-sel="1"]`);
+      if(sel){ picked=+sel.dataset.oi; ok = (q.type==='tf') ? (picked===1)===q.a : picked===q.a; }
+      document.querySelectorAll(`.opt[data-quiz="${i}"]`).forEach(b=>{
+        b.classList.remove('right','wrong');
+        const bi=+b.dataset.oi;
+        const isAns = (q.type==='tf') ? ((bi===1)===q.a) : (bi===q.a);
+        if(isAns) b.classList.add('right'); else if(picked===bi) b.classList.add('wrong');
+      });
+    }
+    if(ok) right++;
+    fb.className='fb on '+(ok?'ok':'no');
+    fb.innerHTML = (ok?'✅ <b>正確</b> ':'❌ <b>錯誤</b> ') + q.e;
+  });
+  const s = document.getElementById('score');
+  const pct = Math.round(right/QUIZ.length*100);
+  s.style.display='block';
+  s.innerHTML = `成績：<b>${right} / ${QUIZ.length}</b>　（${pct} 分）　${pct>=80?'🏆 很棒！':pct>=60?'💪 再加油':'📖 建議重看重點'}`;
+});
+document.getElementById('resetQuiz').addEventListener('click', ()=>{
+  document.querySelectorAll('.opt[data-quiz]').forEach(b=>{b.classList.remove('right','wrong'); delete b.dataset.sel;});
+  document.querySelectorAll('.fill').forEach(i=>{i.value=''; i.style.borderBottomColor='var(--yellow)';});
+  document.querySelectorAll('[id^="qfb-"]').forEach(f=>f.className='fb');
+  document.getElementById('score').style.display='none';
+});
+
+/* ===== 闖關遊戲 ===== */
+const G = {lv:0, score:0, streak:0, best:0, t:20, timer:null, cur:null, answered:false};
+function gShow(id){ ['gStart','gPlay','gEnd'].forEach(x=>document.getElementById(x).classList.toggle('on', x===id)); }
+function gChips(){
+  document.getElementById('gChips').innerHTML = GAME.map((g,i)=>
+    `<div class="lvchip ${i<G.lv?'done':i===G.lv?'now':''}">${i+1}. ${g.name}</div>`).join('');
+}
+function gLoad(){
+  if(G.lv>=GAME.length){ gFinish(); return; }
+  G.answered=false; G.t=20;
+  const bank = GAME[G.lv].qs;
+  G.cur = bank[Math.floor(Math.random()*bank.length)];
+  document.getElementById('hLv').textContent = (G.lv+1)+'/'+GAME.length;
+  document.getElementById('hSc').textContent = G.score;
+  document.getElementById('hStk').textContent = G.streak;
+  document.getElementById('gQ').innerHTML = `<span style="color:var(--blue);font-size:15px;">第 ${G.lv+1} 關 · ${GAME[G.lv].name}</span><br>${G.cur.q}`;
+  document.getElementById('gO').innerHTML = G.cur.o.map((o,i)=>
+    `<button class="gopt" data-g="${i}">${'ABCD'[i]}. ${o}</button>`).join('');
+  document.getElementById('gFb').className='gfb';
+  document.getElementById('gNext').style.display='none';
+  gChips();
+  clearInterval(G.timer);
+  G.timer = setInterval(()=>{
+    G.t -= 0.1;
+    document.getElementById('hT').textContent = Math.max(0,G.t).toFixed(0);
+    document.getElementById('tFill').style.width = Math.max(0,G.t/20*100)+'%';
+    if(G.t<=0){ clearInterval(G.timer); gAnswer(-1); }
+  },100);
+}
+function gAnswer(pick){
+  if(G.answered) return;
+  G.answered = true; clearInterval(G.timer);
+  const ans = G.cur.a, ok = pick===ans;
+  document.querySelectorAll('.gopt').forEach((b,i)=>{
+    b.disabled=true;
+    if(i===ans) b.classList.add('right'); else if(i===pick) b.classList.add('wrong');
+  });
+  let gain=0, sb=0, tb=0;
+  if(ok){
+    G.streak++; G.best=Math.max(G.best,G.streak);
+    sb = Math.min(5, G.streak-1); tb = Math.min(5, Math.floor(G.t/4));
+    gain = 10+sb+tb; G.score += gain;
+  } else { G.streak = 0; }
+  document.getElementById('hSc').textContent = G.score;
+  document.getElementById('hStk').textContent = G.streak;
+  const fb = document.getElementById('gFb');
+  fb.className = 'gfb on '+(ok?'ok':'no');
+  fb.innerHTML = (ok? `✅ <b>答對！+${gain} 分</b>（基礎10 + 連擊${sb} + 速度${tb}）<br>`
+                    : (pick===-1?'⏰ <b>時間到！</b><br>':'❌ <b>答錯了</b><br>')) + G.cur.e;
+  document.getElementById('gNext').style.display='inline-block';
+  document.getElementById('gNext').textContent = (G.lv>=GAME.length-1)?'看成績 🏁':'下一關 ▶';
+}
+function gFinish(){
+  clearInterval(G.timer);
+  const max = GAME.length*20, pct = Math.round(G.score/max*100);
+  const rank = pct>=85?['🏆','數論大師']:pct>=70?['🥇','高手']:pct>=50?['🥈','不錯']:['📖','再加油'];
+  document.getElementById('gRank').textContent = rank[0];
+  document.getElementById('gFinal').innerHTML = `<b class="hl">${G.score}</b> / ${max} 分　·　${rank[1]}`;
+  document.getElementById('gStats').innerHTML = `最高連擊 <b class="hl">${G.best}</b>　·　完成 ${GAME.length} 關`;
+  gShow('gEnd');
+}
+document.getElementById('gGo').addEventListener('click', ()=>{ G.lv=0;G.score=0;G.streak=0;G.best=0; gShow('gPlay'); gLoad(); });
+document.getElementById('gAgain').addEventListener('click', ()=>{ G.lv=0;G.score=0;G.streak=0;G.best=0; gShow('gPlay'); gLoad(); });
+document.getElementById('gNext').addEventListener('click', ()=>{ G.lv++; gLoad(); });
+document.addEventListener('click', e=>{ const b=e.target.closest('.gopt'); if(!b||b.disabled) return; gAnswer(+b.dataset.g); });
+
+/* ===== Canvas ===== */
+const VIZ = {}; let DPR=1;
+
+/* ① 選方法建議器 */
+const PICK=[
+  {e:'{ y = 2x，x + y = 12 }', m:'代入', why:'第一式已經是 y = 2x → 直接代入最快', ans:'(4, 8)'},
+  {e:'{ 2x + y = 10，x − y = 2 }', m:'代入', why:'第二式 x 係數是 1 → 解出 x = y+2 代入', ans:'(4, 2)'},
+  {e:'{ 3x + 2y = 16，x + 2y = 8 }', m:'加減(相減)', why:'y 係數都是 +2（相同）→ 相減消 y', ans:'(4, 2)'},
+  {e:'{ 2x + 3y = 12，4x − 3y = 6 }', m:'加減(相加)', why:'y 係數 +3 與 −3（互為相反）→ 相加消 y', ans:'(3, 2)'},
+  {e:'{ 5x + 2y = 16，3x − 2y = 0 }', m:'加減(相加)', why:'y 係數 +2 與 −2（相反）→ 相加消 y', ans:'(2, 3)'},
+  {e:'{ 3x + 2y = 7，2x + 3y = 8 }', m:'加減(先乘倍數)', why:'係數都不同 → 第一式×3、第二式×2 → y 都變 6', ans:'(1, 2)'},
+];
+/* ② 加減消去逐步器 */
+const ELIM=[
+ {name:'係數相同 → 相減', fr:[
+   {t:'3x + 2y = 16', t2:'x + 2y = 8', hi:'y', note:'y 的係數都是 +2（相同）→ 用「相減」消去 y'},
+   {t:'(3x+2y) − (x+2y) = 16 − 8', t2:'', hi:null, note:'兩式相減：3x−x = 2x，2y−2y = 0（消掉了！）'},
+   {t:'2x = 8', t2:'', hi:null, note:'剩下一元一次 → x = 4'},
+   {t:'x = 4 → 回代 x+2y=8', t2:'', hi:null, note:'4 + 2y = 8 → 2y = 4 → y = 2'},
+   {t:'x = 4， y = 2', t2:'', hi:'ans', note:'✓ 驗算兩條：3×4+2×2=16 ✓；4+2×2=8 ✓'},
+ ]},
+ {name:'互為相反 → 相加', fr:[
+   {t:'2x + 3y = 12', t2:'4x − 3y = 6', hi:'y', note:'y 的係數是 +3 和 −3（互為相反）→ 用「相加」消去 y'},
+   {t:'(2x+3y) + (4x−3y) = 12 + 6', t2:'', hi:null, note:'兩式相加：2x+4x = 6x，3y+(−3y) = 0（消掉了！）'},
+   {t:'6x = 18', t2:'', hi:null, note:'x = 3'},
+   {t:'x = 3 → 回代 2x+3y=12', t2:'', hi:null, note:'6 + 3y = 12 → y = 2'},
+   {t:'x = 3， y = 2', t2:'', hi:'ans', note:'✓ 驗算兩條都成立'},
+ ]},
+ {name:'⚠️ 減負變加', fr:[
+   {t:'3x + 2y = 19', t2:'3x − y = 13', hi:'x', note:'x 係數都是 +3（相同）→ 相減消 x'},
+   {t:'(3x+2y) − (3x−y) = 19 − 13', t2:'', hi:'trap', note:'⚠️ 關鍵：2y − (−y) = 2y + y = 3y（減去負的要變加！）'},
+   {t:'3y = 6', t2:'', hi:null, note:'y = 2（若算成 2y−y=y 就會得到錯的 y=6）'},
+   {t:'y = 2 → 回代 3x+2y=19', t2:'', hi:null, note:'3x + 4 = 19 → x = 5'},
+   {t:'x = 5， y = 2', t2:'', hi:'ans', note:'✓ 完成'},
+ ]},
+];
+/* ③ 三種解的情形 */
+const CASE=[
+  {name:'唯一解', a1:1,b1:1,c1:8, a2:1,b2:-1,c2:2, kind:'unique', sx:5, sy:3,
+   e1:'x + y = 8', e2:'x − y = 2', elim:'相加 → 2x = 10 → x = 5（正常）', geo:'兩直線相交於一點'},
+  {name:'無解', a1:1,b1:1,c1:5, a2:1,b2:1,c2:8, kind:'none',
+   e1:'x + y = 5', e2:'x + y = 8', elim:'相減 → 0 = −3（矛盾！）', geo:'兩直線平行'},
+  {name:'無限多解', a1:1,b1:1,c1:5, a2:2,b2:2,c2:10, kind:'inf',
+   e1:'x + y = 5', e2:'2x + 2y = 10', elim:'第二式÷2 → x+y=5 → 0 = 0（恆成立）', geo:'兩直線重合'},
+];
+
+function initViz(cv){
+  const si=+cv.dataset.si, kind=cv.dataset.viz;
+  const ctx=cv.getContext('2d');
+  const st = VIZ[si] = {kind, cv, ctx};
+  const ctrl = document.querySelector(`[data-ctrl="${si}"]`);
+  if(kind==='pick'){
+    st.i=0; st.show=false;
+    ctrl.innerHTML = `<div class="readout" id="ro-${si}"></div>
+      <button class="btn" data-t="rev" data-si="${si}" style="background:rgba(242,217,121,.2);border-color:var(--yellow);color:var(--yellow);font-weight:700;">🔍 揭曉建議方法</button>
+      <button class="btn" data-t="next" data-si="${si}">下一題 ▶</button>
+      <button class="btn" data-t="prev" data-si="${si}">◀ 上一題</button>`;
+  } else if(kind==='elim'){
+    st.ei=0; st.fi=0;
+    ctrl.innerHTML = `<div class="readout" id="ro-${si}"></div>
+      <button class="btn" data-t="next" data-si="${si}" style="background:rgba(242,217,121,.2);border-color:var(--yellow);color:var(--yellow);font-weight:700;">下一步 ▶</button>
+      <button class="btn" data-t="rst" data-si="${si}">↩ 重設</button>
+      <button class="btn" data-t="swap" data-si="${si}">🔀 換一題</button>`;
+  } else {
+    st.i=0;
+    ctrl.innerHTML = `<div class="readout" id="ro-${si}"></div>
+      <button class="btn" data-t="next" data-si="${si}" style="background:rgba(242,217,121,.2);border-color:var(--yellow);color:var(--yellow);font-weight:700;">🔀 換一種情形</button>`;
+  }
+  draw(si);
+}
+
+function wrapT(ctx, txt, cx, y, maxw, lh){
+  let line='', ly=y;
+  for(const ch of txt){
+    if(ctx.measureText(line+ch).width>maxw){ ctx.fillText(line, cx, ly); line=ch; ly+=lh; }
+    else line+=ch;
+  }
+  ctx.fillText(line, cx, ly); return ly;
+}
+
+function drawPick(st, ctx, w, h, ro){
+  const E=PICK[st.i];
+  ctx.textAlign='center';
+  ctx.fillStyle='rgba(242,217,121,.85)'; ctx.font='bold 13px "Noto Sans TC"';
+  ctx.fillText(`第 ${st.i+1} / ${PICK.length} 題　·　用代入還是加減？`, w/2, 16);
+  ctx.fillStyle='#f3efe2'; ctx.font='bold 20px "Noto Serif TC"';
+  ctx.fillText(E.e, w/2, 52);
+  if(!st.show){
+    ctx.fillStyle='rgba(243,239,226,.06)';
+    ctx.strokeStyle='rgba(243,239,226,.25)'; ctx.lineWidth=1.5; ctx.setLineDash([5,4]);
+    ctx.beginPath(); ctx.roundRect(26, 66, w-52, 54, 8); ctx.fill(); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle='rgba(243,239,226,.4)'; ctx.font='13px "Noto Sans TC"';
+    ctx.fillText('🔒 先自己想「哪個未知數的係數最好消？」', w/2, 88);
+    ctx.fillText('想好再按「揭曉建議方法」', w/2, 108);
+  } else {
+    ctx.fillStyle='rgba(166,214,160,.16)';
+    ctx.strokeStyle='#a6d6a0'; ctx.lineWidth=1.6;
+    const bw=Math.min(w-50, 240);
+    ctx.beginPath(); ctx.roundRect((w-bw)/2, 64, bw, 28, 7); ctx.fill(); ctx.stroke();
+    ctx.fillStyle='#a6d6a0'; ctx.font='bold 15px "Noto Sans TC"';
+    ctx.fillText('建議：' + E.m, w/2, 83);
+    ctx.fillStyle='rgba(243,239,226,.78)'; ctx.font='13px "Noto Sans TC"';
+    const ly=wrapT(ctx, E.why, w/2, 110, w-40, 18);
+    ctx.fillStyle='#f2d979'; ctx.font='bold 13px "Noto Serif TC"';
+    ctx.fillText('→ 解 ' + E.ans, w/2, ly+22);
+  }
+  ro.innerHTML = st.show
+    ? `<b>${E.e}</b>　→　建議用 <b style="color:var(--green)">${E.m}</b>　｜　${E.why}　→　<b>${E.ans}</b>`
+    : `<b>${E.e}</b>　<span style="color:rgba(243,239,226,.5)">—— 先想「哪個未知數的係數最好消？」再按揭曉</span>`;
+}
+
+function drawElim(st, ctx, w, h, ro){
+  const E=ELIM[st.ei], F=E.fr[st.fi];
+  ctx.textAlign='center';
+  ctx.fillStyle='rgba(242,217,121,.85)'; ctx.font='bold 13px "Noto Sans TC"';
+  ctx.fillText(`第 ${st.ei+1} 題 · ${E.name}　（步驟 ${st.fi+1} / ${E.fr.length}）`, w/2, 16);
+  const trap = F.hi==='trap', ans = F.hi==='ans';
+  // 主式
+  ctx.fillStyle= trap?'#eda0a8':(ans?'#a6d6a0':'#f3efe2'); ctx.font='bold 21px "Noto Serif TC"';
+  ctx.fillText(F.t, w/2, F.t2 ? 46 : 56);
+  if(F.t2){
+    ctx.fillStyle='#f3efe2'; ctx.font='bold 21px "Noto Serif TC"';
+    ctx.fillText(F.t2, w/2, 74);
+    // 高亮係數
+    if(F.hi==='y' || F.hi==='x'){
+      ctx.fillStyle='rgba(242,217,121,.8)'; ctx.font='11px "Noto Sans TC"';
+      ctx.fillText('↑ 看 '+F.hi+' 的係數 ↑', w/2, 90);
+    }
+  }
+  const ny = F.t2 ? 112 : 90;
+  ctx.fillStyle= trap?'#eda0a8':'rgba(243,239,226,.8)'; ctx.font='13.5px "Noto Sans TC"';
+  wrapT(ctx, F.note, w/2, ny, w-40, 19);
+  const n=E.fr.length, dx=15, sx=w/2-(n-1)*dx/2;
+  for(let i=0;i<n;i++){
+    ctx.beginPath(); ctx.arc(sx+i*dx, h-13, 4.5, 0, 7);
+    ctx.fillStyle = i<=st.fi ? '#f2d979' : 'rgba(243,239,226,.22)'; ctx.fill();
+  }
+  ro.innerHTML = `<b>${E.name}</b>　｜　步驟 ${st.fi+1}/${E.fr.length}：${F.t}${F.t2?' ／ '+F.t2:''}　—　${F.note}`;
+}
+
+function drawCase(st, ctx, w, h, ro){
+  const E=CASE[st.i];
+  const M=10, L=30, R=w-14, B=h-40, T=14;
+  const cx=(L+R)/2;
+  const X=v=>L+(v/M)*(R-L), Y=v=>B-(v/M)*(B-T);
+  ctx.textAlign='center';
+  const col = E.kind==='unique'?'#a6d6a0':(E.kind==='none'?'#eda0a8':'#98c9dc');
+  ctx.fillStyle=col; ctx.font='bold 14px "Noto Sans TC"';
+  ctx.fillText(`【${E.name}】${E.geo}`, w/2, 11);
+  // 格線
+  ctx.strokeStyle='rgba(243,239,226,.07)'; ctx.lineWidth=1;
+  for(let g=0;g<=M;g+=2){ ctx.beginPath(); ctx.moveTo(X(g),T); ctx.lineTo(X(g),B); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(L,Y(g)); ctx.lineTo(R,Y(g)); ctx.stroke(); }
+  ctx.strokeStyle='rgba(243,239,226,.5)'; ctx.lineWidth=1.4;
+  ctx.beginPath(); ctx.moveTo(L,B); ctx.lineTo(R,B); ctx.moveTo(L,B); ctx.lineTo(L,T); ctx.stroke();
+  // 畫兩條線 a x + b y = c → y = (c-ax)/b
+  const drawLine=(a,b,c,color,lw,dash)=>{
+    ctx.strokeStyle=color; ctx.lineWidth=lw;
+    if(dash) ctx.setLineDash(dash); else ctx.setLineDash([]);
+    ctx.beginPath(); let started=false;
+    for(let i=0;i<=200;i++){ const x=i/200*M, y=(c-a*x)/b;
+      if(y<0||y>M){ started=false; continue; }
+      if(!started){ ctx.moveTo(X(x),Y(y)); started=true; } else ctx.lineTo(X(x),Y(y)); }
+    ctx.stroke(); ctx.setLineDash([]);
+  };
+  drawLine(E.a1,E.b1,E.c1,'#eda0a8',2.2);
+  if(E.kind==='inf'){
+    // 重合：畫一條略粗、略偏的藍線疊上去
+    drawLine(E.a2,E.b2,E.c2,'#98c9dc',2.2,[6,5]);
+  } else {
+    drawLine(E.a2,E.b2,E.c2,'#98c9dc',2.2);
+  }
+  // 交點
+  if(E.kind==='unique'){
+    ctx.beginPath(); ctx.arc(X(E.sx),Y(E.sy),6,0,7); ctx.fillStyle='#f2d979'; ctx.fill();
+    ctx.strokeStyle='#16281c'; ctx.lineWidth=1.6; ctx.stroke();
+    ctx.fillStyle='#f2d979'; ctx.font='bold 12px "Noto Serif TC"';
+    ctx.fillText(`(${E.sx}, ${E.sy})`, X(E.sx)+30, Y(E.sy)-8);
+  }
+  // 底部：消去結果
+  ctx.textAlign='left';
+  ctx.fillStyle='#eda0a8'; ctx.font='12px "Noto Serif TC"'; ctx.fillText(E.e1, L, B+16);
+  ctx.fillStyle='#98c9dc'; ctx.fillText(E.e2, L+w*0.32, B+16);
+  ctx.fillStyle=col; ctx.font='bold 12px "Noto Sans TC"'; ctx.textAlign='center';
+  ctx.fillText('消去 → ' + E.elim, w/2, B+34);
+  ro.innerHTML = `【<b style="color:${col}">${E.name}</b>】<b>${E.e1}</b> 和 <b>${E.e2}</b>　｜　消去 → <b>${E.elim}</b>　｜　幾何：<b>${E.geo}</b>`;
+}
+
+function draw(si){
+  const st=VIZ[si]; if(!st) return;
+  const {cv,ctx,kind}=st, w=cv.width/DPR, h=cv.height/DPR;
+  ctx.clearRect(0,0,w,h);
+  const ro=document.getElementById('ro-'+si);
+  if(kind==='pick') drawPick(st,ctx,w,h,ro);
+  else if(kind==='elim') drawElim(st,ctx,w,h,ro);
+  else if(kind==='case') drawCase(st,ctx,w,h,ro);
+}
+
+document.addEventListener('click', e=>{
+  const btn=e.target.closest('[data-t]'); if(!btn) return;
+  const si=+btn.dataset.si, st=VIZ[si]; if(!st) return;
+  const t=btn.dataset.t;
+  if(st.kind==='pick'){
+    if(t==='rev') st.show=true;
+    if(t==='next'){ st.i=(st.i+1)%PICK.length; st.show=false; }
+    if(t==='prev'){ st.i=(st.i-1+PICK.length)%PICK.length; st.show=false; }
+  } else if(st.kind==='elim'){
+    if(t==='next') st.fi=Math.min(ELIM[st.ei].fr.length-1, st.fi+1);
+    if(t==='rst')  st.fi=0;
+    if(t==='swap'){ st.ei=(st.ei+1)%ELIM.length; st.fi=0; }
+  } else {
+    if(t==='next') st.i=(st.i+1)%CASE.length;
+  }
+  draw(si);
+});
+
+function resizeAll(){
+  DPR = Math.min(2, window.devicePixelRatio||1);
+  document.querySelectorAll('canvas.viz').forEach(cv=>{
+    const w = cv.clientWidth || cv.parentElement.clientWidth;
+    const h = (cv.dataset.viz==='pick') ? 190 : (cv.dataset.viz==='case' ? 210 : 178);
+    cv.width=w*DPR; cv.height=h*DPR; cv.style.height=h+'px';
+    cv.getContext('2d').setTransform(DPR,0,0,DPR,0,0);
+  });
+  Object.keys(VIZ).forEach(k=>draw(+k));
+}
+document.querySelectorAll('canvas.viz').forEach(initViz);
+window.addEventListener('resize', resizeAll);
+resizeAll();
+</script>
+<div class="hint">← → 鍵可翻頁　·　Canvas 用按鈕互動　·　支援平板觸控</div>
+</body></html>

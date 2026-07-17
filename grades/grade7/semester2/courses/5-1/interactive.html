@@ -1,0 +1,901 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>七下 5-1 統計圖表和資料分析｜互動教學平台</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;--wood:#6b4a32;}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);overscroll-behavior:none;}
+.topbar{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:10px 16px;background:linear-gradient(180deg,#1b2f21,#132218);border-bottom:2px solid var(--wood);box-shadow:0 4px 18px rgba(0,0,0,0.5);}
+.brand{font-family:'Noto Serif TC',serif;font-weight:900;font-size:clamp(15px,2.2vw,20px);color:var(--yellow);white-space:nowrap;}
+.brand small{display:block;font-family:'Caveat',cursive;font-size:14px;color:var(--soft);font-weight:400;}
+.spacer{flex:1;}
+.btn{background:rgba(243,239,226,0.08);border:1.5px solid rgba(243,239,226,0.28);color:var(--chalk);
+  border-radius:10px;padding:7px 13px;font-family:inherit;font-size:14px;cursor:pointer;white-space:nowrap;transition:.15s;}
+.btn:hover{background:rgba(243,239,226,0.16);}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:10px 16px 0;scrollbar-width:none;}
+.tabs::-webkit-scrollbar{display:none;}
+.tab{background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.2);border-bottom:none;
+  color:var(--soft);border-radius:10px 10px 0 0;padding:9px 15px;font-size:14px;cursor:pointer;white-space:nowrap;font-family:inherit;}
+.tab.on{background:var(--board);border-color:var(--yellow);color:var(--yellow);font-weight:700;}
+.tab .n{font-family:'Caveat',cursive;font-size:18px;margin-right:5px;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px 60px;}
+.panel{display:none;}.panel.on{display:block;}
+.card{background:radial-gradient(ellipse at 20% 10%,rgba(255,255,255,0.05),transparent 45%),
+   linear-gradient(160deg,var(--board),var(--board2));
+  border:1.5px solid rgba(242,217,121,0.16);border-radius:14px;padding:18px;margin-bottom:16px;
+  box-shadow:0 8px 26px rgba(0,0,0,0.45);position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 38px,rgba(255,255,255,0.012) 38px,rgba(255,255,255,0.012) 39px);}
+.card>*{position:relative;}
+.card h3{font-family:'Noto Serif TC',serif;font-size:clamp(17px,2.4vw,21px);color:var(--yellow);
+  margin-bottom:12px;padding-bottom:8px;border-bottom:2px dashed rgba(242,217,121,0.35);display:flex;align-items:center;gap:8px;}
+.card h3 .ic{font-size:20px;}
+.goals{display:flex;flex-wrap:wrap;gap:9px;}
+.goal{display:flex;align-items:center;gap:9px;background:rgba(242,217,121,0.07);
+  border:1.5px dashed rgba(242,217,121,0.4);border-radius:22px;padding:8px 15px 8px 8px;
+  font-size:clamp(13.5px,1.8vw,15px);color:var(--yellow);line-height:1.5;}
+.goal .bdg{width:24px;height:24px;border-radius:50%;background:var(--yellow);color:#16281c;
+  font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;flex:none;}
+.deck{position:relative;background:rgba(0,0,0,0.22);border-radius:12px;padding:clamp(16px,3vw,30px);
+  min-height:clamp(260px,42vh,380px);display:flex;flex-direction:column;justify-content:center;}
+.sl{display:none;animation:fade .25s;}.sl.on{display:block;}
+@keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+.sl .eyebrow{font-family:'Caveat',cursive;font-size:20px;color:var(--yellow);margin-bottom:6px;}
+.sl h4{font-family:'Noto Serif TC',serif;font-size:clamp(19px,3vw,27px);margin-bottom:12px;line-height:1.35;}
+.sl p{font-size:clamp(15px,2vw,18px);line-height:1.8;margin-bottom:9px;}
+.sl ul{list-style:none;}
+.sl li{font-size:clamp(15px,2vw,18px);line-height:1.85;padding-left:26px;position:relative;margin-bottom:4px;}
+.sl li::before{content:'✦';position:absolute;left:2px;color:var(--yellow);font-size:14px;top:3px;}
+.nav{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:14px;}
+.nav .pg{font-family:'Caveat',cursive;font-size:20px;color:var(--soft);min-width:64px;text-align:center;}
+.dots{display:flex;gap:6px;justify-content:center;margin-top:10px;flex-wrap:wrap;}
+.dot{width:9px;height:9px;border-radius:50%;background:rgba(243,239,226,0.25);cursor:pointer;border:none;padding:0;}
+.dot.on{background:var(--yellow);transform:scale(1.3);}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.32);border-radius:10px;
+  padding:11px 15px;margin:9px 0;font-size:clamp(14px,1.9vw,17px);line-height:1.7;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.36);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.36);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.32);}
+.two{display:flex;gap:12px;flex-wrap:wrap;}.two>*{flex:1;min-width:220px;}
+.teach{background:rgba(201,174,224,0.12);border:1.5px dashed rgba(201,174,224,0.5);
+  border-radius:10px;padding:11px 15px;margin:9px 0;font-size:clamp(14px,1.8vw,15px);line-height:1.7;}
+.teach b{color:var(--purple);}
+.tbl{width:100%;border-collapse:collapse;margin:9px 0;font-size:clamp(13.5px,1.8vw,16px);}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.24);padding:8px 11px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.cv-wrap{background:rgba(0,0,0,0.25);border-radius:12px;padding:10px;}
+canvas.viz{width:100%;display:block;border-radius:8px;touch-action:none;}
+.ctrl{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center;}
+.readout{font-family:'Noto Serif TC',serif;font-size:clamp(14px,1.9vw,18px);color:var(--chalk);
+  background:rgba(242,217,121,0.1);border:1px solid rgba(242,217,121,0.3);border-radius:8px;
+  padding:7px 12px;flex:1;min-width:220px;}
+.readout b{color:var(--yellow);}
+.q{background:rgba(0,0,0,0.2);border:1px solid rgba(242,217,121,0.18);border-radius:10px;padding:13px 15px;margin:10px 0;}
+.q .qt{font-size:clamp(15px,2vw,17px);margin-bottom:10px;line-height:1.7;}
+.q .qt .qn{font-family:'Caveat',cursive;color:var(--yellow);font-size:20px;margin-right:6px;}
+.opts{display:flex;flex-direction:column;gap:7px;}
+.opt{text-align:left;background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.22);
+  color:var(--chalk);border-radius:9px;padding:9px 13px;font-family:inherit;font-size:15px;cursor:pointer;transition:.15s;line-height:1.5;}
+.opt:hover:not(:disabled){background:rgba(243,239,226,0.13);}
+.opt.right{background:rgba(166,214,160,0.24);border-color:var(--green);color:#fff;font-weight:700;}
+.opt.wrong{background:rgba(237,160,168,0.22);border-color:var(--pink);}
+.opt:disabled{cursor:default;}
+.fb{display:none;margin-top:9px;padding:9px 13px;border-radius:8px;font-size:14.5px;line-height:1.65;}
+.fb.on{display:block;}
+.fb.ok{background:rgba(166,214,160,0.14);border-left:3px solid var(--green);}
+.fb.no{background:rgba(237,160,168,0.14);border-left:3px solid var(--pink);}
+.fill{display:inline-block;background:rgba(0,0,0,0.3);border:none;border-bottom:2px solid var(--yellow);
+  color:var(--yellow);font-family:'Noto Serif TC',serif;font-size:17px;width:110px;text-align:center;padding:3px 5px;margin:0 4px;}
+.fill:focus{outline:none;background:rgba(242,217,121,0.12);}
+.exq{background:rgba(0,0,0,0.26);border:1.5px solid rgba(242,217,121,0.28);border-radius:11px;padding:13px 15px;margin:10px 0;position:relative;}
+.exq::before{content:'';position:absolute;top:-8px;left:32px;width:54px;height:14px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.exq .exq-q{font-size:clamp(14.5px,1.9vw,17px);line-height:1.75;margin-bottom:11px;}
+.exo{text-align:left;background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.22);
+  color:var(--chalk);border-radius:9px;padding:9px 13px;font-family:inherit;font-size:clamp(14px,1.8vw,15.5px);
+  cursor:pointer;transition:.15s;line-height:1.55;width:100%;margin-bottom:6px;display:block;}
+.exo:hover:not(:disabled){background:rgba(243,239,226,0.13);}
+.exo.right{background:rgba(166,214,160,0.26);border-color:var(--green);color:#fff;font-weight:700;}
+.exo.wrong{background:rgba(237,160,168,0.2);border-color:var(--pink);opacity:.75;}
+.exo:disabled{cursor:default;}
+@keyframes shake{10%,90%{transform:translateX(-2px);}30%,70%{transform:translateX(4px);}50%{transform:translateX(-4px);}}
+.exo.shake{animation:shake .4s;}
+.exsol{display:none;margin-top:10px;padding:11px 14px;border-radius:9px;
+  background:rgba(166,214,160,0.13);border-left:3px solid var(--green);font-size:clamp(14px,1.8vw,15.5px);line-height:1.75;}
+.exsol.on{display:block;animation:fade .3s;}
+.exsol .st{color:var(--soft);margin:3px 0;}
+.exsol .an{color:var(--green);font-weight:700;margin-top:6px;}
+.exlock{display:flex;align-items:center;gap:7px;margin-top:9px;font-size:13.5px;color:rgba(243,239,226,0.45);}
+.exlock.hide{display:none;}
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:11px;}
+.icard{background:rgba(0,0,0,0.22);border:1.5px solid rgba(242,217,121,0.22);border-radius:11px;padding:14px;text-align:center;}
+.icard .big{font-family:'Noto Serif TC',serif;font-size:clamp(17px,2.6vw,23px);font-weight:900;margin:6px 0;}
+.icard .cap{font-size:13.5px;color:var(--soft);line-height:1.6;}
+.frow{display:flex;gap:12px;align-items:center;padding:9px 12px;border-bottom:1px dashed rgba(243,239,226,0.16);}
+.frow:last-child{border-bottom:none;}
+.flab{color:var(--blue);font-weight:700;min-width:150px;font-size:clamp(13.5px,1.8vw,15.5px);flex:none;}
+.fval{color:var(--yellow);font-weight:700;font-family:'Noto Serif TC',serif;font-size:clamp(14px,1.9vw,17px);}
+@media(max-width:560px){.frow{flex-direction:column;align-items:flex-start;gap:3px;}.flab{min-width:0;}}
+.hud{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:12px;}
+.hud .st{background:rgba(0,0,0,0.3);border:1.5px solid rgba(242,217,121,0.28);border-radius:9px;
+  padding:7px 13px;font-size:14px;flex:1;min-width:88px;text-align:center;}
+.hud .st b{display:block;font-family:'Noto Serif TC',serif;font-size:20px;color:var(--yellow);}
+.tbar{height:8px;background:rgba(0,0,0,0.35);border-radius:5px;overflow:hidden;margin-bottom:12px;}
+.tfill{height:100%;background:linear-gradient(90deg,var(--green),var(--yellow),var(--pink));width:100%;transition:width .1s linear;}
+.gscreen{display:none;}.gscreen.on{display:block;}
+.lvchips{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin:14px 0;}
+.lvchip{background:rgba(152,201,220,0.12);border:1.5px solid rgba(152,201,220,0.35);border-radius:18px;
+  padding:6px 13px;font-size:13.5px;color:var(--blue);}
+.lvchip.done{background:rgba(166,214,160,0.2);border-color:var(--green);color:var(--green);}
+.lvchip.now{background:rgba(242,217,121,0.22);border-color:var(--yellow);color:var(--yellow);font-weight:700;}
+.gq{font-size:clamp(16px,2.2vw,20px);line-height:1.7;margin:14px 0;text-align:center;font-family:'Noto Serif TC',serif;}
+.gopts{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+@media(max-width:560px){.gopts{grid-template-columns:1fr;}}
+.gopt{background:rgba(243,239,226,0.07);border:1.5px solid rgba(243,239,226,0.25);color:var(--chalk);
+  border-radius:10px;padding:12px;font-family:'Noto Serif TC',serif;font-size:17px;cursor:pointer;transition:.15s;min-height:48px;}
+.gopt:hover:not(:disabled){background:rgba(243,239,226,0.15);}
+.gopt.right{background:rgba(166,214,160,0.3);border-color:var(--green);font-weight:900;}
+.gopt.wrong{background:rgba(237,160,168,0.25);border-color:var(--pink);}
+.gfb{margin-top:11px;padding:10px 13px;border-radius:8px;font-size:14.5px;line-height:1.6;display:none;}
+.gfb.on{display:block;}
+.gfb.ok{background:rgba(166,214,160,0.15);border-left:3px solid var(--green);}
+.gfb.no{background:rgba(237,160,168,0.15);border-left:3px solid var(--pink);}
+.rank{font-size:54px;text-align:center;margin:10px 0;}
+.hint{text-align:center;color:rgba(243,239,226,0.35);font-size:12.5px;padding:8px 0 0;}
+@media (max-width:640px){.topbar{padding:8px 10px;gap:8px;}.wrap{padding:0 10px 70px;}.card{padding:13px;}}
+</style></head><body>
+
+<div class="topbar">
+  <div class="brand">5-1　統計圖表和資料分析<small>七下 · 第5章 統計</small></div>
+  <div class="spacer"></div>
+</div>
+
+<div class="tabs" id="tabs">
+  <button class="tab on" data-p="0"><span class="n">📊</span>統計圖表</button>
+  <button class="tab" data-p="1"><span class="n">📋</span>次數分配表</button>
+  <button class="tab" data-p="2"><span class="n">📈</span>代表值</button>
+  <button class="tab" data-p="3"><span class="n">★</span>題型測驗</button>
+  <button class="tab" data-p="4"><span class="n">🎮</span>闖關遊戲</button>
+</div>
+
+<div class="wrap">
+  <div class="card" id="goalCard">
+    <h3><span class="ic">🎯</span>本節學習目標</h3>
+    <div class="goals" id="goals"></div>
+  </div>
+  <div id="wrap"></div>
+</div>
+
+<script>
+const GOALS = [
+  '能選用長條圖、折線圖、圓形圖、直方圖',
+  '能整理次數分配表（相對次數、累積次數）',
+  '能由次數分配表畫出直方圖、看懂折線趨勢',
+  '能計算平均數、中位數、眾數',
+  '理解三種代表值的性質與適用（極端值影響）',
+];
+
+const DATA = [
+{ key:'chart', viz:'chart', vizTitle:'選對統計圖表 —— 判斷情境要用哪種圖（6 題）',
+  slides:[
+    {eb:'核心觀念', h:'四種統計圖表，各有專長', html:`
+      <table class="tbl">
+        <tr><th style="width:20%;">圖表</th><th style="width:34%;">長什麼樣</th><th>最適合</th></tr>
+        <tr><td class="hl-b">長條圖</td><td>一根根<b>分開</b></td><td class="hl">比較各類別大小</td></tr>
+        <tr><td class="hl-b">折線圖</td><td>折線連接時間點</td><td class="hl">隨時間的變化趨勢</td></tr>
+        <tr><td class="hl-b">圓形圖</td><td>圓切成扇形</td><td class="hl">各部分佔整體比例</td></tr>
+        <tr><td class="hl-b">直方圖</td><td>長條<b>緊貼無空隙</b></td><td class="hl">連續資料的分布</td></tr>
+      </table>
+      <div class="box y" style="text-align:center;">選圖三問：<span class="hl">比較 → 長條　變化 → 折線　佔比 → 圓形　連續分布 → 直方</span></div>`},
+    {eb:'圓形圖的計算', h:'圓心角與佔比', html:`
+      <div class="box y" style="text-align:center;font-size:20px;">某扇形佔比 = <span class="fm">圓心角 ÷ 360°</span></div>
+      <div class="box"><b>例：</b>圓心角 72° → 72 ÷ 360 = 20%；<br>反過來：佔 25% → 圓心角 = 0.25 × 360° = 90°。</div>
+      <div class="box g">👉 用下方 Canvas：判斷各情境該用哪種圖，揭曉看理由。</div>`},
+    {eb:'例題 ★☆☆　選圖', h:'選對統計圖表', html:`
+      <div class="exq" data-a="1">
+        <div class="exq-q"><span class="hl">Q</span>　要呈現「學校每月出勤率的變化」，最適合哪種圖？</div>
+        <button class="exo" data-i="0">長條圖</button>
+        <button class="exo" data-i="1">折線圖</button>
+        <button class="exo" data-i="2">圓形圖</button>
+        <button class="exo" data-i="3">直方圖</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">「每月的變化」= 隨<b>時間的趨勢</b> → 折線圖</div>
+          <div class="st">(C) 圓形圖是看佔比；(A) 長條圖是比較類別。</div>
+          <div class="an">答：折線圖</div>
+        </div>
+      </div>`},
+    {eb:'例題 ★☆☆　圓心角', h:'扇形佔比', html:`
+      <div class="exq" data-a="2">
+        <div class="exq-q"><span class="hl">Q</span>　圓形圖中某扇形的圓心角是 72°，佔全體幾 %？</div>
+        <button class="exo" data-i="0">72%</button>
+        <button class="exo" data-i="1">36%</button>
+        <button class="exo" data-i="2">20%</button>
+        <button class="exo" data-i="3">25%</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">佔比 = 圓心角 ÷ 360° = 72 ÷ 360 = 0.2</div>
+          <div class="an">答：20%</div>
+        </div>
+      </div>`}
+  ],
+  fa:[
+    {q:'比較四班人數，用？', o:['長條圖','折線圖','圓形圖','直方圖'], a:0, e:'比較類別 → 長條圖。'},
+    {q:'各科佔全班比例，用？', o:['長條圖','折線圖','圓形圖','直方圖'], a:2, e:'佔比 → 圓形圖。'},
+    {q:'圓心角 90° 佔幾 %？', o:['90%','25%','45%','30%'], a:1, e:'90÷360=25%。'}
+  ],
+  info:[
+    {big:'比較→長條', cap:'變化→折線', c:'var(--blue)'},
+    {big:'佔比→圓形', cap:'連續分布→直方', c:'var(--green)'},
+    {big:'圓心角÷360', cap:'= 佔比', c:'var(--yellow)'}
+  ]
+},
+{ key:'freq', viz:'freq', vizTitle:'次數分配表 —— 揭曉相對次數與累積次數（3 組資料）',
+  slides:[
+    {eb:'細目② 次數分配表', h:'把資料分組看清楚', html:`
+      <table class="tbl">
+        <tr><th style="width:26%;">欄位</th><th>定義</th></tr>
+        <tr><td class="hl-b">次數</td><td>落在該組的資料筆數</td></tr>
+        <tr><td class="hl-b">相對次數</td><td>該組次數 ÷ <b>總筆數</b></td></tr>
+        <tr><td class="hl-b">累積次數</td><td>從第一組加到<b>這一組為止</b>的加總</td></tr>
+      </table>
+      <div class="box r" style="text-align:center;">⚠️ <span class="hl">相對次數 = 當組 ÷ 總數；累積次數 = 到此組加總。</span>別混淆！</div>
+      <div class="box g">👉 用下方 Canvas：先自己算，再揭曉整張表。</div>`},
+    {eb:'例題 ★★☆　相對次數', h:'40 條輪胎胎壓', html:`
+      <div class="exq" data-a="2">
+        <div class="exq-q"><span class="hl">Q</span>　某組次數 16、總數 40，該組相對次數是？</div>
+        <button class="exo" data-i="0">16%</button>
+        <button class="exo" data-i="1">35%</button>
+        <button class="exo" data-i="2">40%</button>
+        <button class="exo" data-i="3">64%</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">相對次數 = 16 ÷ 40 = 0.4</div>
+          <div class="an">答：40%</div>
+        </div>
+      </div>`},
+    {eb:'例題 ★★★　累積次數', h:'100 位學生英語成績', html:`
+      <div class="exq" data-a="1">
+        <div class="exq-q"><span class="hl">Q</span>　次數 5,12,22,30,20,11（100 人）。「70 分以下」的累積次數（前三組）是？</div>
+        <button class="exo" data-i="0">30</button>
+        <button class="exo" data-i="1">39</button>
+        <button class="exo" data-i="2">61</button>
+        <button class="exo" data-i="3">69</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">累積 = 5 + 12 + 22 = 39</div>
+          <div class="st">（「70 分以上」則是 30+20+11 = 61）</div>
+          <div class="an">答：39</div>
+        </div>
+      </div>`}
+  ],
+  fa:[
+    {q:'次數 8、總數 40，相對次數？', o:['8%','20%','32%','25%'], a:1, e:'8÷40=20%。'},
+    {q:'累積次數是？', o:['當組÷總','到此組加總','最大值','眾數'], a:1, e:'到此組的加總。'},
+    {q:'相對次數末組累積 = ?', o:['總數','0','平均','100 恆等'], a:0, e:'累積末組 = 總數。'}
+  ],
+  info:[
+    {big:'相對 = 當組÷總', cap:'可寫百分比', c:'var(--green)'},
+    {big:'累積 = 加總', cap:'到此組為止', c:'var(--yellow)'},
+    {big:'末組累積', cap:'= 總筆數', c:'var(--blue)'}
+  ]
+},
+{ key:'avg', viz:'avg', vizTitle:'三種代表值 —— 排序後求平均 / 中位 / 眾數（3 組資料）',
+  slides:[
+    {eb:'細目④ 代表值', h:'平均、中位、眾數', html:`
+      <table class="tbl">
+        <tr><th style="width:20%;">代表值</th><th style="width:40%;">算法</th><th>特性</th></tr>
+        <tr><td class="hl-b">平均數</td><td>總和 ÷ 個數</td><td class="hl-r">受極端值影響大</td></tr>
+        <tr><td class="hl-b">中位數</td><td>排序後最中間</td><td class="hl-g">不受極端值影響</td></tr>
+        <tr><td class="hl-b">眾數</td><td>出現最多次</td><td>可能多個/沒有</td></tr>
+      </table>
+      <div class="box r" style="text-align:center;">⚠️ 求中位數前<span class="hl">一定先「由小到大排列」</span>！偶數個取中間兩個平均。</div>
+      <div class="box g">👉 用下方 Canvas：換資料，看排序後三種代表值與極端值的影響。</div>`},
+    {eb:'例題 ★☆☆', h:'求三種代表值', html:`
+      <div class="exq" data-a="1">
+        <div class="exq-q"><span class="hl">Q</span>　資料 4、6、9、11 的中位數是？</div>
+        <button class="exo" data-i="0">6</button>
+        <button class="exo" data-i="1">7.5</button>
+        <button class="exo" data-i="2">9</button>
+        <button class="exo" data-i="3">7</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">4 個數（偶數）→ 取中間兩個 6、9 的平均</div>
+          <div class="st">(6 + 9) ÷ 2 = 7.5</div>
+          <div class="an">答：7.5</div>
+        </div>
+      </div>`},
+    {eb:'例題 ★★☆　極端值', h:'平均數騙了你', html:`
+      <div class="exq" data-a="1">
+        <div class="exq-q"><span class="hl">Q</span>　薪資 3,3,3,4,5,6,20（萬），哪個代表值最能反映「一般員工」？</div>
+        <button class="exo" data-i="0">平均數 ≈ 6.3 萬</button>
+        <button class="exo" data-i="1">中位數 4 萬</button>
+        <button class="exo" data-i="2">眾數 3 萬</button>
+        <button class="exo" data-i="3">最大值 20 萬</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">平均被 20 萬的高薪拉高到 6.3 萬，但 6 人都低於它 → 不具代表性</div>
+          <div class="st">中位數 4 萬（排序第 4 個）最接近多數員工實況</div>
+          <div class="st">💡 有極端值的資料（薪資、房價）→ 優先看中位數。</div>
+          <div class="an">答：中位數 4 萬</div>
+        </div>
+      </div>`}
+  ],
+  fa:[
+    {q:'求中位數前要先？', o:['求和','排序','平方','求平均'], a:1, e:'先由小到大排列。'},
+    {q:'2,4,6,8,100 最能代表一般？', o:['平均 24','中位 6','眾數','最大'], a:1, e:'平均被 100 拉高。'},
+    {q:'眾數一定唯一嗎？', o:['是','否（可多個/沒有）','看資料','一定沒有'], a:1, e:'可多個或沒有。'}
+  ],
+  info:[
+    {big:'先排序', cap:'再取中位數', c:'var(--blue)'},
+    {big:'有極端值', cap:'看中位數', c:'var(--green)'},
+    {big:'總和=平均×個數', cap:'缺項回推鑰匙', c:'var(--yellow)'}
+  ]
+}];
+
+const QUIZ = [
+  {type:'choice', q:'比較四個班級的人數，用哪種圖？', o:['長條圖','折線圖','圓形圖','直方圖'], a:0, e:'比較類別 → 長條圖。'},
+  {type:'choice', q:'呈現逐月營收變化，用哪種圖？', o:['長條圖','折線圖','圓形圖','直方圖'], a:1, e:'隨時間趨勢 → 折線圖。'},
+  {type:'choice', q:'各科佔全班選修比例，用？', o:['長條圖','折線圖','圓形圖','直方圖'], a:2, e:'佔比 → 圓形圖。'},
+  {type:'choice', q:'身高區間的分布，用哪種圖？', o:['長條圖','折線圖','圓形圖','直方圖'], a:3, e:'連續資料 → 直方圖。'},
+  {type:'choice', q:'圓形圖圓心角 72° 佔幾 %？', o:['72%','36%','20%','25%'], a:2, e:'72÷360=20%。'},
+  {type:'choice', q:'佔 25% 的圓心角是？', o:['25°','72°','90°','36°'], a:2, e:'0.25×360=90°。'},
+  {type:'choice', q:'某組次數 8、總數 40，相對次數？', o:['8%','20%','32%','25%'], a:1, e:'8÷40=20%。'},
+  {type:'tf', q:'判斷：「累積次數是當組次數 ÷ 總數。」', a:false, e:'錯。那是相對次數；累積是到此組加總。'},
+  {type:'choice', q:'直方圖與長條圖的差別？', o:['顏色不同','長條緊貼無空隙','沒有軸','只能畫兩組'], a:1, e:'直方圖長條緊貼（連續資料）。'},
+  {type:'choice', q:'資料 4,6,9,11 的中位數？', o:['6','7.5','9','7'], a:1, e:'(6+9)/2=7.5。'},
+  {type:'choice', q:'資料 5,8,3,8,6,8,2 的眾數？', o:['3','6','8','2'], a:2, e:'8 出現 3 次。'},
+  {type:'choice', q:'12,15,10,14,13 的平均數？', o:['12.8','13','13.2','12'], a:0, e:'64÷5=12.8。'},
+  {type:'choice', q:'薪資 3,3,3,4,5,6,20 最能代表一般的是？', o:['平均6.3','中位4','眾數3','最大20'], a:1, e:'有極端值看中位數。'},
+  {type:'choice', q:'30 人平均 76，補上 88 分後 31 人平均？', o:['76','76.4','77','78'], a:1, e:'(2280+88)/31≈76.4。'},
+  {type:'choice', q:'前 20 人均 75、後 20 人均 83，全班？', o:['79','78','80','76'], a:0, e:'(1500+1660)/40=79。'},
+  {type:'tf', q:'判斷：「一組資料只有一個眾數。」', a:false, e:'錯。可多個，也可能沒有。'},
+  {type:'choice', q:'0,1,0,2,1,0,3,1,0,2 的眾數？', o:['0','1','2','3'], a:0, e:'0 出現 4 次。'},
+  {type:'choice', q:'求中位數前一定要先？', o:['求和','由小到大排列','平方','取平均'], a:1, e:'先排序。'}
+];
+
+const GAME = [
+  {name:'選對圖表', qs:[
+    {q:'比較各班人數？', o:['長條圖','折線圖','圓形圖','直方圖'], a:0, e:'比較 → 長條。'},
+    {q:'逐月營收變化？', o:['長條圖','折線圖','圓形圖','直方圖'], a:1, e:'趨勢 → 折線。'},
+    {q:'各科佔比？', o:['長條圖','折線圖','圓形圖','直方圖'], a:2, e:'佔比 → 圓形。'},
+    {q:'身高區間分布？', o:['長條圖','折線圖','圓形圖','直方圖'], a:3, e:'連續 → 直方。'}
+  ]},
+  {name:'圓形圖計算', qs:[
+    {q:'圓心角 72° 佔？', o:['72%','20%','36%','25%'], a:1, e:'72/360=20%。'},
+    {q:'佔 25% 的圓心角？', o:['25°','90°','72°','45°'], a:1, e:'0.25×360=90°。'},
+    {q:'佔 50% 的圓心角？', o:['90°','180°','120°','200°'], a:1, e:'半圓 180°。'},
+    {q:'圓心角 36° 佔？', o:['10%','36%','20%','5%'], a:0, e:'36/360=10%。'}
+  ]},
+  {name:'次數分配表', qs:[
+    {q:'次數 8/總 40 相對次數？', o:['8%','20%','32%','25%'], a:1, e:'20%。'},
+    {q:'相對次數 = ?', o:['當組÷總','到此加總','最大值','平均'], a:0, e:'當組÷總。'},
+    {q:'累積次數 = ?', o:['當組÷總','到此組加總','眾數','全距'], a:1, e:'到此加總。'},
+    {q:'相對次數末組累積 = ?', o:['總數','0','平均','眾數'], a:0, e:'末組=總數。'}
+  ]},
+  {name:'平均數', qs:[
+    {q:'12,15,10,14,13 平均？', o:['12.8','13','12','13.2'], a:0, e:'64÷5。'},
+    {q:'30 人均 76 補 88 後？', o:['76','76.4','77','78'], a:1, e:'≈76.4。'},
+    {q:'5 數均 10，4 個 8,11,9,12，第5？', o:['10','9','11','8'], a:0, e:'50−40=10。'},
+    {q:'加權平均公式？', o:['Σ(值×次數)÷總次數','總和','眾數','中位'], a:0, e:'加權平均。'}
+  ]},
+  {name:'中位數', qs:[
+    {q:'4,6,9,11 中位數？', o:['6','7.5','9','7'], a:1, e:'(6+9)/2。'},
+    {q:'求中位數先？', o:['求和','排序','平方','取平均'], a:1, e:'先排序。'},
+    {q:'偶數個中位數？', o:['中間一個','中間兩個平均','最大','最小'], a:1, e:'兩個平均。'},
+    {q:'2,3,5,6,8,8,8 中位數？', o:['5','6','8','3'], a:1, e:'第4個=6。'}
+  ]},
+  {name:'眾數與極端值', qs:[
+    {q:'5,8,3,8,6,8,2 眾數？', o:['3','6','8','2'], a:2, e:'8 三次。'},
+    {q:'0,0,0,0,1,1,1,2,2,3 眾數？', o:['0','1','2','3'], a:0, e:'0 四次。'},
+    {q:'眾數一定唯一？', o:['是','否','看資料','一定沒有'], a:1, e:'可多個/沒有。'},
+    {q:'2,4,6,8,100 看哪個代表？', o:['平均24','中位6','眾數','最大'], a:1, e:'有極端值看中位。'}
+  ]},
+  {name:'性質綜合', qs:[
+    {q:'薪資 3,3,3,4,5,6,20 代表？', o:['平均6.3','中位4','眾數3','最大20'], a:1, e:'看中位數。'},
+    {q:'有極端值優先看？', o:['平均','中位數','眾數','最大值'], a:1, e:'中位數抗極端。'},
+    {q:'直方圖長條？', o:['分開','緊貼無空隙','無軸','斜的'], a:1, e:'緊貼。'},
+    {q:'圓心角 90° 佔？', o:['90%','25%','45%','30%'], a:1, e:'90/360=25%。'}
+  ]}
+];
+
+document.getElementById('goals').innerHTML = GOALS.map((g,i)=>
+  `<div class="goal"><div class="bdg">${i+1}</div>${g}</div>`).join('');
+
+const wrap = document.getElementById('wrap');
+DATA.forEach((sec, si)=>{
+  const p = document.createElement('div');
+  p.className = 'panel' + (si===0?' on':'');
+  p.dataset.p = si;
+  p.innerHTML = `
+    <div class="card">
+      <h3><span class="ic">📽</span>簡報翻頁器</h3>
+      <div class="deck" data-deck="${si}">
+        ${sec.slides.map((s,i)=>`<div class="sl${i===0?' on':''}" data-i="${i}">
+          <div class="eyebrow">${s.eb}</div><h4>${s.h}</h4>${s.html}</div>`).join('')}
+      </div>
+      <div class="nav">
+        <button class="btn" data-nav="prev" data-s="${si}">◀ 上一張</button>
+        <span class="pg" id="pg-${si}">1 / ${sec.slides.length}</span>
+        <button class="btn" data-nav="next" data-s="${si}">下一張 ▶</button>
+      </div>
+      <div class="dots" id="dots-${si}">
+        ${sec.slides.map((_,i)=>`<button class="dot${i===0?' on':''}" data-s="${si}" data-i="${i}"></button>`).join('')}
+      </div>
+    </div>
+    <div class="card">
+      <h3><span class="ic">🎯</span>Canvas 互動視覺化<span style="font-size:14px;color:var(--soft);font-weight:400;">　${sec.vizTitle}</span></h3>
+      <div class="cv-wrap">
+        <canvas class="viz" data-viz="${sec.viz}" data-si="${si}"></canvas>
+        <div class="ctrl" data-ctrl="${si}"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3><span class="ic">✅</span>形成性評量</h3>
+      ${sec.fa.map((f,i)=>`<div class="q" data-fa="${si}-${i}">
+        <div class="qt"><span class="qn">Q${i+1}</span>${f.q}</div>
+        <div class="opts">${f.o.map((o,oi)=>`<button class="opt" data-si="${si}" data-qi="${i}" data-oi="${oi}">${o}</button>`).join('')}</div>
+        <div class="fb" id="fb-${si}-${i}"></div>
+      </div>`).join('')}
+    </div>
+    <div class="card">
+      <h3><span class="ic">📊</span>資訊圖表</h3>
+      <div class="info">
+        ${sec.info.map(c=>`<div class="icard"><div class="big" style="color:${c.c}">${c.big}</div><div class="cap">${c.cap}</div></div>`).join('')}
+      </div>
+    </div>`;
+  wrap.appendChild(p);
+});
+
+const qp = document.createElement('div');
+qp.className='panel'; qp.dataset.p='3';
+qp.innerHTML = `<div class="card"><h3><span class="ic">📝</span>題型測驗　<span style="font-size:14px;color:var(--soft);font-weight:400;">單選 · 是非 · 填充，共 ${QUIZ.length} 題</span></h3>
+  <div id="quizBox"></div>
+  <div style="display:flex;gap:10px;align-items:center;margin-top:14px;flex-wrap:wrap;">
+    <button class="btn" id="gradeBtn" style="background:rgba(242,217,121,.2);border-color:var(--yellow);color:var(--yellow);font-weight:700;">📊 批改並看成績</button>
+    <button class="btn" id="resetQuiz">🔄 重做</button>
+    <div class="readout" id="score" style="display:none;"></div>
+  </div></div>
+  <div class="card"><h3><span class="ic">📋</span>公式速查表</h3>
+    <div class="frow"><div class="flab">長條圖</div><div class="fval">分開長條 → 比較各類別</div></div>
+    <div class="frow"><div class="flab">折線圖</div><div class="fval">折線 → 隨時間趨勢</div></div>
+    <div class="frow"><div class="flab">圓形圖</div><div class="fval">扇形 → 各部分佔比</div></div>
+    <div class="frow"><div class="flab">直方圖</div><div class="fval">緊貼長條 → 連續資料分布</div></div>
+    <div class="frow"><div class="flab">扇形佔比</div><div class="fval">圓心角 ÷ 360°</div></div>
+    <div class="frow"><div class="flab">相對次數</div><div class="fval">該組次數 ÷ <b>總數</b></div></div>
+    <div class="frow"><div class="flab">累積次數</div><div class="fval">到<b>此組為止</b>的加總（末組=總數）</div></div>
+    <div class="frow"><div class="flab">平均數</div><div class="fval">總和 ÷ 個數（受極端值影響）</div></div>
+    <div class="frow"><div class="flab">中位數</div><div class="fval"><b>先排序</b>；奇→中間，偶→中間兩個平均</div></div>
+    <div class="frow"><div class="flab">眾數</div><div class="fval">出現最多次（可多個/沒有）</div></div>
+    <div class="frow"><div class="flab">總和</div><div class="fval">= 平均 × 個數（缺項回推）</div></div>
+    <div class="frow"><div class="flab">加權平均</div><div class="fval">Σ(值×次數) ÷ 總次數</div></div>
+    <div class="frow"><div class="flab">有極端值</div><div class="fval">優先看<b>中位數</b>（薪資、房價）</div></div>
+  </div>`;
+wrap.appendChild(qp);
+
+const gp = document.createElement('div');
+gp.className='panel'; gp.dataset.p='4';
+gp.innerHTML = `<div class="card"><h3><span class="ic">🎮</span>闖關遊戲　<span style="font-size:14px;color:var(--soft);font-weight:400;">6 關挑戰 · 每題 20 秒 · 連擊與速度都有加分</span></h3>
+  <div class="gscreen on" id="gStart">
+    <div style="text-align:center;font-size:clamp(15px,2vw,18px);line-height:1.8;">
+      闖過 <b class="hl">7</b> 關，每關 1 題，每題 <b class="hl">20 秒</b>。<br>
+      計分：基礎 <b class="hl">10</b> 分 + 連擊獎勵（最多 <b class="hl">5</b>）+ 速度獎勵（最多 <b class="hl">5</b>）＝ 單題最高 <b class="hl">20</b> 分</div>
+    <div class="lvchips" id="gStartChips"></div>
+    <div style="text-align:center;"><button class="btn" id="gGo" style="background:rgba(242,217,121,.25);border-color:var(--yellow);color:var(--yellow);font-weight:700;font-size:16px;padding:10px 24px;">🚀 開始挑戰</button></div>
+  </div>
+  <div class="gscreen" id="gPlay">
+    <div class="hud">
+      <div class="st">關卡<b id="hLv">1/7</b></div>
+      <div class="st">分數<b id="hSc">0</b></div>
+      <div class="st">連擊<b id="hStk">0</b></div>
+      <div class="st">剩餘<b id="hT">20</b></div>
+    </div>
+    <div class="tbar"><div class="tfill" id="tFill"></div></div>
+    <div class="lvchips" id="gChips"></div>
+    <div class="gq" id="gQ"></div>
+    <div class="gopts" id="gO"></div>
+    <div class="gfb" id="gFb"></div>
+    <div style="text-align:center;margin-top:12px;"><button class="btn" id="gNext" style="display:none;">下一關 ▶</button></div>
+  </div>
+  <div class="gscreen" id="gEnd">
+    <div class="rank" id="gRank">🏆</div>
+    <div style="text-align:center;font-size:clamp(17px,2.6vw,22px);font-family:'Noto Serif TC';" id="gFinal"></div>
+    <div style="text-align:center;color:var(--soft);margin-top:8px;" id="gStats"></div>
+    <div style="text-align:center;margin-top:16px;"><button class="btn" id="gAgain" style="background:rgba(242,217,121,.25);border-color:var(--yellow);color:var(--yellow);font-weight:700;">🔄 再挑戰一次</button></div>
+  </div></div>`;
+wrap.appendChild(gp);
+document.getElementById('gStartChips').innerHTML = GAME.map((g,i)=>`<div class="lvchip">第${i+1}關 ${g.name}</div>`).join('');
+
+const qb = document.getElementById('quizBox');
+QUIZ.forEach((q,i)=>{
+  const d = document.createElement('div'); d.className='q';
+  let body='';
+  if(q.type==='choice') body = `<div class="opts">${q.o.map((o,oi)=>`<button class="opt" data-quiz="${i}" data-oi="${oi}">${o}</button>`).join('')}</div>`;
+  else if(q.type==='tf') body = `<div class="opts" style="flex-direction:row;gap:10px;">
+      <button class="opt" data-quiz="${i}" data-oi="1" style="flex:1;">⭕ 對</button>
+      <button class="opt" data-quiz="${i}" data-oi="0" style="flex:1;">❌ 錯</button></div>`;
+  else body = `<div><input class="fill" data-quiz="${i}" placeholder="?"></div>`;
+  d.innerHTML = `<div class="qt"><span class="qn">${i+1}</span>
+    <span style="font-size:12px;color:var(--soft);border:1px solid rgba(243,239,226,.25);border-radius:6px;padding:1px 6px;margin-right:6px;">
+    ${q.type==='choice'?'單選':q.type==='tf'?'是非':'填充'}</span>${q.q}</div>${body}
+    <div class="fb" id="qfb-${i}"></div>`;
+  qb.appendChild(d);
+});
+
+document.getElementById('tabs').addEventListener('click', e=>{
+  const t = e.target.closest('.tab'); if(!t) return;
+  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on', x===t));
+  document.querySelectorAll('.panel').forEach(x=>x.classList.toggle('on', x.dataset.p===t.dataset.p));
+  document.getElementById('goalCard').style.display = (t.dataset.p==='4')?'none':'';
+  window.scrollTo({top:0,behavior:'smooth'});
+  setTimeout(resizeAll, 60);
+});
+
+const cur = DATA.map(()=>0);
+function showSlide(si, i){
+  const deck = document.querySelector(`[data-deck="${si}"]`);
+  const sl = deck.querySelectorAll('.sl');
+  i = Math.max(0, Math.min(sl.length-1, i));
+  cur[si] = i;
+  sl.forEach((s,k)=>s.classList.toggle('on', k===i));
+  document.getElementById('pg-'+si).textContent = `${i+1} / ${sl.length}`;
+  document.querySelectorAll(`#dots-${si} .dot`).forEach((d,k)=>d.classList.toggle('on', k===i));
+}
+document.addEventListener('click', e=>{
+  const n = e.target.closest('[data-nav]');
+  if(n){ const si=+n.dataset.s; showSlide(si, cur[si] + (n.dataset.nav==='next'?1:-1)); return; }
+  const d = e.target.closest('.dot');
+  if(d){ showSlide(+d.dataset.s, +d.dataset.i); return; }
+});
+document.addEventListener('keydown', e=>{
+  const p = document.querySelector('.panel.on'); if(!p) return;
+  const si = +p.dataset.p; if(si>=DATA.length) return;
+  if(e.key==='ArrowRight') showSlide(si, cur[si]+1);
+  if(e.key==='ArrowLeft') showSlide(si, cur[si]-1);
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.opt[data-si]'); if(!o) return;
+  const si=+o.dataset.si, qi=+o.dataset.qi, oi=+o.dataset.oi;
+  const f = DATA[si].fa[qi];
+  const box = document.querySelector(`[data-fa="${si}-${qi}"]`);
+  box.querySelectorAll('.opt').forEach((b,k)=>{
+    b.disabled = true;
+    if(k===f.a) b.classList.add('right'); else if(k===oi) b.classList.add('wrong');
+  });
+  const fb = document.getElementById(`fb-${si}-${qi}`);
+  const ok = oi===f.a;
+  fb.className = 'fb on ' + (ok?'ok':'no');
+  fb.innerHTML = (ok?'✅ <b>答對了！</b> ':'❌ <b>再想想。</b> ') + f.e;
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.exo');
+  if(o && !o.disabled){
+    const box = o.closest('.exq');
+    const ans = +box.dataset.a, pick = +o.dataset.i;
+    if(pick === ans){
+      box.querySelectorAll('.exo').forEach(b=>{ b.disabled=true; if(+b.dataset.i===ans) b.classList.add('right'); });
+      box.querySelector('.exsol').classList.add('on');
+      box.querySelector('.exlock').classList.add('hide');
+    } else {
+      o.classList.add('wrong','shake');
+      setTimeout(()=>o.classList.remove('shake'), 420);
+      o.disabled = true;
+      const lock = box.querySelector('.exlock');
+      lock.innerHTML = '🔒 再想想 —— 答對才會顯示詳解'; lock.style.color='var(--pink)';
+    }
+  }
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.opt[data-quiz]'); if(!o) return;
+  const i = +o.dataset.quiz;
+  o.parentElement.querySelectorAll('.opt').forEach(b=>b.classList.remove('right','wrong'));
+  o.classList.add('right'); o.dataset.sel='1';
+  o.parentElement.querySelectorAll('.opt').forEach(b=>{ if(b!==o) delete b.dataset.sel; });
+});
+document.getElementById('gradeBtn').addEventListener('click', ()=>{
+  let right=0;
+  QUIZ.forEach((q,i)=>{
+    const fb = document.getElementById('qfb-'+i);
+    let ok=false, picked=null;
+    if(q.type==='fill'){
+      const inp = document.querySelector(`.fill[data-quiz="${i}"]`);
+      const v = (inp.value||'').trim().replace(/−/g,'-').replace(/\s/g,'');
+      ok = q.a.some(a=>a.replace(/−/g,'-').replace(/\s/g,'')===v);
+      inp.style.borderBottomColor = ok?'var(--green)':'var(--pink)';
+    } else {
+      const sel = document.querySelector(`.opt[data-quiz="${i}"][data-sel="1"]`);
+      if(sel){ picked=+sel.dataset.oi; ok = (q.type==='tf') ? (picked===1)===q.a : picked===q.a; }
+      document.querySelectorAll(`.opt[data-quiz="${i}"]`).forEach(b=>{
+        b.classList.remove('right','wrong');
+        const bi=+b.dataset.oi;
+        const isAns = (q.type==='tf') ? ((bi===1)===q.a) : (bi===q.a);
+        if(isAns) b.classList.add('right'); else if(picked===bi) b.classList.add('wrong');
+      });
+    }
+    if(ok) right++;
+    fb.className='fb on '+(ok?'ok':'no');
+    fb.innerHTML = (ok?'✅ <b>正確</b> ':'❌ <b>錯誤</b> ') + q.e;
+  });
+  const s = document.getElementById('score');
+  const pct = Math.round(right/QUIZ.length*100);
+  s.style.display='block';
+  s.innerHTML = `成績：<b>${right} / ${QUIZ.length}</b>　（${pct} 分）　${pct>=80?'🏆 很棒！':pct>=60?'💪 再加油':'📖 建議重看重點'}`;
+});
+document.getElementById('resetQuiz').addEventListener('click', ()=>{
+  document.querySelectorAll('.opt[data-quiz]').forEach(b=>{b.classList.remove('right','wrong'); delete b.dataset.sel;});
+  document.querySelectorAll('.fill').forEach(i=>{i.value=''; i.style.borderBottomColor='var(--yellow)';});
+  document.querySelectorAll('[id^="qfb-"]').forEach(f=>f.className='fb');
+  document.getElementById('score').style.display='none';
+});
+
+/* ===== 闖關遊戲 ===== */
+const G = {lv:0, score:0, streak:0, best:0, t:20, timer:null, cur:null, answered:false};
+function gShow(id){ ['gStart','gPlay','gEnd'].forEach(x=>document.getElementById(x).classList.toggle('on', x===id)); }
+function gChips(){
+  document.getElementById('gChips').innerHTML = GAME.map((g,i)=>
+    `<div class="lvchip ${i<G.lv?'done':i===G.lv?'now':''}">${i+1}. ${g.name}</div>`).join('');
+}
+function gLoad(){
+  if(G.lv>=GAME.length){ gFinish(); return; }
+  G.answered=false; G.t=20;
+  const bank = GAME[G.lv].qs;
+  G.cur = bank[Math.floor(Math.random()*bank.length)];
+  document.getElementById('hLv').textContent = (G.lv+1)+'/'+GAME.length;
+  document.getElementById('hSc').textContent = G.score;
+  document.getElementById('hStk').textContent = G.streak;
+  document.getElementById('gQ').innerHTML = `<span style="color:var(--blue);font-size:15px;">第 ${G.lv+1} 關 · ${GAME[G.lv].name}</span><br>${G.cur.q}`;
+  document.getElementById('gO').innerHTML = G.cur.o.map((o,i)=>
+    `<button class="gopt" data-g="${i}">${'ABCD'[i]}. ${o}</button>`).join('');
+  document.getElementById('gFb').className='gfb';
+  document.getElementById('gNext').style.display='none';
+  gChips();
+  clearInterval(G.timer);
+  G.timer = setInterval(()=>{
+    G.t -= 0.1;
+    document.getElementById('hT').textContent = Math.max(0,G.t).toFixed(0);
+    document.getElementById('tFill').style.width = Math.max(0,G.t/20*100)+'%';
+    if(G.t<=0){ clearInterval(G.timer); gAnswer(-1); }
+  },100);
+}
+function gAnswer(pick){
+  if(G.answered) return;
+  G.answered = true; clearInterval(G.timer);
+  const ans = G.cur.a, ok = pick===ans;
+  document.querySelectorAll('.gopt').forEach((b,i)=>{
+    b.disabled=true;
+    if(i===ans) b.classList.add('right'); else if(i===pick) b.classList.add('wrong');
+  });
+  let gain=0, sb=0, tb=0;
+  if(ok){
+    G.streak++; G.best=Math.max(G.best,G.streak);
+    sb = Math.min(5, G.streak-1); tb = Math.min(5, Math.floor(G.t/4));
+    gain = 10+sb+tb; G.score += gain;
+  } else { G.streak = 0; }
+  document.getElementById('hSc').textContent = G.score;
+  document.getElementById('hStk').textContent = G.streak;
+  const fb = document.getElementById('gFb');
+  fb.className = 'gfb on '+(ok?'ok':'no');
+  fb.innerHTML = (ok? `✅ <b>答對！+${gain} 分</b>（基礎10 + 連擊${sb} + 速度${tb}）<br>`
+                    : (pick===-1?'⏰ <b>時間到！</b><br>':'❌ <b>答錯了</b><br>')) + G.cur.e;
+  document.getElementById('gNext').style.display='inline-block';
+  document.getElementById('gNext').textContent = (G.lv>=GAME.length-1)?'看成績 🏁':'下一關 ▶';
+}
+function gFinish(){
+  clearInterval(G.timer);
+  const max = GAME.length*20, pct = Math.round(G.score/max*100);
+  const rank = pct>=85?['🏆','數論大師']:pct>=70?['🥇','高手']:pct>=50?['🥈','不錯']:['📖','再加油'];
+  document.getElementById('gRank').textContent = rank[0];
+  document.getElementById('gFinal').innerHTML = `<b class="hl">${G.score}</b> / ${max} 分　·　${rank[1]}`;
+  document.getElementById('gStats').innerHTML = `最高連擊 <b class="hl">${G.best}</b>　·　完成 ${GAME.length} 關`;
+  gShow('gEnd');
+}
+document.getElementById('gGo').addEventListener('click', ()=>{ G.lv=0;G.score=0;G.streak=0;G.best=0; gShow('gPlay'); gLoad(); });
+document.getElementById('gAgain').addEventListener('click', ()=>{ G.lv=0;G.score=0;G.streak=0;G.best=0; gShow('gPlay'); gLoad(); });
+document.getElementById('gNext').addEventListener('click', ()=>{ G.lv++; gLoad(); });
+document.addEventListener('click', e=>{ const b=e.target.closest('.gopt'); if(!b||b.disabled) return; gAnswer(+b.dataset.g); });
+
+/* ===== Canvas ===== */
+const VIZ = {}; let DPR=1;
+
+function miniIcon(ctx, cx, cy, kind, col){
+  ctx.save();
+  if(kind==='bar'){
+    const hs=[18,30,24,14];
+    hs.forEach((h,i)=>{ ctx.fillStyle=col; ctx.fillRect(cx-30+i*16, cy+15-h, 11, h); });
+  } else if(kind==='line'){
+    const ys=[10,-6,4,-12,-16];
+    ctx.strokeStyle=col; ctx.lineWidth=2.5; ctx.beginPath();
+    ys.forEach((y,i)=>{ const x=cx-32+i*16; i?ctx.lineTo(x,cy+y):ctx.moveTo(x,cy+y); });
+    ctx.stroke();
+    ys.forEach((y,i)=>{ ctx.fillStyle='#f2d979'; ctx.beginPath(); ctx.arc(cx-32+i*16,cy+y,2.5,0,7); ctx.fill(); });
+  } else if(kind==='pie'){
+    const segs=[[0,0.4,'#98c9dc'],[0.4,0.65,'#a6d6a0'],[0.65,0.85,'#f2d979'],[0.85,1,'#eda0a8']];
+    segs.forEach(([a,b,c])=>{ ctx.fillStyle=c; ctx.beginPath(); ctx.moveTo(cx,cy);
+      ctx.arc(cx,cy,20,a*6.283-1.571,b*6.283-1.571); ctx.closePath(); ctx.fill(); });
+  } else if(kind==='hist'){
+    const hs=[12,22,30,18,8];
+    hs.forEach((h,i)=>{ ctx.fillStyle=col; ctx.fillRect(cx-32+i*13, cy+15-h, 13, h);
+      ctx.strokeStyle='#16281c'; ctx.lineWidth=1; ctx.strokeRect(cx-32+i*13, cy+15-h, 13, h); });
+  }
+  ctx.restore();
+}
+
+/* ① 選對統計圖表 */
+const SCENE=[
+  {txt:'比較四個班級的人數多寡', ans:'長條圖', icon:'bar', why:'各類別的「比較」→ 分開的長條'},
+  {txt:'呈現公司逐月營收的變化', ans:'折線圖', icon:'line', why:'隨時間的「趨勢」→ 折線'},
+  {txt:'各科佔全班選修比例', ans:'圓形圖', icon:'pie', why:'各部分佔整體「比例」→ 扇形'},
+  {txt:'全班同學身高區間的分布', ans:'直方圖', icon:'hist', why:'連續資料的「分布」→ 緊貼長條'},
+  {txt:'學校每月出勤率的變化', ans:'折線圖', icon:'line', why:'隨時間變化 → 折線'},
+  {txt:'每天使用手機時數區間的分布', ans:'直方圖', icon:'hist', why:'連續時間區間 → 直方圖'},
+];
+/* ② 次數分配表 */
+const FREQ=[
+  {title:'40 條輪胎胎壓 (PSI)', labs:['28–30','30–32','32–34','34–36'], f:[5,14,16,5]},
+  {title:'40 位學生每週運動時數', labs:['0','1','2','3','4'], f:[3,8,12,10,7]},
+  {title:'手機使用時間 (小時)', labs:['0–1','1–2','2–3','3–4','4+'], f:[5,10,15,8,2]},
+];
+/* ③ 三種代表值 */
+const AVG=[
+  {title:'10 位同學成績', data:[72,85,90,68,85,78,92,85,70,75]},
+  {title:'7 位員工月薪 (萬)', data:[3,3,3,4,5,6,20]},
+  {title:'10 批不良品數', data:[0,1,0,2,1,0,3,1,0,2]},
+];
+
+function initViz(cv){
+  const si=+cv.dataset.si, kind=cv.dataset.viz;
+  const ctx=cv.getContext('2d');
+  const st=VIZ[si]={kind,cv,ctx};
+  const ctrl=document.querySelector(`[data-ctrl="${si}"]`);
+  const revLabel = kind==='chart' ? '🔍 揭曉該選哪種圖'
+                 : kind==='freq' ? '🔍 算相對＆累積次數' : '🔍 求三種代表值';
+  st.i=0; st.show=false;
+  ctrl.innerHTML=`<div class="readout" id="ro-${si}"></div>
+    <button class="btn" data-t="rev" data-si="${si}" style="background:rgba(242,217,121,.2);border-color:var(--yellow);color:var(--yellow);font-weight:700;">${revLabel}</button>
+    <button class="btn" data-t="next" data-si="${si}">下一題 ▶</button>`;
+  draw(si);
+}
+
+function drawChart(st, ctx, w, h, ro){
+  const E=SCENE[st.i];
+  ctx.textAlign='center';
+  ctx.fillStyle='rgba(242,217,121,.85)'; ctx.font='bold 13px "Noto Sans TC"';
+  ctx.fillText(`第 ${st.i+1} / ${SCENE.length} 題　·　情境`, w/2, 18);
+  ctx.fillStyle='#f3efe2'; ctx.font='bold 18px "Noto Serif TC"';
+  ctx.fillText(E.txt, w/2, 50);
+  if(!st.show){
+    ctx.fillStyle='rgba(243,239,226,.4)'; ctx.font='13px "Noto Sans TC"';
+    ctx.fillText('🔒 先想：比較？變化？佔比？連續分布？', w/2, 92);
+    ctx.fillText('（比較→長條 · 變化→折線 · 佔比→圓形 · 分布→直方）', w/2, 114);
+  } else {
+    miniIcon(ctx, w/2, 92, E.icon, '#98c9dc');
+    ctx.fillStyle='#a6d6a0'; ctx.font='bold 20px "Noto Serif TC"';
+    ctx.fillText('→ ' + E.ans, w/2, h-30);
+    ctx.fillStyle='rgba(243,239,226,.7)'; ctx.font='12px "Noto Sans TC"';
+    ctx.fillText(E.why, w/2, h-12);
+  }
+  ro.innerHTML = st.show
+    ? `<b>${E.txt}</b>　→　<b style="color:var(--green)">${E.ans}</b>（${E.why}）`
+    : `<b>${E.txt}</b>　<span style="color:rgba(243,239,226,.5)">—— 比較 / 變化 / 佔比 / 連續分布？</span>`;
+}
+
+function drawFreq(st, ctx, w, h, ro){
+  const E=FREQ[st.i], n=E.labs.length;
+  const total=E.f.reduce((a,b)=>a+b,0);
+  ctx.textAlign='center';
+  ctx.fillStyle='rgba(242,217,121,.85)'; ctx.font='bold 13px "Noto Sans TC"';
+  ctx.fillText(`${E.title}　（總數 ${total}）`, w/2, 16);
+  const L=20, R=w-20, colw=(R-L)/(n+1), rowY=[34,54,74,94];
+  const rows=['組別','次數','相對','累積'];
+  let cum=0;
+  for(let r=0;r<4;r++){
+    ctx.textAlign='left';
+    ctx.fillStyle='rgba(243,239,226,.6)'; ctx.font='11px "Noto Sans TC"';
+    ctx.fillText(rows[r], L, rowY[r]);
+    for(let c=0;c<n;c++){
+      const x=L+colw*(c+1), y=rowY[r]; ctx.textAlign='center';
+      if(r===0){ ctx.fillStyle='#f3efe2'; ctx.font='bold 12px "Noto Serif TC"'; ctx.fillText(E.labs[c], x, y); }
+      else if(r===1){ ctx.fillStyle='#98c9dc'; ctx.font='13px "Noto Serif TC"'; ctx.fillText(String(E.f[c]), x, y); }
+      else if(r===2){
+        if(st.show){ ctx.fillStyle='#a6d6a0'; ctx.font='12px "Noto Serif TC"';
+          ctx.fillText((E.f[c]/total*100).toFixed(1)+'%', x, y); }
+        else { ctx.fillStyle='rgba(243,239,226,.25)'; ctx.font='12px "Noto Serif TC"'; ctx.fillText('?', x, y); }
+      } else {
+        if(c===0) cum=0; cum+=E.f[c];
+        if(st.show){ ctx.fillStyle='#f2d979'; ctx.font='12px "Noto Serif TC"'; ctx.fillText(String(cum), x, y); }
+        else { ctx.fillStyle='rgba(243,239,226,.25)'; ctx.font='12px "Noto Serif TC"'; ctx.fillText('?', x, y); }
+      }
+    }
+  }
+  ctx.textAlign='center';
+  if(!st.show){
+    ctx.fillStyle='rgba(243,239,226,.4)'; ctx.font='12px "Noto Sans TC"';
+    ctx.fillText('🔒 相對 = 次數 ÷ 總數；累積 = 到此組的加總', w/2, h-12);
+  } else {
+    ctx.fillStyle='rgba(243,239,226,.7)'; ctx.font='12px "Noto Sans TC"';
+    ctx.fillText('相對次數（綠）÷ 總數；累積次數（黃）逐組加總，末組 = 總數', w/2, h-12);
+  }
+  const rel=E.f.map(x=>(x/total*100).toFixed(1)+'%').join('、');
+  ro.innerHTML = st.show
+    ? `相對次數：<b style="color:var(--green)">${rel}</b>　·　累積末組 = <b style="color:var(--yellow)">${total}</b>`
+    : `<b>${E.title}</b>　<span style="color:rgba(243,239,226,.5)">—— 先自己算相對＆累積次數</span>`;
+}
+
+function drawAvg(st, ctx, w, h, ro){
+  const E=AVG[st.i], d=E.data.slice(), n=d.length;
+  const sorted=d.slice().sort((a,b)=>a-b);
+  const sum=d.reduce((a,b)=>a+b,0), mean=sum/n;
+  let med;
+  if(n%2) med=sorted[(n-1)/2];
+  else med=(sorted[n/2-1]+sorted[n/2])/2;
+  const cnt={}; sorted.forEach(v=>cnt[v]=(cnt[v]||0)+1);
+  const mx=Math.max(...Object.values(cnt));
+  const modes=Object.keys(cnt).filter(k=>cnt[k]===mx);
+  ctx.textAlign='center';
+  ctx.fillStyle='rgba(242,217,121,.85)'; ctx.font='bold 13px "Noto Sans TC"';
+  ctx.fillText(`${E.title}　（${n} 筆）`, w/2, 16);
+  ctx.fillStyle='#f3efe2'; ctx.font='13px "Noto Serif TC"';
+  ctx.fillText('原始：' + d.join('、'), w/2, 38);
+  if(!st.show){
+    ctx.fillStyle='rgba(243,239,226,.4)'; ctx.font='13px "Noto Sans TC"';
+    ctx.fillText('🔒 先排序，再算平均 / 中位 / 眾數', w/2, 78);
+    ctx.fillText('（中位數要先由小到大排列！）', w/2, 100);
+  } else {
+    ctx.fillStyle='#98c9dc'; ctx.font='12px "Noto Serif TC"';
+    ctx.fillText('排序：' + sorted.join('、'), w/2, 60);
+    ctx.font='bold 15px "Noto Serif TC"';
+    ctx.fillStyle='#eda0a8'; ctx.fillText('平均 ' + (Number.isInteger(mean)?mean:mean.toFixed(2)), w*0.22, 92);
+    ctx.fillStyle='#a6d6a0'; ctx.fillText('中位 ' + med, w*0.5, 92);
+    ctx.fillStyle='#f2d979'; ctx.fillText('眾數 ' + modes.join('/'), w*0.8, 92);
+    ctx.fillStyle='rgba(243,239,226,.7)'; ctx.font='12px "Noto Sans TC"';
+    const skew = mean>med*1.15 ? '⚠️ 平均被極端值拉高 → 中位數更具代表性' : '平均與中位接近 → 分布較均勻';
+    ctx.fillText(skew, w/2, h-12);
+  }
+  ro.innerHTML = st.show
+    ? `平均 <b style="color:var(--pink)">${Number.isInteger(mean)?mean:mean.toFixed(2)}</b>　中位 <b style="color:var(--green)">${med}</b>　眾數 <b style="color:var(--yellow)">${modes.join('、')}</b>`
+    : `<b>${E.title}</b>　<span style="color:rgba(243,239,226,.5)">—— 先排序再求三代表值</span>`;
+}
+
+function draw(si){
+  const st=VIZ[si]; if(!st) return;
+  const {cv,ctx,kind}=st, w=cv.width/DPR, h=cv.height/DPR;
+  ctx.clearRect(0,0,w,h);
+  const ro=document.getElementById('ro-'+si);
+  if(kind==='chart') drawChart(st,ctx,w,h,ro);
+  else if(kind==='freq') drawFreq(st,ctx,w,h,ro);
+  else if(kind==='avg') drawAvg(st,ctx,w,h,ro);
+}
+
+document.addEventListener('click', e=>{
+  const btn=e.target.closest('[data-t]'); if(!btn) return;
+  const si=+btn.dataset.si, st=VIZ[si]; if(!st) return;
+  const t=btn.dataset.t;
+  const arr = st.kind==='chart'?SCENE : st.kind==='freq'?FREQ : AVG;
+  if(t==='rev') st.show=true;
+  if(t==='next'){ st.i=(st.i+1)%arr.length; st.show=false; }
+  draw(si);
+});
+
+function resizeAll(){
+  DPR = Math.min(2, window.devicePixelRatio||1);
+  document.querySelectorAll('canvas.viz').forEach(cv=>{
+    const w = cv.clientWidth || cv.parentElement.clientWidth;
+    const h = (cv.dataset.viz==='freq') ? 180 : (cv.dataset.viz==='avg' ? 178 : 176);
+    cv.width=w*DPR; cv.height=h*DPR; cv.style.height=h+'px';
+    cv.getContext('2d').setTransform(DPR,0,0,DPR,0,0);
+  });
+  Object.keys(VIZ).forEach(k=>draw(+k));
+}
+document.querySelectorAll('canvas.viz').forEach(initViz);
+window.addEventListener('resize', resizeAll);
+resizeAll();
+</script>
+<div class="hint">← → 鍵可翻頁　·　Canvas 用按鈕互動　·　支援平板觸控</div>
+</body></html>

@@ -1,0 +1,955 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>七下 4-1 一元一次不等式｜互動教學平台</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;--wood:#6b4a32;}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);overscroll-behavior:none;}
+.topbar{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:10px 16px;background:linear-gradient(180deg,#1b2f21,#132218);border-bottom:2px solid var(--wood);box-shadow:0 4px 18px rgba(0,0,0,0.5);}
+.brand{font-family:'Noto Serif TC',serif;font-weight:900;font-size:clamp(15px,2.2vw,20px);color:var(--yellow);white-space:nowrap;}
+.brand small{display:block;font-family:'Caveat',cursive;font-size:14px;color:var(--soft);font-weight:400;}
+.spacer{flex:1;}
+.btn{background:rgba(243,239,226,0.08);border:1.5px solid rgba(243,239,226,0.28);color:var(--chalk);
+  border-radius:10px;padding:7px 13px;font-family:inherit;font-size:14px;cursor:pointer;white-space:nowrap;transition:.15s;}
+.btn:hover{background:rgba(243,239,226,0.16);}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:10px 16px 0;scrollbar-width:none;}
+.tabs::-webkit-scrollbar{display:none;}
+.tab{background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.2);border-bottom:none;
+  color:var(--soft);border-radius:10px 10px 0 0;padding:9px 15px;font-size:14px;cursor:pointer;white-space:nowrap;font-family:inherit;}
+.tab.on{background:var(--board);border-color:var(--yellow);color:var(--yellow);font-weight:700;}
+.tab .n{font-family:'Caveat',cursive;font-size:18px;margin-right:5px;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px 60px;}
+.panel{display:none;}.panel.on{display:block;}
+.card{background:radial-gradient(ellipse at 20% 10%,rgba(255,255,255,0.05),transparent 45%),
+   linear-gradient(160deg,var(--board),var(--board2));
+  border:1.5px solid rgba(242,217,121,0.16);border-radius:14px;padding:18px;margin-bottom:16px;
+  box-shadow:0 8px 26px rgba(0,0,0,0.45);position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 38px,rgba(255,255,255,0.012) 38px,rgba(255,255,255,0.012) 39px);}
+.card>*{position:relative;}
+.card h3{font-family:'Noto Serif TC',serif;font-size:clamp(17px,2.4vw,21px);color:var(--yellow);
+  margin-bottom:12px;padding-bottom:8px;border-bottom:2px dashed rgba(242,217,121,0.35);display:flex;align-items:center;gap:8px;}
+.card h3 .ic{font-size:20px;}
+.goals{display:flex;flex-wrap:wrap;gap:9px;}
+.goal{display:flex;align-items:center;gap:9px;background:rgba(242,217,121,0.07);
+  border:1.5px dashed rgba(242,217,121,0.4);border-radius:22px;padding:8px 15px 8px 8px;
+  font-size:clamp(13.5px,1.8vw,15px);color:var(--yellow);line-height:1.5;}
+.goal .bdg{width:24px;height:24px;border-radius:50%;background:var(--yellow);color:#16281c;
+  font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;flex:none;}
+.deck{position:relative;background:rgba(0,0,0,0.22);border-radius:12px;padding:clamp(16px,3vw,30px);
+  min-height:clamp(260px,42vh,380px);display:flex;flex-direction:column;justify-content:center;}
+.sl{display:none;animation:fade .25s;}.sl.on{display:block;}
+@keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+.sl .eyebrow{font-family:'Caveat',cursive;font-size:20px;color:var(--yellow);margin-bottom:6px;}
+.sl h4{font-family:'Noto Serif TC',serif;font-size:clamp(19px,3vw,27px);margin-bottom:12px;line-height:1.35;}
+.sl p{font-size:clamp(15px,2vw,18px);line-height:1.8;margin-bottom:9px;}
+.sl ul{list-style:none;}
+.sl li{font-size:clamp(15px,2vw,18px);line-height:1.85;padding-left:26px;position:relative;margin-bottom:4px;}
+.sl li::before{content:'✦';position:absolute;left:2px;color:var(--yellow);font-size:14px;top:3px;}
+.nav{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:14px;}
+.nav .pg{font-family:'Caveat',cursive;font-size:20px;color:var(--soft);min-width:64px;text-align:center;}
+.dots{display:flex;gap:6px;justify-content:center;margin-top:10px;flex-wrap:wrap;}
+.dot{width:9px;height:9px;border-radius:50%;background:rgba(243,239,226,0.25);cursor:pointer;border:none;padding:0;}
+.dot.on{background:var(--yellow);transform:scale(1.3);}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.32);border-radius:10px;
+  padding:11px 15px;margin:9px 0;font-size:clamp(14px,1.9vw,17px);line-height:1.7;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.36);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.36);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.32);}
+.two{display:flex;gap:12px;flex-wrap:wrap;}.two>*{flex:1;min-width:220px;}
+.teach{background:rgba(201,174,224,0.12);border:1.5px dashed rgba(201,174,224,0.5);
+  border-radius:10px;padding:11px 15px;margin:9px 0;font-size:clamp(14px,1.8vw,15px);line-height:1.7;}
+.teach b{color:var(--purple);}
+.tbl{width:100%;border-collapse:collapse;margin:9px 0;font-size:clamp(13.5px,1.8vw,16px);}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.24);padding:8px 11px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.cv-wrap{background:rgba(0,0,0,0.25);border-radius:12px;padding:10px;}
+canvas.viz{width:100%;display:block;border-radius:8px;touch-action:none;}
+.ctrl{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center;}
+.readout{font-family:'Noto Serif TC',serif;font-size:clamp(14px,1.9vw,18px);color:var(--chalk);
+  background:rgba(242,217,121,0.1);border:1px solid rgba(242,217,121,0.3);border-radius:8px;
+  padding:7px 12px;flex:1;min-width:220px;}
+.readout b{color:var(--yellow);}
+.q{background:rgba(0,0,0,0.2);border:1px solid rgba(242,217,121,0.18);border-radius:10px;padding:13px 15px;margin:10px 0;}
+.q .qt{font-size:clamp(15px,2vw,17px);margin-bottom:10px;line-height:1.7;}
+.q .qt .qn{font-family:'Caveat',cursive;color:var(--yellow);font-size:20px;margin-right:6px;}
+.opts{display:flex;flex-direction:column;gap:7px;}
+.opt{text-align:left;background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.22);
+  color:var(--chalk);border-radius:9px;padding:9px 13px;font-family:inherit;font-size:15px;cursor:pointer;transition:.15s;line-height:1.5;}
+.opt:hover:not(:disabled){background:rgba(243,239,226,0.13);}
+.opt.right{background:rgba(166,214,160,0.24);border-color:var(--green);color:#fff;font-weight:700;}
+.opt.wrong{background:rgba(237,160,168,0.22);border-color:var(--pink);}
+.opt:disabled{cursor:default;}
+.fb{display:none;margin-top:9px;padding:9px 13px;border-radius:8px;font-size:14.5px;line-height:1.65;}
+.fb.on{display:block;}
+.fb.ok{background:rgba(166,214,160,0.14);border-left:3px solid var(--green);}
+.fb.no{background:rgba(237,160,168,0.14);border-left:3px solid var(--pink);}
+.fill{display:inline-block;background:rgba(0,0,0,0.3);border:none;border-bottom:2px solid var(--yellow);
+  color:var(--yellow);font-family:'Noto Serif TC',serif;font-size:17px;width:110px;text-align:center;padding:3px 5px;margin:0 4px;}
+.fill:focus{outline:none;background:rgba(242,217,121,0.12);}
+.exq{background:rgba(0,0,0,0.26);border:1.5px solid rgba(242,217,121,0.28);border-radius:11px;padding:13px 15px;margin:10px 0;position:relative;}
+.exq::before{content:'';position:absolute;top:-8px;left:32px;width:54px;height:14px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.exq .exq-q{font-size:clamp(14.5px,1.9vw,17px);line-height:1.75;margin-bottom:11px;}
+.exo{text-align:left;background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.22);
+  color:var(--chalk);border-radius:9px;padding:9px 13px;font-family:inherit;font-size:clamp(14px,1.8vw,15.5px);
+  cursor:pointer;transition:.15s;line-height:1.55;width:100%;margin-bottom:6px;display:block;}
+.exo:hover:not(:disabled){background:rgba(243,239,226,0.13);}
+.exo.right{background:rgba(166,214,160,0.26);border-color:var(--green);color:#fff;font-weight:700;}
+.exo.wrong{background:rgba(237,160,168,0.2);border-color:var(--pink);opacity:.75;}
+.exo:disabled{cursor:default;}
+@keyframes shake{10%,90%{transform:translateX(-2px);}30%,70%{transform:translateX(4px);}50%{transform:translateX(-4px);}}
+.exo.shake{animation:shake .4s;}
+.exsol{display:none;margin-top:10px;padding:11px 14px;border-radius:9px;
+  background:rgba(166,214,160,0.13);border-left:3px solid var(--green);font-size:clamp(14px,1.8vw,15.5px);line-height:1.75;}
+.exsol.on{display:block;animation:fade .3s;}
+.exsol .st{color:var(--soft);margin:3px 0;}
+.exsol .an{color:var(--green);font-weight:700;margin-top:6px;}
+.exlock{display:flex;align-items:center;gap:7px;margin-top:9px;font-size:13.5px;color:rgba(243,239,226,0.45);}
+.exlock.hide{display:none;}
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:11px;}
+.icard{background:rgba(0,0,0,0.22);border:1.5px solid rgba(242,217,121,0.22);border-radius:11px;padding:14px;text-align:center;}
+.icard .big{font-family:'Noto Serif TC',serif;font-size:clamp(17px,2.6vw,23px);font-weight:900;margin:6px 0;}
+.icard .cap{font-size:13.5px;color:var(--soft);line-height:1.6;}
+.frow{display:flex;gap:12px;align-items:center;padding:9px 12px;border-bottom:1px dashed rgba(243,239,226,0.16);}
+.frow:last-child{border-bottom:none;}
+.flab{color:var(--blue);font-weight:700;min-width:150px;font-size:clamp(13.5px,1.8vw,15.5px);flex:none;}
+.fval{color:var(--yellow);font-weight:700;font-family:'Noto Serif TC',serif;font-size:clamp(14px,1.9vw,17px);}
+@media(max-width:560px){.frow{flex-direction:column;align-items:flex-start;gap:3px;}.flab{min-width:0;}}
+.hud{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:12px;}
+.hud .st{background:rgba(0,0,0,0.3);border:1.5px solid rgba(242,217,121,0.28);border-radius:9px;
+  padding:7px 13px;font-size:14px;flex:1;min-width:88px;text-align:center;}
+.hud .st b{display:block;font-family:'Noto Serif TC',serif;font-size:20px;color:var(--yellow);}
+.tbar{height:8px;background:rgba(0,0,0,0.35);border-radius:5px;overflow:hidden;margin-bottom:12px;}
+.tfill{height:100%;background:linear-gradient(90deg,var(--green),var(--yellow),var(--pink));width:100%;transition:width .1s linear;}
+.gscreen{display:none;}.gscreen.on{display:block;}
+.lvchips{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin:14px 0;}
+.lvchip{background:rgba(152,201,220,0.12);border:1.5px solid rgba(152,201,220,0.35);border-radius:18px;
+  padding:6px 13px;font-size:13.5px;color:var(--blue);}
+.lvchip.done{background:rgba(166,214,160,0.2);border-color:var(--green);color:var(--green);}
+.lvchip.now{background:rgba(242,217,121,0.22);border-color:var(--yellow);color:var(--yellow);font-weight:700;}
+.gq{font-size:clamp(16px,2.2vw,20px);line-height:1.7;margin:14px 0;text-align:center;font-family:'Noto Serif TC',serif;}
+.gopts{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+@media(max-width:560px){.gopts{grid-template-columns:1fr;}}
+.gopt{background:rgba(243,239,226,0.07);border:1.5px solid rgba(243,239,226,0.25);color:var(--chalk);
+  border-radius:10px;padding:12px;font-family:'Noto Serif TC',serif;font-size:17px;cursor:pointer;transition:.15s;min-height:48px;}
+.gopt:hover:not(:disabled){background:rgba(243,239,226,0.15);}
+.gopt.right{background:rgba(166,214,160,0.3);border-color:var(--green);font-weight:900;}
+.gopt.wrong{background:rgba(237,160,168,0.25);border-color:var(--pink);}
+.gfb{margin-top:11px;padding:10px 13px;border-radius:8px;font-size:14.5px;line-height:1.6;display:none;}
+.gfb.on{display:block;}
+.gfb.ok{background:rgba(166,214,160,0.15);border-left:3px solid var(--green);}
+.gfb.no{background:rgba(237,160,168,0.15);border-left:3px solid var(--pink);}
+.rank{font-size:54px;text-align:center;margin:10px 0;}
+.hint{text-align:center;color:rgba(243,239,226,0.35);font-size:12.5px;padding:8px 0 0;}
+@media (max-width:640px){.topbar{padding:8px 10px;gap:8px;}.wrap{padding:0 10px 70px;}.card{padding:13px;}}
+</style></head><body>
+
+<div class="topbar">
+  <div class="brand">4-1　一元一次不等式<small>七下 · 第4章 一元一次不等式</small></div>
+  <div class="spacer"></div>
+</div>
+
+<div class="tabs" id="tabs">
+  <button class="tab on" data-p="0"><span class="n">📏</span>不等式與數線</button>
+  <button class="tab" data-p="1"><span class="n">⚖️</span>基本性質</button>
+  <button class="tab" data-p="2"><span class="n">🔄</span>範圍運算</button>
+  <button class="tab" data-p="3"><span class="n">★</span>題型測驗</button>
+  <button class="tab" data-p="4"><span class="n">🎮</span>闖關遊戲</button>
+</div>
+
+<div class="wrap">
+  <div class="card" id="goalCard">
+    <h3><span class="ic">🎯</span>本節學習目標</h3>
+    <div class="goals" id="goals"></div>
+  </div>
+  <div id="wrap"></div>
+</div>
+
+<script>
+const GOALS = [
+  '理解不等式的意義（描述大小關係）',
+  '能把文字條件列成不等式',
+  '能判斷一個數是不是解（代入）',
+  '能用數線表示解集合（實心/空心、箭頭）',
+  '知道加減、乘除正數方向不變',
+  '⚠️ 乘除負數要翻轉不等號（本章最重要）',
+];
+
+const DATA = [
+{ key:'nline', viz:'nline', vizTitle:'數線繪製器 —— 換不等式，看實心/空心圓與箭頭方向',
+  slides:[
+    {eb:'核心觀念', h:'不等式的解是「範圍」', html:`
+      <table class="tbl">
+        <tr><th style="width:22%;">　</th><th style="width:39%;">方程式</th><th>不等式</th></tr>
+        <tr><td>符號</td><td class="fm">=</td><td class="fm hl">&gt; &lt; ≥ ≤</td></tr>
+        <tr><td>解</td><td>一個數 (x=4)</td><td class="hl">一個<b>範圍</b> (x&gt;2)</td></tr>
+        <tr><td>數線</td><td>一個點</td><td class="hl">一段<b>區間</b></td></tr>
+      </table>
+      <div class="box y" style="text-align:center;">💡 「x &gt; 2」代表 <span class="hl">2.1、3、100…無限多個數</span>都符合。</div>`},
+    {eb:'細目 ① 列式', h:'關鍵詞翻譯', html:`
+      <table class="tbl">
+        <tr><th style="width:52%;">中文</th><th style="width:22%;">不等號</th><th>含端點</th></tr>
+        <tr><td><b>超過、多於</b></td><td class="fm hl">&gt;</td><td class="hl-r">❌</td></tr>
+        <tr><td><b>不足、少於</b></td><td class="fm hl">&lt;</td><td class="hl-r">❌</td></tr>
+        <tr><td><b>至少、不少於</b></td><td class="fm hl">≥</td><td class="hl-g">✅</td></tr>
+        <tr><td><b>至多、不超過</b></td><td class="fm hl">≤</td><td class="hl-g">✅</td></tr>
+      </table>
+      <div class="box r" style="text-align:center;">⚠️ 「超過 5」→ x&gt;5（不含）；「至少 5」→ x≥5（含）。<span class="hl">有沒有「等於」味道決定。</span></div>`},
+    {eb:'細目 ② 數線', h:'實心/空心、箭頭方向', html:`
+      <table class="tbl">
+        <tr><th style="width:24%;">要素</th><th>規則</th></tr>
+        <tr><td class="hl-b">圓點</td><td>有等號 → <b>實心 ●</b>；沒等號 → <b>空心 ○</b></td></tr>
+        <tr><td class="hl-b">箭頭</td><td>大於 → 向<b>右</b>；小於 → 向<b>左</b></td></tr>
+      </table>
+      <div class="box y" style="text-align:center;">記法：<span class="hl">有等號填滿（實心）、沒等號留空（空心）</span></div>
+      <div class="box g">👉 用下方 Canvas 換不等式，看圓點種類與箭頭方向怎麼變。</div>`},
+    {eb:'例題 ★☆☆', h:'列式', html:`
+      <div class="exq" data-a="1">
+        <div class="exq-q"><span class="hl">Q</span>　「年齡<b>超過</b> 18 歲」的不等式是？（設年齡 x）</div>
+        <button class="exo" data-i="0">x ≥ 18</button>
+        <button class="exo" data-i="1">x > 18</button>
+        <button class="exo" data-i="2">x ≤ 18</button>
+        <button class="exo" data-i="3">x < 18</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">「<b>超過</b> 18」= 大於 18，<b>不含</b> 18 本身 → x > 18</div>
+          <div class="st">(A) x≥18 是「<b>至少</b> 18」（含 18），不是「超過」。</div>
+          <div class="st">💡 「超過」不含端點，「至少」含端點 —— 差一條等號線。</div>
+          <div class="an">答：x > 18</div>
+        </div>
+      </div>`},
+    {eb:'例題 ★☆☆', h:'數線表示', html:`
+      <div class="exq" data-a="2">
+        <div class="exq-q"><span class="hl">Q</span>　x ≤ −1 的數線表示是？</div>
+        <button class="exo" data-i="0">−1 空心，向左</button>
+        <button class="exo" data-i="1">−1 空心，向右</button>
+        <button class="exo" data-i="2">−1 實心，向左</button>
+        <button class="exo" data-i="3">−1 實心，向右</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">≤ 有等號 → <b>實心 ●</b>（含 −1）</div>
+          <div class="st">「小於」→ 向<b>左</b></div>
+          <div class="st">(A) 空心是錯的（≤ 有等號要實心）；(C) 向右是錯的（小於向左）。</div>
+          <div class="an">答：−1 實心，向左</div>
+        </div>
+      </div>`}
+  ],
+  fa:[
+    {q:'不等式的解是？', o:['一個數','一個範圍','兩個數','沒有解'], a:1, e:'解是一個範圍。'},
+    {q:'「至少 5」的不等式？', o:['x>5','x≥5','x<5','x≤5'], a:1, e:'至少 = ≥（含 5）。'},
+    {q:'≥ 在數線上用？', o:['實心，向左','實心，向右','空心，向右','空心，向左'], a:1, e:'有等號實心、大於向右。'}
+  ],
+  info:[
+    {big:'解是範圍', cap:'不是一個數', c:'var(--yellow)'},
+    {big:'超過/至少', cap:'>（不含）<br>≥（含）', c:'var(--blue)'},
+    {big:'有等號實心', cap:'沒等號空心', c:'var(--green)'}
+  ]
+},
+{ key:'prop', viz:'prop', vizTitle:'性質判斷 —— 先想「乘除正還是負？」，再揭曉會不會翻轉（6 題）',
+  slides:[
+    {eb:'基本性質', h:'運算時方向會不會變？', html:`
+      <table class="tbl">
+        <tr><th style="width:60%;">運算</th><th>方向</th></tr>
+        <tr><td>兩邊同<b>加</b>、同<b>減</b></td><td class="hl-g"><b>不變</b></td></tr>
+        <tr><td>兩邊同乘除 <span class="hl-g">正數</span></td><td class="hl-g"><b>不變</b></td></tr>
+        <tr><td>兩邊同乘除 <span class="hl-r">負數</span></td><td class="hl-r"><b>⚠️ 翻轉！</b></td></tr>
+      </table>
+      <div class="box y" style="text-align:center;">加減、乘除正數 —— 和方程式<span class="hl">一模一樣</span>。唯一差別是<b>乘除負數</b>。</div>`},
+    {eb:'🔑 本章最重要', h:'乘除負數，方向翻轉', html:`
+      <div class="box y" style="text-align:center;font-size:20px;">
+        <span class="fm">a &gt; b</span>，兩邊乘 <span class="hl">−2</span> → <span class="fm hl">−2a &lt; −2b</span>（&gt; 變 &lt;）</div>
+      <div class="box g"><b>用具體數字看：</b><span class="fm">3 &gt; 2</span>，但乘 −2 → <span class="fm">−6 &lt; −4</span>（顛倒了！）<br>
+        乘負數會「翻到數線另一邊」→ 大小關係顛倒。</div>
+      <div class="box r" style="text-align:center;">⚠️ 這是不等式單元<b>最高頻的錯誤</b>。每次乘除前先問「<span class="hl">正還是負？負 → 翻</span>」。</div>
+      <div class="box y">👉 用下方 Canvas：先自己判斷會不會翻，再按「揭曉」。</div>`},
+    {eb:'例題 ★★☆', h:'性質判斷', html:`
+      <div class="exq" data-a="2">
+        <div class="exq-q"><span class="hl">Q</span>　已知 a > b，下列<b>哪一個不成立</b>？</div>
+        <button class="exo" data-i="0">a+3 > b+3</button>
+        <button class="exo" data-i="1">a/3 > b/3</button>
+        <button class="exo" data-i="2">−2a > −2b</button>
+        <button class="exo" data-i="3">a−5 > b−5</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">(C) −2a > −2b：兩邊乘 −2（<b>負數</b>）→ 方向要<b>翻轉</b></div>
+          <div class="st fm">正確應是 −2a < −2b → 原式寫 > 是錯的</div>
+          <div class="st">(A)(D) 加減不變、(B) 除正數不變 → 都成立。</div>
+          <div class="st">💡 只有動到<b>負數</b>的 (C) 要翻轉。</div>
+          <div class="an">答：−2a > −2b（不成立）</div>
+        </div>
+      </div>`},
+    {eb:'例題 ★★☆', h:'含未知正負的字母', html:`
+      <div class="exq" data-a="0">
+        <div class="exq-q"><span class="hl">Q</span>　已知 a < b 且 c < 0，則 ac 與 bc 的關係？</div>
+        <button class="exo" data-i="0">ac > bc</button>
+        <button class="exo" data-i="1">ac < bc</button>
+        <button class="exo" data-i="2">ac = bc</button>
+        <button class="exo" data-i="3">無法判斷</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">a < b 兩邊乘 c，而 <b>c < 0（負數）</b> → 翻轉</div>
+          <div class="st fm">a < b → ac > bc</div>
+          <div class="st">💡 <b>就算不知道 c 的確切值，只要知道它是負的，就翻轉。</b></div>
+          <div class="an">答：ac > bc</div>
+        </div>
+      </div>`}
+  ],
+  fa:[
+    {q:'兩邊同加一個數，方向？', o:['不變','翻轉','看數字','消失'], a:0, e:'加減不變。'},
+    {q:'兩邊同乘 −3，方向？', o:['不變','翻轉','看 a、b','不能乘'], a:1, e:'乘負數翻轉。'},
+    {q:'a>b，−a 與 −b？', o:['−a>−b','−a<−b','相等','不定'], a:1, e:'乘 −1 翻轉 → −a<−b。'}
+  ],
+  info:[
+    {big:'加減不變', cap:'乘除正數也不變', c:'var(--green)'},
+    {big:'⚠️ 乘除負數翻轉', cap:'本章最重要', c:'var(--pink)'},
+    {big:'先問正還是負', cap:'負 → 翻轉', c:'var(--yellow)'}
+  ]
+},
+{ key:'range', viz:'range', vizTitle:'範圍運算 —— 先自己算（乘負要翻！），再按「求範圍」',
+  slides:[
+    {eb:'範圍運算', h:'給 x 範圍，求另一式的範圍', html:`
+      <div class="box"><b>已知 −3 &lt; x ≤ 5，求 −2x</b><br>
+        兩邊乘 −2（負數！）→ 方向全翻<br>
+        −3×(−2)=6；5×(−2)=−10 → <span class="fm hl">−10 ≤ −2x &lt; 6</span></div>
+      <div class="box r"><b>⚠️ 端點也跟著走：</b>原 −3 端是 &lt;（開）、5 端是 ≤（閉）→
+        乘 −2 後 6 端變開、−10 端變閉。</div>
+      <div class="box y">👉 用下方 Canvas 練習：正數不翻、負數翻，還會顯示端點怎麼變。</div>`},
+    {eb:'⚠️ 陷阱', h:'a > b ⟹ a² > b²？→ 錯', html:`
+      <div class="box"><b>反例：a=1、b=−3</b><br>
+        a &gt; b：1 &gt; −3 ✓<br>
+        但 a²=1、b²=9 → <span class="fm hl-r">1 &lt; 9</span> → a² &lt; b² ✗</div>
+      <div class="box y" style="text-align:center;">💡 <span class="hl">有負數時，平方大小不能直接由原數判斷</span> —— 平方把負號吃掉了。</div>
+      <div class="box g"><b>用反例最有力：</b>不確定不等式規則對不對，就<b>代含負數的數字試</b>。一個反例就推翻它。</div>`},
+    {eb:'例題 ★★★', h:'乘負數的範圍', html:`
+      <div class="exq" data-a="1">
+        <div class="exq-q"><span class="hl">Q</span>　已知 2 ≤ x < 6，求 −x 的範圍</div>
+        <button class="exo" data-i="0">−2 ≤ −x < −6</button>
+        <button class="exo" data-i="1">−6 < −x ≤ −2</button>
+        <button class="exo" data-i="2">−6 ≤ −x < −2</button>
+        <button class="exo" data-i="3">2 < −x ≤ 6</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">乘 −1（<b>負數</b>）→ 方向與端點都翻</div>
+          <div class="st fm">2×(−1)=−2、6×(−1)=−6</div>
+          <div class="st fm">原 2 端是 ≤（閉）→ 翻到 −2 端變 ≤；原 6 端是 <（開）→ 翻到 −6 端變 <</div>
+          <div class="st fm">結果：−6 < −x ≤ −2</div>
+          <div class="st">(A) 沒把不等號翻轉（還是 ≤...<，且左右寫反）。</div>
+          <div class="an">答：−6 < −x ≤ −2</div>
+        </div>
+      </div>`},
+    {eb:'例題 ★★☆', h:'乘正數+加減', html:`
+      <div class="exq" data-a="3">
+        <div class="exq-q"><span class="hl">Q</span>　已知 −1 < x ≤ 3，求 2x+1 的範圍</div>
+        <button class="exo" data-i="0">−1 ≤ 2x+1 < 7</button>
+        <button class="exo" data-i="1">−2 < 2x+1 ≤ 6</button>
+        <button class="exo" data-i="2">1 < 2x+1 ≤ 7</button>
+        <button class="exo" data-i="3">−1 < 2x+1 ≤ 7</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">先乘 2（<b>正數</b>，不變）：−2 < 2x ≤ 6</div>
+          <div class="st">再加 1（不變）：−1 < 2x+1 ≤ 7</div>
+          <div class="st">💡 全程沒碰負數 → 方向一路不變。</div>
+          <div class="an">答：−1 < 2x+1 ≤ 7</div>
+        </div>
+      </div>`},
+    {eb:'素養 ★★★', h:'絕對值不等式', html:`
+      <div class="box">溫度誤差 <span class="fm">|T − 36.5| ≤ 0.2</span>（°C）</div>
+      <div class="exq" data-a="2">
+        <div class="exq-q"><span class="hl">Q</span>　T 的允許範圍是？</div>
+        <button class="exo" data-i="0">T ≤ 36.7</button>
+        <button class="exo" data-i="1">36.5 ≤ T ≤ 0.2</button>
+        <button class="exo" data-i="2">36.3 ≤ T ≤ 36.7</button>
+        <button class="exo" data-i="3">T ≥ 36.3</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st"><b>|x| ≤ a 就是 −a ≤ x ≤ a</b></div>
+          <div class="st fm">|T−36.5| ≤ 0.2 → −0.2 ≤ T−36.5 ≤ 0.2</div>
+          <div class="st fm">各加 36.5 → 36.3 ≤ T ≤ 36.7</div>
+          <div class="st">💡 「標準值 ± 誤差」= |實測 − 標準| ≤ 誤差 → 展開成一段範圍。</div>
+          <div class="an">答：36.3 ≤ T ≤ 36.7</div>
+        </div>
+      </div>`}
+  ],
+  fa:[
+    {q:'2≤x<6，求 −x', o:['−2≤−x<−6','−6<−x≤−2','2<−x≤6','−6≤−x<−2'], a:1, e:'乘−1翻轉，端點跟著走。'},
+    {q:'−4<x<2，求 3x', o:['−12<3x<6','−12>3x>6','−4<3x<2','12<3x<6'], a:0, e:'乘正數3，方向不變。'},
+    {q:'|x| ≤ 3 等於？', o:['x≤3','−3≤x≤3','x≥−3','x≤−3'], a:1, e:'|x|≤a → −a≤x≤a。'}
+  ],
+  info:[
+    {big:'乘正數不翻', cap:'方向不變', c:'var(--green)'},
+    {big:'乘負數翻轉', cap:'方向+端點都翻', c:'var(--pink)'},
+    {big:'|x|≤a', cap:'= −a≤x≤a', c:'var(--blue)'}
+  ]
+}];
+
+const QUIZ = [
+  {type:'choice', q:'不等式的解是？', o:['一個數','一個範圍','兩個數','沒有'], a:1, e:'解是範圍。'},
+  {type:'choice', q:'「至多 60」的不等式？', o:['x>60','x<60','x≥60','x≤60'], a:3, e:'至多 = ≤（含60）。'},
+  {type:'choice', q:'「超過 50」的不等式？', o:['x>50','x≥50','x<50','x≤50'], a:0, e:'超過 = >（不含）。'},
+  {type:'choice', q:'x=3 是 2x+1>5 的解嗎？', o:['是','不是','邊界','不能判斷'], a:0, e:'7>5 ✓。'},
+  {type:'choice', q:'x=2 是 2x+1>5 的解嗎？', o:['是','不是（5>5不成立）','是，邊界','不能判斷'], a:1, e:'5>5 不成立，嚴格大於等於不算。'},
+  {type:'choice', q:'x>2 的數線？', o:['空心，向右','空心，向左','實心，向右','實心，向左'], a:0, e:'沒等號空心、大於向右。'},
+  {type:'choice', q:'x≤−1 的數線？', o:['空心，向左','實心，向左','實心，向右','空心，向右'], a:1, e:'有等號實心、小於向左。'},
+  {type:'tf', q:'判斷：「a>b，則 −2a>−2b。」', a:false, e:'錯。乘 −2（負數）要翻轉 → −2a<−2b。'},
+  {type:'tf', q:'判斷：「a>b，則 a+3>b+3。」', a:true, e:'對。加減方向不變。'},
+  {type:'choice', q:'a>b，−3a 與 −3b？', o:['−3a>−3b','−3a<−3b','相等','不定'], a:1, e:'乘負數翻轉。'},
+  {type:'choice', q:'a<b、c<0，ac 與 bc？', o:['ac>bc','ac<bc','相等','不定'], a:0, e:'c<0 翻轉 → ac>bc。'},
+  {type:'choice', q:'2≤x<6，求 −x', o:['−2≤−x<−6','−6<−x≤−2','2<−x≤6','−6≤−x<−2'], a:1, e:'乘−1翻轉。'},
+  {type:'choice', q:'−4<x<2，求 3x', o:['−12<3x<6','−4<3x<2','12<3x<6','−12>3x>6'], a:0, e:'乘正數不變。'},
+  {type:'choice', q:'−1<x≤3，求 2x+1', o:['−1≤2x+1<7','−1<2x+1≤7','−2<2x+1≤6','1<2x+1≤7'], a:1, e:'先乘2(不變)再加1。'},
+  {type:'tf', q:'判斷：「a>b，則 a²>b²。」', a:false, e:'錯。反例 a=1、b=−3：1<9。'},
+  {type:'choice', q:'a>0>b，ab 與 0？', o:['ab>0','ab<0','ab=0','不定'], a:1, e:'正×負=負 → ab<0。'},
+  {type:'choice', q:'|x|≤3 等於？', o:['x≤3','−3≤x≤3','x≥−3','x≤−3'], a:1, e:'−3≤x≤3。'},
+  {type:'choice', q:'|T−36.5|≤0.2 的 T 範圍？', o:['T≤36.7','36.3≤T≤36.7','T≥36.3','36.5≤T≤0.2'], a:1, e:'各加36.5 → 36.3≤T≤36.7。'}
+];
+
+const GAME = [
+  {name:'不等式基礎', qs:[
+    {q:'不等式的解是？', o:['一個數','一個範圍','兩個數','沒有'], a:1, e:'範圍。'},
+    {q:'≥ 讀作？', o:['大於','小於','大於等於','不等於'], a:2, e:'大於等於。'},
+    {q:'x>2 含 2 嗎？', o:['含','不含','看情況','含一半'], a:1, e:'嚴格大於不含端點。'},
+    {q:'x≤5 含 5 嗎？', o:['含','不含','看情況','不一定'], a:0, e:'有等號含端點。'}
+  ]},
+  {name:'列式', qs:[
+    {q:'「至少 18」？', o:['x>18','x≥18','x<18','x≤18'], a:1, e:'至少 = ≥。'},
+    {q:'「超過 50」？', o:['x>50','x≥50','x<50','x≤50'], a:0, e:'超過 = >。'},
+    {q:'「不超過 60」？', o:['x>60','x<60','x≥60','x≤60'], a:3, e:'不超過 = ≤。'},
+    {q:'「不足 60」？', o:['x>60','x<60','x≥60','x≤60'], a:1, e:'不足 = <。'}
+  ]},
+  {name:'判斷解', qs:[
+    {q:'x=3 是 2x+1>5 的解？', o:['是','不是','邊界','不定'], a:0, e:'7>5 ✓。'},
+    {q:'x=2 是 2x+1>5 的解？', o:['是','不是','是邊界','不定'], a:1, e:'5>5 不成立。'},
+    {q:'x=−1 是 3x+4>0 的解？', o:['是','不是','邊界','不定'], a:0, e:'1>0 ✓。'},
+    {q:'x=5 是 2x−1≤8 的解？', o:['是','不是','邊界','不定'], a:1, e:'9≤8 不成立。'}
+  ]},
+  {name:'數線表示', qs:[
+    {q:'x>2 的圓點？', o:['實心','空心','半實','無'], a:1, e:'沒等號空心。'},
+    {q:'x≤−1 的圓點？', o:['實心','空心','半實','無'], a:0, e:'有等號實心。'},
+    {q:'x>2 的箭頭？', o:['向左','向右','雙向','無'], a:1, e:'大於向右。'},
+    {q:'x<3 的箭頭？', o:['向左','向右','雙向','無'], a:0, e:'小於向左。'}
+  ]},
+  {name:'⚠️ 乘除負數', qs:[
+    {q:'a>b，乘 −2 後？', o:['−2a>−2b','−2a<−2b','相等','不定'], a:1, e:'翻轉！'},
+    {q:'乘除負數方向？', o:['不變','翻轉','消失','看數字'], a:1, e:'翻轉。'},
+    {q:'加減方向？', o:['不變','翻轉','看數字','消失'], a:0, e:'不變。'},
+    {q:'乘除正數方向？', o:['不變','翻轉','看數字','消失'], a:0, e:'不變。'}
+  ]},
+  {name:'範圍運算', qs:[
+    {q:'2≤x<6，−x 範圍？', o:['−2≤−x<−6','−6<−x≤−2','2<−x≤6','−6≤−x<−2'], a:1, e:'乘−1翻。'},
+    {q:'−4<x<2，3x 範圍？', o:['−12<3x<6','−4<3x<2','12<3x<6','−12>3x>6'], a:0, e:'乘正不變。'},
+    {q:'a>b 就 a²>b² 嗎？', o:['對','錯（有負數時）','一定','不一定但常對'], a:1, e:'反例 1>−3 但 1<9。'},
+    {q:'|x|≤3 等於？', o:['x≤3','−3≤x≤3','x≥−3','x≤−3'], a:1, e:'−3≤x≤3。'}
+  ]},
+  {name:'應用', qs:[
+    {q:'|T−36.5|≤0.2 的範圍？', o:['T≤36.7','36.3≤T≤36.7','T≥36.3','36.5≤T'], a:1, e:'36.3~36.7。'},
+    {q:'「標準±誤差」寫成？', o:['|實測−標準|≤誤差','實測=標準','實測>誤差','標準<誤差'], a:0, e:'絕對值不等式。'},
+    {q:'a>0>b，ab？', o:['>0','<0','=0','不定'], a:1, e:'正×負=負。'},
+    {q:'胎壓 |p−32|≤1.5，範圍？', o:['30.5≤p≤33.5','p≤33.5','p≥30.5','32≤p≤1.5'], a:0, e:'30.5~33.5。'}
+  ]}
+];
+
+document.getElementById('goals').innerHTML = GOALS.map((g,i)=>
+  `<div class="goal"><div class="bdg">${i+1}</div>${g}</div>`).join('');
+
+const wrap = document.getElementById('wrap');
+DATA.forEach((sec, si)=>{
+  const p = document.createElement('div');
+  p.className = 'panel' + (si===0?' on':'');
+  p.dataset.p = si;
+  p.innerHTML = `
+    <div class="card">
+      <h3><span class="ic">📽</span>簡報翻頁器</h3>
+      <div class="deck" data-deck="${si}">
+        ${sec.slides.map((s,i)=>`<div class="sl${i===0?' on':''}" data-i="${i}">
+          <div class="eyebrow">${s.eb}</div><h4>${s.h}</h4>${s.html}</div>`).join('')}
+      </div>
+      <div class="nav">
+        <button class="btn" data-nav="prev" data-s="${si}">◀ 上一張</button>
+        <span class="pg" id="pg-${si}">1 / ${sec.slides.length}</span>
+        <button class="btn" data-nav="next" data-s="${si}">下一張 ▶</button>
+      </div>
+      <div class="dots" id="dots-${si}">
+        ${sec.slides.map((_,i)=>`<button class="dot${i===0?' on':''}" data-s="${si}" data-i="${i}"></button>`).join('')}
+      </div>
+    </div>
+    <div class="card">
+      <h3><span class="ic">🎯</span>Canvas 互動視覺化<span style="font-size:14px;color:var(--soft);font-weight:400;">　${sec.vizTitle}</span></h3>
+      <div class="cv-wrap">
+        <canvas class="viz" data-viz="${sec.viz}" data-si="${si}"></canvas>
+        <div class="ctrl" data-ctrl="${si}"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3><span class="ic">✅</span>形成性評量</h3>
+      ${sec.fa.map((f,i)=>`<div class="q" data-fa="${si}-${i}">
+        <div class="qt"><span class="qn">Q${i+1}</span>${f.q}</div>
+        <div class="opts">${f.o.map((o,oi)=>`<button class="opt" data-si="${si}" data-qi="${i}" data-oi="${oi}">${o}</button>`).join('')}</div>
+        <div class="fb" id="fb-${si}-${i}"></div>
+      </div>`).join('')}
+    </div>
+    <div class="card">
+      <h3><span class="ic">📊</span>資訊圖表</h3>
+      <div class="info">
+        ${sec.info.map(c=>`<div class="icard"><div class="big" style="color:${c.c}">${c.big}</div><div class="cap">${c.cap}</div></div>`).join('')}
+      </div>
+    </div>`;
+  wrap.appendChild(p);
+});
+
+const qp = document.createElement('div');
+qp.className='panel'; qp.dataset.p='3';
+qp.innerHTML = `<div class="card"><h3><span class="ic">📝</span>題型測驗　<span style="font-size:14px;color:var(--soft);font-weight:400;">單選 · 是非 · 填充，共 ${QUIZ.length} 題</span></h3>
+  <div id="quizBox"></div>
+  <div style="display:flex;gap:10px;align-items:center;margin-top:14px;flex-wrap:wrap;">
+    <button class="btn" id="gradeBtn" style="background:rgba(242,217,121,.2);border-color:var(--yellow);color:var(--yellow);font-weight:700;">📊 批改並看成績</button>
+    <button class="btn" id="resetQuiz">🔄 重做</button>
+    <div class="readout" id="score" style="display:none;"></div>
+  </div></div>
+  <div class="card"><h3><span class="ic">📋</span>公式速查表</h3>
+    <div class="frow"><div class="flab">不等式</div><div class="fval">&gt;、&lt;、≥、≤ 連接，解是<b>範圍</b></div></div>
+    <div class="frow"><div class="flab">&gt;、&lt;</div><div class="fval">不含端點（空心 ○）</div></div>
+    <div class="frow"><div class="flab">≥、≤</div><div class="fval">含端點（實心 ●）</div></div>
+    <div class="frow"><div class="flab">超過/少於</div><div class="fval">&gt;、&lt;（不含）</div></div>
+    <div class="frow"><div class="flab">至少/至多</div><div class="fval">≥、≤（含）</div></div>
+    <div class="frow"><div class="flab">判斷解</div><div class="fval">代入看成不成立（嚴格 &gt; 時等於不算）</div></div>
+    <div class="frow"><div class="flab">數線圓點</div><div class="fval">有等號實心、沒等號空心</div></div>
+    <div class="frow"><div class="flab">數線箭頭</div><div class="fval">大於向右、小於向左</div></div>
+    <div class="frow"><div class="flab">加減</div><div class="fval">方向<b>不變</b></div></div>
+    <div class="frow"><div class="flab">乘除正數</div><div class="fval">方向<b>不變</b></div></div>
+    <div class="frow"><div class="flab">⚠️ 乘除負數</div><div class="fval">方向<b>翻轉</b>（本章最重要）</div></div>
+    <div class="frow"><div class="flab">|x| ≤ a</div><div class="fval">−a ≤ x ≤ a</div></div>
+    <div class="frow"><div class="flab">標準 ± 誤差</div><div class="fval">|實測 − 標準| ≤ 誤差</div></div>
+    <div class="frow"><div class="flab">⚠️ a&gt;b ⟹ a²&gt;b²</div><div class="fval">有負數時<b>不成立</b>（反例 1&gt;−3）</div></div>
+  </div>`;
+wrap.appendChild(qp);
+
+const gp = document.createElement('div');
+gp.className='panel'; gp.dataset.p='4';
+gp.innerHTML = `<div class="card"><h3><span class="ic">🎮</span>闖關遊戲　<span style="font-size:14px;color:var(--soft);font-weight:400;">6 關挑戰 · 每題 20 秒 · 連擊與速度都有加分</span></h3>
+  <div class="gscreen on" id="gStart">
+    <div style="text-align:center;font-size:clamp(15px,2vw,18px);line-height:1.8;">
+      闖過 <b class="hl">7</b> 關，每關 1 題，每題 <b class="hl">20 秒</b>。<br>
+      計分：基礎 <b class="hl">10</b> 分 + 連擊獎勵（最多 <b class="hl">5</b>）+ 速度獎勵（最多 <b class="hl">5</b>）＝ 單題最高 <b class="hl">20</b> 分</div>
+    <div class="lvchips" id="gStartChips"></div>
+    <div style="text-align:center;"><button class="btn" id="gGo" style="background:rgba(242,217,121,.25);border-color:var(--yellow);color:var(--yellow);font-weight:700;font-size:16px;padding:10px 24px;">🚀 開始挑戰</button></div>
+  </div>
+  <div class="gscreen" id="gPlay">
+    <div class="hud">
+      <div class="st">關卡<b id="hLv">1/7</b></div>
+      <div class="st">分數<b id="hSc">0</b></div>
+      <div class="st">連擊<b id="hStk">0</b></div>
+      <div class="st">剩餘<b id="hT">20</b></div>
+    </div>
+    <div class="tbar"><div class="tfill" id="tFill"></div></div>
+    <div class="lvchips" id="gChips"></div>
+    <div class="gq" id="gQ"></div>
+    <div class="gopts" id="gO"></div>
+    <div class="gfb" id="gFb"></div>
+    <div style="text-align:center;margin-top:12px;"><button class="btn" id="gNext" style="display:none;">下一關 ▶</button></div>
+  </div>
+  <div class="gscreen" id="gEnd">
+    <div class="rank" id="gRank">🏆</div>
+    <div style="text-align:center;font-size:clamp(17px,2.6vw,22px);font-family:'Noto Serif TC';" id="gFinal"></div>
+    <div style="text-align:center;color:var(--soft);margin-top:8px;" id="gStats"></div>
+    <div style="text-align:center;margin-top:16px;"><button class="btn" id="gAgain" style="background:rgba(242,217,121,.25);border-color:var(--yellow);color:var(--yellow);font-weight:700;">🔄 再挑戰一次</button></div>
+  </div></div>`;
+wrap.appendChild(gp);
+document.getElementById('gStartChips').innerHTML = GAME.map((g,i)=>`<div class="lvchip">第${i+1}關 ${g.name}</div>`).join('');
+
+const qb = document.getElementById('quizBox');
+QUIZ.forEach((q,i)=>{
+  const d = document.createElement('div'); d.className='q';
+  let body='';
+  if(q.type==='choice') body = `<div class="opts">${q.o.map((o,oi)=>`<button class="opt" data-quiz="${i}" data-oi="${oi}">${o}</button>`).join('')}</div>`;
+  else if(q.type==='tf') body = `<div class="opts" style="flex-direction:row;gap:10px;">
+      <button class="opt" data-quiz="${i}" data-oi="1" style="flex:1;">⭕ 對</button>
+      <button class="opt" data-quiz="${i}" data-oi="0" style="flex:1;">❌ 錯</button></div>`;
+  else body = `<div><input class="fill" data-quiz="${i}" placeholder="?"></div>`;
+  d.innerHTML = `<div class="qt"><span class="qn">${i+1}</span>
+    <span style="font-size:12px;color:var(--soft);border:1px solid rgba(243,239,226,.25);border-radius:6px;padding:1px 6px;margin-right:6px;">
+    ${q.type==='choice'?'單選':q.type==='tf'?'是非':'填充'}</span>${q.q}</div>${body}
+    <div class="fb" id="qfb-${i}"></div>`;
+  qb.appendChild(d);
+});
+
+document.getElementById('tabs').addEventListener('click', e=>{
+  const t = e.target.closest('.tab'); if(!t) return;
+  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on', x===t));
+  document.querySelectorAll('.panel').forEach(x=>x.classList.toggle('on', x.dataset.p===t.dataset.p));
+  document.getElementById('goalCard').style.display = (t.dataset.p==='4')?'none':'';
+  window.scrollTo({top:0,behavior:'smooth'});
+  setTimeout(resizeAll, 60);
+});
+
+const cur = DATA.map(()=>0);
+function showSlide(si, i){
+  const deck = document.querySelector(`[data-deck="${si}"]`);
+  const sl = deck.querySelectorAll('.sl');
+  i = Math.max(0, Math.min(sl.length-1, i));
+  cur[si] = i;
+  sl.forEach((s,k)=>s.classList.toggle('on', k===i));
+  document.getElementById('pg-'+si).textContent = `${i+1} / ${sl.length}`;
+  document.querySelectorAll(`#dots-${si} .dot`).forEach((d,k)=>d.classList.toggle('on', k===i));
+}
+document.addEventListener('click', e=>{
+  const n = e.target.closest('[data-nav]');
+  if(n){ const si=+n.dataset.s; showSlide(si, cur[si] + (n.dataset.nav==='next'?1:-1)); return; }
+  const d = e.target.closest('.dot');
+  if(d){ showSlide(+d.dataset.s, +d.dataset.i); return; }
+});
+document.addEventListener('keydown', e=>{
+  const p = document.querySelector('.panel.on'); if(!p) return;
+  const si = +p.dataset.p; if(si>=DATA.length) return;
+  if(e.key==='ArrowRight') showSlide(si, cur[si]+1);
+  if(e.key==='ArrowLeft') showSlide(si, cur[si]-1);
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.opt[data-si]'); if(!o) return;
+  const si=+o.dataset.si, qi=+o.dataset.qi, oi=+o.dataset.oi;
+  const f = DATA[si].fa[qi];
+  const box = document.querySelector(`[data-fa="${si}-${qi}"]`);
+  box.querySelectorAll('.opt').forEach((b,k)=>{
+    b.disabled = true;
+    if(k===f.a) b.classList.add('right'); else if(k===oi) b.classList.add('wrong');
+  });
+  const fb = document.getElementById(`fb-${si}-${qi}`);
+  const ok = oi===f.a;
+  fb.className = 'fb on ' + (ok?'ok':'no');
+  fb.innerHTML = (ok?'✅ <b>答對了！</b> ':'❌ <b>再想想。</b> ') + f.e;
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.exo');
+  if(o && !o.disabled){
+    const box = o.closest('.exq');
+    const ans = +box.dataset.a, pick = +o.dataset.i;
+    if(pick === ans){
+      box.querySelectorAll('.exo').forEach(b=>{ b.disabled=true; if(+b.dataset.i===ans) b.classList.add('right'); });
+      box.querySelector('.exsol').classList.add('on');
+      box.querySelector('.exlock').classList.add('hide');
+    } else {
+      o.classList.add('wrong','shake');
+      setTimeout(()=>o.classList.remove('shake'), 420);
+      o.disabled = true;
+      const lock = box.querySelector('.exlock');
+      lock.innerHTML = '🔒 再想想 —— 答對才會顯示詳解'; lock.style.color='var(--pink)';
+    }
+  }
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.opt[data-quiz]'); if(!o) return;
+  const i = +o.dataset.quiz;
+  o.parentElement.querySelectorAll('.opt').forEach(b=>b.classList.remove('right','wrong'));
+  o.classList.add('right'); o.dataset.sel='1';
+  o.parentElement.querySelectorAll('.opt').forEach(b=>{ if(b!==o) delete b.dataset.sel; });
+});
+document.getElementById('gradeBtn').addEventListener('click', ()=>{
+  let right=0;
+  QUIZ.forEach((q,i)=>{
+    const fb = document.getElementById('qfb-'+i);
+    let ok=false, picked=null;
+    if(q.type==='fill'){
+      const inp = document.querySelector(`.fill[data-quiz="${i}"]`);
+      const v = (inp.value||'').trim().replace(/−/g,'-').replace(/\s/g,'');
+      ok = q.a.some(a=>a.replace(/−/g,'-').replace(/\s/g,'')===v);
+      inp.style.borderBottomColor = ok?'var(--green)':'var(--pink)';
+    } else {
+      const sel = document.querySelector(`.opt[data-quiz="${i}"][data-sel="1"]`);
+      if(sel){ picked=+sel.dataset.oi; ok = (q.type==='tf') ? (picked===1)===q.a : picked===q.a; }
+      document.querySelectorAll(`.opt[data-quiz="${i}"]`).forEach(b=>{
+        b.classList.remove('right','wrong');
+        const bi=+b.dataset.oi;
+        const isAns = (q.type==='tf') ? ((bi===1)===q.a) : (bi===q.a);
+        if(isAns) b.classList.add('right'); else if(picked===bi) b.classList.add('wrong');
+      });
+    }
+    if(ok) right++;
+    fb.className='fb on '+(ok?'ok':'no');
+    fb.innerHTML = (ok?'✅ <b>正確</b> ':'❌ <b>錯誤</b> ') + q.e;
+  });
+  const s = document.getElementById('score');
+  const pct = Math.round(right/QUIZ.length*100);
+  s.style.display='block';
+  s.innerHTML = `成績：<b>${right} / ${QUIZ.length}</b>　（${pct} 分）　${pct>=80?'🏆 很棒！':pct>=60?'💪 再加油':'📖 建議重看重點'}`;
+});
+document.getElementById('resetQuiz').addEventListener('click', ()=>{
+  document.querySelectorAll('.opt[data-quiz]').forEach(b=>{b.classList.remove('right','wrong'); delete b.dataset.sel;});
+  document.querySelectorAll('.fill').forEach(i=>{i.value=''; i.style.borderBottomColor='var(--yellow)';});
+  document.querySelectorAll('[id^="qfb-"]').forEach(f=>f.className='fb');
+  document.getElementById('score').style.display='none';
+});
+
+/* ===== 闖關遊戲 ===== */
+const G = {lv:0, score:0, streak:0, best:0, t:20, timer:null, cur:null, answered:false};
+function gShow(id){ ['gStart','gPlay','gEnd'].forEach(x=>document.getElementById(x).classList.toggle('on', x===id)); }
+function gChips(){
+  document.getElementById('gChips').innerHTML = GAME.map((g,i)=>
+    `<div class="lvchip ${i<G.lv?'done':i===G.lv?'now':''}">${i+1}. ${g.name}</div>`).join('');
+}
+function gLoad(){
+  if(G.lv>=GAME.length){ gFinish(); return; }
+  G.answered=false; G.t=20;
+  const bank = GAME[G.lv].qs;
+  G.cur = bank[Math.floor(Math.random()*bank.length)];
+  document.getElementById('hLv').textContent = (G.lv+1)+'/'+GAME.length;
+  document.getElementById('hSc').textContent = G.score;
+  document.getElementById('hStk').textContent = G.streak;
+  document.getElementById('gQ').innerHTML = `<span style="color:var(--blue);font-size:15px;">第 ${G.lv+1} 關 · ${GAME[G.lv].name}</span><br>${G.cur.q}`;
+  document.getElementById('gO').innerHTML = G.cur.o.map((o,i)=>
+    `<button class="gopt" data-g="${i}">${'ABCD'[i]}. ${o}</button>`).join('');
+  document.getElementById('gFb').className='gfb';
+  document.getElementById('gNext').style.display='none';
+  gChips();
+  clearInterval(G.timer);
+  G.timer = setInterval(()=>{
+    G.t -= 0.1;
+    document.getElementById('hT').textContent = Math.max(0,G.t).toFixed(0);
+    document.getElementById('tFill').style.width = Math.max(0,G.t/20*100)+'%';
+    if(G.t<=0){ clearInterval(G.timer); gAnswer(-1); }
+  },100);
+}
+function gAnswer(pick){
+  if(G.answered) return;
+  G.answered = true; clearInterval(G.timer);
+  const ans = G.cur.a, ok = pick===ans;
+  document.querySelectorAll('.gopt').forEach((b,i)=>{
+    b.disabled=true;
+    if(i===ans) b.classList.add('right'); else if(i===pick) b.classList.add('wrong');
+  });
+  let gain=0, sb=0, tb=0;
+  if(ok){
+    G.streak++; G.best=Math.max(G.best,G.streak);
+    sb = Math.min(5, G.streak-1); tb = Math.min(5, Math.floor(G.t/4));
+    gain = 10+sb+tb; G.score += gain;
+  } else { G.streak = 0; }
+  document.getElementById('hSc').textContent = G.score;
+  document.getElementById('hStk').textContent = G.streak;
+  const fb = document.getElementById('gFb');
+  fb.className = 'gfb on '+(ok?'ok':'no');
+  fb.innerHTML = (ok? `✅ <b>答對！+${gain} 分</b>（基礎10 + 連擊${sb} + 速度${tb}）<br>`
+                    : (pick===-1?'⏰ <b>時間到！</b><br>':'❌ <b>答錯了</b><br>')) + G.cur.e;
+  document.getElementById('gNext').style.display='inline-block';
+  document.getElementById('gNext').textContent = (G.lv>=GAME.length-1)?'看成績 🏁':'下一關 ▶';
+}
+function gFinish(){
+  clearInterval(G.timer);
+  const max = GAME.length*20, pct = Math.round(G.score/max*100);
+  const rank = pct>=85?['🏆','數論大師']:pct>=70?['🥇','高手']:pct>=50?['🥈','不錯']:['📖','再加油'];
+  document.getElementById('gRank').textContent = rank[0];
+  document.getElementById('gFinal').innerHTML = `<b class="hl">${G.score}</b> / ${max} 分　·　${rank[1]}`;
+  document.getElementById('gStats').innerHTML = `最高連擊 <b class="hl">${G.best}</b>　·　完成 ${GAME.length} 關`;
+  gShow('gEnd');
+}
+document.getElementById('gGo').addEventListener('click', ()=>{ G.lv=0;G.score=0;G.streak=0;G.best=0; gShow('gPlay'); gLoad(); });
+document.getElementById('gAgain').addEventListener('click', ()=>{ G.lv=0;G.score=0;G.streak=0;G.best=0; gShow('gPlay'); gLoad(); });
+document.getElementById('gNext').addEventListener('click', ()=>{ G.lv++; gLoad(); });
+document.addEventListener('click', e=>{ const b=e.target.closest('.gopt'); if(!b||b.disabled) return; gAnswer(+b.dataset.g); });
+
+/* ===== Canvas ===== */
+const VIZ = {}; let DPR=1;
+
+function numberline(ctx, w, y, lo, hi){
+  const L=26, R=w-26;
+  const X=v=>L+(v-lo)/(hi-lo)*(R-L);
+  ctx.strokeStyle='rgba(243,239,226,.7)'; ctx.lineWidth=2;
+  ctx.beginPath(); ctx.moveTo(L,y); ctx.lineTo(R,y); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(R,y); ctx.lineTo(R-8,y-4); ctx.moveTo(R,y); ctx.lineTo(R-8,y+4); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(L,y); ctx.lineTo(L+8,y-4); ctx.moveTo(L,y); ctx.lineTo(L+8,y+4); ctx.stroke();
+  ctx.fillStyle='rgba(243,239,226,.55)'; ctx.font='10px "Noto Serif TC"'; ctx.textAlign='center';
+  for(let v=lo+1; v<hi; v++){
+    ctx.strokeStyle='rgba(243,239,226,.35)'; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(X(v),y-3); ctx.lineTo(X(v),y+3); ctx.stroke();
+    if(v%2===0) ctx.fillText(String(v), X(v), y+16);
+  }
+  return X;
+}
+/* ① 數線繪製器 */
+const INEQ=[
+  {op:'>', val:2,  s:'x > 2'},
+  {op:'>=',val:-1, s:'x ≥ −1'},
+  {op:'<', val:3,  s:'x < 3'},
+  {op:'<=',val:-3, s:'x ≤ −3'},
+  {op:'>', val:0,  s:'x > 0'},
+  {op:'<=',val:4,  s:'x ≤ 4'},
+];
+/* ② 性質判斷 */
+const PROP=[
+  {q:'a > b，則 a+3 ? b+3', op:'加 3（不變）', ans:'a+3 > b+3', ok:true, flip:false},
+  {q:'a > b，則 −2a ? −2b', op:'乘 −2（負數，翻轉！）', ans:'−2a < −2b', ok:false, flip:true},
+  {q:'a > b，則 a/3 ? b/3', op:'除 3（正數，不變）', ans:'a/3 > b/3', ok:true, flip:false},
+  {q:'a > b，則 a−5 ? b−5', op:'減 5（不變）', ans:'a−5 > b−5', ok:true, flip:false},
+  {q:'a > b，則 −3a ? −3b', op:'乘 −3（負數，翻轉！）', ans:'−3a < −3b', ok:false, flip:true},
+  {q:'a < b、c < 0，ac ? bc', op:'乘 c（c<0 負數，翻轉！）', ans:'ac > bc', ok:false, flip:true},
+];
+/* ③ 範圍運算 */
+const RANGE=[
+  {lo:-3, hi:5, loOp:'<', hiOp:'<=', k:-2, rs:'−2x', calc:'兩邊乘 −2（負數，翻轉！）'},
+  {lo:2, hi:6, loOp:'<=', hiOp:'<', k:-1, rs:'−x', calc:'兩邊乘 −1（負數，翻轉！）'},
+  {lo:-4, hi:2, loOp:'<', hiOp:'<', k:3, rs:'3x', calc:'兩邊乘 3（正數，不變）'},
+  {lo:-1, hi:3, loOp:'<', hiOp:'<=', k:2, rs:'2x', calc:'兩邊乘 2（正數，不變）'},
+];
+
+function initViz(cv){
+  const si=+cv.dataset.si, kind=cv.dataset.viz;
+  const ctx=cv.getContext('2d');
+  const st=VIZ[si]={kind,cv,ctx};
+  const ctrl=document.querySelector(`[data-ctrl="${si}"]`);
+  if(kind==='nline'){
+    st.i=0;
+    ctrl.innerHTML=`<div class="readout" id="ro-${si}"></div>
+      <button class="btn" data-t="next" data-si="${si}" style="background:rgba(242,217,121,.2);border-color:var(--yellow);color:var(--yellow);font-weight:700;">🔀 換一個不等式</button>`;
+  } else if(kind==='prop'){
+    st.i=0; st.show=false;
+    ctrl.innerHTML=`<div class="readout" id="ro-${si}"></div>
+      <button class="btn" data-t="rev" data-si="${si}" style="background:rgba(242,217,121,.2);border-color:var(--yellow);color:var(--yellow);font-weight:700;">🔍 揭曉（會翻轉嗎？）</button>
+      <button class="btn" data-t="next" data-si="${si}">下一題 ▶</button>`;
+  } else {
+    st.i=0; st.show=false;
+    ctrl.innerHTML=`<div class="readout" id="ro-${si}"></div>
+      <button class="btn" data-t="rev" data-si="${si}" style="background:rgba(242,217,121,.2);border-color:var(--yellow);color:var(--yellow);font-weight:700;">🔍 求範圍</button>
+      <button class="btn" data-t="next" data-si="${si}">下一題 ▶</button>`;
+  }
+  draw(si);
+}
+
+function drawNline(st, ctx, w, h, ro){
+  const E=INEQ[st.i], lo=-6, hi=6;
+  ctx.textAlign='center';
+  ctx.fillStyle='rgba(242,217,121,.85)'; ctx.font='bold 14px "Noto Sans TC"';
+  ctx.fillText(`${E.s} 的解集合`, w/2, 20);
+  const X=numberline(ctx, w, h*0.5, lo, hi);
+  const ge = (E.op==='>=' || E.op==='<=');
+  const right = (E.op==='>' || E.op==='>=');
+  const col = right? '#a6d6a0' : '#98c9dc';
+  const px=X(E.val), y=h*0.5;
+  // 箭頭方向
+  ctx.strokeStyle=col; ctx.lineWidth=4;
+  ctx.beginPath();
+  if(right) ctx.moveTo(px, y), ctx.lineTo(w-30, y);
+  else ctx.moveTo(px, y), ctx.lineTo(30, y);
+  ctx.stroke();
+  // 圓點
+  ctx.beginPath(); ctx.arc(px, y, 6.5, 0, 7);
+  if(ge){ ctx.fillStyle=col; ctx.fill(); }
+  else { ctx.fillStyle='#16281c'; ctx.fill(); ctx.strokeStyle=col; ctx.lineWidth=2.5; ctx.stroke(); }
+  ctx.fillStyle=col; ctx.font='bold 13px "Noto Serif TC"';
+  ctx.fillText(String(E.val), px, y-14);
+  // 說明
+  ctx.fillStyle='rgba(243,239,226,.8)'; ctx.font='13px "Noto Sans TC"';
+  ctx.fillText(`${ge?'有等號 → 實心 ●':'沒等號 → 空心 ○'}　·　${right?'大於 → 向右':'小於 → 向左'}`, w/2, h-10);
+  ro.innerHTML=`<b>${E.s}</b>　→　${ge?'<b style="color:var(--green)">實心 ●</b>（含端點）':'<b style="color:var(--blue)">空心 ○</b>（不含端點）'}，向<b>${right?'右':'左'}</b>`;
+}
+
+function drawProp(st, ctx, w, h, ro){
+  const E=PROP[st.i];
+  ctx.textAlign='center';
+  ctx.fillStyle='rgba(242,217,121,.85)'; ctx.font='bold 13px "Noto Sans TC"';
+  ctx.fillText(`第 ${st.i+1} / ${PROP.length} 題`, w/2, 16);
+  ctx.fillStyle='#f3efe2'; ctx.font='bold 20px "Noto Serif TC"';
+  ctx.fillText(E.q, w/2, 52);
+  if(!st.show){
+    ctx.fillStyle='rgba(243,239,226,.4)'; ctx.font='13px "Noto Sans TC"';
+    ctx.fillText('🔒 先想：這一步乘除的是正數還是負數？', w/2, 90);
+    ctx.fillText('負數 → 不等號翻轉！再按「揭曉」', w/2, 112);
+  } else {
+    const col = E.flip? '#eda0a8':'#a6d6a0';
+    ctx.fillStyle='rgba(243,239,226,.75)'; ctx.font='14px "Noto Sans TC"';
+    ctx.fillText(E.op, w/2, 86);
+    ctx.fillStyle=col; ctx.font='bold 22px "Noto Serif TC"';
+    ctx.fillText(E.ans, w/2, 120);
+    ctx.fillStyle=col; ctx.font='bold 13px "Noto Sans TC"';
+    ctx.fillText(E.flip? '⚠️ 方向翻轉了！':'方向不變', w/2, 146);
+  }
+  ro.innerHTML = st.show
+    ? `<b>${E.q}</b>　→　${E.op}　→　<b style="color:${E.flip?'var(--pink)':'var(--green)'}">${E.ans}</b>${E.flip?'（翻轉！）':'（不變）'}`
+    : `<b>${E.q}</b>　<span style="color:rgba(243,239,226,.5)">—— 先想「乘除的是正數還是負數？」再揭曉</span>`;
+}
+
+function drawRange(st, ctx, w, h, ro){
+  const E=RANGE[st.i];
+  // 原範圍與新範圍
+  const nlo=E.lo*E.k, nhi=E.hi*E.k;
+  const flip = E.k<0;
+  // 新範圍排序
+  let a=nlo, b=nhi, aOp=E.loOp, bOp=E.hiOp;
+  if(flip){ // 翻轉：小的變大，端點符號跟著端點走
+    a=nhi; b=nlo;
+    // 原 lo 那端(loOp) 對應到 nlo，翻轉後 nlo 是較大端(b)
+    aOp = E.hiOp==='<'?'<':'<='; // 較小端來自原 hi 端
+    bOp = E.loOp==='<'?'<':'<='; // 較大端來自原 lo 端
+  }
+  const oOp = s=>s;
+  ctx.textAlign='center';
+  ctx.fillStyle='rgba(242,217,121,.85)'; ctx.font='bold 13px "Noto Sans TC"';
+  ctx.fillText(`已知 ${E.lo} ${E.loOp==='<'?'<':'≤'} x ${E.hiOp==='<'?'<':'≤'} ${E.hi}，求 ${E.rs}`, w/2, 18);
+  ctx.fillStyle='#f3efe2'; ctx.font='16px "Noto Serif TC"';
+  ctx.fillText(`原範圍：${E.lo} ${E.loOp==='<'?'<':'≤'} x ${E.hiOp==='<'?'<':'≤'} ${E.hi}`, w/2, 50);
+  if(!st.show){
+    ctx.fillStyle='rgba(243,239,226,.4)'; ctx.font='13px "Noto Sans TC"';
+    ctx.fillText('🔒 先自己算（乘負數要翻！），再按「求範圍」', w/2, 92);
+    ctx.fillText(E.calc, w/2, 114);
+  } else {
+    const col = flip?'#eda0a8':'#a6d6a0';
+    ctx.fillStyle='rgba(243,239,226,.7)'; ctx.font='13px "Noto Sans TC"';
+    ctx.fillText(E.calc, w/2, 78);
+    ctx.fillStyle=col; ctx.font='bold 20px "Noto Serif TC"';
+    const res = `${a} ${aOp==='<'?'<':'≤'} ${E.rs} ${bOp==='<'?'<':'≤'} ${b}`;
+    ctx.fillText(res, w/2, 112);
+    ctx.fillStyle=col; ctx.font='bold 13px "Noto Sans TC"';
+    ctx.fillText(flip?'⚠️ 乘負數 → 方向與端點都翻轉':'乘正數 → 方向不變', w/2, 138);
+  }
+  const res = `${a} ${aOp==='<'?'<':'≤'} ${E.rs} ${bOp==='<'?'<':'≤'} ${b}`;
+  ro.innerHTML = st.show
+    ? `原 ${E.lo} ${E.loOp==='<'?'<':'≤'} x ${E.hiOp==='<'?'<':'≤'} ${E.hi}　→　${E.calc}　→　<b style="color:${flip?'var(--pink)':'var(--green)'}">${res}</b>`
+    : `已知 ${E.lo} ${E.loOp==='<'?'<':'≤'} x ${E.hiOp==='<'?'<':'≤'} ${E.hi}，求 ${E.rs}　<span style="color:rgba(243,239,226,.5)">—— 先自己算（乘負要翻！）</span>`;
+}
+
+function draw(si){
+  const st=VIZ[si]; if(!st) return;
+  const {cv,ctx,kind}=st, w=cv.width/DPR, h=cv.height/DPR;
+  ctx.clearRect(0,0,w,h);
+  const ro=document.getElementById('ro-'+si);
+  if(kind==='nline') drawNline(st,ctx,w,h,ro);
+  else if(kind==='prop') drawProp(st,ctx,w,h,ro);
+  else if(kind==='range') drawRange(st,ctx,w,h,ro);
+}
+
+document.addEventListener('click', e=>{
+  const btn=e.target.closest('[data-t]'); if(!btn) return;
+  const si=+btn.dataset.si, st=VIZ[si]; if(!st) return;
+  const t=btn.dataset.t;
+  if(st.kind==='nline'){
+    if(t==='next') st.i=(st.i+1)%INEQ.length;
+  } else if(st.kind==='prop'){
+    if(t==='rev') st.show=true;
+    if(t==='next'){ st.i=(st.i+1)%PROP.length; st.show=false; }
+  } else {
+    if(t==='rev') st.show=true;
+    if(t==='next'){ st.i=(st.i+1)%RANGE.length; st.show=false; }
+  }
+  draw(si);
+});
+
+function resizeAll(){
+  DPR = Math.min(2, window.devicePixelRatio||1);
+  document.querySelectorAll('canvas.viz').forEach(cv=>{
+    const w = cv.clientWidth || cv.parentElement.clientWidth;
+    const h = (cv.dataset.viz==='nline') ? 176 : (cv.dataset.viz==='prop' ? 176 : 176);
+    cv.width=w*DPR; cv.height=h*DPR; cv.style.height=h+'px';
+    cv.getContext('2d').setTransform(DPR,0,0,DPR,0,0);
+  });
+  Object.keys(VIZ).forEach(k=>draw(+k));
+}
+document.querySelectorAll('canvas.viz').forEach(initViz);
+window.addEventListener('resize', resizeAll);
+resizeAll();
+</script>
+<div class="hint">← → 鍵可翻頁　·　Canvas 用按鈕互動　·　支援平板觸控</div>
+</body></html>

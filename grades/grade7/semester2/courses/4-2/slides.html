@@ -1,0 +1,410 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>七下 4-2 一元一次不等式的解法與應用｜授課簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--chalk-soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);padding:24px 14px;}
+.deck{max-width:1060px;margin:0 auto;}
+.print-hint{text-align:center;color:rgba(243,239,226,0.4);font-size:13px;padding:6px 0 22px;}
+.print-hint b{color:var(--yellow);}
+.slide{position:relative;min-height:576px;margin:0 auto 26px;padding:44px 52px;
+ background:radial-gradient(ellipse at 18% 12%,rgba(255,255,255,0.05),transparent 45%),
+  radial-gradient(ellipse at 82% 88%,rgba(255,255,255,0.035),transparent 45%),
+  radial-gradient(ellipse at 60% 40%,rgba(120,160,130,0.10),transparent 60%),
+  linear-gradient(160deg,var(--board) 0%,var(--board2) 100%);
+ border-radius:14px;box-shadow:0 10px 34px rgba(0,0,0,0.55);
+ border:1px solid rgba(242,217,121,0.14);overflow:hidden;display:flex;flex-direction:column;}
+.slide::before{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;
+ background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.014) 40px,rgba(255,255,255,0.014) 41px),
+  radial-gradient(circle at 30% 72%,rgba(255,255,255,0.03),transparent 8%),
+  radial-gradient(circle at 76% 24%,rgba(255,255,255,0.025),transparent 7%);}
+.slide::after{content:attr(data-pg);position:absolute;bottom:15px;right:26px;font-family:'Caveat',cursive;font-size:20px;color:rgba(243,239,226,0.4);}
+.tag{position:absolute;top:20px;right:26px;font-family:'Caveat',cursive;font-size:22px;color:var(--pink);transform:rotate(4deg);}
+.eyebrow{font-family:'Caveat',cursive;font-size:25px;color:var(--yellow);letter-spacing:1px;margin-bottom:8px;opacity:0.92;}
+.slide h1{font-family:'Noto Serif TC',serif;font-size:46px;font-weight:900;line-height:1.28;letter-spacing:1px;
+ text-shadow:0 0 1px rgba(243,239,226,0.5),1px 1px 0 rgba(0,0,0,0.2);}
+.slide h2{font-family:'Noto Serif TC',serif;font-size:33px;font-weight:900;color:var(--yellow);
+ margin-bottom:20px;padding-bottom:11px;border-bottom:2px dashed rgba(242,217,121,0.4);
+ text-shadow:0 0 1px rgba(242,217,121,0.4);}
+.slide p{font-size:20px;line-height:1.85;margin-bottom:12px;}
+.big-center{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;}
+.big-center .lead,.lead{font-family:'Caveat',cursive;font-size:30px;color:var(--blue);letter-spacing:1px;margin-top:12px;}
+ul{list-style:none;margin:8px 0;}
+li{font-size:21px;line-height:1.95;padding-left:32px;position:relative;margin-bottom:4px;}
+li::before{content:'\2726';position:absolute;left:4px;color:var(--yellow);font-size:17px;top:3px;}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.34);border-radius:12px;padding:15px 21px;margin:12px 0;font-size:19px;line-height:1.8;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.38);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.38);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.34);}
+.eg{position:relative;background:rgba(0,0,0,0.24);border:1px solid rgba(242,217,121,0.2);border-radius:10px;padding:17px 22px;margin:12px 0;font-size:19px;}
+.eg::before{content:'';position:absolute;top:-8px;left:38px;width:58px;height:15px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.eg .q{color:var(--blue);font-weight:700;margin-bottom:8px;font-size:19px;}
+.eg .a{color:var(--green);font-weight:700;margin-top:6px;}
+.eg .stp{color:var(--chalk-soft);font-size:18px;margin:3px 0;}
+.tip{display:flex;gap:12px;align-items:flex-start;background:rgba(242,217,121,0.09);border:1.5px dashed rgba(242,217,121,0.45);border-radius:12px;padding:13px 18px;margin:10px 0;}
+.tip .ic{font-size:24px;line-height:1;}.tip .tx{font-size:18px;line-height:1.7;}
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:18px;}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.26);padding:10px 14px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.two{display:flex;gap:20px;}.two>div{flex:1;}
+svg{display:block;margin:6px auto;max-width:100%;}
+@media print{
+ body{background:#0a130d;padding:0;}
+ .deck{max-width:none;}
+ .print-hint{display:none;}
+ .slide{margin:0;border-radius:0;box-shadow:none;min-height:100vh;
+  page-break-after:always;break-after:page;padding:32px 44px;justify-content:center;}
+ .slide:last-child{page-break-after:auto;break-after:auto;}
+ .slide h1{font-size:40px;}
+ .slide h2{font-size:27px;margin-bottom:13px;padding-bottom:8px;}
+ .slide p{font-size:17px;line-height:1.55;margin-bottom:6px;}
+ li{font-size:17px;line-height:1.55;margin-bottom:1px;padding-left:26px;}
+ .eyebrow{font-size:21px;margin-bottom:5px;}
+ .big-center .lead,.lead{font-size:26px;}
+ .box{font-size:16px;padding:10px 16px;margin:6px 0;line-height:1.5;}
+ .eg{font-size:16px;padding:11px 16px;margin:6px 0;}
+ .tip{font-size:16px;padding:10px 14px;margin:6px 0;}
+ .tbl{font-size:15px;margin:6px 0;}
+ .tbl th,.tbl td{padding:6px 10px;}
+ svg{max-height:210px;}
+}
+</style></head><body><div class="deck">
+<div class="print-hint">共 <b>25</b> 張・列印時每張一頁（Ctrl+P → 橫向 → 背景圖形）</div>
+
+
+<!-- 1 -->
+<div class="slide" data-pg="1 / 25"><div class="tag">Start!</div><div class="big-center">
+<div class="eyebrow">國一下學期・第四章 一元一次不等式</div>
+<h1>4-2　解法與應用</h1>
+<div class="lead">會解方程式，就會解不等式 ——<br>只要記得一件事:<span style="color:#eda0a8;">乘除負數，方向翻轉</span></div>
+<div class="lead" style="font-size:21px;margin-top:8px;">−2x + 3 &gt; 11 → −2x &gt; 8 → <span style="color:#f2d979;">x &lt; −4</span>（翻！）</div>
+</div></div>
+
+<!-- 2 -->
+<div class="slide" data-pg="2 / 25"><div class="tag">目標</div><div class="body">
+<h2>本節學習目標</h2>
+<ul>
+<li>能用<span class="hl">移項法則</span>解一元一次不等式</li>
+<li>能正確處理 <span class="hl-r">⚠️ 乘除負數時不等號翻轉</span></li>
+<li>能解<span class="hl-b">含括號、含分母</span>的不等式</li>
+<li>能把文字（不超過/至少/超過…）<span class="hl">翻譯成不等式並列式</span></li>
+<li>能依情境對解做<span class="hl">整數限制</span>；能解<span class="hl-b">連立（雙邊）不等式取交集</span></li>
+</ul>
+<div class="box y">一句話:<span class="hl">解法和解方程式一模一樣，只有除以負係數那一步要翻轉。</span></div>
+</div></div>
+
+<!-- 3 -->
+<div class="slide" data-pg="3 / 25"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心觀念</div>
+<h2>解法流程:和方程式只差一步</h2>
+<table class="tbl">
+<tr><th style="width:20%;">步驟</th><th>做法</th></tr>
+<tr><td>① 去括號</td><td>用分配律展開</td></tr>
+<tr><td>② 去分母</td><td>兩邊乘 LCM（正數，方向不變）</td></tr>
+<tr><td>③ 移項合併</td><td>x 項一邊、常數一邊（移項變號）</td></tr>
+<tr><td>④ 除以係數</td><td class="hl-r">係數是負數 → ⚠️ 不等號翻轉</td></tr>
+<tr><td>⑤ 數線表示</td><td>空心/實心 + 箭頭</td></tr>
+</table>
+<div class="box y" style="text-align:center;font-size:20px;">
+唯一的差別在 <span class="hl">第 ④ 步</span> —— 其他步驟和解方程式完全一樣。</div>
+</div></div>
+
+<!-- 4 -->
+<div class="slide" data-pg="4 / 25"><div class="tag">避雷</div><div class="body">
+<div class="eyebrow">🔑 本章的靈魂</div>
+<h2>乘除負數，方向翻轉</h2>
+<div class="box y" style="text-align:center;font-size:24px;padding:18px;">
+<span class="fm">−2x ≤ 6</span>　<span style="color:var(--chalk-soft);">兩邊 ÷(−2)、翻轉</span>　→　<span class="fm hl">x ≥ −3</span></div>
+<div class="box g"><b>為什麼?用具體數字看:</b>
+<span class="fm">3 &gt; 2</span>，兩邊乘 −2 → <span class="fm">−6 &lt; −4</span>（大小顛倒！）</div><svg viewBox="0 0 560 70" width="78%" style="margin:6px auto;display:block;"><line x1="30" y1="40" x2="530" y2="40" stroke="rgba(243,239,226,0.7)" stroke-width="2"/><path d="M530 40 l-9 -5 M530 40 l-9 5" stroke="rgba(243,239,226,0.7)" stroke-width="2" fill="none"/><path d="M30 40 l9 -5 M30 40 l9 5" stroke="rgba(243,239,226,0.7)" stroke-width="2" fill="none"/><line x1="72" y1="36" x2="72" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><line x1="113" y1="36" x2="113" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><text x="113" y="60" font-family="Noto Serif TC" font-size="12" fill="rgba(243,239,226,0.6)" text-anchor="middle">-4</text><line x1="155" y1="36" x2="155" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><line x1="197" y1="36" x2="197" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><text x="197" y="60" font-family="Noto Serif TC" font-size="12" fill="rgba(243,239,226,0.6)" text-anchor="middle">-2</text><line x1="238" y1="36" x2="238" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><line x1="280" y1="36" x2="280" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><text x="280" y="60" font-family="Noto Serif TC" font-size="12" fill="rgba(243,239,226,0.6)" text-anchor="middle">0</text><line x1="322" y1="36" x2="322" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><line x1="363" y1="36" x2="363" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><text x="363" y="60" font-family="Noto Serif TC" font-size="12" fill="rgba(243,239,226,0.6)" text-anchor="middle">2</text><line x1="405" y1="36" x2="405" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><line x1="447" y1="36" x2="447" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><text x="447" y="60" font-family="Noto Serif TC" font-size="12" fill="rgba(243,239,226,0.6)" text-anchor="middle">4</text><line x1="488" y1="36" x2="488" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><circle cx="30" cy="40" r="6" fill="#eda0a8"/><text x="30" y="26" font-family="Noto Serif TC" font-size="13" fill="#eda0a8" text-anchor="middle">-6</text><circle cx="113" cy="40" r="6" fill="#98c9dc"/><text x="113" y="26" font-family="Noto Serif TC" font-size="13" fill="#98c9dc" text-anchor="middle">-4</text><circle cx="363" cy="40" r="6" fill="#98c9dc"/><text x="363" y="26" font-family="Noto Serif TC" font-size="13" fill="#98c9dc" text-anchor="middle">2</text><circle cx="405" cy="40" r="6" fill="#a6d6a0"/><text x="405" y="26" font-family="Noto Serif TC" font-size="13" fill="#a6d6a0" text-anchor="middle">3</text></svg><div class="box r" style="text-align:center;font-size:20px;">
+固定儀式:每次乘除前先問「<span class="hl">正數還是負數?負數 → 翻轉</span>」。</div>
+</div></div>
+
+<!-- 5 -->
+<div class="slide" data-pg="5 / 25"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 1　難度 ★☆☆</div>
+<h2>解 3x + 5 &gt; 14</h2>
+<div class="eg">
+<div class="q">解不等式：3x + 5 &gt; 14</div>
+<div class="stp"><b>移項</b>　3x &gt; 14 − 5 = 9</div>
+<div class="stp"><b>除以 3</b>（正數，方向不變）　<span class="fm hl">x &gt; 3</span></div>
+<div class="a">x &gt; 3</div>
+</div><svg viewBox="0 0 560 70" width="72%" style="margin:6px auto;display:block;"><line x1="30" y1="40" x2="530" y2="40" stroke="rgba(243,239,226,0.7)" stroke-width="2"/><path d="M530 40 l-9 -5 M530 40 l-9 5" stroke="rgba(243,239,226,0.7)" stroke-width="2" fill="none"/><path d="M30 40 l9 -5 M30 40 l9 5" stroke="rgba(243,239,226,0.7)" stroke-width="2" fill="none"/><line x1="72" y1="36" x2="72" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><line x1="113" y1="36" x2="113" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><text x="113" y="60" font-family="Noto Serif TC" font-size="12" fill="rgba(243,239,226,0.6)" text-anchor="middle">-4</text><line x1="155" y1="36" x2="155" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><line x1="197" y1="36" x2="197" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><text x="197" y="60" font-family="Noto Serif TC" font-size="12" fill="rgba(243,239,226,0.6)" text-anchor="middle">-2</text><line x1="238" y1="36" x2="238" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><line x1="280" y1="36" x2="280" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><text x="280" y="60" font-family="Noto Serif TC" font-size="12" fill="rgba(243,239,226,0.6)" text-anchor="middle">0</text><line x1="322" y1="36" x2="322" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><line x1="363" y1="36" x2="363" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><text x="363" y="60" font-family="Noto Serif TC" font-size="12" fill="rgba(243,239,226,0.6)" text-anchor="middle">2</text><line x1="405" y1="36" x2="405" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><line x1="447" y1="36" x2="447" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><text x="447" y="60" font-family="Noto Serif TC" font-size="12" fill="rgba(243,239,226,0.6)" text-anchor="middle">4</text><line x1="488" y1="36" x2="488" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><line x1="405" y1="40" x2="526" y2="40" stroke="#f2d979" stroke-width="4"/><circle cx="405" cy="40" r="6" fill="#16281c" stroke="#f2d979" stroke-width="2.5"/><text x="405" y="26" font-family="Noto Serif TC" font-size="13" fill="#f2d979" text-anchor="middle">3</text></svg><div class="box y" style="text-align:center;">3 處空心圓（&gt; 不含端點），向右箭頭。</div>
+</div></div>
+
+<!-- 6 -->
+<div class="slide" data-pg="6 / 25"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 2　難度 ★★☆　⚠️ 負係數</div>
+<h2>解 −2x + 3 ≤ 9</h2>
+<div class="eg">
+<div class="q">解不等式：−2x + 3 ≤ 9</div>
+<div class="stp"><b>移項</b>　−2x ≤ 9 − 3 = 6</div>
+<div class="stp"><b>除以 −2</b>（<span class="hl-r">負數！方向翻轉</span>）　≤ 變 ≥ → <span class="fm hl">x ≥ −3</span></div>
+<div class="a">x ≥ −3</div>
+</div><svg viewBox="0 0 560 70" width="72%" style="margin:6px auto;display:block;"><line x1="30" y1="40" x2="530" y2="40" stroke="rgba(243,239,226,0.7)" stroke-width="2"/><path d="M530 40 l-9 -5 M530 40 l-9 5" stroke="rgba(243,239,226,0.7)" stroke-width="2" fill="none"/><path d="M30 40 l9 -5 M30 40 l9 5" stroke="rgba(243,239,226,0.7)" stroke-width="2" fill="none"/><line x1="72" y1="36" x2="72" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><line x1="113" y1="36" x2="113" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><text x="113" y="60" font-family="Noto Serif TC" font-size="12" fill="rgba(243,239,226,0.6)" text-anchor="middle">-4</text><line x1="155" y1="36" x2="155" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><line x1="197" y1="36" x2="197" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><text x="197" y="60" font-family="Noto Serif TC" font-size="12" fill="rgba(243,239,226,0.6)" text-anchor="middle">-2</text><line x1="238" y1="36" x2="238" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><line x1="280" y1="36" x2="280" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><text x="280" y="60" font-family="Noto Serif TC" font-size="12" fill="rgba(243,239,226,0.6)" text-anchor="middle">0</text><line x1="322" y1="36" x2="322" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><line x1="363" y1="36" x2="363" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><text x="363" y="60" font-family="Noto Serif TC" font-size="12" fill="rgba(243,239,226,0.6)" text-anchor="middle">2</text><line x1="405" y1="36" x2="405" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><line x1="447" y1="36" x2="447" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><text x="447" y="60" font-family="Noto Serif TC" font-size="12" fill="rgba(243,239,226,0.6)" text-anchor="middle">4</text><line x1="488" y1="36" x2="488" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><line x1="155" y1="40" x2="526" y2="40" stroke="#a6d6a0" stroke-width="4"/><circle cx="155" cy="40" r="6" fill="#a6d6a0"/><text x="155" y="26" font-family="Noto Serif TC" font-size="13" fill="#a6d6a0" text-anchor="middle">-3</text></svg><div class="box r" style="text-align:center;">−3 處實心圓（≥ 含端點），向右箭頭。<span class="hl">除負數 → 翻！</span></div>
+</div></div>
+
+<!-- 7 -->
+<div class="slide" data-pg="7 / 25"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 3　難度 ★★☆　含括號</div>
+<h2>解 2(x+3) − 5 &gt; x + 4</h2>
+<div class="eg">
+<div class="q">解不等式：2(x+3) − 5 &gt; x + 4</div>
+<div class="stp"><b>去括號</b>　2x + 6 − 5 &gt; x + 4 → 2x + 1 &gt; x + 4</div>
+<div class="stp"><b>移項</b>　2x − x &gt; 4 − 1 → x &gt; 3</div>
+<div class="a">x &gt; 3</div>
+</div>
+<div class="box y" style="text-align:center;">有括號先展開，再移項 —— 全程沒碰負係數，方向不變。</div>
+</div></div>
+
+<!-- 8 -->
+<div class="slide" data-pg="8 / 25"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 4　難度 ★★★　含分母</div>
+<h2>解 x/2 − 1 &lt; (x+3)/3</h2>
+<div class="eg">
+<div class="q">解不等式：x/2 − 1 &lt; (x+3)/3</div>
+<div class="stp"><b>去分母</b>　兩邊乘 6（LCM，正數不翻）　3x − 6 &lt; 2(x+3)</div>
+<div class="stp"><b>展開</b>　3x − 6 &lt; 2x + 6</div>
+<div class="stp"><b>移項</b>　x &lt; 12</div>
+<div class="a">x &lt; 12</div>
+</div>
+<div class="box r" style="text-align:center;">⚠️ 去分母時<b>每一項都要乘 LCM</b>（含常數項 −1 → −6）。</div>
+</div></div>
+
+<!-- 9 -->
+<div class="slide" data-pg="9 / 25"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 5　難度 ★★★　負係數+括號</div>
+<h2>解 −3(2x−1) ≥ 4x − 5</h2>
+<div class="eg">
+<div class="q">解不等式：−3(2x−1) ≥ 4x − 5，並用數線表示。</div>
+<div class="stp"><b>去括號</b>　−6x + 3 ≥ 4x − 5</div>
+<div class="stp"><b>移項</b>　−6x − 4x ≥ −5 − 3 → −10x ≥ −8</div>
+<div class="stp"><b>除以 −10</b>（<span class="hl-r">負數，翻轉</span>）　x ≤ 8/10 = <span class="fm hl">4/5</span></div>
+<div class="a">x ≤ 4/5</div>
+</div>
+<div class="box y" style="text-align:center;">4/5 處實心圓，向左箭頭。</div>
+</div></div>
+
+<!-- 10 -->
+<div class="slide" data-pg="10 / 25"><div class="tag">精選</div><div class="body">
+<div class="eyebrow">隨堂練習　解法快照</div>
+<h2>自我檢查:方向對了嗎?</h2>
+<table class="tbl">
+<tr><th style="width:50%;">題目</th><th>答案</th></tr>
+<tr><td>−4x ≥ 12</td><td class="fm hl">x ≤ −3（÷−4 翻）</td></tr>
+<tr><td>−(x+3) ≤ 5</td><td class="fm hl">x ≥ −8</td></tr>
+<tr><td>x/3 + 1 &gt; 2</td><td class="fm hl">x &gt; 3</td></tr>
+<tr><td>−5x &gt; 10 ⟹ x &gt; −2 ?</td><td class="hl-r">錯！應 x &lt; −2</td></tr>
+<tr><td>−2(x−4) &gt; 3(x+2)</td><td class="fm hl">x &lt; 2/5</td></tr>
+</table>
+<div class="box r" style="text-align:center;">只要式子出現<b>負係數</b>，就在旁邊畫「↺」提醒翻轉。</div>
+</div></div>
+
+<!-- 11 -->
+<div class="slide" data-pg="11 / 25"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">應用的關鍵</div>
+<h2>把文字翻成不等號</h2>
+<table class="tbl">
+<tr><th style="width:52%;">文字</th><th style="width:22%;">不等號</th><th>端點</th></tr>
+<tr><td>超過、多於、大於</td><td class="fm hl">&gt;</td><td class="hl-r">❌ 不含</td></tr>
+<tr><td>少於、小於、不足</td><td class="fm hl">&lt;</td><td class="hl-r">❌ 不含</td></tr>
+<tr><td>至少、不少於、不低於</td><td class="fm hl">≥</td><td class="hl-g">✅ 含</td></tr>
+<tr><td>至多、不超過、不多於</td><td class="fm hl">≤</td><td class="hl-g">✅ 含</td></tr>
+</table>
+<div class="box y" style="text-align:center;font-size:20px;">
+記憶法:<span class="hl">「至少 = 下限 = ≥」「不超過 = 上限 = ≤」</span> —— 最常被弄反的兩組。</div>
+</div></div>
+
+<!-- 12 -->
+<div class="slide" data-pg="12 / 25"><div class="tag">避雷</div><div class="body">
+<div class="eyebrow">應用的陷阱</div>
+<h2>依情境取整數</h2>
+<div class="box">人數、件數、次數 → 解出的範圍必須取<b>整數</b></div>
+<div class="eg">
+<div class="q">解出範圍後怎麼取整數?</div>
+<div class="stp"><b>x &gt; 3.4</b>（至少幾個）→ 取<span class="hl-g">最小整數 x = 4</span></div>
+<div class="stp"><b>x ≤ 6.67</b>（最多幾個）→ 取<span class="hl-g">最大整數 x = 6</span></div>
+</div>
+<div class="box r" style="text-align:center;">
+⚠️ 常見錯誤:解出小數直接當答案（「至少 3.4 個」）—— 沒依情境取整數。</div>
+</div></div>
+
+<!-- 13 -->
+<div class="slide" data-pg="13 / 25"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 6　難度 ★☆☆　列式應用</div>
+<h2>最多能買幾個包子?</h2>
+<div class="eg">
+<div class="q">每天最多花 40 元。包子 5 元、豆漿 10 元，固定買 1 杯豆漿，最多買幾個包子?</div>
+<div class="stp"><b>設</b> 買 x 個包子　<b>列式</b>　5x + 10 ≤ 40</div>
+<div class="stp"><b>解</b>　5x ≤ 30 → x ≤ 6</div>
+<div class="a">最多 6 個包子</div>
+</div>
+<div class="box y" style="text-align:center;">「最多花 40」→ ≤ 40（不超過，含端點）。</div>
+</div></div>
+
+<!-- 14 -->
+<div class="slide" data-pg="14 / 25"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 7　難度 ★★☆　整數限制</div>
+<h2>至少要答對幾題?</h2>
+<div class="eg">
+<div class="q">5 題選擇，每對 +4、每錯 −1（無不作答）。總分至少 12 分，至少對幾題?</div>
+<div class="stp"><b>設</b> 對 x 題、錯 (5−x) 題　<b>列式</b>　4x − (5−x) ≥ 12</div>
+<div class="stp"><b>解</b>　4x − 5 + x ≥ 12 → 5x ≥ 17 → x ≥ 3.4</div>
+<div class="stp"><b>取整數</b>　最小整數解 x = 4</div>
+<div class="a">至少要答對 4 題</div>
+</div>
+<div class="box r" style="text-align:center;">x ≥ 3.4，但題數是整數 → <span class="hl">最小整數 4</span>。</div>
+</div></div>
+
+<!-- 15 -->
+<div class="slide" data-pg="15 / 25"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 8　難度 ★★☆　比較兩方案</div>
+<h2>通話幾分鐘以上選乙?</h2>
+<div class="eg">
+<div class="q">甲:月租 200、每分 0.4 元；乙:月租 350、每分 0.2 元。幾分鐘以上選乙較划算?</div>
+<div class="stp"><b>設</b> 通話 x 分鐘，乙較划算 ⟺ 甲費用 &gt; 乙費用</div>
+<div class="stp"><b>列式</b>　200 + 0.4x &gt; 350 + 0.2x</div>
+<div class="stp"><b>解</b>　0.2x &gt; 150 → x &gt; 750</div>
+<div class="a">通話超過 750 分鐘時選乙較划算</div>
+</div>
+<div class="box y" style="text-align:center;">「乙較划算」= 甲比較貴 = 甲 &gt; 乙，列式方向要想清楚。</div>
+</div></div>
+
+<!-- 16 -->
+<div class="slide" data-pg="16 / 25"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 9　難度 ★★★　加權平均</div>
+<h2>期末考至少幾分?</h2>
+<div class="eg">
+<div class="q">平時 4 次共佔 40%（取平均）、期末佔 60%，加權要 ≥ 70。前 4 次 65、78、80、72，期末至少幾分?</div>
+<div class="stp"><b>平時平均</b>　(65+78+80+72)/4 = 73.75</div>
+<div class="stp"><b>列式</b>　73.75×0.4 + 0.6x ≥ 70 → 29.5 + 0.6x ≥ 70</div>
+<div class="stp"><b>解</b>　0.6x ≥ 40.5 → x ≥ 67.5 → 取整數 68</div>
+<div class="a">期末考至少要考 68 分</div>
+</div>
+</div></div>
+
+<!-- 17 -->
+<div class="slide" data-pg="17 / 25"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 10　難度 ★★★　情境上限</div>
+<h2>工廠生產與利潤</h2>
+<div class="eg">
+<div class="q">每天最多 200 條，每條利潤 80 元，固定成本 6000 元。(1) 損益兩平至少幾條? (2) 利潤超過 5000 元幾條?</div>
+<div class="stp"><b>(1)</b> 80x − 6000 ≥ 0 → x ≥ 75 → <span class="hl-g">至少 75 條</span></div>
+<div class="stp"><b>(2)</b> 80x − 6000 &gt; 5000 → 80x &gt; 11000 → x &gt; 137.5 → <span class="hl-g">至少 138 條</span></div>
+<div class="stp"><b>檢查上限</b>　138 &lt; 200 ✓ 在每天上限內</div>
+</div>
+<div class="box r" style="text-align:center;">⚠️ 別忘了檢查情境的<b>隱藏上限</b>（最多 200 條）。</div>
+</div></div>
+
+<!-- 18 -->
+<div class="slide" data-pg="18 / 25"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">連立（雙邊）不等式</div>
+<h2>同時滿足兩條件 → 取交集</h2>
+<div class="box">一個未知數要<b>同時</b>滿足兩個不等式 → 分別解出後取<b>交集（AND）</b></div>
+<div class="box r" style="text-align:center;font-size:20px;">
+⚠️ 常見錯誤:取<b>聯集（OR）</b>而非交集。<br>
+「同時成立」= 兩個範圍<span class="hl">重疊的部分</span> = 交集。</div><div class="two" style="margin-top:6px;"><div style="text-align:center;flex:1;"><svg viewBox="0 0 560 70" width="96%" style="margin:6px auto;display:block;"><line x1="30" y1="40" x2="530" y2="40" stroke="rgba(243,239,226,0.7)" stroke-width="2"/><path d="M530 40 l-9 -5 M530 40 l-9 5" stroke="rgba(243,239,226,0.7)" stroke-width="2" fill="none"/><path d="M30 40 l9 -5 M30 40 l9 5" stroke="rgba(243,239,226,0.7)" stroke-width="2" fill="none"/><line x1="72" y1="36" x2="72" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><line x1="113" y1="36" x2="113" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><text x="113" y="60" font-family="Noto Serif TC" font-size="12" fill="rgba(243,239,226,0.6)" text-anchor="middle">-4</text><line x1="155" y1="36" x2="155" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><line x1="197" y1="36" x2="197" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><text x="197" y="60" font-family="Noto Serif TC" font-size="12" fill="rgba(243,239,226,0.6)" text-anchor="middle">-2</text><line x1="238" y1="36" x2="238" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><line x1="280" y1="36" x2="280" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><text x="280" y="60" font-family="Noto Serif TC" font-size="12" fill="rgba(243,239,226,0.6)" text-anchor="middle">0</text><line x1="322" y1="36" x2="322" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><line x1="363" y1="36" x2="363" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><text x="363" y="60" font-family="Noto Serif TC" font-size="12" fill="rgba(243,239,226,0.6)" text-anchor="middle">2</text><line x1="405" y1="36" x2="405" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><line x1="447" y1="36" x2="447" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><text x="447" y="60" font-family="Noto Serif TC" font-size="12" fill="rgba(243,239,226,0.6)" text-anchor="middle">4</text><line x1="488" y1="36" x2="488" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><line x1="405" y1="40" x2="526" y2="40" stroke="#98c9dc" stroke-width="4"/><circle cx="405" cy="40" r="6" fill="#16281c" stroke="#98c9dc" stroke-width="2.5"/><text x="405" y="26" font-family="Noto Serif TC" font-size="13" fill="#98c9dc" text-anchor="middle">3</text></svg><div style="color:#98c9dc;font-size:14px;">x &gt; 3</div></div><div style="text-align:center;flex:1;"><svg viewBox="0 0 560 70" width="96%" style="margin:6px auto;display:block;"><line x1="30" y1="40" x2="530" y2="40" stroke="rgba(243,239,226,0.7)" stroke-width="2"/><path d="M530 40 l-9 -5 M530 40 l-9 5" stroke="rgba(243,239,226,0.7)" stroke-width="2" fill="none"/><path d="M30 40 l9 -5 M30 40 l9 5" stroke="rgba(243,239,226,0.7)" stroke-width="2" fill="none"/><line x1="72" y1="36" x2="72" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><line x1="113" y1="36" x2="113" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><text x="113" y="60" font-family="Noto Serif TC" font-size="12" fill="rgba(243,239,226,0.6)" text-anchor="middle">-4</text><line x1="155" y1="36" x2="155" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><line x1="197" y1="36" x2="197" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><text x="197" y="60" font-family="Noto Serif TC" font-size="12" fill="rgba(243,239,226,0.6)" text-anchor="middle">-2</text><line x1="238" y1="36" x2="238" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><line x1="280" y1="36" x2="280" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><text x="280" y="60" font-family="Noto Serif TC" font-size="12" fill="rgba(243,239,226,0.6)" text-anchor="middle">0</text><line x1="322" y1="36" x2="322" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><line x1="363" y1="36" x2="363" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><text x="363" y="60" font-family="Noto Serif TC" font-size="12" fill="rgba(243,239,226,0.6)" text-anchor="middle">2</text><line x1="405" y1="36" x2="405" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><line x1="447" y1="36" x2="447" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><text x="447" y="60" font-family="Noto Serif TC" font-size="12" fill="rgba(243,239,226,0.6)" text-anchor="middle">4</text><line x1="488" y1="36" x2="488" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><line x1="613" y1="40" x2="34" y2="40" stroke="#eda0a8" stroke-width="4"/><circle cx="613" cy="40" r="6" fill="#eda0a8"/><text x="613" y="26" font-family="Noto Serif TC" font-size="13" fill="#eda0a8" text-anchor="middle">8</text></svg><div style="color:#eda0a8;font-size:14px;">x ≤ 8</div></div></div><div class="box y" style="text-align:center;">交集 = <span class="fm hl">3 &lt; x ≤ 8</span></div>
+</div></div>
+
+<!-- 19 -->
+<div class="slide" data-pg="19 / 25"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 11　難度 ★★☆　連立</div>
+<h2>求整數解</h2>
+<div class="eg">
+<div class="q">x 的 2 倍加 3 大於 9，且 x 的 3 倍減 5 不超過 19，求整數解。</div>
+<div class="stp"><b>第一式</b>　2x + 3 &gt; 9 → x &gt; 3</div>
+<div class="stp"><b>第二式</b>　3x − 5 ≤ 19 → x ≤ 8</div>
+<div class="stp"><b>交集</b>　3 &lt; x ≤ 8</div>
+<div class="a">整數解:4、5、6、7、8（共 5 個）</div>
+</div>
+<div class="box y" style="text-align:center;">x &gt; 3 不含 3，x ≤ 8 含 8 → 整數從 4 到 8。</div>
+</div></div>
+
+<!-- 20 -->
+<div class="slide" data-pg="20 / 25"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 12　難度 ★★☆　雙邊不等式</div>
+<h2>解 −3 ≤ 2x − 1 ≤ 7</h2>
+<div class="eg">
+<div class="q">解 −3 ≤ 2x − 1 ≤ 7</div>
+<div class="stp"><b>三邊同 +1</b>　−2 ≤ 2x ≤ 8</div>
+<div class="stp"><b>三邊同 ÷2</b>（正數不翻）　−1 ≤ x ≤ 4</div>
+<div class="a">−1 ≤ x ≤ 4</div>
+</div><svg viewBox="0 0 560 70" width="72%" style="margin:6px auto;display:block;"><line x1="30" y1="40" x2="530" y2="40" stroke="rgba(243,239,226,0.7)" stroke-width="2"/><path d="M530 40 l-9 -5 M530 40 l-9 5" stroke="rgba(243,239,226,0.7)" stroke-width="2" fill="none"/><path d="M30 40 l9 -5 M30 40 l9 5" stroke="rgba(243,239,226,0.7)" stroke-width="2" fill="none"/><line x1="72" y1="36" x2="72" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><line x1="113" y1="36" x2="113" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><text x="113" y="60" font-family="Noto Serif TC" font-size="12" fill="rgba(243,239,226,0.6)" text-anchor="middle">-4</text><line x1="155" y1="36" x2="155" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><line x1="197" y1="36" x2="197" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><text x="197" y="60" font-family="Noto Serif TC" font-size="12" fill="rgba(243,239,226,0.6)" text-anchor="middle">-2</text><line x1="238" y1="36" x2="238" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><line x1="280" y1="36" x2="280" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><text x="280" y="60" font-family="Noto Serif TC" font-size="12" fill="rgba(243,239,226,0.6)" text-anchor="middle">0</text><line x1="322" y1="36" x2="322" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><line x1="363" y1="36" x2="363" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><text x="363" y="60" font-family="Noto Serif TC" font-size="12" fill="rgba(243,239,226,0.6)" text-anchor="middle">2</text><line x1="405" y1="36" x2="405" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><line x1="447" y1="36" x2="447" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><text x="447" y="60" font-family="Noto Serif TC" font-size="12" fill="rgba(243,239,226,0.6)" text-anchor="middle">4</text><line x1="488" y1="36" x2="488" y2="44" stroke="rgba(243,239,226,0.4)" stroke-width="1.2"/><line x1="238" y1="40" x2="526" y2="40" stroke="#a6d6a0" stroke-width="4"/><circle cx="238" cy="40" r="6" fill="#a6d6a0"/><text x="238" y="26" font-family="Noto Serif TC" font-size="13" fill="#a6d6a0" text-anchor="middle">-1</text><line x1="447" y1="40" x2="34" y2="40" stroke="#a6d6a0" stroke-width="4"/><circle cx="447" cy="40" r="6" fill="#a6d6a0"/><text x="447" y="26" font-family="Noto Serif TC" font-size="13" fill="#a6d6a0" text-anchor="middle">4</text></svg><div class="box y" style="text-align:center;">雙邊不等式:三邊<b>一起</b>做同樣運算。除負數時三邊一起翻。</div>
+</div></div>
+
+<!-- 21 -->
+<div class="slide" data-pg="21 / 25"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 13　難度 ★★★　連續偶數</div>
+<h2>找三個連續偶數</h2>
+<div class="eg">
+<div class="q">連續三個偶數，最小的比最大的 2 倍少 22，求這三個偶數。</div>
+<div class="stp"><b>設</b> 三個連續偶數 2n、2n+2、2n+4</div>
+<div class="stp"><b>條件</b>　2n = 2(2n+4) − 22 → 2n = 4n − 14 → n = 7</div>
+<div class="a">14、16、18</div>
+<div class="stp"><b>驗算</b>　14 = 2×18 − 22 = 36 − 22 = 14 ✓</div>
+</div>
+</div></div>
+
+<!-- 22 -->
+<div class="slide" data-pg="22 / 25"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 1　【烤肉活動】</div>
+<h2>預算分配</h2>
+<div class="box">場地費每人 50 元，雞翅 30 元/份、玉米 10 元/根，每人預算上限 180 元。食材預算 = 180 − 50 = <b>130</b> 元</div>
+<div class="eg">
+<div class="stp"><b>(1) 固定 2 根玉米，最多幾份雞翅?</b>　30x + 20 ≤ 130 → x ≤ 3.67 → <span class="hl-g">最多 3 份</span></div>
+<div class="stp"><b>(2) 買 3 份雞翅，玉米最多幾根?</b>　90 + 10x ≤ 130 → x ≤ 4 → <span class="hl-g">最多 4 根</span></div>
+<div class="stp"><b>(3) 各買 x 個，最多幾個?</b>　40x ≤ 130 → x ≤ 3.25 → <span class="hl-g">各最多 3 個</span></div>
+</div>
+</div></div>
+
+<!-- 23 -->
+<div class="slide" data-pg="23 / 25"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 2　【輪胎廠達標】</div>
+<h2>目標生產量</h2>
+<div class="box">本月目標<b>不少於 2000 條</b>，已生產 1340 條，還有 x 天，每天最多 90 條。</div>
+<div class="eg">
+<div class="stp"><b>(1) 還需至少幾條?</b>　2000 − 1340 = <span class="hl-g">660 條</span></div>
+<div class="stp"><b>(2) 建立達標不等式</b>（每天 y 條，y ≤ 90）　<span class="fm hl">xy ≥ 660</span></div>
+<div class="stp"><b>(3) 還有 9 天，每天至少幾條?</b>　9y ≥ 660 → y ≥ 73.3 → <span class="hl-g">至少 74 條</span></div>
+</div>
+<div class="box y" style="text-align:center;">「不少於 2000」→ ≥ 2000（至少，含端點）。</div>
+</div></div>
+
+<!-- 24 -->
+<div class="slide" data-pg="24 / 25"><div class="tag">避雷</div><div class="body">
+<h2>避雷指南:六個最常見錯誤</h2>
+<table class="tbl">
+<tr><th style="width:46%;">❌ 錯誤</th><th>✓ 正確</th></tr>
+<tr><td>除以負係數忘記翻轉</td><td><b class="hl-g">乘除負數，方向必翻</b>（最重要！）</td></tr>
+<tr><td>去分母只乘部分項</td><td><b class="hl-g">每一項</b>都乘 LCM（含常數）</td></tr>
+<tr><td>「至少／不超過」翻反</td><td>至少 = ≥（下限）、不超過 = ≤（上限）</td></tr>
+<tr><td>解出小數直接當答案</td><td>人數/件數取<b class="hl-g">整數</b>（最小/最大）</td></tr>
+<tr><td>連立取聯集</td><td>「同時成立」取<b class="hl-g">交集</b></td></tr>
+<tr><td>忽略情境隱藏上限</td><td>檢查「最多 200 條」等限制</td></tr>
+</table>
+<div class="box y" style="text-align:center;">自我檢查:<span class="hl">「這一步乘除的是正數還是負數?負數要翻轉！」</span></div>
+</div></div>
+
+<!-- 25 -->
+<div class="slide" data-pg="25 / 25"><div class="tag">總結</div><div class="body">
+<h2>本節總結</h2>
+<ul>
+<li><span class="hl">解法流程</span>:去括號 → 去分母 → 移項合併 → 除以係數 → 數線</li>
+<li><span class="hl-r">⚠️ 除以負係數那一步，不等號翻轉</span> —— 和方程式唯一的差別</li>
+<li><span class="hl">應用</span>:圈臨界詞列式（超過/至少…）、人數件數取整數</li>
+<li><span class="hl-b">連立不等式</span>:分別解，取<b>交集</b>（同時成立）</li>
+</ul>
+<div class="box g" style="text-align:center;font-size:20px;">
+🔗 <b>承先</b>:4-1 不等式概念與性質、七上 3-2 一元一次方程式解法<br>
+🔗 <b>啟後</b>:<span class="hl">5-1 統計 —— 用不等式描述資料的分布與範圍</span></div>
+</div></div>
+
+</div></body></html>

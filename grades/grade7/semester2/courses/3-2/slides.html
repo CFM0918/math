@@ -1,0 +1,448 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>七下 3-2 正比和反比｜授課簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--chalk-soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);padding:24px 14px;}
+.deck{max-width:1060px;margin:0 auto;}
+.print-hint{text-align:center;color:rgba(243,239,226,0.4);font-size:13px;padding:6px 0 22px;}
+.print-hint b{color:var(--yellow);}
+.slide{position:relative;min-height:576px;margin:0 auto 26px;padding:44px 52px;
+ background:radial-gradient(ellipse at 18% 12%,rgba(255,255,255,0.05),transparent 45%),
+  radial-gradient(ellipse at 82% 88%,rgba(255,255,255,0.035),transparent 45%),
+  radial-gradient(ellipse at 60% 40%,rgba(120,160,130,0.10),transparent 60%),
+  linear-gradient(160deg,var(--board) 0%,var(--board2) 100%);
+ border-radius:14px;box-shadow:0 10px 34px rgba(0,0,0,0.55);
+ border:1px solid rgba(242,217,121,0.14);overflow:hidden;display:flex;flex-direction:column;}
+.slide::before{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;
+ background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.014) 40px,rgba(255,255,255,0.014) 41px),
+  radial-gradient(circle at 30% 72%,rgba(255,255,255,0.03),transparent 8%),
+  radial-gradient(circle at 76% 24%,rgba(255,255,255,0.025),transparent 7%);}
+.slide::after{content:attr(data-pg);position:absolute;bottom:15px;right:26px;font-family:'Caveat',cursive;font-size:20px;color:rgba(243,239,226,0.4);}
+.tag{position:absolute;top:20px;right:26px;font-family:'Caveat',cursive;font-size:22px;color:var(--pink);transform:rotate(4deg);}
+.eyebrow{font-family:'Caveat',cursive;font-size:25px;color:var(--yellow);letter-spacing:1px;margin-bottom:8px;opacity:0.92;}
+.slide h1{font-family:'Noto Serif TC',serif;font-size:46px;font-weight:900;line-height:1.28;letter-spacing:1px;
+ text-shadow:0 0 1px rgba(243,239,226,0.5),1px 1px 0 rgba(0,0,0,0.2);}
+.slide h2{font-family:'Noto Serif TC',serif;font-size:33px;font-weight:900;color:var(--yellow);
+ margin-bottom:20px;padding-bottom:11px;border-bottom:2px dashed rgba(242,217,121,0.4);
+ text-shadow:0 0 1px rgba(242,217,121,0.4);}
+.slide p{font-size:20px;line-height:1.85;margin-bottom:12px;}
+.big-center{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;}
+.big-center .lead,.lead{font-family:'Caveat',cursive;font-size:30px;color:var(--blue);letter-spacing:1px;margin-top:12px;}
+ul{list-style:none;margin:8px 0;}
+li{font-size:21px;line-height:1.95;padding-left:32px;position:relative;margin-bottom:4px;}
+li::before{content:'\2726';position:absolute;left:4px;color:var(--yellow);font-size:17px;top:3px;}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.34);border-radius:12px;padding:15px 21px;margin:12px 0;font-size:19px;line-height:1.8;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.38);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.38);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.34);}
+.eg{position:relative;background:rgba(0,0,0,0.24);border:1px solid rgba(242,217,121,0.2);border-radius:10px;padding:17px 22px;margin:12px 0;font-size:19px;}
+.eg::before{content:'';position:absolute;top:-8px;left:38px;width:58px;height:15px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.eg .q{color:var(--blue);font-weight:700;margin-bottom:8px;font-size:19px;}
+.eg .a{color:var(--green);font-weight:700;margin-top:6px;}
+.eg .stp{color:var(--chalk-soft);font-size:18px;margin:3px 0;}
+.tip{display:flex;gap:12px;align-items:flex-start;background:rgba(242,217,121,0.09);border:1.5px dashed rgba(242,217,121,0.45);border-radius:12px;padding:13px 18px;margin:10px 0;}
+.tip .ic{font-size:24px;line-height:1;}.tip .tx{font-size:18px;line-height:1.7;}
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:18px;}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.26);padding:10px 14px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.two{display:flex;gap:20px;}.two>div{flex:1;}
+svg{display:block;margin:6px auto;max-width:100%;}
+@media print{
+ body{background:#0a130d;padding:0;}
+ .deck{max-width:none;}
+ .print-hint{display:none;}
+ .slide{margin:0;border-radius:0;box-shadow:none;min-height:100vh;
+  page-break-after:always;break-after:page;padding:32px 44px;justify-content:center;}
+ .slide:last-child{page-break-after:auto;break-after:auto;}
+ .slide h1{font-size:40px;}
+ .slide h2{font-size:27px;margin-bottom:13px;padding-bottom:8px;}
+ .slide p{font-size:17px;line-height:1.55;margin-bottom:6px;}
+ li{font-size:17px;line-height:1.55;margin-bottom:1px;padding-left:26px;}
+ .eyebrow{font-size:21px;margin-bottom:5px;}
+ .big-center .lead,.lead{font-size:26px;}
+ .box{font-size:16px;padding:10px 16px;margin:6px 0;line-height:1.5;}
+ .eg{font-size:16px;padding:11px 16px;margin:6px 0;}
+ .tip{font-size:16px;padding:10px 14px;margin:6px 0;}
+ .tbl{font-size:15px;margin:6px 0;}
+ .tbl th,.tbl td{padding:6px 10px;}
+ svg{max-height:210px;}
+}
+</style></head><body><div class="deck">
+<div class="print-hint">共 <b>21</b> 張・列印時每張一頁（Ctrl+P → 橫向 → 背景圖形）</div>
+
+
+<!-- 1 -->
+<div class="slide" data-pg="1 / 21"><div class="tag">Start!</div><div class="big-center">
+<div class="eyebrow">國一下學期・第三章 比例</div>
+<h1>3-2　正比和反比</h1>
+<div class="lead">正比「相除」固定　·　反比「相乘」固定<br>兩種最基本的數量關係</div>
+<svg viewBox="0 0 640 150" width="84%" style="margin-top:14px;">
+<line x1="30" y1="126" x2="270" y2="126" stroke="rgba(243,239,226,0.5)" stroke-width="1.5"/>
+<line x1="42" y1="14" x2="42" y2="138" stroke="rgba(243,239,226,0.5)" stroke-width="1.5"/>
+<line x1="42" y1="126" x2="250" y2="26" stroke="#98c9dc" stroke-width="2.5"/>
+<circle cx="42" cy="126" r="4" fill="#f2d979"/>
+<text x="150" y="52" font-family="Noto Serif TC" font-size="20" fill="#98c9dc" text-anchor="middle">y = kx</text>
+<text x="150" y="146" font-family="Caveat" font-size="19" fill="#a6d6a0" text-anchor="middle">正比・過原點</text>
+<line x1="320" y1="14" x2="320" y2="138" stroke="rgba(243,239,226,0.2)" stroke-width="1.5"/>
+<line x1="380" y1="126" x2="620" y2="126" stroke="rgba(243,239,226,0.5)" stroke-width="1.5"/>
+<line x1="392" y1="14" x2="392" y2="138" stroke="rgba(243,239,226,0.5)" stroke-width="1.5"/>
+<path d="M410 26 Q430 100 470 112 Q520 122 600 124" stroke="#eda0a8" stroke-width="2.5" fill="none"/>
+<circle cx="392" cy="126" r="4" fill="none" stroke="#eda0a8" stroke-width="1.5" stroke-dasharray="2 2"/>
+<text x="510" y="60" font-family="Noto Serif TC" font-size="20" fill="#eda0a8" text-anchor="middle">y = k/x</text>
+<text x="500" y="146" font-family="Caveat" font-size="19" fill="#f2d979" text-anchor="middle">反比・不過原點</text>
+</svg>
+</div></div>
+
+<!-- 2 -->
+<div class="slide" data-pg="2 / 21"><div class="tag">目標</div><div class="body">
+<h2>本節學習目標</h2>
+<ul>
+<li>能從情境寫出<span class="hl">關係式</span></li>
+<li>能判斷兩量是否成<span class="hl-b">正比</span>（<span class="fm">y/x</span> 恆為常數 k），並寫出 <span class="fm">y = kx</span></li>
+<li>能判斷兩量是否成<span class="hl-r">反比</span>（<span class="fm">x×y</span> 恆為常數 k），並寫出 <span class="fm">y = k/x</span></li>
+<li>能從<span class="hl">數表</span>中識別正比或反比</li>
+<li>能用「已知一組對應值」求另一組</li>
+<li>知道 <span class="fm">y = kx</span> <b>過原點</b>；<span class="fm">y = k/x</span> <b>不過原點且 x ≠ 0</b></li>
+</ul>
+<div class="box y">一句話：<span class="hl">正比相除固定、反比相乘固定 —— 這節只有這一句話。</span></div>
+</div></div>
+
+<!-- 3 -->
+<div class="slide" data-pg="3 / 21"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">細目 ①　關係式</div>
+<h2>什麼是關係式？</h2>
+<div class="box y" style="text-align:center;font-size:20px;">
+用式子把<span class="hl">兩個量之間的關係</span>寫下來</div>
+<table class="tbl">
+<tr><th style="width:48%;">情境</th><th>關係式</th></tr>
+<tr><td>一顆 42 元，買 x 顆</td><td class="fm hl">y = 42x</td></tr>
+<tr><td>距離固定 300 公里</td><td class="fm hl">速度 × 時間 = 300</td></tr>
+<tr><td>每小時耗油 3 公升</td><td class="fm hl">油耗 = 3 × 時間</td></tr>
+</table>
+<div class="box g">💡 <b>關係式是列式的延伸</b>（七上 3-1 學過）——<br>
+差別在這裡有<span class="hl">兩個變數在動</span>，不是只有一個 x。</div>
+</div></div>
+
+<!-- 4 -->
+<div class="slide" data-pg="4 / 21"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">細目 ①　正比</div>
+<h2>正比：相除固定</h2>
+<div class="box y" style="text-align:center;font-size:24px;padding:18px;">
+<span class="fm"><span class="hl">y/x = k</span></span>（k 為<b>不等於 0</b> 的常數）<br>
+<span class="fm" style="font-size:26px;">即　<span class="hl">y = kx</span></span></div>
+<div class="box"><b>k 叫做<span class="hl">比例常數</span></b></div>
+<table class="tbl">
+<tr><th style="width:22%;">x</th><td class="fm">2</td><td class="fm">4</td><td class="fm">6</td></tr>
+<tr><th>y</th><td class="fm">6</td><td class="fm">12</td><td class="fm">18</td></tr>
+<tr><th class="hl-b">y/x</th><td class="fm hl-g" style="font-size:20px;">3</td><td class="fm hl-g" style="font-size:20px;">3</td><td class="fm hl-g" style="font-size:20px;">3</td></tr>
+</table>
+<div class="box g" style="text-align:center;font-size:20px;">
+比值恆為 3 → <span class="hl">正比，y = 3x</span></div>
+</div></div>
+
+<!-- 5 -->
+<div class="slide" data-pg="5 / 21"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">細目 ①</div>
+<h2>正比的行為與圖形</h2>
+<div class="two">
+<div class="box g"><b class="hl-g">k > 0</b><br>
+x 變大 → y <span class="hl">等比例變大</span><br>
+<span class="fm">例：y = 3x</span></div>
+<div class="box r"><b class="hl-r">k < 0</b><br>
+x 變大 → y <span class="hl-r">等比例變小</span><br>
+<span class="fm">例：y = −x</span></div>
+</div>
+<div class="box r" style="text-align:center;font-size:20px;">
+⚠️ <b>注意 k < 0 這一點</b> —— 等一下的陷阱就在這裡。</div>
+<div class="box y" style="text-align:center;font-size:21px;">
+<span class="fm">y = kx</span> 的圖形是<span class="hl">通過原點的直線</span><br>
+<span style="font-size:16px;color:var(--chalk-soft);">（x = 0 時 y = 0）</span></div>
+</div></div>
+
+<!-- 6 -->
+<div class="slide" data-pg="6 / 21"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">細目 ②　反比</div>
+<h2>反比：相乘固定</h2>
+<div class="box y" style="text-align:center;font-size:24px;padding:18px;">
+<span class="fm"><span class="hl">x × y = k</span></span>（k 為<b>不等於 0</b> 的常數）<br>
+<span class="fm" style="font-size:26px;">即　<span class="hl">y = k/x</span></span></div>
+<table class="tbl">
+<tr><th style="width:22%;">x</th><td class="fm">2</td><td class="fm">4</td><td class="fm">6</td></tr>
+<tr><th>y</th><td class="fm">12</td><td class="fm">6</td><td class="fm">4</td></tr>
+<tr><th class="hl-r">x×y</th><td class="fm hl-g" style="font-size:20px;">24</td><td class="fm hl-g" style="font-size:20px;">24</td><td class="fm hl-g" style="font-size:20px;">24</td></tr>
+</table>
+<div class="box g" style="text-align:center;font-size:20px;">
+乘積恆為 24 → <span class="hl">反比，y = 24/x</span></div>
+<div class="box r" style="text-align:center;">
+⚠️ <span class="fm">y = k/x</span> <span class="hl-r">不過原點</span>，而且 <span class="hl-r">x ≠ 0</span>
+（分母不能為 0 —— 七上 1-3 的鐵則）</div>
+</div></div>
+
+<!-- 7 -->
+<div class="slide" data-pg="7 / 21"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">🔑 本節唯一要記的事</div>
+<h2>判斷方法：先除、再乘</h2>
+<div class="box y" style="text-align:center;font-size:27px;padding:24px;">
+<span class="hl">正比「相除」固定</span><br>
+<span class="hl">反比「相乘」固定</span></div>
+<div class="box"><b>給一張數表時：</b><br>
+<span class="hl-b">① 先試 y/x 是否都一樣</span> → 是 → <b>正比</b><br>
+<span class="hl-r">② 再試 x×y 是否都一樣</span> → 是 → <b>反比</b><br>
+<span class="hl">③ 兩個都不恆定</span> → <b>都不是</b></div>
+<div class="box g"><b>為什麼「先除再乘」？</b>因為正比比較常見，先試命中率高。<br>
+而且<span class="hl">兩個都要試過</span>才能說「都不是」。</div>
+</div></div>
+
+<!-- 8 -->
+<div class="slide" data-pg="8 / 21"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 1　難度 ★☆☆</div>
+<h2>判斷數表</h2>
+<div class="eg">
+<div class="q">表A：<span class="fm">x = 2, 4, 6　；　y = 6, 12, 18</span></div>
+<div class="stp"><b>先試相除</b>　<span class="fm">6/2 = 3、12/4 = 3、18/6 = 3</span> → 恆為 3</div>
+<div class="a">正比，k = 3，y = 3x</div>
+</div>
+<div class="eg">
+<div class="q">表B：<span class="fm">x = 2, 4, 6　；　y = 12, 6, 4</span></div>
+<div class="stp"><b>先試相除</b>　<span class="fm">12/2 = 6、6/4 = 1.5</span> → <span class="hl-r">不恆定</span>，不是正比</div>
+<div class="stp"><b>再試相乘</b>　<span class="fm">2×12 = 24、4×6 = 24、6×4 = 24</span> → 恆為 24</div>
+<div class="a">反比，k = 24，y = 24/x</div>
+</div>
+</div></div>
+
+<!-- 9 -->
+<div class="slide" data-pg="9 / 21"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 2、3　難度 ★★☆</div>
+<h2>通用解法：先求 k，再算新的</h2>
+<div class="eg">
+<div class="q">例題2　y 與 x 成<span class="hl-b">正比</span>，x = 4 時 y = 10。求 x = 6 時的 y。</div>
+<div class="stp"><b>求 k</b>（正比 → <span class="hl">相除</span>）　<span class="fm">k = y/x = 10/4 = 5/2</span></div>
+<div class="stp"><b>代入</b>　<span class="fm">y = (5/2) × 6 = 15</span></div>
+<div class="a">y = 15</div>
+</div>
+<div class="eg">
+<div class="q">例題3　y 與 x 成<span class="hl-r">反比</span>，x = 3 時 y = 8。求 x = 12 時的 y。</div>
+<div class="stp"><b>求 k</b>（反比 → <span class="hl">相乘</span>）　<span class="fm">k = x×y = 3×8 = 24</span></div>
+<div class="stp"><b>代入</b>　<span class="fm">y = 24/12 = 2</span></div>
+<div class="a">y = 2</div>
+</div>
+<div class="box y" style="text-align:center;font-size:20px;">
+💡 <span class="hl">通用解法：先用已知的那組求出 k，再拿 k 去算新的。</span><br>
+差別只在「求 k 的時候是<b>除</b>還是<b>乘</b>」。</div>
+</div></div>
+
+<!-- 10 -->
+<div class="slide" data-pg="10 / 21"><div class="tag">避雷</div><div class="body">
+<div class="eyebrow">⚠️ 陷阱（本節最重要）</div>
+<h2>「y 隨 x 增大而減小」<span style="color:#eda0a8;">不等於</span>反比</h2>
+<div class="box r" style="text-align:center;font-size:20px;">
+❌ 以為只要「x 變大、y 變小」就是反比</div>
+<div class="box g"><b class="hl-g">反例：y = −x</b>
+<table class="tbl" style="margin-top:6px;">
+<tr><th style="width:24%;">x</th><td class="fm">1</td><td class="fm">2</td><td class="fm">3</td></tr>
+<tr><th>y</th><td class="fm">−1</td><td class="fm">−2</td><td class="fm">−3</td></tr>
+<tr><th class="hl-b">y/x</th><td class="fm hl-g">−1</td><td class="fm hl-g">−1</td><td class="fm hl-g">−1</td></tr>
+<tr><th class="hl-r">x×y</th><td class="fm hl-r">−1</td><td class="fm hl-r">−4</td><td class="fm hl-r">−9</td></tr>
+</table></div>
+<div class="box y">・y 確實隨 x 增大而<b>減小</b> ✓<br>
+・但 <span class="fm">y/x = −1</span> <span class="hl-g">恆定</span> → 這是<span class="hl">正比</span>（k = −1）！<br>
+・<span class="fm">x×y</span> <span class="hl-r">不恆定</span> → <b>不是反比</b></div>
+<div class="box r" style="text-align:center;font-size:20px;">
+<span class="hl">一定要驗算比值或乘積，不能只看趨勢。</span></div>
+</div></div>
+
+<!-- 11 -->
+<div class="slide" data-pg="11 / 21"><div class="tag">避雷</div><div class="body">
+<div class="eyebrow">⚠️ 陷阱　變形題</div>
+<h2>「y 與 x² 成正比」</h2>
+<div class="box y" style="text-align:center;font-size:22px;padding:16px;">
+<span class="hl">與什麼成正比，就對哪個量做除法</span></div>
+<div class="box g"><b>y 與 <span class="hl">x²</span> 成正比</b><br>
+→ 設 <span class="fm hl" style="font-size:20px;">y = k·x²</span>，且 <span class="fm">y/x² = k</span><br>
+⚠️ <b>不是</b> y 與 x 成正比！要把 <span class="hl">x² 當成一個整體</span>。</div>
+<div class="eg">
+<div class="q">y 與 x² 成正比，x = 2 時 y = 12。求 x = 5 時的 y。</div>
+<div class="stp"><b>設</b>　<span class="fm">y = k·x²</span></div>
+<div class="stp"><b>求 k</b>　<span class="fm">12 = k × 2² = 4k → k = 3</span></div>
+<div class="stp"><b>代入</b>　<span class="fm">y = 3 × 5² = 3 × 25 = 75</span></div>
+<div class="a">y = 75</div>
+</div>
+<div class="box r"><b class="hl-r">若誤以為「y 與 x 成正比」：</b>
+<span class="fm">k = 12/2 = 6 → y = 6×5 = 30</span> → <span class="hl-r">錯</span></div>
+</div></div>
+
+<!-- 12 -->
+<div class="slide" data-pg="12 / 21"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 4　難度 ★★★</div>
+<h2>正比＋反比一起來</h2>
+<div class="box">汽車固定速度行駛。<span class="hl-b">行駛時間與油耗成正比</span>；<span class="hl-r">速度與所需時間成反比</span>（距離固定 300 公里）。<br>
+已知時速 60 公里需 5 小時、耗油 15 公升。</div>
+<div class="eg">
+<div class="stp"><b>(1) 每小時耗油量</b>　油耗與時間<span class="hl-b">成正比</span> → <span class="fm">k = 15/5 = 3</span> 公升/小時</div>
+<div class="stp"><b>(2) 改以時速 100 公里 —— 先求時間</b></div>
+<div class="stp">　　速度 × 時間 = 300（<span class="hl-r">反比</span>，k = 300）→ <span class="fm">t = 300/100 = 3</span> 小時</div>
+<div class="stp">　　<span style="font-size:15px;color:var(--chalk-soft);">驗算 k：60 × 5 = 300 ✓</span></div>
+<div class="stp"><b>再求油耗</b>　<span class="fm">油耗 = 3 × 3 = 9</span> 公升</div>
+<div class="a">(1) 每小時耗油 3 公升　(2) 需 3 小時，耗油 9 公升</div>
+</div>
+<div class="box y">💡 這題把<span class="hl">兩種比例</span>放在一起：先用<b>反比</b>求時間，再用<b>正比</b>求油耗。<br>
+<b>關鍵是分清楚「誰跟誰成什麼比」。</b></div>
+</div></div>
+
+<!-- 13 -->
+<div class="slide" data-pg="13 / 21"><div class="tag">精選</div><div class="body">
+<div class="eyebrow">隨堂精選</div>
+<h2>「x=1,2,3；y=2,5,10」是什麼？</h2>
+<div class="eg">
+<div class="stp"><b>① 先試相除</b>　<span class="fm">y/x = 2/1 = 2、5/2 = 2.5、10/3 ≈ 3.33</span></div>
+<div class="stp">　　<span class="hl-r">不恆定</span> → <b>不是正比</b></div>
+<div class="stp"><b>② 再試相乘</b>　<span class="fm">x×y = 1×2 = 2、2×5 = 10、3×10 = 30</span></div>
+<div class="stp">　　<span class="hl-r">不恆定</span> → <b>不是反比</b></div>
+<div class="a">答：都不是</div>
+</div>
+<div class="box y" style="text-align:center;font-size:21px;">
+💡 <span class="hl">兩個都要試過，才能下「都不是」這個結論。</span><br>
+只試一個就說都不是，是不夠的。</div>
+<div class="tip"><div class="ic">📌</div><div class="tx"><b>這題的意義：</b>不是每兩個量都有比例關係。
+世界上大部分的關係<b>既不是正比也不是反比</b> —— 正比反比只是最簡單的兩種。</div></div>
+</div></div>
+
+<!-- 14 -->
+<div class="slide" data-pg="14 / 21"><div class="tag">精選</div><div class="body">
+<div class="eyebrow">隨堂精選　💡 正比的本質</div>
+<h2><span class="fm">y = kx</span>，若 x 增加 20%，y 怎麼變？</h2>
+<div class="eg">
+<div class="stp"><b>x 增加 20%</b>　→　<span class="fm">x 變成 1.2x</span></div>
+<div class="stp"><b>代入</b>　<span class="fm">y' = k(1.2x) = 1.2(kx) = 1.2y</span></div>
+<div class="stp"><b>所以</b>　y 也<span class="hl">增加 20%</span></div>
+<div class="a">答：增加 20%</div>
+</div>
+<div class="box y" style="text-align:center;font-size:24px;padding:18px;">
+💡 這就是<span class="hl">正比的本質</span>：<br>
+<span class="hl">x 變幾倍，y 就變幾倍。</span></div>
+<div class="box g">同理：x 變 <b>2 倍</b> → y 變 <b>2 倍</b>；x 變 <b>一半</b> → y 變 <b>一半</b>。<br>
+<span class="hl-r">反比則相反</span>：x 變 2 倍 → y 變 <b>一半</b>（因為乘積要維持定值）。</div>
+</div></div>
+
+<!-- 15 -->
+<div class="slide" data-pg="15 / 21"><div class="tag">觀念</div><div class="body">
+<h2>比例常數 k 是有意義的</h2>
+<table class="tbl">
+<tr><th style="width:44%;">情境</th><th>k 的實際意義</th></tr>
+<tr><td>採購量(kg) 與 總價(元) 成正比</td><td class="hl">k = <b>每公斤單價</b></td></tr>
+<tr><td>注水速度 與 注滿時間 成反比</td><td class="hl">k = <b>水箱容量</b></td></tr>
+<tr><td>機台數 與 每台分攤電費 成反比</td><td class="hl">k = <b>每月總電費</b></td></tr>
+<tr><td>生產速度 與 完成時間 成反比</td><td class="hl">k = <b>總件數</b></td></tr>
+<tr><td>時間 與 油耗 成正比</td><td class="hl">k = <b>每小時耗油量</b></td></tr>
+</table>
+<div class="box y" style="text-align:center;font-size:21px;">
+<span class="hl">找到 k 的物理意義，題目就活了。</span></div>
+<div class="tip"><div class="ic">💡</div><div class="tx">k 不是一個「為了算題目而存在的字母」——
+它<b>就是那個題目裡不變的東西</b>（呼應七上 3-3 的「找不變量」）。</div></div>
+</div></div>
+
+<!-- 16 -->
+<div class="slide" data-pg="16 / 21"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 1　【正比】</div>
+<h2>碳黑採購</h2>
+<table class="tbl">
+<tr><th style="width:34%;">採購量 (kg)</th><td class="fm">100</td><td class="fm">250</td><td class="fm">500</td></tr>
+<tr><th>總價 (元)</th><td class="fm">4200</td><td class="fm">10500</td><td class="fm">21000</td></tr>
+</table>
+<div class="eg">
+<div class="stp"><b>(1) 驗證是否成正比</b>　<span class="fm">4200/100 = 42、10500/250 = 42、21000/500 = 42</span></div>
+<div class="stp">　　比值恆為 42 → <span class="hl-g">成正比</span> ✓</div>
+<div class="stp"><b>(2) 比例常數</b>　<span class="fm">k = 42</span> 元/公斤 —— 就是<span class="hl">每公斤單價</span>！</div>
+<div class="stp"><b>(3) 採購 750 公斤</b>　<span class="fm">y = 42 × 750 = 31500</span> 元</div>
+<div class="a">(1) 成正比　(2) k = 42 元/公斤　(3) 預算 31500 元</div>
+</div>
+<div class="box y">💡 <b>k 的意義就是單價</b> —— 正比的比例常數幾乎都有實際意義。</div>
+</div></div>
+
+<!-- 17 -->
+<div class="slide" data-pg="17 / 21"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 2　【反比】</div>
+<h2>電費分攤</h2>
+<div class="box">每月固定電費固定。<span class="hl">機台數量與每台分攤電費成反比</span>。目前開 <span class="hl">10 台</span>，每台分攤 <span class="hl">2400 元</span>。</div>
+<div class="eg">
+<div class="stp"><b>(1) 每月總電費（即 k）</b>　<span class="fm">k = 10 × 2400 = 24000</span> 元</div>
+<div class="stp"><b>(2) 多開 5 台（共 15 台）</b>　<span class="fm">y = 24000/15 = 1600</span> 元/台</div>
+<div class="stp"><b>(3) 每台分攤不超過 1600 元，至少開幾台？</b></div>
+<div class="stp">　　<span class="fm">24000/x ≤ 1600 → x ≥ 24000/1600 = 15</span> → 至少 <span class="hl">15 台</span></div>
+<div class="a">(1) 24000 元　(2) 1600 元/台　(3) 至少開 15 台</div>
+</div>
+<div class="box y">💡 <b>k 的意義就是總電費</b> —— 不管開幾台，總電費<b>不變</b>，只是分攤的人變多。<br>
+💡 (3) 用到<span class="hl">不等式</span> —— 這是 <b>4-1、4-2</b> 要學的東西，先感受一下。</div>
+</div></div>
+
+<!-- 18 -->
+<div class="slide" data-pg="18 / 21"><div class="tag">總覽</div><div class="body">
+<h2>正比 vs 反比：一張表講完</h2>
+<table class="tbl">
+<tr><th style="width:24%;">　</th><th style="width:38%;">正比</th><th>反比</th></tr>
+<tr><td>什麼固定</td><td class="hl-b" style="font-size:19px;"><b>相除</b> y/x = k</td><td class="hl-r" style="font-size:19px;"><b>相乘</b> x×y = k</td></tr>
+<tr><td>關係式</td><td class="fm hl" style="font-size:19px;">y = kx</td><td class="fm hl" style="font-size:19px;">y = k/x</td></tr>
+<tr><td>圖形</td><td><b>過原點</b>的直線</td><td><b>不過原點</b>的曲線</td></tr>
+<tr><td>限制</td><td>k ≠ 0</td><td>k ≠ 0，且 <span class="hl-r">x ≠ 0</span></td></tr>
+<tr><td>x 變 2 倍</td><td class="hl-g">y 變 <b>2 倍</b></td><td class="hl-r">y 變 <b>一半</b></td></tr>
+<tr><td>x 增加 20%</td><td class="hl-g">y 增加 <b>20%</b></td><td>y 變成 <b>1/1.2</b> 倍</td></tr>
+</table>
+<div class="box y" style="text-align:center;font-size:22px;">
+<span class="hl">正比：一起變　·　反比：一個變大、另一個就要變小來補</span></div>
+</div></div>
+
+<!-- 19 -->
+<div class="slide" data-pg="19 / 21"><div class="tag">避雷</div><div class="body">
+<h2>避雷指南：五個最常見錯誤</h2>
+<table class="tbl">
+<tr><th style="width:46%;">❌ 錯誤</th><th>✓ 正確</th></tr>
+<tr><td>正比反比的判斷方法搞反</td><td><b class="hl-g">正比相除固定、反比相乘固定</b></td></tr>
+<tr><td>以為「y 隨 x 增大而減小」就是反比</td><td><b class="hl-g">要驗算 x×y 是否恆定</b>（<span class="fm">y=−x</span> 是正比！）</td></tr>
+<tr><td>「y 與 x² 成正比」當成「y 與 x 成正比」</td><td>設 <span class="fm hl-g">y = kx²</span>，除以 <b>x²</b></td></tr>
+<tr><td>只試一種就說「都不是」</td><td><b class="hl-g">兩種都要試過</b></td></tr>
+<tr><td>忘記 <span class="fm">y = k/x</span> 的 <b>x ≠ 0</b></td><td>分母不能為 0（七上 1-3 的鐵則）</td></tr>
+</table>
+<div class="box y" style="text-align:center;">
+自我檢查句：<span class="hl">「我驗算過比值和乘積了嗎？還是只憑趨勢在猜？」</span></div>
+</div></div>
+
+<!-- 20 -->
+<div class="slide" data-pg="20 / 21"><div class="tag">總結</div><div class="body">
+<h2>本節總結</h2>
+<ul>
+<li><span class="hl">正比</span>：<span class="fm">y/x = k</span> 恆定 → <span class="fm">y = kx</span>，<b>過原點</b>；<b>相除固定</b></li>
+<li><span class="hl">反比</span>：<span class="fm">x×y = k</span> 恆定 → <span class="fm">y = k/x</span>，<b>不過原點且 x ≠ 0</b>；<b>相乘固定</b></li>
+<li><span class="hl">判斷</span>：先試相除、再試相乘；⚠️ <b>不能只看「x 變大 y 變小」的趨勢</b></li>
+<li><span class="hl">通用解法</span>：先用已知那組求 <b>k</b>，再拿 k 算新的</li>
+<li><span class="hl-r">k 是有意義的</span>：單價、水箱容量、總電費… —— <b>它就是題目裡不變的東西</b></li>
+</ul>
+<div class="box g" style="text-align:center;font-size:20px;">
+🔗 <b>承先</b>：3-1 的比與比值（y/x 就是比值）；七上 1-3 的「除數不可以是 0」<br>
+🔗 <b>啟後</b>：<span class="hl">y = kx 正是八下 2-1「函數及其圖形」的核心</span></div>
+</div></div>
+
+<!-- 21 -->
+<div class="slide" data-pg="21 / 21"><div class="tag">Next</div><div class="big-center">
+<div class="eyebrow">🔗 這節在幫你鋪路</div>
+<h1 style="font-size:38px;">y = kx 是函數的起點</h1>
+<div class="box y" style="max-width:840px;margin-top:20px;font-size:20px;">
+<span class="hl">正比就是「過原點的一次函數」的特例。</span><br><br>
+八下 2-1 會告訴你：<span class="fm">y = kx + b</span> 叫做<b>一次函數</b>；<br>
+當 <span class="fm">b = 0</span> 時，它就退化成 <span class="fm hl">y = kx</span> —— 也就是<b>正比</b>。</div>
+<div class="box g" style="max-width:840px;font-size:20px;">
+所以你今天學的不是一個孤立的東西 ——<br>
+<span class="hl">你已經在學函數了，只是還沒被告知它叫函數。</span></div>
+<div class="lead" style="margin-top:18px;">數學課本很少直說：<br>
+<span style="color:#a6d6a0;">很多「新東西」，其實是你早就會的東西換個名字。</span></div>
+</div></div>
+
+</div></body></html>

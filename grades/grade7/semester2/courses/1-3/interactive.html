@@ -1,0 +1,1080 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>七下 1-3 聯立方程式解應用問題｜互動教學平台</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;--wood:#6b4a32;}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);overscroll-behavior:none;}
+.topbar{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:10px 16px;background:linear-gradient(180deg,#1b2f21,#132218);border-bottom:2px solid var(--wood);box-shadow:0 4px 18px rgba(0,0,0,0.5);}
+.brand{font-family:'Noto Serif TC',serif;font-weight:900;font-size:clamp(15px,2.2vw,20px);color:var(--yellow);white-space:nowrap;}
+.brand small{display:block;font-family:'Caveat',cursive;font-size:14px;color:var(--soft);font-weight:400;}
+.spacer{flex:1;}
+.btn{background:rgba(243,239,226,0.08);border:1.5px solid rgba(243,239,226,0.28);color:var(--chalk);
+  border-radius:10px;padding:7px 13px;font-family:inherit;font-size:14px;cursor:pointer;white-space:nowrap;transition:.15s;}
+.btn:hover{background:rgba(243,239,226,0.16);}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:10px 16px 0;scrollbar-width:none;}
+.tabs::-webkit-scrollbar{display:none;}
+.tab{background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.2);border-bottom:none;
+  color:var(--soft);border-radius:10px 10px 0 0;padding:9px 15px;font-size:14px;cursor:pointer;white-space:nowrap;font-family:inherit;}
+.tab.on{background:var(--board);border-color:var(--yellow);color:var(--yellow);font-weight:700;}
+.tab .n{font-family:'Caveat',cursive;font-size:18px;margin-right:5px;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px 60px;}
+.panel{display:none;}.panel.on{display:block;}
+.card{background:radial-gradient(ellipse at 20% 10%,rgba(255,255,255,0.05),transparent 45%),
+   linear-gradient(160deg,var(--board),var(--board2));
+  border:1.5px solid rgba(242,217,121,0.16);border-radius:14px;padding:18px;margin-bottom:16px;
+  box-shadow:0 8px 26px rgba(0,0,0,0.45);position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 38px,rgba(255,255,255,0.012) 38px,rgba(255,255,255,0.012) 39px);}
+.card>*{position:relative;}
+.card h3{font-family:'Noto Serif TC',serif;font-size:clamp(17px,2.4vw,21px);color:var(--yellow);
+  margin-bottom:12px;padding-bottom:8px;border-bottom:2px dashed rgba(242,217,121,0.35);display:flex;align-items:center;gap:8px;}
+.card h3 .ic{font-size:20px;}
+.goals{display:flex;flex-wrap:wrap;gap:9px;}
+.goal{display:flex;align-items:center;gap:9px;background:rgba(242,217,121,0.07);
+  border:1.5px dashed rgba(242,217,121,0.4);border-radius:22px;padding:8px 15px 8px 8px;
+  font-size:clamp(13.5px,1.8vw,15px);color:var(--yellow);line-height:1.5;}
+.goal .bdg{width:24px;height:24px;border-radius:50%;background:var(--yellow);color:#16281c;
+  font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;flex:none;}
+.deck{position:relative;background:rgba(0,0,0,0.22);border-radius:12px;padding:clamp(16px,3vw,30px);
+  min-height:clamp(260px,42vh,380px);display:flex;flex-direction:column;justify-content:center;}
+.sl{display:none;animation:fade .25s;}.sl.on{display:block;}
+@keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+.sl .eyebrow{font-family:'Caveat',cursive;font-size:20px;color:var(--yellow);margin-bottom:6px;}
+.sl h4{font-family:'Noto Serif TC',serif;font-size:clamp(19px,3vw,27px);margin-bottom:12px;line-height:1.35;}
+.sl p{font-size:clamp(15px,2vw,18px);line-height:1.8;margin-bottom:9px;}
+.sl ul{list-style:none;}
+.sl li{font-size:clamp(15px,2vw,18px);line-height:1.85;padding-left:26px;position:relative;margin-bottom:4px;}
+.sl li::before{content:'✦';position:absolute;left:2px;color:var(--yellow);font-size:14px;top:3px;}
+.nav{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:14px;}
+.nav .pg{font-family:'Caveat',cursive;font-size:20px;color:var(--soft);min-width:64px;text-align:center;}
+.dots{display:flex;gap:6px;justify-content:center;margin-top:10px;flex-wrap:wrap;}
+.dot{width:9px;height:9px;border-radius:50%;background:rgba(243,239,226,0.25);cursor:pointer;border:none;padding:0;}
+.dot.on{background:var(--yellow);transform:scale(1.3);}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.32);border-radius:10px;
+  padding:11px 15px;margin:9px 0;font-size:clamp(14px,1.9vw,17px);line-height:1.7;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.36);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.36);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.32);}
+.two{display:flex;gap:12px;flex-wrap:wrap;}.two>*{flex:1;min-width:220px;}
+.teach{background:rgba(201,174,224,0.12);border:1.5px dashed rgba(201,174,224,0.5);
+  border-radius:10px;padding:11px 15px;margin:9px 0;font-size:clamp(14px,1.8vw,15px);line-height:1.7;}
+.teach b{color:var(--purple);}
+.tbl{width:100%;border-collapse:collapse;margin:9px 0;font-size:clamp(13.5px,1.8vw,16px);}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.24);padding:8px 11px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.cv-wrap{background:rgba(0,0,0,0.25);border-radius:12px;padding:10px;}
+canvas.viz{width:100%;display:block;border-radius:8px;touch-action:none;}
+.ctrl{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center;}
+.readout{font-family:'Noto Serif TC',serif;font-size:clamp(14px,1.9vw,18px);color:var(--chalk);
+  background:rgba(242,217,121,0.1);border:1px solid rgba(242,217,121,0.3);border-radius:8px;
+  padding:7px 12px;flex:1;min-width:220px;}
+.readout b{color:var(--yellow);}
+.q{background:rgba(0,0,0,0.2);border:1px solid rgba(242,217,121,0.18);border-radius:10px;padding:13px 15px;margin:10px 0;}
+.q .qt{font-size:clamp(15px,2vw,17px);margin-bottom:10px;line-height:1.7;}
+.q .qt .qn{font-family:'Caveat',cursive;color:var(--yellow);font-size:20px;margin-right:6px;}
+.opts{display:flex;flex-direction:column;gap:7px;}
+.opt{text-align:left;background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.22);
+  color:var(--chalk);border-radius:9px;padding:9px 13px;font-family:inherit;font-size:15px;cursor:pointer;transition:.15s;line-height:1.5;}
+.opt:hover:not(:disabled){background:rgba(243,239,226,0.13);}
+.opt.right{background:rgba(166,214,160,0.24);border-color:var(--green);color:#fff;font-weight:700;}
+.opt.wrong{background:rgba(237,160,168,0.22);border-color:var(--pink);}
+.opt:disabled{cursor:default;}
+.fb{display:none;margin-top:9px;padding:9px 13px;border-radius:8px;font-size:14.5px;line-height:1.65;}
+.fb.on{display:block;}
+.fb.ok{background:rgba(166,214,160,0.14);border-left:3px solid var(--green);}
+.fb.no{background:rgba(237,160,168,0.14);border-left:3px solid var(--pink);}
+.fill{display:inline-block;background:rgba(0,0,0,0.3);border:none;border-bottom:2px solid var(--yellow);
+  color:var(--yellow);font-family:'Noto Serif TC',serif;font-size:17px;width:110px;text-align:center;padding:3px 5px;margin:0 4px;}
+.fill:focus{outline:none;background:rgba(242,217,121,0.12);}
+.exq{background:rgba(0,0,0,0.26);border:1.5px solid rgba(242,217,121,0.28);border-radius:11px;padding:13px 15px;margin:10px 0;position:relative;}
+.exq::before{content:'';position:absolute;top:-8px;left:32px;width:54px;height:14px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.exq .exq-q{font-size:clamp(14.5px,1.9vw,17px);line-height:1.75;margin-bottom:11px;}
+.exo{text-align:left;background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.22);
+  color:var(--chalk);border-radius:9px;padding:9px 13px;font-family:inherit;font-size:clamp(14px,1.8vw,15.5px);
+  cursor:pointer;transition:.15s;line-height:1.55;width:100%;margin-bottom:6px;display:block;}
+.exo:hover:not(:disabled){background:rgba(243,239,226,0.13);}
+.exo.right{background:rgba(166,214,160,0.26);border-color:var(--green);color:#fff;font-weight:700;}
+.exo.wrong{background:rgba(237,160,168,0.2);border-color:var(--pink);opacity:.75;}
+.exo:disabled{cursor:default;}
+@keyframes shake{10%,90%{transform:translateX(-2px);}30%,70%{transform:translateX(4px);}50%{transform:translateX(-4px);}}
+.exo.shake{animation:shake .4s;}
+.exsol{display:none;margin-top:10px;padding:11px 14px;border-radius:9px;
+  background:rgba(166,214,160,0.13);border-left:3px solid var(--green);font-size:clamp(14px,1.8vw,15.5px);line-height:1.75;}
+.exsol.on{display:block;animation:fade .3s;}
+.exsol .st{color:var(--soft);margin:3px 0;}
+.exsol .an{color:var(--green);font-weight:700;margin-top:6px;}
+.exlock{display:flex;align-items:center;gap:7px;margin-top:9px;font-size:13.5px;color:rgba(243,239,226,0.45);}
+.exlock.hide{display:none;}
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:11px;}
+.icard{background:rgba(0,0,0,0.22);border:1.5px solid rgba(242,217,121,0.22);border-radius:11px;padding:14px;text-align:center;}
+.icard .big{font-family:'Noto Serif TC',serif;font-size:clamp(17px,2.6vw,23px);font-weight:900;margin:6px 0;}
+.icard .cap{font-size:13.5px;color:var(--soft);line-height:1.6;}
+.frow{display:flex;gap:12px;align-items:center;padding:9px 12px;border-bottom:1px dashed rgba(243,239,226,0.16);}
+.frow:last-child{border-bottom:none;}
+.flab{color:var(--blue);font-weight:700;min-width:150px;font-size:clamp(13.5px,1.8vw,15.5px);flex:none;}
+.fval{color:var(--yellow);font-weight:700;font-family:'Noto Serif TC',serif;font-size:clamp(14px,1.9vw,17px);}
+@media(max-width:560px){.frow{flex-direction:column;align-items:flex-start;gap:3px;}.flab{min-width:0;}}
+.hud{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:12px;}
+.hud .st{background:rgba(0,0,0,0.3);border:1.5px solid rgba(242,217,121,0.28);border-radius:9px;
+  padding:7px 13px;font-size:14px;flex:1;min-width:88px;text-align:center;}
+.hud .st b{display:block;font-family:'Noto Serif TC',serif;font-size:20px;color:var(--yellow);}
+.tbar{height:8px;background:rgba(0,0,0,0.35);border-radius:5px;overflow:hidden;margin-bottom:12px;}
+.tfill{height:100%;background:linear-gradient(90deg,var(--green),var(--yellow),var(--pink));width:100%;transition:width .1s linear;}
+.gscreen{display:none;}.gscreen.on{display:block;}
+.lvchips{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin:14px 0;}
+.lvchip{background:rgba(152,201,220,0.12);border:1.5px solid rgba(152,201,220,0.35);border-radius:18px;
+  padding:6px 13px;font-size:13.5px;color:var(--blue);}
+.lvchip.done{background:rgba(166,214,160,0.2);border-color:var(--green);color:var(--green);}
+.lvchip.now{background:rgba(242,217,121,0.22);border-color:var(--yellow);color:var(--yellow);font-weight:700;}
+.gq{font-size:clamp(16px,2.2vw,20px);line-height:1.7;margin:14px 0;text-align:center;font-family:'Noto Serif TC',serif;}
+.gopts{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+@media(max-width:560px){.gopts{grid-template-columns:1fr;}}
+.gopt{background:rgba(243,239,226,0.07);border:1.5px solid rgba(243,239,226,0.25);color:var(--chalk);
+  border-radius:10px;padding:12px;font-family:'Noto Serif TC',serif;font-size:17px;cursor:pointer;transition:.15s;min-height:48px;}
+.gopt:hover:not(:disabled){background:rgba(243,239,226,0.15);}
+.gopt.right{background:rgba(166,214,160,0.3);border-color:var(--green);font-weight:900;}
+.gopt.wrong{background:rgba(237,160,168,0.25);border-color:var(--pink);}
+.gfb{margin-top:11px;padding:10px 13px;border-radius:8px;font-size:14.5px;line-height:1.6;display:none;}
+.gfb.on{display:block;}
+.gfb.ok{background:rgba(166,214,160,0.15);border-left:3px solid var(--green);}
+.gfb.no{background:rgba(237,160,168,0.15);border-left:3px solid var(--pink);}
+.rank{font-size:54px;text-align:center;margin:10px 0;}
+.hint{text-align:center;color:rgba(243,239,226,0.35);font-size:12.5px;padding:8px 0 0;}
+@media (max-width:640px){.topbar{padding:8px 10px;gap:8px;}.wrap{padding:0 10px 70px;}.card{padding:13px;}}
+</style></head><body>
+
+<div class="topbar">
+  <div class="brand">1-3　聯立方程式解應用問題<small>七下 · 第1章 二元一次聯立方程式</small></div>
+  <div class="spacer"></div>
+</div>
+
+<div class="tabs" id="tabs">
+  <button class="tab on" data-p="0"><span class="n">🔑</span>兩條方程式</button>
+  <button class="tab" data-p="1"><span class="n">💨</span>順逆風與採購</button>
+  <button class="tab" data-p="2"><span class="n">🧪</span>濃度與利息</button>
+  <button class="tab" data-p="3"><span class="n">★</span>題型測驗</button>
+  <button class="tab" data-p="4"><span class="n">🎮</span>闖關遊戲</button>
+</div>
+
+<div class="wrap">
+  <div class="card" id="goalCard">
+    <h3><span class="ic">🎯</span>本節學習目標</h3>
+    <div class="goals" id="goals"></div>
+  </div>
+  <div id="wrap"></div>
+</div>
+
+<script>
+const GOALS = [
+  '理解「有幾個未知數，就要幾條方程式」',
+  '能設兩個未知數，列出兩條獨立的等量關係',
+  '能依形式選擇代入消去法或加減消去法',
+  '能處理六大題型（和差／年齡／順逆風／濃度／採購／利息）',
+  '解完能代回「兩條」原方程式驗算',
+  '能檢查合理性（重量、年齡不能為負）',
+];
+
+const DATA = [
+{ key:'pair', viz:'pair', vizTitle:'兩條方程式偵測器 —— 先自己想「哪兩件事不變？」，想好再揭曉（7 題）',
+  slides:[
+    {eb:'🔑 本節唯一的新規則', h:'有幾個未知數，就要幾條方程式', html:`
+      <table class="tbl">
+        <tr><th style="width:26%;">　</th><th style="width:34%;">七上 3-3</th><th>七下 1-3</th></tr>
+        <tr><td>未知數</td><td class="hl-b" style="font-size:18px;"><b>1 個</b>（x）</td><td class="hl-g" style="font-size:18px;"><b>2 個</b>（x、y）</td></tr>
+        <tr><td>需要的方程式</td><td class="hl-b" style="font-size:18px;"><b>1 條</b></td><td class="hl-g" style="font-size:18px;"><b>2 條</b></td></tr>
+        <tr><td>追問句</td><td>「<b>什麼</b>不變？」</td><td class="hl">「<b>哪兩件事</b>不變？」</td></tr>
+      </table>
+      <div class="box y" style="text-align:center;">💡 <span class="hl">這就是本節唯一的升級。</span>七上你已經會找<b>一個</b>不變量了 —— 現在只是要找<b>兩個</b>。</div>`},
+    {eb:'觀念', h:'為什麼一條不夠？（1-1 已經說了）', html:`
+      <div class="box r"><b class="hl-r">只有一條</b>　<span class="fm" style="font-size:18px;">x + y = 20</span><br>
+        解有<span class="hl-r">無限多組</span>：<span class="fm">(1,19)、(2,18)、(12,8)…</span> 根本鎖不定</div>
+      <div class="box g"><b class="hl-g">再給一條</b>　<span class="fm" style="font-size:18px;">15x + 25y = 380</span><br>
+        兩條<b>同時成立</b> → 鎖定<span class="hl">唯一一組</span> <span class="fm">(12, 8)</span></div>
+      <div class="box y"><b>⚠️「獨立」很重要：</b><span class="fm">x+y=20</span> 和 <span class="fm">2x+2y=40</span> <span class="hl-r">不算兩條</span> ——
+        第二條是第一條乘 2，<b>沒給任何新資訊</b>。（1-2 補給站會談）</div>`},
+    {eb:'流程', h:'解題五步驟', html:`
+      <div class="box y" style="text-align:center;font-size:15px;padding:12px;">
+        <span class="hl">① 設兩個 → ② 找兩條 → ③ 選方法 → ④ 代回兩條驗算 → ⑤ 檢查合理性</span></div>
+      <table class="tbl">
+        <tr><th style="width:9%;">　</th><th style="width:28%;">動作</th><th>關鍵</th></tr>
+        <tr><td class="hl">①</td><td><b>設兩個未知數</b></td><td>寫清楚「設…為 x、…為 y」<span class="hl-r">含單位</span></td></tr>
+        <tr><td class="hl">②</td><td><b>找兩條等量關係</b></td><td class="hl">「<b>哪兩件事</b>不變？」← 靈魂</td></tr>
+        <tr><td class="hl">③</td><td><b>選方法</b></td><td>有 <span class="fm">y = …</span> → <b>代入</b>；係數相同／相反 → <b>加減</b></td></tr>
+        <tr><td class="hl">④</td><td><b>驗算</b></td><td>⚠️ 要代回<span class="hl-r">兩條</span>原方程式</td></tr>
+        <tr><td class="hl">⑤</td><td><b>檢查合理性</b></td><td>重量、年齡不能為負；件數要正整數</td></tr>
+      </table>`},
+    {eb:'總覽', h:'六大題型：兩條方程式從哪來？', html:`
+      <table class="tbl">
+        <tr><th style="width:22%;">題型</th><th style="width:36%;">第 1 條</th><th>第 2 條</th></tr>
+        <tr><td class="hl-b"><b>和差</b></td><td>兩數的<b>和</b></td><td>兩數的<b>差</b></td></tr>
+        <tr><td class="hl-b"><b>年齡</b></td><td>現在的倍數關係</td><td><b>幾年後</b>的倍數關係</td></tr>
+        <tr><td class="hl-b"><b>順逆風</b></td><td class="fm">順風：(x+y)×時間</td><td class="fm">逆風：(x−y)×時間</td></tr>
+        <tr><td class="hl-b"><b>濃度混合</b></td><td><b>總重量</b></td><td><b>溶質總重量</b></td></tr>
+        <tr><td class="hl-b"><b>採購分配</b></td><td><b>總件數</b></td><td><b>總金額</b></td></tr>
+        <tr><td class="hl-b"><b>投資利息</b></td><td><b>總本金</b></td><td><b>總利息</b></td></tr>
+      </table>
+      <div class="box y" style="text-align:center;">💡 <b>看出規律了嗎？</b>第 1 條幾乎都是「<span class="hl">總數量</span>」，第 2 條幾乎都是「<span class="hl">總價值</span>」</div>`},
+    {eb:'例題 1 ★☆☆', h:'和差問題', html:`
+      <div class="exq" data-a="2">
+        <div class="exq-q"><span class="hl">Q</span>　兩個數的和是 50，差是 12。較大的數是？</div>
+        <button class="exo" data-i="0">19</button>
+        <button class="exo" data-i="1">25</button>
+        <button class="exo" data-i="2">31</button>
+        <button class="exo" data-i="3">38</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">設較大 x、較小 y</div>
+          <div class="st fm">x + y = 50（和）　；　x − y = 12（差）</div>
+          <div class="st">y 的係數是 +1 與 −1（互為相反）→ <b>加減消去法（相加）</b></div>
+          <div class="st fm">兩式相加：2x = 62 → x = 31；y = 50 − 31 = 19</div>
+          <div class="st fm">驗算：31 + 19 = 50 ✓；31 − 19 = 12 ✓　<b>（兩條都要驗！）</b></div>
+          <div class="st">(A) 19 是<b>較小</b>的數 —— 題目問的是<b>較大</b>的！</div>
+          <div class="an">答：較大的數是 31（較小的是 19）</div>
+        </div>
+      </div>`},
+    {eb:'例題 2 ★★☆', h:'年齡問題（和七上同一個坑）', html:`
+      <div class="exq" data-a="1">
+        <div class="exq-q"><span class="hl">Q</span>　父親是兒子的 4 倍；<b>5 年後</b>父親是兒子的 3 倍多 5 歲。設兒子 x 歲、父親 y 歲，第二條方程式是？</div>
+        <button class="exo" data-i="0">y + 5 = 3x + 5</button>
+        <button class="exo" data-i="1">y + 5 = 3(x + 5) + 5</button>
+        <button class="exo" data-i="2">y = 3(x + 5) + 5</button>
+        <button class="exo" data-i="3">y + 5 = 3x</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">5 年後：父親 <b>y + 5</b>、兒子 <b>x + 5</b>　—— <span class="hl-r">兩人都要加 5！</span></div>
+          <div class="st fm">條件：父親 = 兒子的 3 倍多 5 → y + 5 = 3(x+5) + 5</div>
+          <div class="st fm">配上第一條 y = 4x（代入）：4x + 5 = 3x + 20 → x = 15；y = 60</div>
+          <div class="st fm">驗算：5 年後父 65、子 20；3×20 + 5 = 65 ✓</div>
+          <div class="st">(A) 的錯誤：<span class="hl-r">只給父親加了 5，忘記兒子也會長大</span>。<br>
+            這和七上 3-2 年齡題是<b>同一個坑</b> —— <b>時間對兩個人是公平的</b>。</div>
+          <div class="an">答：y + 5 = 3(x + 5) + 5</div>
+        </div>
+      </div>`},
+    {eb:'觀念', h:'回頭看「雞兔同籠」：為什麼七上那麼難？', html:`
+      <div class="box r"><b class="hl-r">七上（只能設一個 x）</b><br>
+        「雞兔共 20 隻，腳共 56 隻」→ 設雞 x 隻，兔就是 <span class="fm">(20 − x)</span> 隻<br>
+        <span class="fm">2x + 4(20 − x) = 56</span><br>
+        <span style="font-size:13px;color:var(--soft)">要先在腦中把「兔 = 20 − x」轉一次 —— 這一步就卡住很多人</span></div>
+      <div class="box g"><b class="hl-g">七下（設兩個）</b><br>
+        設雞 <span class="fm">x</span> 隻、兔 <span class="fm">y</span> 隻<br>
+        <span class="fm">x + y = 20</span>（總隻數）　；　<span class="fm">2x + 4y = 56</span>（總腳數）<br>
+        <span style="font-size:13px;color:var(--soft)">直接照著題目寫，<b>不用在腦中轉任何東西</b></span></div>
+      <div class="box y" style="text-align:center;"><span class="hl">多設一個未知數，換來的是「不用動腦轉換」。</span><br>這就是聯立方程式存在的理由。</div>`}
+  ],
+  fa:[
+    {q:'兩個未知數，最少需要幾條「獨立」的方程式才解得出來？', o:['1 條','2 條','3 條','不一定'], a:1, e:'有幾個未知數就要幾條獨立的方程式。'},
+    {q:'<span class="fm">x+y=20</span> 和 <span class="fm">2x+2y=40</span> 算兩條獨立的方程式嗎？', o:['算','不算，第二條是第一條乘2','算，係數不同','不一定'], a:1, e:'第二條沒給任何新資訊 → 不獨立 → 會有無限多解。'},
+    {q:'看到 <span class="fm">y = 4x</span> 這種形式，該用哪個方法？', o:['代入消去法','加減消去法','都不行','畫圖'], a:0, e:'已經解出 y 了，直接代入另一條最快。'}
+  ],
+  info:[
+    {big:'幾個未知數', cap:'就要幾條<br>獨立的方程式', c:'var(--yellow)'},
+    {big:'哪「兩件」事不變', cap:'七上問一件<br>這節問兩件', c:'var(--blue)'},
+    {big:'總數量 + 總價值', cap:'兩條的<br>共同結構', c:'var(--green)'}
+  ]
+},
+{ key:'cross', viz:'cross', vizTitle:'兩條直線的交點 —— 你解的 (x, y) 其實是這個（2-2 的伏筆）',
+  slides:[
+    {eb:'題型 3 ⚠️ 本節新題型', h:'順逆風（順逆水）', html:`
+      <div class="box y" style="text-align:center;font-size:20px;padding:16px;">
+        <span class="hl">順風速度 = 靜風速度 ＋ 風速</span><br>
+        <span class="hl">逆風速度 = 靜風速度 － 風速</span></div>
+      <div class="two">
+        <div class="box g"><b class="hl-g">順風</b>　輕鬆・快<br><span class="fm" style="font-size:18px;">x + y</span><br>
+          <span style="font-size:13px;color:var(--soft)">風在幫你推</span></div>
+        <div class="box"><b class="hl-r">逆風</b>　吃力・慢<br><span class="fm" style="font-size:18px;">x − y</span><br>
+          <span style="font-size:13px;color:var(--soft)">風在扯你後腿</span></div>
+      </div>
+      <div class="box r"><b class="hl-r">⚠️ 最常錯：記反成「順風 = 風速 − 靜風」。</b><br>
+        <b>生活類比：</b>順風騎車<span class="hl-g">輕鬆快</span>、逆風<span class="hl-r">吃力慢</span> —— <span class="hl">想一下騎車的感覺就不會反了。</span></div>`},
+    {eb:'例題 3 ★★★', h:'順逆風', html:`
+      <div class="exq" data-a="2">
+        <div class="exq-q"><span class="hl">Q</span>　順風 2 小時走 36km，逆風 3 小時走 36km。<b>風速</b>是多少？</div>
+        <button class="exo" data-i="0">15 公里/時</button>
+        <button class="exo" data-i="1">18 公里/時</button>
+        <button class="exo" data-i="2">3 公里/時</button>
+        <button class="exo" data-i="3">12 公里/時</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">設靜風 x、風速 y</div>
+          <div class="st fm">2(x + y) = 36（順風）　；　3(x − y) = 36（逆風）</div>
+          <div class="st"><b>💡 先化簡！</b> <span class="fm">x + y = 18</span>；<span class="fm">x − y = 12</span>　← 數字小很多</div>
+          <div class="st fm">相加：2x = 30 → x = 15；y = 18 − 15 = 3</div>
+          <div class="st fm">驗算：順風 (15+3)×2 = 36 ✓；逆風 (15−3)×3 = 36 ✓</div>
+          <div class="st">(A) 15 是<b>靜風速度</b>，不是風速 —— 題目問哪一個要看清楚！</div>
+          <div class="st">💡 <b>關鍵動作</b>：先把 2(x+y)=36 除掉係數變 x+y=18 再消去。<b>化簡完再解，永遠比硬幹快。</b></div>
+          <div class="an">答：風速 3 公里/時（靜風 15 公里/時）</div>
+        </div>
+      </div>`},
+    {eb:'例題 4 ★★☆', h:'採購分配（雞兔同籠型）', html:`
+      <div class="exq" data-a="1">
+        <div class="exq-q"><span class="hl">Q</span>　練習簿每本 15 元、彩色筆每支 25 元，共買 20 件、花了 380 元。彩色筆買幾支？</div>
+        <button class="exo" data-i="0">12 支</button>
+        <button class="exo" data-i="1">8 支</button>
+        <button class="exo" data-i="2">10 支</button>
+        <button class="exo" data-i="3">15 支</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">設練習簿 x 本、彩色筆 y 支</div>
+          <div class="st fm">x + y = 20（<b>總件數</b>）　；　15x + 25y = 380（<b>總金額</b>）</div>
+          <div class="st fm">代入：x = 20 − y → 15(20 − y) + 25y = 380 → 300 + 10y = 380 → y = 8；x = 12</div>
+          <div class="st fm">驗算：15×12 + 25×8 = 180 + 200 = 380 ✓</div>
+          <div class="st">⑤ 檢查：12 本、8 支都是<b>正整數</b> ✓</div>
+          <div class="st">(A) 12 是<b>練習簿</b>的本數 —— 題目問彩色筆！</div>
+          <div class="an">答：彩色筆 8 支（練習簿 12 本）</div>
+        </div>
+      </div>`},
+    {eb:'💡 2-2 的伏筆', h:'你解的 (x, y)，其實是平面上的一個點', html:`
+      <div class="box">例題 4 解出「練習簿 <span class="hl">12</span> 本、彩色筆 <span class="hl">8</span> 支」——<br>
+        在坐標平面上，就是<span class="hl">一個點 (12, 8)</span>。</div>
+      <div class="box g" style="text-align:center;font-size:18px;">
+        而下一章會讓你看到：<br>
+        <span class="hl">那兩條方程式，是兩條直線；</span><br>
+        <span class="hl">你解的答案，是它們的交點。</span></div>
+      <div class="box y">👉 用下方的 <b>Canvas</b> 按「換一題」，親眼看三種題型的兩條直線，
+        以及交點怎麼剛好落在你算出的答案上。</div>
+      <div class="teach"><b>為什麼現在就講？</b>因為你等一下在 2-1、2-2 學坐標和圖形的時候，
+        腦中會有一個<b>已經解過的具體例子</b> —— 那時候「兩直線交點」就不是抽象的東西了。</div>`}
+  ],
+  fa:[
+    {q:'順風速度 = ?', o:['靜風 + 風速','靜風 − 風速','風速 − 靜風','靜風 × 風速'], a:0, e:'順風騎車輕鬆快 → 靜風 + 風速。'},
+    {q:'去程順風時速 50、回程逆風時速 30，風速是？', o:['40','20','10','80'], a:2, e:'x+y=50、x−y=30 → x=40（靜風）、y=10（風速）。'},
+    {q:'<span class="fm">2(x+y)=36</span> 該先做什麼？', o:['直接代入','先化簡成 x+y=18','先平方','先移項'], a:1, e:'先除掉係數變 x+y=18，數字小很多，比較不會算錯。'}
+  ],
+  info:[
+    {big:'順風 = 靜風+風速', cap:'順風輕鬆快<br>逆風吃力慢', c:'var(--green)'},
+    {big:'先化簡再消去', cap:'2(x+y)=36<br>→ x+y=18', c:'var(--yellow)'},
+    {big:'解 = 兩直線交點', cap:'2-2 會證明<br>給你看', c:'var(--blue)'}
+  ]
+},
+{ key:'mix', viz:'mix', vizTitle:'濃度混合槓桿 —— 調配比，看混合濃度怎麼在 10% 與 30% 之間滑動',
+  slides:[
+    {eb:'題型 4 ⚠️ 一定要兩條', h:'濃度混合：兩條方程式從哪來？', html:`
+      <div class="two">
+        <div class="box"><b class="hl-b">第 1 條：總重量</b><br><span class="fm" style="font-size:17px;">x + y = 500</span><br>
+          <span style="font-size:13px;color:var(--soft)">兩種溶液加起來的重量</span></div>
+        <div class="box g"><b class="hl-g">第 2 條：溶質總重量</b><br><span class="fm" style="font-size:17px;">0.3x + 0.1y = 90</span><br>
+          <span style="font-size:13px;color:var(--soft)">兩種溶液裡的橡膠加起來</span></div>
+      </div>
+      <div class="box r" style="text-align:center;">⚠️ <b class="hl-r">最常見錯誤：只列「總重量」這一條。</b><br>
+        一條方程式<span class="hl-r">解不出兩個未知數</span>！</div>
+      <div class="box y">💡 <b>這是七上 3-3 濃度題的升級版：</b>當時只有一個未知數（已知加多少），
+        現在<span class="hl">兩種都不知道</span> → 需要<b>兩條</b>（總重量 ＋ 溶質守恆）。</div>`},
+    {eb:'例題 5 ★★★', h:'濃度混合', html:`
+      <div class="exq" data-a="0">
+        <div class="exq-q"><span class="hl">Q</span>　30% 與 10% 的溶液混成 <b>18%</b>、共 500 公斤。30% 的溶液要幾公斤？</div>
+        <button class="exo" data-i="0">200 公斤</button>
+        <button class="exo" data-i="1">300 公斤</button>
+        <button class="exo" data-i="2">250 公斤</button>
+        <button class="exo" data-i="3">180 公斤</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">設 30% 溶液 x 公斤、10% 溶液 y 公斤</div>
+          <div class="st fm">x + y = 500（總重量）　；　0.3x + 0.1y = 500×0.18 = 90（橡膠總重量）</div>
+          <div class="st fm">代入：y = 500 − x → 0.3x + 50 − 0.1x = 90 → 0.2x = 40 → x = 200；y = 300</div>
+          <div class="st fm">驗算：0.3×200 + 0.1×300 = 60 + 30 = 90 ✓</div>
+          <div class="st"><b>估算檢查</b>：18% 比中間值 20% <b>偏低</b> → <b>10% 的溶液要比較多</b>（300 > 200）✓ 合理</div>
+          <div class="st">(B) 300 是 <b>10%</b> 溶液的重量 —— 又是「問哪一個」的陷阱！</div>
+          <div class="an">答：30% 溶液 200 公斤</div>
+        </div>
+      </div>`},
+    {eb:'💡 技巧', h:'目標濃度在正中間 → 兩種等量', html:`
+      <div class="two">
+        <div class="box"><span class="fm" style="font-size:16px;">40% 與 10% → 混成 25%</span><br>
+          <span class="hl-g">各 150 毫升（等量）</span><br><span style="font-size:13px;color:var(--soft)">25% 剛好是 40 和 10 的中間</span></div>
+        <div class="box g"><span class="fm" style="font-size:16px;">50% 與 20% → 混成 35%</span><br>
+          <span class="hl-g">各 300 公斤（等量）</span><br><span style="font-size:13px;color:var(--soft)">35% 剛好是 50 和 20 的中間</span></div>
+      </div>
+      <div class="box y" style="text-align:center;font-size:19px;"><span class="hl">目標濃度落在正中間 → 兩種等量混合</span></div>
+      <div class="box g"><b>很好用的估算檢查：</b><br>
+        ・目標偏向 30% 那邊 → <b>30% 的溶液要多一點</b><br>
+        ・例題5 目標 18% 比中間 20% <b>偏低</b> → <b>10% 的溶液比較多</b>（300kg）✓</div>
+      <div class="teach"><b>先估再算，算完對照。</b>估算不會給你精確答案，但會在你算錯一位數的時候<b>大聲叫你</b>。</div>`},
+    {eb:'素養 ★★★', h:'投資利息：全押 vs 分散', html:`
+      <div class="box">10 萬元分兩部分：年利率 <span class="hl">5%</span> 定存、年利率 <span class="hl">8%</span> 基金。一年後共得利息 <span class="hl">6500 元</span>。</div>
+      <div class="box g"><b>解</b>：<span class="fm">x + y = 100000</span>（總本金）；<span class="fm">0.05x + 0.08y = 6500</span>（總利息）<br>
+        → <span class="fm">5000 + 0.03y = 6500 → y = 50000</span>；<span class="fm">x = 50000</span>　（各 5 萬）</div>
+      <div class="exq" data-a="1">
+        <div class="exq-q"><span class="hl">Q</span>　若<b>全部 10 萬</b>都投入 8% 的基金，比原本<b>多賺</b>多少？</div>
+        <button class="exo" data-i="0">多賺 8000 元</button>
+        <button class="exo" data-i="1">多賺 1500 元</button>
+        <button class="exo" data-i="2">多賺 3000 元</button>
+        <button class="exo" data-i="3">一樣多</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st fm">全押 8%：100000 × 0.08 = 8000 元</div>
+          <div class="st fm">原本：6500 元　→　多賺 8000 − 6500 = <b>1500 元</b></div>
+          <div class="st">(A) 8000 是<b>全押的總利息</b>，不是「多賺的」—— 題目問「多賺多少」！</div>
+          <div class="st">💡 <b>全押高利率當然賺比較多</b> —— 但那也代表<b>風險全押在一邊</b>。<br>
+            <b>數學算得出報酬，算不出風險。</b>分散投資的代價，就是這 1500 元。<br>
+            要不要少賺 1500 換安心 —— 那是<b>人</b>要決定的事，不是數學。</div>
+          <div class="an">答：多賺 1500 元</div>
+        </div>
+      </div>`},
+    {eb:'總覽', h:'六大題型，一個結構', html:`
+      <table class="tbl">
+        <tr><th style="width:22%;">題型</th><th style="width:30%;">第 1 條（總數量）</th><th>第 2 條（總價值）</th></tr>
+        <tr><td class="hl-b">濃度混合</td><td class="fm">x+y=500</td><td class="fm">0.3x+0.1y=90</td></tr>
+        <tr><td class="hl-b">採購分配</td><td class="fm">x+y=20</td><td class="fm">15x+25y=380</td></tr>
+        <tr><td class="hl-b">投資利息</td><td class="fm">x+y=100000</td><td class="fm">.05x+.08y=6500</td></tr>
+        <tr><td class="hl-b">原料採購</td><td class="fm">x+y=50</td><td class="fm">120x+80y=5200</td></tr>
+      </table>
+      <div class="box y" style="text-align:center;font-size:19px;">
+        四種題型，<span class="hl">長得一模一樣</span>：<br>
+        <span class="fm hl">x + y = 總數量</span>　　<span class="fm hl">ax + by = 總價值</span></div>
+      <div class="box g"><b>認出這個結構，這四種題型就是同一題。</b>換的只是單位（公斤／件／元）和係數（濃度／單價／利率）。</div>`},
+    {eb:'第 ⑤ 步', h:'檢查合理性（別跳過）', html:`
+      <table class="tbl">
+        <tr><th style="width:34%;">量</th><th style="width:30%;">可以是小數嗎？</th><th>可以是負數嗎？</th></tr>
+        <tr><td class="hl-b"><b>件數、本數、支數</b></td><td class="hl-r">❌ 必須是<b>整數</b></td><td class="hl-r">❌</td></tr>
+        <tr><td class="hl-b"><b>年齡</b></td><td class="hl-r">❌</td><td class="hl-r">❌</td></tr>
+        <tr><td class="hl-b"><b>重量、金額</b></td><td class="hl-g">✅</td><td class="hl-r">❌</td></tr>
+        <tr><td class="hl-b"><b>風速、靜風速度</b></td><td class="hl-g">✅</td><td class="hl-r">❌（風速為負沒意義）</td></tr>
+      </table>
+      <div class="box r" style="text-align:center;">解出「彩色筆 <span class="fm hl-r">8.5 支</span>」或「風速 <span class="fm hl-r">−3</span> 公里/時」→ <span class="hl">一定是算錯了</span></div>
+      <div class="teach"><b>驗算和檢查合理性是兩件事：</b><br>
+        ・<b>驗算</b>抓的是「算錯」（代回去不相等）<br>
+        ・<b>檢查合理性</b>抓的是「<b>列式錯</b>」（式子解得出來，但答案在現實中不存在）</div>`}
+  ],
+  fa:[
+    {q:'濃度混合題只列「總重量」一條夠嗎？', o:['夠','不夠，還要「溶質總重量」','要看題目','不一定'], a:1, e:'兩個未知數要兩條！溶質守恆是第二條。'},
+    {q:'40% 與 10% 混成 25%，兩種的量？', o:['40%比較多','10%比較多','一樣多','無法判斷'], a:2, e:'25% 剛好是中點 → 兩種等量。'},
+    {q:'解出「彩色筆 8.5 支」該怎麼辦？', o:['四捨五入成 9','就寫 8.5','一定算錯了，要重算','無條件捨去'], a:2, e:'支數必須是整數 → 出現小數就是算錯了。'}
+  ],
+  info:[
+    {big:'濃度要兩條', cap:'總重量 +<br>溶質總重量', c:'var(--pink)'},
+    {big:'中點 → 等量', cap:'偏向哪邊<br>哪邊就多', c:'var(--blue)'},
+    {big:'驗算 ≠ 檢查合理', cap:'一個抓算錯<br>一個抓列式錯', c:'var(--green)'}
+  ]
+}];
+
+const QUIZ = [
+  {type:'choice', q:'兩個未知數最少需要幾條「獨立」的方程式？', o:['1 條','2 條','3 條','不一定'], a:1, e:'有幾個未知數就要幾條獨立的方程式。'},
+  {type:'tf', q:'判斷：「<span class="fm">x+y=20</span> 和 <span class="fm">2x+2y=40</span> 是兩條獨立的方程式。」', a:false, e:'錯。第二條是第一條乘 2，沒給新資訊 → 不獨立。'},
+  {type:'choice', q:'兩數和 38、差 8，較大的數是？', o:['15','23','19','30'], a:1, e:'x+y=38、x−y=8 → 2x=46 → x=23（y=15）。'},
+  {type:'choice', q:'甲的 2 倍加乙 = 20；甲加乙的 2 倍 = 25。甲是？', o:['5','10','15','20'], a:0, e:'兩式相加 3a+3b=45 → a+b=15；再用 2a+b=20 減之 → a=5。'},
+  {type:'choice', q:'長方形長加寬 15cm、長減寬 5cm，長是？', o:['5','10','7.5','12'], a:1, e:'相加 2長=20 → 長=10、寬=5。'},
+  {type:'choice', q:'甲 3 件 + 乙 2 件 = 130 元；甲 1 件 + 乙 1 件 = 50 元。甲單價？', o:['20','30','40','25'], a:1, e:'乙=50−甲 → 3甲+2(50−甲)=130 → 甲=30。'},
+  {type:'choice', q:'父是女的 3 倍，年齡和 52 歲。女兒幾歲？', o:['13','39','17','26'], a:0, e:'4女=52 → 女=13、父=39。'},
+  {type:'fill', q:'順風速度 = 靜風速度 ___ 風速（填 + 或 −）', a:['+'], e:'順風騎車輕鬆快 → 靜風 + 風速。'},
+  {type:'choice', q:'去程順風時速 50、回程逆風時速 30。風速是？', o:['40','20','10','80'], a:2, e:'x+y=50、x−y=30 → x=40、y=10。'},
+  {type:'tf', q:'判斷：「順風速度等於風速減去靜風速度。」', a:false, e:'錯。應該是<b>順風 = 靜風 + 風速</b>。'},
+  {type:'choice', q:'40% 與 10% 混成 25%，共 300 毫升。40% 的用量？', o:['100','150','200','120'], a:1, e:'25% 是中點 → 各 150 毫升。'},
+  {type:'choice', q:'50% 與 20% 混成 35%，共 600 公斤。50% 的用量？', o:['200','300','400','250'], a:1, e:'35% 是中點 → 各 300 公斤。'},
+  {type:'choice', q:'30% 與 10% 混成 18%、共 500kg。30% 的用量？', o:['200','300','250','180'], a:0, e:'0.3x+0.1(500−x)=90 → x=200。（18% 偏低 → 10% 的比較多）'},
+  {type:'choice', q:'筆記本 20 元、原子筆 10 元，共 15 件、230 元。筆記本幾本？', o:['7','8','10','5'], a:1, e:'20x+10(15−x)=230 → 10x=80 → x=8。'},
+  {type:'choice', q:'雞兔共 20 隻、腳共 56 隻。兔幾隻？', o:['12','8','10','6'], a:1, e:'x+y=20、2x+4y=56 → y=8（雞 12）。'},
+  {type:'choice', q:'兩數和 60，一數是另一數的 3 倍少 4。較小的數？', o:['16','44','14','46'], a:0, e:'x=3y−4、x+y=60 → 4y=64 → y=16（另一數 44）。'},
+  {type:'choice', q:'兩個連續奇數，較大數的 2 倍減較小數 = 17。較小數？', o:['13','15','11','17'], a:0, e:'設較小 x、較大 x+2：2(x+2)−x=17 → x=13。'},
+  {type:'tf', q:'判斷：「解完聯立方程式，只要驗算其中一條就好。」', a:false, e:'錯。要代回<b>兩條</b>原方程式 —— 只驗一條可能剛好矇對。'}
+];
+
+const GAME = [
+  {name:'核心規則', qs:[
+    {q:'兩個未知數要幾條方程式？', o:['1 條','2 條','3 條','不一定'], a:1, e:'有幾個未知數就要幾條獨立的方程式。'},
+    {q:'x+y=20 和 2x+2y=40 算兩條嗎？', o:['算','不算，不獨立','算，係數不同','看題目'], a:1, e:'第二條是第一條乘2，沒給新資訊。'},
+    {q:'本節的靈魂追問句是？', o:['x 是多少？','哪兩件事不變？','要用哪個公式？','答案是幾？'], a:1, e:'七上問「什麼不變」，這節問「哪兩件事不變」。'},
+    {q:'兩條方程式的共同結構是？', o:['總數量 + 總價值','和 + 差','大 + 小','x + y'], a:0, e:'第1條多半是總數量、第2條多半是總價值。'}
+  ]},
+  {name:'選方法', qs:[
+    {q:'看到 y = 4x 該用？', o:['代入消去法','加減消去法','畫圖','猜'], a:0, e:'已經解出 y，直接代入最快。'},
+    {q:'兩條的 y 係數互為相反（+y、−y）？', o:['代入','加減（相加）','加減（相減）','都不行'], a:1, e:'相加就消掉了。'},
+    {q:'兩條的 y 係數相同（都是 +2y）？', o:['代入','加減（相加）','加減（相減）','都不行'], a:2, e:'相減就消掉了。'},
+    {q:'2(x+y)=36 該先做什麼？', o:['直接代入','先化簡成 x+y=18','先平方','先開根號'], a:1, e:'先除掉係數，數字小很多。'}
+  ]},
+  {name:'和差・年齡', qs:[
+    {q:'兩數和 50、差 12，較大的數？', o:['19','31','25','38'], a:1, e:'相加 2x=62 → x=31。'},
+    {q:'兩數和 38、差 8，較小的數？', o:['23','15','19','8'], a:1, e:'x=23、y=15。'},
+    {q:'年齡題「5 年後」要怎麼處理？', o:['只加大人','只加小孩','兩人都加 5','都不加'], a:2, e:'時間對兩個人是公平的！'},
+    {q:'父是女的 3 倍、和 52 歲，女兒？', o:['13','39','17','26'], a:0, e:'4女=52 → 女=13。'}
+  ]},
+  {name:'順逆風', qs:[
+    {q:'順風速度 = ?', o:['靜風 + 風速','靜風 − 風速','風速 − 靜風','靜風 × 風速'], a:0, e:'順風騎車輕鬆快！'},
+    {q:'逆風速度 = ?', o:['靜風 + 風速','靜風 − 風速','風速 − 靜風','靜風 ÷ 風速'], a:1, e:'逆風吃力慢。'},
+    {q:'順風時速 50、逆風時速 30，靜風速度？', o:['40','10','20','80'], a:0, e:'x+y=50、x−y=30 → x=40。'},
+    {q:'承上，風速？', o:['40','10','20','80'], a:1, e:'y=10。'}
+  ]},
+  {name:'濃度混合', qs:[
+    {q:'濃度混合要列幾條方程式？', o:['1 條（總重量）','2 條（總重量+溶質）','3 條','看題目'], a:1, e:'只列總重量解不出兩個未知數！'},
+    {q:'第 2 條方程式是什麼？', o:['總重量','溶質總重量','濃度和','平均濃度'], a:1, e:'溶質守恆。'},
+    {q:'40% 與 10% 混成 25%（中點），兩種的量？', o:['40%多','10%多','一樣多','不能判斷'], a:2, e:'目標在正中間 → 等量。'},
+    {q:'30% 與 10% 混成 18%，哪種多？', o:['30% 多','10% 多','一樣多','不能判斷'], a:1, e:'18% 比中點 20% 偏低 → 靠近 10% → 10% 的多（300kg）。'}
+  ]},
+  {name:'採購・利息', qs:[
+    {q:'採購題的兩條是？', o:['總件數 + 總金額','總件數 + 單價','總金額 + 單價','件數 + 件數'], a:0, e:'總數量 + 總價值。'},
+    {q:'練習簿15元、彩色筆25元，共20件380元。彩色筆？', o:['12 支','8 支','10 支','15 支'], a:1, e:'300+10y=380 → y=8。'},
+    {q:'雞兔共 20 隻、腳 56 隻，兔幾隻？', o:['12','8','10','6'], a:1, e:'x+y=20、2x+4y=56 → y=8。'},
+    {q:'投資題的兩條是？', o:['總本金 + 總利息','總本金 + 利率','總利息 + 利率','本金 + 本金'], a:0, e:'一樣是「總數量 + 總價值」。'}
+  ]},
+  {name:'驗算與檢查', qs:[
+    {q:'解完聯立要驗算幾條？', o:['1 條','2 條都要','不用驗','隨便'], a:1, e:'只驗一條可能剛好矇對。'},
+    {q:'解出「彩色筆 8.5 支」？', o:['四捨五入成 9','就寫 8.5','一定算錯了','無條件捨去'], a:2, e:'支數必須是整數。'},
+    {q:'解出「風速 −3 公里/時」？', o:['寫 −3','取絕對值 3','一定算錯了','不用管'], a:2, e:'風速為負沒有意義 → 算錯了。'},
+    {q:'「驗算」和「檢查合理性」的差別？', o:['一樣','驗算抓算錯，檢查合理抓列式錯','驗算比較重要','檢查合理可以跳過'], a:1, e:'式子解得出來但現實不存在 → 是列式錯，驗算抓不到。'}
+  ]}
+];
+
+document.getElementById('goals').innerHTML = GOALS.map((g,i)=>
+  `<div class="goal"><div class="bdg">${i+1}</div>${g}</div>`).join('');
+
+const wrap = document.getElementById('wrap');
+DATA.forEach((sec, si)=>{
+  const p = document.createElement('div');
+  p.className = 'panel' + (si===0?' on':'');
+  p.dataset.p = si;
+  p.innerHTML = `
+    <div class="card">
+      <h3><span class="ic">📽</span>簡報翻頁器</h3>
+      <div class="deck" data-deck="${si}">
+        ${sec.slides.map((s,i)=>`<div class="sl${i===0?' on':''}" data-i="${i}">
+          <div class="eyebrow">${s.eb}</div><h4>${s.h}</h4>${s.html}</div>`).join('')}
+      </div>
+      <div class="nav">
+        <button class="btn" data-nav="prev" data-s="${si}">◀ 上一張</button>
+        <span class="pg" id="pg-${si}">1 / ${sec.slides.length}</span>
+        <button class="btn" data-nav="next" data-s="${si}">下一張 ▶</button>
+      </div>
+      <div class="dots" id="dots-${si}">
+        ${sec.slides.map((_,i)=>`<button class="dot${i===0?' on':''}" data-s="${si}" data-i="${i}"></button>`).join('')}
+      </div>
+    </div>
+    <div class="card">
+      <h3><span class="ic">🎯</span>Canvas 互動視覺化<span style="font-size:14px;color:var(--soft);font-weight:400;">　${sec.vizTitle}</span></h3>
+      <div class="cv-wrap">
+        <canvas class="viz" data-viz="${sec.viz}" data-si="${si}"></canvas>
+        <div class="ctrl" data-ctrl="${si}"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3><span class="ic">✅</span>形成性評量</h3>
+      ${sec.fa.map((f,i)=>`<div class="q" data-fa="${si}-${i}">
+        <div class="qt"><span class="qn">Q${i+1}</span>${f.q}</div>
+        <div class="opts">${f.o.map((o,oi)=>`<button class="opt" data-si="${si}" data-qi="${i}" data-oi="${oi}">${o}</button>`).join('')}</div>
+        <div class="fb" id="fb-${si}-${i}"></div>
+      </div>`).join('')}
+    </div>
+    <div class="card">
+      <h3><span class="ic">📊</span>資訊圖表</h3>
+      <div class="info">
+        ${sec.info.map(c=>`<div class="icard"><div class="big" style="color:${c.c}">${c.big}</div><div class="cap">${c.cap}</div></div>`).join('')}
+      </div>
+    </div>`;
+  wrap.appendChild(p);
+});
+
+const qp = document.createElement('div');
+qp.className='panel'; qp.dataset.p='3';
+qp.innerHTML = `<div class="card"><h3><span class="ic">📝</span>題型測驗　<span style="font-size:14px;color:var(--soft);font-weight:400;">單選 · 是非 · 填充，共 ${QUIZ.length} 題</span></h3>
+  <div id="quizBox"></div>
+  <div style="display:flex;gap:10px;align-items:center;margin-top:14px;flex-wrap:wrap;">
+    <button class="btn" id="gradeBtn" style="background:rgba(242,217,121,.2);border-color:var(--yellow);color:var(--yellow);font-weight:700;">📊 批改並看成績</button>
+    <button class="btn" id="resetQuiz">🔄 重做</button>
+    <div class="readout" id="score" style="display:none;"></div>
+  </div></div>
+  <div class="card"><h3><span class="ic">📋</span>公式速查表</h3>
+    <div class="frow"><div class="flab">🔑 核心規則</div><div class="fval">有幾個未知數，就要幾條「<b>獨立</b>」的方程式</div></div>
+    <div class="frow"><div class="flab">🔑 靈魂追問句</div><div class="fval">「<b>哪兩件事</b>不變？」（七上是「什麼不變？」）</div></div>
+    <div class="frow"><div class="flab">五步驟</div><div class="fval">① 設兩個 → ② 找兩條 → ③ 選方法 → ④ 驗算<b>兩條</b> → ⑤ 檢查合理</div></div>
+    <div class="frow"><div class="flab">選方法</div><div class="fval">有 <b>y = …</b> → 代入；係數相同／相反 → 加減</div></div>
+    <div class="frow"><div class="flab">兩條的來源</div><div class="fval">第 1 條多半是「<b>總數量</b>」；第 2 條多半是「<b>總價值</b>」</div></div>
+    <div class="frow"><div class="flab">和差問題</div><div class="fval">和 ＋ 差（相加消一個、相減消另一個）</div></div>
+    <div class="frow"><div class="flab">年齡問題</div><div class="fval">現在的關係 ＋ 幾年後的關係（⚠️ <b>兩人都加</b>）</div></div>
+    <div class="frow"><div class="flab">順風速度</div><div class="fval"><b>靜風 ＋ 風速</b>（順風騎車輕鬆快）</div></div>
+    <div class="frow"><div class="flab">逆風速度</div><div class="fval"><b>靜風 − 風速</b>（逆風吃力慢）</div></div>
+    <div class="frow"><div class="flab">濃度混合</div><div class="fval"><b>總重量</b> ＋ <b>溶質總重量</b>（⚠️ 一定要兩條）</div></div>
+    <div class="frow"><div class="flab">採購分配</div><div class="fval"><b>總件數</b> ＋ <b>總金額</b></div></div>
+    <div class="frow"><div class="flab">投資利息</div><div class="fval"><b>總本金</b> ＋ <b>總利息</b></div></div>
+    <div class="frow"><div class="flab">濃度估算檢查</div><div class="fval">目標在<b>正中間</b> → 兩種<b>等量</b>；偏向哪邊 → 哪邊<b>多</b></div></div>
+    <div class="frow"><div class="flab">先化簡再消去</div><div class="fval">2(x+y)=36 → 先變 x+y=18，數字小很多</div></div>
+    <div class="frow"><div class="flab">驗算</div><div class="fval">代回<b>兩條</b>原方程式（只驗一條可能矇對）</div></div>
+    <div class="frow"><div class="flab">檢查合理性</div><div class="fval">件數要正整數；重量、年齡、風速不能為負</div></div>
+  </div>`;
+wrap.appendChild(qp);
+
+const gp = document.createElement('div');
+gp.className='panel'; gp.dataset.p='4';
+gp.innerHTML = `<div class="card"><h3><span class="ic">🎮</span>闖關遊戲　<span style="font-size:14px;color:var(--soft);font-weight:400;">6 關挑戰 · 每題 20 秒 · 連擊與速度都有加分</span></h3>
+  <div class="gscreen on" id="gStart">
+    <div style="text-align:center;font-size:clamp(15px,2vw,18px);line-height:1.8;">
+      闖過 <b class="hl">7</b> 關，每關 1 題，每題 <b class="hl">20 秒</b>。<br>
+      計分：基礎 <b class="hl">10</b> 分 + 連擊獎勵（最多 <b class="hl">5</b>）+ 速度獎勵（最多 <b class="hl">5</b>）＝ 單題最高 <b class="hl">20</b> 分</div>
+    <div class="lvchips" id="gStartChips"></div>
+    <div style="text-align:center;"><button class="btn" id="gGo" style="background:rgba(242,217,121,.25);border-color:var(--yellow);color:var(--yellow);font-weight:700;font-size:16px;padding:10px 24px;">🚀 開始挑戰</button></div>
+  </div>
+  <div class="gscreen" id="gPlay">
+    <div class="hud">
+      <div class="st">關卡<b id="hLv">1/7</b></div>
+      <div class="st">分數<b id="hSc">0</b></div>
+      <div class="st">連擊<b id="hStk">0</b></div>
+      <div class="st">剩餘<b id="hT">20</b></div>
+    </div>
+    <div class="tbar"><div class="tfill" id="tFill"></div></div>
+    <div class="lvchips" id="gChips"></div>
+    <div class="gq" id="gQ"></div>
+    <div class="gopts" id="gO"></div>
+    <div class="gfb" id="gFb"></div>
+    <div style="text-align:center;margin-top:12px;"><button class="btn" id="gNext" style="display:none;">下一關 ▶</button></div>
+  </div>
+  <div class="gscreen" id="gEnd">
+    <div class="rank" id="gRank">🏆</div>
+    <div style="text-align:center;font-size:clamp(17px,2.6vw,22px);font-family:'Noto Serif TC';" id="gFinal"></div>
+    <div style="text-align:center;color:var(--soft);margin-top:8px;" id="gStats"></div>
+    <div style="text-align:center;margin-top:16px;"><button class="btn" id="gAgain" style="background:rgba(242,217,121,.25);border-color:var(--yellow);color:var(--yellow);font-weight:700;">🔄 再挑戰一次</button></div>
+  </div></div>`;
+wrap.appendChild(gp);
+document.getElementById('gStartChips').innerHTML = GAME.map((g,i)=>`<div class="lvchip">第${i+1}關 ${g.name}</div>`).join('');
+
+const qb = document.getElementById('quizBox');
+QUIZ.forEach((q,i)=>{
+  const d = document.createElement('div'); d.className='q';
+  let body='';
+  if(q.type==='choice') body = `<div class="opts">${q.o.map((o,oi)=>`<button class="opt" data-quiz="${i}" data-oi="${oi}">${o}</button>`).join('')}</div>`;
+  else if(q.type==='tf') body = `<div class="opts" style="flex-direction:row;gap:10px;">
+      <button class="opt" data-quiz="${i}" data-oi="1" style="flex:1;">⭕ 對</button>
+      <button class="opt" data-quiz="${i}" data-oi="0" style="flex:1;">❌ 錯</button></div>`;
+  else body = `<div><input class="fill" data-quiz="${i}" placeholder="?"></div>`;
+  d.innerHTML = `<div class="qt"><span class="qn">${i+1}</span>
+    <span style="font-size:12px;color:var(--soft);border:1px solid rgba(243,239,226,.25);border-radius:6px;padding:1px 6px;margin-right:6px;">
+    ${q.type==='choice'?'單選':q.type==='tf'?'是非':'填充'}</span>${q.q}</div>${body}
+    <div class="fb" id="qfb-${i}"></div>`;
+  qb.appendChild(d);
+});
+
+document.getElementById('tabs').addEventListener('click', e=>{
+  const t = e.target.closest('.tab'); if(!t) return;
+  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on', x===t));
+  document.querySelectorAll('.panel').forEach(x=>x.classList.toggle('on', x.dataset.p===t.dataset.p));
+  document.getElementById('goalCard').style.display = (t.dataset.p==='4')?'none':'';
+  window.scrollTo({top:0,behavior:'smooth'});
+  setTimeout(resizeAll, 60);
+});
+
+const cur = DATA.map(()=>0);
+function showSlide(si, i){
+  const deck = document.querySelector(`[data-deck="${si}"]`);
+  const sl = deck.querySelectorAll('.sl');
+  i = Math.max(0, Math.min(sl.length-1, i));
+  cur[si] = i;
+  sl.forEach((s,k)=>s.classList.toggle('on', k===i));
+  document.getElementById('pg-'+si).textContent = `${i+1} / ${sl.length}`;
+  document.querySelectorAll(`#dots-${si} .dot`).forEach((d,k)=>d.classList.toggle('on', k===i));
+}
+document.addEventListener('click', e=>{
+  const n = e.target.closest('[data-nav]');
+  if(n){ const si=+n.dataset.s; showSlide(si, cur[si] + (n.dataset.nav==='next'?1:-1)); return; }
+  const d = e.target.closest('.dot');
+  if(d){ showSlide(+d.dataset.s, +d.dataset.i); return; }
+});
+document.addEventListener('keydown', e=>{
+  const p = document.querySelector('.panel.on'); if(!p) return;
+  const si = +p.dataset.p; if(si>=DATA.length) return;
+  if(e.key==='ArrowRight') showSlide(si, cur[si]+1);
+  if(e.key==='ArrowLeft') showSlide(si, cur[si]-1);
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.opt[data-si]'); if(!o) return;
+  const si=+o.dataset.si, qi=+o.dataset.qi, oi=+o.dataset.oi;
+  const f = DATA[si].fa[qi];
+  const box = document.querySelector(`[data-fa="${si}-${qi}"]`);
+  box.querySelectorAll('.opt').forEach((b,k)=>{
+    b.disabled = true;
+    if(k===f.a) b.classList.add('right'); else if(k===oi) b.classList.add('wrong');
+  });
+  const fb = document.getElementById(`fb-${si}-${qi}`);
+  const ok = oi===f.a;
+  fb.className = 'fb on ' + (ok?'ok':'no');
+  fb.innerHTML = (ok?'✅ <b>答對了！</b> ':'❌ <b>再想想。</b> ') + f.e;
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.exo');
+  if(o && !o.disabled){
+    const box = o.closest('.exq');
+    const ans = +box.dataset.a, pick = +o.dataset.i;
+    if(pick === ans){
+      box.querySelectorAll('.exo').forEach(b=>{ b.disabled=true; if(+b.dataset.i===ans) b.classList.add('right'); });
+      box.querySelector('.exsol').classList.add('on');
+      box.querySelector('.exlock').classList.add('hide');
+    } else {
+      o.classList.add('wrong','shake');
+      setTimeout(()=>o.classList.remove('shake'), 420);
+      o.disabled = true;
+      const lock = box.querySelector('.exlock');
+      lock.innerHTML = '🔒 再想想 —— 答對才會顯示詳解'; lock.style.color='var(--pink)';
+    }
+  }
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.opt[data-quiz]'); if(!o) return;
+  const i = +o.dataset.quiz;
+  o.parentElement.querySelectorAll('.opt').forEach(b=>b.classList.remove('right','wrong'));
+  o.classList.add('right'); o.dataset.sel='1';
+  o.parentElement.querySelectorAll('.opt').forEach(b=>{ if(b!==o) delete b.dataset.sel; });
+});
+document.getElementById('gradeBtn').addEventListener('click', ()=>{
+  let right=0;
+  QUIZ.forEach((q,i)=>{
+    const fb = document.getElementById('qfb-'+i);
+    let ok=false, picked=null;
+    if(q.type==='fill'){
+      const inp = document.querySelector(`.fill[data-quiz="${i}"]`);
+      const v = (inp.value||'').trim().replace(/−/g,'-').replace(/\s/g,'');
+      ok = q.a.some(a=>a.replace(/−/g,'-').replace(/\s/g,'')===v);
+      inp.style.borderBottomColor = ok?'var(--green)':'var(--pink)';
+    } else {
+      const sel = document.querySelector(`.opt[data-quiz="${i}"][data-sel="1"]`);
+      if(sel){ picked=+sel.dataset.oi; ok = (q.type==='tf') ? (picked===1)===q.a : picked===q.a; }
+      document.querySelectorAll(`.opt[data-quiz="${i}"]`).forEach(b=>{
+        b.classList.remove('right','wrong');
+        const bi=+b.dataset.oi;
+        const isAns = (q.type==='tf') ? ((bi===1)===q.a) : (bi===q.a);
+        if(isAns) b.classList.add('right'); else if(picked===bi) b.classList.add('wrong');
+      });
+    }
+    if(ok) right++;
+    fb.className='fb on '+(ok?'ok':'no');
+    fb.innerHTML = (ok?'✅ <b>正確</b> ':'❌ <b>錯誤</b> ') + q.e;
+  });
+  const s = document.getElementById('score');
+  const pct = Math.round(right/QUIZ.length*100);
+  s.style.display='block';
+  s.innerHTML = `成績：<b>${right} / ${QUIZ.length}</b>　（${pct} 分）　${pct>=80?'🏆 很棒！':pct>=60?'💪 再加油':'📖 建議重看重點'}`;
+});
+document.getElementById('resetQuiz').addEventListener('click', ()=>{
+  document.querySelectorAll('.opt[data-quiz]').forEach(b=>{b.classList.remove('right','wrong'); delete b.dataset.sel;});
+  document.querySelectorAll('.fill').forEach(i=>{i.value=''; i.style.borderBottomColor='var(--yellow)';});
+  document.querySelectorAll('[id^="qfb-"]').forEach(f=>f.className='fb');
+  document.getElementById('score').style.display='none';
+});
+
+/* ===== 闖關遊戲 ===== */
+const G = {lv:0, score:0, streak:0, best:0, t:20, timer:null, cur:null, answered:false};
+function gShow(id){ ['gStart','gPlay','gEnd'].forEach(x=>document.getElementById(x).classList.toggle('on', x===id)); }
+function gChips(){
+  document.getElementById('gChips').innerHTML = GAME.map((g,i)=>
+    `<div class="lvchip ${i<G.lv?'done':i===G.lv?'now':''}">${i+1}. ${g.name}</div>`).join('');
+}
+function gLoad(){
+  if(G.lv>=GAME.length){ gFinish(); return; }
+  G.answered=false; G.t=20;
+  const bank = GAME[G.lv].qs;
+  G.cur = bank[Math.floor(Math.random()*bank.length)];
+  document.getElementById('hLv').textContent = (G.lv+1)+'/'+GAME.length;
+  document.getElementById('hSc').textContent = G.score;
+  document.getElementById('hStk').textContent = G.streak;
+  document.getElementById('gQ').innerHTML = `<span style="color:var(--blue);font-size:15px;">第 ${G.lv+1} 關 · ${GAME[G.lv].name}</span><br>${G.cur.q}`;
+  document.getElementById('gO').innerHTML = G.cur.o.map((o,i)=>
+    `<button class="gopt" data-g="${i}">${'ABCD'[i]}. ${o}</button>`).join('');
+  document.getElementById('gFb').className='gfb';
+  document.getElementById('gNext').style.display='none';
+  gChips();
+  clearInterval(G.timer);
+  G.timer = setInterval(()=>{
+    G.t -= 0.1;
+    document.getElementById('hT').textContent = Math.max(0,G.t).toFixed(0);
+    document.getElementById('tFill').style.width = Math.max(0,G.t/20*100)+'%';
+    if(G.t<=0){ clearInterval(G.timer); gAnswer(-1); }
+  },100);
+}
+function gAnswer(pick){
+  if(G.answered) return;
+  G.answered = true; clearInterval(G.timer);
+  const ans = G.cur.a, ok = pick===ans;
+  document.querySelectorAll('.gopt').forEach((b,i)=>{
+    b.disabled=true;
+    if(i===ans) b.classList.add('right'); else if(i===pick) b.classList.add('wrong');
+  });
+  let gain=0, sb=0, tb=0;
+  if(ok){
+    G.streak++; G.best=Math.max(G.best,G.streak);
+    sb = Math.min(5, G.streak-1); tb = Math.min(5, Math.floor(G.t/4));
+    gain = 10+sb+tb; G.score += gain;
+  } else { G.streak = 0; }
+  document.getElementById('hSc').textContent = G.score;
+  document.getElementById('hStk').textContent = G.streak;
+  const fb = document.getElementById('gFb');
+  fb.className = 'gfb on '+(ok?'ok':'no');
+  fb.innerHTML = (ok? `✅ <b>答對！+${gain} 分</b>（基礎10 + 連擊${sb} + 速度${tb}）<br>`
+                    : (pick===-1?'⏰ <b>時間到！</b><br>':'❌ <b>答錯了</b><br>')) + G.cur.e;
+  document.getElementById('gNext').style.display='inline-block';
+  document.getElementById('gNext').textContent = (G.lv>=GAME.length-1)?'看成績 🏁':'下一關 ▶';
+}
+function gFinish(){
+  clearInterval(G.timer);
+  const max = GAME.length*20, pct = Math.round(G.score/max*100);
+  const rank = pct>=85?['🏆','數論大師']:pct>=70?['🥇','高手']:pct>=50?['🥈','不錯']:['📖','再加油'];
+  document.getElementById('gRank').textContent = rank[0];
+  document.getElementById('gFinal').innerHTML = `<b class="hl">${G.score}</b> / ${max} 分　·　${rank[1]}`;
+  document.getElementById('gStats').innerHTML = `最高連擊 <b class="hl">${G.best}</b>　·　完成 ${GAME.length} 關`;
+  gShow('gEnd');
+}
+document.getElementById('gGo').addEventListener('click', ()=>{ G.lv=0;G.score=0;G.streak=0;G.best=0; gShow('gPlay'); gLoad(); });
+document.getElementById('gAgain').addEventListener('click', ()=>{ G.lv=0;G.score=0;G.streak=0;G.best=0; gShow('gPlay'); gLoad(); });
+document.getElementById('gNext').addEventListener('click', ()=>{ G.lv++; gLoad(); });
+document.addEventListener('click', e=>{ const b=e.target.closest('.gopt'); if(!b||b.disabled) return; gAnswer(+b.dataset.g); });
+
+/* ===== Canvas ===== */
+const VIZ = {}; let DPR=1;
+function fmtN(v){ return Math.abs(v-Math.round(v))<1e-9 ? String(Math.round(v)) : (Math.round(v*1000)/1000).toString(); }
+
+/* ① 兩條方程式的來源偵測器 */
+const PAIR=[
+  {k:'和差', q:'兩個數的和是 50，差是 12', set:'設較大 x、較小 y',
+   e1:'x + y = 50', n1:'和', e2:'x − y = 12', n2:'差',
+   m:'加減消去（相加）', ans:'x = 31、y = 19'},
+  {k:'年齡', q:'父親是兒子的 4 倍；5 年後父親是兒子的 3 倍多 5 歲', set:'設兒子 x 歲、父親 y 歲',
+   e1:'y = 4x', n1:'現在的關係', e2:'y + 5 = 3(x+5) + 5', n2:'5 年後的關係（兩人都加 5！）',
+   m:'代入消去', ans:'x = 15、y = 60'},
+  {k:'順逆風', q:'順風 2 小時走 36km，逆風 3 小時走 36km', set:'設靜風 x、風速 y',
+   e1:'2(x + y) = 36', n1:'順風＝靜風＋風速', e2:'3(x − y) = 36', n2:'逆風＝靜風−風速',
+   m:'先化簡再加減', ans:'x = 15、y = 3'},
+  {k:'濃度混合', q:'30% 與 10% 混成 18%，共 500 公斤', set:'設 30% 溶液 x 公斤、10% 溶液 y 公斤',
+   e1:'x + y = 500', n1:'總重量', e2:'0.3x + 0.1y = 90', n2:'溶質總重量（橡膠守恆）',
+   m:'代入消去', ans:'x = 200、y = 300'},
+  {k:'採購分配', q:'練習簿 15 元、彩色筆 25 元，共 20 件、380 元', set:'設練習簿 x 本、彩色筆 y 支',
+   e1:'x + y = 20', n1:'總件數', e2:'15x + 25y = 380', n2:'總金額',
+   m:'代入消去', ans:'x = 12、y = 8'},
+  {k:'投資利息', q:'10 萬分兩部分，年利率 5% 與 8%，一年得利息 6500 元', set:'設定存 x 元、基金 y 元',
+   e1:'x + y = 100000', n1:'總本金', e2:'0.05x + 0.08y = 6500', n2:'總利息',
+   m:'代入消去', ans:'x = 50000、y = 50000'},
+  {k:'雞兔同籠', q:'雞兔共 20 隻，腳共 56 隻', set:'設雞 x 隻、兔 y 隻',
+   e1:'x + y = 20', n1:'總隻數', e2:'2x + 4y = 56', n2:'總腳數',
+   m:'代入消去', ans:'x = 12、y = 8'},
+];
+
+/* ③ 濃度混合槓桿 */
+const MIX={a:0.30, b:0.10, total:500};
+
+function initViz(cv){
+  const si=+cv.dataset.si, kind=cv.dataset.viz;
+  const ctx=cv.getContext('2d');
+  const st = VIZ[si] = {kind, cv, ctx};
+  const ctrl = document.querySelector(`[data-ctrl="${si}"]`);
+  if(kind==='pair'){
+    st.i=0; st.show=false;
+    ctrl.innerHTML = `<div class="readout" id="ro-${si}"></div>
+      <button class="btn" data-t="reveal" data-si="${si}" style="background:rgba(242,217,121,.2);border-color:var(--yellow);color:var(--yellow);font-weight:700;">🔍 揭曉兩條方程式</button>
+      <button class="btn" data-t="next" data-si="${si}">下一題 ▶</button>
+      <button class="btn" data-t="prev" data-si="${si}">◀ 上一題</button>`;
+  } else if(kind==='cross'){
+    st.pi=0;
+    ctrl.innerHTML = `<div class="readout" id="ro-${si}"></div>
+      <button class="btn" data-t="next" data-si="${si}" style="background:rgba(242,217,121,.2);border-color:var(--yellow);color:var(--yellow);font-weight:700;">🔀 換一題</button>`;
+  } else {                    // mix 濃度槓桿
+    st.x=250;
+    ctrl.innerHTML = `<div class="readout" id="ro-${si}"></div>
+      <button class="btn" data-t="m" data-si="${si}">◀ 30%溶液 −25kg</button>
+      <button class="btn" data-t="p" data-si="${si}">30%溶液 +25kg ▶</button>
+      <button class="btn" data-t="goal" data-si="${si}" style="background:rgba(166,214,160,.18);border-color:var(--green);color:var(--green);font-weight:700;">🎯 跳到 18%</button>
+      <button class="btn" data-t="mid" data-si="${si}" style="background:rgba(152,201,220,.18);border-color:var(--blue);color:var(--blue);">⚖️ 跳到正中間(20%)</button>`;
+  }
+  draw(si);
+}
+
+function wrapText(ctx, txt, cx, y, maxw, lh){
+  let line='', ly=y;
+  for(const ch of txt){
+    if(ctx.measureText(line+ch).width>maxw){ ctx.fillText(line, cx, ly); line=ch; ly+=lh; }
+    else line+=ch;
+  }
+  ctx.fillText(line, cx, ly);
+  return ly;
+}
+
+function drawPair(st, ctx, w, h, ro){
+  const E=PAIR[st.i];
+  ctx.textAlign='center';
+  ctx.fillStyle='rgba(242,217,121,.85)'; ctx.font='bold 13px "Noto Sans TC"';
+  ctx.fillText(`第 ${st.i+1} / ${PAIR.length} 題　·　【${E.k}】　問問自己：哪兩件事不變？`, w/2, 16);
+  ctx.fillStyle='rgba(243,239,226,.9)'; ctx.font='15px "Noto Sans TC"';
+  const ly=wrapText(ctx, E.q, w/2, 40, w-44, 21);
+  const y0=ly+16;
+  if(!st.show){
+    ctx.fillStyle='rgba(243,239,226,.06)';
+    ctx.strokeStyle='rgba(243,239,226,.25)'; ctx.lineWidth=1.5; ctx.setLineDash([5,4]);
+    ctx.beginPath(); ctx.roundRect(24, y0, w-48, 66, 8); ctx.fill(); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle='rgba(243,239,226,.4)'; ctx.font='14px "Noto Sans TC"';
+    ctx.fillText('🔒 先自己想「哪兩件事不變？」', w/2, y0+28);
+    ctx.fillText('想好再按「揭曉兩條方程式」', w/2, y0+48);
+  } else {
+    ctx.fillStyle='rgba(243,239,226,.55)'; ctx.font='12px "Noto Sans TC"';
+    ctx.fillText(E.set, w/2, y0+2);
+    [[E.e1,E.n1,'#98c9dc',y0+16],[E.e2,E.n2,'#a6d6a0',y0+52]].forEach(([eq,nm,col,yy])=>{
+      ctx.fillStyle=col.replace('#98c9dc','rgba(152,201,220,.14)').replace('#a6d6a0','rgba(166,214,160,.14)');
+      ctx.strokeStyle=col; ctx.lineWidth=1.4;
+      ctx.beginPath(); ctx.roundRect(24, yy, w-48, 30, 6); ctx.fill(); ctx.stroke();
+      ctx.fillStyle=col; ctx.font='bold 16px "Noto Serif TC"';
+      ctx.textAlign='left'; ctx.fillText(eq, 36, yy+20);
+      ctx.fillStyle='rgba(243,239,226,.5)'; ctx.font='11px "Noto Sans TC"';
+      ctx.textAlign='right'; ctx.fillText(nm, w-36, yy+20);
+      ctx.textAlign='center';
+    });
+    ctx.fillStyle='#f2d979'; ctx.font='bold 13px "Noto Sans TC"';
+    ctx.fillText(`→ 用【${E.m}】　${E.ans}`, w/2, y0+104);
+  }
+  ro.innerHTML = st.show
+    ? `【${E.k}】<b style="color:var(--blue)">${E.e1}</b>（${E.n1}）　＋　<b style="color:var(--green)">${E.e2}</b>（${E.n2}）　→　${E.m} → <b>${E.ans}</b>`
+    : `【${E.k}】${E.q}　<span style="color:rgba(243,239,226,.5)">—— 先自己想「哪兩件事不變？」再按揭曉</span>`;
+}
+
+/* ② 兩條直線的交點（2-2 伏筆） */
+const XL=[
+  {k:'採購分配', a1:1,b1:1,c1:20, a2:15,b2:25,c2:380, sx:12, sy:8,
+   l1:'x + y = 20', l2:'15x + 25y = 380', nx:'練習簿(本)', ny:'彩色筆(支)'},
+  {k:'雞兔同籠', a1:1,b1:1,c1:20, a2:2,b2:4,c2:56, sx:12, sy:8,
+   l1:'x + y = 20', l2:'2x + 4y = 56', nx:'雞(隻)', ny:'兔(隻)'},
+  {k:'和差', a1:1,b1:1,c1:50, a2:1,b2:-1,c2:12, sx:31, sy:19,
+   l1:'x + y = 50', l2:'x − y = 12', nx:'較大數', ny:'較小數'},
+];
+function drawCross(st, ctx, w, h, ro){
+  const E=XL[st.pi];
+  const M=Math.max(E.sx,E.sy)*1.9;
+  const pad=32, L=pad+14, R=w-14, B=h-24, T=14;
+  const X=v=>L+(v/M)*(R-L), Y=v=>B-(v/M)*(B-T);
+  ctx.textAlign='center';
+  ctx.fillStyle='rgba(242,217,121,.85)'; ctx.font='bold 12px "Noto Sans TC"';
+  ctx.fillText(`【${E.k}】兩條方程式 ＝ 兩條直線　·　解 ＝ 交點`, w/2, 11);
+  // 軸
+  ctx.strokeStyle='rgba(243,239,226,.5)'; ctx.lineWidth=1.5;
+  ctx.beginPath(); ctx.moveTo(L,B); ctx.lineTo(R,B); ctx.moveTo(L,B); ctx.lineTo(L,T); ctx.stroke();
+  ctx.fillStyle='rgba(243,239,226,.5)'; ctx.font='10px "Noto Sans TC"';
+  ctx.textAlign='right'; ctx.fillText(E.nx, R, B+15);
+  ctx.textAlign='left'; ctx.fillText(E.ny, L-4, T+2);
+  ctx.textAlign='center';
+  // 畫直線 a x + b y = c  → y = (c - a x)/b
+  const line=(a,b,c,col,lab)=>{
+    const pts=[];
+    for(let i=0;i<=200;i++){
+      const x=M*i/200, y=(c-a*x)/b;
+      if(y>=0 && y<=M) pts.push([x,y]);
+    }
+    if(!pts.length) return;
+    ctx.strokeStyle=col; ctx.lineWidth=2.2;
+    ctx.beginPath(); ctx.moveTo(X(pts[0][0]),Y(pts[0][1]));
+    pts.forEach(p=>ctx.lineTo(X(p[0]),Y(p[1]))); ctx.stroke();
+    const mid=pts[Math.floor(pts.length*0.72)];
+    ctx.fillStyle=col; ctx.font='bold 12px "Noto Serif TC"';
+    ctx.fillText(lab, X(mid[0]), Y(mid[1])-7);
+  };
+  line(E.a1,E.b1,E.c1,'#98c9dc',E.l1);
+  line(E.a2,E.b2,E.c2,'#a6d6a0',E.l2);
+  // 交點
+  ctx.strokeStyle='rgba(242,217,121,.55)'; ctx.lineWidth=1; ctx.setLineDash([3,3]);
+  ctx.beginPath(); ctx.moveTo(X(E.sx),B); ctx.lineTo(X(E.sx),Y(E.sy)); ctx.lineTo(L,Y(E.sy)); ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.beginPath(); ctx.arc(X(E.sx),Y(E.sy),5.5,0,7); ctx.fillStyle='#f2d979'; ctx.fill();
+  ctx.strokeStyle='#16281c'; ctx.lineWidth=1.5; ctx.stroke();
+  ctx.fillStyle='#f2d979'; ctx.font='bold 14px "Noto Serif TC"';
+  ctx.fillText(`(${E.sx}, ${E.sy})`, X(E.sx)+34, Y(E.sy)-8);
+  ctx.font='10px "Noto Serif TC"';
+  ctx.fillText(String(E.sx), X(E.sx), B+13);
+  ctx.textAlign='right'; ctx.fillText(String(E.sy), L-3, Y(E.sy)+3);
+  ro.innerHTML = `【${E.k}】<b style="color:var(--blue)">${E.l1}</b> 和 <b style="color:var(--green)">${E.l2}</b> 在坐標平面上是<b>兩條直線</b>`
+    + `　｜　你解出的 <b style="color:var(--yellow)">(${E.sx}, ${E.sy})</b> 就是它們的<b>交點</b>`
+    + `　<span style="color:rgba(243,239,226,.5)">（這是 2-2 的伏筆）</span>`;
+}
+
+/* ③ 濃度混合槓桿 */
+function drawMix(st, ctx, w, h, ro){
+  const x=st.x, y=MIX.total-x;
+  const pct=(MIX.a*x + MIX.b*y)/MIX.total;
+  ctx.textAlign='center';
+  ctx.fillStyle='rgba(242,217,121,.85)'; ctx.font='bold 13px "Noto Sans TC"';
+  ctx.fillText('30% 與 10% 混合，總重固定 500 公斤', w/2, 15);
+  // 濃度尺
+  const L=52, R=w-52, Y=52;
+  ctx.strokeStyle='rgba(243,239,226,.5)'; ctx.lineWidth=2;
+  ctx.beginPath(); ctx.moveTo(L,Y); ctx.lineTo(R,Y); ctx.stroke();
+  const P=p=>L+((p-MIX.b)/(MIX.a-MIX.b))*(R-L);
+  [[MIX.b,'10%','#98c9dc'],[MIX.a,'30%','#eda0a8']].forEach(([p,lab,col])=>{
+    ctx.strokeStyle=col; ctx.lineWidth=3;
+    ctx.beginPath(); ctx.moveTo(P(p),Y-8); ctx.lineTo(P(p),Y+8); ctx.stroke();
+    ctx.fillStyle=col; ctx.font='bold 13px "Noto Serif TC"';
+    ctx.fillText(lab, P(p), Y-14);
+  });
+  // 中點
+  ctx.strokeStyle='rgba(152,201,220,.45)'; ctx.lineWidth=1.5; ctx.setLineDash([3,3]);
+  ctx.beginPath(); ctx.moveTo(P(0.20),Y-6); ctx.lineTo(P(0.20),Y+6); ctx.stroke(); ctx.setLineDash([]);
+  ctx.fillStyle='rgba(152,201,220,.6)'; ctx.font='10px "Noto Sans TC"';
+  ctx.fillText('中點20%', P(0.20), Y+22);
+  // 目標
+  ctx.strokeStyle='rgba(166,214,160,.6)'; ctx.lineWidth=1.5; ctx.setLineDash([4,3]);
+  ctx.beginPath(); ctx.moveTo(P(0.18),Y-16); ctx.lineTo(P(0.18),Y+16); ctx.stroke(); ctx.setLineDash([]);
+  ctx.fillStyle='#a6d6a0'; ctx.font='bold 10px "Noto Sans TC"';
+  ctx.fillText('目標18%', P(0.18), Y+34);
+  // 目前
+  const px=P(pct);
+  ctx.beginPath(); ctx.arc(px,Y,6,0,7); ctx.fillStyle='#f2d979'; ctx.fill();
+  ctx.strokeStyle='#16281c'; ctx.lineWidth=1.5; ctx.stroke();
+  ctx.fillStyle='#f2d979'; ctx.font='bold 15px "Noto Serif TC"';
+  ctx.fillText(fmtN(Math.round(pct*10000)/100)+'%', px, Y-22);
+  // 重量條
+  const BY=h-42, BW=R-L;
+  const wx=BW*x/MIX.total;
+  ctx.fillStyle='rgba(237,160,168,.45)'; ctx.fillRect(L,BY,wx,20);
+  ctx.fillStyle='rgba(152,201,220,.45)'; ctx.fillRect(L+wx,BY,BW-wx,20);
+  ctx.strokeStyle='rgba(243,239,226,.5)'; ctx.lineWidth=1.2; ctx.strokeRect(L,BY,BW,20);
+  ctx.fillStyle='#f3efe2'; ctx.font='bold 11px "Noto Sans TC"';
+  if(wx>52) ctx.fillText(`30%：${fmtN(x)}kg`, L+wx/2, BY+14);
+  if(BW-wx>52) ctx.fillText(`10%：${fmtN(y)}kg`, L+wx+(BW-wx)/2, BY+14);
+  ctx.fillStyle='rgba(243,239,226,.55)'; ctx.font='11px "Noto Sans TC"';
+  ctx.fillText(`溶質 = 0.3×${fmtN(x)} + 0.1×${fmtN(y)} = ${fmtN(MIX.a*x+MIX.b*y)} kg`, w/2, h-8);
+  const hit=Math.abs(pct-0.18)<0.0005;
+  ro.innerHTML = `30%：<b>${fmtN(x)}kg</b>　10%：<b>${fmtN(y)}kg</b>　→　混合濃度 <b>${fmtN(Math.round(pct*10000)/100)}%</b>`
+    + (hit ? '　<span style="color:var(--green)">✓ 達到目標 18%！（x=200、y=300）</span>' : '')
+    + (Math.abs(pct-0.20)<0.0005 ? '　<span style="color:var(--blue)">⚖️ 正中間 20% → 兩種剛好等量！</span>' : '')
+    + `　｜　<span style="color:rgba(243,239,226,.55)">濃度越靠近哪一端，那一端的溶液就越多</span>`;
+}
+
+function draw(si){
+  const st=VIZ[si]; if(!st) return;
+  const {cv,ctx,kind}=st, w=cv.width/DPR, h=cv.height/DPR;
+  ctx.clearRect(0,0,w,h);
+  const ro=document.getElementById('ro-'+si);
+  if(kind==='pair') drawPair(st,ctx,w,h,ro);
+  else if(kind==='cross') drawCross(st,ctx,w,h,ro);
+  else if(kind==='mix') drawMix(st,ctx,w,h,ro);
+}
+
+document.addEventListener('click', e=>{
+  const btn=e.target.closest('[data-t]'); if(!btn) return;
+  const si=+btn.dataset.si, st=VIZ[si]; if(!st) return;
+  const t=btn.dataset.t;
+  if(st.kind==='pair'){
+    if(t==='reveal') st.show=true;
+    if(t==='next'){ st.i=(st.i+1)%PAIR.length; st.show=false; }
+    if(t==='prev'){ st.i=(st.i-1+PAIR.length)%PAIR.length; st.show=false; }
+  } else if(st.kind==='cross'){
+    if(t==='next') st.pi=(st.pi+1)%XL.length;
+  } else {
+    if(t==='p') st.x=Math.min(MIX.total, st.x+25);
+    if(t==='m') st.x=Math.max(0, st.x-25);
+    if(t==='goal') st.x=200;
+    if(t==='mid') st.x=250;
+  }
+  draw(si);
+});
+
+function resizeAll(){
+  DPR = Math.min(2, window.devicePixelRatio||1);
+  document.querySelectorAll('canvas.viz').forEach(cv=>{
+    const w = cv.clientWidth || cv.parentElement.clientWidth;
+    const h = (cv.dataset.viz==='pair') ? 214 : (cv.dataset.viz==='cross' ? 210 : 190);
+    cv.width=w*DPR; cv.height=h*DPR; cv.style.height=h+'px';
+    cv.getContext('2d').setTransform(DPR,0,0,DPR,0,0);
+  });
+  Object.keys(VIZ).forEach(k=>draw(+k));
+}
+document.querySelectorAll('canvas.viz').forEach(initViz);
+window.addEventListener('resize', resizeAll);
+resizeAll();
+</script>
+<div class="hint">← → 鍵可翻頁　·　Canvas 用按鈕互動　·　支援平板觸控</div>
+</body></html>

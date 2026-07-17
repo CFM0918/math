@@ -1,0 +1,518 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>七下 1-3 聯立方程式解應用問題｜授課簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--chalk-soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);padding:24px 14px;}
+.deck{max-width:1060px;margin:0 auto;}
+.print-hint{text-align:center;color:rgba(243,239,226,0.4);font-size:13px;padding:6px 0 22px;}
+.print-hint b{color:var(--yellow);}
+.slide{position:relative;min-height:576px;margin:0 auto 26px;padding:44px 52px;
+ background:radial-gradient(ellipse at 18% 12%,rgba(255,255,255,0.05),transparent 45%),
+  radial-gradient(ellipse at 82% 88%,rgba(255,255,255,0.035),transparent 45%),
+  radial-gradient(ellipse at 60% 40%,rgba(120,160,130,0.10),transparent 60%),
+  linear-gradient(160deg,var(--board) 0%,var(--board2) 100%);
+ border-radius:14px;box-shadow:0 10px 34px rgba(0,0,0,0.55);
+ border:1px solid rgba(242,217,121,0.14);overflow:hidden;display:flex;flex-direction:column;}
+.slide::before{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;
+ background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.014) 40px,rgba(255,255,255,0.014) 41px),
+  radial-gradient(circle at 30% 72%,rgba(255,255,255,0.03),transparent 8%),
+  radial-gradient(circle at 76% 24%,rgba(255,255,255,0.025),transparent 7%);}
+.slide::after{content:attr(data-pg);position:absolute;bottom:15px;right:26px;font-family:'Caveat',cursive;font-size:20px;color:rgba(243,239,226,0.4);}
+.tag{position:absolute;top:20px;right:26px;font-family:'Caveat',cursive;font-size:22px;color:var(--pink);transform:rotate(4deg);}
+.eyebrow{font-family:'Caveat',cursive;font-size:25px;color:var(--yellow);letter-spacing:1px;margin-bottom:8px;opacity:0.92;}
+.slide h1{font-family:'Noto Serif TC',serif;font-size:46px;font-weight:900;line-height:1.28;letter-spacing:1px;
+ text-shadow:0 0 1px rgba(243,239,226,0.5),1px 1px 0 rgba(0,0,0,0.2);}
+.slide h2{font-family:'Noto Serif TC',serif;font-size:33px;font-weight:900;color:var(--yellow);
+ margin-bottom:20px;padding-bottom:11px;border-bottom:2px dashed rgba(242,217,121,0.4);
+ text-shadow:0 0 1px rgba(242,217,121,0.4);}
+.slide p{font-size:20px;line-height:1.85;margin-bottom:12px;}
+.big-center{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;}
+.big-center .lead,.lead{font-family:'Caveat',cursive;font-size:30px;color:var(--blue);letter-spacing:1px;margin-top:12px;}
+ul{list-style:none;margin:8px 0;}
+li{font-size:21px;line-height:1.95;padding-left:32px;position:relative;margin-bottom:4px;}
+li::before{content:'\2726';position:absolute;left:4px;color:var(--yellow);font-size:17px;top:3px;}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.34);border-radius:12px;padding:15px 21px;margin:12px 0;font-size:19px;line-height:1.8;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.38);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.38);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.34);}
+.eg{position:relative;background:rgba(0,0,0,0.24);border:1px solid rgba(242,217,121,0.2);border-radius:10px;padding:17px 22px;margin:12px 0;font-size:19px;}
+.eg::before{content:'';position:absolute;top:-8px;left:38px;width:58px;height:15px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.eg .q{color:var(--blue);font-weight:700;margin-bottom:8px;font-size:19px;}
+.eg .a{color:var(--green);font-weight:700;margin-top:6px;}
+.eg .stp{color:var(--chalk-soft);font-size:18px;margin:3px 0;}
+.tip{display:flex;gap:12px;align-items:flex-start;background:rgba(242,217,121,0.09);border:1.5px dashed rgba(242,217,121,0.45);border-radius:12px;padding:13px 18px;margin:10px 0;}
+.tip .ic{font-size:24px;line-height:1;}.tip .tx{font-size:18px;line-height:1.7;}
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:18px;}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.26);padding:10px 14px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.two{display:flex;gap:20px;}.two>div{flex:1;}
+svg{display:block;margin:6px auto;max-width:100%;}
+@media print{
+ body{background:#0a130d;padding:0;}
+ .deck{max-width:none;}
+ .print-hint{display:none;}
+ .slide{margin:0;border-radius:0;box-shadow:none;min-height:100vh;
+  page-break-after:always;break-after:page;padding:32px 44px;justify-content:center;}
+ .slide:last-child{page-break-after:auto;break-after:auto;}
+ .slide h1{font-size:40px;}
+ .slide h2{font-size:27px;margin-bottom:13px;padding-bottom:8px;}
+ .slide p{font-size:17px;line-height:1.55;margin-bottom:6px;}
+ li{font-size:17px;line-height:1.55;margin-bottom:1px;padding-left:26px;}
+ .eyebrow{font-size:21px;margin-bottom:5px;}
+ .big-center .lead,.lead{font-size:26px;}
+ .box{font-size:16px;padding:10px 16px;margin:6px 0;line-height:1.5;}
+ .eg{font-size:16px;padding:11px 16px;margin:6px 0;}
+ .tip{font-size:16px;padding:10px 14px;margin:6px 0;}
+ .tbl{font-size:15px;margin:6px 0;}
+ .tbl th,.tbl td{padding:6px 10px;}
+ svg{max-height:210px;}
+}
+</style></head><body><div class="deck">
+<div class="print-hint">共 <b>25</b> 張・列印時每張一頁（Ctrl+P → 橫向 → 背景圖形）</div>
+
+
+<!-- 1 -->
+<div class="slide" data-pg="1 / 25"><div class="tag">Start!</div><div class="big-center">
+<div class="eyebrow">國一下學期・第一章 二元一次聯立方程式</div>
+<h1>1-3　聯立方程式解應用問題</h1>
+<div class="lead">七上問「什麼不變？」——<br>這節升級成「<span style="color:#f2d979;">哪兩件事</span>不變？」</div>
+<svg viewBox="0 0 620 116" width="82%" style="margin-top:18px;">
+<rect x="16" y="20" width="240" height="76" rx="10" fill="rgba(152,201,220,0.13)" stroke="#98c9dc" stroke-width="1.5"/>
+<text x="136" y="44" font-family="Noto Sans TC" font-size="15" fill="#98c9dc" text-anchor="middle">七上 3-3</text>
+<text x="136" y="70" font-family="Noto Serif TC" font-size="20" fill="#f3efe2" text-anchor="middle">1 個未知數</text>
+<text x="136" y="90" font-family="Caveat" font-size="18" fill="rgba(243,239,226,0.6)" text-anchor="middle">→ 1 條方程式</text>
+<path d="M276 58 L344 58" stroke="#f2d979" stroke-width="2" stroke-dasharray="3 5"/>
+<path d="M344 58 l-10 -6 M344 58 l-10 6" stroke="#f2d979" stroke-width="2" fill="none"/>
+<rect x="364" y="20" width="240" height="76" rx="10" fill="rgba(166,214,160,0.13)" stroke="#a6d6a0" stroke-width="1.5"/>
+<text x="484" y="44" font-family="Noto Sans TC" font-size="15" fill="#a6d6a0" text-anchor="middle">七下 1-3</text>
+<text x="484" y="70" font-family="Noto Serif TC" font-size="20" fill="#f3efe2" text-anchor="middle">2 個未知數</text>
+<text x="484" y="90" font-family="Caveat" font-size="18" fill="#f2d979" text-anchor="middle">→ 要 2 條方程式</text>
+</svg>
+</div></div>
+
+<!-- 2 -->
+<div class="slide" data-pg="2 / 25"><div class="tag">目標</div><div class="body">
+<h2>本節學習目標</h2>
+<ul>
+<li>理解<span class="hl">有幾個未知數，就要幾條方程式</span></li>
+<li>能<span class="hl-b">設兩個未知數</span>，並列出<span class="hl">兩條獨立</span>的等量關係</li>
+<li>能依方程式的形式，<span class="hl">選擇</span>代入消去法或加減消去法</li>
+<li>能處理六大題型：<span class="hl">和差、年齡、順逆風、濃度混合、採購分配、投資利息</span></li>
+<li>解完能<span class="hl-r">代回兩條原方程式</span>驗算</li>
+<li>能<span class="hl">檢查合理性</span>（重量、年齡不能為負）</li>
+</ul>
+<div class="box y">一句話：<span class="hl">七上的五步驟全部照用，只是「一個」變成「兩個」。</span></div>
+</div></div>
+
+<!-- 3 -->
+<div class="slide" data-pg="3 / 25"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">🔑 本節唯一的新規則</div>
+<h2>有幾個未知數，就要幾條方程式</h2>
+<table class="tbl">
+<tr><th style="width:26%;">　</th><th style="width:34%;">七上 3-3</th><th>七下 1-3</th></tr>
+<tr><td>未知數</td><td class="hl-b" style="font-size:20px;"><b>1 個</b>（x）</td><td class="hl-g" style="font-size:20px;"><b>2 個</b>（x、y）</td></tr>
+<tr><td>需要的方程式</td><td class="hl-b" style="font-size:20px;"><b>1 條</b></td><td class="hl-g" style="font-size:20px;"><b>2 條</b></td></tr>
+<tr><td>追問句</td><td>「<b>什麼</b>不變？」</td><td class="hl">「<b>哪兩件事</b>不變？」</td></tr>
+</table>
+<div class="box y" style="text-align:center;font-size:21px;">
+💡 <span class="hl">這就是本節唯一的升級。</span><br>
+七上你已經會找<b>一個</b>不變量了 —— 現在只是要找<b>兩個</b>。</div>
+</div></div>
+
+<!-- 4 -->
+<div class="slide" data-pg="4 / 25"><div class="tag">觀念</div><div class="body">
+<div class="eyebrow">🔑</div>
+<h2>為什麼一條不夠？（1-1 已經告訴你了）</h2>
+<div class="box r"><b class="hl-r">只有一條</b>　<span class="fm" style="font-size:20px;">x + y = 20</span><br>
+解有<span class="hl-r">無限多組</span>：<span class="fm">(1,19)、(2,18)、(3,17)、(12,8)…</span><br>
+<span style="font-size:16px;color:var(--chalk-soft);">根本鎖不定</span></div>
+<div class="box g"><b class="hl-g">再給一條</b>　<span class="fm" style="font-size:20px;">15x + 25y = 380</span><br>
+兩條<b>同時成立</b> → 鎖定<span class="hl">唯一一組</span> <span class="fm">(12, 8)</span></div>
+<div class="box y"><b>⚠️「獨立」很重要：</b>
+<span class="fm">x + y = 20</span> 和 <span class="fm">2x + 2y = 40</span> <span class="hl-r">不算兩條</span> ——<br>
+第二條是第一條乘 2，<b>沒給任何新資訊</b>。這種情況會有無限多解（1-2 補給站會談）。</div>
+</div></div>
+
+<!-- 5 -->
+<div class="slide" data-pg="5 / 25"><div class="tag">流程</div><div class="body">
+<h2>解題五步驟</h2>
+<div class="box y" style="text-align:center;font-size:18px;padding:14px;">
+<span class="hl">① 設兩個未知數　→　② 找兩條等量關係　→　③ 選方法解　→　④ 代回兩條驗算　→　⑤ 檢查合理性</span></div>
+<table class="tbl">
+<tr><th style="width:9%;">　</th><th style="width:30%;">動作</th><th>關鍵</th></tr>
+<tr><td class="hl" style="font-size:19px;">①</td><td><b>設兩個未知數</b></td><td>寫清楚「設…為 x、…為 y」<span class="hl-r">含單位</span></td></tr>
+<tr><td class="hl" style="font-size:19px;">②</td><td><b>找兩條等量關係</b></td><td class="hl">「<b>哪兩件事</b>不變？」← 本節靈魂</td></tr>
+<tr><td class="hl" style="font-size:19px;">③</td><td><b>選方法</b></td><td>有 <span class="fm">y = …</span> → <b>代入</b>；係數相同／相反 → <b>加減</b></td></tr>
+<tr><td class="hl" style="font-size:19px;">④</td><td><b>驗算</b></td><td>⚠️ 要代回<span class="hl-r">兩條</span>原方程式</td></tr>
+<tr><td class="hl" style="font-size:19px;">⑤</td><td><b>檢查合理性</b></td><td>重量、年齡不能為負；件數要正整數</td></tr>
+</table>
+</div></div>
+
+<!-- 6 -->
+<div class="slide" data-pg="6 / 25"><div class="tag">工具</div><div class="body">
+<div class="eyebrow">第 ③ 步</div>
+<h2>怎麼選：代入還是加減？</h2>
+<table class="tbl">
+<tr><th style="width:52%;">看到什麼</th><th>用哪個</th></tr>
+<tr><td>有一條長得像 <span class="fm hl-b">y = 4x</span></td><td class="hl-g" style="font-size:19px;"><b>代入消去法</b></td></tr>
+<tr><td>某個未知數係數<b>相同</b>（都是 <span class="fm">+2y</span>）</td><td class="hl-g" style="font-size:19px;"><b>加減</b>（相<b>減</b>）</td></tr>
+<tr><td>某個未知數係數<b>互為相反</b>（<span class="fm">+y</span> 與 <span class="fm">−y</span>）</td><td class="hl-g" style="font-size:19px;"><b>加減</b>（相<b>加</b>）</td></tr>
+<tr><td>都不像</td><td>哪個係數簡單就針對它處理</td></tr>
+</table>
+<div class="box y" style="text-align:center;font-size:20px;">
+💡 <span class="hl">先看一眼再動手</span> —— 選對方法可以少寫一半的字。</div>
+<div class="tip"><div class="ic">📌</div><div class="tx"><b>不用糾結。</b>兩種方法都會得到同一個答案，選錯只是慢一點，不會錯。
+但養成「先看一眼」的習慣，考試時會差很多。</div></div>
+</div></div>
+
+<!-- 7 -->
+<div class="slide" data-pg="7 / 25"><div class="tag">總覽</div><div class="body">
+<h2>六大題型：兩條方程式從哪來？</h2>
+<table class="tbl">
+<tr><th style="width:22%;">題型</th><th style="width:38%;">第 1 條</th><th>第 2 條</th></tr>
+<tr><td class="hl-b"><b>和差</b></td><td>兩數的<b>和</b></td><td>兩數的<b>差</b></td></tr>
+<tr><td class="hl-b"><b>年齡</b></td><td>現在的倍數關係</td><td><b>幾年後</b>的倍數關係</td></tr>
+<tr><td class="hl-b"><b>順逆風</b></td><td class="fm">順風：(x+y) × 時間 = 距離</td><td class="fm">逆風：(x−y) × 時間 = 距離</td></tr>
+<tr><td class="hl-b"><b>濃度混合</b></td><td><b>總重量</b></td><td><b>溶質總重量</b></td></tr>
+<tr><td class="hl-b"><b>採購分配</b></td><td><b>總件數</b></td><td><b>總金額</b></td></tr>
+<tr><td class="hl-b"><b>投資利息</b></td><td><b>總本金</b></td><td><b>總利息</b></td></tr>
+</table>
+<div class="box y" style="text-align:center;font-size:21px;">
+💡 <b>看出規律了嗎？</b><br>
+第 1 條幾乎都是「<span class="hl">總數量</span>」，第 2 條幾乎都是「<span class="hl">總價值</span>」</div>
+</div></div>
+
+<!-- 8 -->
+<div class="slide" data-pg="8 / 25"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 1　難度 ★☆☆　【和差】</div>
+<h2>兩個數的和是 50，差是 12</h2>
+<div class="eg">
+<div class="stp"><b>① 設</b>　較大的數為 <span class="fm hl">x</span>、較小的數為 <span class="fm hl">y</span></div>
+<div class="stp"><b>② 兩條</b>　<span class="fm">x + y = 50</span>（和）　；　<span class="fm">x − y = 12</span>（差）</div>
+<div class="stp"><b>③ 選方法</b>　y 的係數是 <span class="fm">+1</span> 與 <span class="fm">−1</span>（互為相反）→ <span class="hl">加減消去法（相加）</span></div>
+<div class="stp"><b>④ 解</b>　兩式相加 → <span class="fm">2x = 62 → x = 31</span>；<span class="fm">y = 50 − 31 = 19</span></div>
+<div class="stp"><b>驗算</b>　<span class="fm">31 + 19 = 50</span> ✓　；　<span class="fm">31 − 19 = 12</span> ✓　<span class="hl-r">（兩條都要驗！）</span></div>
+<div class="a">答：31 和 19</div>
+</div>
+<div class="box y" style="text-align:center;">和差問題是最漂亮的加減消去 —— <span class="hl">相加消 y、相減消 x</span>，兩下就解完。</div>
+</div></div>
+
+<!-- 9 -->
+<div class="slide" data-pg="9 / 25"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 2　難度 ★★☆　【年齡】</div>
+<h2>父親是兒子的 4 倍；5 年後是兒子的 3 倍多 5 歲</h2>
+<div class="eg">
+<div class="stp"><b>① 設</b>　兒子現在 <span class="fm hl">x</span> 歲、父親現在 <span class="fm hl">y</span> 歲</div>
+<div class="stp"><b>② 兩條</b>　<span class="fm">y = 4x</span>（現在）　；　<span class="fm">y + 5 = 3(x + 5) + 5</span>（5 年後）</div>
+<div class="stp">　　<span class="hl-r">⚠️ 兩人都要加 5！</span></div>
+<div class="stp"><b>③ 選方法</b>　第一條長得像 <span class="fm">y = …</span> → <span class="hl">代入消去法</span></div>
+<div class="stp"><b>④ 解</b>　<span class="fm">4x + 5 = 3x + 15 + 5 = 3x + 20 → x = 15</span>；<span class="fm">y = 60</span></div>
+<div class="stp"><b>驗算</b>　5 年後父 65、子 20；<span class="fm">3×20 + 5 = 65</span> ✓</div>
+<div class="a">答：兒子 15 歲，父親 60 歲</div>
+</div>
+<div class="box r" style="text-align:center;">
+⚠️ <b class="hl-r">最常見錯誤：「幾年後」只加一個人的歲數。</b><br>
+這和七上 3-2 年齡題是<span class="hl">同一個坑</span> —— 時間對兩個人是公平的。</div>
+</div></div>
+
+<!-- 10 -->
+<div class="slide" data-pg="10 / 25"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">題型 3　⚠️ 本節新題型</div>
+<h2>順逆風（順逆水）</h2>
+<div class="box y" style="text-align:center;font-size:23px;padding:18px;">
+<span class="hl">順風速度 = 靜風速度 ＋ 風速</span><br>
+<span class="hl">逆風速度 = 靜風速度 － 風速</span></div>
+<svg viewBox="0 0 600 96" width="86%" style="margin:6px auto;display:block;">
+<text x="150" y="22" font-family="Noto Sans TC" font-size="15" fill="#a6d6a0" text-anchor="middle">順風（輕鬆・快）</text>
+<line x1="40" y1="40" x2="260" y2="40" stroke="#a6d6a0" stroke-width="2.5"/>
+<path d="M260 40 l-10 -5 M260 40 l-10 5" stroke="#a6d6a0" stroke-width="2.5" fill="none"/>
+<text x="150" y="60" font-family="Noto Serif TC" font-size="17" fill="#f2d979" text-anchor="middle">x + y</text>
+<text x="150" y="84" font-family="Caveat" font-size="17" fill="rgba(243,239,226,0.6)" text-anchor="middle">風在幫你推</text>
+<line x1="300" y1="16" x2="300" y2="88" stroke="rgba(243,239,226,0.25)" stroke-width="1.5"/>
+<text x="450" y="22" font-family="Noto Sans TC" font-size="15" fill="#eda0a8" text-anchor="middle">逆風（吃力・慢）</text>
+<line x1="340" y1="40" x2="470" y2="40" stroke="#eda0a8" stroke-width="2.5"/>
+<path d="M470 40 l-10 -5 M470 40 l-10 5" stroke="#eda0a8" stroke-width="2.5" fill="none"/>
+<line x1="560" y1="40" x2="500" y2="40" stroke="rgba(243,239,226,0.45)" stroke-width="2" stroke-dasharray="4 3"/>
+<path d="M500 40 l10 -5 M500 40 l10 5" stroke="rgba(243,239,226,0.45)" stroke-width="2" fill="none"/>
+<text x="450" y="60" font-family="Noto Serif TC" font-size="17" fill="#f2d979" text-anchor="middle">x − y</text>
+<text x="450" y="84" font-family="Caveat" font-size="17" fill="rgba(243,239,226,0.6)" text-anchor="middle">風在扯你後腿</text>
+</svg>
+<div class="box r"><b class="hl-r">⚠️ 最常錯：記反成「順風 = 風速 − 靜風」。</b><br>
+<b>生活類比：</b>順風騎車<span class="hl-g">輕鬆快</span>、逆風<span class="hl-r">吃力慢</span> ——
+<span class="hl">想一下騎車的感覺就不會反了。</span></div>
+</div></div>
+
+<!-- 11 -->
+<div class="slide" data-pg="11 / 25"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 3　難度 ★★★　【順逆風】</div>
+<h2>順風 2 小時走 36km，逆風 3 小時走 36km</h2>
+<div class="eg">
+<div class="stp"><b>① 設</b>　靜風速度 <span class="fm hl">x</span> 公里/時、風速 <span class="fm hl">y</span> 公里/時</div>
+<div class="stp"><b>② 兩條</b>　<span class="fm">2(x + y) = 36</span>（順風）　；　<span class="fm">3(x − y) = 36</span>（逆風）</div>
+<div class="stp"><b>💡 先化簡！</b>　<span class="fm">x + y = 18</span>　；　<span class="fm">x − y = 12</span>　<span class="hl-g">← 數字小很多</span></div>
+<div class="stp"><b>③ 解</b>　相加 → <span class="fm">2x = 30 → x = 15</span>；<span class="fm">y = 18 − 15 = 3</span></div>
+<div class="stp"><b>驗算</b>　順風 <span class="fm">(15+3)×2 = 36</span> ✓　；　逆風 <span class="fm">(15−3)×3 = 36</span> ✓</div>
+<div class="a">答：靜風速度 15 公里/時，風速 3 公里/時</div>
+</div>
+<div class="box y" style="text-align:center;font-size:20px;">
+💡 <b>關鍵動作：先把 <span class="fm">2(x+y) = 36</span> 除掉係數變成 <span class="fm">x+y = 18</span>，再消去。</b><br>
+<span class="hl">化簡完再解，永遠比硬幹快。</span></div>
+</div></div>
+
+<!-- 12 -->
+<div class="slide" data-pg="12 / 25"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">題型 4　⚠️ 一定要兩條</div>
+<h2>濃度混合：兩條方程式從哪來？</h2>
+<div class="two">
+<div class="box"><b class="hl-b">第 1 條：總重量</b><br>
+<span class="fm" style="font-size:19px;">x + y = 500</span><br>
+<span style="font-size:16px;color:var(--chalk-soft);">兩種溶液加起來的重量</span></div>
+<div class="box g"><b class="hl-g">第 2 條：溶質總重量</b><br>
+<span class="fm" style="font-size:19px;">0.3x + 0.1y = 90</span><br>
+<span style="font-size:16px;color:var(--chalk-soft);">兩種溶液裡的橡膠加起來</span></div>
+</div>
+<div class="box r" style="text-align:center;font-size:20px;">
+⚠️ <b class="hl-r">最常見錯誤：只列「總重量」這一條。</b><br>
+一條方程式<span class="hl-r">解不出兩個未知數</span>！</div>
+<div class="box y">💡 <b>這是七上 3-3 濃度題的升級版：</b>當時只有一個未知數（已知加多少），
+現在<span class="hl">兩種都不知道</span> → 需要<b>兩條</b>（總重量 ＋ 溶質守恆）。</div>
+</div></div>
+
+<!-- 13 -->
+<div class="slide" data-pg="13 / 25"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 4　難度 ★★★　【濃度混合】</div>
+<h2>30% 與 10% 混成 18%，共 500 公斤</h2>
+<div class="eg">
+<div class="stp"><b>① 設</b>　30% 溶液 <span class="fm hl">x</span> 公斤、10% 溶液 <span class="fm hl">y</span> 公斤</div>
+<div class="stp"><b>② 兩條</b>　<span class="fm">x + y = 500</span>（總重量）</div>
+<div class="stp">　　<span class="fm">0.3x + 0.1y = 500 × 0.18 = 90</span>（橡膠總重量）</div>
+<div class="stp"><b>③ 解（代入）</b>　<span class="fm">y = 500 − x</span> → <span class="fm">0.3x + 0.1(500 − x) = 90</span></div>
+<div class="stp">　　<span class="fm">0.3x + 50 − 0.1x = 90 → 0.2x = 40 → x = 200</span>；<span class="fm">y = 300</span></div>
+<div class="stp"><b>驗算</b>　<span class="fm">0.3×200 + 0.1×300 = 60 + 30 = 90</span> ✓</div>
+<div class="a">答：30% 溶液 200 公斤，10% 溶液 300 公斤</div>
+</div>
+<div class="box g"><b>估算檢查：</b>18% 比中間值 20% <span class="hl">偏低</span> →
+所以 <b>10% 的溶液要比較多</b>（300 > 200）✓ <span class="hl-g">合理</span></div>
+</div></div>
+
+<!-- 14 -->
+<div class="slide" data-pg="14 / 25"><div class="tag">技巧</div><div class="body">
+<div class="eyebrow">💡 隨堂裡藏的規律</div>
+<h2>目標濃度在正中間 → 兩種等量</h2>
+<div class="two">
+<div class="box"><span class="fm" style="font-size:18px;">40% 與 10% → 混成 25%</span><br>
+<span class="hl-g">各 150 毫升（等量）</span><br>
+<span style="font-size:16px;color:var(--chalk-soft);">25% 剛好是 40 和 10 的中間</span></div>
+<div class="box g"><span class="fm" style="font-size:18px;">50% 與 20% → 混成 35%</span><br>
+<span class="hl-g">各 300 公斤（等量）</span><br>
+<span style="font-size:16px;color:var(--chalk-soft);">35% 剛好是 50 和 20 的中間</span></div>
+</div>
+<div class="box y" style="text-align:center;font-size:21px;">
+<span class="hl">目標濃度落在正中間 → 兩種等量混合</span></div>
+<div class="box g"><b>這是很好用的估算檢查：</b><br>
+・目標偏向 30% 那邊 → <b>30% 的溶液要多一點</b><br>
+・例題4 目標 18% 比中間 20% <b>偏低</b> → <b>10% 的溶液比較多</b>（300kg）✓</div>
+<div class="tip"><div class="ic">💡</div><div class="tx"><b>先估再算，算完對照。</b>估算不會給你精確答案，但會在你算錯一位數的時候<b>大聲叫你</b>。</div></div>
+</div></div>
+
+<!-- 15 -->
+<div class="slide" data-pg="15 / 25"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 5　難度 ★★☆　【採購分配・雞兔同籠型】</div>
+<h2>練習簿 15 元、彩色筆 25 元，共 20 件、380 元</h2>
+<div class="eg">
+<div class="stp"><b>① 設</b>　練習簿 <span class="fm hl">x</span> 本、彩色筆 <span class="fm hl">y</span> 支</div>
+<div class="stp"><b>② 兩條</b>　<span class="fm">x + y = 20</span>（<b>總件數</b>）　；　<span class="fm">15x + 25y = 380</span>（<b>總金額</b>）</div>
+<div class="stp"><b>③ 解（代入）</b>　<span class="fm">x = 20 − y</span> → <span class="fm">15(20 − y) + 25y = 380</span></div>
+<div class="stp">　　<span class="fm">300 − 15y + 25y = 380 → 10y = 80 → y = 8</span>；<span class="fm">x = 12</span></div>
+<div class="stp"><b>驗算</b>　<span class="fm">15×12 + 25×8 = 180 + 200 = 380</span> ✓</div>
+<div class="stp"><b>⑤ 檢查</b>　12 本、8 支都是<span class="hl-g">正整數</span> ✓</div>
+<div class="a">答：練習簿 12 本，彩色筆 8 支</div>
+</div>
+<div class="box y" style="text-align:center;">
+這就是<span class="hl">「雞兔同籠」</span>的現代版 —— 七上要硬湊，現在<b>兩條式子直接解</b>。</div>
+</div></div>
+
+<!-- 16 -->
+<div class="slide" data-pg="16 / 25"><div class="tag">觀念</div><div class="body">
+<h2>回頭看「雞兔同籠」：為什麼七上那麼難？</h2>
+<div class="box r"><b class="hl-r">七上的做法（只能設一個 x）</b><br>
+「雞兔共 20 隻，腳共 56 隻」→ 設雞 x 隻，兔就是 <span class="fm">(20 − x)</span> 隻<br>
+<span class="fm">2x + 4(20 − x) = 56</span><br>
+<span style="font-size:16px;color:var(--chalk-soft);">要先在腦中把「兔 = 20 − x」轉一次 —— 這一步就卡住很多人</span></div>
+<div class="box g"><b class="hl-g">七下的做法（設兩個）</b><br>
+設雞 <span class="fm">x</span> 隻、兔 <span class="fm">y</span> 隻<br>
+<span class="fm">x + y = 20</span>（總隻數）　；　<span class="fm">2x + 4y = 56</span>（總腳數）<br>
+<span style="font-size:16px;color:var(--chalk-soft);">直接照著題目寫，<b>不用在腦中轉任何東西</b></span></div>
+<div class="box y" style="text-align:center;font-size:21px;">
+<span class="hl">多設一個未知數，換來的是「不用動腦轉換」。</span><br>
+這就是聯立方程式存在的理由。</div>
+</div></div>
+
+<!-- 17 -->
+<div class="slide" data-pg="17 / 25"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 1　【投資利息】</div>
+<h2>10 萬元分兩部分投資</h2>
+<div class="box">一部分年利率 <span class="hl">5%</span> 定存，另一部分年利率 <span class="hl">8%</span> 基金。一年後共得利息 <span class="hl">6500 元</span>。</div>
+<div class="eg">
+<div class="stp"><b>① 設</b>　定存 <span class="fm hl">x</span> 元、基金 <span class="fm hl">y</span> 元</div>
+<div class="stp"><b>② 兩條</b>　<span class="fm">x + y = 100000</span>（<b>總本金</b>）　；　<span class="fm">0.05x + 0.08y = 6500</span>（<b>總利息</b>）</div>
+<div class="stp"><b>③ 解（代入）</b>　<span class="fm">x = 100000 − y</span> → <span class="fm">0.05(100000 − y) + 0.08y = 6500</span></div>
+<div class="stp">　　<span class="fm">5000 + 0.03y = 6500 → 0.03y = 1500 → y = 50000</span>；<span class="fm">x = 50000</span></div>
+<div class="a">答：定存 50000 元，基金 50000 元</div>
+</div>
+<div class="box y">💡 <b>又是「總數量 ＋ 總價值」的模式</b>：總本金是數量、總利息是價值。
+六大題型全部都是這個結構。</div>
+</div></div>
+
+<!-- 18 -->
+<div class="slide" data-pg="18 / 25"><div class="tag">觀念</div><div class="body">
+<div class="eyebrow">素養 1　(3)　延伸思考</div>
+<h2>如果全部押在 8% 的基金呢？</h2>
+<div class="eg">
+<div class="stp"><b>計算</b>　<span class="fm">100000 × 0.08 = 8000 元</span></div>
+<div class="stp"><b>比較</b>　比原本的 6500 元 <span class="hl-g">多賺 1500 元</span></div>
+</div>
+<div class="box y" style="text-align:center;font-size:21px;">
+全押高利率當然賺比較多 ——<br>
+但那也代表<span class="hl-r">風險全押在一邊</span>。</div>
+<div class="box g" style="text-align:center;font-size:20px;">
+<span class="hl">數學算得出報酬，算不出風險。</span><br>
+分散投資的代價，就是這 <b>1500 元</b>。</div>
+<div class="tip"><div class="ic">💡</div><div class="tx"><b>這題想告訴你的：</b>數學會給你一個精確的數字，但<b>那個數字不等於答案</b>。
+要不要少賺 1500 元換取安心 —— 那是<b>人</b>要決定的事，不是數學。</div></div>
+</div></div>
+
+<!-- 19 -->
+<div class="slide" data-pg="19 / 25"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 2　【原料採購】</div>
+<h2>A 每公斤 120 元、B 每公斤 80 元，共 50 公斤、5200 元</h2>
+<div class="eg">
+<div class="stp"><b>① 設</b>　A 原料 <span class="fm hl">x</span> 公斤、B 原料 <span class="fm hl">y</span> 公斤</div>
+<div class="stp"><b>② 兩條</b>　<span class="fm">x + y = 50</span>（<b>總重量</b>）　；　<span class="fm">120x + 80y = 5200</span>（<b>總花費</b>）</div>
+<div class="stp"><b>③ 解</b>　<span class="fm">x = 50 − y</span> → <span class="fm">120(50 − y) + 80y = 5200</span></div>
+<div class="stp">　　<span class="fm">6000 − 40y = 5200 → 40y = 800 → y = 20</span>；<span class="fm">x = 30</span></div>
+<div class="stp"><b>(3) A 漲到 140 元、維持比例 A:B = 30:20 = 3:2</b></div>
+<div class="stp">　　<span class="fm">140×30 + 80×20 = 4200 + 1600 = 5800 元</span>（多花 600 元）</div>
+<div class="a">答：A 30 公斤、B 20 公斤；漲價後總花費 5800 元</div>
+</div>
+<div class="box y"><b>(3) 的讀題重點：</b>「<span class="hl">維持相同採購比例</span>」= A 仍 30、B 仍 20，<b>只有單價變</b>。
+不要以為要重解一次聯立。</div>
+</div></div>
+
+<!-- 20 -->
+<div class="slide" data-pg="20 / 25"><div class="tag">總覽</div><div class="body">
+<h2>六大題型，一個結構</h2>
+<table class="tbl">
+<tr><th style="width:22%;">題型</th><th style="width:30%;">第 1 條（總數量）</th><th>第 2 條（總價值）</th></tr>
+<tr><td class="hl-b">濃度混合</td><td>總重量 <span class="fm">x+y=500</span></td><td>溶質總重 <span class="fm">0.3x+0.1y=90</span></td></tr>
+<tr><td class="hl-b">採購分配</td><td>總件數 <span class="fm">x+y=20</span></td><td>總金額 <span class="fm">15x+25y=380</span></td></tr>
+<tr><td class="hl-b">投資利息</td><td>總本金 <span class="fm">x+y=100000</span></td><td>總利息 <span class="fm">.05x+.08y=6500</span></td></tr>
+<tr><td class="hl-b">原料採購</td><td>總重量 <span class="fm">x+y=50</span></td><td>總花費 <span class="fm">120x+80y=5200</span></td></tr>
+</table>
+<div class="box y" style="text-align:center;font-size:22px;">
+四種題型，<span class="hl">長得一模一樣</span>：<br>
+<span class="fm hl">x + y = 總數量</span>　　<span class="fm hl">ax + by = 總價值</span></div>
+<div class="box g"><b>認出這個結構，這四種題型就是同一題。</b>
+換的只是單位（公斤／件／元）和係數（濃度／單價／利率）。</div>
+</div></div>
+
+<!-- 21 -->
+<div class="slide" data-pg="21 / 25"><div class="tag">避雷</div><div class="body">
+<h2>避雷指南：六個最常見錯誤</h2>
+<table class="tbl">
+<tr><th style="width:44%;">❌ 錯誤</th><th>✓ 正確</th></tr>
+<tr><td>年齡題「幾年後」只加一個人的歲數</td><td><b class="hl-g">兩人都要加</b>相同年數</td></tr>
+<tr><td><span class="fm">順風 = 風速 − 靜風</span></td><td><span class="fm hl-g">順風 = 靜風 + 風速</span>（順風輕鬆快！）</td></tr>
+<tr><td>濃度混合只列「總重量」一條</td><td>還要「<b class="hl-g">溶質總重量</b>」—— 兩個未知數要兩條</td></tr>
+<tr><td>只驗算一條方程式</td><td>要代回<b class="hl-g">兩條</b>原方程式</td></tr>
+<tr><td><span class="fm">2(x+y)=36</span> 直接消去</td><td>先<b class="hl-g">化簡</b>成 <span class="fm">x+y=18</span> 再消</td></tr>
+<tr><td>解出負的重量／件數還照寫</td><td><b class="hl-g">檢查合理性</b> —— 一定是算錯了</td></tr>
+</table>
+<div class="box y" style="text-align:center;">
+自我檢查句：<span class="hl">「這題的兩個未知數是什麼？哪兩件事情是『不變』的？」</span></div>
+</div></div>
+
+<!-- 22 -->
+<div class="slide" data-pg="22 / 25"><div class="tag">連結</div><div class="body">
+<h2>這節用到了前面哪些東西？</h2>
+<table class="tbl">
+<tr><th style="width:26%;">來自</th><th style="width:34%;">學到什麼</th><th>在 1-3 怎麼用</th></tr>
+<tr><td class="hl-b">七上 3-3</td><td>五步驟、找不變量、檢查合理性</td><td class="hl"><b>全部照用</b>，只是變兩個</td></tr>
+<tr><td class="hl-b">七上 3-3 濃度</td><td>溶質守恆</td><td>濃度混合的第 2 條</td></tr>
+<tr><td class="hl-b">七上 3-2</td><td>移項、解方程式</td><td>消去後就是一元一次</td></tr>
+<tr><td class="hl-b">七下 1-1</td><td>一條方程式有<b>無限多解</b></td><td class="hl">解釋<b>為什麼需要第二條</b></td></tr>
+<tr><td class="hl-b">七下 1-2</td><td>代入／加減消去法</td><td>這節的解題工具</td></tr>
+</table>
+<div class="box y" style="text-align:center;font-size:21px;">
+<span class="hl">這節沒有一個動作是新的</span> ——<br>
+除了「<b>要找兩個不變量</b>」這一件事。</div>
+</div></div>
+
+<!-- 23 -->
+<div class="slide" data-pg="23 / 25"><div class="tag">核心</div><div class="body">
+<h2>第 ⑤ 步：檢查合理性（別跳過）</h2>
+<table class="tbl">
+<tr><th style="width:34%;">量</th><th style="width:30%;">可以是小數嗎？</th><th>可以是負數嗎？</th></tr>
+<tr><td class="hl-b"><b>件數、本數、支數</b></td><td class="hl-r">❌ 必須是<b>整數</b></td><td class="hl-r">❌</td></tr>
+<tr><td class="hl-b"><b>年齡</b></td><td class="hl-r">❌</td><td class="hl-r">❌</td></tr>
+<tr><td class="hl-b"><b>重量、金額</b></td><td class="hl-g">✅</td><td class="hl-r">❌</td></tr>
+<tr><td class="hl-b"><b>風速、靜風速度</b></td><td class="hl-g">✅</td><td class="hl-r">❌（風速為負沒意義）</td></tr>
+</table>
+<div class="box r" style="text-align:center;font-size:20px;">
+解出「彩色筆 <span class="fm hl-r">8.5 支</span>」或「風速 <span class="fm hl-r">−3</span> 公里/時」<br>
+→ <span class="hl">一定是算錯了</span></div>
+<div class="tip"><div class="ic">📌</div><div class="tx"><b>驗算和檢查合理性是兩件事：</b><br>
+・<b>驗算</b>抓的是「算錯」（代回去不相等）<br>
+・<b>檢查合理性</b>抓的是「<b>列式錯</b>」（式子解得出來，但答案在現實中不存在）</div></div>
+</div></div>
+
+<!-- 24 -->
+<div class="slide" data-pg="24 / 25"><div class="tag">總結</div><div class="body">
+<h2>本節總結</h2>
+<ul>
+<li><span class="hl">有幾個未知數，就要幾條獨立的方程式</span> —— 本節唯一的新規則</li>
+<li>靈魂追問句從「<b>什麼</b>不變？」升級成「<span class="hl">哪兩件事不變？</span>」</li>
+<li><span class="hl">兩條的來源有規律</span>：第 1 條「總數量」、第 2 條「總價值」</li>
+<li><span class="hl-r">驗算要代回兩條</span>，不是只驗一條</li>
+<li>六大題型：和差、年齡、<b>順逆風</b>、濃度混合、採購分配、投資利息</li>
+</ul>
+<div class="box g" style="text-align:center;font-size:20px;">
+🔗 <b>承先</b>：七上 3-3 的五步驟全部照用；1-1 說明為何需要第二條；1-2 提供消去工具<br>
+🔗 <b>啟後</b>：<span class="hl">2-2 會告訴你 —— 這兩條方程式在坐標平面上是兩條直線</span></div>
+</div></div>
+
+<!-- 25 -->
+<div class="slide" data-pg="25 / 25"><div class="tag">Next</div><div class="big-center">
+<div class="eyebrow">下節預告</div>
+<h1 style="font-size:40px;">2-1　平面上的直角坐標</h1>
+<div class="lead">你解出的 <span style="color:#f2d979;">(x, y)</span> ——<br>其實是平面上的一個<span style="color:#a6d6a0;">位置</span></div>
+<svg viewBox="0 0 420 180" width="52%" style="margin-top:14px;">
+<line x1="30" y1="150" x2="390" y2="150" stroke="rgba(243,239,226,0.6)" stroke-width="1.8"/>
+<line x1="210" y1="14" x2="210" y2="172" stroke="rgba(243,239,226,0.6)" stroke-width="1.8"/>
+<path d="M390 150 l-9 -5 M390 150 l-9 5" stroke="rgba(243,239,226,0.6)" stroke-width="1.8" fill="none"/>
+<path d="M210 14 l-5 9 M210 14 l5 9" stroke="rgba(243,239,226,0.6)" stroke-width="1.8" fill="none"/>
+<text x="396" y="155" font-family="Noto Serif TC" font-size="15" fill="rgba(243,239,226,0.7)">x</text>
+<text x="216" y="16" font-family="Noto Serif TC" font-size="15" fill="rgba(243,239,226,0.7)">y</text>
+<line x1="300" y1="150" x2="300" y2="70" stroke="#f2d979" stroke-width="1.2" stroke-dasharray="3 3"/>
+<line x1="210" y1="70" x2="300" y2="70" stroke="#f2d979" stroke-width="1.2" stroke-dasharray="3 3"/>
+<circle cx="300" cy="70" r="5.5" fill="#a6d6a0"/>
+<text x="318" y="64" font-family="Noto Serif TC" font-size="17" fill="#a6d6a0">(12, 8)</text>
+<text x="300" y="168" font-family="Noto Serif TC" font-size="14" fill="#f2d979" text-anchor="middle">12</text>
+<text x="198" y="75" font-family="Noto Serif TC" font-size="14" fill="#f2d979" text-anchor="end">8</text>
+</svg>
+<div class="box y" style="max-width:800px;margin-top:12px;">
+例題5 解出的「練習簿 12 本、彩色筆 8 支」——<br>
+在坐標平面上，就是<span class="hl">一個點 (12, 8)</span>。<br>
+而下一章會讓你看到：<span class="hl">那兩條方程式，是兩條直線；你解的答案，是它們的交點。</span></div>
+</div></div>
+
+</div></body></html>

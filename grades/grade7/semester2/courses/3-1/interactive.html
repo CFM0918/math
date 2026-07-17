@@ -1,0 +1,930 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>七下 3-1 比與比例式｜互動教學平台</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;--wood:#6b4a32;}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);overscroll-behavior:none;}
+.topbar{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:10px 16px;background:linear-gradient(180deg,#1b2f21,#132218);border-bottom:2px solid var(--wood);box-shadow:0 4px 18px rgba(0,0,0,0.5);}
+.brand{font-family:'Noto Serif TC',serif;font-weight:900;font-size:clamp(15px,2.2vw,20px);color:var(--yellow);white-space:nowrap;}
+.brand small{display:block;font-family:'Caveat',cursive;font-size:14px;color:var(--soft);font-weight:400;}
+.spacer{flex:1;}
+.btn{background:rgba(243,239,226,0.08);border:1.5px solid rgba(243,239,226,0.28);color:var(--chalk);
+  border-radius:10px;padding:7px 13px;font-family:inherit;font-size:14px;cursor:pointer;white-space:nowrap;transition:.15s;}
+.btn:hover{background:rgba(243,239,226,0.16);}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:10px 16px 0;scrollbar-width:none;}
+.tabs::-webkit-scrollbar{display:none;}
+.tab{background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.2);border-bottom:none;
+  color:var(--soft);border-radius:10px 10px 0 0;padding:9px 15px;font-size:14px;cursor:pointer;white-space:nowrap;font-family:inherit;}
+.tab.on{background:var(--board);border-color:var(--yellow);color:var(--yellow);font-weight:700;}
+.tab .n{font-family:'Caveat',cursive;font-size:18px;margin-right:5px;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px 60px;}
+.panel{display:none;}.panel.on{display:block;}
+.card{background:radial-gradient(ellipse at 20% 10%,rgba(255,255,255,0.05),transparent 45%),
+   linear-gradient(160deg,var(--board),var(--board2));
+  border:1.5px solid rgba(242,217,121,0.16);border-radius:14px;padding:18px;margin-bottom:16px;
+  box-shadow:0 8px 26px rgba(0,0,0,0.45);position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 38px,rgba(255,255,255,0.012) 38px,rgba(255,255,255,0.012) 39px);}
+.card>*{position:relative;}
+.card h3{font-family:'Noto Serif TC',serif;font-size:clamp(17px,2.4vw,21px);color:var(--yellow);
+  margin-bottom:12px;padding-bottom:8px;border-bottom:2px dashed rgba(242,217,121,0.35);display:flex;align-items:center;gap:8px;}
+.card h3 .ic{font-size:20px;}
+.goals{display:flex;flex-wrap:wrap;gap:9px;}
+.goal{display:flex;align-items:center;gap:9px;background:rgba(242,217,121,0.07);
+  border:1.5px dashed rgba(242,217,121,0.4);border-radius:22px;padding:8px 15px 8px 8px;
+  font-size:clamp(13.5px,1.8vw,15px);color:var(--yellow);line-height:1.5;}
+.goal .bdg{width:24px;height:24px;border-radius:50%;background:var(--yellow);color:#16281c;
+  font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;flex:none;}
+.deck{position:relative;background:rgba(0,0,0,0.22);border-radius:12px;padding:clamp(16px,3vw,30px);
+  min-height:clamp(260px,42vh,380px);display:flex;flex-direction:column;justify-content:center;}
+.sl{display:none;animation:fade .25s;}.sl.on{display:block;}
+@keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+.sl .eyebrow{font-family:'Caveat',cursive;font-size:20px;color:var(--yellow);margin-bottom:6px;}
+.sl h4{font-family:'Noto Serif TC',serif;font-size:clamp(19px,3vw,27px);margin-bottom:12px;line-height:1.35;}
+.sl p{font-size:clamp(15px,2vw,18px);line-height:1.8;margin-bottom:9px;}
+.sl ul{list-style:none;}
+.sl li{font-size:clamp(15px,2vw,18px);line-height:1.85;padding-left:26px;position:relative;margin-bottom:4px;}
+.sl li::before{content:'✦';position:absolute;left:2px;color:var(--yellow);font-size:14px;top:3px;}
+.nav{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:14px;}
+.nav .pg{font-family:'Caveat',cursive;font-size:20px;color:var(--soft);min-width:64px;text-align:center;}
+.dots{display:flex;gap:6px;justify-content:center;margin-top:10px;flex-wrap:wrap;}
+.dot{width:9px;height:9px;border-radius:50%;background:rgba(243,239,226,0.25);cursor:pointer;border:none;padding:0;}
+.dot.on{background:var(--yellow);transform:scale(1.3);}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.32);border-radius:10px;
+  padding:11px 15px;margin:9px 0;font-size:clamp(14px,1.9vw,17px);line-height:1.7;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.36);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.36);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.32);}
+.two{display:flex;gap:12px;flex-wrap:wrap;}.two>*{flex:1;min-width:220px;}
+.teach{background:rgba(201,174,224,0.12);border:1.5px dashed rgba(201,174,224,0.5);
+  border-radius:10px;padding:11px 15px;margin:9px 0;font-size:clamp(14px,1.8vw,15px);line-height:1.7;}
+.teach b{color:var(--purple);}
+.tbl{width:100%;border-collapse:collapse;margin:9px 0;font-size:clamp(13.5px,1.8vw,16px);}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.24);padding:8px 11px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.cv-wrap{background:rgba(0,0,0,0.25);border-radius:12px;padding:10px;}
+canvas.viz{width:100%;display:block;border-radius:8px;touch-action:none;}
+.ctrl{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center;}
+.readout{font-family:'Noto Serif TC',serif;font-size:clamp(14px,1.9vw,18px);color:var(--chalk);
+  background:rgba(242,217,121,0.1);border:1px solid rgba(242,217,121,0.3);border-radius:8px;
+  padding:7px 12px;flex:1;min-width:220px;}
+.readout b{color:var(--yellow);}
+.q{background:rgba(0,0,0,0.2);border:1px solid rgba(242,217,121,0.18);border-radius:10px;padding:13px 15px;margin:10px 0;}
+.q .qt{font-size:clamp(15px,2vw,17px);margin-bottom:10px;line-height:1.7;}
+.q .qt .qn{font-family:'Caveat',cursive;color:var(--yellow);font-size:20px;margin-right:6px;}
+.opts{display:flex;flex-direction:column;gap:7px;}
+.opt{text-align:left;background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.22);
+  color:var(--chalk);border-radius:9px;padding:9px 13px;font-family:inherit;font-size:15px;cursor:pointer;transition:.15s;line-height:1.5;}
+.opt:hover:not(:disabled){background:rgba(243,239,226,0.13);}
+.opt.right{background:rgba(166,214,160,0.24);border-color:var(--green);color:#fff;font-weight:700;}
+.opt.wrong{background:rgba(237,160,168,0.22);border-color:var(--pink);}
+.opt:disabled{cursor:default;}
+.fb{display:none;margin-top:9px;padding:9px 13px;border-radius:8px;font-size:14.5px;line-height:1.65;}
+.fb.on{display:block;}
+.fb.ok{background:rgba(166,214,160,0.14);border-left:3px solid var(--green);}
+.fb.no{background:rgba(237,160,168,0.14);border-left:3px solid var(--pink);}
+.fill{display:inline-block;background:rgba(0,0,0,0.3);border:none;border-bottom:2px solid var(--yellow);
+  color:var(--yellow);font-family:'Noto Serif TC',serif;font-size:17px;width:110px;text-align:center;padding:3px 5px;margin:0 4px;}
+.fill:focus{outline:none;background:rgba(242,217,121,0.12);}
+.exq{background:rgba(0,0,0,0.26);border:1.5px solid rgba(242,217,121,0.28);border-radius:11px;padding:13px 15px;margin:10px 0;position:relative;}
+.exq::before{content:'';position:absolute;top:-8px;left:32px;width:54px;height:14px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.exq .exq-q{font-size:clamp(14.5px,1.9vw,17px);line-height:1.75;margin-bottom:11px;}
+.exo{text-align:left;background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.22);
+  color:var(--chalk);border-radius:9px;padding:9px 13px;font-family:inherit;font-size:clamp(14px,1.8vw,15.5px);
+  cursor:pointer;transition:.15s;line-height:1.55;width:100%;margin-bottom:6px;display:block;}
+.exo:hover:not(:disabled){background:rgba(243,239,226,0.13);}
+.exo.right{background:rgba(166,214,160,0.26);border-color:var(--green);color:#fff;font-weight:700;}
+.exo.wrong{background:rgba(237,160,168,0.2);border-color:var(--pink);opacity:.75;}
+.exo:disabled{cursor:default;}
+@keyframes shake{10%,90%{transform:translateX(-2px);}30%,70%{transform:translateX(4px);}50%{transform:translateX(-4px);}}
+.exo.shake{animation:shake .4s;}
+.exsol{display:none;margin-top:10px;padding:11px 14px;border-radius:9px;
+  background:rgba(166,214,160,0.13);border-left:3px solid var(--green);font-size:clamp(14px,1.8vw,15.5px);line-height:1.75;}
+.exsol.on{display:block;animation:fade .3s;}
+.exsol .st{color:var(--soft);margin:3px 0;}
+.exsol .an{color:var(--green);font-weight:700;margin-top:6px;}
+.exlock{display:flex;align-items:center;gap:7px;margin-top:9px;font-size:13.5px;color:rgba(243,239,226,0.45);}
+.exlock.hide{display:none;}
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:11px;}
+.icard{background:rgba(0,0,0,0.22);border:1.5px solid rgba(242,217,121,0.22);border-radius:11px;padding:14px;text-align:center;}
+.icard .big{font-family:'Noto Serif TC',serif;font-size:clamp(17px,2.6vw,23px);font-weight:900;margin:6px 0;}
+.icard .cap{font-size:13.5px;color:var(--soft);line-height:1.6;}
+.frow{display:flex;gap:12px;align-items:center;padding:9px 12px;border-bottom:1px dashed rgba(243,239,226,0.16);}
+.frow:last-child{border-bottom:none;}
+.flab{color:var(--blue);font-weight:700;min-width:150px;font-size:clamp(13.5px,1.8vw,15.5px);flex:none;}
+.fval{color:var(--yellow);font-weight:700;font-family:'Noto Serif TC',serif;font-size:clamp(14px,1.9vw,17px);}
+@media(max-width:560px){.frow{flex-direction:column;align-items:flex-start;gap:3px;}.flab{min-width:0;}}
+.hud{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:12px;}
+.hud .st{background:rgba(0,0,0,0.3);border:1.5px solid rgba(242,217,121,0.28);border-radius:9px;
+  padding:7px 13px;font-size:14px;flex:1;min-width:88px;text-align:center;}
+.hud .st b{display:block;font-family:'Noto Serif TC',serif;font-size:20px;color:var(--yellow);}
+.tbar{height:8px;background:rgba(0,0,0,0.35);border-radius:5px;overflow:hidden;margin-bottom:12px;}
+.tfill{height:100%;background:linear-gradient(90deg,var(--green),var(--yellow),var(--pink));width:100%;transition:width .1s linear;}
+.gscreen{display:none;}.gscreen.on{display:block;}
+.lvchips{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin:14px 0;}
+.lvchip{background:rgba(152,201,220,0.12);border:1.5px solid rgba(152,201,220,0.35);border-radius:18px;
+  padding:6px 13px;font-size:13.5px;color:var(--blue);}
+.lvchip.done{background:rgba(166,214,160,0.2);border-color:var(--green);color:var(--green);}
+.lvchip.now{background:rgba(242,217,121,0.22);border-color:var(--yellow);color:var(--yellow);font-weight:700;}
+.gq{font-size:clamp(16px,2.2vw,20px);line-height:1.7;margin:14px 0;text-align:center;font-family:'Noto Serif TC',serif;}
+.gopts{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+@media(max-width:560px){.gopts{grid-template-columns:1fr;}}
+.gopt{background:rgba(243,239,226,0.07);border:1.5px solid rgba(243,239,226,0.25);color:var(--chalk);
+  border-radius:10px;padding:12px;font-family:'Noto Serif TC',serif;font-size:17px;cursor:pointer;transition:.15s;min-height:48px;}
+.gopt:hover:not(:disabled){background:rgba(243,239,226,0.15);}
+.gopt.right{background:rgba(166,214,160,0.3);border-color:var(--green);font-weight:900;}
+.gopt.wrong{background:rgba(237,160,168,0.25);border-color:var(--pink);}
+.gfb{margin-top:11px;padding:10px 13px;border-radius:8px;font-size:14.5px;line-height:1.6;display:none;}
+.gfb.on{display:block;}
+.gfb.ok{background:rgba(166,214,160,0.15);border-left:3px solid var(--green);}
+.gfb.no{background:rgba(237,160,168,0.15);border-left:3px solid var(--pink);}
+.rank{font-size:54px;text-align:center;margin:10px 0;}
+.hint{text-align:center;color:rgba(243,239,226,0.35);font-size:12.5px;padding:8px 0 0;}
+@media (max-width:640px){.topbar{padding:8px 10px;gap:8px;}.wrap{padding:0 10px 70px;}.card{padding:13px;}}
+</style></head><body>
+
+<div class="topbar">
+  <div class="brand">3-1　比與比例式<small>七下 · 第3章 比例</small></div>
+  <div class="spacer"></div>
+</div>
+
+<div class="tabs" id="tabs">
+  <button class="tab on" data-p="0"><span class="n">✂️</span>比與化簡</button>
+  <button class="tab" data-p="1"><span class="n">📊</span>連比與分配</button>
+  <button class="tab" data-p="2"><span class="n">⚖️</span>比例式</button>
+  <button class="tab" data-p="3"><span class="n">★</span>題型測驗</button>
+  <button class="tab" data-p="4"><span class="n">🎮</span>闖關遊戲</button>
+</div>
+
+<div class="wrap">
+  <div class="card" id="goalCard">
+    <h3><span class="ic">🎯</span>本節學習目標</h3>
+    <div class="goals" id="goals"></div>
+  </div>
+  <div id="wrap"></div>
+</div>
+
+<script>
+const GOALS = [
+  '能說出比與比值的定義並理解關係',
+  '能化簡比（整數、分數、小數、負數）',
+  '能處理連比與按比例分配',
+  '理解比例式與「內積=外積」性質',
+  '能解比例式、等比中項',
+  '能應用在比例尺（含面積比例尺）',
+];
+
+const DATA = [
+{ key:'simp', viz:'simp', vizTitle:'化簡比 —— 先自己算 GCD，再按「化簡」（6 題含負數）',
+  slides:[
+    {eb:'細目 ① ⚠️', h:'比 vs 比值：兩者不同！', html:`
+      <table class="tbl">
+        <tr><th style="width:20%;">　</th><th style="width:40%;">是什麼</th><th>例</th></tr>
+        <tr><td class="hl-b"><b>比</b></td><td>兩個數的<b>關係</b> a:b</td><td class="fm" style="font-size:18px;">3 : 4</td></tr>
+        <tr><td class="hl-g"><b>比值</b></td><td><b>一個數</b>（a÷b）</td><td class="fm" style="font-size:18px;">3/4</td></tr>
+      </table>
+      <div class="box r" style="text-align:center;">⚠️ 別把 <span class="fm">3:4</span> 說成「比值」，也別把 <span class="fm">3/4</span> 說成「一個比」。</div>
+      <div class="box y"><b>等值的比：</b>不同的比、相同的比值。<span class="fm">3:4</span> 和 <span class="fm">6:8</span> 的比值都是 <span class="fm">3/4</span>。</div>`},
+    {eb:'細目 ①', h:'四種比的化簡法', html:`
+      <table class="tbl">
+        <tr><th style="width:22%;">類型</th><th style="width:32%;">方法</th><th>例</th></tr>
+        <tr><td class="hl-b">整數</td><td>同除 <b>GCD</b></td><td class="fm">36:48 → 3:4</td></tr>
+        <tr><td class="hl-b">分數</td><td>同乘分母 <b>LCM</b></td><td class="fm">1/2:3/4 → 2:3</td></tr>
+        <tr><td class="hl-b">小數</td><td>同乘 <b>10 次方</b></td><td class="fm">0.6:1.5 → 2:5</td></tr>
+        <tr><td class="hl-r">負數</td><td><b>負號別弄丟</b></td><td class="fm">(−8):6 → (−4):3</td></tr>
+      </table>
+      <div class="box r" style="text-align:center;">⚠️ <span class="fm">(−6):4</span> 化簡成 <span class="fm hl-r">3:2</span>（少負號）→ 正確 <span class="fm hl-g">(−3):2</span></div>`},
+    {eb:'例題 ★★☆', h:'化整數比', html:`
+      <div class="exq" data-a="1">
+        <div class="exq-q"><span class="hl">Q</span>　0.6 : 1.5 化為最簡整數比是？</div>
+        <button class="exo" data-i="0">6 : 15</button>
+        <button class="exo" data-i="1">2 : 5</button>
+        <button class="exo" data-i="2">3 : 5</button>
+        <button class="exo" data-i="3">1 : 2.5</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st fm">×10 消小數：6 : 15</div>
+          <div class="st fm">GCD(6,15)=3，÷3 → 2 : 5</div>
+          <div class="st">(A) 6:15 還沒化到最簡；(D) 1:2.5 還有小數，不是整數比。</div>
+          <div class="an">答：2 : 5</div>
+        </div>
+      </div>`},
+    {eb:'例題 ★★☆', h:'負數比', html:`
+      <div class="exq" data-a="2">
+        <div class="exq-q"><span class="hl">Q</span>　(−10) : 15 化簡後，比值是？</div>
+        <button class="exo" data-i="0">2/3</button>
+        <button class="exo" data-i="1">−3/2</button>
+        <button class="exo" data-i="2">−2/3</button>
+        <button class="exo" data-i="3">3/2</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st fm">GCD(10,15)=5，÷5 → (−2) : 3</div>
+          <div class="st fm">比值 = −2 ÷ 3 = −2/3</div>
+          <div class="st">(A) 2/3 是<b>把負號弄丟了</b> —— 這裡最多人錯。</div>
+          <div class="an">答：−2/3</div>
+        </div>
+      </div>`}
+  ],
+  fa:[
+    {q:'比和比值的差別？', o:['一樣','比是 a:b、比值是 a÷b','比值有兩個數','比是一個數'], a:1, e:'比是關係、比值是一個數。'},
+    {q:'化簡整數比用什麼？', o:['GCD','LCM','平方','相加'], a:0, e:'同除以 GCD。'},
+    {q:'(−8):6 化簡？', o:['4:3','(−4):3','(−3):4','8:6'], a:1, e:'÷2 → (−4):3，負號保留。'}
+  ],
+  info:[
+    {big:'比 ≠ 比值', cap:'a:b vs a÷b', c:'var(--blue)'},
+    {big:'同除 GCD', cap:'化簡整數比', c:'var(--green)'},
+    {big:'負號別弄丟', cap:'(−8):6→(−4):3', c:'var(--pink)'}
+  ]
+},
+{ key:'alloc', viz:'alloc', vizTitle:'按比例分配 —— 換一組比，看長條怎麼依份數切、每份多少',
+  slides:[
+    {eb:'細目 ①　連比', h:'按比例分配：用「份數」', html:`
+      <div class="box y" style="text-align:center;font-size:19px;">把總量分成「<span class="hl">總份數</span>」份，每份相等</div>
+      <div class="box"><b>甲乙丙 5:6:7，甲 150 公分</b><br>
+        甲是 5 份 → 每份 = 150÷5 = <span class="hl">30</span><br>
+        乙 = 6×30 = <span class="fm">180</span>；丙 = 7×30 = <span class="fm">210</span></div>
+      <div class="box g" style="text-align:center;">公式：<span class="hl">某項 = 總量 × (份數 ÷ 總份數)</span></div>
+      <div class="box y">👉 用下方 Canvas 換一組比，看長條依份數切開、每份多少。</div>`},
+    {eb:'細目 ① ⚠️', h:'合併兩個比 → 統一中間量', html:`
+      <div class="box"><b>甲:乙 = 3:4，乙:丙 = 2:5，求甲:乙:丙</b><br>
+        乙在兩比裡是 4 和 2 → LCM(4,2) = <span class="hl">4</span><br>
+        乙:丙 = 2:5 → ×2 → 4:10<br>
+        合併 → <span class="fm hl">3 : 4 : 10</span></div>
+      <div class="box r" style="text-align:center;font-size:19px;">
+        ⚠️ 最常錯：直接把 3:4 和 2:5 拼成 <span class="fm hl-r">3:4:5</span>（沒統一乙！）</div>`},
+    {eb:'例題 ★★★', h:'按比例分配求差', html:`
+      <div class="exq" data-a="2">
+        <div class="exq-q"><span class="hl">Q</span>　蛋糕 A:B:C = 2:3:5 分配，總重 500 克，C 比 A 多幾克？</div>
+        <button class="exo" data-i="0">100 克</button>
+        <button class="exo" data-i="1">250 克</button>
+        <button class="exo" data-i="2">150 克</button>
+        <button class="exo" data-i="3">50 克</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st fm">總份數 2+3+5=10 → 每份 500÷10 = 50 克</div>
+          <div class="st fm">A = 2×50 = 100；C = 5×50 = 250</div>
+          <div class="st fm">差 = 250 − 100 = 150 克</div>
+          <div class="st">(A) 100 是 A 的重量；(B) 250 是 C 的重量 —— 題目問「多幾克」！</div>
+          <div class="an">答：150 克</div>
+        </div>
+      </div>`},
+    {eb:'例題 ★★☆', h:'合併連比', html:`
+      <div class="exq" data-a="0">
+        <div class="exq-q"><span class="hl">Q</span>　甲:乙=2:3，乙:丙=6:5，求甲:乙:丙</div>
+        <button class="exo" data-i="0">4:6:5</button>
+        <button class="exo" data-i="1">2:3:5</button>
+        <button class="exo" data-i="2">2:6:5</button>
+        <button class="exo" data-i="3">2:3:6:5</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">乙在兩比裡是 3 和 6 → LCM(3,6)=6</div>
+          <div class="st fm">甲:乙=2:3 → ×2 → 4:6；乙:丙=6:5 不變</div>
+          <div class="st fm">合併 → 4:6:5</div>
+          <div class="st">(B) 2:3:5 是<b>沒統一乙</b>直接拼的錯誤。</div>
+          <div class="an">答：4:6:5</div>
+        </div>
+      </div>`}
+  ],
+  fa:[
+    {q:'按比例分配先算什麼？', o:['每份多少','總數','比值','差'], a:0, e:'先算每份 = 總量÷總份數。'},
+    {q:'1:2:3 分 720 元，最多的一份？', o:['120','240','360','720'], a:2, e:'每份120，3份=360。'},
+    {q:'合併連比的關鍵？', o:['直接拼','統一中間量','取最大','取平均'], a:1, e:'用 LCM 統一中間量。'}
+  ],
+  info:[
+    {big:'先算每份', cap:'總量÷總份數', c:'var(--blue)'},
+    {big:'統一中間量', cap:'用 LCM<br>再合併', c:'var(--pink)'},
+    {big:'份數 × 每份', cap:'= 各項的量', c:'var(--green)'}
+  ]
+},
+{ key:'prop', viz:'prop', vizTitle:'比例式解題 —— 先自己用「內積=外積」算，再按「解出 x」',
+  slides:[
+    {eb:'細目 ②', h:'內項積 = 外項積', html:`
+      <div class="box y" style="text-align:center;font-size:19px;">
+        <span class="fm">a:b = c:d</span> 表示兩個比相等，也可寫成 <span class="fm">a/b = c/d</span></div>
+      <div class="box" style="text-align:center;font-size:22px;">
+        外項是 <b class="hl-r">a、d</b>（頭尾）；內項是 <b class="hl-g">b、c</b>（中間）<br>
+        <span class="fm hl" style="font-size:24px;">a × d = b × c</span></div>
+      <div class="box g" style="text-align:center;">口訣：<span class="hl">外外相乘 = 內內相乘</span></div>
+      <div class="box y">👉 用下方 Canvas 練習：先自己用內積=外積算，再按「解出 x」驗證。</div>`},
+    {eb:'細目 ②　等比中項', h:'a:b = b:c 時，b² = ac', html:`
+      <div class="box y" style="text-align:center;font-size:19px;">
+        若 <span class="fm">a:b = b:c</span>（中間項重複）→ <span class="fm hl">b² = a×c</span></div>
+      <div class="box"><b>3 : x = x : 12</b><br>
+        內積=外積：<span class="fm">x·x = 3×12 → x² = 36</span><br>
+        → <span class="fm hl">x = 6 或 x = −6</span></div>
+      <div class="box r" style="text-align:center;font-size:19px;">
+        ⚠️ <b>別漏負根！</b>情境是長度 → 取 6；允許負數 → ±6</div>`},
+    {eb:'例題 ★☆☆', h:'解比例式', html:`
+      <div class="exq" data-a="1">
+        <div class="exq-q"><span class="hl">Q</span>　解 x : 6 = 4 : 8</div>
+        <button class="exo" data-i="0">2</button>
+        <button class="exo" data-i="1">3</button>
+        <button class="exo" data-i="2">12</button>
+        <button class="exo" data-i="3">48</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st fm">內積=外積：6×4 = x×8 → 24 = 8x → x = 3</div>
+          <div class="st fm">驗算：3:6 = 1:2 = 4:8 ✓</div>
+          <div class="an">答：x = 3</div>
+        </div>
+      </div>`},
+    {eb:'例題 ★★☆ ⚠️', h:'來源標錯的那題', html:`
+      <div class="exq" data-a="0">
+        <div class="exq-q"><span class="hl">Q</span>　解 (x+2) : (x−1) = 5 : 2</div>
+        <button class="exo" data-i="0">3</button>
+        <button class="exo" data-i="1">4</button>
+        <button class="exo" data-i="2">5</button>
+        <button class="exo" data-i="3">2</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st fm">內積=外積：2(x+2) = 5(x−1)</div>
+          <div class="st fm">2x+4 = 5x−5 → 9 = 3x → x = 3</div>
+          <div class="st fm">驗算：(3+2):(3−1) = 5:2 ✓</div>
+          <div class="st">⚠️ <b>原教材標答是 x=4，但過程明明算出 x=3</b> —— 答案標籤沒跟過程。<br>
+            （驗算 x=4：(6):(3) = 2:1 ≠ 5:2，可見 4 是錯的）</div>
+          <div class="an">答：x = 3</div>
+        </div>
+      </div>`},
+    {eb:'例題 ★★★', h:'等比中項', html:`
+      <div class="exq" data-a="2">
+        <div class="exq-q"><span class="hl">Q</span>　2 : x = x : 8，求所有可能的 x（含正負）</div>
+        <button class="exo" data-i="0">只有 4</button>
+        <button class="exo" data-i="1">只有 −4</button>
+        <button class="exo" data-i="2">4 或 −4</button>
+        <button class="exo" data-i="3">4 或 16</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st fm">內積=外積：x² = 2×8 = 16</div>
+          <div class="st fm">x = 4 或 x = −4</div>
+          <div class="st">(A) 只寫 4 = <b>漏了負根</b>。題目說「含正負」→ 兩個都要。</div>
+          <div class="an">答：x = 4 或 x = −4</div>
+        </div>
+      </div>`}
+  ],
+  fa:[
+    {q:'a:b=c:d 的性質？', o:['a+d=b+c','a×d=b×c','a×b=c×d','a−d=b−c'], a:1, e:'內積=外積：a×d=b×c。'},
+    {q:'解 5:x=3:12', o:['20','7.2','4','15'], a:0, e:'5×12=3x → x=20。'},
+    {q:'a:b=b:c，b 稱為？', o:['比值','等比中項','外項','公因數'], a:1, e:'b²=ac，b 是等比中項。'}
+  ],
+  info:[
+    {big:'內積 = 外積', cap:'a×d = b×c', c:'var(--yellow)'},
+    {big:'外外・內內', cap:'相乘相等', c:'var(--blue)'},
+    {big:'等比中項 ±根', cap:'b²=ac<br>別漏負根', c:'var(--pink)'}
+  ]
+}];
+
+const QUIZ = [
+  {type:'choice', q:'「3:4」是比還是比值？', o:['比','比值','都是','都不是'], a:0, e:'比是 a:b 的形式。'},
+  {type:'choice', q:'3:4 的比值是？', o:['3:4','3/4','4/3','7'], a:1, e:'比值 = 3÷4 = 3/4。'},
+  {type:'choice', q:'化簡 24:40 求比值', o:['3:5，3/5','2:5，2/5','3:4，3/4','6:10'], a:0, e:'÷8 → 3:5，比值 3/5。'},
+  {type:'choice', q:'1/3 : 1/2 化整數比', o:['1:1','2:3','3:2','3:6'], a:1, e:'×6 → 2:3。'},
+  {type:'choice', q:'(−10):15 化簡', o:['2:3','(−2):3','(−3):2','10:15'], a:1, e:'÷5 → (−2):3。'},
+  {type:'choice', q:'甲:乙=4:5，甲 80 元，乙？', o:['100','64','40','20'], a:0, e:'每份20，乙5份=100。'},
+  {type:'choice', q:'甲:乙=2:3，乙:丙=6:5，連比？', o:['2:3:5','4:6:5','2:6:5','4:6:10'], a:1, e:'統一乙(LCM6)：4:6:5。'},
+  {type:'choice', q:'1:2:3 分 720 元，各得？', o:['120/240/360','100/200/300','200/200/320','180/240/300'], a:0, e:'每份120。'},
+  {type:'choice', q:'兩數比 5:3，差 14，兩數？', o:['35和21','25和15','50和36','40和26'], a:0, e:'2份=14每份7 → 35和21。'},
+  {type:'choice', q:'a:b=3:7，(a+b):b = ?', o:['10:7','3:7','7:10','10:3'], a:0, e:'8k? a+b=10k → 10:7。'},
+  {type:'choice', q:'解 x:6 = 4:8', o:['2','3','12','48'], a:1, e:'6×4=8x → x=3。'},
+  {type:'choice', q:'解 (2x+1):5 = 3:1', o:['5','7','8','14'], a:1, e:'2x+1=15 → x=7。'},
+  {type:'choice', q:'解 (x+2):(x−1) = 5:2', o:['3','4','5','2'], a:0, e:'2(x+2)=5(x−1) → x=3。（來源標 x=4 是錯的）'},
+  {type:'choice', q:'3:x = x:12，正數解', o:['4','6','9','36'], a:1, e:'x²=36 → x=6。'},
+  {type:'choice', q:'2:x = x:8，所有解', o:['只有4','只有−4','4或−4','4或16'], a:2, e:'x²=16 → ±4。'},
+  {type:'choice', q:'地圖 1:250000，圖上 4.8cm，實際？', o:['12 公里','1.2 公里','120 公里','12000 公尺'], a:0, e:'4.8×250000=1200000cm=12km。'},
+  {type:'choice', q:'長度比例尺 1:200，面積比例尺？', o:['200','400','40000','20000'], a:2, e:'長度²=200²=40000。'},
+  {type:'choice', q:'配方 5:3:2 共 400kg，天然橡膠幾 kg？', o:['200','120','80','40'], a:0, e:'每份40，5份=200。'}
+];
+
+const GAME = [
+  {name:'比 vs 比值', qs:[
+    {q:'「3:4」是？', o:['比','比值','一個數','都不是'], a:0, e:'比是 a:b。'},
+    {q:'3:4 的比值？', o:['3:4','3/4','4/3','12'], a:1, e:'3÷4=3/4。'},
+    {q:'比值是？', o:['兩個數','一個數（a÷b）','一個比','一條線'], a:1, e:'一個數。'},
+    {q:'3:4 和 6:8 是？', o:['不同的比','等值的比','比值不同','不能比'], a:1, e:'比值都是 3/4，等值。'}
+  ]},
+  {name:'化簡比', qs:[
+    {q:'24:40 化簡？', o:['3:5','2:5','3:4','6:10'], a:0, e:'÷8。'},
+    {q:'1/3:1/2 化整數比？', o:['1:1','2:3','3:2','1:2'], a:1, e:'×6。'},
+    {q:'0.4:1.2 化整數比？', o:['1:3','2:6','4:12','1:2'], a:0, e:'×10÷4。'},
+    {q:'(−8):6 化簡？', o:['4:3','(−4):3','(−3):4','8:6'], a:1, e:'÷2，負號保留。'}
+  ]},
+  {name:'連比與分配', qs:[
+    {q:'按比例分配先算？', o:['每份','總數','比值','差'], a:0, e:'總量÷總份數。'},
+    {q:'2:3:5 分 500，最多一份？', o:['100','150','250','500'], a:2, e:'每份50，5份=250。'},
+    {q:'甲:乙=2:3，乙:丙=6:5，連比？', o:['2:3:5','4:6:5','2:6:5','2:3:6'], a:1, e:'統一乙。'},
+    {q:'合併連比要？', o:['直接拼','統一中間量','取大','取平均'], a:1, e:'用 LCM。'}
+  ]},
+  {name:'比例式', qs:[
+    {q:'a:b=c:d 的性質？', o:['a+d=b+c','a×d=b×c','a×b=c×d','a÷d=b÷c'], a:1, e:'內積=外積。'},
+    {q:'外項是？', o:['b、c','a、d','a、b','c、d'], a:1, e:'頭尾兩項。'},
+    {q:'解 x:6=4:8', o:['2','3','12','48'], a:1, e:'6×4=8x。'},
+    {q:'解 5:x=3:12', o:['20','7.2','4','15'], a:0, e:'5×12=3x → 20。'}
+  ]},
+  {name:'等比中項', qs:[
+    {q:'a:b=b:c，則？', o:['b=a+c','b²=ac','b=ac','2b=a+c'], a:1, e:'等比中項。'},
+    {q:'3:x=x:12，正數解？', o:['4','6','9','36'], a:1, e:'x²=36。'},
+    {q:'2:x=x:8，所有解？', o:['只4','只−4','4或−4','4或16'], a:2, e:'x²=16。'},
+    {q:'等比中項最常漏？', o:['正根','負根','都寫','不用寫'], a:1, e:'別漏負根！'}
+  ]},
+  {name:'比例尺', qs:[
+    {q:'比例尺 = ?', o:['圖上:實際','實際:圖上','圖上+實際','圖上×實際'], a:0, e:'圖上距離:實際距離。'},
+    {q:'1:250000，圖上4.8cm，實際？', o:['12km','1.2km','120km','48km'], a:0, e:'×250000=12km。'},
+    {q:'比例尺題最常錯？', o:['乘錯','忘記單位換算','算比值','畫圖'], a:1, e:'公分→公里要換算。'},
+    {q:'長度比例尺 1:200，面積比例尺？', o:['200','400','40000','20000'], a:2, e:'長度²。'}
+  ]},
+  {name:'應用綜合', qs:[
+    {q:'配方 5:3:2 共 400kg，天然？', o:['200','120','80','40'], a:0, e:'每份40，5份。'},
+    {q:'長寬比 5:3，面積 135，長？', o:['15','9','45','5'], a:0, e:'15k²=135，k=3，長15。'},
+    {q:'比值用到七上哪節？', o:['GCD/LCM','分數','都有','幾何'], a:2, e:'化簡用GCD/LCM，比值用分數。'},
+    {q:'解比例式本質是？', o:['解一元一次方程式','畫圖','背公式','猜'], a:0, e:'內積=外積後就是一元一次。'}
+  ]}
+];
+
+document.getElementById('goals').innerHTML = GOALS.map((g,i)=>
+  `<div class="goal"><div class="bdg">${i+1}</div>${g}</div>`).join('');
+
+const wrap = document.getElementById('wrap');
+DATA.forEach((sec, si)=>{
+  const p = document.createElement('div');
+  p.className = 'panel' + (si===0?' on':'');
+  p.dataset.p = si;
+  p.innerHTML = `
+    <div class="card">
+      <h3><span class="ic">📽</span>簡報翻頁器</h3>
+      <div class="deck" data-deck="${si}">
+        ${sec.slides.map((s,i)=>`<div class="sl${i===0?' on':''}" data-i="${i}">
+          <div class="eyebrow">${s.eb}</div><h4>${s.h}</h4>${s.html}</div>`).join('')}
+      </div>
+      <div class="nav">
+        <button class="btn" data-nav="prev" data-s="${si}">◀ 上一張</button>
+        <span class="pg" id="pg-${si}">1 / ${sec.slides.length}</span>
+        <button class="btn" data-nav="next" data-s="${si}">下一張 ▶</button>
+      </div>
+      <div class="dots" id="dots-${si}">
+        ${sec.slides.map((_,i)=>`<button class="dot${i===0?' on':''}" data-s="${si}" data-i="${i}"></button>`).join('')}
+      </div>
+    </div>
+    <div class="card">
+      <h3><span class="ic">🎯</span>Canvas 互動視覺化<span style="font-size:14px;color:var(--soft);font-weight:400;">　${sec.vizTitle}</span></h3>
+      <div class="cv-wrap">
+        <canvas class="viz" data-viz="${sec.viz}" data-si="${si}"></canvas>
+        <div class="ctrl" data-ctrl="${si}"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3><span class="ic">✅</span>形成性評量</h3>
+      ${sec.fa.map((f,i)=>`<div class="q" data-fa="${si}-${i}">
+        <div class="qt"><span class="qn">Q${i+1}</span>${f.q}</div>
+        <div class="opts">${f.o.map((o,oi)=>`<button class="opt" data-si="${si}" data-qi="${i}" data-oi="${oi}">${o}</button>`).join('')}</div>
+        <div class="fb" id="fb-${si}-${i}"></div>
+      </div>`).join('')}
+    </div>
+    <div class="card">
+      <h3><span class="ic">📊</span>資訊圖表</h3>
+      <div class="info">
+        ${sec.info.map(c=>`<div class="icard"><div class="big" style="color:${c.c}">${c.big}</div><div class="cap">${c.cap}</div></div>`).join('')}
+      </div>
+    </div>`;
+  wrap.appendChild(p);
+});
+
+const qp = document.createElement('div');
+qp.className='panel'; qp.dataset.p='3';
+qp.innerHTML = `<div class="card"><h3><span class="ic">📝</span>題型測驗　<span style="font-size:14px;color:var(--soft);font-weight:400;">單選 · 是非 · 填充，共 ${QUIZ.length} 題</span></h3>
+  <div id="quizBox"></div>
+  <div style="display:flex;gap:10px;align-items:center;margin-top:14px;flex-wrap:wrap;">
+    <button class="btn" id="gradeBtn" style="background:rgba(242,217,121,.2);border-color:var(--yellow);color:var(--yellow);font-weight:700;">📊 批改並看成績</button>
+    <button class="btn" id="resetQuiz">🔄 重做</button>
+    <div class="readout" id="score" style="display:none;"></div>
+  </div></div>
+  <div class="card"><h3><span class="ic">📋</span>公式速查表</h3>
+    <div class="frow"><div class="flab">比</div><div class="fval">a:b（相對關係，b≠0）</div></div>
+    <div class="frow"><div class="flab">比值</div><div class="fval">a÷b（<b>一個數</b>，不是比）</div></div>
+    <div class="frow"><div class="flab">等值的比</div><div class="fval">不同的比、相同比值（3:4 = 6:8）</div></div>
+    <div class="frow"><div class="flab">化簡整數比</div><div class="fval">同除以 <b>GCD</b></div></div>
+    <div class="frow"><div class="flab">化簡分數比</div><div class="fval">同乘分母 <b>LCM</b></div></div>
+    <div class="frow"><div class="flab">化簡小數比</div><div class="fval">同乘 <b>10 的次方</b></div></div>
+    <div class="frow"><div class="flab">⚠️ 負數比</div><div class="fval">負號別弄丟：(−8):6 → (−4):3</div></div>
+    <div class="frow"><div class="flab">合併連比</div><div class="fval"><b>統一中間量</b>（用 LCM）</div></div>
+    <div class="frow"><div class="flab">按比例分配</div><div class="fval">某項 = 總量 × (份數/總份數)</div></div>
+    <div class="frow"><div class="flab">比例式</div><div class="fval">a:b = c:d ⟺ a/b = c/d</div></div>
+    <div class="frow"><div class="flab">🔑 內積=外積</div><div class="fval">a:b=c:d → <b>a×d = b×c</b></div></div>
+    <div class="frow"><div class="flab">等比中項</div><div class="fval">a:b=b:c → <b>b²=ac</b>（±根，看情境）</div></div>
+    <div class="frow"><div class="flab">更比</div><div class="fval">a:b=c:d → a:c=b:d</div></div>
+    <div class="frow"><div class="flab">比例尺</div><div class="fval">圖上:實際（⚠️ 算完做單位換算）</div></div>
+    <div class="frow"><div class="flab">面積比例尺</div><div class="fval"><b>長度比例尺²</b></div></div>
+    <div class="frow"><div class="flab">萬用技巧</div><div class="fval">用「份數 k」設未知數</div></div>
+  </div>`;
+wrap.appendChild(qp);
+
+const gp = document.createElement('div');
+gp.className='panel'; gp.dataset.p='4';
+gp.innerHTML = `<div class="card"><h3><span class="ic">🎮</span>闖關遊戲　<span style="font-size:14px;color:var(--soft);font-weight:400;">6 關挑戰 · 每題 20 秒 · 連擊與速度都有加分</span></h3>
+  <div class="gscreen on" id="gStart">
+    <div style="text-align:center;font-size:clamp(15px,2vw,18px);line-height:1.8;">
+      闖過 <b class="hl">7</b> 關，每關 1 題，每題 <b class="hl">20 秒</b>。<br>
+      計分：基礎 <b class="hl">10</b> 分 + 連擊獎勵（最多 <b class="hl">5</b>）+ 速度獎勵（最多 <b class="hl">5</b>）＝ 單題最高 <b class="hl">20</b> 分</div>
+    <div class="lvchips" id="gStartChips"></div>
+    <div style="text-align:center;"><button class="btn" id="gGo" style="background:rgba(242,217,121,.25);border-color:var(--yellow);color:var(--yellow);font-weight:700;font-size:16px;padding:10px 24px;">🚀 開始挑戰</button></div>
+  </div>
+  <div class="gscreen" id="gPlay">
+    <div class="hud">
+      <div class="st">關卡<b id="hLv">1/7</b></div>
+      <div class="st">分數<b id="hSc">0</b></div>
+      <div class="st">連擊<b id="hStk">0</b></div>
+      <div class="st">剩餘<b id="hT">20</b></div>
+    </div>
+    <div class="tbar"><div class="tfill" id="tFill"></div></div>
+    <div class="lvchips" id="gChips"></div>
+    <div class="gq" id="gQ"></div>
+    <div class="gopts" id="gO"></div>
+    <div class="gfb" id="gFb"></div>
+    <div style="text-align:center;margin-top:12px;"><button class="btn" id="gNext" style="display:none;">下一關 ▶</button></div>
+  </div>
+  <div class="gscreen" id="gEnd">
+    <div class="rank" id="gRank">🏆</div>
+    <div style="text-align:center;font-size:clamp(17px,2.6vw,22px);font-family:'Noto Serif TC';" id="gFinal"></div>
+    <div style="text-align:center;color:var(--soft);margin-top:8px;" id="gStats"></div>
+    <div style="text-align:center;margin-top:16px;"><button class="btn" id="gAgain" style="background:rgba(242,217,121,.25);border-color:var(--yellow);color:var(--yellow);font-weight:700;">🔄 再挑戰一次</button></div>
+  </div></div>`;
+wrap.appendChild(gp);
+document.getElementById('gStartChips').innerHTML = GAME.map((g,i)=>`<div class="lvchip">第${i+1}關 ${g.name}</div>`).join('');
+
+const qb = document.getElementById('quizBox');
+QUIZ.forEach((q,i)=>{
+  const d = document.createElement('div'); d.className='q';
+  let body='';
+  if(q.type==='choice') body = `<div class="opts">${q.o.map((o,oi)=>`<button class="opt" data-quiz="${i}" data-oi="${oi}">${o}</button>`).join('')}</div>`;
+  else if(q.type==='tf') body = `<div class="opts" style="flex-direction:row;gap:10px;">
+      <button class="opt" data-quiz="${i}" data-oi="1" style="flex:1;">⭕ 對</button>
+      <button class="opt" data-quiz="${i}" data-oi="0" style="flex:1;">❌ 錯</button></div>`;
+  else body = `<div><input class="fill" data-quiz="${i}" placeholder="?"></div>`;
+  d.innerHTML = `<div class="qt"><span class="qn">${i+1}</span>
+    <span style="font-size:12px;color:var(--soft);border:1px solid rgba(243,239,226,.25);border-radius:6px;padding:1px 6px;margin-right:6px;">
+    ${q.type==='choice'?'單選':q.type==='tf'?'是非':'填充'}</span>${q.q}</div>${body}
+    <div class="fb" id="qfb-${i}"></div>`;
+  qb.appendChild(d);
+});
+
+document.getElementById('tabs').addEventListener('click', e=>{
+  const t = e.target.closest('.tab'); if(!t) return;
+  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on', x===t));
+  document.querySelectorAll('.panel').forEach(x=>x.classList.toggle('on', x.dataset.p===t.dataset.p));
+  document.getElementById('goalCard').style.display = (t.dataset.p==='4')?'none':'';
+  window.scrollTo({top:0,behavior:'smooth'});
+  setTimeout(resizeAll, 60);
+});
+
+const cur = DATA.map(()=>0);
+function showSlide(si, i){
+  const deck = document.querySelector(`[data-deck="${si}"]`);
+  const sl = deck.querySelectorAll('.sl');
+  i = Math.max(0, Math.min(sl.length-1, i));
+  cur[si] = i;
+  sl.forEach((s,k)=>s.classList.toggle('on', k===i));
+  document.getElementById('pg-'+si).textContent = `${i+1} / ${sl.length}`;
+  document.querySelectorAll(`#dots-${si} .dot`).forEach((d,k)=>d.classList.toggle('on', k===i));
+}
+document.addEventListener('click', e=>{
+  const n = e.target.closest('[data-nav]');
+  if(n){ const si=+n.dataset.s; showSlide(si, cur[si] + (n.dataset.nav==='next'?1:-1)); return; }
+  const d = e.target.closest('.dot');
+  if(d){ showSlide(+d.dataset.s, +d.dataset.i); return; }
+});
+document.addEventListener('keydown', e=>{
+  const p = document.querySelector('.panel.on'); if(!p) return;
+  const si = +p.dataset.p; if(si>=DATA.length) return;
+  if(e.key==='ArrowRight') showSlide(si, cur[si]+1);
+  if(e.key==='ArrowLeft') showSlide(si, cur[si]-1);
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.opt[data-si]'); if(!o) return;
+  const si=+o.dataset.si, qi=+o.dataset.qi, oi=+o.dataset.oi;
+  const f = DATA[si].fa[qi];
+  const box = document.querySelector(`[data-fa="${si}-${qi}"]`);
+  box.querySelectorAll('.opt').forEach((b,k)=>{
+    b.disabled = true;
+    if(k===f.a) b.classList.add('right'); else if(k===oi) b.classList.add('wrong');
+  });
+  const fb = document.getElementById(`fb-${si}-${qi}`);
+  const ok = oi===f.a;
+  fb.className = 'fb on ' + (ok?'ok':'no');
+  fb.innerHTML = (ok?'✅ <b>答對了！</b> ':'❌ <b>再想想。</b> ') + f.e;
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.exo');
+  if(o && !o.disabled){
+    const box = o.closest('.exq');
+    const ans = +box.dataset.a, pick = +o.dataset.i;
+    if(pick === ans){
+      box.querySelectorAll('.exo').forEach(b=>{ b.disabled=true; if(+b.dataset.i===ans) b.classList.add('right'); });
+      box.querySelector('.exsol').classList.add('on');
+      box.querySelector('.exlock').classList.add('hide');
+    } else {
+      o.classList.add('wrong','shake');
+      setTimeout(()=>o.classList.remove('shake'), 420);
+      o.disabled = true;
+      const lock = box.querySelector('.exlock');
+      lock.innerHTML = '🔒 再想想 —— 答對才會顯示詳解'; lock.style.color='var(--pink)';
+    }
+  }
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.opt[data-quiz]'); if(!o) return;
+  const i = +o.dataset.quiz;
+  o.parentElement.querySelectorAll('.opt').forEach(b=>b.classList.remove('right','wrong'));
+  o.classList.add('right'); o.dataset.sel='1';
+  o.parentElement.querySelectorAll('.opt').forEach(b=>{ if(b!==o) delete b.dataset.sel; });
+});
+document.getElementById('gradeBtn').addEventListener('click', ()=>{
+  let right=0;
+  QUIZ.forEach((q,i)=>{
+    const fb = document.getElementById('qfb-'+i);
+    let ok=false, picked=null;
+    if(q.type==='fill'){
+      const inp = document.querySelector(`.fill[data-quiz="${i}"]`);
+      const v = (inp.value||'').trim().replace(/−/g,'-').replace(/\s/g,'');
+      ok = q.a.some(a=>a.replace(/−/g,'-').replace(/\s/g,'')===v);
+      inp.style.borderBottomColor = ok?'var(--green)':'var(--pink)';
+    } else {
+      const sel = document.querySelector(`.opt[data-quiz="${i}"][data-sel="1"]`);
+      if(sel){ picked=+sel.dataset.oi; ok = (q.type==='tf') ? (picked===1)===q.a : picked===q.a; }
+      document.querySelectorAll(`.opt[data-quiz="${i}"]`).forEach(b=>{
+        b.classList.remove('right','wrong');
+        const bi=+b.dataset.oi;
+        const isAns = (q.type==='tf') ? ((bi===1)===q.a) : (bi===q.a);
+        if(isAns) b.classList.add('right'); else if(picked===bi) b.classList.add('wrong');
+      });
+    }
+    if(ok) right++;
+    fb.className='fb on '+(ok?'ok':'no');
+    fb.innerHTML = (ok?'✅ <b>正確</b> ':'❌ <b>錯誤</b> ') + q.e;
+  });
+  const s = document.getElementById('score');
+  const pct = Math.round(right/QUIZ.length*100);
+  s.style.display='block';
+  s.innerHTML = `成績：<b>${right} / ${QUIZ.length}</b>　（${pct} 分）　${pct>=80?'🏆 很棒！':pct>=60?'💪 再加油':'📖 建議重看重點'}`;
+});
+document.getElementById('resetQuiz').addEventListener('click', ()=>{
+  document.querySelectorAll('.opt[data-quiz]').forEach(b=>{b.classList.remove('right','wrong'); delete b.dataset.sel;});
+  document.querySelectorAll('.fill').forEach(i=>{i.value=''; i.style.borderBottomColor='var(--yellow)';});
+  document.querySelectorAll('[id^="qfb-"]').forEach(f=>f.className='fb');
+  document.getElementById('score').style.display='none';
+});
+
+/* ===== 闖關遊戲 ===== */
+const G = {lv:0, score:0, streak:0, best:0, t:20, timer:null, cur:null, answered:false};
+function gShow(id){ ['gStart','gPlay','gEnd'].forEach(x=>document.getElementById(x).classList.toggle('on', x===id)); }
+function gChips(){
+  document.getElementById('gChips').innerHTML = GAME.map((g,i)=>
+    `<div class="lvchip ${i<G.lv?'done':i===G.lv?'now':''}">${i+1}. ${g.name}</div>`).join('');
+}
+function gLoad(){
+  if(G.lv>=GAME.length){ gFinish(); return; }
+  G.answered=false; G.t=20;
+  const bank = GAME[G.lv].qs;
+  G.cur = bank[Math.floor(Math.random()*bank.length)];
+  document.getElementById('hLv').textContent = (G.lv+1)+'/'+GAME.length;
+  document.getElementById('hSc').textContent = G.score;
+  document.getElementById('hStk').textContent = G.streak;
+  document.getElementById('gQ').innerHTML = `<span style="color:var(--blue);font-size:15px;">第 ${G.lv+1} 關 · ${GAME[G.lv].name}</span><br>${G.cur.q}`;
+  document.getElementById('gO').innerHTML = G.cur.o.map((o,i)=>
+    `<button class="gopt" data-g="${i}">${'ABCD'[i]}. ${o}</button>`).join('');
+  document.getElementById('gFb').className='gfb';
+  document.getElementById('gNext').style.display='none';
+  gChips();
+  clearInterval(G.timer);
+  G.timer = setInterval(()=>{
+    G.t -= 0.1;
+    document.getElementById('hT').textContent = Math.max(0,G.t).toFixed(0);
+    document.getElementById('tFill').style.width = Math.max(0,G.t/20*100)+'%';
+    if(G.t<=0){ clearInterval(G.timer); gAnswer(-1); }
+  },100);
+}
+function gAnswer(pick){
+  if(G.answered) return;
+  G.answered = true; clearInterval(G.timer);
+  const ans = G.cur.a, ok = pick===ans;
+  document.querySelectorAll('.gopt').forEach((b,i)=>{
+    b.disabled=true;
+    if(i===ans) b.classList.add('right'); else if(i===pick) b.classList.add('wrong');
+  });
+  let gain=0, sb=0, tb=0;
+  if(ok){
+    G.streak++; G.best=Math.max(G.best,G.streak);
+    sb = Math.min(5, G.streak-1); tb = Math.min(5, Math.floor(G.t/4));
+    gain = 10+sb+tb; G.score += gain;
+  } else { G.streak = 0; }
+  document.getElementById('hSc').textContent = G.score;
+  document.getElementById('hStk').textContent = G.streak;
+  const fb = document.getElementById('gFb');
+  fb.className = 'gfb on '+(ok?'ok':'no');
+  fb.innerHTML = (ok? `✅ <b>答對！+${gain} 分</b>（基礎10 + 連擊${sb} + 速度${tb}）<br>`
+                    : (pick===-1?'⏰ <b>時間到！</b><br>':'❌ <b>答錯了</b><br>')) + G.cur.e;
+  document.getElementById('gNext').style.display='inline-block';
+  document.getElementById('gNext').textContent = (G.lv>=GAME.length-1)?'看成績 🏁':'下一關 ▶';
+}
+function gFinish(){
+  clearInterval(G.timer);
+  const max = GAME.length*20, pct = Math.round(G.score/max*100);
+  const rank = pct>=85?['🏆','數論大師']:pct>=70?['🥇','高手']:pct>=50?['🥈','不錯']:['📖','再加油'];
+  document.getElementById('gRank').textContent = rank[0];
+  document.getElementById('gFinal').innerHTML = `<b class="hl">${G.score}</b> / ${max} 分　·　${rank[1]}`;
+  document.getElementById('gStats').innerHTML = `最高連擊 <b class="hl">${G.best}</b>　·　完成 ${GAME.length} 關`;
+  gShow('gEnd');
+}
+document.getElementById('gGo').addEventListener('click', ()=>{ G.lv=0;G.score=0;G.streak=0;G.best=0; gShow('gPlay'); gLoad(); });
+document.getElementById('gAgain').addEventListener('click', ()=>{ G.lv=0;G.score=0;G.streak=0;G.best=0; gShow('gPlay'); gLoad(); });
+document.getElementById('gNext').addEventListener('click', ()=>{ G.lv++; gLoad(); });
+document.addEventListener('click', e=>{ const b=e.target.closest('.gopt'); if(!b||b.disabled) return; gAnswer(+b.dataset.g); });
+
+/* ===== Canvas ===== */
+const VIZ = {}; let DPR=1;
+function gcd(a,b){ a=Math.abs(a); b=Math.abs(b); while(b){ [a,b]=[b,a%b]; } return a||1; }
+
+/* ① 化簡比 */
+const RATIO=[
+  {a:36, b:48, s:'36 : 48'},
+  {a:24, b:40, s:'24 : 40'},
+  {a:-8, b:6,  s:'(−8) : 6'},
+  {a:-10,b:15, s:'(−10) : 15'},
+  {a:15, b:9,  s:'15 : 9'},
+  {a:50, b:75, s:'50 : 75'},
+];
+/* ② 按比例分配（連比分配長條）*/
+const ALLOC=[
+  {parts:[2,3,5], total:500, unit:'克', name:['A','B','C']},
+  {parts:[5,6,7], total:540, unit:'cm', name:['甲','乙','丙']},
+  {parts:[1,2,3], total:720, unit:'元', name:['甲','乙','丙']},
+  {parts:[5,3,2], total:400, unit:'kg', name:['天然','合成','碳黑']},
+];
+/* ③ 比例式解題 */
+const PROP=[
+  {a:'x', b:6, c:4, d:8, x:3, s:'x : 6 = 4 : 8', calc:'6×4 = 8x → 24 = 8x → x = 3'},
+  {a:5, b:'x', c:3, d:12, x:20, s:'5 : x = 3 : 12', calc:'5×12 = 3x → 60 = 3x → x = 20'},
+  {a:3, b:'x', c:'x', d:12, x:6, s:'3 : x = x : 12', calc:'x² = 3×12 = 36 → x = 6（或 −6）', mid:true},
+  {a:2, b:3, c:8, d:'x', x:12, s:'2 : 3 = 8 : x', calc:'2x = 3×8 = 24 → x = 12'},
+];
+
+function initViz(cv){
+  const si=+cv.dataset.si, kind=cv.dataset.viz;
+  const ctx=cv.getContext('2d');
+  const st=VIZ[si]={kind,cv,ctx};
+  const ctrl=document.querySelector(`[data-ctrl="${si}"]`);
+  if(kind==='simp'){
+    st.i=0; st.show=false;
+    ctrl.innerHTML=`<div class="readout" id="ro-${si}"></div>
+      <button class="btn" data-t="rev" data-si="${si}" style="background:rgba(242,217,121,.2);border-color:var(--yellow);color:var(--yellow);font-weight:700;">🔍 化簡</button>
+      <button class="btn" data-t="next" data-si="${si}">下一題 ▶</button>`;
+  } else if(kind==='alloc'){
+    st.i=0;
+    ctrl.innerHTML=`<div class="readout" id="ro-${si}"></div>
+      <button class="btn" data-t="next" data-si="${si}" style="background:rgba(242,217,121,.2);border-color:var(--yellow);color:var(--yellow);font-weight:700;">🔀 換一組比</button>`;
+  } else {
+    st.i=0; st.show=false;
+    ctrl.innerHTML=`<div class="readout" id="ro-${si}"></div>
+      <button class="btn" data-t="rev" data-si="${si}" style="background:rgba(242,217,121,.2);border-color:var(--yellow);color:var(--yellow);font-weight:700;">🔍 解出 x</button>
+      <button class="btn" data-t="next" data-si="${si}">下一題 ▶</button>`;
+  }
+  draw(si);
+}
+function wrapT(ctx, txt, cx, y, maxw, lh){
+  let line='', ly=y;
+  for(const ch of txt){ if(ctx.measureText(line+ch).width>maxw){ ctx.fillText(line,cx,ly); line=ch; ly+=lh; } else line+=ch; }
+  ctx.fillText(line,cx,ly); return ly;
+}
+
+function drawSimp(st, ctx, w, h, ro){
+  const E=RATIO[st.i], g=gcd(E.a,E.b);
+  const sa=E.a/g, sb=E.b/g;
+  ctx.textAlign='center';
+  ctx.fillStyle='rgba(242,217,121,.85)'; ctx.font='bold 13px "Noto Sans TC"';
+  ctx.fillText(`第 ${st.i+1} / ${RATIO.length} 題　·　化為最簡整數比`, w/2, 16);
+  ctx.fillStyle='#f3efe2'; ctx.font='bold 30px "Noto Serif TC"';
+  ctx.fillText(E.s, w/2, 58);
+  if(!st.show){
+    ctx.fillStyle='rgba(243,239,226,.4)'; ctx.font='13px "Noto Sans TC"';
+    ctx.fillText('🔒 先自己算 GCD 化簡，再按「化簡」', w/2, 92);
+    ctx.fillText('提示：同除以 GCD（負號要保留！）', w/2, 114);
+  } else {
+    ctx.fillStyle='rgba(243,239,226,.75)'; ctx.font='14px "Noto Sans TC"';
+    ctx.fillText(`GCD(${Math.abs(E.a)}, ${Math.abs(E.b)}) = ${g}　→　同除以 ${g}`, w/2, 88);
+    ctx.fillStyle='#a6d6a0'; ctx.font='bold 24px "Noto Serif TC"';
+    const simp = (E.a<0?'(−'+Math.abs(sa)+')':sa) + ' : ' + sb;
+    ctx.fillText(simp, w/2, 122);
+    ctx.fillStyle='#f2d979'; ctx.font='14px "Noto Serif TC"';
+    ctx.fillText(`比值 = ${sa}/${sb}${E.a<0?'（負）':''}`, w/2, 150);
+  }
+  ro.innerHTML = st.show
+    ? `<b>${E.s}</b>　→　GCD = ${g}　→　最簡比 <b style="color:var(--green)">${(E.a<0?'(−'+Math.abs(sa)+')':sa)} : ${sb}</b>　｜　比值 <b>${sa}/${sb}</b>`
+    : `<b>${E.s}</b>　<span style="color:rgba(243,239,226,.5)">—— 先自己算 GCD 化簡，再按「化簡」驗證</span>`;
+}
+
+function drawAlloc(st, ctx, w, h, ro){
+  const E=ALLOC[st.i], sum=E.parts.reduce((a,b)=>a+b,0), per=E.total/sum;
+  ctx.textAlign='center';
+  ctx.fillStyle='rgba(242,217,121,.85)'; ctx.font='bold 13px "Noto Sans TC"';
+  ctx.fillText(`${E.name.join(':')} = ${E.parts.join(':')}　·　總量 ${E.total} ${E.unit}`, w/2, 16);
+  ctx.fillStyle='rgba(243,239,226,.6)'; ctx.font='12px "Noto Sans TC"';
+  ctx.fillText(`總份數 ${E.parts.join('+')} = ${sum} → 每份 ${E.total}÷${sum} = ${per% 1===0?per:per.toFixed(1)} ${E.unit}`, w/2, 34);
+  // 長條
+  const L=30, R=w-30, BW=R-L, by=52, bh=30;
+  const cols=['#98c9dc','#a6d6a0','#eda0a8','#c9aee0'];
+  let x=L;
+  E.parts.forEach((p,i)=>{
+    const pw=BW*p/sum;
+    ctx.fillStyle=cols[i].replace(')',',.4)').replace('#98c9dc','rgba(152,201,220').replace('#a6d6a0','rgba(166,214,160').replace('#eda0a8','rgba(237,160,168').replace('#c9aee0','rgba(201,174,224');
+    ctx.fillRect(x, by, pw, bh);
+    ctx.strokeStyle=cols[i]; ctx.lineWidth=1.5; ctx.strokeRect(x, by, pw, bh);
+    ctx.fillStyle=cols[i]; ctx.font='bold 12px "Noto Sans TC"';
+    ctx.fillText(`${E.name[i]} ${p}份`, x+pw/2, by-5);
+    const val=p*per;
+    ctx.fillStyle='#f3efe2'; ctx.font='bold 13px "Noto Serif TC"';
+    ctx.fillText(`${val%1===0?val:val.toFixed(1)}`, x+pw/2, by+20);
+    x+=pw;
+  });
+  // 各項數值
+  ctx.fillStyle='rgba(243,239,226,.75)'; ctx.font='13px "Noto Serif TC"';
+  const vals=E.parts.map((p,i)=>`${E.name[i]} ${(p*per)%1===0?p*per:(p*per).toFixed(1)}`).join('　');
+  ctx.fillText(vals + ' ' + E.unit, w/2, by+bh+26);
+  ro.innerHTML = `${E.name.join(':')} = ${E.parts.join(':')}，共 ${E.total}${E.unit}　→　每份 <b>${per%1===0?per:per.toFixed(1)}${E.unit}</b>　→　${vals} ${E.unit}`;
+}
+
+function drawProp(st, ctx, w, h, ro){
+  const E=PROP[st.i];
+  ctx.textAlign='center';
+  ctx.fillStyle='rgba(242,217,121,.85)'; ctx.font='bold 13px "Noto Sans TC"';
+  ctx.fillText(`第 ${st.i+1} / ${PROP.length} 題　·　解比例式（內積=外積）`, w/2, 16);
+  ctx.fillStyle='#f3efe2'; ctx.font='bold 28px "Noto Serif TC"';
+  ctx.fillText(E.s, w/2, 54);
+  // 外項內項弧線
+  ctx.font='bold 28px "Noto Serif TC"';
+  const tw=ctx.measureText(E.s).width, sx=w/2-tw/2;
+  ctx.strokeStyle='rgba(237,160,168,.7)'; ctx.lineWidth=1.6;
+  ctx.beginPath(); ctx.moveTo(sx+6, 40); ctx.quadraticCurveTo(w/2, 22, sx+tw-6, 40); ctx.stroke();
+  ctx.fillStyle='#eda0a8'; ctx.font='11px "Caveat"'; ctx.fillText('外項', w/2, 28);
+  if(!st.show){
+    ctx.fillStyle='rgba(243,239,226,.4)'; ctx.font='13px "Noto Sans TC"';
+    ctx.fillText('🔒 先自己用「內積=外積」算，再按「解出 x」', w/2, 92);
+    ctx.fillText('外外相乘 = 內內相乘', w/2, 114);
+  } else {
+    ctx.fillStyle='rgba(243,239,226,.78)'; ctx.font='14px "Noto Sans TC"';
+    wrapT(ctx, E.calc, w/2, 90, w-36, 20);
+    ctx.fillStyle='#a6d6a0'; ctx.font='bold 22px "Noto Serif TC"';
+    ctx.fillText('x = ' + E.x + (E.mid?'（或 −'+E.x+'）':''), w/2, 138);
+  }
+  ro.innerHTML = st.show
+    ? `<b>${E.s}</b>　→　${E.calc}　→　<b style="color:var(--green)">x = ${E.x}${E.mid?'（或 −'+E.x+'）':''}</b>`
+    : `<b>${E.s}</b>　<span style="color:rgba(243,239,226,.5)">—— 先用「內積=外積」自己算，再按「解出 x」</span>`;
+}
+
+function draw(si){
+  const st=VIZ[si]; if(!st) return;
+  const {cv,ctx,kind}=st, w=cv.width/DPR, h=cv.height/DPR;
+  ctx.clearRect(0,0,w,h);
+  const ro=document.getElementById('ro-'+si);
+  if(kind==='simp') drawSimp(st,ctx,w,h,ro);
+  else if(kind==='alloc') drawAlloc(st,ctx,w,h,ro);
+  else if(kind==='prop') drawProp(st,ctx,w,h,ro);
+}
+
+document.addEventListener('click', e=>{
+  const btn=e.target.closest('[data-t]'); if(!btn) return;
+  const si=+btn.dataset.si, st=VIZ[si]; if(!st) return;
+  const t=btn.dataset.t;
+  if(st.kind==='simp'){
+    if(t==='rev') st.show=true;
+    if(t==='next'){ st.i=(st.i+1)%RATIO.length; st.show=false; }
+  } else if(st.kind==='alloc'){
+    if(t==='next') st.i=(st.i+1)%ALLOC.length;
+  } else {
+    if(t==='rev') st.show=true;
+    if(t==='next'){ st.i=(st.i+1)%PROP.length; st.show=false; }
+  }
+  draw(si);
+});
+
+function resizeAll(){
+  DPR = Math.min(2, window.devicePixelRatio||1);
+  document.querySelectorAll('canvas.viz').forEach(cv=>{
+    const w = cv.clientWidth || cv.parentElement.clientWidth;
+    const h = (cv.dataset.viz==='simp') ? 178 : (cv.dataset.viz==='alloc' ? 174 : 176);
+    cv.width=w*DPR; cv.height=h*DPR; cv.style.height=h+'px';
+    cv.getContext('2d').setTransform(DPR,0,0,DPR,0,0);
+  });
+  Object.keys(VIZ).forEach(k=>draw(+k));
+}
+document.querySelectorAll('canvas.viz').forEach(initViz);
+window.addEventListener('resize', resizeAll);
+resizeAll();
+</script>
+<div class="hint">← → 鍵可翻頁　·　Canvas 用按鈕互動　·　支援平板觸控</div>
+</body></html>

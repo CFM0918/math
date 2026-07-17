@@ -1,0 +1,358 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>七下 2-1 平面上的直角坐標｜授課簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--chalk-soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);padding:24px 14px;}
+.deck{max-width:1060px;margin:0 auto;}
+.print-hint{text-align:center;color:rgba(243,239,226,0.4);font-size:13px;padding:6px 0 22px;}
+.print-hint b{color:var(--yellow);}
+.slide{position:relative;min-height:576px;margin:0 auto 26px;padding:44px 52px;
+ background:radial-gradient(ellipse at 18% 12%,rgba(255,255,255,0.05),transparent 45%),
+  radial-gradient(ellipse at 82% 88%,rgba(255,255,255,0.035),transparent 45%),
+  radial-gradient(ellipse at 60% 40%,rgba(120,160,130,0.10),transparent 60%),
+  linear-gradient(160deg,var(--board) 0%,var(--board2) 100%);
+ border-radius:14px;box-shadow:0 10px 34px rgba(0,0,0,0.55);
+ border:1px solid rgba(242,217,121,0.14);overflow:hidden;display:flex;flex-direction:column;}
+.slide::before{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;
+ background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.014) 40px,rgba(255,255,255,0.014) 41px),
+  radial-gradient(circle at 30% 72%,rgba(255,255,255,0.03),transparent 8%),
+  radial-gradient(circle at 76% 24%,rgba(255,255,255,0.025),transparent 7%);}
+.slide::after{content:attr(data-pg);position:absolute;bottom:15px;right:26px;font-family:'Caveat',cursive;font-size:20px;color:rgba(243,239,226,0.4);}
+.tag{position:absolute;top:20px;right:26px;font-family:'Caveat',cursive;font-size:22px;color:var(--pink);transform:rotate(4deg);}
+.eyebrow{font-family:'Caveat',cursive;font-size:25px;color:var(--yellow);letter-spacing:1px;margin-bottom:8px;opacity:0.92;}
+.slide h1{font-family:'Noto Serif TC',serif;font-size:46px;font-weight:900;line-height:1.28;letter-spacing:1px;
+ text-shadow:0 0 1px rgba(243,239,226,0.5),1px 1px 0 rgba(0,0,0,0.2);}
+.slide h2{font-family:'Noto Serif TC',serif;font-size:33px;font-weight:900;color:var(--yellow);
+ margin-bottom:20px;padding-bottom:11px;border-bottom:2px dashed rgba(242,217,121,0.4);
+ text-shadow:0 0 1px rgba(242,217,121,0.4);}
+.slide p{font-size:20px;line-height:1.85;margin-bottom:12px;}
+.big-center{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;}
+.big-center .lead,.lead{font-family:'Caveat',cursive;font-size:30px;color:var(--blue);letter-spacing:1px;margin-top:12px;}
+ul{list-style:none;margin:8px 0;}
+li{font-size:21px;line-height:1.95;padding-left:32px;position:relative;margin-bottom:4px;}
+li::before{content:'\2726';position:absolute;left:4px;color:var(--yellow);font-size:17px;top:3px;}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.34);border-radius:12px;padding:15px 21px;margin:12px 0;font-size:19px;line-height:1.8;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.38);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.38);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.34);}
+.eg{position:relative;background:rgba(0,0,0,0.24);border:1px solid rgba(242,217,121,0.2);border-radius:10px;padding:17px 22px;margin:12px 0;font-size:19px;}
+.eg::before{content:'';position:absolute;top:-8px;left:38px;width:58px;height:15px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.eg .q{color:var(--blue);font-weight:700;margin-bottom:8px;font-size:19px;}
+.eg .a{color:var(--green);font-weight:700;margin-top:6px;}
+.eg .stp{color:var(--chalk-soft);font-size:18px;margin:3px 0;}
+.tip{display:flex;gap:12px;align-items:flex-start;background:rgba(242,217,121,0.09);border:1.5px dashed rgba(242,217,121,0.45);border-radius:12px;padding:13px 18px;margin:10px 0;}
+.tip .ic{font-size:24px;line-height:1;}.tip .tx{font-size:18px;line-height:1.7;}
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:18px;}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.26);padding:10px 14px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.two{display:flex;gap:20px;}.two>div{flex:1;}
+svg{display:block;margin:6px auto;max-width:100%;}
+@media print{
+ body{background:#0a130d;padding:0;}
+ .deck{max-width:none;}
+ .print-hint{display:none;}
+ .slide{margin:0;border-radius:0;box-shadow:none;min-height:100vh;
+  page-break-after:always;break-after:page;padding:32px 44px;justify-content:center;}
+ .slide:last-child{page-break-after:auto;break-after:auto;}
+ .slide h1{font-size:40px;}
+ .slide h2{font-size:27px;margin-bottom:13px;padding-bottom:8px;}
+ .slide p{font-size:17px;line-height:1.55;margin-bottom:6px;}
+ li{font-size:17px;line-height:1.55;margin-bottom:1px;padding-left:26px;}
+ .eyebrow{font-size:21px;margin-bottom:5px;}
+ .big-center .lead,.lead{font-size:26px;}
+ .box{font-size:16px;padding:10px 16px;margin:6px 0;line-height:1.5;}
+ .eg{font-size:16px;padding:11px 16px;margin:6px 0;}
+ .tip{font-size:16px;padding:10px 14px;margin:6px 0;}
+ .tbl{font-size:15px;margin:6px 0;}
+ .tbl th,.tbl td{padding:6px 10px;}
+ svg{max-height:210px;}
+}
+</style></head><body><div class="deck">
+<div class="print-hint">共 <b>18</b> 張・列印時每張一頁（Ctrl+P → 橫向 → 背景圖形）</div>
+
+
+<!-- 1 -->
+<div class="slide" data-pg="1 / 18"><div class="tag">Start!</div><div class="big-center">
+<div class="eyebrow">國一下學期・第二章 直角坐標和二元一次方程式的圖形</div>
+<h1>2-1　平面上的直角坐標</h1>
+<div class="lead">一對數字 (x, y) 就能定位平面上任何一點<br>——這是<span style="color:#f2d979;">圖形與代數連接的起點</span></div><svg viewBox="0 0 350 350" width="210" height="210" style="margin:2px auto;display:block;"><line x1="35" y1="315" x2="35" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="315" x2="315" y2="315" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="63" y1="315" x2="63" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="287" x2="315" y2="287" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="91" y1="315" x2="91" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="259" x2="315" y2="259" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="119" y1="315" x2="119" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="231" x2="315" y2="231" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="147" y1="315" x2="147" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="203" x2="315" y2="203" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="175" y1="315" x2="175" y2="35" stroke="rgba(243,239,226,0)" stroke-width="1"/><line x1="35" y1="175" x2="315" y2="175" stroke="rgba(243,239,226,0)" stroke-width="1"/><line x1="203" y1="315" x2="203" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="147" x2="315" y2="147" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="231" y1="315" x2="231" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="119" x2="315" y2="119" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="259" y1="315" x2="259" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="91" x2="315" y2="91" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="287" y1="315" x2="287" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="63" x2="315" y2="63" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="315" y1="315" x2="315" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="35" x2="315" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="175" x2="315" y2="175" stroke="rgba(243,239,226,0.7)" stroke-width="1.8"/><line x1="175" y1="315" x2="175" y2="35" stroke="rgba(243,239,226,0.7)" stroke-width="1.8"/><path d="M315 175 l-8 -4 M315 175 l-8 4" stroke="rgba(243,239,226,0.7)" stroke-width="1.8" fill="none"/><path d="M175 35 l-4 8 M175 35 l4 8" stroke="rgba(243,239,226,0.7)" stroke-width="1.8" fill="none"/><text x="323" y="179" font-family="Noto Serif TC" font-size="14" fill="rgba(243,239,226,0.7)">x</text><text x="181" y="31" font-family="Noto Serif TC" font-size="14" fill="rgba(243,239,226,0.7)">y</text><circle cx="231" cy="91" r="4.5" fill="#a6d6a0"/><text x="238" y="84" font-family="Noto Serif TC" font-size="13" fill="#a6d6a0">A(2,3)</text><circle cx="119" cy="147" r="4.5" fill="#98c9dc"/><text x="126" y="140" font-family="Noto Serif TC" font-size="13" fill="#98c9dc">B(−2,1)</text><circle cx="147" cy="231" r="4.5" fill="#eda0a8"/><text x="154" y="224" font-family="Noto Serif TC" font-size="13" fill="#eda0a8">C(−1,−2)</text><circle cx="259" cy="203" r="4.5" fill="#c9aee0"/><text x="266" y="196" font-family="Noto Serif TC" font-size="13" fill="#c9aee0">D(3,−1)</text></svg>
+</div></div>
+
+<!-- 2 -->
+<div class="slide" data-pg="2 / 18"><div class="tag">目標</div><div class="body">
+<h2>本節學習目標</h2>
+<ul>
+<li>理解直角坐標平面的構成:<span class="hl">x 軸、y 軸、原點、四個象限</span></li>
+<li>能<span class="hl-b">標點</span>(給 (x,y) 畫出來)也能<span class="hl-b">讀點</span>(從圖上讀坐標)</li>
+<li>能判斷一個點落在<span class="hl">哪個象限</span>(或哪條軸上)</li>
+<li>能算<span class="hl">平行軸兩點的距離</span>(水平 |x₁−x₂|、垂直 |y₁−y₂|)</li>
+</ul>
+<div class="box y">一句話:<span class="hl">坐標把「幾何的點」和「代數的數對」綁在一起 —— 這是整章的地基。</span></div>
+</div></div>
+
+<!-- 3 -->
+<div class="slide" data-pg="3 / 18"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">承接 1-2</div>
+<h2>為什麼要有坐標?</h2>
+<div class="box y" style="text-align:center;font-size:21px;">
+<span class="hl">一對數字 (x, y) 就能定位平面上任何一點</span></div>
+<div class="box"><b>回想 1-2 的結尾:</b><br>
+你解聯立方程式算出 <span class="fm">(x, y)</span>,我說「它是<span class="hl">兩條直線的交點</span>」。<br>
+但那時你<span class="hl-r">看不到</span>那個點 —— 因為還沒有坐標平面。</div>
+<div class="box g" style="text-align:center;font-size:21px;">
+<span class="hl">這一章就是要給你那張圖。</span></div>
+</div></div>
+
+<!-- 4 -->
+<div class="slide" data-pg="4 / 18"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">細目 ①</div>
+<h2>直角坐標平面的四個零件</h2>
+<div class="two">
+<div class="box">
+<b class="hl-b">x 軸</b>:水平的數線(往右 +)<br>
+<b class="hl-b">y 軸</b>:垂直的數線(往上 +)<br>
+<b class="hl-b">原點</b>:兩軸交點 <span class="fm">(0, 0)</span><br>
+<b class="hl-b">象限</b>:兩軸把平面分成<b>四塊</b></div><svg viewBox="0 0 350 350" width="232" height="232" style="margin:2px auto;display:block;"><line x1="35" y1="315" x2="35" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="315" x2="315" y2="315" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="63" y1="315" x2="63" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="287" x2="315" y2="287" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="91" y1="315" x2="91" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="259" x2="315" y2="259" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="119" y1="315" x2="119" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="231" x2="315" y2="231" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="147" y1="315" x2="147" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="203" x2="315" y2="203" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="175" y1="315" x2="175" y2="35" stroke="rgba(243,239,226,0)" stroke-width="1"/><line x1="35" y1="175" x2="315" y2="175" stroke="rgba(243,239,226,0)" stroke-width="1"/><line x1="203" y1="315" x2="203" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="147" x2="315" y2="147" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="231" y1="315" x2="231" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="119" x2="315" y2="119" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="259" y1="315" x2="259" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="91" x2="315" y2="91" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="287" y1="315" x2="287" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="63" x2="315" y2="63" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="315" y1="315" x2="315" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="35" x2="315" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="175" x2="315" y2="175" stroke="rgba(243,239,226,0.7)" stroke-width="1.8"/><line x1="175" y1="315" x2="175" y2="35" stroke="rgba(243,239,226,0.7)" stroke-width="1.8"/><path d="M315 175 l-8 -4 M315 175 l-8 4" stroke="rgba(243,239,226,0.7)" stroke-width="1.8" fill="none"/><path d="M175 35 l-4 8 M175 35 l4 8" stroke="rgba(243,239,226,0.7)" stroke-width="1.8" fill="none"/><text x="323" y="179" font-family="Noto Serif TC" font-size="14" fill="rgba(243,239,226,0.7)">x</text><text x="181" y="31" font-family="Noto Serif TC" font-size="14" fill="rgba(243,239,226,0.7)">y</text><text x="235" y="120" font-family="Noto Sans TC" font-size="11" fill="rgba(166,214,160,0.7)">第一</text>
+<text x="95" y="120" font-family="Noto Sans TC" font-size="11" fill="rgba(152,201,220,0.7)">第二</text>
+<text x="95" y="245" font-family="Noto Sans TC" font-size="11" fill="rgba(237,160,168,0.7)">第三</text>
+<text x="235" y="245" font-family="Noto Sans TC" font-size="11" fill="rgba(201,174,224,0.7)">第四</text></svg></div>
+<div class="box y"><b>坐標 (x, y):</b>x 是橫向(右+左−)、y 是縱向(上+下−)。<span class="hl">順序固定:先 x 後 y。</span></div>
+</div></div>
+
+<!-- 5 -->
+<div class="slide" data-pg="5 / 18"><div class="tag">避雷</div><div class="body">
+<div class="eyebrow">細目 ①　⚠️ 最常見錯誤</div>
+<h2>先 x 後 y —— 別寫反了</h2>
+<div class="box r" style="text-align:center;font-size:20px;">
+❌ 把 <span class="fm">(3, 5)</span> 標在 <span class="fm">x=5、y=3</span> 的位置</div>
+<div class="two">
+<div class="box g" style="text-align:center;">
+<b class="hl-g">✓ 正確 (3, 5)</b><br>
+先往右走 <b>3</b> 格<br>再往上爬 <b>5</b> 格</div><svg viewBox="0 0 350 350" width="196" height="196" style="margin:2px auto;display:block;"><line x1="35" y1="315" x2="35" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="315" x2="315" y2="315" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="63" y1="315" x2="63" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="287" x2="315" y2="287" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="91" y1="315" x2="91" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="259" x2="315" y2="259" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="119" y1="315" x2="119" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="231" x2="315" y2="231" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="147" y1="315" x2="147" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="203" x2="315" y2="203" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="175" y1="315" x2="175" y2="35" stroke="rgba(243,239,226,0)" stroke-width="1"/><line x1="35" y1="175" x2="315" y2="175" stroke="rgba(243,239,226,0)" stroke-width="1"/><line x1="203" y1="315" x2="203" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="147" x2="315" y2="147" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="231" y1="315" x2="231" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="119" x2="315" y2="119" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="259" y1="315" x2="259" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="91" x2="315" y2="91" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="287" y1="315" x2="287" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="63" x2="315" y2="63" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="315" y1="315" x2="315" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="35" x2="315" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="175" x2="315" y2="175" stroke="rgba(243,239,226,0.7)" stroke-width="1.8"/><line x1="175" y1="315" x2="175" y2="35" stroke="rgba(243,239,226,0.7)" stroke-width="1.8"/><path d="M315 175 l-8 -4 M315 175 l-8 4" stroke="rgba(243,239,226,0.7)" stroke-width="1.8" fill="none"/><path d="M175 35 l-4 8 M175 35 l4 8" stroke="rgba(243,239,226,0.7)" stroke-width="1.8" fill="none"/><text x="323" y="179" font-family="Noto Serif TC" font-size="14" fill="rgba(243,239,226,0.7)">x</text><text x="181" y="31" font-family="Noto Serif TC" font-size="14" fill="rgba(243,239,226,0.7)">y</text><line x1="175" y1="175" x2="259" y2="175" stroke="#f2d979" stroke-width="1.5" stroke-dasharray="3 3"/><line x1="259" y1="175" x2="259" y2="35" stroke="#f2d979" stroke-width="1.5" stroke-dasharray="3 3"/><circle cx="259" cy="35" r="4.5" fill="#a6d6a0"/><text x="266" y="28" font-family="Noto Serif TC" font-size="13" fill="#a6d6a0">(3,5)</text></svg></div>
+<div class="box y" style="text-align:center;font-size:21px;">
+記法:<span class="hl">「先走廊(橫),再爬樓梯(縱)」</span> —— 先左右,再上下。</div>
+</div></div>
+
+<!-- 6 -->
+<div class="slide" data-pg="6 / 18"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">細目 ②　四個象限</div>
+<h2>從右上開始,逆時針數</h2>
+<table class="tbl">
+<tr><th>象限</th><th>x</th><th>y</th><th>符號</th></tr>
+<tr><td class="hl-g"><b>第一象限</b></td><td>+</td><td>+</td><td class="fm">(+, +)</td></tr>
+<tr><td class="hl-b"><b>第二象限</b></td><td>−</td><td>+</td><td class="fm">(−, +)</td></tr>
+<tr><td class="hl-r"><b>第三象限</b></td><td>−</td><td>−</td><td class="fm">(−, −)</td></tr>
+<tr><td class="hl"><b>第四象限</b></td><td>+</td><td>−</td><td class="fm">(+, −)</td></tr>
+</table>
+<div class="box y" style="text-align:center;font-size:20px;">
+順序:右上 → 左上 → 左下 → 右下(<span class="hl">逆時針</span>)</div>
+</div></div>
+
+<!-- 7 -->
+<div class="slide" data-pg="7 / 18"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">細目 ②　⚠️ 重要</div>
+<h2>軸上的點不屬於任何象限</h2>
+<div class="box y" style="text-align:center;font-size:21px;">
+<span class="hl">x = 0 → 在 y 軸上</span>　　<span class="hl">y = 0 → 在 x 軸上</span></div>
+<div class="two">
+<div class="box"><span class="fm">(0, 3)</span>:x = 0 → 在 <b class="hl-b">y 軸</b>上<br>
+<span class="hl-r">不是第一象限!</span><br><br>
+<span class="fm">(−5, 0)</span>:y = 0 → 在 <b class="hl-b">x 軸</b>上</div><svg viewBox="0 0 350 350" width="196" height="196" style="margin:2px auto;display:block;"><line x1="35" y1="315" x2="35" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="315" x2="315" y2="315" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="63" y1="315" x2="63" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="287" x2="315" y2="287" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="91" y1="315" x2="91" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="259" x2="315" y2="259" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="119" y1="315" x2="119" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="231" x2="315" y2="231" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="147" y1="315" x2="147" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="203" x2="315" y2="203" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="175" y1="315" x2="175" y2="35" stroke="rgba(243,239,226,0)" stroke-width="1"/><line x1="35" y1="175" x2="315" y2="175" stroke="rgba(243,239,226,0)" stroke-width="1"/><line x1="203" y1="315" x2="203" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="147" x2="315" y2="147" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="231" y1="315" x2="231" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="119" x2="315" y2="119" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="259" y1="315" x2="259" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="91" x2="315" y2="91" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="287" y1="315" x2="287" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="63" x2="315" y2="63" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="315" y1="315" x2="315" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="35" x2="315" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="175" x2="315" y2="175" stroke="rgba(243,239,226,0.7)" stroke-width="1.8"/><line x1="175" y1="315" x2="175" y2="35" stroke="rgba(243,239,226,0.7)" stroke-width="1.8"/><path d="M315 175 l-8 -4 M315 175 l-8 4" stroke="rgba(243,239,226,0.7)" stroke-width="1.8" fill="none"/><path d="M175 35 l-4 8 M175 35 l4 8" stroke="rgba(243,239,226,0.7)" stroke-width="1.8" fill="none"/><text x="323" y="179" font-family="Noto Serif TC" font-size="14" fill="rgba(243,239,226,0.7)">x</text><text x="181" y="31" font-family="Noto Serif TC" font-size="14" fill="rgba(243,239,226,0.7)">y</text><circle cx="175" cy="91" r="4.5" fill="#f2d979"/><text x="182" y="84" font-family="Noto Serif TC" font-size="13" fill="#f2d979">(0,3)</text><circle cx="35" cy="175" r="4.5" fill="#f2d979"/><text x="42" y="168" font-family="Noto Serif TC" font-size="13" fill="#f2d979">(−5,0)</text></svg></div>
+<div class="box g" style="text-align:center;">
+這些點是各象限的<span class="hl">邊界</span> —— 就像「牆」不屬於左邊或右邊的房間。</div>
+</div></div>
+
+<!-- 8 -->
+<div class="slide" data-pg="8 / 18"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 1　難度 ★☆☆</div>
+<h2>判斷象限</h2>
+<div class="eg">
+<div class="stp"><b>A(3,5)</b>　(+,+) → <span class="hl-g">第一象限</span></div>
+<div class="stp"><b>B(−2,4)</b>　(−,+) → <span class="hl-b">第二象限</span></div>
+<div class="stp"><b>C(−1,−3)</b>　(−,−) → <span class="hl-r">第三象限</span></div>
+<div class="stp"><b>D(4,−2)</b>　(+,−) → <span class="hl">第四象限</span></div>
+<div class="stp"><b>E(0,3)</b>　x=0 → <span class="hl-r">在 y 軸上</span>(不屬於任何象限)</div>
+<div class="stp"><b>F(−5,0)</b>　y=0 → <span class="hl-r">在 x 軸上</span></div>
+</div>
+<div class="box y" style="text-align:center;">
+判斷象限只看<span class="hl">兩個坐標的正負號</span> —— 但先檢查有沒有 0(在軸上)。</div>
+</div></div>
+
+<!-- 9 -->
+<div class="slide" data-pg="9 / 18"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 3　難度 ★★☆</div>
+<h2>從象限反推符號</h2>
+<div class="eg">
+<div class="q">A(a, 3) 在第二象限、B(2, b) 在第四象限,判斷 a、b 的正負</div>
+<div class="stp"><b>A 在第二象限</b> → (−, +);y=3 已是正 → <span class="hl">a 必須為負</span> → a < 0</div>
+<div class="stp"><b>B 在第四象限</b> → (+, −);x=2 已是正 → <span class="hl">b 必須為負</span> → b < 0</div>
+<div class="a">a < 0，b < 0</div>
+</div>
+<div class="box y"><b>解法:</b>先寫出那個象限的<span class="hl">符號模板</span>(−,+),再對照哪個坐標還沒確定。</div>
+<div class="tip"><div class="ic">📌</div><div class="tx"><b>進階:</b>「(a,b) 在第二象限,(−a,−b) 在哪?」<br>
+a<0→−a>0、b>0→−b<0 → (正,負) → <b>第四象限</b>。<span class="hl">加負號 = 對原點對稱</span>(二↔四、一↔三)。</div></div>
+</div></div>
+
+<!-- 10 -->
+<div class="slide" data-pg="10 / 18"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">細目 ①　距離</div>
+<h2>平行軸兩點的距離:只有兩種能算</h2>
+<div class="two">
+<div class="box"><b class="hl-b">水平線段(y 相同)</b><br>
+距離 = <span class="fm">|x₁ − x₂|</span><br>
+<span class="fm">P(−3,2)、Q(4,2)</span><br>
+y 都是 2 → <span class="fm">|−3−4| = 7</span></div>
+<div class="box g"><b class="hl-g">垂直線段(x 相同)</b><br>
+距離 = <span class="fm">|y₁ − y₂|</span><br>
+<span class="fm">A(1,5)、B(1,−3)</span><br>
+x 都是 1 → <span class="fm">|5−(−3)| = 8</span></div>
+</div>
+<div class="box r" style="text-align:center;">
+⚠️ <b>一定加絕對值</b>(距離不可能是負)。<span class="fm">|5−(−3)| = |5+3| = 8</span>(<span class="hl-r">減負變加!</span>)</div>
+<div class="box y" style="text-align:center;font-size:20px;">
+🔑 追問句:<span class="hl">「這兩點是 x 一樣還是 y 一樣?」</span><br>
+y 一樣 → 算 x 的差(水平);x 一樣 → 算 y 的差(垂直)</div>
+</div></div>
+
+<!-- 11 -->
+<div class="slide" data-pg="11 / 18"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 4　難度 ★★★</div>
+<h2>直角三角形三邊(畢氏定理預備)</h2>
+<div class="body" style="display:flex;gap:14px;align-items:center;">
+<div style="flex:1;">
+<div class="eg">
+<div class="q">A(1,5)、B(1,−3)、C(4,−3)</div>
+<div class="stp"><b>AB</b>　x 都是 1(垂直)→ <span class="fm">|5−(−3)| = 8</span></div>
+<div class="stp"><b>BC</b>　y 都是 −3(水平)→ <span class="fm">|1−4| = 3</span></div>
+<div class="stp"><b>AC</b>　斜邊 → <span class="fm">√(8²+3²) = √73</span></div>
+</div>
+<div class="box r">⚠️ 斜邊要用<span class="hl-r">畢氏定理</span>(八上內容)—— 本節先記算式。</div>
+</div><svg viewBox="0 0 350 350" width="224" height="224" style="margin:2px auto;display:block;"><line x1="35" y1="315" x2="35" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="315" x2="315" y2="315" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="63" y1="315" x2="63" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="287" x2="315" y2="287" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="91" y1="315" x2="91" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="259" x2="315" y2="259" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="119" y1="315" x2="119" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="231" x2="315" y2="231" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="147" y1="315" x2="147" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="203" x2="315" y2="203" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="175" y1="315" x2="175" y2="35" stroke="rgba(243,239,226,0)" stroke-width="1"/><line x1="35" y1="175" x2="315" y2="175" stroke="rgba(243,239,226,0)" stroke-width="1"/><line x1="203" y1="315" x2="203" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="147" x2="315" y2="147" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="231" y1="315" x2="231" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="119" x2="315" y2="119" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="259" y1="315" x2="259" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="91" x2="315" y2="91" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="287" y1="315" x2="287" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="63" x2="315" y2="63" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="315" y1="315" x2="315" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="35" x2="315" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="175" x2="315" y2="175" stroke="rgba(243,239,226,0.7)" stroke-width="1.8"/><line x1="175" y1="315" x2="175" y2="35" stroke="rgba(243,239,226,0.7)" stroke-width="1.8"/><path d="M315 175 l-8 -4 M315 175 l-8 4" stroke="rgba(243,239,226,0.7)" stroke-width="1.8" fill="none"/><path d="M175 35 l-4 8 M175 35 l4 8" stroke="rgba(243,239,226,0.7)" stroke-width="1.8" fill="none"/><text x="323" y="179" font-family="Noto Serif TC" font-size="14" fill="rgba(243,239,226,0.7)">x</text><text x="181" y="31" font-family="Noto Serif TC" font-size="14" fill="rgba(243,239,226,0.7)">y</text><line x1="203" y1="35" x2="203" y2="259" stroke="#a6d6a0" stroke-width="2"/><line x1="203" y1="259" x2="287" y2="259" stroke="#98c9dc" stroke-width="2"/><line x1="203" y1="35" x2="287" y2="259" stroke="#eda0a8" stroke-width="2" stroke-dasharray="4 3"/><circle cx="203" cy="35" r="4.5" fill="#a6d6a0"/><text x="210" y="28" font-family="Noto Serif TC" font-size="13" fill="#a6d6a0">A</text><circle cx="203" cy="259" r="4.5" fill="#98c9dc"/><text x="210" y="252" font-family="Noto Serif TC" font-size="13" fill="#98c9dc">B</text><circle cx="287" cy="259" r="4.5" fill="#eda0a8"/><text x="294" y="252" font-family="Noto Serif TC" font-size="13" fill="#eda0a8">C</text></svg></div>
+</div></div>
+
+<!-- 12 -->
+<div class="slide" data-pg="12 / 18"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 5　難度 ★★★</div>
+<h2>判斷形狀＋周長面積</h2>
+<div class="body" style="display:flex;gap:14px;align-items:center;">
+<div style="flex:1;">
+<div class="eg">
+<div class="q">A(−2,1)、B(3,1)、C(3,−4)、D(−2,−4) 圍成?</div>
+<div class="stp"><b>四邊方向</b>　AB 水平、BC 垂直、CD 水平、DA 垂直 → <span class="hl">四個直角</span></div>
+<div class="stp"><b>邊長</b>　<span class="fm">AB=|−2−3|=5</span>;<span class="fm">BC=|1−(−4)|=5</span> → 都是 5</div>
+<div class="stp"><b>結論</b>　四邊相等 + 直角 → <span class="hl">正方形!</span></div>
+</div>
+<div class="a" style="text-align:center;">周長 = 5×4 = 20;面積 = 5×5 = 25</div>
+</div><svg viewBox="0 0 350 350" width="224" height="224" style="margin:2px auto;display:block;"><line x1="35" y1="315" x2="35" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="315" x2="315" y2="315" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="63" y1="315" x2="63" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="287" x2="315" y2="287" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="91" y1="315" x2="91" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="259" x2="315" y2="259" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="119" y1="315" x2="119" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="231" x2="315" y2="231" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="147" y1="315" x2="147" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="203" x2="315" y2="203" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="175" y1="315" x2="175" y2="35" stroke="rgba(243,239,226,0)" stroke-width="1"/><line x1="35" y1="175" x2="315" y2="175" stroke="rgba(243,239,226,0)" stroke-width="1"/><line x1="203" y1="315" x2="203" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="147" x2="315" y2="147" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="231" y1="315" x2="231" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="119" x2="315" y2="119" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="259" y1="315" x2="259" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="91" x2="315" y2="91" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="287" y1="315" x2="287" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="63" x2="315" y2="63" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="315" y1="315" x2="315" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="35" x2="315" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="175" x2="315" y2="175" stroke="rgba(243,239,226,0.7)" stroke-width="1.8"/><line x1="175" y1="315" x2="175" y2="35" stroke="rgba(243,239,226,0.7)" stroke-width="1.8"/><path d="M315 175 l-8 -4 M315 175 l-8 4" stroke="rgba(243,239,226,0.7)" stroke-width="1.8" fill="none"/><path d="M175 35 l-4 8 M175 35 l4 8" stroke="rgba(243,239,226,0.7)" stroke-width="1.8" fill="none"/><text x="323" y="179" font-family="Noto Serif TC" font-size="14" fill="rgba(243,239,226,0.7)">x</text><text x="181" y="31" font-family="Noto Serif TC" font-size="14" fill="rgba(243,239,226,0.7)">y</text><polygon points="119,147 259,147 259,287 119,287" fill="rgba(242,217,121,0.10)" stroke="#f2d979" stroke-width="1.8"/><circle cx="119" cy="147" r="4.5" fill="#a6d6a0"/><text x="126" y="140" font-family="Noto Serif TC" font-size="13" fill="#a6d6a0">A</text><circle cx="259" cy="147" r="4.5" fill="#98c9dc"/><text x="266" y="140" font-family="Noto Serif TC" font-size="13" fill="#98c9dc">B</text><circle cx="259" cy="287" r="4.5" fill="#eda0a8"/><text x="266" y="280" font-family="Noto Serif TC" font-size="13" fill="#eda0a8">C</text><circle cx="119" cy="287" r="4.5" fill="#c9aee0"/><text x="126" y="280" font-family="Noto Serif TC" font-size="13" fill="#c9aee0">D</text></svg></div>
+</div></div>
+
+<!-- 13 -->
+<div class="slide" data-pg="13 / 18"><div class="tag">精選</div><div class="body">
+<div class="eyebrow">隨堂精選　★★☆</div>
+<h2>距離已知,反求坐標 → 兩個答案</h2>
+<div class="eg">
+<div class="q">P(x, 3) 與 Q(2, 3) 的距離是 7,求 x</div>
+<div class="stp"><b>觀察</b>　y 都是 3 → 水平 → <span class="fm">|x − 2| = 7</span></div>
+<div class="stp"><b>兩種情況</b>　<span class="fm">x − 2 = 7 → x = 9</span></div>
+<div class="stp">　　或 <span class="fm">x − 2 = −7 → x = −5</span></div>
+<div class="a">x = 9 或 x = −5</div>
+</div>
+<div class="box y" style="text-align:center;font-size:20px;">
+💡 <span class="hl">絕對值方程式有兩個解</span> —— Q 的左右各一個點,距離都是 7。</div>
+<svg viewBox="0 0 620 70" width="92%" style="margin:4px auto;display:block;">
+<line x1="20" y1="40" x2="600" y2="40" stroke="rgba(243,239,226,0.6)" stroke-width="1.6"/>
+<path d="M600 40 l-9 -4 M600 40 l-9 4" stroke="rgba(243,239,226,0.6)" stroke-width="1.6" fill="none"/>
+<!-- x 從 -6 到 10，每格 36px，原點 x=-6→38 -->
+<line x1="326" y1="34" x2="326" y2="46" stroke="#98c9dc" stroke-width="3"/>
+<text x="326" y="62" font-family="Noto Serif TC" font-size="14" fill="#98c9dc" text-anchor="middle">Q(2)</text>
+<line x1="578" y1="34" x2="578" y2="46" stroke="#f2d979" stroke-width="3"/>
+<text x="578" y="62" font-family="Noto Serif TC" font-size="14" fill="#f2d979" text-anchor="middle">x=9</text>
+<line x1="74" y1="34" x2="74" y2="46" stroke="#f2d979" stroke-width="3"/>
+<text x="74" y="62" font-family="Noto Serif TC" font-size="14" fill="#f2d979" text-anchor="middle">x=−5</text>
+<path d="M326 24 q126 -16 252 0" stroke="#f2d979" stroke-width="1.4" fill="none" stroke-dasharray="3 3"/>
+<text x="452" y="16" font-family="Caveat" font-size="17" fill="#f2d979" text-anchor="middle">距離 7</text>
+<path d="M74 24 q126 -16 252 0" stroke="#f2d979" stroke-width="1.4" fill="none" stroke-dasharray="3 3"/>
+<text x="200" y="16" font-family="Caveat" font-size="17" fill="#f2d979" text-anchor="middle">距離 7</text>
+</svg>
+</div></div>
+
+<!-- 14 -->
+<div class="slide" data-pg="14 / 18"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 1　【城市規劃】</div>
+<h2>L 形 vs 直線</h2>
+<div class="box">市政廳為原點,每格 1 公里。圖書館(−3,4)、公園(5,4)、學校(5,−2)。</div>
+<div class="eg">
+<div class="stp"><b>(1) 圖書館→公園</b>　y 都是 4 → <span class="fm">|−3−5| = 8</span> 公里</div>
+<div class="stp"><b>(2) 公園→學校</b>　x 都是 5 → <span class="fm">|4−(−2)| = 6</span> 公里</div>
+<div class="stp"><b>(3) L 形路線</b>　<span class="fm">8 + 6 = 14</span> 公里</div>
+<div class="stp">　　直線 = <span class="fm">√(8²+6²) = √100 = 10</span> 公里 → 多走 <span class="hl">4 公里</span></div>
+</div>
+<div class="box y">💡 (3) 藏了一個<span class="hl">畢氏定理</span>(8-6-10 直角三角形)—— 八上會學。<br>
+現在你先感受:<b>繞路(L 形)一定比直線遠</b>。</div>
+</div></div>
+
+<!-- 15 -->
+<div class="slide" data-pg="15 / 18"><div class="tag">伏筆</div><div class="body">
+<div class="eyebrow">🔗 兌現 1-2 的伏筆</div>
+<h2>解 = 交點,現在你能畫出來了</h2>
+<div class="body" style="display:flex;gap:14px;align-items:center;">
+<div style="flex:1;">
+<div class="box">1-2 的硬幣問題解出 <span class="fm hl">(2, 6)</span></div>
+<div class="box g">在坐標平面上,就是 <span class="fm">x=2、y=6</span> 的那個點。<br>
+而 2-2 會讓你看到:<span class="fm">x+y=8</span> 和 <span class="fm">10x+50y=320</span> 各是一條直線,<br>
+它們<span class="hl">就相交在 (2, 6)</span>。</div>
+<div class="box y" style="text-align:center;font-size:19px;">
+代數的「解」= 幾何的「點」<br>
+代數的「方程式」= 幾何的「線」</div>
+</div><svg viewBox="0 0 350 350" width="224" height="224" style="margin:2px auto;display:block;"><line x1="35" y1="315" x2="35" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="315" x2="315" y2="315" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="63" y1="315" x2="63" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="287" x2="315" y2="287" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="91" y1="315" x2="91" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="259" x2="315" y2="259" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="119" y1="315" x2="119" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="231" x2="315" y2="231" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="147" y1="315" x2="147" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="203" x2="315" y2="203" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="175" y1="315" x2="175" y2="35" stroke="rgba(243,239,226,0)" stroke-width="1"/><line x1="35" y1="175" x2="315" y2="175" stroke="rgba(243,239,226,0)" stroke-width="1"/><line x1="203" y1="315" x2="203" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="147" x2="315" y2="147" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="231" y1="315" x2="231" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="119" x2="315" y2="119" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="259" y1="315" x2="259" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="91" x2="315" y2="91" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="287" y1="315" x2="287" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="63" x2="315" y2="63" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="315" y1="315" x2="315" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="35" x2="315" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="175" x2="315" y2="175" stroke="rgba(243,239,226,0.7)" stroke-width="1.8"/><line x1="175" y1="315" x2="175" y2="35" stroke="rgba(243,239,226,0.7)" stroke-width="1.8"/><path d="M315 175 l-8 -4 M315 175 l-8 4" stroke="rgba(243,239,226,0.7)" stroke-width="1.8" fill="none"/><path d="M175 35 l-4 8 M175 35 l4 8" stroke="rgba(243,239,226,0.7)" stroke-width="1.8" fill="none"/><text x="323" y="179" font-family="Noto Serif TC" font-size="14" fill="rgba(243,239,226,0.7)">x</text><text x="181" y="31" font-family="Noto Serif TC" font-size="14" fill="rgba(243,239,226,0.7)">y</text><line x1="119" y1="119" x2="315" y2="35" stroke="#eda0a8" stroke-width="1.6"/><line x1="119" y1="35" x2="315" y2="147" stroke="#98c9dc" stroke-width="1.6"/><circle cx="231" cy="7" r="4.5" fill="#f2d979"/><text x="238" y="0" font-family="Noto Serif TC" font-size="13" fill="#f2d979">(2,6)</text></svg></div>
+</div></div>
+
+<!-- 16 -->
+<div class="slide" data-pg="16 / 18"><div class="tag">避雷</div><div class="body">
+<h2>避雷指南:五個最常見錯誤</h2>
+<table class="tbl">
+<tr><th style="width:48%;">❌ 錯誤</th><th>✓ 正確</th></tr>
+<tr><td>把 x、y 寫反((3,5) 標成 x=5,y=3)</td><td><b class="hl-g">先 x 後 y</b>(先走廊再爬樓梯)</td></tr>
+<tr><td>把 (0,3) 說成第一象限</td><td><b class="hl-g">軸上的點不屬於任何象限</b></td></tr>
+<tr><td>算距離忘記絕對值,得到負數</td><td><b class="hl-g">距離一定 ≥ 0</b>,要加 |·|</td></tr>
+<tr><td><span class="fm">|5−(−3)|</span> 算成 <span class="fm">|5−3|=2</span></td><td><b class="hl-g">減負變加</b>:|5+3| = 8</td></tr>
+<tr><td>象限順序數錯</td><td>從右上<b class="hl-g">逆時針</b>:一、二、三、四</td></tr>
+</table>
+<div class="box y" style="text-align:center;">
+自我檢查句:<span class="hl">「這兩點是 x 一樣還是 y 一樣?」</span></div>
+</div></div>
+
+<!-- 17 -->
+<div class="slide" data-pg="17 / 18"><div class="tag">總結</div><div class="body">
+<h2>本節總結</h2>
+<ul>
+<li><span class="hl">坐標 (x, y)</span>:先 x(橫)後 y(縱);分成<b>四個象限</b>,軸上的點不屬於任何象限</li>
+<li><span class="hl">平行軸的距離</span>:y 同算 x 差、x 同算 y 差;<b>一定加絕對值</b></li>
+<li><span class="hl">象限符號</span>:一(+,+)、二(−,+)、三(−,−)、四(+,−);逆時針</li>
+<li><span class="hl">加負號 = 對原點對稱</span>(二↔四、一↔三)</li>
+</ul>
+<div class="box g" style="text-align:center;font-size:20px;">
+🔗 <b>承先</b>:1-1 的數對、1-2 的「解=交點」;七上 1-1 的數線與絕對值<br>
+🔗 <b>啟後</b>:<span class="hl">2-2 讓方程式變成直線 —— 你會看到 1-2 的三種解就是兩直線的相交/平行/重合</span></div>
+</div></div>
+
+<!-- 18 -->
+<div class="slide" data-pg="18 / 18"><div class="tag">Next</div><div class="big-center">
+<div class="eyebrow">下節預告</div>
+<h1 style="font-size:40px;">2-2　二元一次方程式的圖形</h1>
+<div class="lead">一個方程式的所有解 ——<br>連起來就是<span style="color:#98c9dc;">一條直線</span></div><svg viewBox="0 0 350 350" width="224" height="224" style="margin:2px auto;display:block;"><line x1="35" y1="315" x2="35" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="315" x2="315" y2="315" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="63" y1="315" x2="63" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="287" x2="315" y2="287" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="91" y1="315" x2="91" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="259" x2="315" y2="259" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="119" y1="315" x2="119" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="231" x2="315" y2="231" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="147" y1="315" x2="147" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="203" x2="315" y2="203" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="175" y1="315" x2="175" y2="35" stroke="rgba(243,239,226,0)" stroke-width="1"/><line x1="35" y1="175" x2="315" y2="175" stroke="rgba(243,239,226,0)" stroke-width="1"/><line x1="203" y1="315" x2="203" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="147" x2="315" y2="147" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="231" y1="315" x2="231" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="119" x2="315" y2="119" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="259" y1="315" x2="259" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="91" x2="315" y2="91" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="287" y1="315" x2="287" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="63" x2="315" y2="63" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="315" y1="315" x2="315" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="35" x2="315" y2="35" stroke="rgba(243,239,226,0.10)" stroke-width="1"/><line x1="35" y1="175" x2="315" y2="175" stroke="rgba(243,239,226,0.7)" stroke-width="1.8"/><line x1="175" y1="315" x2="175" y2="35" stroke="rgba(243,239,226,0.7)" stroke-width="1.8"/><path d="M315 175 l-8 -4 M315 175 l-8 4" stroke="rgba(243,239,226,0.7)" stroke-width="1.8" fill="none"/><path d="M175 35 l-4 8 M175 35 l4 8" stroke="rgba(243,239,226,0.7)" stroke-width="1.8" fill="none"/><text x="323" y="179" font-family="Noto Serif TC" font-size="14" fill="rgba(243,239,226,0.7)">x</text><text x="181" y="31" font-family="Noto Serif TC" font-size="14" fill="rgba(243,239,226,0.7)">y</text><line x1="119" y1="231" x2="231" y2="63" stroke="#98c9dc" stroke-width="2.2"/><text x="240" y="70" font-family="Noto Serif TC" font-size="13" fill="#98c9dc">2x−y=−2</text><circle cx="175" cy="119" r="4.5" fill="#98c9dc"/><text x="182" y="112" font-family="Noto Serif TC" font-size="13" fill="#98c9dc"></text><circle cx="203" cy="63" r="4.5" fill="#98c9dc"/><text x="210" y="56" font-family="Noto Serif TC" font-size="13" fill="#98c9dc"></text><circle cx="147" cy="175" r="4.5" fill="#98c9dc"/><text x="154" y="168" font-family="Noto Serif TC" font-size="13" fill="#98c9dc"></text></svg><div class="box y" style="max-width:780px;margin:10px auto 0;font-size:20px;">
+<span class="fm">2x + y = 10</span> 有無限多組解(1-1 學過)——<br>
+把它們<span class="hl">全部畫在坐標平面上</span>,會排成<b>一條直線</b>。<br>
+而兩個方程式的<span class="hl">交點</span>,就是聯立方程式的解。</div>
+</div></div>
+
+</div></body></html>

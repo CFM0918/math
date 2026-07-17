@@ -1,0 +1,927 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>七下 2-2 二元一次方程式的圖形｜互動教學平台</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;--wood:#6b4a32;}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);overscroll-behavior:none;}
+.topbar{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:10px 16px;background:linear-gradient(180deg,#1b2f21,#132218);border-bottom:2px solid var(--wood);box-shadow:0 4px 18px rgba(0,0,0,0.5);}
+.brand{font-family:'Noto Serif TC',serif;font-weight:900;font-size:clamp(15px,2.2vw,20px);color:var(--yellow);white-space:nowrap;}
+.brand small{display:block;font-family:'Caveat',cursive;font-size:14px;color:var(--soft);font-weight:400;}
+.spacer{flex:1;}
+.btn{background:rgba(243,239,226,0.08);border:1.5px solid rgba(243,239,226,0.28);color:var(--chalk);
+  border-radius:10px;padding:7px 13px;font-family:inherit;font-size:14px;cursor:pointer;white-space:nowrap;transition:.15s;}
+.btn:hover{background:rgba(243,239,226,0.16);}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:10px 16px 0;scrollbar-width:none;}
+.tabs::-webkit-scrollbar{display:none;}
+.tab{background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.2);border-bottom:none;
+  color:var(--soft);border-radius:10px 10px 0 0;padding:9px 15px;font-size:14px;cursor:pointer;white-space:nowrap;font-family:inherit;}
+.tab.on{background:var(--board);border-color:var(--yellow);color:var(--yellow);font-weight:700;}
+.tab .n{font-family:'Caveat',cursive;font-size:18px;margin-right:5px;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px 60px;}
+.panel{display:none;}.panel.on{display:block;}
+.card{background:radial-gradient(ellipse at 20% 10%,rgba(255,255,255,0.05),transparent 45%),
+   linear-gradient(160deg,var(--board),var(--board2));
+  border:1.5px solid rgba(242,217,121,0.16);border-radius:14px;padding:18px;margin-bottom:16px;
+  box-shadow:0 8px 26px rgba(0,0,0,0.45);position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 38px,rgba(255,255,255,0.012) 38px,rgba(255,255,255,0.012) 39px);}
+.card>*{position:relative;}
+.card h3{font-family:'Noto Serif TC',serif;font-size:clamp(17px,2.4vw,21px);color:var(--yellow);
+  margin-bottom:12px;padding-bottom:8px;border-bottom:2px dashed rgba(242,217,121,0.35);display:flex;align-items:center;gap:8px;}
+.card h3 .ic{font-size:20px;}
+.goals{display:flex;flex-wrap:wrap;gap:9px;}
+.goal{display:flex;align-items:center;gap:9px;background:rgba(242,217,121,0.07);
+  border:1.5px dashed rgba(242,217,121,0.4);border-radius:22px;padding:8px 15px 8px 8px;
+  font-size:clamp(13.5px,1.8vw,15px);color:var(--yellow);line-height:1.5;}
+.goal .bdg{width:24px;height:24px;border-radius:50%;background:var(--yellow);color:#16281c;
+  font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;flex:none;}
+.deck{position:relative;background:rgba(0,0,0,0.22);border-radius:12px;padding:clamp(16px,3vw,30px);
+  min-height:clamp(260px,42vh,380px);display:flex;flex-direction:column;justify-content:center;}
+.sl{display:none;animation:fade .25s;}.sl.on{display:block;}
+@keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+.sl .eyebrow{font-family:'Caveat',cursive;font-size:20px;color:var(--yellow);margin-bottom:6px;}
+.sl h4{font-family:'Noto Serif TC',serif;font-size:clamp(19px,3vw,27px);margin-bottom:12px;line-height:1.35;}
+.sl p{font-size:clamp(15px,2vw,18px);line-height:1.8;margin-bottom:9px;}
+.sl ul{list-style:none;}
+.sl li{font-size:clamp(15px,2vw,18px);line-height:1.85;padding-left:26px;position:relative;margin-bottom:4px;}
+.sl li::before{content:'✦';position:absolute;left:2px;color:var(--yellow);font-size:14px;top:3px;}
+.nav{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:14px;}
+.nav .pg{font-family:'Caveat',cursive;font-size:20px;color:var(--soft);min-width:64px;text-align:center;}
+.dots{display:flex;gap:6px;justify-content:center;margin-top:10px;flex-wrap:wrap;}
+.dot{width:9px;height:9px;border-radius:50%;background:rgba(243,239,226,0.25);cursor:pointer;border:none;padding:0;}
+.dot.on{background:var(--yellow);transform:scale(1.3);}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.32);border-radius:10px;
+  padding:11px 15px;margin:9px 0;font-size:clamp(14px,1.9vw,17px);line-height:1.7;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.36);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.36);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.32);}
+.two{display:flex;gap:12px;flex-wrap:wrap;}.two>*{flex:1;min-width:220px;}
+.teach{background:rgba(201,174,224,0.12);border:1.5px dashed rgba(201,174,224,0.5);
+  border-radius:10px;padding:11px 15px;margin:9px 0;font-size:clamp(14px,1.8vw,15px);line-height:1.7;}
+.teach b{color:var(--purple);}
+.tbl{width:100%;border-collapse:collapse;margin:9px 0;font-size:clamp(13.5px,1.8vw,16px);}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.24);padding:8px 11px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.cv-wrap{background:rgba(0,0,0,0.25);border-radius:12px;padding:10px;}
+canvas.viz{width:100%;display:block;border-radius:8px;touch-action:none;}
+.ctrl{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center;}
+.readout{font-family:'Noto Serif TC',serif;font-size:clamp(14px,1.9vw,18px);color:var(--chalk);
+  background:rgba(242,217,121,0.1);border:1px solid rgba(242,217,121,0.3);border-radius:8px;
+  padding:7px 12px;flex:1;min-width:220px;}
+.readout b{color:var(--yellow);}
+.q{background:rgba(0,0,0,0.2);border:1px solid rgba(242,217,121,0.18);border-radius:10px;padding:13px 15px;margin:10px 0;}
+.q .qt{font-size:clamp(15px,2vw,17px);margin-bottom:10px;line-height:1.7;}
+.q .qt .qn{font-family:'Caveat',cursive;color:var(--yellow);font-size:20px;margin-right:6px;}
+.opts{display:flex;flex-direction:column;gap:7px;}
+.opt{text-align:left;background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.22);
+  color:var(--chalk);border-radius:9px;padding:9px 13px;font-family:inherit;font-size:15px;cursor:pointer;transition:.15s;line-height:1.5;}
+.opt:hover:not(:disabled){background:rgba(243,239,226,0.13);}
+.opt.right{background:rgba(166,214,160,0.24);border-color:var(--green);color:#fff;font-weight:700;}
+.opt.wrong{background:rgba(237,160,168,0.22);border-color:var(--pink);}
+.opt:disabled{cursor:default;}
+.fb{display:none;margin-top:9px;padding:9px 13px;border-radius:8px;font-size:14.5px;line-height:1.65;}
+.fb.on{display:block;}
+.fb.ok{background:rgba(166,214,160,0.14);border-left:3px solid var(--green);}
+.fb.no{background:rgba(237,160,168,0.14);border-left:3px solid var(--pink);}
+.fill{display:inline-block;background:rgba(0,0,0,0.3);border:none;border-bottom:2px solid var(--yellow);
+  color:var(--yellow);font-family:'Noto Serif TC',serif;font-size:17px;width:110px;text-align:center;padding:3px 5px;margin:0 4px;}
+.fill:focus{outline:none;background:rgba(242,217,121,0.12);}
+.exq{background:rgba(0,0,0,0.26);border:1.5px solid rgba(242,217,121,0.28);border-radius:11px;padding:13px 15px;margin:10px 0;position:relative;}
+.exq::before{content:'';position:absolute;top:-8px;left:32px;width:54px;height:14px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.exq .exq-q{font-size:clamp(14.5px,1.9vw,17px);line-height:1.75;margin-bottom:11px;}
+.exo{text-align:left;background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.22);
+  color:var(--chalk);border-radius:9px;padding:9px 13px;font-family:inherit;font-size:clamp(14px,1.8vw,15.5px);
+  cursor:pointer;transition:.15s;line-height:1.55;width:100%;margin-bottom:6px;display:block;}
+.exo:hover:not(:disabled){background:rgba(243,239,226,0.13);}
+.exo.right{background:rgba(166,214,160,0.26);border-color:var(--green);color:#fff;font-weight:700;}
+.exo.wrong{background:rgba(237,160,168,0.2);border-color:var(--pink);opacity:.75;}
+.exo:disabled{cursor:default;}
+@keyframes shake{10%,90%{transform:translateX(-2px);}30%,70%{transform:translateX(4px);}50%{transform:translateX(-4px);}}
+.exo.shake{animation:shake .4s;}
+.exsol{display:none;margin-top:10px;padding:11px 14px;border-radius:9px;
+  background:rgba(166,214,160,0.13);border-left:3px solid var(--green);font-size:clamp(14px,1.8vw,15.5px);line-height:1.75;}
+.exsol.on{display:block;animation:fade .3s;}
+.exsol .st{color:var(--soft);margin:3px 0;}
+.exsol .an{color:var(--green);font-weight:700;margin-top:6px;}
+.exlock{display:flex;align-items:center;gap:7px;margin-top:9px;font-size:13.5px;color:rgba(243,239,226,0.45);}
+.exlock.hide{display:none;}
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:11px;}
+.icard{background:rgba(0,0,0,0.22);border:1.5px solid rgba(242,217,121,0.22);border-radius:11px;padding:14px;text-align:center;}
+.icard .big{font-family:'Noto Serif TC',serif;font-size:clamp(17px,2.6vw,23px);font-weight:900;margin:6px 0;}
+.icard .cap{font-size:13.5px;color:var(--soft);line-height:1.6;}
+.frow{display:flex;gap:12px;align-items:center;padding:9px 12px;border-bottom:1px dashed rgba(243,239,226,0.16);}
+.frow:last-child{border-bottom:none;}
+.flab{color:var(--blue);font-weight:700;min-width:150px;font-size:clamp(13.5px,1.8vw,15.5px);flex:none;}
+.fval{color:var(--yellow);font-weight:700;font-family:'Noto Serif TC',serif;font-size:clamp(14px,1.9vw,17px);}
+@media(max-width:560px){.frow{flex-direction:column;align-items:flex-start;gap:3px;}.flab{min-width:0;}}
+.hud{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:12px;}
+.hud .st{background:rgba(0,0,0,0.3);border:1.5px solid rgba(242,217,121,0.28);border-radius:9px;
+  padding:7px 13px;font-size:14px;flex:1;min-width:88px;text-align:center;}
+.hud .st b{display:block;font-family:'Noto Serif TC',serif;font-size:20px;color:var(--yellow);}
+.tbar{height:8px;background:rgba(0,0,0,0.35);border-radius:5px;overflow:hidden;margin-bottom:12px;}
+.tfill{height:100%;background:linear-gradient(90deg,var(--green),var(--yellow),var(--pink));width:100%;transition:width .1s linear;}
+.gscreen{display:none;}.gscreen.on{display:block;}
+.lvchips{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin:14px 0;}
+.lvchip{background:rgba(152,201,220,0.12);border:1.5px solid rgba(152,201,220,0.35);border-radius:18px;
+  padding:6px 13px;font-size:13.5px;color:var(--blue);}
+.lvchip.done{background:rgba(166,214,160,0.2);border-color:var(--green);color:var(--green);}
+.lvchip.now{background:rgba(242,217,121,0.22);border-color:var(--yellow);color:var(--yellow);font-weight:700;}
+.gq{font-size:clamp(16px,2.2vw,20px);line-height:1.7;margin:14px 0;text-align:center;font-family:'Noto Serif TC',serif;}
+.gopts{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+@media(max-width:560px){.gopts{grid-template-columns:1fr;}}
+.gopt{background:rgba(243,239,226,0.07);border:1.5px solid rgba(243,239,226,0.25);color:var(--chalk);
+  border-radius:10px;padding:12px;font-family:'Noto Serif TC',serif;font-size:17px;cursor:pointer;transition:.15s;min-height:48px;}
+.gopt:hover:not(:disabled){background:rgba(243,239,226,0.15);}
+.gopt.right{background:rgba(166,214,160,0.3);border-color:var(--green);font-weight:900;}
+.gopt.wrong{background:rgba(237,160,168,0.25);border-color:var(--pink);}
+.gfb{margin-top:11px;padding:10px 13px;border-radius:8px;font-size:14.5px;line-height:1.6;display:none;}
+.gfb.on{display:block;}
+.gfb.ok{background:rgba(166,214,160,0.15);border-left:3px solid var(--green);}
+.gfb.no{background:rgba(237,160,168,0.15);border-left:3px solid var(--pink);}
+.rank{font-size:54px;text-align:center;margin:10px 0;}
+.hint{text-align:center;color:rgba(243,239,226,0.35);font-size:12.5px;padding:8px 0 0;}
+@media (max-width:640px){.topbar{padding:8px 10px;gap:8px;}.wrap{padding:0 10px 70px;}.card{padding:13px;}}
+</style></head><body>
+
+<div class="topbar">
+  <div class="brand">2-2　二元一次方程式的圖形<small>七下 · 第2章 直角坐標與圖形</small></div>
+  <div class="spacer"></div>
+</div>
+
+<div class="tabs" id="tabs">
+  <button class="tab on" data-p="0"><span class="n">📈</span>畫直線</button>
+  <button class="tab" data-p="1"><span class="n">🔀</span>交點與位置</button>
+  <button class="tab" data-p="2"><span class="n">📐</span>截距與方程式</button>
+  <button class="tab" data-p="3"><span class="n">★</span>題型測驗</button>
+  <button class="tab" data-p="4"><span class="n">🎮</span>闖關遊戲</button>
+</div>
+
+<div class="wrap">
+  <div class="card" id="goalCard">
+    <h3><span class="ic">🎯</span>本節學習目標</h3>
+    <div class="goals" id="goals"></div>
+  </div>
+  <div id="wrap"></div>
+</div>
+
+<script>
+const GOALS = [
+  '理解方程式的所有解形成一條直線',
+  '能用列表法、截距法畫直線',
+  '能識別 x=k（垂直）、y=k（水平）',
+  '能由相異兩點求直線方程式',
+  '理解聯立的解 = 兩直線的交點',
+  '知道相交／平行／重合對應唯一解／無解／無限多解',
+];
+
+const DATA = [
+{ key:'plot', viz:'plot', vizTitle:'截距法畫線器 —— 按「下一步」，看令 y=0、x=0 標出兩截距再連線',
+  slides:[
+    {eb:'細目 ①', h:'方程式的圖形是一條直線', html:`
+      <div class="box y" style="text-align:center;font-size:19px;"><span class="hl">ax + by = c 的所有解 (x, y)，畫上去會排成一條直線。</span></div>
+      <div class="box"><b>回想 1-1：</b><span class="fm">2x + y = 10</span> 有無限多組解 (0,10)、(1,8)、(2,6)…<br>
+        把它們<span class="hl">全部畫上去</span> → 恰好排成<b>一條直線</b>。</div>
+      <div class="box g" style="text-align:center;font-size:19px;">💡 <span class="hl">一個方程式（代數）= 一條直線（圖形）</span></div>`},
+    {eb:'細目 ①', h:'兩種畫法', html:`
+      <div class="box"><b class="hl-b">列表取點法</b>：代 x 求 y，取<b>至少三點</b>連線（第三點驗證共線）</div>
+      <div class="box g"><b class="hl-g">截距法（更快）</b>：<br>
+        x 截距（令 y=0）→ 與 x 軸交點；y 截距（令 x=0）→ 與 y 軸交點<br>
+        <b>兩個截距就夠畫線</b></div>
+      <div class="box r" style="text-align:center;">⚠️ 截距是一個<span class="hl-r">點</span> (6,0)，不是一個數「6」。</div>
+      <div class="box y">👉 用下方 Canvas 按「下一步」，看截距法一步步標點、連線。</div>`},
+    {eb:'例題 ★☆☆', h:'求截距', html:`
+      <div class="exq" data-a="1">
+        <div class="exq-q"><span class="hl">Q</span>　2x + 3y = 12 的 <b>x 截距</b>是？</div>
+        <button class="exo" data-i="0">(0, 4)</button>
+        <button class="exo" data-i="1">(6, 0)</button>
+        <button class="exo" data-i="2">6</button>
+        <button class="exo" data-i="3">(6, 4)</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">x 截距 = 令 <b>y=0</b>：2x = 12 → x = 6</div>
+          <div class="st">截距是一個<b>點</b> → (6, 0)</div>
+          <div class="st">(A) (0,4) 是 <b>y</b> 截距（令 x=0）；(C) 只寫「6」漏了它是一個點。</div>
+          <div class="an">答：(6, 0)</div>
+        </div>
+      </div>`},
+    {eb:'例題 ★★☆', h:'點在直線上', html:`
+      <div class="exq" data-a="0">
+        <div class="exq-q"><span class="hl">Q</span>　點 (3, 2) 在直線 2x + y = 8 上嗎？</div>
+        <button class="exo" data-i="0">在（代入成立）</button>
+        <button class="exo" data-i="1">不在</button>
+        <button class="exo" data-i="2">不能判斷</button>
+        <button class="exo" data-i="3">要先畫圖</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st fm">代入：2×3 + 2 = 6 + 2 = 8 ✓</div>
+          <div class="st">左邊 = 右邊 → 點在直線上</div>
+          <div class="st">💡 <b>「點在直線上」= 「代入方程式成立」</b> —— 1-1 的驗證解，反過來用。</div>
+          <div class="an">答：在（代入成立）</div>
+        </div>
+      </div>`}
+  ],
+  fa:[
+    {q:'x 截距是令什麼 = 0？', o:['x','y','都要','c'], a:1, e:'令 y=0 得 x 截距。'},
+    {q:'截距是什麼？', o:['一個數','一個點','一條線','一個角'], a:1, e:'是坐標平面上的一個交點，如 (6,0)。'},
+    {q:'列表法至少取幾點？', o:['1 點','2 點','3 點','5 點'], a:2, e:'至少三點，第三點驗證共線。'}
+  ],
+  info:[
+    {big:'方程式 = 直線', cap:'所有解<br>排成一條線', c:'var(--blue)'},
+    {big:'截距法最快', cap:'令 y=0、x=0<br>連兩點', c:'var(--green)'},
+    {big:'截距是「點」', cap:'(6,0) 不是 6', c:'var(--yellow)'}
+  ]
+},
+{ key:'pos', viz:'pos', vizTitle:'兩直線位置關係 —— 換位置看相交／平行／重合，以及消去後的結果',
+  slides:[
+    {eb:'細目 ① ⚠️', h:'x=k 垂直、y=k 水平', html:`
+      <table class="tbl">
+        <tr><th>方程式</th><th>圖形</th></tr>
+        <tr><td class="fm">x = 3</td><td class="hl-b"><b>垂直線</b>（平行 y 軸）</td></tr>
+        <tr><td class="fm">y = −2</td><td class="hl-g"><b>水平線</b>（平行 x 軸）</td></tr>
+      </table>
+      <div class="box y"><b>x = 3 為什麼是垂直線？</b>它表示「所有 <span class="hl">x 坐標 = 3</span> 的點」：(3,0)、(3,1)、(3,−5)… 這些點<span class="hl">垂直排成一列</span>。</div>
+      <div class="box r" style="text-align:center;">⚠️ 本節最高頻的錯：把 x=5 說成水平線。<span class="hl">x=k 垂直、y=k 水平。</span></div>`},
+    {eb:'細目 ③ 🔗 兌現伏筆', h:'聯立的解 = 兩直線的交點', html:`
+      <div class="box"><b>{ x+y=5，2x−y=4 }</b>　直線一過 (5,0)(0,5)、直線二過 (2,0)(0,−4)<br>
+        相加 <span class="fm">3x=9 → x=3、y=2</span> → 交點 <span class="fm hl">(3, 2)</span></div>
+      <div class="box g" style="text-align:center;font-size:19px;">💡 <span class="hl">代數（解方程式）和幾何（找交點）算的是同一個答案。</span></div>
+      <div class="box y">1-2 我說「解是兩直線的交點」、2-1 給你坐標平面，<br>
+        現在 2-2 讓你<b>真的看到那條線、那個交點</b>。</div>`},
+    {eb:'［補給站］🔗 收 1-2 的網', h:'兩直線的三種位置關係', html:`
+      <table class="tbl">
+        <tr><th>代數（1-2）</th><th>幾何（這裡）</th><th>圖形</th></tr>
+        <tr><td class="hl-g">唯一解</td><td>相交</td><td>交於一點</td></tr>
+        <tr><td class="hl-r">無解</td><td>平行</td><td>永不相交</td></tr>
+        <tr><td class="hl-b">無限多解</td><td>重合</td><td>完全疊在一起</td></tr>
+      </table>
+      <div class="box g" style="text-align:center;font-size:19px;">
+        <span class="hl">代數的「無解」= 幾何的「平行」；「無限多解」= 「重合」</span></div>
+      <div class="box y">👉 用下方 Canvas 按「換一種位置」，看三種各長什麼樣、消去後得到什麼。</div>`},
+    {eb:'例題 ★★☆', h:'判斷位置關係', html:`
+      <div class="exq" data-a="2">
+        <div class="exq-q"><span class="hl">Q</span>　{ x+y=5，x+y=8 } 兩直線是什麼關係？</div>
+        <button class="exo" data-i="0">相交（唯一解）</button>
+        <button class="exo" data-i="1">重合（無限多解）</button>
+        <button class="exo" data-i="2">平行（無解）</button>
+        <button class="exo" data-i="3">垂直</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">x、y 係數都一樣（1/1 = 1/1），但右邊 5 ≠ 8</div>
+          <div class="st">同樣的 x+y 不可能既 = 5 又 = 8 → 矛盾</div>
+          <div class="st fm">消去看看：相減 → 0 = −3（矛盾）→ 無解</div>
+          <div class="st">→ 兩直線<b>平行</b>（永不相交）</div>
+          <div class="an">答：平行（無解）</div>
+        </div>
+      </div>`},
+    {eb:'例題 ★★☆', h:'另一種位置', html:`
+      <div class="exq" data-a="1">
+        <div class="exq-q"><span class="hl">Q</span>　{ x+y=5，2x+2y=10 } 有幾組解？</div>
+        <button class="exo" data-i="0">唯一解</button>
+        <button class="exo" data-i="1">無限多解</button>
+        <button class="exo" data-i="2">無解</button>
+        <button class="exo" data-i="3">兩組</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">第二式 ÷2 → x + y = 5，和第一式<b>完全一樣</b></div>
+          <div class="st fm">係數全成比例：1/2 = 1/2 = 5/10</div>
+          <div class="st fm">消去 → 0 = 0（恆成立）→ 無限多解</div>
+          <div class="st">→ 兩直線<b>重合</b>（完全疊在一起）</div>
+          <div class="an">答：無限多解</div>
+        </div>
+      </div>`}
+  ],
+  fa:[
+    {q:'x = 5 的圖形是？', o:['水平線','垂直線','斜線','一個點'], a:1, e:'x=k 是垂直線。'},
+    {q:'兩直線平行 → 幾組解？', o:['唯一解','無解','無限多解','兩組'], a:1, e:'平行永不相交 → 無解。'},
+    {q:'兩直線重合 → 幾組解？', o:['唯一解','無解','無限多解','零組'], a:2, e:'重合 = 同一條線 → 無限多解。'}
+  ],
+  info:[
+    {big:'相交 → 唯一解', cap:'交於一點', c:'var(--green)'},
+    {big:'平行 → 無解', cap:'永不相交', c:'var(--pink)'},
+    {big:'重合 → 無限多', cap:'完全疊合', c:'var(--blue)'}
+  ]
+},
+{ key:'tri', viz:'tri', vizTitle:'截距三角形 —— 換直線，看它與兩軸圍成的三角形與面積',
+  slides:[
+    {eb:'細目 ②', h:'通過相異兩點求直線方程式', html:`
+      <div class="box y" style="text-align:center;font-size:19px;"><span class="hl">反過來：已知直線通過兩點，求它的方程式</span></div>
+      <div class="box"><b>x 截距 −3、y 截距 4（過 (−3,0)、(0,4)）</b><br>
+        設 <span class="fm">px + qy = c</span>；代兩點 → <span class="fm">−3p = c、4q = c</span><br>
+        取 c=12 → <span class="fm">p=−4、q=3</span> → <span class="fm hl">4x − 3y = −12</span></div>
+      <div class="box g" style="text-align:center;">💡 這其實是在<span class="hl">解聯立方程式</span>（把係數當未知數）—— 又回到 1-2！</div>`},
+    {eb:'細目 ①　截距應用', h:'與兩軸圍成的三角形面積', html:`
+      <div class="box"><b>3x + y = 6 與兩軸圍成的三角形</b><br>
+        x 截距 (2,0)、y 截距 (0,6)；三頂點：原點、(2,0)、(0,6)</div>
+      <div class="box g" style="text-align:center;font-size:20px;">面積 = <span class="fm">½ × 2 × 6 = <span class="hl">6</span></span></div>
+      <div class="box y" style="text-align:center;">公式：<span class="hl">½ × |x截距| × |y截距|</span></div>
+      <div class="box">👉 用下方 Canvas 換直線，看三角形怎麼變、面積怎麼算。</div>`},
+    {eb:'例題 ★★☆', h:'三角形面積', html:`
+      <div class="exq" data-a="1">
+        <div class="exq-q"><span class="hl">Q</span>　2x + y = 6 與兩軸圍成的三角形面積是？</div>
+        <button class="exo" data-i="0">6</button>
+        <button class="exo" data-i="1">9</button>
+        <button class="exo" data-i="2">18</button>
+        <button class="exo" data-i="3">3</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st fm">x 截距：令 y=0 → 2x=6 → x=3 → (3,0)</div>
+          <div class="st fm">y 截距：令 x=0 → y=6 → (0,6)</div>
+          <div class="st fm">面積 = ½ × 3 × 6 = 9</div>
+          <div class="st">(C) 18 是<b>忘了 ½</b>（3×6=18）—— 三角形面積要除以 2。</div>
+          <div class="an">答：9</div>
+        </div>
+      </div>`},
+    {eb:'例題 ★★★', h:'由截距求方程式', html:`
+      <div class="exq" data-a="2">
+        <div class="exq-q"><span class="hl">Q</span>　x 截距 −3、y 截距 4，這條直線的方程式是？</div>
+        <button class="exo" data-i="0">3x + 4y = 12</button>
+        <button class="exo" data-i="1">−3x + 4y = 12</button>
+        <button class="exo" data-i="2">4x − 3y = −12</button>
+        <button class="exo" data-i="3">4x + 3y = 12</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">通過 (−3, 0) 和 (0, 4)</div>
+          <div class="st">設 px+qy=c；代 (−3,0)→−3p=c、代 (0,4)→4q=c</div>
+          <div class="st fm">取 c=12 → p=−4、q=3 → −4x+3y=12 → 4x−3y=−12</div>
+          <div class="st fm">驗算：4(−3)−0 = −12 ✓；−3(4) = −12 ✓</div>
+          <div class="an">答：4x − 3y = −12</div>
+        </div>
+      </div>`},
+    {eb:'素養 ★★★', h:'工廠生產', html:`
+      <div class="box"><span class="fm">2x + y = 100</span>（x=A 件數、y=B 件數）</div>
+      <div class="exq" data-a="0">
+        <div class="exq-q"><span class="hl">Q</span>　x 截距 (50, 0) 的實際意義是？</div>
+        <button class="exo" data-i="0">只生產 A 最多 50 件</button>
+        <button class="exo" data-i="1">只生產 B 最多 50 件</button>
+        <button class="exo" data-i="2">A、B 各 50 件</button>
+        <button class="exo" data-i="3">總共 50 件</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">x 截距 = 令 y=0 → B 不生產（y=0）時，A = 50</div>
+          <div class="st">→ <b>只生產 A 的話，最多 50 件</b></div>
+          <div class="st">💡 截距在真實情境有意義：<b>x 截距 = 「只做一種」的極限</b>。<br>
+            同理 y 截距 (0,100) = 只生產 B 最多 100 件。</div>
+          <div class="an">答：只生產 A 最多 50 件</div>
+        </div>
+      </div>`}
+  ],
+  fa:[
+    {q:'兩軸三角形面積公式？', o:['|x截距|×|y截距|','½×|x截距|×|y截距|','x截距+y截距','2×截距'], a:1, e:'三角形要 ½。'},
+    {q:'由兩點求方程式，本質是？', o:['解聯立方程式','畫圖','背公式','猜'], a:0, e:'把係數當未知數，代兩點解聯立。'},
+    {q:'4x+3y=12 與兩軸圍成面積？', o:['6','12','3','24'], a:0, e:'x截距3、y截距4 → ½×3×4=6。'}
+  ],
+  info:[
+    {big:'½×截距×截距', cap:'兩軸<br>三角形面積', c:'var(--yellow)'},
+    {big:'兩點求方程式', cap:'= 解聯立<br>（係數當未知數）', c:'var(--blue)'},
+    {big:'截距有意義', cap:'「只做一種」<br>的極限', c:'var(--green)'}
+  ]
+}];
+
+const QUIZ = [
+  {type:'choice', q:'2x+3y=12 的 x 截距？', o:['(0,4)','(6,0)','6','(6,4)'], a:1, e:'令 y=0 → x=6 → (6,0)。'},
+  {type:'choice', q:'3x−y=6 的 y 截距？', o:['(2,0)','(0,6)','(0,−6)','−6'], a:2, e:'令 x=0 → −y=6 → y=−6 → (0,−6)。'},
+  {type:'choice', q:'y = 4 的圖形是？', o:['水平線','垂直線','斜線','過原點'], a:0, e:'y=k 是水平線。'},
+  {type:'choice', q:'x = −2 的圖形是？', o:['水平線','垂直線','斜線','過原點'], a:1, e:'x=k 是垂直線。'},
+  {type:'tf', q:'判斷：「x=5 是一條通過 (5,0) 的水平線。」', a:false, e:'錯。x=5 是<b>垂直線</b>（平行 y 軸）。水平線是 y=k。'},
+  {type:'choice', q:'點 (3,2) 在 2x+y=8 上嗎？', o:['在','不在','不能判斷','要畫圖'], a:0, e:'2×3+2=8 ✓。'},
+  {type:'choice', q:'2x+y=6 與兩軸圍成面積？', o:['6','9','18','3'], a:1, e:'x截距3、y截距6 → ½×3×6=9。'},
+  {type:'choice', q:'4x+3y=12 與兩軸圍成面積？', o:['6','12','24','3'], a:0, e:'x截距3、y截距4 → ½×3×4=6。'},
+  {type:'choice', q:'{ x+y=7，x−y=3 } 的交點？', o:['(5,2)','(2,5)','(3,4)','(4,3)'], a:0, e:'相加 2x=10→x=5、y=2。'},
+  {type:'choice', q:'ax+2y=8 過 (2,3)，a = ?', o:['1','2','3','4'], a:0, e:'2a+6=8 → a=1。'},
+  {type:'choice', q:'x+3y=9 與 x=3 的交點？', o:['(3,2)','(3,3)','(2,3)','(3,0)'], a:0, e:'x=3 代入 → 3+3y=9 → y=2。'},
+  {type:'choice', q:'x 截距 −3、y 截距 4 的方程式？', o:['3x+4y=12','4x−3y=−12','4x+3y=12','−3x+4y=12'], a:1, e:'過 (−3,0)(0,4) → 4x−3y=−12。'},
+  {type:'choice', q:'{ x+y=5，x+y=8 } 是什麼關係？', o:['相交','平行','重合','垂直'], a:1, e:'係數同、常數不同 → 平行、無解。'},
+  {type:'choice', q:'{ x+y=5，2x+2y=10 } 有幾組解？', o:['唯一解','無限多解','無解','兩組'], a:1, e:'係數全成比例 → 重合、無限多解。'},
+  {type:'choice', q:'消去後得到 0 = −3，兩直線？', o:['相交','平行','重合','垂直'], a:1, e:'矛盾 → 平行、無解。'},
+  {type:'tf', q:'判斷：「聯立方程式一定有唯一解。」', a:false, e:'錯。平行→無解、重合→無限多解。'},
+  {type:'choice', q:'60x+30y=1800 化簡後？', o:['2x+y=60','6x+3y=180','2x+y=1800','x+y=60'], a:0, e:'÷30 → 2x+y=60。'},
+  {type:'choice', q:'承上，只賣珍奶(x)要幾杯達標？（x截距）', o:['30','60','20','25'], a:0, e:'令 y=0 → 2x=60 → x=30。'}
+];
+
+const GAME = [
+  {name:'方程式 = 直線', qs:[
+    {q:'ax+by=c 的圖形是？', o:['一條直線','一個點','一條曲線','一個圓'], a:0, e:'所有解排成一條直線。'},
+    {q:'1-1 的無限多組解畫出來是？', o:['一堆散點','一條直線','一個區域','一條曲線'], a:1, e:'恰好排成直線。'},
+    {q:'一個方程式對應？', o:['一個點','一條線','一個面','一個角'], a:1, e:'代數的方程式 = 幾何的直線。'},
+    {q:'畫直線最少要幾點？', o:['1','2','3','4'], a:1, e:'兩點決定一直線（建議取三點驗證）。'}
+  ]},
+  {name:'截距法', qs:[
+    {q:'x 截距 = 令什麼 = 0？', o:['x','y','c','都要'], a:1, e:'令 y=0。'},
+    {q:'2x+3y=12 的 x 截距？', o:['(0,4)','(6,0)','6','(4,6)'], a:1, e:'令 y=0 → x=6。'},
+    {q:'截距是什麼？', o:['一個數','一個點','一條線','一個角'], a:1, e:'是一個交點，如 (6,0)。'},
+    {q:'3x−y=6 的 y 截距？', o:['(2,0)','(0,−6)','(0,6)','−6'], a:1, e:'令 x=0 → y=−6。'}
+  ]},
+  {name:'⚠️ x=k y=k', qs:[
+    {q:'x=3 的圖形？', o:['水平線','垂直線','斜線','點'], a:1, e:'x=k 垂直。'},
+    {q:'y=−2 的圖形？', o:['水平線','垂直線','斜線','點'], a:0, e:'y=k 水平。'},
+    {q:'「x=5 是水平線」對嗎？', o:['對','錯，是垂直線','錯，是斜線','對，過(5,0)'], a:1, e:'x=k 是垂直線！'},
+    {q:'x=3 與 x+3y=9 的交點？', o:['(3,2)','(3,3)','(2,3)','(0,3)'], a:0, e:'x=3 代入 → y=2。'}
+  ]},
+  {name:'解 = 交點', qs:[
+    {q:'聯立的解 = ?', o:['兩直線交點','兩直線斜率','x 截距','y 截距'], a:0, e:'解就是交點。'},
+    {q:'{ x+y=5，2x−y=4 } 的交點？', o:['(3,2)','(2,3)','(5,0)','(0,5)'], a:0, e:'相加 3x=9 → x=3、y=2。'},
+    {q:'{ x+y=7，x−y=3 } 的交點？', o:['(5,2)','(2,5)','(3,4)','(4,3)'], a:0, e:'x=5、y=2。'},
+    {q:'代數和幾何算的答案？', o:['不一樣','一樣','看情況','互補'], a:1, e:'同一個答案，互相印證。'}
+  ]},
+  {name:'三種位置', qs:[
+    {q:'相交 → 幾組解？', o:['唯一解','無解','無限多','零組'], a:0, e:'交於一點。'},
+    {q:'平行 → 幾組解？', o:['唯一解','無解','無限多','零組'], a:1, e:'永不相交。'},
+    {q:'重合 → 幾組解？', o:['唯一解','無解','無限多','零組'], a:2, e:'同一條線。'},
+    {q:'消去後 0=0 → ?', o:['相交','平行','重合','無意義'], a:2, e:'恆成立 → 重合、無限多解。'}
+  ]},
+  {name:'三角形面積', qs:[
+    {q:'兩軸三角形面積 = ?', o:['截距×截距','½×截距×截距','截距+截距','2×截距'], a:1, e:'三角形要 ½。'},
+    {q:'3x+y=6 圍成面積？', o:['6','9','12','3'], a:0, e:'½×2×6=6。'},
+    {q:'2x+y=6 圍成面積？', o:['6','9','18','3'], a:1, e:'½×3×6=9。'},
+    {q:'算面積忘了 ½ 會？', o:['答案對','大一倍','小一半','沒差'], a:1, e:'會大一倍（多算了）。'}
+  ]},
+  {name:'求方程式・應用', qs:[
+    {q:'x截距−3、y截距4 的方程式？', o:['3x+4y=12','4x−3y=−12','4x+3y=12','−3x+4y=12'], a:1, e:'過(−3,0)(0,4)。'},
+    {q:'由兩點求方程式，本質是？', o:['解聯立','畫圖','背公式','猜'], a:0, e:'係數當未知數解聯立。'},
+    {q:'60x+30y=1800 化簡？', o:['2x+y=60','6x+3y=180','x+y=60','2x+y=1800'], a:0, e:'÷30。'},
+    {q:'截距在應用題代表？', o:['最大值','「只做一種」的極限','平均','總和'], a:1, e:'如只生產 A 的極限。'}
+  ]}
+];
+
+document.getElementById('goals').innerHTML = GOALS.map((g,i)=>
+  `<div class="goal"><div class="bdg">${i+1}</div>${g}</div>`).join('');
+
+const wrap = document.getElementById('wrap');
+DATA.forEach((sec, si)=>{
+  const p = document.createElement('div');
+  p.className = 'panel' + (si===0?' on':'');
+  p.dataset.p = si;
+  p.innerHTML = `
+    <div class="card">
+      <h3><span class="ic">📽</span>簡報翻頁器</h3>
+      <div class="deck" data-deck="${si}">
+        ${sec.slides.map((s,i)=>`<div class="sl${i===0?' on':''}" data-i="${i}">
+          <div class="eyebrow">${s.eb}</div><h4>${s.h}</h4>${s.html}</div>`).join('')}
+      </div>
+      <div class="nav">
+        <button class="btn" data-nav="prev" data-s="${si}">◀ 上一張</button>
+        <span class="pg" id="pg-${si}">1 / ${sec.slides.length}</span>
+        <button class="btn" data-nav="next" data-s="${si}">下一張 ▶</button>
+      </div>
+      <div class="dots" id="dots-${si}">
+        ${sec.slides.map((_,i)=>`<button class="dot${i===0?' on':''}" data-s="${si}" data-i="${i}"></button>`).join('')}
+      </div>
+    </div>
+    <div class="card">
+      <h3><span class="ic">🎯</span>Canvas 互動視覺化<span style="font-size:14px;color:var(--soft);font-weight:400;">　${sec.vizTitle}</span></h3>
+      <div class="cv-wrap">
+        <canvas class="viz" data-viz="${sec.viz}" data-si="${si}"></canvas>
+        <div class="ctrl" data-ctrl="${si}"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3><span class="ic">✅</span>形成性評量</h3>
+      ${sec.fa.map((f,i)=>`<div class="q" data-fa="${si}-${i}">
+        <div class="qt"><span class="qn">Q${i+1}</span>${f.q}</div>
+        <div class="opts">${f.o.map((o,oi)=>`<button class="opt" data-si="${si}" data-qi="${i}" data-oi="${oi}">${o}</button>`).join('')}</div>
+        <div class="fb" id="fb-${si}-${i}"></div>
+      </div>`).join('')}
+    </div>
+    <div class="card">
+      <h3><span class="ic">📊</span>資訊圖表</h3>
+      <div class="info">
+        ${sec.info.map(c=>`<div class="icard"><div class="big" style="color:${c.c}">${c.big}</div><div class="cap">${c.cap}</div></div>`).join('')}
+      </div>
+    </div>`;
+  wrap.appendChild(p);
+});
+
+const qp = document.createElement('div');
+qp.className='panel'; qp.dataset.p='3';
+qp.innerHTML = `<div class="card"><h3><span class="ic">📝</span>題型測驗　<span style="font-size:14px;color:var(--soft);font-weight:400;">單選 · 是非 · 填充，共 ${QUIZ.length} 題</span></h3>
+  <div id="quizBox"></div>
+  <div style="display:flex;gap:10px;align-items:center;margin-top:14px;flex-wrap:wrap;">
+    <button class="btn" id="gradeBtn" style="background:rgba(242,217,121,.2);border-color:var(--yellow);color:var(--yellow);font-weight:700;">📊 批改並看成績</button>
+    <button class="btn" id="resetQuiz">🔄 重做</button>
+    <div class="readout" id="score" style="display:none;"></div>
+  </div></div>
+  <div class="card"><h3><span class="ic">📋</span>公式速查表</h3>
+    <div class="frow"><div class="flab">核心</div><div class="fval">方程式 ax+by=c 的圖形是<b>一條直線</b></div></div>
+    <div class="frow"><div class="flab">列表法</div><div class="fval">代 x 求 y，取<b>至少三點</b>連線</div></div>
+    <div class="frow"><div class="flab">截距法</div><div class="fval">x 截距（令 y=0）、y 截距（令 x=0），連兩點</div></div>
+    <div class="frow"><div class="flab">⚠️ 截距</div><div class="fval">是一個<b>點</b>：(6,0)、(0,4)，不是一個數</div></div>
+    <div class="frow"><div class="flab">x = k</div><div class="fval"><b>垂直線</b>（平行 y 軸）</div></div>
+    <div class="frow"><div class="flab">y = k</div><div class="fval"><b>水平線</b>（平行 x 軸）</div></div>
+    <div class="frow"><div class="flab">由兩點求方程式</div><div class="fval">代入兩點解係數（= 解聯立）</div></div>
+    <div class="frow"><div class="flab">聯立幾何意義</div><div class="fval">解 = 兩直線<b>交點</b></div></div>
+    <div class="frow"><div class="flab">遇 x=k / y=k</div><div class="fval"><b>直接代入</b>另一條最快</div></div>
+    <div class="frow"><div class="flab">［補］相交</div><div class="fval">a₁/a₂ ≠ b₁/b₂ → 唯一解</div></div>
+    <div class="frow"><div class="flab">［補］平行</div><div class="fval">a₁/a₂ = b₁/b₂ ≠ c₁/c₂ → 無解</div></div>
+    <div class="frow"><div class="flab">［補］重合</div><div class="fval">a₁/a₂ = b₁/b₂ = c₁/c₂ → 無限多解</div></div>
+    <div class="frow"><div class="flab">兩軸三角形面積</div><div class="fval"><b>½ × |x截距| × |y截距|</b></div></div>
+    <div class="frow"><div class="flab">點在直線上</div><div class="fval">代入方程式<b>成立</b>（1-1 的驗證解）</div></div>
+  </div>`;
+wrap.appendChild(qp);
+
+const gp = document.createElement('div');
+gp.className='panel'; gp.dataset.p='4';
+gp.innerHTML = `<div class="card"><h3><span class="ic">🎮</span>闖關遊戲　<span style="font-size:14px;color:var(--soft);font-weight:400;">6 關挑戰 · 每題 20 秒 · 連擊與速度都有加分</span></h3>
+  <div class="gscreen on" id="gStart">
+    <div style="text-align:center;font-size:clamp(15px,2vw,18px);line-height:1.8;">
+      闖過 <b class="hl">7</b> 關，每關 1 題，每題 <b class="hl">20 秒</b>。<br>
+      計分：基礎 <b class="hl">10</b> 分 + 連擊獎勵（最多 <b class="hl">5</b>）+ 速度獎勵（最多 <b class="hl">5</b>）＝ 單題最高 <b class="hl">20</b> 分</div>
+    <div class="lvchips" id="gStartChips"></div>
+    <div style="text-align:center;"><button class="btn" id="gGo" style="background:rgba(242,217,121,.25);border-color:var(--yellow);color:var(--yellow);font-weight:700;font-size:16px;padding:10px 24px;">🚀 開始挑戰</button></div>
+  </div>
+  <div class="gscreen" id="gPlay">
+    <div class="hud">
+      <div class="st">關卡<b id="hLv">1/7</b></div>
+      <div class="st">分數<b id="hSc">0</b></div>
+      <div class="st">連擊<b id="hStk">0</b></div>
+      <div class="st">剩餘<b id="hT">20</b></div>
+    </div>
+    <div class="tbar"><div class="tfill" id="tFill"></div></div>
+    <div class="lvchips" id="gChips"></div>
+    <div class="gq" id="gQ"></div>
+    <div class="gopts" id="gO"></div>
+    <div class="gfb" id="gFb"></div>
+    <div style="text-align:center;margin-top:12px;"><button class="btn" id="gNext" style="display:none;">下一關 ▶</button></div>
+  </div>
+  <div class="gscreen" id="gEnd">
+    <div class="rank" id="gRank">🏆</div>
+    <div style="text-align:center;font-size:clamp(17px,2.6vw,22px);font-family:'Noto Serif TC';" id="gFinal"></div>
+    <div style="text-align:center;color:var(--soft);margin-top:8px;" id="gStats"></div>
+    <div style="text-align:center;margin-top:16px;"><button class="btn" id="gAgain" style="background:rgba(242,217,121,.25);border-color:var(--yellow);color:var(--yellow);font-weight:700;">🔄 再挑戰一次</button></div>
+  </div></div>`;
+wrap.appendChild(gp);
+document.getElementById('gStartChips').innerHTML = GAME.map((g,i)=>`<div class="lvchip">第${i+1}關 ${g.name}</div>`).join('');
+
+const qb = document.getElementById('quizBox');
+QUIZ.forEach((q,i)=>{
+  const d = document.createElement('div'); d.className='q';
+  let body='';
+  if(q.type==='choice') body = `<div class="opts">${q.o.map((o,oi)=>`<button class="opt" data-quiz="${i}" data-oi="${oi}">${o}</button>`).join('')}</div>`;
+  else if(q.type==='tf') body = `<div class="opts" style="flex-direction:row;gap:10px;">
+      <button class="opt" data-quiz="${i}" data-oi="1" style="flex:1;">⭕ 對</button>
+      <button class="opt" data-quiz="${i}" data-oi="0" style="flex:1;">❌ 錯</button></div>`;
+  else body = `<div><input class="fill" data-quiz="${i}" placeholder="?"></div>`;
+  d.innerHTML = `<div class="qt"><span class="qn">${i+1}</span>
+    <span style="font-size:12px;color:var(--soft);border:1px solid rgba(243,239,226,.25);border-radius:6px;padding:1px 6px;margin-right:6px;">
+    ${q.type==='choice'?'單選':q.type==='tf'?'是非':'填充'}</span>${q.q}</div>${body}
+    <div class="fb" id="qfb-${i}"></div>`;
+  qb.appendChild(d);
+});
+
+document.getElementById('tabs').addEventListener('click', e=>{
+  const t = e.target.closest('.tab'); if(!t) return;
+  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on', x===t));
+  document.querySelectorAll('.panel').forEach(x=>x.classList.toggle('on', x.dataset.p===t.dataset.p));
+  document.getElementById('goalCard').style.display = (t.dataset.p==='4')?'none':'';
+  window.scrollTo({top:0,behavior:'smooth'});
+  setTimeout(resizeAll, 60);
+});
+
+const cur = DATA.map(()=>0);
+function showSlide(si, i){
+  const deck = document.querySelector(`[data-deck="${si}"]`);
+  const sl = deck.querySelectorAll('.sl');
+  i = Math.max(0, Math.min(sl.length-1, i));
+  cur[si] = i;
+  sl.forEach((s,k)=>s.classList.toggle('on', k===i));
+  document.getElementById('pg-'+si).textContent = `${i+1} / ${sl.length}`;
+  document.querySelectorAll(`#dots-${si} .dot`).forEach((d,k)=>d.classList.toggle('on', k===i));
+}
+document.addEventListener('click', e=>{
+  const n = e.target.closest('[data-nav]');
+  if(n){ const si=+n.dataset.s; showSlide(si, cur[si] + (n.dataset.nav==='next'?1:-1)); return; }
+  const d = e.target.closest('.dot');
+  if(d){ showSlide(+d.dataset.s, +d.dataset.i); return; }
+});
+document.addEventListener('keydown', e=>{
+  const p = document.querySelector('.panel.on'); if(!p) return;
+  const si = +p.dataset.p; if(si>=DATA.length) return;
+  if(e.key==='ArrowRight') showSlide(si, cur[si]+1);
+  if(e.key==='ArrowLeft') showSlide(si, cur[si]-1);
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.opt[data-si]'); if(!o) return;
+  const si=+o.dataset.si, qi=+o.dataset.qi, oi=+o.dataset.oi;
+  const f = DATA[si].fa[qi];
+  const box = document.querySelector(`[data-fa="${si}-${qi}"]`);
+  box.querySelectorAll('.opt').forEach((b,k)=>{
+    b.disabled = true;
+    if(k===f.a) b.classList.add('right'); else if(k===oi) b.classList.add('wrong');
+  });
+  const fb = document.getElementById(`fb-${si}-${qi}`);
+  const ok = oi===f.a;
+  fb.className = 'fb on ' + (ok?'ok':'no');
+  fb.innerHTML = (ok?'✅ <b>答對了！</b> ':'❌ <b>再想想。</b> ') + f.e;
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.exo');
+  if(o && !o.disabled){
+    const box = o.closest('.exq');
+    const ans = +box.dataset.a, pick = +o.dataset.i;
+    if(pick === ans){
+      box.querySelectorAll('.exo').forEach(b=>{ b.disabled=true; if(+b.dataset.i===ans) b.classList.add('right'); });
+      box.querySelector('.exsol').classList.add('on');
+      box.querySelector('.exlock').classList.add('hide');
+    } else {
+      o.classList.add('wrong','shake');
+      setTimeout(()=>o.classList.remove('shake'), 420);
+      o.disabled = true;
+      const lock = box.querySelector('.exlock');
+      lock.innerHTML = '🔒 再想想 —— 答對才會顯示詳解'; lock.style.color='var(--pink)';
+    }
+  }
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.opt[data-quiz]'); if(!o) return;
+  const i = +o.dataset.quiz;
+  o.parentElement.querySelectorAll('.opt').forEach(b=>b.classList.remove('right','wrong'));
+  o.classList.add('right'); o.dataset.sel='1';
+  o.parentElement.querySelectorAll('.opt').forEach(b=>{ if(b!==o) delete b.dataset.sel; });
+});
+document.getElementById('gradeBtn').addEventListener('click', ()=>{
+  let right=0;
+  QUIZ.forEach((q,i)=>{
+    const fb = document.getElementById('qfb-'+i);
+    let ok=false, picked=null;
+    if(q.type==='fill'){
+      const inp = document.querySelector(`.fill[data-quiz="${i}"]`);
+      const v = (inp.value||'').trim().replace(/−/g,'-').replace(/\s/g,'');
+      ok = q.a.some(a=>a.replace(/−/g,'-').replace(/\s/g,'')===v);
+      inp.style.borderBottomColor = ok?'var(--green)':'var(--pink)';
+    } else {
+      const sel = document.querySelector(`.opt[data-quiz="${i}"][data-sel="1"]`);
+      if(sel){ picked=+sel.dataset.oi; ok = (q.type==='tf') ? (picked===1)===q.a : picked===q.a; }
+      document.querySelectorAll(`.opt[data-quiz="${i}"]`).forEach(b=>{
+        b.classList.remove('right','wrong');
+        const bi=+b.dataset.oi;
+        const isAns = (q.type==='tf') ? ((bi===1)===q.a) : (bi===q.a);
+        if(isAns) b.classList.add('right'); else if(picked===bi) b.classList.add('wrong');
+      });
+    }
+    if(ok) right++;
+    fb.className='fb on '+(ok?'ok':'no');
+    fb.innerHTML = (ok?'✅ <b>正確</b> ':'❌ <b>錯誤</b> ') + q.e;
+  });
+  const s = document.getElementById('score');
+  const pct = Math.round(right/QUIZ.length*100);
+  s.style.display='block';
+  s.innerHTML = `成績：<b>${right} / ${QUIZ.length}</b>　（${pct} 分）　${pct>=80?'🏆 很棒！':pct>=60?'💪 再加油':'📖 建議重看重點'}`;
+});
+document.getElementById('resetQuiz').addEventListener('click', ()=>{
+  document.querySelectorAll('.opt[data-quiz]').forEach(b=>{b.classList.remove('right','wrong'); delete b.dataset.sel;});
+  document.querySelectorAll('.fill').forEach(i=>{i.value=''; i.style.borderBottomColor='var(--yellow)';});
+  document.querySelectorAll('[id^="qfb-"]').forEach(f=>f.className='fb');
+  document.getElementById('score').style.display='none';
+});
+
+/* ===== 闖關遊戲 ===== */
+const G = {lv:0, score:0, streak:0, best:0, t:20, timer:null, cur:null, answered:false};
+function gShow(id){ ['gStart','gPlay','gEnd'].forEach(x=>document.getElementById(x).classList.toggle('on', x===id)); }
+function gChips(){
+  document.getElementById('gChips').innerHTML = GAME.map((g,i)=>
+    `<div class="lvchip ${i<G.lv?'done':i===G.lv?'now':''}">${i+1}. ${g.name}</div>`).join('');
+}
+function gLoad(){
+  if(G.lv>=GAME.length){ gFinish(); return; }
+  G.answered=false; G.t=20;
+  const bank = GAME[G.lv].qs;
+  G.cur = bank[Math.floor(Math.random()*bank.length)];
+  document.getElementById('hLv').textContent = (G.lv+1)+'/'+GAME.length;
+  document.getElementById('hSc').textContent = G.score;
+  document.getElementById('hStk').textContent = G.streak;
+  document.getElementById('gQ').innerHTML = `<span style="color:var(--blue);font-size:15px;">第 ${G.lv+1} 關 · ${GAME[G.lv].name}</span><br>${G.cur.q}`;
+  document.getElementById('gO').innerHTML = G.cur.o.map((o,i)=>
+    `<button class="gopt" data-g="${i}">${'ABCD'[i]}. ${o}</button>`).join('');
+  document.getElementById('gFb').className='gfb';
+  document.getElementById('gNext').style.display='none';
+  gChips();
+  clearInterval(G.timer);
+  G.timer = setInterval(()=>{
+    G.t -= 0.1;
+    document.getElementById('hT').textContent = Math.max(0,G.t).toFixed(0);
+    document.getElementById('tFill').style.width = Math.max(0,G.t/20*100)+'%';
+    if(G.t<=0){ clearInterval(G.timer); gAnswer(-1); }
+  },100);
+}
+function gAnswer(pick){
+  if(G.answered) return;
+  G.answered = true; clearInterval(G.timer);
+  const ans = G.cur.a, ok = pick===ans;
+  document.querySelectorAll('.gopt').forEach((b,i)=>{
+    b.disabled=true;
+    if(i===ans) b.classList.add('right'); else if(i===pick) b.classList.add('wrong');
+  });
+  let gain=0, sb=0, tb=0;
+  if(ok){
+    G.streak++; G.best=Math.max(G.best,G.streak);
+    sb = Math.min(5, G.streak-1); tb = Math.min(5, Math.floor(G.t/4));
+    gain = 10+sb+tb; G.score += gain;
+  } else { G.streak = 0; }
+  document.getElementById('hSc').textContent = G.score;
+  document.getElementById('hStk').textContent = G.streak;
+  const fb = document.getElementById('gFb');
+  fb.className = 'gfb on '+(ok?'ok':'no');
+  fb.innerHTML = (ok? `✅ <b>答對！+${gain} 分</b>（基礎10 + 連擊${sb} + 速度${tb}）<br>`
+                    : (pick===-1?'⏰ <b>時間到！</b><br>':'❌ <b>答錯了</b><br>')) + G.cur.e;
+  document.getElementById('gNext').style.display='inline-block';
+  document.getElementById('gNext').textContent = (G.lv>=GAME.length-1)?'看成績 🏁':'下一關 ▶';
+}
+function gFinish(){
+  clearInterval(G.timer);
+  const max = GAME.length*20, pct = Math.round(G.score/max*100);
+  const rank = pct>=85?['🏆','數論大師']:pct>=70?['🥇','高手']:pct>=50?['🥈','不錯']:['📖','再加油'];
+  document.getElementById('gRank').textContent = rank[0];
+  document.getElementById('gFinal').innerHTML = `<b class="hl">${G.score}</b> / ${max} 分　·　${rank[1]}`;
+  document.getElementById('gStats').innerHTML = `最高連擊 <b class="hl">${G.best}</b>　·　完成 ${GAME.length} 關`;
+  gShow('gEnd');
+}
+document.getElementById('gGo').addEventListener('click', ()=>{ G.lv=0;G.score=0;G.streak=0;G.best=0; gShow('gPlay'); gLoad(); });
+document.getElementById('gAgain').addEventListener('click', ()=>{ G.lv=0;G.score=0;G.streak=0;G.best=0; gShow('gPlay'); gLoad(); });
+document.getElementById('gNext').addEventListener('click', ()=>{ G.lv++; gLoad(); });
+document.addEventListener('click', e=>{ const b=e.target.closest('.gopt'); if(!b||b.disabled) return; gAnswer(+b.dataset.g); });
+
+/* ===== Canvas ===== */
+const VIZ = {}; let DPR=1;
+
+function axes(ctx, w, h, M){
+  const pad=20, cx=w/2, cy=h/2;
+  const U=Math.min((w-pad*2)/(2*M),(h-pad*2)/(2*M));
+  const X=v=>cx+v*U, Y=v=>cy-v*U;
+  ctx.strokeStyle='rgba(243,239,226,.07)'; ctx.lineWidth=1;
+  for(let g=-M; g<=M; g++){
+    ctx.beginPath(); ctx.moveTo(X(g),Y(-M)); ctx.lineTo(X(g),Y(M)); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(X(-M),Y(g)); ctx.lineTo(X(M),Y(g)); ctx.stroke();
+  }
+  ctx.strokeStyle='rgba(243,239,226,.55)'; ctx.lineWidth=1.4;
+  ctx.beginPath(); ctx.moveTo(X(-M),cy); ctx.lineTo(X(M),cy); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(cx,Y(-M)); ctx.lineTo(cx,Y(M)); ctx.stroke();
+  return {X,Y,U,cx,cy};
+}
+/* 畫 ax+by=c 在 [-M,M]，回傳是否畫出 */
+function drawEq(ctx, X, Y, M, a, b, c, col, lw, dash){
+  ctx.strokeStyle=col; ctx.lineWidth=lw||2.2;
+  if(dash) ctx.setLineDash(dash); else ctx.setLineDash([]);
+  const pts=[];
+  if(b!==0){
+    for(let i=0;i<=100;i++){ const x=-M+2*M*i/100, y=(c-a*x)/b;
+      if(y>=-M-0.01 && y<=M+0.01) pts.push([x,y]); }
+  } else { // 垂直線 x = c/a
+    const x=c/a; pts.push([x,-M]); pts.push([x,M]);
+  }
+  if(pts.length){ ctx.beginPath(); ctx.moveTo(X(pts[0][0]),Y(pts[0][1]));
+    pts.forEach(p=>ctx.lineTo(X(p[0]),Y(p[1]))); ctx.stroke(); }
+  ctx.setLineDash([]);
+}
+
+/* ① 畫線器（截距法）*/
+const LINES=[
+  {a:2,b:3,c:12, s:'2x + 3y = 12'},
+  {a:1,b:1,c:5,  s:'x + y = 5'},
+  {a:3,b:1,c:6,  s:'3x + y = 6'},
+  {a:1,b:-2,c:4, s:'x − 2y = 4'},
+  {a:2,b:1,c:-4, s:'2x + y = −4'},
+];
+/* ② 兩直線位置關係 */
+const POS=[
+  {name:'相交 → 唯一解', l1:[1,1,5], l2:[2,-1,4], kind:'x', sol:'(3, 2)', elim:'相加 3x=9 → x=3（正常）'},
+  {name:'平行 → 無解',   l1:[1,1,5], l2:[1,1,8], kind:'0', sol:'無解',   elim:'相減 0 = −3（矛盾）'},
+  {name:'重合 → 無限多解', l1:[1,1,5], l2:[2,2,10], kind:'i', sol:'無限多解', elim:'第二式÷2 → 0 = 0（恆成立）'},
+];
+/* ③ 截距三角形 */
+const TRI=[
+  {a:3,b:1,c:6,  s:'3x + y = 6',  xi:2, yi:6, area:6},
+  {a:2,b:1,c:6,  s:'2x + y = 6',  xi:3, yi:6, area:9},
+  {a:4,b:3,c:12, s:'4x + 3y = 12',xi:3, yi:4, area:6},
+  {a:1,b:2,c:8,  s:'x + 2y = 8',  xi:8, yi:4, area:16},
+];
+
+function initViz(cv){
+  const si=+cv.dataset.si, kind=cv.dataset.viz;
+  const ctx=cv.getContext('2d');
+  const st=VIZ[si]={kind,cv,ctx};
+  const ctrl=document.querySelector(`[data-ctrl="${si}"]`);
+  if(kind==='plot'){
+    st.i=0; st.step=0; // 0=原式 1=x截距 2=y截距 3=連線
+    ctrl.innerHTML=`<div class="readout" id="ro-${si}"></div>
+      <button class="btn" data-t="step" data-si="${si}" style="background:rgba(242,217,121,.2);border-color:var(--yellow);color:var(--yellow);font-weight:700;">下一步 ▶</button>
+      <button class="btn" data-t="next" data-si="${si}">🔀 換方程式</button>`;
+  } else if(kind==='pos'){
+    st.i=0;
+    ctrl.innerHTML=`<div class="readout" id="ro-${si}"></div>
+      <button class="btn" data-t="next" data-si="${si}" style="background:rgba(242,217,121,.2);border-color:var(--yellow);color:var(--yellow);font-weight:700;">🔀 換一種位置</button>`;
+  } else {
+    st.i=0;
+    ctrl.innerHTML=`<div class="readout" id="ro-${si}"></div>
+      <button class="btn" data-t="next" data-si="${si}" style="background:rgba(242,217,121,.2);border-color:var(--yellow);color:var(--yellow);font-weight:700;">🔀 換直線</button>`;
+  }
+  draw(si);
+}
+
+function drawPlot(st, ctx, w, h, ro){
+  const E=LINES[st.i], M=7, {X,Y,cx,cy}=axes(ctx,w,h,M);
+  const xi=E.c/E.a, yi=E.c/E.b;
+  ctx.textAlign='center'; ctx.fillStyle='rgba(242,217,121,.85)'; ctx.font='bold 13px "Noto Sans TC"';
+  ctx.fillText(`用截距法畫 ${E.s}`, w/2, 13);
+  const dot=(x,y,col,lab)=>{ ctx.beginPath(); ctx.arc(X(x),Y(y),5,0,7); ctx.fillStyle=col; ctx.fill();
+    ctx.strokeStyle='#16281c'; ctx.lineWidth=1.3; ctx.stroke();
+    ctx.fillStyle=col; ctx.font='bold 12px "Noto Serif TC"'; ctx.textAlign='left';
+    ctx.fillText(lab, X(x)+7, Y(y)-6); ctx.textAlign='center'; };
+  if(st.step>=1) dot(xi,0,'#98c9dc',`(${xi},0)`);
+  if(st.step>=2) dot(0,yi,'#a6d6a0',`(0,${yi})`);
+  if(st.step>=3) drawEq(ctx,X,Y,M,E.a,E.b,E.c,'#f2d979',2.4);
+  const notes=['原式 —— 準備用截距法','令 y=0 → x 截距','令 x=0 → y 截距','連兩截距 → 直線完成！'];
+  ctx.fillStyle='rgba(243,239,226,.75)'; ctx.font='12px "Noto Sans TC"';
+  ctx.fillText(notes[st.step], w/2, h-8);
+  ro.innerHTML=`<b>${E.s}</b>　｜　x 截距 <b style="color:var(--blue)">(${xi}, 0)</b>、y 截距 <b style="color:var(--green)">(0, ${yi})</b>`
+    + `　｜　${notes[st.step]}`;
+}
+
+function drawPos(st, ctx, w, h, ro){
+  const E=POS[st.i], M=6, {X,Y}=axes(ctx,w,h,M);
+  const col=E.kind==='x'?'#a6d6a0':(E.kind==='0'?'#eda0a8':'#98c9dc');
+  ctx.textAlign='center'; ctx.fillStyle=col; ctx.font='bold 13px "Noto Sans TC"';
+  ctx.fillText(`【${E.name}】`, w/2, 13);
+  drawEq(ctx,X,Y,M,E.l1[0],E.l1[1],E.l1[2],'#eda0a8',2.2);
+  if(E.kind==='i'){
+    drawEq(ctx,X,Y,M,E.l2[0],E.l2[1],E.l2[2],'#f2d979',1.5,[5,4]);
+  } else {
+    drawEq(ctx,X,Y,M,E.l2[0],E.l2[1],E.l2[2],'#98c9dc',2.2);
+  }
+  if(E.kind==='x'){ // 畫交點 (3,2)
+    ctx.beginPath(); ctx.arc(X(3),Y(2),6,0,7); ctx.fillStyle='#f2d979'; ctx.fill();
+    ctx.strokeStyle='#16281c'; ctx.lineWidth=1.5; ctx.stroke();
+    ctx.fillStyle='#f2d979'; ctx.font='bold 12px "Noto Serif TC"'; ctx.textAlign='left';
+    ctx.fillText('(3,2)', X(3)+8, Y(2)-7); ctx.textAlign='center';
+  }
+  ctx.fillStyle='rgba(243,239,226,.7)'; ctx.font='11px "Noto Sans TC"';
+  ctx.fillText('消去 → '+E.elim, w/2, h-8);
+  const f=v=>v[2];
+  ro.innerHTML=`【<b style="color:${col}">${E.name}</b>】　兩直線　→　消去結果：<b>${E.elim}</b>　→　<b style="color:${col}">${E.sol}</b>`;
+}
+
+function drawTri(st, ctx, w, h, ro){
+  const E=TRI[st.i], M=Math.max(E.xi,E.yi)+1, {X,Y,cx,cy}=axes(ctx,w,h,M);
+  ctx.textAlign='center'; ctx.fillStyle='rgba(242,217,121,.85)'; ctx.font='bold 13px "Noto Sans TC"';
+  ctx.fillText(`${E.s} 與兩軸圍成的三角形`, w/2, 13);
+  // 三角形
+  ctx.fillStyle='rgba(242,217,121,.15)'; ctx.strokeStyle='#f2d979'; ctx.lineWidth=1.8;
+  ctx.beginPath(); ctx.moveTo(X(0),Y(0)); ctx.lineTo(X(E.xi),Y(0)); ctx.lineTo(X(0),Y(E.yi)); ctx.closePath();
+  ctx.fill(); ctx.stroke();
+  const dot=(x,y,lab)=>{ ctx.beginPath(); ctx.arc(X(x),Y(y),4.5,0,7); ctx.fillStyle='#f2d979'; ctx.fill();
+    ctx.fillStyle='#f2d979'; ctx.font='bold 11px "Noto Serif TC"'; ctx.textAlign='left';
+    ctx.fillText(lab, X(x)+6, Y(y)+(y===0?14:-5)); ctx.textAlign='center'; };
+  dot(E.xi,0,`(${E.xi},0)`); dot(0,E.yi,`(0,${E.yi})`);
+  ctx.fillStyle='rgba(243,239,226,.8)'; ctx.font='12px "Noto Serif TC"';
+  ctx.fillText(`面積 = ½ × ${E.xi} × ${E.yi} = ${E.area}`, w/2, h-8);
+  ro.innerHTML=`<b>${E.s}</b>　｜　x 截距 <b>${E.xi}</b>、y 截距 <b>${E.yi}</b>　｜　面積 = ½ × ${E.xi} × ${E.yi} = <b style="color:var(--yellow)">${E.area}</b>`;
+}
+
+function draw(si){
+  const st=VIZ[si]; if(!st) return;
+  const {cv,ctx,kind}=st, w=cv.width/DPR, h=cv.height/DPR;
+  ctx.clearRect(0,0,w,h);
+  const ro=document.getElementById('ro-'+si);
+  if(kind==='plot') drawPlot(st,ctx,w,h,ro);
+  else if(kind==='pos') drawPos(st,ctx,w,h,ro);
+  else if(kind==='tri') drawTri(st,ctx,w,h,ro);
+}
+
+document.addEventListener('click', e=>{
+  const btn=e.target.closest('[data-t]'); if(!btn) return;
+  const si=+btn.dataset.si, st=VIZ[si]; if(!st) return;
+  const t=btn.dataset.t;
+  if(st.kind==='plot'){
+    if(t==='step') st.step=Math.min(3, st.step+1);
+    if(t==='next'){ st.i=(st.i+1)%LINES.length; st.step=0; }
+  } else if(st.kind==='pos'){
+    if(t==='next') st.i=(st.i+1)%POS.length;
+  } else {
+    if(t==='next') st.i=(st.i+1)%TRI.length;
+  }
+  draw(si);
+});
+
+function resizeAll(){
+  DPR = Math.min(2, window.devicePixelRatio||1);
+  document.querySelectorAll('canvas.viz').forEach(cv=>{
+    const w = cv.clientWidth || cv.parentElement.clientWidth;
+    const h = (cv.dataset.viz==='plot') ? 218 : (cv.dataset.viz==='pos' ? 218 : 218);
+    cv.width=w*DPR; cv.height=h*DPR; cv.style.height=h+'px';
+    cv.getContext('2d').setTransform(DPR,0,0,DPR,0,0);
+  });
+  Object.keys(VIZ).forEach(k=>draw(+k));
+}
+document.querySelectorAll('canvas.viz').forEach(initViz);
+window.addEventListener('resize', resizeAll);
+resizeAll();
+</script>
+<div class="hint">← → 鍵可翻頁　·　Canvas 用按鈕互動　·　支援平板觸控</div>
+</body></html>

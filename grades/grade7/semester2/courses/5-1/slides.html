@@ -1,0 +1,367 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>七下 5-1 統計圖表和資料分析｜授課簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--chalk-soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);padding:24px 14px;}
+.deck{max-width:1060px;margin:0 auto;}
+.print-hint{text-align:center;color:rgba(243,239,226,0.4);font-size:13px;padding:6px 0 22px;}
+.print-hint b{color:var(--yellow);}
+.slide{position:relative;min-height:576px;margin:0 auto 26px;padding:44px 52px;
+ background:radial-gradient(ellipse at 18% 12%,rgba(255,255,255,0.05),transparent 45%),
+  radial-gradient(ellipse at 82% 88%,rgba(255,255,255,0.035),transparent 45%),
+  radial-gradient(ellipse at 60% 40%,rgba(120,160,130,0.10),transparent 60%),
+  linear-gradient(160deg,var(--board) 0%,var(--board2) 100%);
+ border-radius:14px;box-shadow:0 10px 34px rgba(0,0,0,0.55);
+ border:1px solid rgba(242,217,121,0.14);overflow:hidden;display:flex;flex-direction:column;}
+.slide::before{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;
+ background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.014) 40px,rgba(255,255,255,0.014) 41px),
+  radial-gradient(circle at 30% 72%,rgba(255,255,255,0.03),transparent 8%),
+  radial-gradient(circle at 76% 24%,rgba(255,255,255,0.025),transparent 7%);}
+.slide::after{content:attr(data-pg);position:absolute;bottom:15px;right:26px;font-family:'Caveat',cursive;font-size:20px;color:rgba(243,239,226,0.4);}
+.tag{position:absolute;top:20px;right:26px;font-family:'Caveat',cursive;font-size:22px;color:var(--pink);transform:rotate(4deg);}
+.eyebrow{font-family:'Caveat',cursive;font-size:25px;color:var(--yellow);letter-spacing:1px;margin-bottom:8px;opacity:0.92;}
+.slide h1{font-family:'Noto Serif TC',serif;font-size:46px;font-weight:900;line-height:1.28;letter-spacing:1px;
+ text-shadow:0 0 1px rgba(243,239,226,0.5),1px 1px 0 rgba(0,0,0,0.2);}
+.slide h2{font-family:'Noto Serif TC',serif;font-size:33px;font-weight:900;color:var(--yellow);
+ margin-bottom:20px;padding-bottom:11px;border-bottom:2px dashed rgba(242,217,121,0.4);
+ text-shadow:0 0 1px rgba(242,217,121,0.4);}
+.slide p{font-size:20px;line-height:1.85;margin-bottom:12px;}
+.big-center{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;}
+.big-center .lead,.lead{font-family:'Caveat',cursive;font-size:30px;color:var(--blue);letter-spacing:1px;margin-top:12px;}
+ul{list-style:none;margin:8px 0;}
+li{font-size:21px;line-height:1.95;padding-left:32px;position:relative;margin-bottom:4px;}
+li::before{content:'\2726';position:absolute;left:4px;color:var(--yellow);font-size:17px;top:3px;}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.34);border-radius:12px;padding:15px 21px;margin:12px 0;font-size:19px;line-height:1.8;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.38);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.38);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.34);}
+.eg{position:relative;background:rgba(0,0,0,0.24);border:1px solid rgba(242,217,121,0.2);border-radius:10px;padding:17px 22px;margin:12px 0;font-size:19px;}
+.eg::before{content:'';position:absolute;top:-8px;left:38px;width:58px;height:15px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.eg .q{color:var(--blue);font-weight:700;margin-bottom:8px;font-size:19px;}
+.eg .a{color:var(--green);font-weight:700;margin-top:6px;}
+.eg .stp{color:var(--chalk-soft);font-size:18px;margin:3px 0;}
+.tip{display:flex;gap:12px;align-items:flex-start;background:rgba(242,217,121,0.09);border:1.5px dashed rgba(242,217,121,0.45);border-radius:12px;padding:13px 18px;margin:10px 0;}
+.tip .ic{font-size:24px;line-height:1;}.tip .tx{font-size:18px;line-height:1.7;}
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:18px;}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.26);padding:10px 14px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.two{display:flex;gap:20px;}.two>div{flex:1;}
+svg{display:block;margin:6px auto;max-width:100%;}
+@media print{
+ body{background:#0a130d;padding:0;}
+ .deck{max-width:none;}
+ .print-hint{display:none;}
+ .slide{margin:0;border-radius:0;box-shadow:none;min-height:100vh;
+  page-break-after:always;break-after:page;padding:32px 44px;justify-content:center;}
+ .slide:last-child{page-break-after:auto;break-after:auto;}
+ .slide h1{font-size:40px;}
+ .slide h2{font-size:27px;margin-bottom:13px;padding-bottom:8px;}
+ .slide p{font-size:17px;line-height:1.55;margin-bottom:6px;}
+ li{font-size:17px;line-height:1.55;margin-bottom:1px;padding-left:26px;}
+ .eyebrow{font-size:21px;margin-bottom:5px;}
+ .big-center .lead,.lead{font-size:26px;}
+ .box{font-size:16px;padding:10px 16px;margin:6px 0;line-height:1.5;}
+ .eg{font-size:16px;padding:11px 16px;margin:6px 0;}
+ .tip{font-size:16px;padding:10px 14px;margin:6px 0;}
+ .tbl{font-size:15px;margin:6px 0;}
+ .tbl th,.tbl td{padding:6px 10px;}
+ svg{max-height:210px;}
+}
+</style></head><body><div class="deck">
+<div class="print-hint">共 <b>22</b> 張・列印時每張一頁（Ctrl+P → 橫向 → 背景圖形）</div>
+
+
+<!-- 1 -->
+<div class="slide" data-pg="1 / 22"><div class="tag">Start!</div><div class="big-center">
+<div class="eyebrow">國一下學期・第五章 統計</div>
+<h1>5-1　統計圖表和資料分析</h1>
+<div class="lead">資料要先整理成<span style="color:#f2d979;">圖表</span>才看得出趨勢<br>
+平均數、中位數、眾數各有各的用途</div><svg viewBox="0 0 340 150" width="340" height="150" style="display:block;margin:4px auto;"><line x1="34" y1="120" x2="328" y2="120" stroke="rgba(243,239,226,.6)" stroke-width="1.5"/><line x1="34" y1="22" x2="34" y2="120" stroke="rgba(243,239,226,.6)" stroke-width="1.5"/><rect x="48.7" y="34.8" width="44.1" height="85.2" fill="#98c9dc" rx="2"/><text x="70.8" y="30.8" font-family="Noto Sans TC" font-size="11" fill="#98c9dc" text-anchor="middle" >30</text><text x="70.8" y="134.0" font-family="Noto Sans TC" font-size="11" fill="rgba(243,239,226,.75)" text-anchor="middle" >甲</text><rect x="122.2" y="49.0" width="44.1" height="71.0" fill="#a6d6a0" rx="2"/><text x="144.2" y="45.0" font-family="Noto Sans TC" font-size="11" fill="#a6d6a0" text-anchor="middle" >25</text><text x="144.2" y="134.0" font-family="Noto Sans TC" font-size="11" fill="rgba(243,239,226,.75)" text-anchor="middle" >乙</text><rect x="195.7" y="68.9" width="44.1" height="51.1" fill="#f2d979" rx="2"/><text x="217.8" y="64.9" font-family="Noto Sans TC" font-size="11" fill="#f2d979" text-anchor="middle" >18</text><text x="217.8" y="134.0" font-family="Noto Sans TC" font-size="11" fill="rgba(243,239,226,.75)" text-anchor="middle" >丙</text><rect x="269.2" y="85.9" width="44.1" height="34.1" fill="#eda0a8" rx="2"/><text x="291.2" y="81.9" font-family="Noto Sans TC" font-size="11" fill="#eda0a8" text-anchor="middle" >12</text><text x="291.2" y="134.0" font-family="Noto Sans TC" font-size="11" fill="rgba(243,239,226,.75)" text-anchor="middle" >丁</text></svg>
+</div></div>
+
+<!-- 2 -->
+<div class="slide" data-pg="2 / 22"><div class="tag">目標</div><div class="body">
+<h2>本節學習目標</h2>
+<ul>
+<li>能選用<span class="hl">長條圖、折線圖、圓形圖、直方圖</span>四種統計圖表</li>
+<li>能把分組資料整理成<span class="hl-b">次數分配表</span>（相對次數、累積次數）</li>
+<li>能由次數分配表畫出<span class="hl">直方圖</span>、看懂折線圖趨勢</li>
+<li>能算<span class="hl">平均數、中位數、眾數</span></li>
+<li>理解三種代表值的<span class="hl-r">性質與適用</span>（極端值的影響）</li>
+</ul>
+<div class="box y">一句話:<span class="hl">選對圖看趨勢，選對代表值講真相 —— 有極端值時，中位數比平均數誠實。</span></div>
+</div></div>
+
+<!-- 3 -->
+<div class="slide" data-pg="3 / 22"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心觀念</div>
+<h2>四種統計圖表，各有專長</h2>
+<table class="tbl">
+<tr><th style="width:20%;">圖表</th><th style="width:34%;">長什麼樣</th><th>最適合呈現</th></tr>
+<tr><td class="hl-b">長條圖</td><td>一根根<b>分開</b>的長條</td><td class="hl">比較各類別大小</td></tr>
+<tr><td class="hl-b">折線圖</td><td>折線連接各時間點</td><td class="hl">隨時間的變化趨勢</td></tr>
+<tr><td class="hl-b">圓形圖</td><td>一個圓切成扇形</td><td class="hl">各部分佔整體比例</td></tr>
+<tr><td class="hl-b">直方圖</td><td>長條<b>緊貼無空隙</b></td><td class="hl">連續資料的分布</td></tr>
+</table>
+<div class="box y" style="text-align:center;font-size:20px;">
+選圖三問:<span class="hl">比較？→ 長條　變化？→ 折線　佔比？→ 圓形　連續分布？→ 直方</span></div>
+</div></div>
+
+<!-- 4 -->
+<div class="slide" data-pg="4 / 22"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">圖解</div>
+<h2>折線看趨勢、圓形看佔比</h2><div class="two" style="flex-direction:row;align-items:center;"><div style="flex:1;"><svg viewBox="0 0 330 150" width="330" height="150" style="display:block;margin:4px auto;"><text x="165.0" y="14.0" font-family="Noto Sans TC" font-size="12" fill="#f2d979" text-anchor="middle" font-weight="700">月銷售量（折線圖）</text><line x1="34" y1="122" x2="318" y2="122" stroke="rgba(243,239,226,.6)" stroke-width="1.5"/><line x1="34" y1="22" x2="34" y2="122" stroke="rgba(243,239,226,.6)" stroke-width="1.5"/><polyline points="34.0,102.2 90.8,80.7 147.6,105.1 204.4,70.7 261.2,66.4 318.0,44.9" fill="none" stroke="#98c9dc" stroke-width="2.5"/><circle cx="34.0" cy="102.2" r="3.5" fill="#f2d979"/><text x="34.0" y="135.0" font-family="Noto Sans TC" font-size="10" fill="rgba(243,239,226,.7)" text-anchor="middle" >1月</text><circle cx="90.8" cy="80.7" r="3.5" fill="#f2d979"/><text x="90.8" y="135.0" font-family="Noto Sans TC" font-size="10" fill="rgba(243,239,226,.7)" text-anchor="middle" >2月</text><circle cx="147.6" cy="105.1" r="3.5" fill="#f2d979"/><text x="147.6" y="135.0" font-family="Noto Sans TC" font-size="10" fill="rgba(243,239,226,.7)" text-anchor="middle" >3月</text><circle cx="204.4" cy="70.7" r="3.5" fill="#f2d979"/><text x="204.4" y="135.0" font-family="Noto Sans TC" font-size="10" fill="rgba(243,239,226,.7)" text-anchor="middle" >4月</text><circle cx="261.2" cy="66.4" r="3.5" fill="#f2d979"/><text x="261.2" y="135.0" font-family="Noto Sans TC" font-size="10" fill="rgba(243,239,226,.7)" text-anchor="middle" >5月</text><circle cx="318.0" cy="44.9" r="3.5" fill="#f2d979"/><text x="318.0" y="135.0" font-family="Noto Sans TC" font-size="10" fill="rgba(243,239,226,.7)" text-anchor="middle" >6月</text></svg></div><div style="flex:1;"><svg viewBox="0 0 210 170" width="210" height="170" style="display:block;margin:4px auto;"><text x="105.0" y="14.0" font-family="Noto Sans TC" font-size="12" fill="#f2d979" text-anchor="middle" font-weight="700">市佔率（圓形圖）</text><path d="M70 91.0 L70.0 29.0 A62 62 0 0 1 129.0 110.2 Z" fill="#98c9dc" fill-opacity="0.85" stroke="#16281c" stroke-width="1.2"/><text x="101.1" y="72.4" font-family="Noto Sans TC" font-size="11" fill="#16281c" text-anchor="middle" font-weight="700">30%</text><path d="M70 91.0 L129.0 110.2 A62 62 0 0 1 50.8 150.0 Z" fill="#a6d6a0" fill-opacity="0.85" stroke="#16281c" stroke-width="1.2"/><text x="87.5" y="129.3" font-family="Noto Sans TC" font-size="11" fill="#16281c" text-anchor="middle" font-weight="700">25%</text><path d="M70 91.0 L50.8 150.0 A62 62 0 0 1 11.0 71.8 Z" fill="#f2d979" fill-opacity="0.85" stroke="#16281c" stroke-width="1.2"/><text x="35.7" y="112.5" font-family="Noto Sans TC" font-size="11" fill="#16281c" text-anchor="middle" font-weight="700">25%</text><path d="M70 91.0 L11.0 71.8 A62 62 0 0 1 70.0 29.0 Z" fill="#eda0a8" fill-opacity="0.85" stroke="#16281c" stroke-width="1.2"/><text x="47.4" y="63.9" font-family="Noto Sans TC" font-size="11" fill="#16281c" text-anchor="middle" font-weight="700">20%</text><rect x="120" y="31" width="11" height="11" fill="#98c9dc" rx="2"/><text x="136.0" y="40.0" font-family="Noto Sans TC" font-size="11" fill="rgba(243,239,226,.8)" text-anchor="start" >甲 30%</text><rect x="120" y="53" width="11" height="11" fill="#a6d6a0" rx="2"/><text x="136.0" y="62.0" font-family="Noto Sans TC" font-size="11" fill="rgba(243,239,226,.8)" text-anchor="start" >乙 25%</text><rect x="120" y="75" width="11" height="11" fill="#f2d979" rx="2"/><text x="136.0" y="84.0" font-family="Noto Sans TC" font-size="11" fill="rgba(243,239,226,.8)" text-anchor="start" >丙 25%</text><rect x="120" y="97" width="11" height="11" fill="#eda0a8" rx="2"/><text x="136.0" y="106.0" font-family="Noto Sans TC" font-size="11" fill="rgba(243,239,226,.8)" text-anchor="start" >丁 20%</text></svg></div></div><div class="box y" style="text-align:center;">折線圖看「上升/下降」的<b>趨勢</b>；圓形圖看各塊佔整體的<b>百分比</b>。</div>
+</div></div>
+
+<!-- 5 -->
+<div class="slide" data-pg="5 / 22"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">圓形圖的計算</div>
+<h2>圓心角與佔比</h2>
+<div class="box y" style="text-align:center;font-size:22px;padding:16px;">
+某扇形佔比 = <span class="fm">圓心角 ÷ 360°</span></div>
+<div class="eg">
+<div class="q">圓形圖中某扇形圓心角是 72°，佔全體幾 %？</div>
+<div class="stp"><span class="fm">72 ÷ 360 = 0.2 = 20%</span></div>
+<div class="a">20%</div>
+</div>
+<div class="box g" style="text-align:center;">反過來:某類佔 25% → 圓心角 = 0.25 × 360° = 90°。</div>
+</div></div>
+
+<!-- 6 -->
+<div class="slide" data-pg="6 / 22"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">細目②　次數分配表（借自八上5-1）</div>
+<h2>把一堆資料分組看清楚</h2>
+<table class="tbl">
+<tr><th style="width:26%;">欄位</th><th>定義</th></tr>
+<tr><td class="hl-b">次數</td><td>落在該組（區間）的資料筆數</td></tr>
+<tr><td class="hl-b">相對次數</td><td>該組次數 ÷ <b>總筆數</b>（可寫百分比）</td></tr>
+<tr><td class="hl-b">累積次數</td><td>從第一組加到<b>這一組為止</b>的次數總和</td></tr>
+</table>
+<div class="box r" style="text-align:center;">
+⚠️ 別混淆:<span class="hl">相對次數 = 當組 ÷ 總數；累積次數 = 到此組的加總。</span></div>
+</div></div>
+
+<!-- 7 -->
+<div class="slide" data-pg="7 / 22"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 1　難度 ★★☆　相對次數</div>
+<h2>40 條輪胎的胎壓分布</h2>
+<table class="tbl">
+<tr><th>胎壓(PSI)</th><th>28–30</th><th>30–32</th><th>32–34</th><th>34–36</th></tr>
+<tr><td>次數</td><td>5</td><td>14</td><td>16</td><td>5</td></tr>
+<tr><td class="hl">相對次數</td><td class="hl">12.5%</td><td class="hl">35%</td><td class="hl-g">40%</td><td class="hl">12.5%</td></tr>
+</table>
+<div class="eg">
+<div class="stp">總數 = 5+14+16+5 = 40</div>
+<div class="stp">相對次數 = 各組次數 ÷ 40 → 5/40=12.5%、14/40=35%、16/40=40%、5/40=12.5%</div>
+<div class="a">最多的是 32–34 PSI（16 條，40%）</div>
+</div>
+</div></div>
+
+<!-- 8 -->
+<div class="slide" data-pg="8 / 22"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 2　難度 ★★★　累積次數</div>
+<h2>100 位學生的英語成績</h2>
+<table class="tbl">
+<tr><th>分數</th><th>40–50</th><th>50–60</th><th>60–70</th><th>70–80</th><th>80–90</th><th>90–100</th></tr>
+<tr><td>次數</td><td>5</td><td>12</td><td>22</td><td>30</td><td>20</td><td>11</td></tr>
+<tr><td class="hl-b">累積</td><td>5</td><td>17</td><td>39</td><td class="hl">69</td><td>89</td><td>100</td></tr>
+</table>
+<div class="eg">
+<div class="stp"><b>(1) 70 分以上</b>　30+20+11 = 61 人 → 相對次數 61%</div>
+<div class="stp"><b>(2) 眾數區間</b>　次數最多 30 → 70–80 分段</div>
+<div class="stp"><b>(3) 中位數區間</b>　第 50 人落在累積 39～69 之間 → 70–80 分段</div>
+</div>
+</div></div>
+
+<!-- 9 -->
+<div class="slide" data-pg="9 / 22"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">細目③　直方圖</div>
+<h2>直方圖:長條「緊貼」</h2><div class="two" style="flex-direction:row;align-items:center;"><div style="flex:1;"><svg viewBox="0 0 300 150" width="300" height="150" style="display:block;margin:4px auto;"><text x="150.0" y="14.0" font-family="Noto Sans TC" font-size="12" fill="#f2d979" text-anchor="middle" font-weight="700">長條圖（分開）</text><line x1="34" y1="120" x2="288" y2="120" stroke="rgba(243,239,226,.6)" stroke-width="1.5"/><line x1="34" y1="22" x2="34" y2="120" stroke="rgba(243,239,226,.6)" stroke-width="1.5"/><rect x="50.9" y="34.8" width="50.8" height="85.2" fill="#98c9dc" rx="2"/><text x="76.3" y="30.8" font-family="Noto Sans TC" font-size="11" fill="#98c9dc" text-anchor="middle" >30</text><text x="76.3" y="134.0" font-family="Noto Sans TC" font-size="11" fill="rgba(243,239,226,.75)" text-anchor="middle" >甲</text><rect x="135.6" y="49.0" width="50.8" height="71.0" fill="#a6d6a0" rx="2"/><text x="161.0" y="45.0" font-family="Noto Sans TC" font-size="11" fill="#a6d6a0" text-anchor="middle" >25</text><text x="161.0" y="134.0" font-family="Noto Sans TC" font-size="11" fill="rgba(243,239,226,.75)" text-anchor="middle" >乙</text><rect x="220.3" y="68.9" width="50.8" height="51.1" fill="#f2d979" rx="2"/><text x="245.7" y="64.9" font-family="Noto Sans TC" font-size="11" fill="#f2d979" text-anchor="middle" >18</text><text x="245.7" y="134.0" font-family="Noto Sans TC" font-size="11" fill="rgba(243,239,226,.75)" text-anchor="middle" >丙</text></svg></div><div style="flex:1;"><svg viewBox="0 0 320 150" width="320" height="150" style="display:block;margin:4px auto;"><text x="160.0" y="14.0" font-family="Noto Sans TC" font-size="12" fill="#f2d979" text-anchor="middle" font-weight="700">直方圖（緊貼）</text><line x1="34" y1="118" x2="308" y2="118" stroke="rgba(243,239,226,.6)" stroke-width="1.5"/><line x1="34" y1="22" x2="34" y2="118" stroke="rgba(243,239,226,.6)" stroke-width="1.5"/><rect x="34.0" y="90.2" width="54.8" height="27.8" fill="#98c9dc" fill-opacity="0.85" stroke="#16281c" stroke-width="1"/><text x="61.4" y="86.2" font-family="Noto Sans TC" font-size="10" fill="rgba(243,239,226,.85)" text-anchor="middle" >5</text><text x="61.4" y="131.0" font-family="Noto Sans TC" font-size="9.5" fill="rgba(243,239,226,.7)" text-anchor="middle" >0–1</text><rect x="88.8" y="62.3" width="54.8" height="55.7" fill="#a6d6a0" fill-opacity="0.85" stroke="#16281c" stroke-width="1"/><text x="116.2" y="58.3" font-family="Noto Sans TC" font-size="10" fill="rgba(243,239,226,.85)" text-anchor="middle" >10</text><text x="116.2" y="131.0" font-family="Noto Sans TC" font-size="9.5" fill="rgba(243,239,226,.7)" text-anchor="middle" >1–2</text><rect x="143.6" y="34.5" width="54.8" height="83.5" fill="#f2d979" fill-opacity="0.85" stroke="#16281c" stroke-width="1"/><text x="171.0" y="30.5" font-family="Noto Sans TC" font-size="10" fill="rgba(243,239,226,.85)" text-anchor="middle" >15</text><text x="171.0" y="131.0" font-family="Noto Sans TC" font-size="9.5" fill="rgba(243,239,226,.7)" text-anchor="middle" >2–3</text><rect x="198.4" y="73.5" width="54.8" height="44.5" fill="#eda0a8" fill-opacity="0.85" stroke="#16281c" stroke-width="1"/><text x="225.8" y="69.5" font-family="Noto Sans TC" font-size="10" fill="rgba(243,239,226,.85)" text-anchor="middle" >8</text><text x="225.8" y="131.0" font-family="Noto Sans TC" font-size="9.5" fill="rgba(243,239,226,.7)" text-anchor="middle" >3–4</text><rect x="253.2" y="106.9" width="54.8" height="11.1" fill="#c9aee0" fill-opacity="0.85" stroke="#16281c" stroke-width="1"/><text x="280.6" y="102.9" font-family="Noto Sans TC" font-size="10" fill="rgba(243,239,226,.85)" text-anchor="middle" >2</text><text x="280.6" y="131.0" font-family="Noto Sans TC" font-size="9.5" fill="rgba(243,239,226,.7)" text-anchor="middle" >4+</text></svg></div></div><div class="box y" style="text-align:center;">
+<span class="hl">長條圖分開</span>（類別型:甲乙丙）;<span class="hl">直方圖緊貼</span>（連續型:時間、身高區間）。</div>
+</div></div>
+
+<!-- 10 -->
+<div class="slide" data-pg="10 / 22"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">細目④　代表值</div>
+<h2>平均數、中位數、眾數</h2>
+<table class="tbl">
+<tr><th style="width:20%;">代表值</th><th style="width:40%;">算法</th><th>特性</th></tr>
+<tr><td class="hl-b">平均數</td><td>總和 ÷ 個數</td><td class="hl-r">受極端值影響大</td></tr>
+<tr><td class="hl-b">中位數</td><td>排序後最中間的值</td><td class="hl-g">不受極端值影響</td></tr>
+<tr><td class="hl-b">眾數</td><td>出現最多次的值</td><td>可能多個或沒有</td></tr>
+</table>
+<div class="box r" style="text-align:center;">
+⚠️ 求中位數前<span class="hl">一定要先「由小到大排列」</span>!</div>
+</div></div>
+
+<!-- 11 -->
+<div class="slide" data-pg="11 / 22"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">中位數的取法</div>
+<h2>奇數取中間，偶數取兩個平均</h2>
+<div class="two" style="flex-direction:row;">
+<div class="box g" style="flex:1;"><b>奇數個（5 個）</b><br>
+3、5、<span class="hl">7</span>、9、11<br>
+→ 中位數 = 正中間 = <b class="hl-g">7</b></div>
+<div class="box y" style="flex:1;"><b>偶數個（6 個）</b><br>
+2、4、<span class="hl">6、8</span>、10、12<br>
+→ 中位數 = (6+8)/2 = <b class="hl-g">7</b></div>
+</div>
+<div class="box r" style="text-align:center;">
+⚠️ 常見錯誤:偶數個只取一個 → 要取<b>中間兩個的平均</b>。</div>
+</div></div>
+
+<!-- 12 -->
+<div class="slide" data-pg="12 / 22"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 3　難度 ★☆☆</div>
+<h2>求三種代表值</h2>
+<div class="eg">
+<div class="q">10 位同學數學成績:72、85、90、68、85、78、92、85、70、75</div>
+<div class="stp"><b>排列</b>　68、70、72、75、78、85、85、85、90、92</div>
+<div class="stp"><b>平均數</b>　800 ÷ 10 = 80</div>
+<div class="stp"><b>中位數</b>　第 5、6 個 (78+85)/2 = 81.5</div>
+<div class="stp"><b>眾數</b>　85（出現 3 次，最多）</div>
+<div class="a">平均 80、中位數 81.5、眾數 85</div>
+</div>
+</div></div>
+
+<!-- 13 -->
+<div class="slide" data-pg="13 / 22"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 4　難度 ★★☆　極端值</div>
+<h2>薪資:平均數騙了你</h2>
+<div class="eg">
+<div class="q">7 位員工月薪（萬）:3、3、3、4、5、6、20</div>
+<div class="stp"><b>平均數</b>　44 ÷ 7 ≈ 6.3 萬</div>
+<div class="stp"><b>中位數</b>　排序第 4 個 = 4 萬</div>
+<div class="stp"><b>判斷</b>　平均被 20 萬拉高，但 6 人都低於 6.3 萬 → 平均<span class="hl-r">不具代表性</span></div>
+<div class="a">中位數 4 萬更接近多數員工實況</div>
+</div>
+<div class="box y" style="text-align:center;">
+💡 <span class="hl">薪資、房價這類有極端值的資料 → 優先看中位數。</span></div>
+</div></div>
+
+<!-- 14 -->
+<div class="slide" data-pg="14 / 22"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 5　難度 ★★☆　總分法</div>
+<h2>少計一個成績，求新平均</h2>
+<div class="eg">
+<div class="q">30 人平均 76 分，發現少計一位同學的 88 分，求新平均。</div>
+<div class="stp"><b>原總分</b>　76 × 30 = 2280</div>
+<div class="stp"><b>加入後</b>　(2280 + 88) ÷ 31 = 2368 ÷ 31 ≈ 76.4</div>
+<div class="a">約 76.4 分</div>
+</div>
+<div class="box g" style="text-align:center;">
+💡 平均數問題的萬用鑰匙:<span class="hl">總和 = 平均 × 個數</span>。先還原總和再算。</div>
+</div></div>
+
+<!-- 15 -->
+<div class="slide" data-pg="15 / 22"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 6　難度 ★★★　加權平均</div>
+<h2>用次數表算平均與眾數</h2>
+<table class="tbl">
+<tr><th>時數</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th></tr>
+<tr><td>人數</td><td>3</td><td>8</td><td>12</td><td>10</td><td>7</td></tr>
+</table>
+<div class="eg">
+<div class="stp"><b>總人數</b>　3+8+12+10+7 = 40</div>
+<div class="stp"><b>加權總時數</b>　0×3+1×8+2×12+3×10+4×7 = 90</div>
+<div class="stp"><b>平均</b>　90 ÷ 40 = 2.25 小時　<b>眾數</b>　2 小時（12 人最多）</div>
+</div>
+<div class="box y" style="text-align:center;">加權平均:<span class="hl">Σ(數值×次數) ÷ 總次數</span>。</div>
+</div></div>
+
+<!-- 16 -->
+<div class="slide" data-pg="16 / 22"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 7　難度 ★★★</div>
+<h2>已知平均與中位數求 x</h2>
+<div class="eg">
+<div class="q">5 個數:3、x、7、9、11，平均 7、中位數也 7，求 x。</div>
+<div class="stp"><b>由平均</b>　(3+x+7+9+11)/5 = 7 → 30+x = 35 → x = 5</div>
+<div class="stp"><b>驗算中位數</b>　排列 3、5、7、9、11，第 3 個 = 7 ✓</div>
+<div class="a">x = 5</div>
+</div>
+<div class="box g" style="text-align:center;">💡 有兩個條件 → 先用其中一個求解，再用另一個<b>驗算</b>。</div>
+</div></div>
+
+<!-- 17 -->
+<div class="slide" data-pg="17 / 22"><div class="tag">精選</div><div class="body">
+<div class="eyebrow">隨堂精選</div>
+<h2>快速檢查</h2>
+<table class="tbl">
+<tr><th style="width:56%;">題目</th><th>答案</th></tr>
+<tr><td>5,8,3,8,6,8,2 的眾數、中位數</td><td class="fm hl">眾數 8、中位數 6</td></tr>
+<tr><td>4,6,9,11 的中位數</td><td class="fm hl">7.5</td></tr>
+<tr><td>前 20 人均 75、後 20 人均 83，全班?</td><td class="fm hl">79</td></tr>
+<tr><td>某組 8 筆 / 共 40 筆，相對次數?</td><td class="fm hl">20%</td></tr>
+<tr><td>「一組資料只有一個眾數」對嗎?</td><td class="hl-r">錯（可多個/沒有）</td></tr>
+</table>
+<div class="box y" style="text-align:center;">偶數個中位數 = 中間兩個平均;相對次數 = 當組 ÷ 總數。</div>
+</div></div>
+
+<!-- 18 -->
+<div class="slide" data-pg="18 / 22"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 1　【銷售量】</div>
+<h2>平均與中位數比較</h2>
+<div class="box">5 個月銷售量（條）:1200、1350、1180、1420、1450</div>
+<div class="eg">
+<div class="stp"><b>(1) 平均</b>　6600 ÷ 5 = 1320 條</div>
+<div class="stp"><b>(2) 中位數</b>　排序 1180,1200,<b>1350</b>,1420,1450 → 1350;與平均 1320 差 30，接近 → 分布均勻</div>
+<div class="stp"><b>(3) 加第 6 月 1600</b>　(6600+1600)/6 ≈ 1366.7 條，增加約 47 條</div>
+</div>
+</div></div>
+
+<!-- 19 -->
+<div class="slide" data-pg="19 / 22"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 2　【手機使用時間】</div>
+<h2>連續資料 → 直方圖</h2><div class="two" style="flex-direction:row;align-items:center;"><div style="flex:1.1;"><div class="eg"><div class="stp"><b>(1) 全班</b>　5+10+15+8+2 = 40 人</div><div class="stp"><b>(2) 2 小時以上</b>　15+8+2 = 25 人 → 25/40 = 62.5%</div><div class="stp"><b>(3) 圖表</b>　直方圖（時間連續、區間緊接）</div></div></div><div style="flex:1;"><svg viewBox="0 0 310 155" width="310" height="155" style="display:block;margin:4px auto;"><text x="155.0" y="14.0" font-family="Noto Sans TC" font-size="12" fill="#f2d979" text-anchor="middle" font-weight="700">使用時間分布</text><line x1="34" y1="123" x2="298" y2="123" stroke="rgba(243,239,226,.6)" stroke-width="1.5"/><line x1="34" y1="22" x2="34" y2="123" stroke="rgba(243,239,226,.6)" stroke-width="1.5"/><rect x="34.0" y="93.7" width="52.8" height="29.3" fill="#98c9dc" fill-opacity="0.85" stroke="#16281c" stroke-width="1"/><text x="60.4" y="89.7" font-family="Noto Sans TC" font-size="10" fill="rgba(243,239,226,.85)" text-anchor="middle" >5</text><text x="60.4" y="136.0" font-family="Noto Sans TC" font-size="9.5" fill="rgba(243,239,226,.7)" text-anchor="middle" >0-1</text><rect x="86.8" y="64.4" width="52.8" height="58.6" fill="#a6d6a0" fill-opacity="0.85" stroke="#16281c" stroke-width="1"/><text x="113.2" y="60.4" font-family="Noto Sans TC" font-size="10" fill="rgba(243,239,226,.85)" text-anchor="middle" >10</text><text x="113.2" y="136.0" font-family="Noto Sans TC" font-size="9.5" fill="rgba(243,239,226,.7)" text-anchor="middle" >1-2</text><rect x="139.6" y="35.2" width="52.8" height="87.8" fill="#f2d979" fill-opacity="0.85" stroke="#16281c" stroke-width="1"/><text x="166.0" y="31.2" font-family="Noto Sans TC" font-size="10" fill="rgba(243,239,226,.85)" text-anchor="middle" >15</text><text x="166.0" y="136.0" font-family="Noto Sans TC" font-size="9.5" fill="rgba(243,239,226,.7)" text-anchor="middle" >2-3</text><rect x="192.4" y="76.2" width="52.8" height="46.8" fill="#eda0a8" fill-opacity="0.85" stroke="#16281c" stroke-width="1"/><text x="218.8" y="72.2" font-family="Noto Sans TC" font-size="10" fill="rgba(243,239,226,.85)" text-anchor="middle" >8</text><text x="218.8" y="136.0" font-family="Noto Sans TC" font-size="9.5" fill="rgba(243,239,226,.7)" text-anchor="middle" >3-4</text><rect x="245.2" y="111.3" width="52.8" height="11.7" fill="#c9aee0" fill-opacity="0.85" stroke="#16281c" stroke-width="1"/><text x="271.6" y="107.3" font-family="Noto Sans TC" font-size="10" fill="rgba(243,239,226,.85)" text-anchor="middle" >2</text><text x="271.6" y="136.0" font-family="Noto Sans TC" font-size="9.5" fill="rgba(243,239,226,.7)" text-anchor="middle" >4+</text></svg></div></div>
+</div></div>
+
+<!-- 20 -->
+<div class="slide" data-pg="20 / 22"><div class="tag">避雷</div><div class="body">
+<h2>避雷指南:六個最常見錯誤</h2>
+<table class="tbl">
+<tr><th style="width:46%;">❌ 錯誤</th><th>✓ 正確</th></tr>
+<tr><td>求中位數前忘記排列</td><td><b class="hl-g">先由小到大排列</b>再取中間</td></tr>
+<tr><td>偶數個中位數只取一個</td><td>取中間<b class="hl-g">兩個的平均</b></td></tr>
+<tr><td>有極端值仍用平均代表</td><td>薪資/房價 → 優先<b class="hl-g">中位數</b></td></tr>
+<tr><td>相對次數 ⇄ 累積次數混淆</td><td>相對=當組÷總；累積=到此組總和</td></tr>
+<tr><td>直方圖畫成分開長條</td><td>連續資料<b class="hl-g">長條緊貼無空隙</b></td></tr>
+<tr><td>認為眾數一定唯一</td><td>眾數可<b class="hl-g">多個或沒有</b></td></tr>
+</table>
+<div class="box y" style="text-align:center;">代表值三兄弟:<span class="hl">平均看整體、中位抗極端、眾數看熱門。</span></div>
+</div></div>
+
+<!-- 21 -->
+<div class="slide" data-pg="21 / 22"><div class="tag">總結</div><div class="body">
+<h2>本節總結</h2>
+<ul>
+<li><span class="hl">四種圖表</span>:比較→長條、變化→折線、佔比→圓形、連續分布→直方</li>
+<li><span class="hl">次數分配表</span>:相對次數（÷總數）、累積次數（到此組加總）</li>
+<li><span class="hl">三代表值</span>:平均（總和÷個數）、中位（排序取中）、眾數（最多次）</li>
+<li><span class="hl-r">有極端值時，中位數比平均數更能代表一般狀況</span></li>
+</ul>
+<div class="box g" style="text-align:center;font-size:20px;">
+🔗 <b>承先</b>:七上分數與百分比、加權平均<br>
+🔗 <b>啟後</b>:<span class="hl">八上 5-1 四分位數與盒狀圖、九下 統計判讀 —— 更進階的資料分析。</span></div>
+</div></div>
+
+<!-- 22 -->
+<div class="slide" data-pg="22 / 22"><div class="tag">Next</div><div class="big-center">
+<div class="eyebrow">下節預告</div>
+<h1 style="font-size:38px;">6-1　線對稱與幾何基礎</h1>
+<div class="lead">從數與統計，走向<span style="color:#eda0a8;">圖形的世界</span><br>
+點、線、角、線對稱 —— 幾何的第一步</div>
+<div class="box y" style="max-width:820px;margin:18px auto 0;font-size:20px;">
+統計整理「資料」，幾何整理「圖形」。<br>
+<span class="hl">下一章我們學怎麼描述、作圖、判斷對稱。</span></div>
+</div></div>
+
+</div></body></html>
