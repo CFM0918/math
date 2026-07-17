@@ -1,0 +1,241 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>九上 4-1 圓的基本性質｜授課簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--chalk-soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);padding:24px 14px;}
+.deck{max-width:1060px;margin:0 auto;}
+.print-hint{text-align:center;color:rgba(243,239,226,0.4);font-size:13px;padding:6px 0 22px;}
+.print-hint b{color:var(--yellow);}
+.slide{position:relative;min-height:576px;margin:0 auto 26px;padding:44px 52px;
+ background:radial-gradient(ellipse at 18% 12%,rgba(255,255,255,0.05),transparent 45%),
+  radial-gradient(ellipse at 82% 88%,rgba(255,255,255,0.035),transparent 45%),
+  radial-gradient(ellipse at 60% 40%,rgba(120,160,130,0.10),transparent 60%),
+  linear-gradient(160deg,var(--board) 0%,var(--board2) 100%);
+ border-radius:14px;box-shadow:0 10px 34px rgba(0,0,0,0.55);
+ border:1px solid rgba(242,217,121,0.14);overflow:hidden;display:flex;flex-direction:column;}
+.slide::before{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;
+ background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.014) 40px,rgba(255,255,255,0.014) 41px),
+  radial-gradient(circle at 30% 72%,rgba(255,255,255,0.03),transparent 8%),
+  radial-gradient(circle at 76% 24%,rgba(255,255,255,0.025),transparent 7%);}
+.slide::after{content:attr(data-pg);position:absolute;bottom:15px;right:26px;font-family:'Caveat',cursive;font-size:20px;color:rgba(243,239,226,0.4);}
+.tag{position:absolute;top:20px;right:26px;font-family:'Caveat',cursive;font-size:22px;color:var(--pink);transform:rotate(4deg);}
+.eyebrow{font-family:'Caveat',cursive;font-size:25px;color:var(--yellow);letter-spacing:1px;margin-bottom:8px;opacity:0.92;}
+.slide h1{font-family:'Noto Serif TC',serif;font-size:46px;font-weight:900;line-height:1.28;letter-spacing:1px;
+ text-shadow:0 0 1px rgba(243,239,226,0.5),1px 1px 0 rgba(0,0,0,0.2);}
+.slide h2{font-family:'Noto Serif TC',serif;font-size:33px;font-weight:900;color:var(--yellow);
+ margin-bottom:20px;padding-bottom:11px;border-bottom:2px dashed rgba(242,217,121,0.4);
+ text-shadow:0 0 1px rgba(242,217,121,0.4);}
+.slide p{font-size:20px;line-height:1.85;margin-bottom:12px;}
+.big-center{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;}
+.big-center .lead,.lead{font-family:'Caveat',cursive;font-size:30px;color:var(--blue);letter-spacing:1px;margin-top:12px;}
+ul{list-style:none;margin:8px 0;}
+li{font-size:21px;line-height:1.95;padding-left:32px;position:relative;margin-bottom:4px;}
+li::before{content:'\2726';position:absolute;left:4px;color:var(--yellow);font-size:17px;top:3px;}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.34);border-radius:12px;padding:15px 21px;margin:12px 0;font-size:19px;line-height:1.8;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.38);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.38);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.34);}
+.eg{position:relative;background:rgba(0,0,0,0.24);border:1px solid rgba(242,217,121,0.2);border-radius:10px;padding:17px 22px;margin:12px 0;font-size:19px;}
+.eg::before{content:'';position:absolute;top:-8px;left:38px;width:58px;height:15px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.eg .q{color:var(--blue);font-weight:700;margin-bottom:8px;font-size:19px;}
+.eg .a{color:var(--green);font-weight:700;margin-top:6px;}
+.eg .stp{color:var(--chalk-soft);font-size:18px;margin:3px 0;}
+.tip{display:flex;gap:12px;align-items:flex-start;background:rgba(242,217,121,0.09);border:1.5px dashed rgba(242,217,121,0.45);border-radius:12px;padding:13px 18px;margin:10px 0;}
+.tip .ic{font-size:24px;line-height:1;}.tip .tx{font-size:18px;line-height:1.7;}
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:18px;}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.26);padding:10px 14px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.two{display:flex;gap:20px;}.two>div{flex:1;}
+svg{display:block;margin:6px auto;max-width:100%;}
+@media print{
+ body{background:#0a130d;padding:0;}
+ .deck{max-width:none;}
+ .print-hint{display:none;}
+ .slide{margin:0;border-radius:0;box-shadow:none;min-height:100vh;
+  page-break-after:always;break-after:page;padding:32px 44px;justify-content:center;}
+ .slide:last-child{page-break-after:auto;break-after:auto;}
+ .slide h1{font-size:40px;}
+ .slide h2{font-size:27px;margin-bottom:13px;padding-bottom:8px;}
+ .slide p{font-size:17px;line-height:1.55;margin-bottom:6px;}
+ li{font-size:17px;line-height:1.55;margin-bottom:1px;padding-left:26px;}
+ .eyebrow{font-size:21px;margin-bottom:5px;}
+ .big-center .lead,.lead{font-size:26px;}
+ .box{font-size:16px;padding:10px 16px;margin:6px 0;line-height:1.5;}
+ .eg{font-size:16px;padding:11px 16px;margin:6px 0;}
+ .tip{font-size:16px;padding:10px 14px;margin:6px 0;}
+ .tbl{font-size:15px;margin:6px 0;}
+ .tbl th,.tbl td{padding:6px 10px;}
+ svg{max-height:210px;}
+}
+</style></head><body><div class="deck">
+<div class="print-hint">共 <b>12</b> 張・列印時每張一頁（Ctrl+P → 橫向 → 背景圖形）</div>
+
+
+<!-- 1 -->
+<div class="slide" data-pg="1 / 12"><div class="tag">Start!</div><div class="big-center">
+<div class="eyebrow">國三上學期・第四章 圓</div>
+<h1>4-1　圓的基本性質</h1>
+<div class="lead">弦、弧、圓心角<br>
+圓的對稱性讓<span style="color:#f2d979;">等弦、等弧、等圓心角</span>三者對應</div><svg viewBox="0 0 200 160" width="200" height="160" style="display:block;margin:0 auto;"><circle cx="100" cy="78" r="62" fill="none" stroke="#98c9dc" stroke-width="2"/><line x1="53" y1="118" x2="147" y2="118" stroke="#f2d979" stroke-width="2"/><line x1="100" y1="78" x2="100" y2="118" stroke="#eda0a8" stroke-width="1.6" stroke-dasharray="3,2"/><line x1="100" y1="78" x2="53" y2="118" stroke="rgba(243,239,226,.4)" stroke-width="1"/><rect x="94" y="106" width="6" height="6" fill="none" stroke="rgba(243,239,226,.5)" stroke-width="1"/><circle cx="100" cy="78" r="2.5" fill="#f3efe2"/><text x="104" y="74" font-size="11" fill="#f3efe2">O</text><text x="41" y="122" font-size="11" fill="#f2d979">A</text><text x="151" y="122" font-size="11" fill="#f2d979">B</text><text x="96" y="132" font-size="10" fill="#eda0a8">M</text><text x="90" y="98" font-size="9" fill="#eda0a8">d</text><text x="100" y="157" font-size="10" fill="rgba(243,239,226,.7)" text-anchor="middle" font-family="Noto Sans TC">OM⊥AB、AM=MB</text></svg>
+</div></div>
+
+<!-- 2 -->
+<div class="slide" data-pg="2 / 12"><div class="tag">目標</div><div class="body">
+<h2>本節學習目標</h2>
+<ul>
+<li>理解<span class="hl">弦、弧、圓心角</span>的定義與關係</li>
+<li>掌握<span class="hl-b">等弦≡等弧≡等圓心角</span></li>
+<li>弦的中垂線<span class="hl-b">過圓心</span></li>
+<li>計算弧長與扇形面積</li>
+</ul>
+<div class="box y">一句話:<span class="hl">圓心到弦畫垂線 → 平分弦。r²=d²+(半弦)²。弧長、扇形都是「圓心角/360°」的比例。</span></div>
+</div></div>
+
+<!-- 3 -->
+<div class="slide" data-pg="3 / 12"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心　弦弧圓心角</div>
+<h2>三者等價 + 公式</h2>
+<table class="tbl">
+<tr><th style="width:26%;">名詞</th><th>內容</th></tr>
+<tr><td class="hl-b">弦</td><td>圓上兩點連線;直徑最長</td></tr>
+<tr><td class="hl-b">弧</td><td>兩點間曲線(劣弧/優弧)</td></tr>
+<tr><td class="hl-b">等價</td><td>同圓:等弦≡等弧≡等圓心角</td></tr>
+<tr><td class="hl-b">弧長/扇形</td><td>(θ/360°)·2πr　/　(θ/360°)·πr²</td></tr>
+</table>
+<div class="box g" style="text-align:center;">相交弦定理:兩弦交於 P → AP·PB=CP·PD。</div>
+</div></div>
+
+<!-- 4 -->
+<div class="slide" data-pg="4 / 12"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">🖍️ 圖解</div>
+<h2>弦的中垂線過圓心</h2>
+<div style="display:flex;flex-direction:row;align-items:center;gap:18px;justify-content:center;">
+<svg viewBox="0 0 180 150" width="180" height="150" style="display:block;margin:0 auto;"><circle cx="100" cy="78" r="62" fill="none" stroke="#98c9dc" stroke-width="2"/><line x1="53" y1="118" x2="147" y2="118" stroke="#f2d979" stroke-width="2"/><line x1="100" y1="78" x2="100" y2="118" stroke="#eda0a8" stroke-width="1.6" stroke-dasharray="3,2"/><line x1="100" y1="78" x2="53" y2="118" stroke="rgba(243,239,226,.4)" stroke-width="1"/><rect x="94" y="106" width="6" height="6" fill="none" stroke="rgba(243,239,226,.5)" stroke-width="1"/><circle cx="100" cy="78" r="2.5" fill="#f3efe2"/><text x="104" y="74" font-size="11" fill="#f3efe2">O</text><text x="41" y="122" font-size="11" fill="#f2d979">A</text><text x="151" y="122" font-size="11" fill="#f2d979">B</text><text x="96" y="132" font-size="10" fill="#eda0a8">M</text><text x="90" y="98" font-size="9" fill="#eda0a8">d</text><text x="90" y="147" font-size="10" fill="rgba(243,239,226,.7)" text-anchor="middle" font-family="Noto Sans TC">OM⊥AB、AM=MB</text></svg>
+<div style="text-align:left;font-size:15px;line-height:1.9;">
+<span style="color:#eda0a8;">■</span> 圓心 O 到弦 AB 的垂線<br>
+<span style="color:#eda0a8;">■</span> 垂足 M 就是<b>弦的中點</b><br>
+<span style="color:#f2d979;">■</span> AM=MB、OM⊥AB<br>
+<span style="color:rgba(243,239,226,.7);">→ r²=d²+(半弦)²</span>
+</div></div>
+<div class="box y" style="text-align:center;">求弦長或圓心距離 → 用半弦、d、r 組成的直角三角形。</div>
+</div></div>
+
+<!-- 5 -->
+<div class="slide" data-pg="5 / 12"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 1、2　難度 ★☆☆~★★☆</div>
+<h2>弦與圓心距離</h2>
+<div class="eg">
+<div class="q">r=10、弦 AB=16，求圓心到弦距離 d</div>
+<div class="stp">AM=8;10²=d²+8² → d²=36 → d=6</div>
+</div>
+<div class="eg">
+<div class="q">r=13、圓心到弦距離=5，求弦長</div>
+<div class="stp">半弦=√(169−25)=12 → 弦長=24</div>
+</div>
+<div class="box y" style="text-align:center;">r、d、半弦 構成直角三角形:r²=d²+(半弦)²。</div>
+</div></div>
+
+<!-- 6 -->
+<div class="slide" data-pg="6 / 12"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 3　難度 ★★☆　弧長扇形</div>
+<h2>圓心角比例</h2>
+<div style="display:flex;flex-direction:row;align-items:center;gap:16px;justify-content:center;">
+<svg viewBox="0 0 170 150" width="170" height="150" style="display:block;margin:0 auto;"><circle cx="95" cy="88" r="60" fill="none" stroke="rgba(152,201,220,.4)" stroke-width="1.5"/><path d="M 95 88 L 43 58 A 60 60 0 0 1 147 58 Z" fill="rgba(242,217,121,.20)" stroke="#f2d979" stroke-width="2"/><circle cx="95" cy="88" r="2.5" fill="#f3efe2"/><text x="91" y="102" font-size="10" fill="#f3efe2">O</text><text x="81" y="74" font-size="11" fill="#f2d979">120°</text><text x="87" y="24" font-size="10" fill="#f2d979">弧</text><text x="85" y="147" font-size="10" fill="rgba(243,239,226,.7)" text-anchor="middle" font-family="Noto Sans TC">弧長=(θ/360)·2πr</text></svg>
+<div class="eg" style="margin:0;">
+<div class="q">r=6、∠AOB=120°</div>
+<div class="stp"><b>弧長</b>　(120/360)·2π·6=4π</div>
+<div class="stp"><b>扇形面積</b>　(120/360)·π·6²=12π</div>
+</div></div>
+<div class="box g" style="text-align:center;">弧長、扇形都是整圓的「θ/360°」倍。</div>
+</div></div>
+
+<!-- 7 -->
+<div class="slide" data-pg="7 / 12"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 4、5　難度 ★★★</div>
+<h2>等弦 & 相交弦定理</h2>
+<div style="display:flex;flex-direction:row;align-items:center;gap:16px;justify-content:center;">
+<svg viewBox="0 0 160 150" width="160" height="150" style="display:block;margin:0 auto;"><circle cx="95" cy="80" r="64" fill="none" stroke="#98c9dc" stroke-width="2"/><line x1="41" y1="52" x2="135" y2="130" stroke="#f2d979" stroke-width="2"/><line x1="55" y1="130" x2="149" y2="52" stroke="#a6d6a0" stroke-width="2"/><circle cx="93" cy="94" r="2.5" fill="#eda0a8"/><text x="29" y="52" font-size="10" fill="#f3efe2">A</text><text x="139" y="138" font-size="10" fill="#f3efe2">B</text><text x="43" y="138" font-size="10" fill="#f3efe2">C</text><text x="153" y="52" font-size="10" fill="#f3efe2">D</text><text x="95" y="90" font-size="10" fill="#f3efe2">P</text><text x="80" y="147" font-size="10" fill="rgba(243,239,226,.7)" text-anchor="middle" font-family="Noto Sans TC">AP·PB = CP·PD</text></svg>
+<div class="eg" style="margin:0;">
+<div class="q">等弦 AB=CD、∠AOB=70°，求 ∠COD</div>
+<div class="stp">等弦對等圓心角 → ∠COD=70°</div>
+<div class="q">相交弦 AP=6 PB=4 CP=3，求 PD</div>
+<div class="stp">6×4=3×PD → PD=8</div>
+</div></div>
+<div class="box y" style="text-align:center;">相交弦定理不需垂直:交點到兩端點乘積相等。</div>
+</div></div>
+
+<!-- 8 -->
+<div class="slide" data-pg="8 / 12"><div class="tag">精選</div><div class="body">
+<div class="eyebrow">隨堂精選</div>
+<h2>快速檢查</h2>
+<table class="tbl">
+<tr><th style="width:60%;">題目</th><th>答案</th></tr>
+<tr><td>r=5 弦6，圓心到弦距離?</td><td class="fm hl">4</td></tr>
+<tr><td>弧長 6π、r=9，圓心角?</td><td class="fm hl">120°</td></tr>
+<tr><td>扇形 24π、120°，半徑?</td><td class="fm hl">6√2</td></tr>
+<tr><td>直徑30 弦18，圓心到弦?</td><td class="fm hl">12</td></tr>
+<tr><td>r=13 平行弦 10、24 兩側相距?</td><td class="fm hl">17</td></tr>
+</table>
+<div class="box y" style="text-align:center;">平行弦兩側:12+5=17;同側則 12−5=7。</div>
+</div></div>
+
+<!-- 9 -->
+<div class="slide" data-pg="9 / 12"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 1　【輪胎截面】</div>
+<h2>弦與內外圓</h2>
+<div class="box">外圓 R=30、內圓 r=20，水平線距圓心 d=24 切外圓於 A、B</div>
+<div class="eg">
+<div class="stp"><b>(1)</b> 半弦=√(30²−24²)=18 → AB=36cm</div>
+<div class="stp"><b>(2)</b> d=24&gt;20 → 弦不與內圓相交</div>
+<div class="stp"><b>(3)</b> sin(∠/2)=18/30=0.6 → ∠AOB≈74°</div>
+</div>
+</div></div>
+
+<!-- 10 -->
+<div class="slide" data-pg="10 / 12"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 2　【披薩分割】</div>
+<h2>扇形均分</h2>
+<div class="box">直徑 40cm 披薩，切 8 等份</div>
+<div class="eg">
+<div class="stp"><b>(1)</b> 每片圓心角 360÷8=45°</div>
+<div class="stp"><b>(2)</b> 弧長=(45/360)·2π·20=5π≈15.7cm</div>
+<div class="stp"><b>(3)</b> 面積=(45/360)·π·20²=50π≈157cm²</div>
+</div>
+</div></div>
+
+<!-- 11 -->
+<div class="slide" data-pg="11 / 12"><div class="tag">避雷</div><div class="body">
+<h2>避雷指南</h2>
+<table class="tbl">
+<tr><th style="width:44%;">❌ 錯誤</th><th>✓ 正確</th></tr>
+<tr><td>弧長與弦長搞混</td><td>弧=<b class="hl-g">曲線</b>、弦=直線</td></tr>
+<tr><td>圓心到弦量到端點</td><td>量到<b class="hl-g">中點(垂足)</b></td></tr>
+<tr><td>忘記中垂線過圓心</td><td>弦的中垂線<b class="hl-g">必過圓心</b></td></tr>
+<tr><td>相交弦定理用錯</td><td class="fm hl-g">AP·PB=CP·PD</td></tr>
+</table>
+<div class="box y" style="text-align:center;">追問:弦的中點在哪?圓心到中點的連線和弦的關係?(垂直)</div>
+</div></div>
+
+<!-- 12 -->
+<div class="slide" data-pg="12 / 12"><div class="tag">總結</div><div class="body">
+<h2>本節總結</h2>
+<ul>
+<li><span class="hl">弦弧圓心角</span>:同圓中三者等價</li>
+<li><span class="hl">中垂線過圓心</span>:r²=d²+(半弦)²</li>
+<li><span class="hl">弧長/扇形</span>:(θ/360°)·2πr、·πr²</li>
+<li><span class="hl-r">相交弦</span>:AP·PB=CP·PD</li>
+</ul>
+<div class="box g" style="text-align:center;font-size:19px;">
+承先:圓的對稱性 → 啟後:<span class="hl">4-2 圓的切線（切線性質、切線長）。</span></div>
+</div></div>
+
+</div></body></html>

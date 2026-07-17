@@ -1,0 +1,240 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>九上 3-2 三角比的應用｜授課簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--chalk-soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);padding:24px 14px;}
+.deck{max-width:1060px;margin:0 auto;}
+.print-hint{text-align:center;color:rgba(243,239,226,0.4);font-size:13px;padding:6px 0 22px;}
+.print-hint b{color:var(--yellow);}
+.slide{position:relative;min-height:576px;margin:0 auto 26px;padding:44px 52px;
+ background:radial-gradient(ellipse at 18% 12%,rgba(255,255,255,0.05),transparent 45%),
+  radial-gradient(ellipse at 82% 88%,rgba(255,255,255,0.035),transparent 45%),
+  radial-gradient(ellipse at 60% 40%,rgba(120,160,130,0.10),transparent 60%),
+  linear-gradient(160deg,var(--board) 0%,var(--board2) 100%);
+ border-radius:14px;box-shadow:0 10px 34px rgba(0,0,0,0.55);
+ border:1px solid rgba(242,217,121,0.14);overflow:hidden;display:flex;flex-direction:column;}
+.slide::before{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;
+ background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.014) 40px,rgba(255,255,255,0.014) 41px),
+  radial-gradient(circle at 30% 72%,rgba(255,255,255,0.03),transparent 8%),
+  radial-gradient(circle at 76% 24%,rgba(255,255,255,0.025),transparent 7%);}
+.slide::after{content:attr(data-pg);position:absolute;bottom:15px;right:26px;font-family:'Caveat',cursive;font-size:20px;color:rgba(243,239,226,0.4);}
+.tag{position:absolute;top:20px;right:26px;font-family:'Caveat',cursive;font-size:22px;color:var(--pink);transform:rotate(4deg);}
+.eyebrow{font-family:'Caveat',cursive;font-size:25px;color:var(--yellow);letter-spacing:1px;margin-bottom:8px;opacity:0.92;}
+.slide h1{font-family:'Noto Serif TC',serif;font-size:46px;font-weight:900;line-height:1.28;letter-spacing:1px;
+ text-shadow:0 0 1px rgba(243,239,226,0.5),1px 1px 0 rgba(0,0,0,0.2);}
+.slide h2{font-family:'Noto Serif TC',serif;font-size:33px;font-weight:900;color:var(--yellow);
+ margin-bottom:20px;padding-bottom:11px;border-bottom:2px dashed rgba(242,217,121,0.4);
+ text-shadow:0 0 1px rgba(242,217,121,0.4);}
+.slide p{font-size:20px;line-height:1.85;margin-bottom:12px;}
+.big-center{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;}
+.big-center .lead,.lead{font-family:'Caveat',cursive;font-size:30px;color:var(--blue);letter-spacing:1px;margin-top:12px;}
+ul{list-style:none;margin:8px 0;}
+li{font-size:21px;line-height:1.95;padding-left:32px;position:relative;margin-bottom:4px;}
+li::before{content:'\2726';position:absolute;left:4px;color:var(--yellow);font-size:17px;top:3px;}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.34);border-radius:12px;padding:15px 21px;margin:12px 0;font-size:19px;line-height:1.8;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.38);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.38);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.34);}
+.eg{position:relative;background:rgba(0,0,0,0.24);border:1px solid rgba(242,217,121,0.2);border-radius:10px;padding:17px 22px;margin:12px 0;font-size:19px;}
+.eg::before{content:'';position:absolute;top:-8px;left:38px;width:58px;height:15px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.eg .q{color:var(--blue);font-weight:700;margin-bottom:8px;font-size:19px;}
+.eg .a{color:var(--green);font-weight:700;margin-top:6px;}
+.eg .stp{color:var(--chalk-soft);font-size:18px;margin:3px 0;}
+.tip{display:flex;gap:12px;align-items:flex-start;background:rgba(242,217,121,0.09);border:1.5px dashed rgba(242,217,121,0.45);border-radius:12px;padding:13px 18px;margin:10px 0;}
+.tip .ic{font-size:24px;line-height:1;}.tip .tx{font-size:18px;line-height:1.7;}
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:18px;}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.26);padding:10px 14px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.two{display:flex;gap:20px;}.two>div{flex:1;}
+svg{display:block;margin:6px auto;max-width:100%;}
+@media print{
+ body{background:#0a130d;padding:0;}
+ .deck{max-width:none;}
+ .print-hint{display:none;}
+ .slide{margin:0;border-radius:0;box-shadow:none;min-height:100vh;
+  page-break-after:always;break-after:page;padding:32px 44px;justify-content:center;}
+ .slide:last-child{page-break-after:auto;break-after:auto;}
+ .slide h1{font-size:40px;}
+ .slide h2{font-size:27px;margin-bottom:13px;padding-bottom:8px;}
+ .slide p{font-size:17px;line-height:1.55;margin-bottom:6px;}
+ li{font-size:17px;line-height:1.55;margin-bottom:1px;padding-left:26px;}
+ .eyebrow{font-size:21px;margin-bottom:5px;}
+ .big-center .lead,.lead{font-size:26px;}
+ .box{font-size:16px;padding:10px 16px;margin:6px 0;line-height:1.5;}
+ .eg{font-size:16px;padding:11px 16px;margin:6px 0;}
+ .tip{font-size:16px;padding:10px 14px;margin:6px 0;}
+ .tbl{font-size:15px;margin:6px 0;}
+ .tbl th,.tbl td{padding:6px 10px;}
+ svg{max-height:210px;}
+}
+</style></head><body><div class="deck">
+<div class="print-hint">共 <b>12</b> 張・列印時每張一頁（Ctrl+P → 橫向 → 背景圖形）</div>
+
+
+<!-- 1 -->
+<div class="slide" data-pg="1 / 12"><div class="tag">Start!</div><div class="big-center">
+<div class="eyebrow">國三上學期・第三章 三角比</div>
+<h1>3-2　三角比的應用</h1>
+<div class="lead">仰角、俯角、方位角<br>
+把測量問題畫成<span style="color:#f2d979;">直角三角形</span>，用三角比解決</div><svg viewBox="0 0 230 150" width="230" height="150" style="display:block;margin:0 auto;"><line x1="30" y1="125" x2="200" y2="125" stroke="rgba(243,239,226,.4)" stroke-width="1" stroke-dasharray="3,2"/><line x1="200" y1="125" x2="200" y2="35" stroke="#a6d6a0" stroke-width="3"/><line x1="30" y1="125" x2="200" y2="35" stroke="#98c9dc" stroke-width="2"/><path d="M 64 125 A 34 34 0 0 0 61 111" fill="none" stroke="#f2d979" stroke-width="1.5"/><text x="67" y="109" font-size="11" fill="#f2d979">θ</text><text x="14" y="129" font-size="10" fill="#98c9dc">A</text><text x="204" y="35" font-size="10" fill="#a6d6a0">B(頂)</text><text x="105" y="139" font-size="9" fill="rgba(243,239,226,.6)">水平線</text><text x="204" y="80" font-size="9" fill="#a6d6a0">高</text><text x="115" y="14" font-size="10" fill="rgba(243,239,226,.7)" text-anchor="middle" font-family="Noto Sans TC">仰角：由水平線向上</text></svg>
+</div></div>
+
+<!-- 2 -->
+<div class="slide" data-pg="2 / 12"><div class="tag">目標</div><div class="body">
+<h2>本節學習目標</h2>
+<ul>
+<li>理解<span class="hl">仰角、俯角</span>(都從水平線量)</li>
+<li>把文字測量題轉為<span class="hl-b">直角三角形圖</span></li>
+<li>用 sin/cos/tan 解仰角俯角</li>
+<li>解兩步驟測量(兩三角形聯立)</li>
+</ul>
+<div class="box y">一句話:<span class="hl">先畫圖標水平線與角，再選公式。h=d·tanθ、h=L·sinθ、d=L·cosθ。</span></div>
+</div></div>
+
+<!-- 3 -->
+<div class="slide" data-pg="3 / 12"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心　仰角俯角與方位</div>
+<h2>都從水平線量起</h2>
+<table class="tbl">
+<tr><th style="width:24%;">名詞</th><th>定義</th></tr>
+<tr><td class="hl-b">仰角</td><td>由水平線向上看目標的夾角</td></tr>
+<tr><td class="hl-b">俯角</td><td>由水平線向下看目標的夾角</td></tr>
+<tr><td class="hl-b">基本式</td><td>h=d·tanθ;斜距 L → h=L·sinθ、d=L·cosθ</td></tr>
+<tr><td class="hl-b">方位角</td><td>北偏東 α:東=L·sinα、北=L·cosα</td></tr>
+</table>
+<div class="box g" style="text-align:center;">⚠️ 從水平線量，不是鉛直線。仰頭=仰角、俯身=俯角。</div>
+</div></div>
+
+<!-- 4 -->
+<div class="slide" data-pg="4 / 12"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 1、2　難度 ★☆☆~★★☆</div>
+<h2>仰角求高 & 俯角求距</h2>
+<div class="eg">
+<div class="q">仰角 45°、水平 AC=50m，求塔高 BC</div>
+<div class="stp">tan45°=BC/50 → BC=50m(仰角 45° 時高=水平距)</div>
+</div>
+<div class="eg">
+<div class="q">飛機高 1200m、俯角 30°，求水平距離</div>
+<div class="stp">tan30°=1200/d → d=1200√3≈2078m</div>
+</div>
+<div class="box y" style="text-align:center;">已知水平求高用 tan;已知高求水平也用 tan(相除)。</div>
+</div></div>
+
+<!-- 5 -->
+<div class="slide" data-pg="5 / 12"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 3　難度 ★★★　兩步驟</div>
+<h2>走近後仰角變大</h2>
+<div style="display:flex;flex-direction:row;align-items:center;gap:16px;justify-content:center;">
+<svg viewBox="0 0 240 140" width="240" height="140" style="display:block;margin:0 auto;"><line x1="20" y1="125" x2="220" y2="125" stroke="rgba(243,239,226,.4)" stroke-width="1"/><line x1="220" y1="125" x2="220" y2="40" stroke="#a6d6a0" stroke-width="3"/><line x1="20" y1="125" x2="220" y2="40" stroke="rgba(152,201,220,.7)" stroke-width="1.6"/><line x1="120" y1="125" x2="220" y2="40" stroke="#f2d979" stroke-width="1.6"/><text x="14" y="138" font-size="10" fill="#98c9dc">A</text><text x="116" y="138" font-size="10" fill="#f2d979">B</text><text x="214" y="138" font-size="10" fill="rgba(243,239,226,.7)">D</text><text x="223" y="40" font-size="10" fill="#a6d6a0">C</text><text x="38" y="121" font-size="9" fill="#98c9dc">30°</text><text x="134" y="121" font-size="9" fill="#f2d979">45°</text><text x="60" y="138" font-size="9" fill="rgba(243,239,226,.6)">200m</text><text x="120" y="12" font-size="10" fill="rgba(243,239,226,.7)" text-anchor="middle" font-family="Noto Sans TC">走近 → 仰角變大</text></svg>
+<div class="eg" style="margin:0;">
+<div class="q">A 仰角 30°，走 200m 到 B 仰角 45°，山高?</div>
+<div class="stp">從 B:tan45°=h/x → x=h</div>
+<div class="stp">從 A:tan30°=h/(x+200) → h√3=h+200</div>
+<div class="stp">h=200/(√3−1)=100(√3+1)≈273m</div>
+</div></div>
+<div class="box g" style="text-align:center;">兩個直角三角形共用高 h，聯立消去 x。</div>
+</div></div>
+
+<!-- 6 -->
+<div class="slide" data-pg="6 / 12"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 4　難度 ★★★　方位角</div>
+<h2>北偏東分量</h2>
+<div style="display:flex;flex-direction:row;align-items:center;gap:16px;justify-content:center;">
+<svg viewBox="0 0 160 150" width="160" height="150" style="display:block;margin:0 auto;"><line x1="85" y1="27" x2="85" y2="153" stroke="rgba(243,239,226,.3)" stroke-width="1"/><line x1="22" y1="90" x2="148" y2="90" stroke="rgba(243,239,226,.3)" stroke-width="1"/><text x="82" y="25" font-size="10" fill="#98c9dc">北</text><text x="150" y="94" font-size="10" fill="rgba(243,239,226,.6)">東</text><line x1="85" y1="90" x2="133" y2="62" stroke="#f2d979" stroke-width="2.5"/><path d="M 85 60 A 30 30 0 0 1 111 75" fill="none" stroke="#eda0a8" stroke-width="1.5"/><text x="95" y="58" font-size="10" fill="#eda0a8">60°</text><text x="129" y="58" font-size="10" fill="#f2d979">B</text><text x="80" y="146" font-size="10" fill="rgba(243,239,226,.7)" text-anchor="middle" font-family="Noto Sans TC">北偏東 60°，航 20 海里</text></svg>
+<div class="eg" style="margin:0;">
+<div class="q">北偏東 60° 航 20 海里，求東向、北向距離</div>
+<div class="stp"><b>東向</b>　20sin60°=10√3≈17.3 海里</div>
+<div class="stp"><b>北向</b>　20cos60°=10 海里</div>
+</div></div>
+<div class="box y" style="text-align:center;">角從正北量:偏東角的 sin 給東向、cos 給北向。</div>
+</div></div>
+
+<!-- 7 -->
+<div class="slide" data-pg="7 / 12"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 5　難度 ★★★　斜面分力</div>
+<h2>三角比在物理</h2>
+<div class="eg">
+<div class="q">斜面坡角 30°、m=50kg、g=10，求重力沿斜面/垂直斜面分力</div>
+<div class="stp"><b>沿斜面</b>　F=mg·sin30°=500×0.5=250N</div>
+<div class="stp"><b>垂直斜面</b>　N=mg·cos30°=250√3≈433N</div>
+</div>
+<div class="box g" style="text-align:center;">坡度越陡(θ 越大)，sinθ 越大 → 沿斜面下滑分力越大。</div>
+</div></div>
+
+<!-- 8 -->
+<div class="slide" data-pg="8 / 12"><div class="tag">精選</div><div class="body">
+<div class="eyebrow">隨堂精選</div>
+<h2>快速檢查</h2>
+<table class="tbl">
+<tr><th style="width:60%;">題目</th><th>答案</th></tr>
+<tr><td>仰角 60° 水平 30m，高?</td><td class="fm hl">30√3≈52m</td></tr>
+<tr><td>北 30km 再東 40km，直線距?</td><td class="fm hl">50km</td></tr>
+<tr><td>北偏西 30° 走 10km，北行?</td><td class="fm hl">5√3≈8.66km</td></tr>
+<tr><td>坡角 30° 60kg，沿斜面分量?</td><td class="fm hl">300N</td></tr>
+<tr><td>A45° B(前100m)60°，山高?</td><td class="fm hl">50(3+√3)</td></tr>
+</table>
+<div class="box y" style="text-align:center;">北 30 東 40 → √(30²+40²)=50(3-4-5)。</div>
+</div></div>
+
+<!-- 9 -->
+<div class="slide" data-pg="9 / 12"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 1　【橋塔仰角】</div>
+<h2>檢查是否符合規定</h2>
+<div class="box">距塔底 60m、仰角 60°、眼高 1.7m</div>
+<div class="eg">
+<div class="stp"><b>(1)</b> h=60tan60°=60√3≈103.9m</div>
+<div class="stp"><b>(2)</b> 塔高=103.9+1.7≈105.6m</div>
+<div class="stp"><b>(3)</b> 規定 95~105m → 略超上限，需複測</div>
+</div>
+<div class="box y" style="text-align:center;">別忘加眼高:實際高 = tan 算出的 h + 眼睛高度。</div>
+</div></div>
+
+<!-- 10 -->
+<div class="slide" data-pg="10 / 12"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 2　【消防梯坡角】</div>
+<h2>反三角求角度</h2>
+<div class="box">梯靠 8m 牆、梯底距牆 3m，安全坡角 60°~75°</div>
+<div class="eg">
+<div class="stp"><b>(1)</b> 梯長=√(8²+3²)=√73m;sinθ=8/√73</div>
+<div class="stp"><b>(2)</b> θ=sin⁻¹(8/√73)≈69.4°</div>
+<div class="stp"><b>(3)</b> 60°&lt;69.4°&lt;75° → 符合規範</div>
+</div>
+</div></div>
+
+<!-- 11 -->
+<div class="slide" data-pg="11 / 12"><div class="tag">避雷</div><div class="body">
+<h2>避雷指南</h2>
+<table class="tbl">
+<tr><th style="width:44%;">❌ 錯誤</th><th>✓ 正確</th></tr>
+<tr><td>仰角、俯角搞反</td><td>仰頭=<b class="hl-g">仰角</b>、俯身=俯角</td></tr>
+<tr><td>從鉛直線量角</td><td>都從<b class="hl-g">水平線</b>量起</td></tr>
+<tr><td>兩步驟題不畫圖</td><td>先<b class="hl-g">畫圖</b>標角與距離再列式</td></tr>
+<tr><td>方位角分量搞混</td><td>北偏東 α:東 <b class="hl-g">sinα</b>、北 cosα</td></tr>
+</table>
+<div class="box y" style="text-align:center;">追問:先畫圖標水平線、角、距離，再選 sin/cos/tan。</div>
+</div></div>
+
+<!-- 12 -->
+<div class="slide" data-pg="12 / 12"><div class="tag">總結</div><div class="body">
+<h2>本節總結</h2>
+<ul>
+<li><span class="hl">仰角/俯角</span>:都從水平線量起</li>
+<li><span class="hl">基本式</span>:h=d·tanθ、h=L·sinθ、d=L·cosθ</li>
+<li><span class="hl">兩步驟</span>:兩三角形共用高，聯立消未知</li>
+<li><span class="hl-r">方位角</span>:北偏東 α → 東 sinα、北 cosα</li>
+</ul>
+<div class="box g" style="text-align:center;font-size:19px;">
+🎉 <b>第三章 三角比 完成!</b> 承先:3-1 定義<br>
+🔗 <b>啟後</b>:<span class="hl">第4章 圓（基本性質、切線、圓心角圓周角）。</span></div>
+</div></div>
+
+</div></body></html>

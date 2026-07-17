@@ -1,0 +1,774 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>九上 2-3 相似形的應用｜互動教學平台</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;--wood:#6b4a32;}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);overscroll-behavior:none;}
+.topbar{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:10px 16px;background:linear-gradient(180deg,#1b2f21,#132218);border-bottom:2px solid var(--wood);box-shadow:0 4px 18px rgba(0,0,0,0.5);}
+.brand{font-family:'Noto Serif TC',serif;font-weight:900;font-size:clamp(15px,2.2vw,20px);color:var(--yellow);white-space:nowrap;}
+.brand small{display:block;font-family:'Caveat',cursive;font-size:14px;color:var(--soft);font-weight:400;}
+.spacer{flex:1;}
+.btn{background:rgba(243,239,226,0.08);border:1.5px solid rgba(243,239,226,0.28);color:var(--chalk);
+  border-radius:10px;padding:7px 13px;font-family:inherit;font-size:14px;cursor:pointer;white-space:nowrap;transition:.15s;}
+.btn:hover{background:rgba(243,239,226,0.16);}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:10px 16px 0;scrollbar-width:none;}
+.tabs::-webkit-scrollbar{display:none;}
+.tab{background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.2);border-bottom:none;
+  color:var(--soft);border-radius:10px 10px 0 0;padding:9px 15px;font-size:14px;cursor:pointer;white-space:nowrap;font-family:inherit;}
+.tab.on{background:var(--board);border-color:var(--yellow);color:var(--yellow);font-weight:700;}
+.tab .n{font-family:'Caveat',cursive;font-size:18px;margin-right:5px;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px 60px;}
+.panel{display:none;}.panel.on{display:block;}
+.card{background:radial-gradient(ellipse at 20% 10%,rgba(255,255,255,0.05),transparent 45%),
+   linear-gradient(160deg,var(--board),var(--board2));
+  border:1.5px solid rgba(242,217,121,0.16);border-radius:14px;padding:18px;margin-bottom:16px;
+  box-shadow:0 8px 26px rgba(0,0,0,0.45);position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 38px,rgba(255,255,255,0.012) 38px,rgba(255,255,255,0.012) 39px);}
+.card>*{position:relative;}
+.card h3{font-family:'Noto Serif TC',serif;font-size:clamp(17px,2.4vw,21px);color:var(--yellow);
+  margin-bottom:12px;padding-bottom:8px;border-bottom:2px dashed rgba(242,217,121,0.35);display:flex;align-items:center;gap:8px;}
+.card h3 .ic{font-size:20px;}
+.goals{display:flex;flex-wrap:wrap;gap:9px;}
+.goal{display:flex;align-items:center;gap:9px;background:rgba(242,217,121,0.07);
+  border:1.5px dashed rgba(242,217,121,0.4);border-radius:22px;padding:8px 15px 8px 8px;
+  font-size:clamp(13.5px,1.8vw,15px);color:var(--yellow);line-height:1.5;}
+.goal .bdg{width:24px;height:24px;border-radius:50%;background:var(--yellow);color:#16281c;
+  font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;flex:none;}
+.deck{position:relative;background:rgba(0,0,0,0.22);border-radius:12px;padding:clamp(16px,3vw,30px);
+  min-height:clamp(260px,42vh,380px);display:flex;flex-direction:column;justify-content:center;}
+.sl{display:none;animation:fade .25s;}.sl.on{display:block;}
+@keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+.sl .eyebrow{font-family:'Caveat',cursive;font-size:20px;color:var(--yellow);margin-bottom:6px;}
+.sl h4{font-family:'Noto Serif TC',serif;font-size:clamp(19px,3vw,27px);margin-bottom:12px;line-height:1.35;}
+.sl p{font-size:clamp(15px,2vw,18px);line-height:1.8;margin-bottom:9px;}
+.sl ul{list-style:none;}
+.sl li{font-size:clamp(15px,2vw,18px);line-height:1.85;padding-left:26px;position:relative;margin-bottom:4px;}
+.sl li::before{content:'✦';position:absolute;left:2px;color:var(--yellow);font-size:14px;top:3px;}
+.nav{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:14px;}
+.nav .pg{font-family:'Caveat',cursive;font-size:20px;color:var(--soft);min-width:64px;text-align:center;}
+.dots{display:flex;gap:6px;justify-content:center;margin-top:10px;flex-wrap:wrap;}
+.dot{width:9px;height:9px;border-radius:50%;background:rgba(243,239,226,0.25);cursor:pointer;border:none;padding:0;}
+.dot.on{background:var(--yellow);transform:scale(1.3);}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.32);border-radius:10px;
+  padding:11px 15px;margin:9px 0;font-size:clamp(14px,1.9vw,17px);line-height:1.7;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.36);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.36);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.32);}
+.two{display:flex;gap:12px;flex-wrap:wrap;}.two>*{flex:1;min-width:220px;}
+.teach{background:rgba(201,174,224,0.12);border:1.5px dashed rgba(201,174,224,0.5);
+  border-radius:10px;padding:11px 15px;margin:9px 0;font-size:clamp(14px,1.8vw,15px);line-height:1.7;}
+.teach b{color:var(--purple);}
+.tbl{width:100%;border-collapse:collapse;margin:9px 0;font-size:clamp(13.5px,1.8vw,16px);}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.24);padding:8px 11px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.cv-wrap{background:rgba(0,0,0,0.25);border-radius:12px;padding:10px;}
+canvas.viz{width:100%;display:block;border-radius:8px;touch-action:none;}
+.ctrl{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center;}
+.readout{font-family:'Noto Serif TC',serif;font-size:clamp(14px,1.9vw,18px);color:var(--chalk);
+  background:rgba(242,217,121,0.1);border:1px solid rgba(242,217,121,0.3);border-radius:8px;
+  padding:7px 12px;flex:1;min-width:220px;}
+.readout b{color:var(--yellow);}
+.q{background:rgba(0,0,0,0.2);border:1px solid rgba(242,217,121,0.18);border-radius:10px;padding:13px 15px;margin:10px 0;}
+.q .qt{font-size:clamp(15px,2vw,17px);margin-bottom:10px;line-height:1.7;}
+.q .qt .qn{font-family:'Caveat',cursive;color:var(--yellow);font-size:20px;margin-right:6px;}
+.opts{display:flex;flex-direction:column;gap:7px;}
+.opt{text-align:left;background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.22);
+  color:var(--chalk);border-radius:9px;padding:9px 13px;font-family:inherit;font-size:15px;cursor:pointer;transition:.15s;line-height:1.5;}
+.opt:hover:not(:disabled){background:rgba(243,239,226,0.13);}
+.opt.right{background:rgba(166,214,160,0.24);border-color:var(--green);color:#fff;font-weight:700;}
+.opt.wrong{background:rgba(237,160,168,0.22);border-color:var(--pink);}
+.opt:disabled{cursor:default;}
+.fb{display:none;margin-top:9px;padding:9px 13px;border-radius:8px;font-size:14.5px;line-height:1.65;}
+.fb.on{display:block;}
+.fb.ok{background:rgba(166,214,160,0.14);border-left:3px solid var(--green);}
+.fb.no{background:rgba(237,160,168,0.14);border-left:3px solid var(--pink);}
+.fill{display:inline-block;background:rgba(0,0,0,0.3);border:none;border-bottom:2px solid var(--yellow);
+  color:var(--yellow);font-family:'Noto Serif TC',serif;font-size:17px;width:110px;text-align:center;padding:3px 5px;margin:0 4px;}
+.fill:focus{outline:none;background:rgba(242,217,121,0.12);}
+.exq{background:rgba(0,0,0,0.26);border:1.5px solid rgba(242,217,121,0.28);border-radius:11px;padding:13px 15px;margin:10px 0;position:relative;}
+.exq::before{content:'';position:absolute;top:-8px;left:32px;width:54px;height:14px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.exq .exq-q{font-size:clamp(14.5px,1.9vw,17px);line-height:1.75;margin-bottom:11px;}
+.exo{text-align:left;background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.22);
+  color:var(--chalk);border-radius:9px;padding:9px 13px;font-family:inherit;font-size:clamp(14px,1.8vw,15.5px);
+  cursor:pointer;transition:.15s;line-height:1.55;width:100%;margin-bottom:6px;display:block;}
+.exo:hover:not(:disabled){background:rgba(243,239,226,0.13);}
+.exo.right{background:rgba(166,214,160,0.26);border-color:var(--green);color:#fff;font-weight:700;}
+.exo.wrong{background:rgba(237,160,168,0.2);border-color:var(--pink);opacity:.75;}
+.exo:disabled{cursor:default;}
+@keyframes shake{10%,90%{transform:translateX(-2px);}30%,70%{transform:translateX(4px);}50%{transform:translateX(-4px);}}
+.exo.shake{animation:shake .4s;}
+.exsol{display:none;margin-top:10px;padding:11px 14px;border-radius:9px;
+  background:rgba(166,214,160,0.13);border-left:3px solid var(--green);font-size:clamp(14px,1.8vw,15.5px);line-height:1.75;}
+.exsol.on{display:block;animation:fade .3s;}
+.exsol .st{color:var(--soft);margin:3px 0;}
+.exsol .an{color:var(--green);font-weight:700;margin-top:6px;}
+.exlock{display:flex;align-items:center;gap:7px;margin-top:9px;font-size:13.5px;color:rgba(243,239,226,0.45);}
+.exlock.hide{display:none;}
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:11px;}
+.icard{background:rgba(0,0,0,0.22);border:1.5px solid rgba(242,217,121,0.22);border-radius:11px;padding:14px;text-align:center;}
+.icard .big{font-family:'Noto Serif TC',serif;font-size:clamp(17px,2.6vw,23px);font-weight:900;margin:6px 0;}
+.icard .cap{font-size:13.5px;color:var(--soft);line-height:1.6;}
+.frow{display:flex;gap:12px;align-items:center;padding:9px 12px;border-bottom:1px dashed rgba(243,239,226,0.16);}
+.frow:last-child{border-bottom:none;}
+.flab{color:var(--blue);font-weight:700;min-width:150px;font-size:clamp(13.5px,1.8vw,15.5px);flex:none;}
+.fval{color:var(--yellow);font-weight:700;font-family:'Noto Serif TC',serif;font-size:clamp(14px,1.9vw,17px);}
+@media(max-width:560px){.frow{flex-direction:column;align-items:flex-start;gap:3px;}.flab{min-width:0;}}
+.hud{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:12px;}
+.hud .st{background:rgba(0,0,0,0.3);border:1.5px solid rgba(242,217,121,0.28);border-radius:9px;
+  padding:7px 13px;font-size:14px;flex:1;min-width:88px;text-align:center;}
+.hud .st b{display:block;font-family:'Noto Serif TC',serif;font-size:20px;color:var(--yellow);}
+.tbar{height:8px;background:rgba(0,0,0,0.35);border-radius:5px;overflow:hidden;margin-bottom:12px;}
+.tfill{height:100%;background:linear-gradient(90deg,var(--green),var(--yellow),var(--pink));width:100%;transition:width .1s linear;}
+.gscreen{display:none;}.gscreen.on{display:block;}
+.lvchips{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin:14px 0;}
+.lvchip{background:rgba(152,201,220,0.12);border:1.5px solid rgba(152,201,220,0.35);border-radius:18px;
+  padding:6px 13px;font-size:13.5px;color:var(--blue);}
+.lvchip.done{background:rgba(166,214,160,0.2);border-color:var(--green);color:var(--green);}
+.lvchip.now{background:rgba(242,217,121,0.22);border-color:var(--yellow);color:var(--yellow);font-weight:700;}
+.gq{font-size:clamp(16px,2.2vw,20px);line-height:1.7;margin:14px 0;text-align:center;font-family:'Noto Serif TC',serif;}
+.gopts{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+@media(max-width:560px){.gopts{grid-template-columns:1fr;}}
+.gopt{background:rgba(243,239,226,0.07);border:1.5px solid rgba(243,239,226,0.25);color:var(--chalk);
+  border-radius:10px;padding:12px;font-family:'Noto Serif TC',serif;font-size:17px;cursor:pointer;transition:.15s;min-height:48px;}
+.gopt:hover:not(:disabled){background:rgba(243,239,226,0.15);}
+.gopt.right{background:rgba(166,214,160,0.3);border-color:var(--green);font-weight:900;}
+.gopt.wrong{background:rgba(237,160,168,0.25);border-color:var(--pink);}
+.gfb{margin-top:11px;padding:10px 13px;border-radius:8px;font-size:14.5px;line-height:1.6;display:none;}
+.gfb.on{display:block;}
+.gfb.ok{background:rgba(166,214,160,0.15);border-left:3px solid var(--green);}
+.gfb.no{background:rgba(237,160,168,0.15);border-left:3px solid var(--pink);}
+.rank{font-size:54px;text-align:center;margin:10px 0;}
+.hint{text-align:center;color:rgba(243,239,226,0.35);font-size:12.5px;padding:8px 0 0;}
+@media (max-width:640px){.topbar{padding:8px 10px;gap:8px;}.wrap{padding:0 10px 70px;}.card{padding:13px;}}
+</style></head><body>
+
+<div class="topbar">
+  <div class="brand">2-3　相似形的應用<small>九上 · 第2章 相似形</small></div>
+  <div class="spacer"></div>
+</div>
+
+<div class="tabs" id="tabs">
+  <button class="tab on" data-p="0"><span class="n">📏</span>平行截</button>
+  <button class="tab" data-p="1"><span class="n">📏</span>間接測量</button>
+  <button class="tab" data-p="2"><span class="n">📦</span>面積體積</button>
+  <button class="tab" data-p="3"><span class="n">★</span>題型測驗</button>
+  <button class="tab" data-p="4"><span class="n">🎮</span>闖關遊戲</button>
+</div>
+
+<div class="wrap">
+  <div class="card" id="goalCard">
+    <h3><span class="ic">🎯</span>本節學習目標</h3>
+    <div class="goals" id="goals"></div>
+  </div>
+  <div id="wrap"></div>
+</div>
+
+<script>
+const GOALS = [
+  '平行截比例線段定理（含逆定理）',
+  '三平行線截比例',
+  '間接測量：影子法、鏡子法（AA）',
+  '面積比 k²、體積比 k³ 換算',
+  '梯形對角線：△BOC=△AOD',
+];
+
+const DATA = [
+{ key:'pcut', viz:'pcut', vizTitle:'平行截與逆定理 —— 比例線段（4 題）',
+  slides:[
+    {eb:'核心 平行截', h:'平行↔比例互推', html:`
+      <div class="box"><b>定理：</b>DE∥BC → AD/DB=AE/EC，且 AD/AB=AE/AC=DE/BC。</div>
+      <div class="box"><b>逆定理：</b>若 AD/AB=AE/AC，則 DE∥BC。</div>
+      <div class="box y" style="text-align:center;">⚠️ 分清「部分:部分」(AD:DB) 與「部分:全體」(AD:AB)。</div>
+      <div class="box g">👉 用下方 Canvas：求比例/判平行。</div>`},
+    {eb:'例題 ★☆☆', h:'逆定理', html:`
+      <div class="exq" data-a="0">
+        <div class="exq-q"><span class="hl">Q</span>　AD=4 AB=10 AE=6 AC=15，DE∥BC 嗎？</div>
+        <button class="exo" data-i="0">平行</button>
+        <button class="exo" data-i="1">不平行</button>
+        <button class="exo" data-i="2">無法判斷</button>
+        <button class="exo" data-i="3">垂直</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">AD/AB=2/5、AE/AC=2/5 → 相等 → DE∥BC</div>
+          <div class="an">答：平行</div>
+        </div>
+      </div>`},
+    {eb:'例題 ★★☆　三平行線', html:`
+      <div class="exq" data-a="1">
+        <div class="exq-q"><span class="hl">Q</span>　三平行線一截線 4,6，另一截線 x,9，x=？</div>
+        <button class="exo" data-i="0">4</button>
+        <button class="exo" data-i="1">6</button>
+        <button class="exo" data-i="2">9</button>
+        <button class="exo" data-i="3">13.5</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">4/6=x/9 → x=6</div>
+          <div class="an">答：6</div>
+        </div>
+      </div>`}
+  ],
+  fa:[
+    {q:'DE∥BC，AD=3 DB=5 AE=4，EC？', o:['20/3','12','7','5'], a:0, e:'3/5=4/EC。'},
+    {q:'逆定理要哪個相等？', o:['AD/AB=AE/AC','AD=AE','DB=EC','AB=AC'], a:0, e:'比例。'},
+    {q:'三平行線 3,5 與 x,10，x？', o:['6','5','8','15'], a:0, e:'3/5=x/10。'}
+  ],
+  info:[
+    {big:'DE∥BC', cap:'→比例', c:'var(--blue)'},
+    {big:'比例相等', cap:'→平行（逆）', c:'var(--green)'},
+    {big:'三平行線', cap:'截段成比例', c:'var(--yellow)'}
+  ]
+},
+{ key:'meas', viz:'meas', vizTitle:'間接測量 —— 影子/鏡子法（4 題）',
+  slides:[
+    {eb:'核心 間接測量', h:'AA 相似測高', html:`
+      <div class="box"><b>影子法：</b>同時刻陽光平行 → 高比 = 影比。</div>
+      <div class="box"><b>鏡子法：</b>入射角=反射角 → 高比 = 到鏡距離比。</div>
+      <div class="box y" style="text-align:center;">中位線：連兩中點的線段 ∥ 第三邊且 = 一半。</div>
+      <div class="box g">👉 用下方 Canvas：求高度。</div>`},
+    {eb:'例題 ★★☆', h:'影子法', html:`
+      <div class="exq" data-a="2">
+        <div class="exq-q"><span class="hl">Q</span>　人 1.6m 影 2m、旗杆影 15m，杆高？</div>
+        <button class="exo" data-i="0">15</button>
+        <button class="exo" data-i="1">10</button>
+        <button class="exo" data-i="2">12</button>
+        <button class="exo" data-i="3">18.75</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">1.6/2=H/15 → H=12</div>
+          <div class="an">答：12 m</div>
+        </div>
+      </div>`},
+    {eb:'例題 ★★★　鏡子法', html:`
+      <div class="exq" data-a="1">
+        <div class="exq-q"><span class="hl">Q</span>　鏡距建築 30m、人後 2m、眼高 1.5m，建築高？</div>
+        <button class="exo" data-i="0">15</button>
+        <button class="exo" data-i="1">22.5</button>
+        <button class="exo" data-i="2">45</button>
+        <button class="exo" data-i="3">30</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">H/1.5=30/2=15 → H=22.5</div>
+          <div class="an">答：22.5 m</div>
+        </div>
+      </div>`}
+  ],
+  fa:[
+    {q:'人 1.8m 影 2.4m 樹影 8m，樹高？', o:['6','4','10','8'], a:0, e:'10/3倍。'},
+    {q:'中位線 DE=5，對應底邊？', o:['10','5','2.5','15'], a:0, e:'DE=底/2。'},
+    {q:'影子法靠哪個判別？', o:['AA','SAS','SSS','HL'], a:0, e:'仰角同。'}
+  ],
+  info:[
+    {big:'高比=影比', cap:'影子法', c:'var(--green)'},
+    {big:'入射=反射', cap:'鏡子法', c:'var(--blue)'},
+    {big:'中位線=底/2', cap:'相似比1:2', c:'var(--yellow)'}
+  ]
+},
+{ key:'conv', viz:'conv', vizTitle:'面積體積換算 —— k² / k³（4 題）',
+  slides:[
+    {eb:'核心 維度換算', h:'升冪：k → k² → k³', html:`
+      <table class="tbl">
+        <tr><td class="hl-b">長度/周長</td><td>k</td></tr>
+        <tr><td class="hl-b">面積/表面積</td><td>k²</td></tr>
+        <tr><td class="hl-b">體積/容量</td><td>k³</td></tr>
+      </table>
+      <div class="box r" style="text-align:center;">⚠️ 材料用量、容積要用 k² 或 k³，不是 k。</div>
+      <div class="box g">👉 用下方 Canvas：求面積/體積比。</div>`},
+    {eb:'例題 ★★☆', h:'側面積比', html:`
+      <div class="exq" data-a="1">
+        <div class="exq-q"><span class="hl">Q</span>　相似圓柱相似比 2:3，側面積比？</div>
+        <button class="exo" data-i="0">2:3</button>
+        <button class="exo" data-i="1">4:9</button>
+        <button class="exo" data-i="2">8:27</button>
+        <button class="exo" data-i="3">6:9</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">側面積是二維 → k²=4/9</div>
+          <div class="an">答：4:9</div>
+        </div>
+      </div>`},
+    {eb:'例題 ★★★　體積換算', html:`
+      <div class="exq" data-a="2">
+        <div class="exq-q"><span class="hl">Q</span>　相似比 3:5 水桶，小 27L，大桶容量？</div>
+        <button class="exo" data-i="0">45</button>
+        <button class="exo" data-i="1">75</button>
+        <button class="exo" data-i="2">125</button>
+        <button class="exo" data-i="3">225</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">體積比 27:125 → 大=27×125/27=125</div>
+          <div class="an">答：125 L</div>
+        </div>
+      </div>`}
+  ],
+  fa:[
+    {q:'相似比 2:3 體積比？', o:['8:27','4:9','2:3','6:9'], a:0, e:'k³。'},
+    {q:'相似比 1:4 體積比？', o:['1:64','1:16','1:4','1:8'], a:0, e:'k³。'},
+    {q:'水庫相似比 2/3 面積比？', o:['4:9','2:3','8:27','1:2'], a:0, e:'k²。'}
+  ],
+  info:[
+    {big:'長度 k', cap:'一維', c:'var(--blue)'},
+    {big:'面積 k²', cap:'二維', c:'var(--green)'},
+    {big:'體積 k³', cap:'三維', c:'var(--pink)'}
+  ]
+}];
+
+const QUIZ = [
+  {type:'choice', q:'AD=4 AB=10 AE=6 AC=15，DE∥BC？', o:['平行','不平行','無法','垂直'], a:0, e:'2/5=2/5。'},
+  {type:'choice', q:'三平行線 4,6 與 x,9，x？', o:['4','6','9','13.5'], a:1, e:'4/6=x/9。'},
+  {type:'choice', q:'DE∥BC，AD=3 DB=5 AE=4，EC？', o:['20/3','12','7','5'], a:0, e:'3/5=4/EC。'},
+  {type:'choice', q:'三平行線 3,5 與 x,10，x？', o:['6','5','8','15'], a:0, e:'3/5=x/10。'},
+  {type:'choice', q:'人1.6影2旗杆影15杆高？', o:['15','10','12','18.75'], a:2, e:'1.6/2。'},
+  {type:'choice', q:'鏡距30人後2眼高1.5建築高？', o:['15','22.5','45','30'], a:1, e:'H/1.5=15。'},
+  {type:'choice', q:'人1.8影2.4樹影8樹高？', o:['6','4','10','8'], a:0, e:'10/3倍。'},
+  {type:'choice', q:'中位線 DE=5 對應底邊？', o:['10','5','2.5','15'], a:0, e:'DE=底/2。'},
+  {type:'choice', q:'相似比 2:3 側面積比？', o:['2:3','4:9','8:27','6:9'], a:1, e:'k²。'},
+  {type:'choice', q:'相似比 2:3 體積比？', o:['8:27','4:9','2:3','6:9'], a:0, e:'k³。'},
+  {type:'choice', q:'相似比 3:5 小桶27L大？', o:['45','75','125','225'], a:2, e:'k³。'},
+  {type:'choice', q:'相似比 1:4 體積比？', o:['1:64','1:16','1:4','1:8'], a:0, e:'k³。'},
+  {type:'choice', q:'梯形AB=12CD=8△AOB:△COD？', o:['9:4','3:2','12:8','4:9'], a:0, e:'k²。'},
+  {type:'choice', q:'梯形對角線△BOC=？', o:['△AOD','△AOB','△COD','梯形'], a:0, e:'同底等高。'},
+  {type:'tf', q:'判斷：「面積比等於相似比 k。」', a:false, e:'錯。等於 k²。'},
+  {type:'tf', q:'判斷：「逆定理：比例相等可推出平行。」', a:true, e:'對。'},
+  {type:'choice', q:'水庫相似比2/3滿水1800萬噸現在？', o:['800','1200','600','400'], a:0, e:'×4/9。'},
+  {type:'choice', q:'模型1:5外徑8cm實際？', o:['40','13','1.6','8'], a:0, e:'×5。'}
+];
+
+const GAME = [
+  {name:'平行截', qs:[
+    {q:'AD=4 AB=10 AE=6 AC=15 DE∥BC？', o:['平行','不平行','無法','垂直'], a:0, e:'2/5。'},
+    {q:'三平行線 4,6 與 x,9？', o:['6','4','9','13.5'], a:0, e:'x=6。'},
+    {q:'AD=3 DB=5 AE=4 EC？', o:['20/3','12','7','5'], a:0, e:'20/3。'},
+    {q:'逆定理要？', o:['AD/AB=AE/AC','AD=AE','DB=EC','AB=AC'], a:0, e:'比例。'}
+  ]},
+  {name:'間接測量', qs:[
+    {q:'人1.6影2旗杆影15杆高？', o:['12','15','10','18.75'], a:0, e:'12m。'},
+    {q:'鏡距30人後2眼高1.5高？', o:['22.5','15','45','30'], a:0, e:'22.5m。'},
+    {q:'人1.8影2.4樹影8樹高？', o:['6','4','10','8'], a:0, e:'6m。'},
+    {q:'中位線 DE=5 底邊？', o:['10','5','2.5','15'], a:0, e:'10。'}
+  ]},
+  {name:'面積換算', qs:[
+    {q:'相似比 2:3 側面積比？', o:['4:9','2:3','8:27','6:9'], a:0, e:'k²。'},
+    {q:'相似比 1:4 面積比？', o:['1:16','1:4','1:64','1:8'], a:0, e:'k²。'},
+    {q:'面積比=？', o:['k²','k','k³','2k'], a:0, e:'二維。'},
+    {q:'水庫相似比2/3面積比？', o:['4:9','2:3','8:27','1:2'], a:0, e:'k²。'}
+  ]},
+  {name:'體積換算', qs:[
+    {q:'相似比 2:3 體積比？', o:['8:27','4:9','2:3','6:9'], a:0, e:'k³。'},
+    {q:'相似比 3:5 小27L大？', o:['125','45','75','225'], a:0, e:'k³。'},
+    {q:'相似比 1:4 體積比？', o:['1:64','1:16','1:4','1:8'], a:0, e:'k³。'},
+    {q:'體積比=？', o:['k³','k²','k','3k'], a:0, e:'三維。'}
+  ]},
+  {name:'梯形對角線', qs:[
+    {q:'AB=12 CD=8 △AOB:△COD？', o:['9:4','3:2','12:8','4:9'], a:0, e:'k²。'},
+    {q:'△BOC=？', o:['△AOD','△AOB','△COD','梯形'], a:0, e:'同底等高。'},
+    {q:'AB=12 CD=8 △AOB:梯形？', o:['9:25','9:4','3:2','9:16'], a:0, e:'25t。'},
+    {q:'△AOB∽△COD 靠？', o:['內錯角AA','SAS','SSS','HL'], a:0, e:'AB∥CD。'}
+  ]},
+  {name:'綜合', qs:[
+    {q:'模型1:5外徑8實際？', o:['40','13','1.6','8'], a:0, e:'×5。'},
+    {q:'模型截面12面積比25實際？', o:['300','60','25','12'], a:0, e:'×25。'},
+    {q:'△ADE:梯形=1:8 AD:AB？', o:['1:3','1:8','1:9','1:2'], a:0, e:'k=1/3。'},
+    {q:'水庫1800萬噸相似比2/3現在？', o:['800','1200','600','400'], a:0, e:'×4/9。'}
+  ]}
+];
+
+document.getElementById('goals').innerHTML = GOALS.map((g,i)=>
+  `<div class="goal"><div class="bdg">${i+1}</div>${g}</div>`).join('');
+
+const wrap = document.getElementById('wrap');
+DATA.forEach((sec, si)=>{
+  const p = document.createElement('div');
+  p.className = 'panel' + (si===0?' on':'');
+  p.dataset.p = si;
+  p.innerHTML = `
+    <div class="card">
+      <h3><span class="ic">📽</span>簡報翻頁器</h3>
+      <div class="deck" data-deck="${si}">
+        ${sec.slides.map((s,i)=>`<div class="sl${i===0?' on':''}" data-i="${i}">
+          <div class="eyebrow">${s.eb}</div><h4>${s.h}</h4>${s.html}</div>`).join('')}
+      </div>
+      <div class="nav">
+        <button class="btn" data-nav="prev" data-s="${si}">◀ 上一張</button>
+        <span class="pg" id="pg-${si}">1 / ${sec.slides.length}</span>
+        <button class="btn" data-nav="next" data-s="${si}">下一張 ▶</button>
+      </div>
+      <div class="dots" id="dots-${si}">
+        ${sec.slides.map((_,i)=>`<button class="dot${i===0?' on':''}" data-s="${si}" data-i="${i}"></button>`).join('')}
+      </div>
+    </div>
+    <div class="card">
+      <h3><span class="ic">🎯</span>Canvas 互動視覺化<span style="font-size:14px;color:var(--soft);font-weight:400;">　${sec.vizTitle}</span></h3>
+      <div class="cv-wrap">
+        <canvas class="viz" data-viz="${sec.viz}" data-si="${si}"></canvas>
+        <div class="ctrl" data-ctrl="${si}"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3><span class="ic">✅</span>形成性評量</h3>
+      ${sec.fa.map((f,i)=>`<div class="q" data-fa="${si}-${i}">
+        <div class="qt"><span class="qn">Q${i+1}</span>${f.q}</div>
+        <div class="opts">${f.o.map((o,oi)=>`<button class="opt" data-si="${si}" data-qi="${i}" data-oi="${oi}">${o}</button>`).join('')}</div>
+        <div class="fb" id="fb-${si}-${i}"></div>
+      </div>`).join('')}
+    </div>
+    <div class="card">
+      <h3><span class="ic">📊</span>資訊圖表</h3>
+      <div class="info">
+        ${sec.info.map(c=>`<div class="icard"><div class="big" style="color:${c.c}">${c.big}</div><div class="cap">${c.cap}</div></div>`).join('')}
+      </div>
+    </div>`;
+  wrap.appendChild(p);
+});
+
+const qp = document.createElement('div');
+qp.className='panel'; qp.dataset.p='3';
+qp.innerHTML = `<div class="card"><h3><span class="ic">📝</span>題型測驗　<span style="font-size:14px;color:var(--soft);font-weight:400;">單選 · 是非 · 填充，共 ${QUIZ.length} 題</span></h3>
+  <div id="quizBox"></div>
+  <div style="display:flex;gap:10px;align-items:center;margin-top:14px;flex-wrap:wrap;">
+    <button class="btn" id="gradeBtn" style="background:rgba(242,217,121,.2);border-color:var(--yellow);color:var(--yellow);font-weight:700;">📊 批改並看成績</button>
+    <button class="btn" id="resetQuiz">🔄 重做</button>
+    <div class="readout" id="score" style="display:none;"></div>
+  </div></div>
+  <div class="card"><h3><span class="ic">📋</span>相似形應用速查表</h3>
+    <div class="frow"><div class="flab">平行截</div><div class="fval">DE∥BC → AD/DB=AE/EC</div></div>
+    <div class="frow"><div class="flab">全長比</div><div class="fval">AD/AB=AE/AC=DE/BC</div></div>
+    <div class="frow"><div class="flab">逆定理</div><div class="fval">比例相等 → 平行</div></div>
+    <div class="frow"><div class="flab">三平行線</div><div class="fval">被兩截線截 → 截段成比例</div></div>
+    <div class="frow"><div class="flab">中位線</div><div class="fval">連兩中點 ∥ 第三邊、=一半</div></div>
+    <div class="frow"><div class="flab">影子法</div><div class="fval">高比 = 影比（AA）</div></div>
+    <div class="frow"><div class="flab">鏡子法</div><div class="fval">高比 = 到鏡距離比</div></div>
+    <div class="frow"><div class="flab">面積比</div><div class="fval">k²（表面積也是）</div></div>
+    <div class="frow"><div class="flab">體積比</div><div class="fval">k³（容量、材料量）</div></div>
+    <div class="frow"><div class="flab">梯形對角線</div><div class="fval">△BOC=△AOD（同底等高）</div></div>
+    <div class="frow"><div class="flab">⚠️ 陷阱</div><div class="fval">分清部分:部分 與 部分:全體</div></div>
+  </div>`;
+wrap.appendChild(qp);
+
+const gp = document.createElement('div');
+gp.className='panel'; gp.dataset.p='4';
+gp.innerHTML = `<div class="card"><h3><span class="ic">🎮</span>闖關遊戲　<span style="font-size:14px;color:var(--soft);font-weight:400;">6 關挑戰 · 每題 20 秒 · 連擊與速度都有加分</span></h3>
+  <div class="gscreen on" id="gStart">
+    <div style="text-align:center;font-size:clamp(15px,2vw,18px);line-height:1.8;">
+      闖過 <b class="hl">6</b> 關，每關 1 題，每題 <b class="hl">20 秒</b>。<br>
+      計分：基礎 <b class="hl">10</b> 分 + 連擊獎勵（最多 <b class="hl">5</b>）+ 速度獎勵（最多 <b class="hl">5</b>）＝ 單題最高 <b class="hl">20</b> 分</div>
+    <div class="lvchips" id="gStartChips"></div>
+    <div style="text-align:center;"><button class="btn" id="gGo" style="background:rgba(242,217,121,.25);border-color:var(--yellow);color:var(--yellow);font-weight:700;font-size:16px;padding:10px 24px;">🚀 開始挑戰</button></div>
+  </div>
+  <div class="gscreen" id="gPlay">
+    <div class="hud">
+      <div class="st">關卡<b id="hLv">1/6</b></div>
+      <div class="st">分數<b id="hSc">0</b></div>
+      <div class="st">連擊<b id="hStk">0</b></div>
+      <div class="st">剩餘<b id="hT">20</b></div>
+    </div>
+    <div class="tbar"><div class="tfill" id="tFill"></div></div>
+    <div class="lvchips" id="gChips"></div>
+    <div class="gq" id="gQ"></div>
+    <div class="gopts" id="gO"></div>
+    <div class="gfb" id="gFb"></div>
+    <div style="text-align:center;margin-top:12px;"><button class="btn" id="gNext" style="display:none;">下一關 ▶</button></div>
+  </div>
+  <div class="gscreen" id="gEnd">
+    <div class="rank" id="gRank">🏆</div>
+    <div style="text-align:center;font-size:clamp(17px,2.6vw,22px);font-family:'Noto Serif TC';" id="gFinal"></div>
+    <div style="text-align:center;color:var(--soft);margin-top:8px;" id="gStats"></div>
+    <div style="text-align:center;margin-top:16px;"><button class="btn" id="gAgain" style="background:rgba(242,217,121,.25);border-color:var(--yellow);color:var(--yellow);font-weight:700;">🔄 再挑戰一次</button></div>
+  </div></div>`;
+wrap.appendChild(gp);
+document.getElementById('gStartChips').innerHTML = GAME.map((g,i)=>`<div class="lvchip">第${i+1}關 ${g.name}</div>`).join('');
+
+const qb = document.getElementById('quizBox');
+QUIZ.forEach((q,i)=>{
+  const d = document.createElement('div'); d.className='q';
+  let body='';
+  if(q.type==='choice') body = `<div class="opts">${q.o.map((o,oi)=>`<button class="opt" data-quiz="${i}" data-oi="${oi}">${o}</button>`).join('')}</div>`;
+  else if(q.type==='tf') body = `<div class="opts" style="flex-direction:row;gap:10px;">
+      <button class="opt" data-quiz="${i}" data-oi="1" style="flex:1;">⭕ 對</button>
+      <button class="opt" data-quiz="${i}" data-oi="0" style="flex:1;">❌ 錯</button></div>`;
+  else body = `<div><input class="fill" data-quiz="${i}" placeholder="?"></div>`;
+  d.innerHTML = `<div class="qt"><span class="qn">${i+1}</span>
+    <span style="font-size:12px;color:var(--soft);border:1px solid rgba(243,239,226,.25);border-radius:6px;padding:1px 6px;margin-right:6px;">
+    ${q.type==='choice'?'單選':q.type==='tf'?'是非':'填充'}</span>${q.q}</div>${body}
+    <div class="fb" id="qfb-${i}"></div>`;
+  qb.appendChild(d);
+});
+
+document.getElementById('tabs').addEventListener('click', e=>{
+  const t = e.target.closest('.tab'); if(!t) return;
+  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on', x===t));
+  document.querySelectorAll('.panel').forEach(x=>x.classList.toggle('on', x.dataset.p===t.dataset.p));
+  document.getElementById('goalCard').style.display = (t.dataset.p==='4')?'none':'';
+  window.scrollTo({top:0,behavior:'smooth'});
+  setTimeout(resizeAll, 60);
+});
+
+const cur = DATA.map(()=>0);
+function showSlide(si, i){
+  const deck = document.querySelector(`[data-deck="${si}"]`);
+  const sl = deck.querySelectorAll('.sl');
+  i = Math.max(0, Math.min(sl.length-1, i));
+  cur[si] = i;
+  sl.forEach((s,k)=>s.classList.toggle('on', k===i));
+  document.getElementById('pg-'+si).textContent = `${i+1} / ${sl.length}`;
+  document.querySelectorAll(`#dots-${si} .dot`).forEach((d,k)=>d.classList.toggle('on', k===i));
+}
+document.addEventListener('click', e=>{
+  const n = e.target.closest('[data-nav]');
+  if(n){ const si=+n.dataset.s; showSlide(si, cur[si] + (n.dataset.nav==='next'?1:-1)); return; }
+  const d = e.target.closest('.dot');
+  if(d){ showSlide(+d.dataset.s, +d.dataset.i); return; }
+});
+document.addEventListener('keydown', e=>{
+  const p = document.querySelector('.panel.on'); if(!p) return;
+  const si = +p.dataset.p; if(si>=DATA.length) return;
+  if(e.key==='ArrowRight') showSlide(si, cur[si]+1);
+  if(e.key==='ArrowLeft') showSlide(si, cur[si]-1);
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.opt[data-si]'); if(!o) return;
+  const si=+o.dataset.si, qi=+o.dataset.qi, oi=+o.dataset.oi;
+  const f = DATA[si].fa[qi];
+  const box = document.querySelector(`[data-fa="${si}-${qi}"]`);
+  box.querySelectorAll('.opt').forEach((b,k)=>{
+    b.disabled = true;
+    if(k===f.a) b.classList.add('right'); else if(k===oi) b.classList.add('wrong');
+  });
+  const fb = document.getElementById(`fb-${si}-${qi}`);
+  const ok = oi===f.a;
+  fb.className = 'fb on ' + (ok?'ok':'no');
+  fb.innerHTML = (ok?'✅ <b>答對了！</b> ':'❌ <b>再想想。</b> ') + f.e;
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.exo');
+  if(o && !o.disabled){
+    const box = o.closest('.exq');
+    const ans = +box.dataset.a, pick = +o.dataset.i;
+    if(pick === ans){
+      box.querySelectorAll('.exo').forEach(b=>{ b.disabled=true; if(+b.dataset.i===ans) b.classList.add('right'); });
+      box.querySelector('.exsol').classList.add('on');
+      box.querySelector('.exlock').classList.add('hide');
+    } else {
+      o.classList.add('wrong','shake');
+      setTimeout(()=>o.classList.remove('shake'), 420);
+      o.disabled = true;
+      const lock = box.querySelector('.exlock');
+      lock.innerHTML = '🔒 再想想 —— 答對才會顯示詳解'; lock.style.color='var(--pink)';
+    }
+  }
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.opt[data-quiz]'); if(!o) return;
+  const i = +o.dataset.quiz;
+  o.parentElement.querySelectorAll('.opt').forEach(b=>b.classList.remove('right','wrong'));
+  o.classList.add('right'); o.dataset.sel='1';
+  o.parentElement.querySelectorAll('.opt').forEach(b=>{ if(b!==o) delete b.dataset.sel; });
+});
+document.getElementById('gradeBtn').addEventListener('click', ()=>{
+  let right=0;
+  QUIZ.forEach((q,i)=>{
+    const fb = document.getElementById('qfb-'+i);
+    let ok=false, picked=null;
+    if(q.type==='fill'){
+      const inp = document.querySelector(`.fill[data-quiz="${i}"]`);
+      const v = (inp.value||'').trim().replace(/−/g,'-').replace(/\s/g,'');
+      ok = q.a.some(a=>a.replace(/−/g,'-').replace(/\s/g,'')===v);
+      inp.style.borderBottomColor = ok?'var(--green)':'var(--pink)';
+    } else {
+      const sel = document.querySelector(`.opt[data-quiz="${i}"][data-sel="1"]`);
+      if(sel){ picked=+sel.dataset.oi; ok = (q.type==='tf') ? (picked===1)===q.a : picked===q.a; }
+      document.querySelectorAll(`.opt[data-quiz="${i}"]`).forEach(b=>{
+        b.classList.remove('right','wrong');
+        const bi=+b.dataset.oi;
+        const isAns = (q.type==='tf') ? ((bi===1)===q.a) : (bi===q.a);
+        if(isAns) b.classList.add('right'); else if(picked===bi) b.classList.add('wrong');
+      });
+    }
+    if(ok) right++;
+    fb.className='fb on '+(ok?'ok':'no');
+    fb.innerHTML = (ok?'✅ <b>正確</b> ':'❌ <b>錯誤</b> ') + q.e;
+  });
+  const s = document.getElementById('score');
+  const pct = Math.round(right/QUIZ.length*100);
+  s.style.display='block';
+  s.innerHTML = `成績：<b>${right} / ${QUIZ.length}</b>　（${pct} 分）　${pct>=80?'🏆 很棒！':pct>=60?'💪 再加油':'📖 建議重看重點'}`;
+});
+document.getElementById('resetQuiz').addEventListener('click', ()=>{
+  document.querySelectorAll('.opt[data-quiz]').forEach(b=>{b.classList.remove('right','wrong'); delete b.dataset.sel;});
+  document.querySelectorAll('.fill').forEach(i=>{i.value=''; i.style.borderBottomColor='var(--yellow)';});
+  document.querySelectorAll('[id^="qfb-"]').forEach(f=>f.className='fb');
+  document.getElementById('score').style.display='none';
+});
+
+/* ===== 闖關遊戲 ===== */
+const G = {lv:0, score:0, streak:0, best:0, t:20, timer:null, cur:null, answered:false};
+function gShow(id){ ['gStart','gPlay','gEnd'].forEach(x=>document.getElementById(x).classList.toggle('on', x===id)); }
+function gChips(){
+  document.getElementById('gChips').innerHTML = GAME.map((g,i)=>
+    `<div class="lvchip ${i<G.lv?'done':i===G.lv?'now':''}">${i+1}. ${g.name}</div>`).join('');
+}
+function gLoad(){
+  if(G.lv>=GAME.length){ gFinish(); return; }
+  G.answered=false; G.t=20;
+  const bank = GAME[G.lv].qs;
+  G.cur = bank[Math.floor(Math.random()*bank.length)];
+  document.getElementById('hLv').textContent = (G.lv+1)+'/'+GAME.length;
+  document.getElementById('hSc').textContent = G.score;
+  document.getElementById('hStk').textContent = G.streak;
+  document.getElementById('gQ').innerHTML = `<span style="color:var(--blue);font-size:15px;">第 ${G.lv+1} 關 · ${GAME[G.lv].name}</span><br>${G.cur.q}`;
+  document.getElementById('gO').innerHTML = G.cur.o.map((o,i)=>
+    `<button class="gopt" data-g="${i}">${'ABCD'[i]}. ${o}</button>`).join('');
+  document.getElementById('gFb').className='gfb';
+  document.getElementById('gNext').style.display='none';
+  gChips();
+  clearInterval(G.timer);
+  G.timer = setInterval(()=>{
+    G.t -= 0.1;
+    document.getElementById('hT').textContent = Math.max(0,G.t).toFixed(0);
+    document.getElementById('tFill').style.width = Math.max(0,G.t/20*100)+'%';
+    if(G.t<=0){ clearInterval(G.timer); gAnswer(-1); }
+  },100);
+}
+function gAnswer(pick){
+  if(G.answered) return;
+  G.answered = true; clearInterval(G.timer);
+  const ans = G.cur.a, ok = pick===ans;
+  document.querySelectorAll('.gopt').forEach((b,i)=>{
+    b.disabled=true;
+    if(i===ans) b.classList.add('right'); else if(i===pick) b.classList.add('wrong');
+  });
+  let gain=0, sb=0, tb=0;
+  if(ok){
+    G.streak++; G.best=Math.max(G.best,G.streak);
+    sb = Math.min(5, G.streak-1); tb = Math.min(5, Math.floor(G.t/4));
+    gain = 10+sb+tb; G.score += gain;
+  } else { G.streak = 0; }
+  document.getElementById('hSc').textContent = G.score;
+  document.getElementById('hStk').textContent = G.streak;
+  const fb = document.getElementById('gFb');
+  fb.className = 'gfb on '+(ok?'ok':'no');
+  fb.innerHTML = (ok? `✅ <b>答對！+${gain} 分</b>（基礎10 + 連擊${sb} + 速度${tb}）<br>`
+                    : (pick===-1?'⏰ <b>時間到！</b><br>':'❌ <b>答錯了</b><br>')) + G.cur.e;
+  document.getElementById('gNext').style.display='inline-block';
+  document.getElementById('gNext').textContent = (G.lv>=GAME.length-1)?'看成績 🏁':'下一關 ▶';
+}
+function gFinish(){
+  clearInterval(G.timer);
+  const max = GAME.length*20, pct = Math.round(G.score/max*100);
+  const rank = pct>=85?['🏆','數論大師']:pct>=70?['🥇','高手']:pct>=50?['🥈','不錯']:['📖','再加油'];
+  document.getElementById('gRank').textContent = rank[0];
+  document.getElementById('gFinal').innerHTML = `<b class="hl">${G.score}</b> / ${max} 分　·　${rank[1]}`;
+  document.getElementById('gStats').innerHTML = `最高連擊 <b class="hl">${G.best}</b>　·　完成 ${GAME.length} 關`;
+  gShow('gEnd');
+}
+document.getElementById('gGo').addEventListener('click', ()=>{ G.lv=0;G.score=0;G.streak=0;G.best=0; gShow('gPlay'); gLoad(); });
+document.getElementById('gAgain').addEventListener('click', ()=>{ G.lv=0;G.score=0;G.streak=0;G.best=0; gShow('gPlay'); gLoad(); });
+document.getElementById('gNext').addEventListener('click', ()=>{ G.lv++; gLoad(); });
+document.addEventListener('click', e=>{ const b=e.target.closest('.gopt'); if(!b||b.disabled) return; gAnswer(+b.dataset.g); });
+
+/* ===== Canvas ===== */
+const VIZ = {}; let DPR=1;
+
+/* ① 平行截與逆定理 */
+const PCUT=[
+  {q:'AD=4 AB=10 AE=6 AC=15，DE∥BC?', r:'平行（2/5=2/5）', why:'逆定理'},
+  {q:'三平行線 4,6 與 x,9', r:'x=6', why:'4/6=x/9'},
+  {q:'DE∥BC，AD=3 DB=5 AE=4，EC?', r:'20/3', why:'3/5=4/EC'},
+  {q:'三平行線 3,5 與 x,10', r:'x=6', why:'3/5=x/10'},
+];
+/* ② 間接測量 */
+const MEAS=[
+  {q:'人 1.6m 影 2m 旗杆影 15m，杆高?', r:'12 m', why:'1.6/2=H/15'},
+  {q:'鏡子距建築 30m 人後 2m 眼高 1.5m', r:'22.5 m', why:'H/1.5=30/2'},
+  {q:'人 1.8m 影 2.4m 樹影 8m，樹高?', r:'6 m', why:'樹/1.8=8/2.4'},
+  {q:'中位線 DE=5，對應底邊?', r:'10', why:'DE=底/2'},
+];
+/* ③ 面積體積換算 */
+const CONV=[
+  {q:'相似比 2:3，側面積比?', r:'4:9', why:'k²'},
+  {q:'相似比 2:3，體積比?', r:'8:27', why:'k³'},
+  {q:'相似比 3:5 水桶，小 27L，大?', r:'125 L', why:'k³=27:125'},
+  {q:'水庫相似比 2/3，面積比?', r:'4:9', why:'1800→800萬噸'},
+];
+
+function initViz(cv){
+  const si=+cv.dataset.si, kind=cv.dataset.viz;
+  const ctx=cv.getContext('2d');
+  const st=VIZ[si]={kind,cv,ctx};
+  const ctrl=document.querySelector(`[data-ctrl="${si}"]`);
+  const revLabel = kind==='pcut' ? '🔍 求比例/平行'
+                 : kind==='meas' ? '🔍 求高度' : '🔍 求面積/體積比';
+  st.i=0; st.show=false;
+  ctrl.innerHTML=`<div class="readout" id="ro-${si}"></div>
+    <button class="btn" data-t="rev" data-si="${si}" style="background:rgba(242,217,121,.2);border-color:var(--yellow);color:var(--yellow);font-weight:700;">${revLabel}</button>
+    <button class="btn" data-t="next" data-si="${si}">下一題 ▶</button>`;
+  draw(si);
+}
+
+function drawCard(st, ctx, w, h, ro, E, title, col){
+  ctx.textAlign='center';
+  ctx.fillStyle='rgba(242,217,121,.85)'; ctx.font='bold 13px "Noto Sans TC"';
+  ctx.fillText(title, w/2, 18);
+  ctx.fillStyle='#f3efe2'; ctx.font='15px "Noto Serif TC"';
+  ctx.fillText(E.q, w/2, 54);
+  if(!st.show){
+    ctx.fillStyle='rgba(243,239,226,.4)'; ctx.font='13px "Noto Sans TC"';
+    ctx.fillText('🔒 先自己算算看', w/2, 98);
+  } else {
+    ctx.fillStyle=col; ctx.font='bold 19px "Noto Serif TC"';
+    ctx.fillText(E.r, w/2, 96);
+    ctx.fillStyle='rgba(243,239,226,.72)'; ctx.font='12px "Noto Sans TC"';
+    ctx.fillText(E.why, w/2, 122);
+  }
+  ro.innerHTML = st.show ? `${E.q} → <b style="color:${col}">${E.r}</b>（${E.why}）`
+    : `${E.q}　<span style="color:rgba(243,239,226,.5)">—— 求解</span>`;
+}
+function drawPcut(st,c,w,h,ro){ drawCard(st,c,w,h,ro,PCUT[st.i],'平行截與逆定理','#98c9dc'); }
+function drawMeas(st,c,w,h,ro){ drawCard(st,c,w,h,ro,MEAS[st.i],'間接測量','#a6d6a0'); }
+function drawConv(st,c,w,h,ro){ drawCard(st,c,w,h,ro,CONV[st.i],'面積體積換算','#f2d979'); }
+
+function draw(si){
+  const st=VIZ[si]; if(!st) return;
+  const {cv,ctx,kind}=st, w=cv.width/DPR, h=cv.height/DPR;
+  ctx.clearRect(0,0,w,h);
+  const ro=document.getElementById('ro-'+si);
+  if(kind==='pcut') drawPcut(st,ctx,w,h,ro);
+  else if(kind==='meas') drawMeas(st,ctx,w,h,ro);
+  else if(kind==='conv') drawConv(st,ctx,w,h,ro);
+}
+
+document.addEventListener('click', e=>{
+  const btn=e.target.closest('[data-t]'); if(!btn) return;
+  const si=+btn.dataset.si, st=VIZ[si]; if(!st) return;
+  const t=btn.dataset.t;
+  const arr = st.kind==='pcut'?PCUT : st.kind==='meas'?MEAS : CONV;
+  if(t==='rev') st.show=true;
+  if(t==='next'){ st.i=(st.i+1)%arr.length; st.show=false; }
+  draw(si);
+});
+
+function resizeAll(){
+  DPR = Math.min(2, window.devicePixelRatio||1);
+  document.querySelectorAll('canvas.viz').forEach(cv=>{
+    const w = cv.clientWidth || cv.parentElement.clientWidth;
+    const h = (cv.dataset.viz==='meas') ? 176 : (cv.dataset.viz==='conv' ? 176 : 176);
+    cv.width=w*DPR; cv.height=h*DPR; cv.style.height=h+'px';
+    cv.getContext('2d').setTransform(DPR,0,0,DPR,0,0);
+  });
+  Object.keys(VIZ).forEach(k=>draw(+k));
+}
+document.querySelectorAll('canvas.viz').forEach(initViz);
+window.addEventListener('resize', resizeAll);
+resizeAll();
+</script>
+<div class="hint">← → 鍵可翻頁　·　Canvas 用按鈕互動　·　支援平板觸控</div>
+</body></html>

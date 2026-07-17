@@ -1,0 +1,229 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>九上 2-2 相似三角形的判別｜授課簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--chalk-soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);padding:24px 14px;}
+.deck{max-width:1060px;margin:0 auto;}
+.print-hint{text-align:center;color:rgba(243,239,226,0.4);font-size:13px;padding:6px 0 22px;}
+.print-hint b{color:var(--yellow);}
+.slide{position:relative;min-height:576px;margin:0 auto 26px;padding:44px 52px;
+ background:radial-gradient(ellipse at 18% 12%,rgba(255,255,255,0.05),transparent 45%),
+  radial-gradient(ellipse at 82% 88%,rgba(255,255,255,0.035),transparent 45%),
+  radial-gradient(ellipse at 60% 40%,rgba(120,160,130,0.10),transparent 60%),
+  linear-gradient(160deg,var(--board) 0%,var(--board2) 100%);
+ border-radius:14px;box-shadow:0 10px 34px rgba(0,0,0,0.55);
+ border:1px solid rgba(242,217,121,0.14);overflow:hidden;display:flex;flex-direction:column;}
+.slide::before{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;
+ background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.014) 40px,rgba(255,255,255,0.014) 41px),
+  radial-gradient(circle at 30% 72%,rgba(255,255,255,0.03),transparent 8%),
+  radial-gradient(circle at 76% 24%,rgba(255,255,255,0.025),transparent 7%);}
+.slide::after{content:attr(data-pg);position:absolute;bottom:15px;right:26px;font-family:'Caveat',cursive;font-size:20px;color:rgba(243,239,226,0.4);}
+.tag{position:absolute;top:20px;right:26px;font-family:'Caveat',cursive;font-size:22px;color:var(--pink);transform:rotate(4deg);}
+.eyebrow{font-family:'Caveat',cursive;font-size:25px;color:var(--yellow);letter-spacing:1px;margin-bottom:8px;opacity:0.92;}
+.slide h1{font-family:'Noto Serif TC',serif;font-size:46px;font-weight:900;line-height:1.28;letter-spacing:1px;
+ text-shadow:0 0 1px rgba(243,239,226,0.5),1px 1px 0 rgba(0,0,0,0.2);}
+.slide h2{font-family:'Noto Serif TC',serif;font-size:33px;font-weight:900;color:var(--yellow);
+ margin-bottom:20px;padding-bottom:11px;border-bottom:2px dashed rgba(242,217,121,0.4);
+ text-shadow:0 0 1px rgba(242,217,121,0.4);}
+.slide p{font-size:20px;line-height:1.85;margin-bottom:12px;}
+.big-center{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;}
+.big-center .lead,.lead{font-family:'Caveat',cursive;font-size:30px;color:var(--blue);letter-spacing:1px;margin-top:12px;}
+ul{list-style:none;margin:8px 0;}
+li{font-size:21px;line-height:1.95;padding-left:32px;position:relative;margin-bottom:4px;}
+li::before{content:'\2726';position:absolute;left:4px;color:var(--yellow);font-size:17px;top:3px;}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.34);border-radius:12px;padding:15px 21px;margin:12px 0;font-size:19px;line-height:1.8;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.38);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.38);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.34);}
+.eg{position:relative;background:rgba(0,0,0,0.24);border:1px solid rgba(242,217,121,0.2);border-radius:10px;padding:17px 22px;margin:12px 0;font-size:19px;}
+.eg::before{content:'';position:absolute;top:-8px;left:38px;width:58px;height:15px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.eg .q{color:var(--blue);font-weight:700;margin-bottom:8px;font-size:19px;}
+.eg .a{color:var(--green);font-weight:700;margin-top:6px;}
+.eg .stp{color:var(--chalk-soft);font-size:18px;margin:3px 0;}
+.tip{display:flex;gap:12px;align-items:flex-start;background:rgba(242,217,121,0.09);border:1.5px dashed rgba(242,217,121,0.45);border-radius:12px;padding:13px 18px;margin:10px 0;}
+.tip .ic{font-size:24px;line-height:1;}.tip .tx{font-size:18px;line-height:1.7;}
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:18px;}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.26);padding:10px 14px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.two{display:flex;gap:20px;}.two>div{flex:1;}
+svg{display:block;margin:6px auto;max-width:100%;}
+@media print{
+ body{background:#0a130d;padding:0;}
+ .deck{max-width:none;}
+ .print-hint{display:none;}
+ .slide{margin:0;border-radius:0;box-shadow:none;min-height:100vh;
+  page-break-after:always;break-after:page;padding:32px 44px;justify-content:center;}
+ .slide:last-child{page-break-after:auto;break-after:auto;}
+ .slide h1{font-size:40px;}
+ .slide h2{font-size:27px;margin-bottom:13px;padding-bottom:8px;}
+ .slide p{font-size:17px;line-height:1.55;margin-bottom:6px;}
+ li{font-size:17px;line-height:1.55;margin-bottom:1px;padding-left:26px;}
+ .eyebrow{font-size:21px;margin-bottom:5px;}
+ .big-center .lead,.lead{font-size:26px;}
+ .box{font-size:16px;padding:10px 16px;margin:6px 0;line-height:1.5;}
+ .eg{font-size:16px;padding:11px 16px;margin:6px 0;}
+ .tip{font-size:16px;padding:10px 14px;margin:6px 0;}
+ .tbl{font-size:15px;margin:6px 0;}
+ .tbl th,.tbl td{padding:6px 10px;}
+ svg{max-height:210px;}
+}
+</style></head><body><div class="deck">
+<div class="print-hint">共 <b>11</b> 張・列印時每張一頁（Ctrl+P → 橫向 → 背景圖形）</div>
+
+
+<!-- 1 -->
+<div class="slide" data-pg="1 / 11"><div class="tag">Start!</div><div class="big-center">
+<div class="eyebrow">國三上學期・第二章 相似形</div>
+<h1>2-2　相似三角形的判別</h1>
+<div class="lead">三角形相似只需驗證三條件之一<br>
+<span style="color:#f2d979;">AA、SAS 相似、SSS 相似</span></div><svg viewBox="0 0 200 150" width="200" height="150" style="display:block;margin:0 auto;"><polygon points="100,20 30,130 180,130" fill="rgba(152,201,220,.10)" stroke="#98c9dc" stroke-width="2"/><line x1="72" y1="64" x2="132" y2="64" stroke="#f2d979" stroke-width="2"/><text x="90" y="16" font-size="11" fill="#f3efe2">A</text><text x="20" y="142" font-size="11" fill="#f3efe2">B</text><text x="184" y="142" font-size="11" fill="#f3efe2">C</text><text x="62" y="64" font-size="11" fill="#f3efe2">D</text><text x="136" y="64" font-size="11" fill="#f3efe2">E</text><text x="100" y="148" font-size="10" fill="#f2d979" text-anchor="middle" font-family="Noto Sans TC">DE ∥ BC → △ADE∽△ABC</text></svg>
+</div></div>
+
+<!-- 2 -->
+<div class="slide" data-pg="2 / 11"><div class="tag">目標</div><div class="body">
+<h2>本節學習目標</h2>
+<ul>
+<li><span class="hl">AA</span>:兩角相等 → 相似</li>
+<li><span class="hl-b">SAS</span>:兩邊成比例 + 夾角相等</li>
+<li><span class="hl-b">SSS</span>:三邊成比例</li>
+<li>平行線截三角形的比例(AA 的應用)</li>
+</ul>
+<div class="box y">一句話:<span class="hl">相似比全等寬鬆——不需邊長相等，只要比例相同。SAS 的角必須是夾角。</span></div>
+</div></div>
+
+<!-- 3 -->
+<div class="slide" data-pg="3 / 11"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心　三個判別法</div>
+<h2>驗證一個條件就夠</h2>
+<table class="tbl">
+<tr><th style="width:22%;">判別</th><th>條件</th></tr>
+<tr><td class="hl-b">AA</td><td>兩組對應角相等(第三組自動相等)</td></tr>
+<tr><td class="hl-b">SAS</td><td>兩邊成比例 + 夾角相等</td></tr>
+<tr><td class="hl-b">SSS</td><td>三組對應邊成比例</td></tr>
+</table>
+<div class="box g" style="text-align:center;">
+平行截比例:DE∥BC → AD/DB=AE/EC，且 AD/AB=AE/AC=DE/BC。</div>
+</div></div>
+
+<!-- 4 -->
+<div class="slide" data-pg="4 / 11"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 1、2　難度 ★☆☆~★★☆</div>
+<h2>AA & 平行截比例</h2>
+<div class="eg">
+<div class="q">∠A=∠D=70°、∠B=∠E=60°，相似?</div>
+<div class="stp">兩角相等 → △ABC∽△DEF(AA);∠C=∠F=50°</div>
+</div>
+<div class="eg">
+<div class="q">DE∥BC，AD=3、AB=9、AE=4，求 EC、DE:BC</div>
+<div class="stp">k=3/9=1/3;AC=12 → EC=8;DE:BC=1:3</div>
+</div>
+<div class="box y" style="text-align:center;">DE∥BC 造出公共角 + 同位角 → AA 相似。</div>
+</div></div>
+
+<!-- 5 -->
+<div class="slide" data-pg="5 / 11"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 3　難度 ★★☆　SAS 相似</div>
+<h2>兩邊成比例 + 夾角相等</h2>
+<div class="eg">
+<div class="q">AB=6、BC=10;DE=9、EF=15;∠B=∠E，相似?</div>
+<div class="stp"><b>邊比</b>　AB/DE=6/9=2/3;BC/EF=10/15=2/3</div>
+<div class="stp"><b>夾角</b>　∠B=∠E(在兩比例邊之間)</div>
+<div class="stp"><b>結論</b>　△ABC∽△DEF(SAS，比 2:3)</div>
+</div>
+<div class="box g" style="text-align:center;">關鍵:相等角必須夾在兩條成比例的邊之間，否則不成立。</div>
+</div></div>
+
+<!-- 6 -->
+<div class="slide" data-pg="6 / 11"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 4、5　難度 ★★★</div>
+<h2>SAS 結論 & 射影定理</h2>
+<div style="display:flex;flex-direction:row;align-items:center;gap:16px;justify-content:center;">
+<svg viewBox="0 0 200 140" width="200" height="140" style="display:block;margin:0 auto;"><polygon points="20,130 190,130 70,40" fill="rgba(166,214,160,.10)" stroke="#a6d6a0" stroke-width="2"/><line x1="70" y1="40" x2="70" y2="130" stroke="#eda0a8" stroke-width="1.8" stroke-dasharray="3,2"/><rect x="64" y="124" width="6" height="6" fill="none" stroke="rgba(243,239,226,.5)" stroke-width="1"/><text x="8" y="134" font-size="11" fill="#f3efe2">A</text><text x="194" y="134" font-size="11" fill="#f3efe2">B</text><text x="66" y="36" font-size="11" fill="#f3efe2">C</text><text x="66" y="144" font-size="11" fill="#f3efe2">D</text><text x="100" y="138" font-size="10" fill="#eda0a8" text-anchor="middle" font-family="Noto Sans TC">CD⊥AB → CD²=AD×DB</text></svg>
+<div class="eg" style="margin:0;">
+<div class="q">直角△，∠C=90°，CD⊥AB</div>
+<div class="stp">∠A 公共、∠ADC=∠ACB=90° → △ACD∽△ABC(AA)</div>
+<div class="stp">△ACD∽△BCD → CD/AD=DB/CD</div>
+<div class="stp"><b>射影定理</b>　CD²=AD×DB</div>
+</div></div>
+<div class="box y" style="text-align:center;">直角三角形斜邊上的高 → 分出兩個與原三角形相似的小三角形。</div>
+</div></div>
+
+<!-- 7 -->
+<div class="slide" data-pg="7 / 11"><div class="tag">精選</div><div class="body">
+<div class="eyebrow">隨堂精選</div>
+<h2>快速檢查</h2>
+<table class="tbl">
+<tr><th style="width:60%;">題目</th><th>答案</th></tr>
+<tr><td>DE∥BC，AD=4 DB=6 AE=5，EC?</td><td class="fm hl">7.5</td></tr>
+<tr><td>邊 3,4,5 與 6,8,10 相似比?</td><td class="fm hl">1:2(SSS)</td></tr>
+<tr><td>射影 AD=3 DB=12，CD?</td><td class="fm hl">6</td></tr>
+<tr><td>△ABC∽△ADB，AB=6 AD=4，AC?</td><td class="fm hl">9</td></tr>
+<tr><td>角平分線 AB=6 AC=9 BC=10，BD?</td><td class="fm hl">4</td></tr>
+</table>
+<div class="box y" style="text-align:center;">角平分線定理:BD/DC=AB/AC=2/3 → BD=4、DC=6。</div>
+</div></div>
+
+<!-- 8 -->
+<div class="slide" data-pg="8 / 11"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 1　【測量樹高】</div>
+<h2>影子相似</h2>
+<div style="display:flex;flex-direction:row;align-items:center;gap:16px;justify-content:center;">
+<svg viewBox="0 0 220 140" width="220" height="140" style="display:block;margin:0 auto;"><line x1="8" y1="130" x2="212" y2="130" stroke="rgba(243,239,226,.3)" stroke-width="1"/><line x1="40" y1="130" x2="40" y2="90" stroke="#98c9dc" stroke-width="3"/><line x1="40" y1="130" x2="88" y2="130" stroke="rgba(242,217,121,.6)" stroke-width="2"/><line x1="40" y1="90" x2="88" y2="130" stroke="rgba(243,239,226,.4)" stroke-width="1" stroke-dasharray="3,2"/><text x="18" y="112" font-size="9" fill="#98c9dc">1.8m</text><text x="46" y="142" font-size="9" fill="rgba(243,239,226,.6)">影2.4</text><line x1="140" y1="130" x2="140" y2="35" stroke="#a6d6a0" stroke-width="4"/><line x1="140" y1="130" x2="220" y2="130" stroke="rgba(242,217,121,.6)" stroke-width="2"/><line x1="140" y1="35" x2="220" y2="130" stroke="rgba(243,239,226,.4)" stroke-width="1" stroke-dasharray="3,2"/><text x="116" y="85" font-size="9" fill="#a6d6a0">?m</text><text x="150" y="142" font-size="9" fill="rgba(243,239,226,.6)">影8</text><text x="110" y="12" font-size="10" fill="#f2d979" text-anchor="middle" font-family="Noto Sans TC">同時刻影子 → AA 相似</text></svg>
+<div class="eg" style="margin:0;">
+<div class="q">人高 1.8m 影 2.4m，樹影 8m</div>
+<div class="stp"><b>(1)</b> 陽光平行、都垂直地面 → AA</div>
+<div class="stp"><b>(2)</b> 樹高/1.8=8/2.4 → 樹高 6m</div>
+<div class="stp"><b>(3)</b> 相似比 1.8:6=3:10</div>
+</div></div>
+<div class="box y" style="text-align:center;">同時刻太陽光平行 → 仰角相同 → AA 相似。</div>
+</div></div>
+
+<!-- 9 -->
+<div class="slide" data-pg="9 / 11"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 2　【建築測量】</div>
+<h2>用桿量大樓</h2>
+<div class="box">距大樓底 60m 立 3m 桿，桿頂與樓頂連線過大樓前 1.5m 地面點</div>
+<div class="eg">
+<div class="stp"><b>(1)(2)</b> 兩直角三角形(垂直地面、仰角相同) → AA</div>
+<div class="stp"><b>(3)</b> 3/1.5 = h/(60+1.5) → h=3×61.5/1.5=123m</div>
+</div>
+<div class="box g" style="text-align:center;">相似測高:近處小三角形的比 = 遠處大三角形的比。</div>
+</div></div>
+
+<!-- 10 -->
+<div class="slide" data-pg="10 / 11"><div class="tag">避雷</div><div class="body">
+<h2>避雷指南</h2>
+<table class="tbl">
+<tr><th style="width:44%;">❌ 錯誤</th><th>✓ 正確</th></tr>
+<tr><td>SAS 用非夾角</td><td>相等角必須是<b class="hl-g">兩比例邊的夾角</b></td></tr>
+<tr><td>對應頂點亂寫</td><td>依 ∽ 記法<b class="hl-g">確認對應</b></td></tr>
+<tr><td>相似當全等</td><td>相似<b class="hl-g">只需比例相同</b></td></tr>
+<tr><td>忘記射影定理</td><td class="fm hl-g">CD²=AD×DB</td></tr>
+</table>
+<div class="box y" style="text-align:center;">追問:有哪些角相等?哪些邊成比例?符合 AA、SAS 還 SSS?對應怎麼排?</div>
+</div></div>
+
+<!-- 11 -->
+<div class="slide" data-pg="11 / 11"><div class="tag">總結</div><div class="body">
+<h2>本節總結</h2>
+<ul>
+<li><span class="hl">AA</span>:兩角相等(最常用)</li>
+<li><span class="hl">SAS</span>:兩邊成比例 + 夾角相等</li>
+<li><span class="hl">SSS</span>:三邊成比例</li>
+<li><span class="hl-r">平行截比例 & 射影定理</span>:AA 的兩大應用</li>
+</ul>
+<div class="box g" style="text-align:center;font-size:19px;">
+承先:2-1 相似定義 → 本節學會怎麼判別<br>
+🔗 <b>啟後</b>:<span class="hl">2-3 相似形的應用（實測、比例線段）。</span></div>
+</div></div>
+
+</div></body></html>
