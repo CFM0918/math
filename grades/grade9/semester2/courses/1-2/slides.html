@@ -1,0 +1,239 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>九下 1-2 統計圖表的判讀與應用｜授課簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--chalk-soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);padding:24px 14px;}
+.deck{max-width:1060px;margin:0 auto;}
+.print-hint{text-align:center;color:rgba(243,239,226,0.4);font-size:13px;padding:6px 0 22px;}
+.print-hint b{color:var(--yellow);}
+.slide{position:relative;min-height:576px;margin:0 auto 26px;padding:44px 52px;
+ background:radial-gradient(ellipse at 18% 12%,rgba(255,255,255,0.05),transparent 45%),
+  radial-gradient(ellipse at 82% 88%,rgba(255,255,255,0.035),transparent 45%),
+  radial-gradient(ellipse at 60% 40%,rgba(120,160,130,0.10),transparent 60%),
+  linear-gradient(160deg,var(--board) 0%,var(--board2) 100%);
+ border-radius:14px;box-shadow:0 10px 34px rgba(0,0,0,0.55);
+ border:1px solid rgba(242,217,121,0.14);overflow:hidden;display:flex;flex-direction:column;}
+.slide::before{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;
+ background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.014) 40px,rgba(255,255,255,0.014) 41px),
+  radial-gradient(circle at 30% 72%,rgba(255,255,255,0.03),transparent 8%),
+  radial-gradient(circle at 76% 24%,rgba(255,255,255,0.025),transparent 7%);}
+.slide::after{content:attr(data-pg);position:absolute;bottom:15px;right:26px;font-family:'Caveat',cursive;font-size:20px;color:rgba(243,239,226,0.4);}
+.tag{position:absolute;top:20px;right:26px;font-family:'Caveat',cursive;font-size:22px;color:var(--pink);transform:rotate(4deg);}
+.eyebrow{font-family:'Caveat',cursive;font-size:25px;color:var(--yellow);letter-spacing:1px;margin-bottom:8px;opacity:0.92;}
+.slide h1{font-family:'Noto Serif TC',serif;font-size:46px;font-weight:900;line-height:1.28;letter-spacing:1px;
+ text-shadow:0 0 1px rgba(243,239,226,0.5),1px 1px 0 rgba(0,0,0,0.2);}
+.slide h2{font-family:'Noto Serif TC',serif;font-size:33px;font-weight:900;color:var(--yellow);
+ margin-bottom:20px;padding-bottom:11px;border-bottom:2px dashed rgba(242,217,121,0.4);
+ text-shadow:0 0 1px rgba(242,217,121,0.4);}
+.slide p{font-size:20px;line-height:1.85;margin-bottom:12px;}
+.big-center{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;}
+.big-center .lead,.lead{font-family:'Caveat',cursive;font-size:30px;color:var(--blue);letter-spacing:1px;margin-top:12px;}
+ul{list-style:none;margin:8px 0;}
+li{font-size:21px;line-height:1.95;padding-left:32px;position:relative;margin-bottom:4px;}
+li::before{content:'\2726';position:absolute;left:4px;color:var(--yellow);font-size:17px;top:3px;}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.34);border-radius:12px;padding:15px 21px;margin:12px 0;font-size:19px;line-height:1.8;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.38);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.38);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.34);}
+.eg{position:relative;background:rgba(0,0,0,0.24);border:1px solid rgba(242,217,121,0.2);border-radius:10px;padding:17px 22px;margin:12px 0;font-size:19px;}
+.eg::before{content:'';position:absolute;top:-8px;left:38px;width:58px;height:15px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.eg .q{color:var(--blue);font-weight:700;margin-bottom:8px;font-size:19px;}
+.eg .a{color:var(--green);font-weight:700;margin-top:6px;}
+.eg .stp{color:var(--chalk-soft);font-size:18px;margin:3px 0;}
+.tip{display:flex;gap:12px;align-items:flex-start;background:rgba(242,217,121,0.09);border:1.5px dashed rgba(242,217,121,0.45);border-radius:12px;padding:13px 18px;margin:10px 0;}
+.tip .ic{font-size:24px;line-height:1;}.tip .tx{font-size:18px;line-height:1.7;}
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:18px;}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.26);padding:10px 14px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.two{display:flex;gap:20px;}.two>div{flex:1;}
+svg{display:block;margin:6px auto;max-width:100%;}
+@media print{
+ body{background:#0a130d;padding:0;}
+ .deck{max-width:none;}
+ .print-hint{display:none;}
+ .slide{margin:0;border-radius:0;box-shadow:none;min-height:100vh;
+  page-break-after:always;break-after:page;padding:32px 44px;justify-content:center;}
+ .slide:last-child{page-break-after:auto;break-after:auto;}
+ .slide h1{font-size:40px;}
+ .slide h2{font-size:27px;margin-bottom:13px;padding-bottom:8px;}
+ .slide p{font-size:17px;line-height:1.55;margin-bottom:6px;}
+ li{font-size:17px;line-height:1.55;margin-bottom:1px;padding-left:26px;}
+ .eyebrow{font-size:21px;margin-bottom:5px;}
+ .big-center .lead,.lead{font-size:26px;}
+ .box{font-size:16px;padding:10px 16px;margin:6px 0;line-height:1.5;}
+ .eg{font-size:16px;padding:11px 16px;margin:6px 0;}
+ .tip{font-size:16px;padding:10px 14px;margin:6px 0;}
+ .tbl{font-size:15px;margin:6px 0;}
+ .tbl th,.tbl td{padding:6px 10px;}
+ svg{max-height:210px;}
+}
+</style></head><body><div class="deck">
+<div class="print-hint">共 <b>12</b> 張・列印時每張一頁（Ctrl+P → 橫向 → 背景圖形）</div>
+
+
+<!-- 1 -->
+<div class="slide" data-pg="1 / 12"><div class="tag">Start!</div><div class="big-center">
+<div class="eyebrow">國三下學期・第一章 統計</div>
+<h1>1-2　統計圖表的判讀</h1>
+<div class="lead">莖葉圖、盒狀圖、散布圖<br>
+<span style="color:#f2d979;">選對圖表</span>才能有效呈現資料特性</div><svg viewBox="0 0 340 140" width="340" height="140" style="display:block;margin:0 auto;"><line x1="58" y1="45" x2="151" y2="45" stroke="#98c9dc" stroke-width="1.5"/><line x1="245" y1="45" x2="301" y2="45" stroke="#98c9dc" stroke-width="1.5"/><rect x="151" y="35" width="94" height="20" fill="rgba(242,217,121,.12)" stroke="#98c9dc" stroke-width="1.8"/><line x1="208" y1="35" x2="208" y2="55" stroke="#98c9dc" stroke-width="2"/><line x1="58" y1="39" x2="58" y2="51" stroke="#98c9dc" stroke-width="1.3"/><line x1="301" y1="39" x2="301" y2="51" stroke="#98c9dc" stroke-width="1.3"/><text x="14" y="49" font-size="10" fill="#98c9dc" text-anchor="end">甲</text><line x1="170" y1="95" x2="189" y2="95" stroke="#a6d6a0" stroke-width="1.5"/><line x1="238" y1="95" x2="282" y2="95" stroke="#a6d6a0" stroke-width="1.5"/><rect x="189" y="85" width="49" height="20" fill="rgba(242,217,121,.12)" stroke="#a6d6a0" stroke-width="1.8"/><line x1="215" y1="85" x2="215" y2="105" stroke="#a6d6a0" stroke-width="2"/><line x1="170" y1="89" x2="170" y2="101" stroke="#a6d6a0" stroke-width="1.3"/><line x1="282" y1="89" x2="282" y2="101" stroke="#a6d6a0" stroke-width="1.3"/><text x="14" y="99" font-size="10" fill="#a6d6a0" text-anchor="end">乙</text><line x1="20" y1="20" x2="20" y2="120" stroke="rgba(243,239,226,.12)" stroke-width="1"/><text x="20" y="134" font-size="9" fill="rgba(243,239,226,.5)" text-anchor="middle">20</text><line x1="95" y1="20" x2="95" y2="120" stroke="rgba(243,239,226,.12)" stroke-width="1"/><text x="95" y="134" font-size="9" fill="rgba(243,239,226,.5)" text-anchor="middle">40</text><line x1="170" y1="20" x2="170" y2="120" stroke="rgba(243,239,226,.12)" stroke-width="1"/><text x="170" y="134" font-size="9" fill="rgba(243,239,226,.5)" text-anchor="middle">60</text><line x1="245" y1="20" x2="245" y2="120" stroke="rgba(243,239,226,.12)" stroke-width="1"/><text x="245" y="134" font-size="9" fill="rgba(243,239,226,.5)" text-anchor="middle">80</text><line x1="320" y1="20" x2="320" y2="120" stroke="rgba(243,239,226,.12)" stroke-width="1"/><text x="320" y="134" font-size="9" fill="rgba(243,239,226,.5)" text-anchor="middle">100</text></svg>
+</div></div>
+
+<!-- 2 -->
+<div class="slide" data-pg="2 / 12"><div class="tag">目標</div><div class="body">
+<h2>本節學習目標</h2>
+<ul>
+<li>讀<span class="hl">莖葉圖</span>算中位數、四分位數</li>
+<li>用<span class="hl-b">盒狀圖</span>比較多組資料分布</li>
+<li>理解<span class="hl-b">散布圖與相關性</span></li>
+<li>判斷資料<span class="hl">偏態</span>(右偏/左偏)</li>
+</ul>
+<div class="box y">一句話:<span class="hl">盒狀圖看分布與離群、散布圖看相關。相關 ≠ 因果。長尾在哪側就偏那側。</span></div>
+</div></div>
+
+<!-- 3 -->
+<div class="slide" data-pg="3 / 12"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心　四種圖表工具</div>
+<h2>各自呈現不同特性</h2>
+<table class="tbl">
+<tr><th style="width:24%;">圖表</th><th>用途</th></tr>
+<tr><td class="hl-b">莖葉圖</td><td>十位莖、個位葉;看分布找統計量</td></tr>
+<tr><td class="hl-b">盒狀圖</td><td>Q1/Q2/Q3/極值;IQR=Q3−Q1</td></tr>
+<tr><td class="hl-b">偏態</td><td>右偏:眾&lt;中&lt;均;左偏相反</td></tr>
+<tr><td class="hl-b">散布圖/r</td><td>正/負/無相關;−1≤r≤1</td></tr>
+</table>
+<div class="box g" style="text-align:center;">離群值界限:Q1−1.5·IQR ~ Q3+1.5·IQR。</div>
+</div></div>
+
+<!-- 4 -->
+<div class="slide" data-pg="4 / 12"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 1　難度 ★☆☆　莖葉圖</div>
+<h2>四分位數</h2>
+<div class="box">資料(14個):52 58 61 65 67 69 70 73 76 78 78 82 84 89</div>
+<div class="eg">
+<div class="stp"><b>Q2</b>　第7、8個平均 (70+73)/2=71.5</div>
+<div class="stp"><b>Q1</b>　前7個中位數=65</div>
+<div class="stp"><b>Q3</b>　後7個中位數=78;<b>IQR</b>=78−65=13</div>
+</div>
+<div class="box y" style="text-align:center;">莖葉圖「7｜3」代表 73(葉是個位)，不是 7.3。</div>
+</div></div>
+
+<!-- 5 -->
+<div class="slide" data-pg="5 / 12"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 2　難度 ★★☆　盒狀圖比較</div>
+<h2>甲乙兩班</h2>
+<div style="display:flex;flex-direction:row;align-items:center;gap:14px;justify-content:center;">
+<svg viewBox="0 0 300 130" width="300" height="130" style="display:block;margin:0 auto;"><line x1="52" y1="45" x2="134" y2="45" stroke="#98c9dc" stroke-width="1.5"/><line x1="215" y1="45" x2="264" y2="45" stroke="#98c9dc" stroke-width="1.5"/><rect x="134" y="35" width="81" height="20" fill="rgba(242,217,121,.12)" stroke="#98c9dc" stroke-width="1.8"/><line x1="182" y1="35" x2="182" y2="55" stroke="#98c9dc" stroke-width="2"/><line x1="52" y1="39" x2="52" y2="51" stroke="#98c9dc" stroke-width="1.3"/><line x1="264" y1="39" x2="264" y2="51" stroke="#98c9dc" stroke-width="1.3"/><text x="14" y="49" font-size="10" fill="#98c9dc" text-anchor="end">甲</text><line x1="150" y1="95" x2="166" y2="95" stroke="#a6d6a0" stroke-width="1.5"/><line x1="208" y1="95" x2="248" y2="95" stroke="#a6d6a0" stroke-width="1.5"/><rect x="166" y="85" width="42" height="20" fill="rgba(242,217,121,.12)" stroke="#a6d6a0" stroke-width="1.8"/><line x1="189" y1="85" x2="189" y2="105" stroke="#a6d6a0" stroke-width="2"/><line x1="150" y1="89" x2="150" y2="101" stroke="#a6d6a0" stroke-width="1.3"/><line x1="248" y1="89" x2="248" y2="101" stroke="#a6d6a0" stroke-width="1.3"/><text x="14" y="99" font-size="10" fill="#a6d6a0" text-anchor="end">乙</text><line x1="20" y1="20" x2="20" y2="120" stroke="rgba(243,239,226,.12)" stroke-width="1"/><text x="20" y="134" font-size="9" fill="rgba(243,239,226,.5)" text-anchor="middle">20</text><line x1="85" y1="20" x2="85" y2="120" stroke="rgba(243,239,226,.12)" stroke-width="1"/><text x="85" y="134" font-size="9" fill="rgba(243,239,226,.5)" text-anchor="middle">40</text><line x1="150" y1="20" x2="150" y2="120" stroke="rgba(243,239,226,.12)" stroke-width="1"/><text x="150" y="134" font-size="9" fill="rgba(243,239,226,.5)" text-anchor="middle">60</text><line x1="215" y1="20" x2="215" y2="120" stroke="rgba(243,239,226,.12)" stroke-width="1"/><text x="215" y="134" font-size="9" fill="rgba(243,239,226,.5)" text-anchor="middle">80</text><line x1="280" y1="20" x2="280" y2="120" stroke="rgba(243,239,226,.12)" stroke-width="1"/><text x="280" y="134" font-size="9" fill="rgba(243,239,226,.5)" text-anchor="middle">100</text></svg>
+<div class="eg" style="margin:0;font-size:13px;">
+<div class="stp">乙 Q2=72&gt;甲 70 → 乙略高</div>
+<div class="stp">IQR 甲25、乙13 → 乙更集中</div>
+<div class="stp">全距 甲65、乙30 → 甲更分散</div>
+</div></div>
+<div class="box y" style="text-align:center;">乙整體高且穩定;甲有偏低同學、分布廣。</div>
+</div></div>
+
+<!-- 6 -->
+<div class="slide" data-pg="6 / 12"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 3　難度 ★★☆　偏態</div>
+<h2>三集中量順序</h2>
+<div style="display:flex;flex-direction:row;align-items:center;gap:16px;justify-content:center;">
+<svg viewBox="0 0 220 140" width="220" height="140" style="display:block;margin:0 auto;"><line x1="15" y1="120" x2="215" y2="120" stroke="rgba(243,239,226,.3)" stroke-width="1"/><polyline points="15,118 19,117 23,115 27,112 31,107 35,101 39,94 43,84 47,74 51,62 55,51 59,41 63,32 67,27 71,25 75,27 79,32 83,41 87,51 91,62 95,74 99,84 103,94 107,101 111,107 115,112 119,115 123,117 127,118 131,119 135,119 139,120 143,120 147,120 151,120 155,120 159,120 163,120 167,120 171,120 175,120 179,120 183,120 187,120 191,120 195,120 199,120 203,120 207,120 211,120 215,120" fill="none" stroke="#98c9dc" stroke-width="2"/><line x1="71" y1="30" x2="71" y2="120" stroke="#eda0a8" stroke-width="1.3" stroke-dasharray="3,2"/><text x="71" y="26" font-size="10" fill="#eda0a8" text-anchor="middle">眾</text><line x1="87" y1="30" x2="87" y2="120" stroke="#a6d6a0" stroke-width="1.3" stroke-dasharray="3,2"/><text x="87" y="26" font-size="10" fill="#a6d6a0" text-anchor="middle">中</text><line x1="107" y1="30" x2="107" y2="120" stroke="#f2d979" stroke-width="1.3" stroke-dasharray="3,2"/><text x="107" y="26" font-size="10" fill="#f2d979" text-anchor="middle">均</text><text x="110" y="137" font-size="10" fill="rgba(243,239,226,.7)" text-anchor="middle" font-family="Noto Sans TC">右偏：眾<中<均</text></svg>
+<div class="eg" style="margin:0;">
+<div class="q">月收入多數 3~5 萬、少數超 50 萬</div>
+<div class="stp">少數高薪把平均數拉高</div>
+<div class="stp">中位數≈4 萬(不受極端值影響)</div>
+<div class="stp"><b>右偏：眾數 &lt; 中位數 &lt; 平均數</b></div>
+</div></div>
+<div class="box g" style="text-align:center;">長尾在右 → 右偏(正偏) → 平均被拉向右(大)。</div>
+</div></div>
+
+<!-- 7 -->
+<div class="slide" data-pg="7 / 12"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 4、5　難度 ★★★</div>
+<h2>相關 & 離群值</h2>
+<div style="display:flex;flex-direction:row;align-items:center;gap:14px;justify-content:center;">
+<svg viewBox="0 0 180 150" width="180" height="150" style="display:block;margin:0 auto;"><line x1="24" y1="130" x2="185" y2="130" stroke="rgba(243,239,226,.3)" stroke-width="1"/><line x1="24" y1="20" x2="24" y2="130" stroke="rgba(243,239,226,.3)" stroke-width="1"/><circle cx="32" cy="120" r="3" fill="#f2d979"/><circle cx="48" cy="115" r="3" fill="#f2d979"/><circle cx="58" cy="100" r="3" fill="#f2d979"/><circle cx="73" cy="96" r="3" fill="#f2d979"/><circle cx="81" cy="87" r="3" fill="#f2d979"/><circle cx="95" cy="78" r="3" fill="#f2d979"/><circle cx="109" cy="64" r="3" fill="#f2d979"/><circle cx="121" cy="61" r="3" fill="#f2d979"/><circle cx="137" cy="47" r="3" fill="#f2d979"/><circle cx="151" cy="37" r="3" fill="#f2d979"/><circle cx="166" cy="30" r="3" fill="#f2d979"/><line x1="28" y1="124" x2="170" y2="30" stroke="rgba(237,160,168,.7)" stroke-width="1.5" stroke-dasharray="4,3"/><text x="100" y="146" font-size="9" fill="rgba(243,239,226,.6)" text-anchor="middle">讀書時間 →</text><text x="18" y="16" font-size="9" fill="rgba(243,239,226,.6)">成績</text><text x="150" y="60" font-size="10" fill="#eda0a8">r=0.85</text></svg>
+<div class="eg" style="margin:0;font-size:13px;">
+<div class="q">讀書時間 vs 成績 r=0.85</div>
+<div class="stp">強正相關;但相關 ≠ 因果</div>
+<div class="q">Q1=800 Q3=1500 IQR=700</div>
+<div class="stp">上界=1500+1.5×700=2550;2000&lt;2550 非離群</div>
+</div></div>
+<div class="box y" style="text-align:center;">|r| 接近 1=相關強;離群界限用 1.5 倍 IQR。</div>
+</div></div>
+
+<!-- 8 -->
+<div class="slide" data-pg="8 / 12"><div class="tag">精選</div><div class="body">
+<div class="eyebrow">隨堂精選</div>
+<h2>快速檢查</h2>
+<table class="tbl">
+<tr><th style="width:60%;">題目</th><th>答案</th></tr>
+<tr><td>r=−0.9，相關方向與強弱?</td><td class="fm hl">強負相關</td></tr>
+<tr><td>IQR=20 Q3=60，離群上界?</td><td class="fm hl">90</td></tr>
+<tr><td>中位數70 平均65，偏態?</td><td class="fm hl">左偏</td></tr>
+<tr><td>25人 Q1=60分，幾人低於?</td><td class="fm hl">約6人</td></tr>
+<tr><td>「r=0 表完全無關」對嗎?</td><td class="fm hl">錯(僅無線性)</td></tr>
+</table>
+<div class="box y" style="text-align:center;">盒子=中間 50%(Q1~Q3);Q1 以下約占 25%。</div>
+</div></div>
+
+<!-- 9 -->
+<div class="slide" data-pg="9 / 12"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 1　【薪資分布】</div>
+<h2>平均 vs 中位數</h2>
+<div class="box">平均月薪 54000、中位數 43000</div>
+<div class="eg">
+<div class="stp"><b>(1)</b> 平均&gt;中位數 → 右偏(高薪拉高平均)</div>
+<div class="stp"><b>(2)</b> 看一般水準用中位數(不受極端值影響)</div>
+<div class="stp"><b>(3)</b> 移除前5%高薪 → 平均大降、中位數幾乎不變</div>
+</div>
+</div></div>
+
+<!-- 10 -->
+<div class="slide" data-pg="10 / 12"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 2　【橡膠品管】</div>
+<h2>標準差看穩定性</h2>
+<div class="box">A:平均18 σ=1.2　B:平均18 σ=2.8</div>
+<div class="eg">
+<div class="stp"><b>(1)</b> A 標準差小 → 品質更穩定</div>
+<div class="stp"><b>(2)</b> 規格≥16:B 分布廣 → 不合格批次可能較多</div>
+<div class="stp"><b>(3)</b> 建議選 A(平均相同但更穩定、風險低)</div>
+</div>
+</div></div>
+
+<!-- 11 -->
+<div class="slide" data-pg="11 / 12"><div class="tag">避雷</div><div class="body">
+<h2>避雷指南</h2>
+<table class="tbl">
+<tr><th style="width:44%;">❌ 錯誤</th><th>✓ 正確</th></tr>
+<tr><td>莖葉「7｜3」讀成 7.3</td><td>葉是個位 → <b class="hl-g">73</b></td></tr>
+<tr><td>相關 = 因果</td><td>相關只說<b class="hl-g">同時變化</b></td></tr>
+<tr><td>右偏左偏方向記反</td><td><b class="hl-g">長尾方向</b>即偏向</td></tr>
+<tr><td>r=0 表完全無關</td><td>僅無<b class="hl-g">線性</b>相關</td></tr>
+</table>
+<div class="box y" style="text-align:center;">追問:最大最小值在哪?哪側尾巴長?長尾側就是偏向。</div>
+</div></div>
+
+<!-- 12 -->
+<div class="slide" data-pg="12 / 12"><div class="tag">總結</div><div class="body">
+<h2>本節總結</h2>
+<ul>
+<li><span class="hl">莖葉圖</span>:找中位數、四分位數</li>
+<li><span class="hl">盒狀圖</span>:比較分布、IQR、離群值</li>
+<li><span class="hl">偏態</span>:右偏 眾&lt;中&lt;均</li>
+<li><span class="hl-r">散布圖/相關</span>:r 看強弱;相關 ≠ 因果</li>
+</ul>
+<div class="box g" style="text-align:center;font-size:19px;">
+承先:八上/九下 統計基礎 → 啟後:<span class="hl">第2章 機率（機率意義、計算）。</span></div>
+</div></div>
+
+</div></body></html>
