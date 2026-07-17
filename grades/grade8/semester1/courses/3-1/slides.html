@@ -1,0 +1,265 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>八上 3-1 因式分解（提公因式與公式）｜授課簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--chalk-soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);padding:24px 14px;}
+.deck{max-width:1060px;margin:0 auto;}
+.print-hint{text-align:center;color:rgba(243,239,226,0.4);font-size:13px;padding:6px 0 22px;}
+.print-hint b{color:var(--yellow);}
+.slide{position:relative;min-height:576px;margin:0 auto 26px;padding:44px 52px;
+ background:radial-gradient(ellipse at 18% 12%,rgba(255,255,255,0.05),transparent 45%),
+  radial-gradient(ellipse at 82% 88%,rgba(255,255,255,0.035),transparent 45%),
+  radial-gradient(ellipse at 60% 40%,rgba(120,160,130,0.10),transparent 60%),
+  linear-gradient(160deg,var(--board) 0%,var(--board2) 100%);
+ border-radius:14px;box-shadow:0 10px 34px rgba(0,0,0,0.55);
+ border:1px solid rgba(242,217,121,0.14);overflow:hidden;display:flex;flex-direction:column;}
+.slide::before{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;
+ background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.014) 40px,rgba(255,255,255,0.014) 41px),
+  radial-gradient(circle at 30% 72%,rgba(255,255,255,0.03),transparent 8%),
+  radial-gradient(circle at 76% 24%,rgba(255,255,255,0.025),transparent 7%);}
+.slide::after{content:attr(data-pg);position:absolute;bottom:15px;right:26px;font-family:'Caveat',cursive;font-size:20px;color:rgba(243,239,226,0.4);}
+.tag{position:absolute;top:20px;right:26px;font-family:'Caveat',cursive;font-size:22px;color:var(--pink);transform:rotate(4deg);}
+.eyebrow{font-family:'Caveat',cursive;font-size:25px;color:var(--yellow);letter-spacing:1px;margin-bottom:8px;opacity:0.92;}
+.slide h1{font-family:'Noto Serif TC',serif;font-size:46px;font-weight:900;line-height:1.28;letter-spacing:1px;
+ text-shadow:0 0 1px rgba(243,239,226,0.5),1px 1px 0 rgba(0,0,0,0.2);}
+.slide h2{font-family:'Noto Serif TC',serif;font-size:33px;font-weight:900;color:var(--yellow);
+ margin-bottom:20px;padding-bottom:11px;border-bottom:2px dashed rgba(242,217,121,0.4);
+ text-shadow:0 0 1px rgba(242,217,121,0.4);}
+.slide p{font-size:20px;line-height:1.85;margin-bottom:12px;}
+.big-center{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;}
+.big-center .lead,.lead{font-family:'Caveat',cursive;font-size:30px;color:var(--blue);letter-spacing:1px;margin-top:12px;}
+ul{list-style:none;margin:8px 0;}
+li{font-size:21px;line-height:1.95;padding-left:32px;position:relative;margin-bottom:4px;}
+li::before{content:'\2726';position:absolute;left:4px;color:var(--yellow);font-size:17px;top:3px;}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.34);border-radius:12px;padding:15px 21px;margin:12px 0;font-size:19px;line-height:1.8;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.38);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.38);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.34);}
+.eg{position:relative;background:rgba(0,0,0,0.24);border:1px solid rgba(242,217,121,0.2);border-radius:10px;padding:17px 22px;margin:12px 0;font-size:19px;}
+.eg::before{content:'';position:absolute;top:-8px;left:38px;width:58px;height:15px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.eg .q{color:var(--blue);font-weight:700;margin-bottom:8px;font-size:19px;}
+.eg .a{color:var(--green);font-weight:700;margin-top:6px;}
+.eg .stp{color:var(--chalk-soft);font-size:18px;margin:3px 0;}
+.tip{display:flex;gap:12px;align-items:flex-start;background:rgba(242,217,121,0.09);border:1.5px dashed rgba(242,217,121,0.45);border-radius:12px;padding:13px 18px;margin:10px 0;}
+.tip .ic{font-size:24px;line-height:1;}.tip .tx{font-size:18px;line-height:1.7;}
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:18px;}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.26);padding:10px 14px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.two{display:flex;gap:20px;}.two>div{flex:1;}
+svg{display:block;margin:6px auto;max-width:100%;}
+@media print{
+ body{background:#0a130d;padding:0;}
+ .deck{max-width:none;}
+ .print-hint{display:none;}
+ .slide{margin:0;border-radius:0;box-shadow:none;min-height:100vh;
+  page-break-after:always;break-after:page;padding:32px 44px;justify-content:center;}
+ .slide:last-child{page-break-after:auto;break-after:auto;}
+ .slide h1{font-size:40px;}
+ .slide h2{font-size:27px;margin-bottom:13px;padding-bottom:8px;}
+ .slide p{font-size:17px;line-height:1.55;margin-bottom:6px;}
+ li{font-size:17px;line-height:1.55;margin-bottom:1px;padding-left:26px;}
+ .eyebrow{font-size:21px;margin-bottom:5px;}
+ .big-center .lead,.lead{font-size:26px;}
+ .box{font-size:16px;padding:10px 16px;margin:6px 0;line-height:1.5;}
+ .eg{font-size:16px;padding:11px 16px;margin:6px 0;}
+ .tip{font-size:16px;padding:10px 14px;margin:6px 0;}
+ .tbl{font-size:15px;margin:6px 0;}
+ .tbl th,.tbl td{padding:6px 10px;}
+ svg{max-height:210px;}
+}
+</style></head><body><div class="deck">
+<div class="print-hint">共 <b>14</b> 張・列印時每張一頁（Ctrl+P → 橫向 → 背景圖形）</div>
+
+
+<!-- 1 -->
+<div class="slide" data-pg="1 / 14"><div class="tag">Start!</div><div class="big-center">
+<div class="eyebrow">國二上學期・第三章 因式分解</div>
+<h1>3-1　因式分解<small style="font-size:16px;">提公因式與乘法公式</small></h1>
+<div class="lead">展開的<span style="color:#eda0a8;">逆操作</span><br>
+把多項式「收縮」回幾個因式的乘積</div>
+<div class="box y" style="max-width:660px;margin:16px auto 0;text-align:center;font-size:19px;">
+展開:<span class="fm">(x+2)(x+3) → x²+5x+6</span><br>
+分解:<span class="fm">x²+5x+6 → (x+2)(x+3)</span></div>
+</div></div>
+
+<!-- 2 -->
+<div class="slide" data-pg="2 / 14"><div class="tag">目標</div><div class="body">
+<h2>本節學習目標</h2>
+<ul>
+<li>理解因式分解:把多項式寫成<span class="hl">因式的乘積</span>（展開的逆）</li>
+<li><span class="hl-b">提公因式</span>法分解</li>
+<li>逆用<span class="hl">乘法公式</span>:完全平方、平方差</li>
+<li>結合<span class="hl">多步驟</span>分解（分解到不能再分）</li>
+</ul>
+<div class="box y">一句話:<span class="hl">1-1 學展開，這章學還原。策略永遠是「先提公因式，再套公式，分到底」。</span></div>
+</div></div>
+
+<!-- 3 -->
+<div class="slide" data-pg="3 / 14"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心　提公因式</div>
+<h2>找最大公因數提出</h2>
+<div class="box y" style="text-align:center;font-size:20px;">
+6x² + 9x = 3x(2x+3)</div>
+<div class="eg">
+<div class="q">怎麼提?</div>
+<div class="stp"><b>係數</b>　6、9 的公因數 3</div>
+<div class="stp"><b>變數</b>　x²、x 的公因式 x → 公因式 3x</div>
+<div class="stp"><b>括號內</b>　6x²÷3x=2x;9x÷3x=3 → (2x+3)</div>
+</div>
+<div class="box r" style="text-align:center;">⚠️ 12x²+8x 提 4x → 4x(3x+2)（8÷4=2，不是 8!）</div>
+</div></div>
+
+<!-- 4 -->
+<div class="slide" data-pg="4 / 14"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心　逆用乘法公式</div>
+<h2>認出公式的「形狀」</h2>
+<table class="tbl">
+<tr><th style="width:48%;">因式分解</th><th>判斷法</th></tr>
+<tr><td class="fm">a²−b² = (a+b)(a−b)</td><td>兩項、一正一負、都是平方</td></tr>
+<tr><td class="fm">a²+2ab+b² = (a+b)²</td><td>首尾平方、中間兩倍首尾積</td></tr>
+<tr><td class="fm">a²−2ab+b² = (a−b)²</td><td>同上，中間負</td></tr>
+</table>
+<div class="box g" style="text-align:center;">
+就是把 1-1 的四個公式<span class="hl">反過來讀</span>。</div>
+</div></div>
+
+<!-- 5 -->
+<div class="slide" data-pg="5 / 14"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 1　難度 ★☆☆　提公因式</div>
+<h2>提出公因式</h2>
+<div class="eg">
+<div class="q">(1) 12x³−8x²+4x　(2) 6a²b−9ab²</div>
+<div class="stp"><b>(1)</b> 公因式 4x → 4x(3x²−2x+1)</div>
+<div class="stp"><b>(2)</b> 公因式 3ab → 3ab(2a−3b)</div>
+</div>
+<div class="box y" style="text-align:center;">檢查:把括號展開回去，應等於原式。</div>
+</div></div>
+
+<!-- 6 -->
+<div class="slide" data-pg="6 / 14"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 2　難度 ★★☆　平方差</div>
+<h2>a² − b² = (a+b)(a−b)</h2>
+<div class="eg">
+<div class="q">(1) x²−25　(2) 4a²−9b²</div>
+<div class="stp"><b>(1)</b> x²−5² = (x+5)(x−5)</div>
+<div class="stp"><b>(2)</b> (2a)²−(3b)² = (2a+3b)(2a−3b)</div>
+</div>
+<div class="box g" style="text-align:center;">看到「□² − ○²」就想平方差:(和)(差)。</div>
+</div></div>
+
+<!-- 7 -->
+<div class="slide" data-pg="7 / 14"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 3　難度 ★★☆　完全平方</div>
+<h2>三項式的判斷</h2>
+<div class="eg">
+<div class="q">(1) x²+6x+9　(2) 4x²−12x+9</div>
+<div class="stp"><b>(1)</b> 首 x²、尾 3²、中間 6x=2·x·3 → (x+3)²</div>
+<div class="stp"><b>(2)</b> 首 (2x)²、尾 3²、中間 12x=2·2x·3 → (2x−3)²</div>
+</div>
+<div class="box r" style="text-align:center;">⚠️ 中間項要「剛好」是兩倍首尾積，x²+3x+4 就不是完全平方式!</div>
+</div></div>
+
+<!-- 8 -->
+<div class="slide" data-pg="8 / 14"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 4、5　難度 ★★★　多步驟</div>
+<h2>分解到不能再分</h2>
+<div class="eg">
+<div class="q">2x²−8　·　3x³−12x</div>
+<div class="stp"><b>2x²−8</b>　先提 2 → 2(x²−4) → 再平方差 → 2(x+2)(x−2)</div>
+<div class="stp"><b>3x³−12x</b>　先提 3x → 3x(x²−4) → 3x(x+2)(x−2)</div>
+</div>
+<div class="eg">
+<div class="q">(x+y)²−4z²（整體代換）</div>
+<div class="stp">把 (x+y) 當整體，4z²=(2z)² → (x+y+2z)(x+y−2z)</div>
+</div>
+<div class="box r" style="text-align:center;">⚠️ 2(x²−4) 還沒完!每步都問「括號還能分嗎?」</div>
+</div></div>
+
+<!-- 9 -->
+<div class="slide" data-pg="9 / 14"><div class="tag">精選</div><div class="body">
+<div class="eyebrow">隨堂精選</div>
+<h2>快速檢查</h2>
+<table class="tbl">
+<tr><th style="width:52%;">題目</th><th>分解結果</th></tr>
+<tr><td>9x²−6x+1</td><td class="fm hl">(3x−1)²</td></tr>
+<tr><td>3x²−75</td><td class="fm hl">3(x+5)(x−5)</td></tr>
+<tr><td>a⁴−b⁴</td><td class="fm hl">(a²+b²)(a+b)(a−b)</td></tr>
+<tr><td>99²−1</td><td class="fm hl">100×98 = 9800</td></tr>
+<tr><td>2(x+1)²−8</td><td class="fm hl">2(x+3)(x−1)</td></tr>
+</table>
+<div class="box y" style="text-align:center;">a⁴−b⁴ 要連用兩次平方差;數字題用分解變乘法。</div>
+</div></div>
+
+<!-- 10 -->
+<div class="slide" data-pg="10 / 14"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 1　【輪胎截面積】</div>
+<h2>環形面積 = π(R+r)(R−r)</h2>
+<div class="box">截面積 = πR² − πr²</div>
+<div class="eg">
+<div class="stp"><b>(1) 化簡</b>　π(R²−r²) = π(R+r)(R−r)</div>
+<div class="stp"><b>(2) R=15,r=12</b>　π×27×3 = 81π ≈ 254.34 cm²</div>
+<div class="stp"><b>(3) 截面積 63π、R+r=15</b>　15(R−r)=63 → R−r=4.2 → R=9.6、r=5.4</div>
+</div>
+</div></div>
+
+<!-- 11 -->
+<div class="slide" data-pg="11 / 14"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 2　【平方差速算】</div>
+<h2>因式分解讓大數變簡單</h2>
+<div class="eg">
+<div class="q">101² − 99²</div>
+<div class="stp"><b>(1) 分解</b>　(101+99)(101−99) = 200×2</div>
+<div class="stp"><b>(2)</b>　= 400</div>
+<div class="stp"><b>(3) 1001²−999²</b>　= 2000×2 = 4000</div>
+</div>
+<div class="box g" style="text-align:center;">💡 避開巨大乘方，只做加減與一次乘法。</div>
+</div></div>
+
+<!-- 12 -->
+<div class="slide" data-pg="12 / 14"><div class="tag">避雷</div><div class="body">
+<h2>避雷指南</h2>
+<table class="tbl">
+<tr><th style="width:46%;">❌ 錯誤</th><th>✓ 正確</th></tr>
+<tr><td class="fm">12x²+8x → 4x(3x+8)</td><td class="fm hl-g">4x(3x+2)（8÷4=2）</td></tr>
+<tr><td>誤判完全平方式</td><td>中間要正好是兩倍首尾積</td></tr>
+<tr><td class="fm">2x²−8 → 2(x²−4) 就停</td><td class="fm hl-g">→ 2(x+2)(x−2)</td></tr>
+<tr><td>忘記先提公因式</td><td>先提公因式，再套公式</td></tr>
+</table>
+<div class="box y" style="text-align:center;">每分解一步都問:<span class="hl">括號內還能再分解嗎?</span></div>
+</div></div>
+
+<!-- 13 -->
+<div class="slide" data-pg="13 / 14"><div class="tag">總結</div><div class="body">
+<h2>本節總結</h2>
+<ul>
+<li><span class="hl">因式分解</span> = 展開的逆操作（多項式 → 因式乘積）</li>
+<li><span class="hl">提公因式</span>:找最大公因數提出，括號內要除對</li>
+<li><span class="hl">逆用公式</span>:平方差 a²−b²、完全平方 a²±2ab+b²</li>
+<li><span class="hl-r">策略</span>:先提公因式 → 再套公式 → 分解到不能再分</li>
+</ul>
+<div class="box g" style="text-align:center;font-size:20px;">
+🔗 <b>承先</b>:1-1 乘法公式（反過來用）<br>
+🔗 <b>啟後</b>:<span class="hl">3-2 十字交乘法 —— 分解 x²+bx+c 型。</span></div>
+</div></div>
+
+<!-- 14 -->
+<div class="slide" data-pg="14 / 14"><div class="tag">Next</div><div class="big-center">
+<div class="eyebrow">下節預告</div>
+<h1 style="font-size:40px;">3-2　十字交乘法</h1>
+<div class="lead">分解 <span style="color:#f2d979;">x² + bx + c</span> 型<br>
+找兩數，積為 c、和為 b</div>
+<div class="box y" style="max-width:800px;margin:20px auto 0;font-size:20px;text-align:center;">
+x²+5x+6 = (x+2)(x+3)，因為 2×3=6、2+3=5。<br>
+<span class="hl">交叉相乘，湊出中間項 —— 因式分解最實用的工具。</span></div>
+</div></div>
+
+</div></body></html>

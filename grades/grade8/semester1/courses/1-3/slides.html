@@ -1,0 +1,288 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>八上 1-3 多項式的乘除運算｜授課簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--chalk-soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);padding:24px 14px;}
+.deck{max-width:1060px;margin:0 auto;}
+.print-hint{text-align:center;color:rgba(243,239,226,0.4);font-size:13px;padding:6px 0 22px;}
+.print-hint b{color:var(--yellow);}
+.slide{position:relative;min-height:576px;margin:0 auto 26px;padding:44px 52px;
+ background:radial-gradient(ellipse at 18% 12%,rgba(255,255,255,0.05),transparent 45%),
+  radial-gradient(ellipse at 82% 88%,rgba(255,255,255,0.035),transparent 45%),
+  radial-gradient(ellipse at 60% 40%,rgba(120,160,130,0.10),transparent 60%),
+  linear-gradient(160deg,var(--board) 0%,var(--board2) 100%);
+ border-radius:14px;box-shadow:0 10px 34px rgba(0,0,0,0.55);
+ border:1px solid rgba(242,217,121,0.14);overflow:hidden;display:flex;flex-direction:column;}
+.slide::before{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;
+ background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.014) 40px,rgba(255,255,255,0.014) 41px),
+  radial-gradient(circle at 30% 72%,rgba(255,255,255,0.03),transparent 8%),
+  radial-gradient(circle at 76% 24%,rgba(255,255,255,0.025),transparent 7%);}
+.slide::after{content:attr(data-pg);position:absolute;bottom:15px;right:26px;font-family:'Caveat',cursive;font-size:20px;color:rgba(243,239,226,0.4);}
+.tag{position:absolute;top:20px;right:26px;font-family:'Caveat',cursive;font-size:22px;color:var(--pink);transform:rotate(4deg);}
+.eyebrow{font-family:'Caveat',cursive;font-size:25px;color:var(--yellow);letter-spacing:1px;margin-bottom:8px;opacity:0.92;}
+.slide h1{font-family:'Noto Serif TC',serif;font-size:46px;font-weight:900;line-height:1.28;letter-spacing:1px;
+ text-shadow:0 0 1px rgba(243,239,226,0.5),1px 1px 0 rgba(0,0,0,0.2);}
+.slide h2{font-family:'Noto Serif TC',serif;font-size:33px;font-weight:900;color:var(--yellow);
+ margin-bottom:20px;padding-bottom:11px;border-bottom:2px dashed rgba(242,217,121,0.4);
+ text-shadow:0 0 1px rgba(242,217,121,0.4);}
+.slide p{font-size:20px;line-height:1.85;margin-bottom:12px;}
+.big-center{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;}
+.big-center .lead,.lead{font-family:'Caveat',cursive;font-size:30px;color:var(--blue);letter-spacing:1px;margin-top:12px;}
+ul{list-style:none;margin:8px 0;}
+li{font-size:21px;line-height:1.95;padding-left:32px;position:relative;margin-bottom:4px;}
+li::before{content:'\2726';position:absolute;left:4px;color:var(--yellow);font-size:17px;top:3px;}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.34);border-radius:12px;padding:15px 21px;margin:12px 0;font-size:19px;line-height:1.8;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.38);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.38);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.34);}
+.eg{position:relative;background:rgba(0,0,0,0.24);border:1px solid rgba(242,217,121,0.2);border-radius:10px;padding:17px 22px;margin:12px 0;font-size:19px;}
+.eg::before{content:'';position:absolute;top:-8px;left:38px;width:58px;height:15px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.eg .q{color:var(--blue);font-weight:700;margin-bottom:8px;font-size:19px;}
+.eg .a{color:var(--green);font-weight:700;margin-top:6px;}
+.eg .stp{color:var(--chalk-soft);font-size:18px;margin:3px 0;}
+.tip{display:flex;gap:12px;align-items:flex-start;background:rgba(242,217,121,0.09);border:1.5px dashed rgba(242,217,121,0.45);border-radius:12px;padding:13px 18px;margin:10px 0;}
+.tip .ic{font-size:24px;line-height:1;}.tip .tx{font-size:18px;line-height:1.7;}
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:18px;}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.26);padding:10px 14px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.two{display:flex;gap:20px;}.two>div{flex:1;}
+svg{display:block;margin:6px auto;max-width:100%;}
+@media print{
+ body{background:#0a130d;padding:0;}
+ .deck{max-width:none;}
+ .print-hint{display:none;}
+ .slide{margin:0;border-radius:0;box-shadow:none;min-height:100vh;
+  page-break-after:always;break-after:page;padding:32px 44px;justify-content:center;}
+ .slide:last-child{page-break-after:auto;break-after:auto;}
+ .slide h1{font-size:40px;}
+ .slide h2{font-size:27px;margin-bottom:13px;padding-bottom:8px;}
+ .slide p{font-size:17px;line-height:1.55;margin-bottom:6px;}
+ li{font-size:17px;line-height:1.55;margin-bottom:1px;padding-left:26px;}
+ .eyebrow{font-size:21px;margin-bottom:5px;}
+ .big-center .lead,.lead{font-size:26px;}
+ .box{font-size:16px;padding:10px 16px;margin:6px 0;line-height:1.5;}
+ .eg{font-size:16px;padding:11px 16px;margin:6px 0;}
+ .tip{font-size:16px;padding:10px 14px;margin:6px 0;}
+ .tbl{font-size:15px;margin:6px 0;}
+ .tbl th,.tbl td{padding:6px 10px;}
+ svg{max-height:210px;}
+}
+</style></head><body><div class="deck">
+<div class="print-hint">共 <b>16</b> 張・列印時每張一頁（Ctrl+P → 橫向 → 背景圖形）</div>
+
+
+<!-- 1 -->
+<div class="slide" data-pg="1 / 16"><div class="tag">Start!</div><div class="big-center">
+<div class="eyebrow">國二上學期・第一章 乘法公式與多項式</div>
+<h1>1-3　多項式的乘除運算</h1>
+<div class="lead">乘法用分配律逐項展開<br>
+除法商出結果後<span style="color:#eda0a8;">別忘了驗算</span></div>
+<div class="box y" style="max-width:660px;margin:16px auto 0;text-align:center;font-size:19px;">
+被除式 = 除式 × 商式 ＋ <span class="fm">餘式</span></div>
+</div></div>
+
+<!-- 2 -->
+<div class="slide" data-pg="2 / 16"><div class="tag">目標</div><div class="body">
+<h2>本節學習目標</h2>
+<ul>
+<li>用<span class="hl">分配律</span>做多項式乘法（逐項相乘再合併）</li>
+<li>理解<span class="hl-b">除法定理</span>:被除式 = 除式×商式 + 餘式</li>
+<li>用<span class="hl">長除法</span>求商式和餘式</li>
+<li>會<span class="hl">驗算</span>除法結果</li>
+</ul>
+<div class="box y">一句話:<span class="hl">乘法是「不漏項」，除法是「試商→乘→減→帶下一項」，做完一定驗算。</span></div>
+</div></div>
+
+<!-- 3 -->
+<div class="slide" data-pg="3 / 16"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心　多項式乘法</div>
+<h2>逐項相乘、不漏項</h2>
+<div class="box y" style="text-align:center;font-size:20px;">
+(a+b)(c+d+e) = ac+ad+ae+bc+bd+be</div>
+<div class="box r" style="text-align:center;">
+⚠️ 常見錯:漏項。(a+b)(c+d) 只乘 ac+bd，漏了 ad+bc。<br>
+<span class="hl">檢查法:m 項 × n 項應該有 m×n 組乘積。</span></div>
+<div class="box g" style="text-align:center;">每項都畫線連到另一式的每項，確保沒漏。</div>
+</div></div>
+
+<!-- 4 -->
+<div class="slide" data-pg="4 / 16"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 1　難度 ★☆☆</div>
+<h2>展開 (2x−1)(3x²+x−4)</h2>
+<div class="eg">
+<div class="q">(2x−1)(3x²+x−4)</div>
+<div class="stp"><b>2x 乘每項</b>　6x³ + 2x² − 8x</div>
+<div class="stp"><b>−1 乘每項</b>　−3x² − x + 4</div>
+<div class="stp"><b>合併</b>　6x³ + (2−3)x² + (−8−1)x + 4</div>
+<div class="a">6x³ − x² − 9x + 4</div>
+</div>
+</div></div>
+
+<!-- 5 -->
+<div class="slide" data-pg="5 / 16"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 2　難度 ★★☆　三個相乘</div>
+<h2>先算兩個，再乘第三個</h2>
+<div class="eg">
+<div class="q">(x+2)(x−1)(x+3)</div>
+<div class="stp"><b>前兩個</b>　(x+2)(x−1) = x² + x − 2</div>
+<div class="stp"><b>再乘</b>　(x²+x−2)(x+3) = x³+3x²+x²+3x−2x−6</div>
+<div class="a">x³ + 4x² + x − 6</div>
+</div>
+<div class="box g" style="text-align:center;">三個以上相乘:兩兩逐步做，別想一次乘完。</div>
+</div></div>
+
+<!-- 6 -->
+<div class="slide" data-pg="6 / 16"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心　除法定理</div>
+<h2>被除式 = 除式 × 商式 ＋ 餘式</h2>
+<div class="box y" style="text-align:center;font-size:20px;padding:14px;">
+<span class="fm">被除式 = 除式 × 商式 + 餘式</span></div>
+<div class="box"><b>長除法四步（重複）:</b>從最高次項開始<br>
+① <b>試商</b>（被除式首項 ÷ 除式首項）② <b>乘</b> ③ <b>減</b> ④ <b>帶下一項</b></div>
+<div class="box r" style="text-align:center;">
+餘式的次數<b>一定低於除式</b>;餘式為 0 → 整除。</div>
+</div></div>
+
+<!-- 7 -->
+<div class="slide" data-pg="7 / 16"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 3　難度 ★★★　長除法</div>
+<h2>(2x³−5x²+3x−1) ÷ (x−2)</h2>
+<table class="tbl">
+<tr><th style="width:16%;">步驟</th><th>動作</th></tr>
+<tr><td>①</td><td class="fm">2x³÷x=2x²;2x²(x−2)=2x³−4x²;減 → −x²</td></tr>
+<tr><td>②</td><td class="fm">−x²÷x=−x;−x(x−2)=−x²+2x;減 → x</td></tr>
+<tr><td>③</td><td class="fm">x÷x=1;1(x−2)=x−2;減 → 1</td></tr>
+</table>
+<div class="box g" style="text-align:center;">
+商式 = <span class="fm hl">2x²−x+1</span>，餘式 = <span class="fm hl">1</span><br>
+驗算:(x−2)(2x²−x+1)+1 = 2x³−5x²+3x−1 ✓</div>
+</div></div>
+
+<!-- 8 -->
+<div class="slide" data-pg="8 / 16"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 4　難度 ★★★　整除＋待定係數</div>
+<h2>被 (x−1) 整除</h2>
+<div class="eg">
+<div class="q">(x³+ax²−x+b) 被 (x−1) 整除，商式常數項為 2，求 a、b。</div>
+<div class="stp"><b>整除</b>　x=1 代入 = 0：1+a−1+b = 0 → a+b = 0</div>
+<div class="stp"><b>設商</b>　(x²+cx+2)：(x−1)(x²+cx+2) = x³+(c−1)x²+(2−c)x−2</div>
+<div class="stp"><b>比較</b>　x 項 2−c=−1 → c=3;x² 項 a=c−1=2;常數 b=−2</div>
+<div class="a">a = 2、b = −2</div>
+</div>
+</div></div>
+
+<!-- 9 -->
+<div class="slide" data-pg="9 / 16"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">🔑 更快的工具</div>
+<h2>餘式定理 & 因式定理</h2>
+<table class="tbl">
+<tr><th style="width:40%;">定理</th><th>內容</th></tr>
+<tr><td class="hl-b">餘式定理</td><td>P(x) 除以 (x−a) 的<b>餘數 = P(a)</b></td></tr>
+<tr><td class="hl-b">因式定理</td><td>P(a) = 0 ⟺ (x−a) 是 P(x) 的因式</td></tr>
+</table>
+<div class="box y" style="text-align:center;font-size:20px;">
+💡 求餘數不必長除法 —— <span class="hl">直接代入 x=a 算 P(a)!</span></div>
+<div class="box g" style="text-align:center;">
+例:(x³+2x²−x+k)÷(x+3) 餘 5 → 代 x=−3：−27+18+3+k=5 → k=11。</div>
+</div></div>
+
+<!-- 10 -->
+<div class="slide" data-pg="10 / 16"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">好用的公式</div>
+<h2>立方和 / 立方差</h2>
+<div class="box y" style="text-align:center;font-size:20px;">
+(a−b)(a²+ab+b²) = a³ − b³<br>
+(a+b)(a²−ab+b²) = a³ + b³</div>
+<div class="eg">
+<div class="q">(x³−1) ÷ (x−1) = ?</div>
+<div class="stp">x³−1 = (x−1)(x²+x+1) → 商 = x²+x+1（餘 0）</div>
+</div>
+<div class="box g" style="text-align:center;">認出立方和差，除法一秒完成，不必長除。</div>
+</div></div>
+
+<!-- 11 -->
+<div class="slide" data-pg="11 / 16"><div class="tag">精選</div><div class="body">
+<div class="eyebrow">隨堂精選</div>
+<h2>快速檢查</h2>
+<table class="tbl">
+<tr><th style="width:52%;">題目</th><th>答案</th></tr>
+<tr><td>(2x−1)(x+4)</td><td class="fm hl">2x²+7x−4</td></tr>
+<tr><td>(x²+3x−2)÷(x+1)</td><td class="fm hl">商 x+2、餘 −4</td></tr>
+<tr><td>(x+1)³</td><td class="fm hl">x³+3x²+3x+1</td></tr>
+<tr><td>(x+y+z)²</td><td class="fm hl">x²+y²+z²+2xy+2yz+2xz</td></tr>
+<tr><td>(x⁴−1)÷(x²−1)</td><td class="fm hl">x²+1</td></tr>
+</table>
+<div class="box y" style="text-align:center;">(x⁴−1)=(x²−1)(x²+1)，先分解比長除快。</div>
+</div></div>
+
+<!-- 12 -->
+<div class="slide" data-pg="12 / 16"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 1　【體積】</div>
+<h2>多項式相乘</h2>
+<div class="box">長 (2x+3)、寬 (x−1)、高 (x+2) 公分</div>
+<div class="eg">
+<div class="stp"><b>(1) 體積</b>　(2x+3)(x−1)=2x²+x−3，再×(x+2) = 2x³+5x²−x−6</div>
+<div class="stp"><b>(2) x=5</b>　250+125−5−6 = 364 立方公分</div>
+<div class="stp"><b>(3) V÷(x+2)</b>　= 2x²+x−3 = (2x+3)(x−1) = 底面積</div>
+</div>
+</div></div>
+
+<!-- 13 -->
+<div class="slide" data-pg="13 / 16"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 2　【數論證明】</div>
+<h2>n³ − n 必被 6 整除</h2>
+<div class="eg">
+<div class="stp"><b>(1) 分解</b>　n³−n = n(n²−1) = (n−1)n(n+1)</div>
+<div class="stp"><b>(2) 觀察</b>　(n−1)、n、(n+1) 是<b>三個連續整數</b></div>
+<div class="stp"><b>(3) 為何被 6 整除</b>　連續三整數必含一個 2 的倍數、一個 3 的倍數 → 積被 2×3=6 整除</div>
+</div>
+<div class="box g" style="text-align:center;">💡 因式分解把「數論性質」變成「看得見的結構」。</div>
+</div></div>
+
+<!-- 14 -->
+<div class="slide" data-pg="14 / 16"><div class="tag">避雷</div><div class="body">
+<h2>避雷指南</h2>
+<table class="tbl">
+<tr><th style="width:46%;">❌ 錯誤</th><th>✓ 正確</th></tr>
+<tr><td>乘法漏項</td><td>m 項×n 項 = <b class="hl-g">m×n 組</b>，數一數</td></tr>
+<tr><td>長除法減錯符號</td><td>減多項式時<b class="hl-g">整體變號</b></td></tr>
+<tr><td>除完不驗算</td><td>除式×商式＋餘式 = 被除式</td></tr>
+<tr><td>用長除法求餘數（慢）</td><td>餘數定理:<b class="hl-g">餘數 = P(a)</b></td></tr>
+</table>
+<div class="box y" style="text-align:center;">除法做完先問:<span class="hl">餘式次數比除式低了嗎?可以驗算了嗎?</span></div>
+</div></div>
+
+<!-- 15 -->
+<div class="slide" data-pg="15 / 16"><div class="tag">總結</div><div class="body">
+<h2>本節總結</h2>
+<ul>
+<li><span class="hl">乘法</span>:逐項相乘不漏項（m×n 組），再合併</li>
+<li><span class="hl-r">除法定理</span>:被除式 = 除式×商式 + 餘式（餘式次數 < 除式）</li>
+<li><span class="hl">長除法</span>:試商→乘→減→帶下一項;做完驗算</li>
+<li><span class="hl">餘式定理</span>:餘數 = P(a);<span class="hl">因式定理</span>:P(a)=0 ⟺ (x−a) 是因式</li>
+</ul>
+<div class="box g" style="text-align:center;font-size:20px;">
+🔗 <b>承先</b>:1-1 乘法公式、1-2 加減<br>
+🔗 <b>啟後</b>:<span class="hl">第 2 章 平方根、第 3 章因式分解 —— 乘法公式反過來用。</span></div>
+</div></div>
+
+<!-- 16 -->
+<div class="slide" data-pg="16 / 16"><div class="tag">Next</div><div class="big-center">
+<div class="eyebrow">下節預告</div>
+<h1 style="font-size:38px;">2-1　平方根與近似值</h1>
+<div class="lead">開根號是平方的<span style="color:#eda0a8;">逆運算</span><br>
+√2 是多少?認識無理數</div>
+<div class="box y" style="max-width:800px;margin:20px auto 0;font-size:20px;text-align:center;">
+從整式運算走向「根式」—— <span class="hl">√ 帶我們認識數線上那些「除不盡、算不完」的數。</span></div>
+</div></div>
+
+</div></body></html>

@@ -1,0 +1,823 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>八上 1-3 多項式的乘除運算｜互動教學平台</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;--wood:#6b4a32;}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);overscroll-behavior:none;}
+.topbar{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:10px 16px;background:linear-gradient(180deg,#1b2f21,#132218);border-bottom:2px solid var(--wood);box-shadow:0 4px 18px rgba(0,0,0,0.5);}
+.brand{font-family:'Noto Serif TC',serif;font-weight:900;font-size:clamp(15px,2.2vw,20px);color:var(--yellow);white-space:nowrap;}
+.brand small{display:block;font-family:'Caveat',cursive;font-size:14px;color:var(--soft);font-weight:400;}
+.spacer{flex:1;}
+.btn{background:rgba(243,239,226,0.08);border:1.5px solid rgba(243,239,226,0.28);color:var(--chalk);
+  border-radius:10px;padding:7px 13px;font-family:inherit;font-size:14px;cursor:pointer;white-space:nowrap;transition:.15s;}
+.btn:hover{background:rgba(243,239,226,0.16);}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:10px 16px 0;scrollbar-width:none;}
+.tabs::-webkit-scrollbar{display:none;}
+.tab{background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.2);border-bottom:none;
+  color:var(--soft);border-radius:10px 10px 0 0;padding:9px 15px;font-size:14px;cursor:pointer;white-space:nowrap;font-family:inherit;}
+.tab.on{background:var(--board);border-color:var(--yellow);color:var(--yellow);font-weight:700;}
+.tab .n{font-family:'Caveat',cursive;font-size:18px;margin-right:5px;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px 60px;}
+.panel{display:none;}.panel.on{display:block;}
+.card{background:radial-gradient(ellipse at 20% 10%,rgba(255,255,255,0.05),transparent 45%),
+   linear-gradient(160deg,var(--board),var(--board2));
+  border:1.5px solid rgba(242,217,121,0.16);border-radius:14px;padding:18px;margin-bottom:16px;
+  box-shadow:0 8px 26px rgba(0,0,0,0.45);position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 38px,rgba(255,255,255,0.012) 38px,rgba(255,255,255,0.012) 39px);}
+.card>*{position:relative;}
+.card h3{font-family:'Noto Serif TC',serif;font-size:clamp(17px,2.4vw,21px);color:var(--yellow);
+  margin-bottom:12px;padding-bottom:8px;border-bottom:2px dashed rgba(242,217,121,0.35);display:flex;align-items:center;gap:8px;}
+.card h3 .ic{font-size:20px;}
+.goals{display:flex;flex-wrap:wrap;gap:9px;}
+.goal{display:flex;align-items:center;gap:9px;background:rgba(242,217,121,0.07);
+  border:1.5px dashed rgba(242,217,121,0.4);border-radius:22px;padding:8px 15px 8px 8px;
+  font-size:clamp(13.5px,1.8vw,15px);color:var(--yellow);line-height:1.5;}
+.goal .bdg{width:24px;height:24px;border-radius:50%;background:var(--yellow);color:#16281c;
+  font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;flex:none;}
+.deck{position:relative;background:rgba(0,0,0,0.22);border-radius:12px;padding:clamp(16px,3vw,30px);
+  min-height:clamp(260px,42vh,380px);display:flex;flex-direction:column;justify-content:center;}
+.sl{display:none;animation:fade .25s;}.sl.on{display:block;}
+@keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+.sl .eyebrow{font-family:'Caveat',cursive;font-size:20px;color:var(--yellow);margin-bottom:6px;}
+.sl h4{font-family:'Noto Serif TC',serif;font-size:clamp(19px,3vw,27px);margin-bottom:12px;line-height:1.35;}
+.sl p{font-size:clamp(15px,2vw,18px);line-height:1.8;margin-bottom:9px;}
+.sl ul{list-style:none;}
+.sl li{font-size:clamp(15px,2vw,18px);line-height:1.85;padding-left:26px;position:relative;margin-bottom:4px;}
+.sl li::before{content:'✦';position:absolute;left:2px;color:var(--yellow);font-size:14px;top:3px;}
+.nav{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:14px;}
+.nav .pg{font-family:'Caveat',cursive;font-size:20px;color:var(--soft);min-width:64px;text-align:center;}
+.dots{display:flex;gap:6px;justify-content:center;margin-top:10px;flex-wrap:wrap;}
+.dot{width:9px;height:9px;border-radius:50%;background:rgba(243,239,226,0.25);cursor:pointer;border:none;padding:0;}
+.dot.on{background:var(--yellow);transform:scale(1.3);}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.32);border-radius:10px;
+  padding:11px 15px;margin:9px 0;font-size:clamp(14px,1.9vw,17px);line-height:1.7;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.36);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.36);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.32);}
+.two{display:flex;gap:12px;flex-wrap:wrap;}.two>*{flex:1;min-width:220px;}
+.teach{background:rgba(201,174,224,0.12);border:1.5px dashed rgba(201,174,224,0.5);
+  border-radius:10px;padding:11px 15px;margin:9px 0;font-size:clamp(14px,1.8vw,15px);line-height:1.7;}
+.teach b{color:var(--purple);}
+.tbl{width:100%;border-collapse:collapse;margin:9px 0;font-size:clamp(13.5px,1.8vw,16px);}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.24);padding:8px 11px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.cv-wrap{background:rgba(0,0,0,0.25);border-radius:12px;padding:10px;}
+canvas.viz{width:100%;display:block;border-radius:8px;touch-action:none;}
+.ctrl{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center;}
+.readout{font-family:'Noto Serif TC',serif;font-size:clamp(14px,1.9vw,18px);color:var(--chalk);
+  background:rgba(242,217,121,0.1);border:1px solid rgba(242,217,121,0.3);border-radius:8px;
+  padding:7px 12px;flex:1;min-width:220px;}
+.readout b{color:var(--yellow);}
+.q{background:rgba(0,0,0,0.2);border:1px solid rgba(242,217,121,0.18);border-radius:10px;padding:13px 15px;margin:10px 0;}
+.q .qt{font-size:clamp(15px,2vw,17px);margin-bottom:10px;line-height:1.7;}
+.q .qt .qn{font-family:'Caveat',cursive;color:var(--yellow);font-size:20px;margin-right:6px;}
+.opts{display:flex;flex-direction:column;gap:7px;}
+.opt{text-align:left;background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.22);
+  color:var(--chalk);border-radius:9px;padding:9px 13px;font-family:inherit;font-size:15px;cursor:pointer;transition:.15s;line-height:1.5;}
+.opt:hover:not(:disabled){background:rgba(243,239,226,0.13);}
+.opt.right{background:rgba(166,214,160,0.24);border-color:var(--green);color:#fff;font-weight:700;}
+.opt.wrong{background:rgba(237,160,168,0.22);border-color:var(--pink);}
+.opt:disabled{cursor:default;}
+.fb{display:none;margin-top:9px;padding:9px 13px;border-radius:8px;font-size:14.5px;line-height:1.65;}
+.fb.on{display:block;}
+.fb.ok{background:rgba(166,214,160,0.14);border-left:3px solid var(--green);}
+.fb.no{background:rgba(237,160,168,0.14);border-left:3px solid var(--pink);}
+.fill{display:inline-block;background:rgba(0,0,0,0.3);border:none;border-bottom:2px solid var(--yellow);
+  color:var(--yellow);font-family:'Noto Serif TC',serif;font-size:17px;width:110px;text-align:center;padding:3px 5px;margin:0 4px;}
+.fill:focus{outline:none;background:rgba(242,217,121,0.12);}
+.exq{background:rgba(0,0,0,0.26);border:1.5px solid rgba(242,217,121,0.28);border-radius:11px;padding:13px 15px;margin:10px 0;position:relative;}
+.exq::before{content:'';position:absolute;top:-8px;left:32px;width:54px;height:14px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.exq .exq-q{font-size:clamp(14.5px,1.9vw,17px);line-height:1.75;margin-bottom:11px;}
+.exo{text-align:left;background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.22);
+  color:var(--chalk);border-radius:9px;padding:9px 13px;font-family:inherit;font-size:clamp(14px,1.8vw,15.5px);
+  cursor:pointer;transition:.15s;line-height:1.55;width:100%;margin-bottom:6px;display:block;}
+.exo:hover:not(:disabled){background:rgba(243,239,226,0.13);}
+.exo.right{background:rgba(166,214,160,0.26);border-color:var(--green);color:#fff;font-weight:700;}
+.exo.wrong{background:rgba(237,160,168,0.2);border-color:var(--pink);opacity:.75;}
+.exo:disabled{cursor:default;}
+@keyframes shake{10%,90%{transform:translateX(-2px);}30%,70%{transform:translateX(4px);}50%{transform:translateX(-4px);}}
+.exo.shake{animation:shake .4s;}
+.exsol{display:none;margin-top:10px;padding:11px 14px;border-radius:9px;
+  background:rgba(166,214,160,0.13);border-left:3px solid var(--green);font-size:clamp(14px,1.8vw,15.5px);line-height:1.75;}
+.exsol.on{display:block;animation:fade .3s;}
+.exsol .st{color:var(--soft);margin:3px 0;}
+.exsol .an{color:var(--green);font-weight:700;margin-top:6px;}
+.exlock{display:flex;align-items:center;gap:7px;margin-top:9px;font-size:13.5px;color:rgba(243,239,226,0.45);}
+.exlock.hide{display:none;}
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:11px;}
+.icard{background:rgba(0,0,0,0.22);border:1.5px solid rgba(242,217,121,0.22);border-radius:11px;padding:14px;text-align:center;}
+.icard .big{font-family:'Noto Serif TC',serif;font-size:clamp(17px,2.6vw,23px);font-weight:900;margin:6px 0;}
+.icard .cap{font-size:13.5px;color:var(--soft);line-height:1.6;}
+.frow{display:flex;gap:12px;align-items:center;padding:9px 12px;border-bottom:1px dashed rgba(243,239,226,0.16);}
+.frow:last-child{border-bottom:none;}
+.flab{color:var(--blue);font-weight:700;min-width:150px;font-size:clamp(13.5px,1.8vw,15.5px);flex:none;}
+.fval{color:var(--yellow);font-weight:700;font-family:'Noto Serif TC',serif;font-size:clamp(14px,1.9vw,17px);}
+@media(max-width:560px){.frow{flex-direction:column;align-items:flex-start;gap:3px;}.flab{min-width:0;}}
+.hud{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:12px;}
+.hud .st{background:rgba(0,0,0,0.3);border:1.5px solid rgba(242,217,121,0.28);border-radius:9px;
+  padding:7px 13px;font-size:14px;flex:1;min-width:88px;text-align:center;}
+.hud .st b{display:block;font-family:'Noto Serif TC',serif;font-size:20px;color:var(--yellow);}
+.tbar{height:8px;background:rgba(0,0,0,0.35);border-radius:5px;overflow:hidden;margin-bottom:12px;}
+.tfill{height:100%;background:linear-gradient(90deg,var(--green),var(--yellow),var(--pink));width:100%;transition:width .1s linear;}
+.gscreen{display:none;}.gscreen.on{display:block;}
+.lvchips{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin:14px 0;}
+.lvchip{background:rgba(152,201,220,0.12);border:1.5px solid rgba(152,201,220,0.35);border-radius:18px;
+  padding:6px 13px;font-size:13.5px;color:var(--blue);}
+.lvchip.done{background:rgba(166,214,160,0.2);border-color:var(--green);color:var(--green);}
+.lvchip.now{background:rgba(242,217,121,0.22);border-color:var(--yellow);color:var(--yellow);font-weight:700;}
+.gq{font-size:clamp(16px,2.2vw,20px);line-height:1.7;margin:14px 0;text-align:center;font-family:'Noto Serif TC',serif;}
+.gopts{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+@media(max-width:560px){.gopts{grid-template-columns:1fr;}}
+.gopt{background:rgba(243,239,226,0.07);border:1.5px solid rgba(243,239,226,0.25);color:var(--chalk);
+  border-radius:10px;padding:12px;font-family:'Noto Serif TC',serif;font-size:17px;cursor:pointer;transition:.15s;min-height:48px;}
+.gopt:hover:not(:disabled){background:rgba(243,239,226,0.15);}
+.gopt.right{background:rgba(166,214,160,0.3);border-color:var(--green);font-weight:900;}
+.gopt.wrong{background:rgba(237,160,168,0.25);border-color:var(--pink);}
+.gfb{margin-top:11px;padding:10px 13px;border-radius:8px;font-size:14.5px;line-height:1.6;display:none;}
+.gfb.on{display:block;}
+.gfb.ok{background:rgba(166,214,160,0.15);border-left:3px solid var(--green);}
+.gfb.no{background:rgba(237,160,168,0.15);border-left:3px solid var(--pink);}
+.rank{font-size:54px;text-align:center;margin:10px 0;}
+.hint{text-align:center;color:rgba(243,239,226,0.35);font-size:12.5px;padding:8px 0 0;}
+@media (max-width:640px){.topbar{padding:8px 10px;gap:8px;}.wrap{padding:0 10px 70px;}.card{padding:13px;}}
+</style></head><body>
+
+<div class="topbar">
+  <div class="brand">1-3　多項式的乘除運算<small>八上 · 第1章 乘法公式與多項式</small></div>
+  <div class="spacer"></div>
+</div>
+
+<div class="tabs" id="tabs">
+  <button class="tab on" data-p="0"><span class="n">✖️</span>多項式乘法</button>
+  <button class="tab" data-p="1"><span class="n">➗</span>長除法</button>
+  <button class="tab" data-p="2"><span class="n">🎯</span>餘式定理</button>
+  <button class="tab" data-p="3"><span class="n">★</span>題型測驗</button>
+  <button class="tab" data-p="4"><span class="n">🎮</span>闖關遊戲</button>
+</div>
+
+<div class="wrap">
+  <div class="card" id="goalCard">
+    <h3><span class="ic">🎯</span>本節學習目標</h3>
+    <div class="goals" id="goals"></div>
+  </div>
+  <div id="wrap"></div>
+</div>
+
+<script>
+const GOALS = [
+  '用分配律做多項式乘法（逐項相乘再合併）',
+  '理解除法定理：被除式 = 除式×商式 + 餘式',
+  '用長除法求商式和餘式',
+  '會驗算除法結果',
+  '（延伸）餘式定理與因式定理：餘數 = P(a)',
+];
+
+const DATA = [
+{ key:'mult', viz:'mult', vizTitle:'逐項乘法 —— 每項乘另一式的每項，不漏項（4 題）',
+  slides:[
+    {eb:'核心 乘法', h:'逐項相乘、不漏項', html:`
+      <div class="box y" style="text-align:center;font-size:19px;">(a+b)(c+d+e) = ac+ad+ae+bc+bd+be</div>
+      <div class="box r" style="text-align:center;">⚠️ 常見錯：漏項。<span class="hl">m 項 × n 項應有 m×n 組</span>乘積，數一數。</div>
+      <div class="box g">👉 用下方 Canvas：看每一步逐項相乘。</div>`},
+    {eb:'例題 ★☆☆', h:'展開', html:`
+      <div class="exq" data-a="0">
+        <div class="exq-q"><span class="hl">Q</span>　(2x−1)(3x²+x−4) = ？</div>
+        <button class="exo" data-i="0">6x³−x²−9x+4</button>
+        <button class="exo" data-i="1">6x³+x²−9x−4</button>
+        <button class="exo" data-i="2">6x³−x²−7x+4</button>
+        <button class="exo" data-i="3">6x³−9x+4</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">2x·(3x²+x−4)=6x³+2x²−8x；−1·(...)=−3x²−x+4</div>
+          <div class="st">合併：6x³−x²−9x+4</div>
+          <div class="an">答：6x³ − x² − 9x + 4</div>
+        </div>
+      </div>`},
+    {eb:'例題 ★★☆　立方公式', h:'認出公式更快', html:`
+      <div class="exq" data-a="2">
+        <div class="exq-q"><span class="hl">Q</span>　(a−b)(a²+ab+b²) = ？</div>
+        <button class="exo" data-i="0">a³+b³</button>
+        <button class="exo" data-i="1">a³−3a²b+3ab²−b³</button>
+        <button class="exo" data-i="2">a³−b³</button>
+        <button class="exo" data-i="3">a²−b²</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">立方差公式：(a−b)(a²+ab+b²) = a³−b³</div>
+          <div class="an">答：a³ − b³</div>
+        </div>
+      </div>`}
+  ],
+  fa:[
+    {q:'(2x−1)(x+4) = ?', o:['2x²+7x−4','2x²−7x−4','2x²+7x+4','2x²+9x−4'], a:0, e:'逐項乘。'},
+    {q:'m 項×n 項共幾組？', o:['m+n','m×n','mⁿ','2mn'], a:1, e:'m×n 組。'},
+    {q:'(x+1)³ = ?', o:['x³+1','x³+3x²+3x+1','x³+3x+1','x³+x²+x+1'], a:1, e:'完全立方。'}
+  ],
+  info:[
+    {big:'逐項相乘', cap:'不漏項', c:'var(--blue)'},
+    {big:'m×n 組', cap:'數一數', c:'var(--yellow)'},
+    {big:'認公式', cap:'立方和差更快', c:'var(--green)'}
+  ]
+},
+{ key:'longdiv', viz:'longdiv', vizTitle:'長除法 —— 試商→乘→減→帶，求商與餘（4 題）',
+  slides:[
+    {eb:'核心 除法定理', h:'被除式 = 除式×商式 + 餘式', html:`
+      <div class="box y" style="text-align:center;font-size:19px;">被除式 = 除式 × 商式 + 餘式</div>
+      <div class="box"><b>長除法四步（重複）：</b>從最高次項開始<br>
+        ① 試商　② 乘　③ 減　④ 帶下一項</div>
+      <div class="box r" style="text-align:center;">餘式次數<b>一定低於除式</b>；餘式 0 → 整除。</div>
+      <div class="box g">👉 用下方 Canvas：看商與餘，記得驗算。</div>`},
+    {eb:'例題 ★★★', h:'長除法', html:`
+      <div class="exq" data-a="1">
+        <div class="exq-q"><span class="hl">Q</span>　(2x³−5x²+3x−1) ÷ (x−2)，商與餘？</div>
+        <button class="exo" data-i="0">商 2x²−x+1、餘 0</button>
+        <button class="exo" data-i="1">商 2x²−x+1、餘 1</button>
+        <button class="exo" data-i="2">商 2x²+x−1、餘 1</button>
+        <button class="exo" data-i="3">商 2x²−x−1、餘 3</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">試商 2x²、−x、1；驗算 (x−2)(2x²−x+1)+1 = 2x³−5x²+3x−1 ✓</div>
+          <div class="an">答：商 2x²−x+1、餘 1</div>
+        </div>
+      </div>`},
+    {eb:'例題 ★★☆', h:'整除', html:`
+      <div class="exq" data-a="0">
+        <div class="exq-q"><span class="hl">Q</span>　(x³−1) ÷ (x−1) = ？</div>
+        <button class="exo" data-i="0">x²+x+1（餘 0）</button>
+        <button class="exo" data-i="1">x²−x+1（餘 0）</button>
+        <button class="exo" data-i="2">x²+1（餘 0）</button>
+        <button class="exo" data-i="3">x²+x−1（餘 2）</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">x³−1 = (x−1)(x²+x+1)（立方差）→ 商 x²+x+1，餘 0</div>
+          <div class="an">答：x²+x+1（整除）</div>
+        </div>
+      </div>`}
+  ],
+  fa:[
+    {q:'餘式的次數？', o:['等於除式','低於除式','高於除式','任意'], a:1, e:'一定低於除式。'},
+    {q:'餘式為 0 稱？', o:['整除','互質','平方','無解'], a:0, e:'整除。'},
+    {q:'除法驗算式？', o:['除÷商','除×商+餘','除+商','商−餘'], a:1, e:'除式×商式+餘式。'}
+  ],
+  info:[
+    {big:'四步', cap:'試商→乘→減→帶', c:'var(--blue)'},
+    {big:'餘 < 除', cap:'次數', c:'var(--yellow)'},
+    {big:'必驗算', cap:'除×商+餘', c:'var(--green)'}
+  ]
+},
+{ key:'remain', viz:'remain', vizTitle:'餘式定理 —— 求餘數不必長除，直接代 P(a)（4 題）',
+  slides:[
+    {eb:'🔑 更快的工具', h:'餘式定理 & 因式定理', html:`
+      <table class="tbl">
+        <tr><th style="width:40%;">定理</th><th>內容</th></tr>
+        <tr><td class="hl-b">餘式定理</td><td>P(x) 除以 (x−a) 的<b>餘數 = P(a)</b></td></tr>
+        <tr><td class="hl-b">因式定理</td><td>P(a)=0 ⟺ (x−a) 是因式</td></tr>
+      </table>
+      <div class="box y" style="text-align:center;">💡 求餘數不必長除法 —— <span class="hl">直接代 x=a 算 P(a)！</span></div>
+      <div class="box g">👉 用下方 Canvas：代入求餘數，判斷是否為因式。</div>`},
+    {eb:'例題 ★★☆', h:'用餘式定理求 k', html:`
+      <div class="exq" data-a="1">
+        <div class="exq-q"><span class="hl">Q</span>　(x³+2x²−x+k) ÷ (x+3) 餘數為 5，求 k。</div>
+        <button class="exo" data-i="0">k = 5</button>
+        <button class="exo" data-i="1">k = 11</button>
+        <button class="exo" data-i="2">k = −1</button>
+        <button class="exo" data-i="3">k = 8</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">代 x=−3：−27+18+3+k = 5 → −6+k = 5</div>
+          <div class="st">k = 11</div>
+          <div class="an">答：k = 11</div>
+        </div>
+      </div>`},
+    {eb:'例題 ★★☆　因式定理', h:'判斷是否為因式', html:`
+      <div class="exq" data-a="0">
+        <div class="exq-q"><span class="hl">Q</span>　(x−1) 是 x³−1 的因式嗎？</div>
+        <button class="exo" data-i="0">是（P(1)=0）</button>
+        <button class="exo" data-i="1">不是</button>
+        <button class="exo" data-i="2">要長除才知道</button>
+        <button class="exo" data-i="3">只有 x+1 才是</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">P(1) = 1³−1 = 0 → 餘 0 → (x−1) 是因式（因式定理）</div>
+          <div class="an">答：是</div>
+        </div>
+      </div>`}
+  ],
+  fa:[
+    {q:'P(x)÷(x−a) 的餘數 = ?', o:['P(0)','P(a)','P(−a)','a'], a:1, e:'餘式定理。'},
+    {q:'(x−a) 是因式 ⟺ ?', o:['P(a)=0','P(0)=0','P(a)=1','a=0'], a:0, e:'因式定理。'},
+    {q:'x²+3x−2 除以 (x+1) 餘？', o:['−4','0','2','−2'], a:0, e:'P(−1)=1−3−2=−4。'}
+  ],
+  info:[
+    {big:'餘數 = P(a)', cap:'餘式定理', c:'var(--yellow)'},
+    {big:'P(a)=0', cap:'⟺ 是因式', c:'var(--green)'},
+    {big:'代入更快', cap:'不必長除', c:'var(--blue)'}
+  ]
+}];
+
+const QUIZ = [
+  {type:'choice', q:'(2x−1)(3x²+x−4) = ?', o:['6x³−x²−9x+4','6x³+x²−9x−4','6x³−x²−7x+4','6x³−9x+4'], a:0, e:'逐項乘。'},
+  {type:'choice', q:'(2x−1)(x+4) = ?', o:['2x²+7x−4','2x²−7x−4','2x²+7x+4','2x²+9x−4'], a:0, e:'2x²+8x−x−4。'},
+  {type:'choice', q:'(x+3)(x²−2x+1) = ?', o:['x³+x²−5x+3','x³−x²+5x+3','x³+x²+5x+3','x³−5x+3'], a:0, e:'逐項。'},
+  {type:'choice', q:'(a−b)(a²+ab+b²) = ?', o:['a³+b³','a³−b³','a²−b²','a³−3ab²'], a:1, e:'立方差。'},
+  {type:'choice', q:'(x+1)³ = ?', o:['x³+1','x³+3x²+3x+1','x³+3x+1','x³+x²+x+1'], a:1, e:'完全立方。'},
+  {type:'choice', q:'(x+y+z)² = ?', o:['x²+y²+z²','x²+y²+z²+2xy+2yz+2xz','x²+y²+z²+xyz','(x+y+z)³'], a:1, e:'展開。'},
+  {type:'tf', q:'判斷：「m 項乘 n 項共有 m+n 組乘積。」', a:false, e:'錯。m×n 組。'},
+  {type:'choice', q:'(2x³−5x²+3x−1)÷(x−2) 商？', o:['2x²−x+1','2x²+x−1','2x²−x−1','2x²+x+1'], a:0, e:'長除。'},
+  {type:'choice', q:'上題的餘式？', o:['0','1','−1','3'], a:1, e:'餘 1。'},
+  {type:'choice', q:'(x³−1)÷(x−1) = ?', o:['x²+x+1','x²−x+1','x²+1','x²−1'], a:0, e:'立方差。'},
+  {type:'choice', q:'除法定理是？', o:['被=除×商+餘','被=除+商','被=除×商','被=商+餘'], a:0, e:'除法定理。'},
+  {type:'tf', q:'判斷：「餘式的次數一定低於除式。」', a:true, e:'對。'},
+  {type:'choice', q:'P(x)÷(x−a) 的餘數 = ?', o:['P(0)','P(a)','P(−a)','a'], a:1, e:'餘式定理。'},
+  {type:'choice', q:'(x³+2x²−x+k)÷(x+3) 餘 5，k = ?', o:['5','11','−1','8'], a:1, e:'P(−3)=−6+k=5。'},
+  {type:'choice', q:'(x−1) 是 x³−1 的因式嗎？', o:['是','不是','要長除','只有x+1'], a:0, e:'P(1)=0。'},
+  {type:'choice', q:'(x²+3x−2)÷(x+1) 餘？', o:['−4','0','2','−2'], a:0, e:'P(−1)=−4。'},
+  {type:'choice', q:'(x⁴−1)÷(x²−1) = ?', o:['x²+1','x²−1','x²+x+1','x⁴'], a:0, e:'先分解。'},
+  {type:'choice', q:'n³−n 因式分解 = ?', o:['n(n²−1)','(n−1)n(n+1)','n³','n(n−1)'], a:1, e:'三連續整數。'}
+];
+
+const GAME = [
+  {name:'乘法基礎', qs:[
+    {q:'(2x−1)(x+4)=?', o:['2x²+7x−4','2x²−7x−4','2x²+7x+4','2x²+9x−4'], a:0, e:'逐項。'},
+    {q:'(x+3)(x−2)=?', o:['x²+x−6','x²−x−6','x²+x+6','x²+5x−6'], a:0, e:'和1積−6。'},
+    {q:'m項×n項幾組？', o:['m+n','m×n','mⁿ','2mn'], a:1, e:'m×n。'},
+    {q:'(x+1)³=?', o:['x³+1','x³+3x²+3x+1','x³+3x+1','x³+x²+x'], a:1, e:'完全立方。'}
+  ]},
+  {name:'立方公式', qs:[
+    {q:'(a−b)(a²+ab+b²)=?', o:['a³+b³','a³−b³','a²−b²','a³'], a:1, e:'立方差。'},
+    {q:'(a+b)(a²−ab+b²)=?', o:['a³+b³','a³−b³','a²+b²','a³'], a:0, e:'立方和。'},
+    {q:'x³−1=(x−1)(?)', o:['x²+x+1','x²−x+1','x²+1','x²−1'], a:0, e:'立方差。'},
+    {q:'x³+8=(x+2)(?)', o:['x²−2x+4','x²+2x+4','x²−4','x²+4'], a:0, e:'立方和。'}
+  ]},
+  {name:'長除法', qs:[
+    {q:'(2x³−5x²+3x−1)÷(x−2)商？', o:['2x²−x+1','2x²+x−1','2x²−x−1','2x²+x+1'], a:0, e:'長除。'},
+    {q:'上題餘？', o:['0','1','−1','3'], a:1, e:'餘1。'},
+    {q:'(x³−1)÷(x−1)=?', o:['x²+x+1','x²−x+1','x²+1','x²−1'], a:0, e:'整除。'},
+    {q:'(x²+3x−2)÷(x+1)商？', o:['x+2','x−2','x+3','x−1'], a:0, e:'商x+2。'}
+  ]},
+  {name:'除法定理', qs:[
+    {q:'除法定理？', o:['被=除×商+餘','被=除+商','被=除×商','被=商+餘'], a:0, e:'定理。'},
+    {q:'餘式次數？', o:['=除式','<除式','>除式','任意'], a:1, e:'低於除式。'},
+    {q:'餘0稱？', o:['整除','互質','平方','無解'], a:0, e:'整除。'},
+    {q:'驗算式？', o:['除÷商','除×商+餘','除+商','商−餘'], a:1, e:'除×商+餘。'}
+  ]},
+  {name:'餘式定理', qs:[
+    {q:'P(x)÷(x−a)餘=?', o:['P(0)','P(a)','P(−a)','a'], a:1, e:'P(a)。'},
+    {q:'(x−a)是因式⟺?', o:['P(a)=0','P(0)=0','P(a)=1','a=0'], a:0, e:'P(a)=0。'},
+    {q:'x²+3x−2÷(x+1)餘?', o:['−4','0','2','−2'], a:0, e:'P(−1)=−4。'},
+    {q:'(x³+2x²−x+k)÷(x+3)餘5,k?', o:['5','11','−1','8'], a:1, e:'k=11。'}
+  ]},
+  {name:'綜合應用', qs:[
+    {q:'(x⁴−1)÷(x²−1)=?', o:['x²+1','x²−1','x²+x+1','x⁴'], a:0, e:'先分解。'},
+    {q:'n³−n分解=?', o:['n(n²−1)','(n−1)n(n+1)','n³','n(n−1)'], a:1, e:'三連續。'},
+    {q:'三連續整數積必被幾整除？', o:['4','5','6','8'], a:2, e:'2×3=6。'},
+    {q:'求餘數最快用？', o:['長除法','餘式定理','因式分解','試乘'], a:1, e:'代P(a)。'}
+  ]}
+];
+
+document.getElementById('goals').innerHTML = GOALS.map((g,i)=>
+  `<div class="goal"><div class="bdg">${i+1}</div>${g}</div>`).join('');
+
+const wrap = document.getElementById('wrap');
+DATA.forEach((sec, si)=>{
+  const p = document.createElement('div');
+  p.className = 'panel' + (si===0?' on':'');
+  p.dataset.p = si;
+  p.innerHTML = `
+    <div class="card">
+      <h3><span class="ic">📽</span>簡報翻頁器</h3>
+      <div class="deck" data-deck="${si}">
+        ${sec.slides.map((s,i)=>`<div class="sl${i===0?' on':''}" data-i="${i}">
+          <div class="eyebrow">${s.eb}</div><h4>${s.h}</h4>${s.html}</div>`).join('')}
+      </div>
+      <div class="nav">
+        <button class="btn" data-nav="prev" data-s="${si}">◀ 上一張</button>
+        <span class="pg" id="pg-${si}">1 / ${sec.slides.length}</span>
+        <button class="btn" data-nav="next" data-s="${si}">下一張 ▶</button>
+      </div>
+      <div class="dots" id="dots-${si}">
+        ${sec.slides.map((_,i)=>`<button class="dot${i===0?' on':''}" data-s="${si}" data-i="${i}"></button>`).join('')}
+      </div>
+    </div>
+    <div class="card">
+      <h3><span class="ic">🎯</span>Canvas 互動視覺化<span style="font-size:14px;color:var(--soft);font-weight:400;">　${sec.vizTitle}</span></h3>
+      <div class="cv-wrap">
+        <canvas class="viz" data-viz="${sec.viz}" data-si="${si}"></canvas>
+        <div class="ctrl" data-ctrl="${si}"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3><span class="ic">✅</span>形成性評量</h3>
+      ${sec.fa.map((f,i)=>`<div class="q" data-fa="${si}-${i}">
+        <div class="qt"><span class="qn">Q${i+1}</span>${f.q}</div>
+        <div class="opts">${f.o.map((o,oi)=>`<button class="opt" data-si="${si}" data-qi="${i}" data-oi="${oi}">${o}</button>`).join('')}</div>
+        <div class="fb" id="fb-${si}-${i}"></div>
+      </div>`).join('')}
+    </div>
+    <div class="card">
+      <h3><span class="ic">📊</span>資訊圖表</h3>
+      <div class="info">
+        ${sec.info.map(c=>`<div class="icard"><div class="big" style="color:${c.c}">${c.big}</div><div class="cap">${c.cap}</div></div>`).join('')}
+      </div>
+    </div>`;
+  wrap.appendChild(p);
+});
+
+const qp = document.createElement('div');
+qp.className='panel'; qp.dataset.p='3';
+qp.innerHTML = `<div class="card"><h3><span class="ic">📝</span>題型測驗　<span style="font-size:14px;color:var(--soft);font-weight:400;">單選 · 是非 · 填充，共 ${QUIZ.length} 題</span></h3>
+  <div id="quizBox"></div>
+  <div style="display:flex;gap:10px;align-items:center;margin-top:14px;flex-wrap:wrap;">
+    <button class="btn" id="gradeBtn" style="background:rgba(242,217,121,.2);border-color:var(--yellow);color:var(--yellow);font-weight:700;">📊 批改並看成績</button>
+    <button class="btn" id="resetQuiz">🔄 重做</button>
+    <div class="readout" id="score" style="display:none;"></div>
+  </div></div>
+  <div class="card"><h3><span class="ic">📋</span>公式速查表</h3>
+    <div class="frow"><div class="flab">多項式乘法</div><div class="fval">逐項相乘再合併（m×n 組）</div></div>
+    <div class="frow"><div class="flab">⚠️ 別漏項</div><div class="fval">m 項×n 項 = m×n 組乘積</div></div>
+    <div class="frow"><div class="flab">立方差</div><div class="fval">(a−b)(a²+ab+b²) = a³−b³</div></div>
+    <div class="frow"><div class="flab">立方和</div><div class="fval">(a+b)(a²−ab+b²) = a³+b³</div></div>
+    <div class="frow"><div class="flab">完全立方</div><div class="fval">(a+b)³ = a³+3a²b+3ab²+b³</div></div>
+    <div class="frow"><div class="flab">除法定理</div><div class="fval">被除式 = 除式×商式 + 餘式</div></div>
+    <div class="frow"><div class="flab">長除法</div><div class="fval">試商 → 乘 → 減 → 帶下一項</div></div>
+    <div class="frow"><div class="flab">餘式次數</div><div class="fval">一定<b>低於</b>除式；餘 0 = 整除</div></div>
+    <div class="frow"><div class="flab">餘式定理</div><div class="fval">P(x)÷(x−a) 餘數 = <b>P(a)</b></div></div>
+    <div class="frow"><div class="flab">因式定理</div><div class="fval">P(a)=0 ⟺ (x−a) 是因式</div></div>
+    <div class="frow"><div class="flab">驗算</div><div class="fval">除式×商式 + 餘式 = 被除式</div></div>
+  </div>`;
+wrap.appendChild(qp);
+
+const gp = document.createElement('div');
+gp.className='panel'; gp.dataset.p='4';
+gp.innerHTML = `<div class="card"><h3><span class="ic">🎮</span>闖關遊戲　<span style="font-size:14px;color:var(--soft);font-weight:400;">6 關挑戰 · 每題 20 秒 · 連擊與速度都有加分</span></h3>
+  <div class="gscreen on" id="gStart">
+    <div style="text-align:center;font-size:clamp(15px,2vw,18px);line-height:1.8;">
+      闖過 <b class="hl">6</b> 關，每關 1 題，每題 <b class="hl">20 秒</b>。<br>
+      計分：基礎 <b class="hl">10</b> 分 + 連擊獎勵（最多 <b class="hl">5</b>）+ 速度獎勵（最多 <b class="hl">5</b>）＝ 單題最高 <b class="hl">20</b> 分</div>
+    <div class="lvchips" id="gStartChips"></div>
+    <div style="text-align:center;"><button class="btn" id="gGo" style="background:rgba(242,217,121,.25);border-color:var(--yellow);color:var(--yellow);font-weight:700;font-size:16px;padding:10px 24px;">🚀 開始挑戰</button></div>
+  </div>
+  <div class="gscreen" id="gPlay">
+    <div class="hud">
+      <div class="st">關卡<b id="hLv">1/6</b></div>
+      <div class="st">分數<b id="hSc">0</b></div>
+      <div class="st">連擊<b id="hStk">0</b></div>
+      <div class="st">剩餘<b id="hT">20</b></div>
+    </div>
+    <div class="tbar"><div class="tfill" id="tFill"></div></div>
+    <div class="lvchips" id="gChips"></div>
+    <div class="gq" id="gQ"></div>
+    <div class="gopts" id="gO"></div>
+    <div class="gfb" id="gFb"></div>
+    <div style="text-align:center;margin-top:12px;"><button class="btn" id="gNext" style="display:none;">下一關 ▶</button></div>
+  </div>
+  <div class="gscreen" id="gEnd">
+    <div class="rank" id="gRank">🏆</div>
+    <div style="text-align:center;font-size:clamp(17px,2.6vw,22px);font-family:'Noto Serif TC';" id="gFinal"></div>
+    <div style="text-align:center;color:var(--soft);margin-top:8px;" id="gStats"></div>
+    <div style="text-align:center;margin-top:16px;"><button class="btn" id="gAgain" style="background:rgba(242,217,121,.25);border-color:var(--yellow);color:var(--yellow);font-weight:700;">🔄 再挑戰一次</button></div>
+  </div></div>`;
+wrap.appendChild(gp);
+document.getElementById('gStartChips').innerHTML = GAME.map((g,i)=>`<div class="lvchip">第${i+1}關 ${g.name}</div>`).join('');
+
+const qb = document.getElementById('quizBox');
+QUIZ.forEach((q,i)=>{
+  const d = document.createElement('div'); d.className='q';
+  let body='';
+  if(q.type==='choice') body = `<div class="opts">${q.o.map((o,oi)=>`<button class="opt" data-quiz="${i}" data-oi="${oi}">${o}</button>`).join('')}</div>`;
+  else if(q.type==='tf') body = `<div class="opts" style="flex-direction:row;gap:10px;">
+      <button class="opt" data-quiz="${i}" data-oi="1" style="flex:1;">⭕ 對</button>
+      <button class="opt" data-quiz="${i}" data-oi="0" style="flex:1;">❌ 錯</button></div>`;
+  else body = `<div><input class="fill" data-quiz="${i}" placeholder="?"></div>`;
+  d.innerHTML = `<div class="qt"><span class="qn">${i+1}</span>
+    <span style="font-size:12px;color:var(--soft);border:1px solid rgba(243,239,226,.25);border-radius:6px;padding:1px 6px;margin-right:6px;">
+    ${q.type==='choice'?'單選':q.type==='tf'?'是非':'填充'}</span>${q.q}</div>${body}
+    <div class="fb" id="qfb-${i}"></div>`;
+  qb.appendChild(d);
+});
+
+document.getElementById('tabs').addEventListener('click', e=>{
+  const t = e.target.closest('.tab'); if(!t) return;
+  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on', x===t));
+  document.querySelectorAll('.panel').forEach(x=>x.classList.toggle('on', x.dataset.p===t.dataset.p));
+  document.getElementById('goalCard').style.display = (t.dataset.p==='4')?'none':'';
+  window.scrollTo({top:0,behavior:'smooth'});
+  setTimeout(resizeAll, 60);
+});
+
+const cur = DATA.map(()=>0);
+function showSlide(si, i){
+  const deck = document.querySelector(`[data-deck="${si}"]`);
+  const sl = deck.querySelectorAll('.sl');
+  i = Math.max(0, Math.min(sl.length-1, i));
+  cur[si] = i;
+  sl.forEach((s,k)=>s.classList.toggle('on', k===i));
+  document.getElementById('pg-'+si).textContent = `${i+1} / ${sl.length}`;
+  document.querySelectorAll(`#dots-${si} .dot`).forEach((d,k)=>d.classList.toggle('on', k===i));
+}
+document.addEventListener('click', e=>{
+  const n = e.target.closest('[data-nav]');
+  if(n){ const si=+n.dataset.s; showSlide(si, cur[si] + (n.dataset.nav==='next'?1:-1)); return; }
+  const d = e.target.closest('.dot');
+  if(d){ showSlide(+d.dataset.s, +d.dataset.i); return; }
+});
+document.addEventListener('keydown', e=>{
+  const p = document.querySelector('.panel.on'); if(!p) return;
+  const si = +p.dataset.p; if(si>=DATA.length) return;
+  if(e.key==='ArrowRight') showSlide(si, cur[si]+1);
+  if(e.key==='ArrowLeft') showSlide(si, cur[si]-1);
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.opt[data-si]'); if(!o) return;
+  const si=+o.dataset.si, qi=+o.dataset.qi, oi=+o.dataset.oi;
+  const f = DATA[si].fa[qi];
+  const box = document.querySelector(`[data-fa="${si}-${qi}"]`);
+  box.querySelectorAll('.opt').forEach((b,k)=>{
+    b.disabled = true;
+    if(k===f.a) b.classList.add('right'); else if(k===oi) b.classList.add('wrong');
+  });
+  const fb = document.getElementById(`fb-${si}-${qi}`);
+  const ok = oi===f.a;
+  fb.className = 'fb on ' + (ok?'ok':'no');
+  fb.innerHTML = (ok?'✅ <b>答對了！</b> ':'❌ <b>再想想。</b> ') + f.e;
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.exo');
+  if(o && !o.disabled){
+    const box = o.closest('.exq');
+    const ans = +box.dataset.a, pick = +o.dataset.i;
+    if(pick === ans){
+      box.querySelectorAll('.exo').forEach(b=>{ b.disabled=true; if(+b.dataset.i===ans) b.classList.add('right'); });
+      box.querySelector('.exsol').classList.add('on');
+      box.querySelector('.exlock').classList.add('hide');
+    } else {
+      o.classList.add('wrong','shake');
+      setTimeout(()=>o.classList.remove('shake'), 420);
+      o.disabled = true;
+      const lock = box.querySelector('.exlock');
+      lock.innerHTML = '🔒 再想想 —— 答對才會顯示詳解'; lock.style.color='var(--pink)';
+    }
+  }
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.opt[data-quiz]'); if(!o) return;
+  const i = +o.dataset.quiz;
+  o.parentElement.querySelectorAll('.opt').forEach(b=>b.classList.remove('right','wrong'));
+  o.classList.add('right'); o.dataset.sel='1';
+  o.parentElement.querySelectorAll('.opt').forEach(b=>{ if(b!==o) delete b.dataset.sel; });
+});
+document.getElementById('gradeBtn').addEventListener('click', ()=>{
+  let right=0;
+  QUIZ.forEach((q,i)=>{
+    const fb = document.getElementById('qfb-'+i);
+    let ok=false, picked=null;
+    if(q.type==='fill'){
+      const inp = document.querySelector(`.fill[data-quiz="${i}"]`);
+      const v = (inp.value||'').trim().replace(/−/g,'-').replace(/\s/g,'');
+      ok = q.a.some(a=>a.replace(/−/g,'-').replace(/\s/g,'')===v);
+      inp.style.borderBottomColor = ok?'var(--green)':'var(--pink)';
+    } else {
+      const sel = document.querySelector(`.opt[data-quiz="${i}"][data-sel="1"]`);
+      if(sel){ picked=+sel.dataset.oi; ok = (q.type==='tf') ? (picked===1)===q.a : picked===q.a; }
+      document.querySelectorAll(`.opt[data-quiz="${i}"]`).forEach(b=>{
+        b.classList.remove('right','wrong');
+        const bi=+b.dataset.oi;
+        const isAns = (q.type==='tf') ? ((bi===1)===q.a) : (bi===q.a);
+        if(isAns) b.classList.add('right'); else if(picked===bi) b.classList.add('wrong');
+      });
+    }
+    if(ok) right++;
+    fb.className='fb on '+(ok?'ok':'no');
+    fb.innerHTML = (ok?'✅ <b>正確</b> ':'❌ <b>錯誤</b> ') + q.e;
+  });
+  const s = document.getElementById('score');
+  const pct = Math.round(right/QUIZ.length*100);
+  s.style.display='block';
+  s.innerHTML = `成績：<b>${right} / ${QUIZ.length}</b>　（${pct} 分）　${pct>=80?'🏆 很棒！':pct>=60?'💪 再加油':'📖 建議重看重點'}`;
+});
+document.getElementById('resetQuiz').addEventListener('click', ()=>{
+  document.querySelectorAll('.opt[data-quiz]').forEach(b=>{b.classList.remove('right','wrong'); delete b.dataset.sel;});
+  document.querySelectorAll('.fill').forEach(i=>{i.value=''; i.style.borderBottomColor='var(--yellow)';});
+  document.querySelectorAll('[id^="qfb-"]').forEach(f=>f.className='fb');
+  document.getElementById('score').style.display='none';
+});
+
+/* ===== 闖關遊戲 ===== */
+const G = {lv:0, score:0, streak:0, best:0, t:20, timer:null, cur:null, answered:false};
+function gShow(id){ ['gStart','gPlay','gEnd'].forEach(x=>document.getElementById(x).classList.toggle('on', x===id)); }
+function gChips(){
+  document.getElementById('gChips').innerHTML = GAME.map((g,i)=>
+    `<div class="lvchip ${i<G.lv?'done':i===G.lv?'now':''}">${i+1}. ${g.name}</div>`).join('');
+}
+function gLoad(){
+  if(G.lv>=GAME.length){ gFinish(); return; }
+  G.answered=false; G.t=20;
+  const bank = GAME[G.lv].qs;
+  G.cur = bank[Math.floor(Math.random()*bank.length)];
+  document.getElementById('hLv').textContent = (G.lv+1)+'/'+GAME.length;
+  document.getElementById('hSc').textContent = G.score;
+  document.getElementById('hStk').textContent = G.streak;
+  document.getElementById('gQ').innerHTML = `<span style="color:var(--blue);font-size:15px;">第 ${G.lv+1} 關 · ${GAME[G.lv].name}</span><br>${G.cur.q}`;
+  document.getElementById('gO').innerHTML = G.cur.o.map((o,i)=>
+    `<button class="gopt" data-g="${i}">${'ABCD'[i]}. ${o}</button>`).join('');
+  document.getElementById('gFb').className='gfb';
+  document.getElementById('gNext').style.display='none';
+  gChips();
+  clearInterval(G.timer);
+  G.timer = setInterval(()=>{
+    G.t -= 0.1;
+    document.getElementById('hT').textContent = Math.max(0,G.t).toFixed(0);
+    document.getElementById('tFill').style.width = Math.max(0,G.t/20*100)+'%';
+    if(G.t<=0){ clearInterval(G.timer); gAnswer(-1); }
+  },100);
+}
+function gAnswer(pick){
+  if(G.answered) return;
+  G.answered = true; clearInterval(G.timer);
+  const ans = G.cur.a, ok = pick===ans;
+  document.querySelectorAll('.gopt').forEach((b,i)=>{
+    b.disabled=true;
+    if(i===ans) b.classList.add('right'); else if(i===pick) b.classList.add('wrong');
+  });
+  let gain=0, sb=0, tb=0;
+  if(ok){
+    G.streak++; G.best=Math.max(G.best,G.streak);
+    sb = Math.min(5, G.streak-1); tb = Math.min(5, Math.floor(G.t/4));
+    gain = 10+sb+tb; G.score += gain;
+  } else { G.streak = 0; }
+  document.getElementById('hSc').textContent = G.score;
+  document.getElementById('hStk').textContent = G.streak;
+  const fb = document.getElementById('gFb');
+  fb.className = 'gfb on '+(ok?'ok':'no');
+  fb.innerHTML = (ok? `✅ <b>答對！+${gain} 分</b>（基礎10 + 連擊${sb} + 速度${tb}）<br>`
+                    : (pick===-1?'⏰ <b>時間到！</b><br>':'❌ <b>答錯了</b><br>')) + G.cur.e;
+  document.getElementById('gNext').style.display='inline-block';
+  document.getElementById('gNext').textContent = (G.lv>=GAME.length-1)?'看成績 🏁':'下一關 ▶';
+}
+function gFinish(){
+  clearInterval(G.timer);
+  const max = GAME.length*20, pct = Math.round(G.score/max*100);
+  const rank = pct>=85?['🏆','數論大師']:pct>=70?['🥇','高手']:pct>=50?['🥈','不錯']:['📖','再加油'];
+  document.getElementById('gRank').textContent = rank[0];
+  document.getElementById('gFinal').innerHTML = `<b class="hl">${G.score}</b> / ${max} 分　·　${rank[1]}`;
+  document.getElementById('gStats').innerHTML = `最高連擊 <b class="hl">${G.best}</b>　·　完成 ${GAME.length} 關`;
+  gShow('gEnd');
+}
+document.getElementById('gGo').addEventListener('click', ()=>{ G.lv=0;G.score=0;G.streak=0;G.best=0; gShow('gPlay'); gLoad(); });
+document.getElementById('gAgain').addEventListener('click', ()=>{ G.lv=0;G.score=0;G.streak=0;G.best=0; gShow('gPlay'); gLoad(); });
+document.getElementById('gNext').addEventListener('click', ()=>{ G.lv++; gLoad(); });
+document.addEventListener('click', e=>{ const b=e.target.closest('.gopt'); if(!b||b.disabled) return; gAnswer(+b.dataset.g); });
+
+/* ===== Canvas ===== */
+const VIZ = {}; let DPR=1;
+
+/* ① 逐項乘法 */
+const MUL=[
+  {a:'(2x−1)', b:'(3x²+x−4)', steps:['2x·每項：6x³+2x²−8x','−1·每項：−3x²−x+4'], r:'6x³ − x² − 9x + 4'},
+  {a:'(x+3)', b:'(x²−2x+1)', steps:['x·每項：x³−2x²+x','3·每項：3x²−6x+3'], r:'x³ + x² − 5x + 3'},
+  {a:'(2x−1)', b:'(x+4)', steps:['2x·每項：2x²+8x','−1·每項：−x−4'], r:'2x² + 7x − 4'},
+  {a:'(a−b)', b:'(a²+ab+b²)', steps:['立方差公式'], r:'a³ − b³'},
+];
+/* ② 長除法 */
+const DIV=[
+  {p:'2x³−5x²+3x−1', d:'x−2', q:'2x²−x+1', r:'1'},
+  {p:'x²+3x−2', d:'x+1', q:'x+2', r:'−4'},
+  {p:'2x³−x²−5x+3', d:'x−1', q:'2x²+x−4', r:'−1'},
+  {p:'x³−1', d:'x−1', q:'x²+x+1', r:'0（整除）'},
+];
+/* ③ 餘式定理 P(a) */
+const REM=[
+  {p:'x³+2x²−x−3', pa:'P(−3)', a:-3, val:-27, disp:'(−3)³+2(−3)²−(−3)−3 = −27+18+3−3 = −9', isF:false},
+  {p:'x³−1', pa:'P(1)', a:1, val:0, disp:'1−1 = 0', isF:true},
+  {p:'x²+3x−2', pa:'P(−1)', a:-1, val:-4, disp:'1−3−2 = −4', isF:false},
+  {p:'2x³−x²−5x+3', pa:'P(1)', a:1, val:-1, disp:'2−1−5+3 = −1', isF:false},
+];
+
+function initViz(cv){
+  const si=+cv.dataset.si, kind=cv.dataset.viz;
+  const ctx=cv.getContext('2d');
+  const st=VIZ[si]={kind,cv,ctx};
+  const ctrl=document.querySelector(`[data-ctrl="${si}"]`);
+  const revLabel = kind==='mult' ? '🔍 揭曉展開'
+                 : kind==='longdiv' ? '🔍 揭曉商與餘' : '🔍 揭曉餘數 P(a)';
+  st.i=0; st.show=false;
+  ctrl.innerHTML=`<div class="readout" id="ro-${si}"></div>
+    <button class="btn" data-t="rev" data-si="${si}" style="background:rgba(242,217,121,.2);border-color:var(--yellow);color:var(--yellow);font-weight:700;">${revLabel}</button>
+    <button class="btn" data-t="next" data-si="${si}">下一題 ▶</button>`;
+  draw(si);
+}
+
+function drawMult(st, ctx, w, h, ro){
+  const E=MUL[st.i];
+  ctx.textAlign='center';
+  ctx.fillStyle='rgba(242,217,121,.85)'; ctx.font='bold 13px "Noto Sans TC"';
+  ctx.fillText('多項式乘法（逐項不漏）', w/2, 16);
+  ctx.fillStyle='#f3efe2'; ctx.font='bold 20px "Noto Serif TC"';
+  ctx.fillText(E.a + ' ' + E.b, w/2, 46);
+  if(!st.show){
+    ctx.fillStyle='rgba(243,239,226,.4)'; ctx.font='13px "Noto Sans TC"';
+    ctx.fillText('🔒 每一項都要乘另一式的每一項', w/2, 86);
+  } else {
+    ctx.font='13px "Noto Sans TC"'; ctx.textAlign='left'; let y=70;
+    E.steps.forEach(s=>{ ctx.fillStyle='rgba(243,239,226,.8)'; ctx.fillText('· '+s, 24, y); y+=20; });
+    ctx.textAlign='center';
+    ctx.fillStyle='#a6d6a0'; ctx.font='bold 19px "Noto Serif TC"';
+    ctx.fillText('= ' + E.r, w/2, h-14);
+  }
+  ro.innerHTML = st.show ? `→ <b style="color:var(--green)">${E.r}</b>`
+    : `<b>展開：</b>${E.a}${E.b}　<span style="color:rgba(243,239,226,.5)">—— 逐項相乘</span>`;
+}
+
+function drawLongdiv(st, ctx, w, h, ro){
+  const E=DIV[st.i];
+  ctx.textAlign='center';
+  ctx.fillStyle='rgba(242,217,121,.85)'; ctx.font='bold 13px "Noto Sans TC"';
+  ctx.fillText('長除法', w/2, 16);
+  ctx.fillStyle='#f3efe2'; ctx.font='16px "Noto Serif TC"';
+  ctx.fillText('(' + E.p + ') ÷ (' + E.d + ')', w/2, 44);
+  if(!st.show){
+    ctx.fillStyle='rgba(243,239,226,.4)'; ctx.font='13px "Noto Sans TC"';
+    ctx.fillText('🔒 試商 → 乘 → 減 → 帶下一項', w/2, 84);
+  } else {
+    ctx.fillStyle='#98c9dc'; ctx.font='bold 17px "Noto Serif TC"';
+    ctx.fillText('商式 = ' + E.q, w/2, 78);
+    ctx.fillStyle='#f2d979';
+    ctx.fillText('餘式 = ' + E.r, w/2, 104);
+    ctx.fillStyle='rgba(243,239,226,.6)'; ctx.font='11px "Noto Sans TC"';
+    ctx.fillText('驗算：除式 × 商式 + 餘式 = 被除式', w/2, 130);
+  }
+  ro.innerHTML = st.show
+    ? `(${E.p}) ÷ (${E.d}) → 商 <b style="color:var(--blue)">${E.q}</b>、餘 <b style="color:var(--yellow)">${E.r}</b>`
+    : `(${E.p}) ÷ (${E.d})　<span style="color:rgba(243,239,226,.5)">—— 試商→乘→減→帶</span>`;
+}
+
+function drawRemain(st, ctx, w, h, ro){
+  const E=REM[st.i];
+  ctx.textAlign='center';
+  ctx.fillStyle='rgba(242,217,121,.85)'; ctx.font='bold 13px "Noto Sans TC"';
+  ctx.fillText('餘式定理：餘數 = P(a)', w/2, 18);
+  ctx.fillStyle='#f3efe2'; ctx.font='15px "Noto Serif TC"';
+  ctx.fillText('P(x) = ' + E.p, w/2, 44);
+  ctx.fillStyle='rgba(243,239,226,.75)'; ctx.font='13px "Noto Sans TC"';
+  ctx.fillText('求 ' + E.pa + '（即除以 (x−(' + E.a + ')) 的餘數）', w/2, 66);
+  if(!st.show){
+    ctx.fillStyle='rgba(243,239,226,.4)'; ctx.font='13px "Noto Sans TC"';
+    ctx.fillText('🔒 直接把 x = ' + E.a + ' 代進去', w/2, 104);
+  } else {
+    ctx.fillStyle='#f3efe2'; ctx.font='13px "Noto Serif TC"';
+    ctx.fillText(E.disp, w/2, 92);
+    ctx.fillStyle=E.isF?'#a6d6a0':'#f2d979'; ctx.font='bold 18px "Noto Serif TC"';
+    ctx.fillText('餘數 = ' + E.val, w/2, 118);
+    ctx.fillStyle=E.isF?'#a6d6a0':'rgba(243,239,226,.6)'; ctx.font='12px "Noto Sans TC"';
+    ctx.fillText(E.isF?'餘 0 → 是因式！（因式定理）':'餘 ≠ 0 → 不是因式', w/2, 138);
+  }
+  ro.innerHTML = st.show
+    ? `${E.pa} = <b style="color:${E.isF?'var(--green)':'var(--yellow)'}">${E.val}</b>${E.isF?'（餘0 → 是因式）':''}`
+    : `${E.pa} = ?　<span style="color:rgba(243,239,226,.5)">—— 代 x=${E.a}</span>`;
+}
+
+function draw(si){
+  const st=VIZ[si]; if(!st) return;
+  const {cv,ctx,kind}=st, w=cv.width/DPR, h=cv.height/DPR;
+  ctx.clearRect(0,0,w,h);
+  const ro=document.getElementById('ro-'+si);
+  if(kind==='mult') drawMult(st,ctx,w,h,ro);
+  else if(kind==='longdiv') drawLongdiv(st,ctx,w,h,ro);
+  else if(kind==='remain') drawRemain(st,ctx,w,h,ro);
+}
+
+document.addEventListener('click', e=>{
+  const btn=e.target.closest('[data-t]'); if(!btn) return;
+  const si=+btn.dataset.si, st=VIZ[si]; if(!st) return;
+  const t=btn.dataset.t;
+  const arr = st.kind==='mult'?MUL : st.kind==='longdiv'?DIV : REM;
+  if(t==='rev') st.show=true;
+  if(t==='next'){ st.i=(st.i+1)%arr.length; st.show=false; }
+  draw(si);
+});
+
+function resizeAll(){
+  DPR = Math.min(2, window.devicePixelRatio||1);
+  document.querySelectorAll('canvas.viz').forEach(cv=>{
+    const w = cv.clientWidth || cv.parentElement.clientWidth;
+    const h = (cv.dataset.viz==='longdiv') ? 176 : (cv.dataset.viz==='remain' ? 178 : 176);
+    cv.width=w*DPR; cv.height=h*DPR; cv.style.height=h+'px';
+    cv.getContext('2d').setTransform(DPR,0,0,DPR,0,0);
+  });
+  Object.keys(VIZ).forEach(k=>draw(+k));
+}
+document.querySelectorAll('canvas.viz').forEach(initViz);
+window.addEventListener('resize', resizeAll);
+resizeAll();
+</script>
+<div class="hint">← → 鍵可翻頁　·　Canvas 用按鈕互動　·　支援平板觸控</div>
+</body></html>

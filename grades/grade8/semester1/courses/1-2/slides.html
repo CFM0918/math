@@ -1,0 +1,289 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>八上 1-2 多項式與其加減運算｜授課簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--chalk-soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);padding:24px 14px;}
+.deck{max-width:1060px;margin:0 auto;}
+.print-hint{text-align:center;color:rgba(243,239,226,0.4);font-size:13px;padding:6px 0 22px;}
+.print-hint b{color:var(--yellow);}
+.slide{position:relative;min-height:576px;margin:0 auto 26px;padding:44px 52px;
+ background:radial-gradient(ellipse at 18% 12%,rgba(255,255,255,0.05),transparent 45%),
+  radial-gradient(ellipse at 82% 88%,rgba(255,255,255,0.035),transparent 45%),
+  radial-gradient(ellipse at 60% 40%,rgba(120,160,130,0.10),transparent 60%),
+  linear-gradient(160deg,var(--board) 0%,var(--board2) 100%);
+ border-radius:14px;box-shadow:0 10px 34px rgba(0,0,0,0.55);
+ border:1px solid rgba(242,217,121,0.14);overflow:hidden;display:flex;flex-direction:column;}
+.slide::before{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;
+ background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.014) 40px,rgba(255,255,255,0.014) 41px),
+  radial-gradient(circle at 30% 72%,rgba(255,255,255,0.03),transparent 8%),
+  radial-gradient(circle at 76% 24%,rgba(255,255,255,0.025),transparent 7%);}
+.slide::after{content:attr(data-pg);position:absolute;bottom:15px;right:26px;font-family:'Caveat',cursive;font-size:20px;color:rgba(243,239,226,0.4);}
+.tag{position:absolute;top:20px;right:26px;font-family:'Caveat',cursive;font-size:22px;color:var(--pink);transform:rotate(4deg);}
+.eyebrow{font-family:'Caveat',cursive;font-size:25px;color:var(--yellow);letter-spacing:1px;margin-bottom:8px;opacity:0.92;}
+.slide h1{font-family:'Noto Serif TC',serif;font-size:46px;font-weight:900;line-height:1.28;letter-spacing:1px;
+ text-shadow:0 0 1px rgba(243,239,226,0.5),1px 1px 0 rgba(0,0,0,0.2);}
+.slide h2{font-family:'Noto Serif TC',serif;font-size:33px;font-weight:900;color:var(--yellow);
+ margin-bottom:20px;padding-bottom:11px;border-bottom:2px dashed rgba(242,217,121,0.4);
+ text-shadow:0 0 1px rgba(242,217,121,0.4);}
+.slide p{font-size:20px;line-height:1.85;margin-bottom:12px;}
+.big-center{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;}
+.big-center .lead,.lead{font-family:'Caveat',cursive;font-size:30px;color:var(--blue);letter-spacing:1px;margin-top:12px;}
+ul{list-style:none;margin:8px 0;}
+li{font-size:21px;line-height:1.95;padding-left:32px;position:relative;margin-bottom:4px;}
+li::before{content:'\2726';position:absolute;left:4px;color:var(--yellow);font-size:17px;top:3px;}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.34);border-radius:12px;padding:15px 21px;margin:12px 0;font-size:19px;line-height:1.8;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.38);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.38);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.34);}
+.eg{position:relative;background:rgba(0,0,0,0.24);border:1px solid rgba(242,217,121,0.2);border-radius:10px;padding:17px 22px;margin:12px 0;font-size:19px;}
+.eg::before{content:'';position:absolute;top:-8px;left:38px;width:58px;height:15px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.eg .q{color:var(--blue);font-weight:700;margin-bottom:8px;font-size:19px;}
+.eg .a{color:var(--green);font-weight:700;margin-top:6px;}
+.eg .stp{color:var(--chalk-soft);font-size:18px;margin:3px 0;}
+.tip{display:flex;gap:12px;align-items:flex-start;background:rgba(242,217,121,0.09);border:1.5px dashed rgba(242,217,121,0.45);border-radius:12px;padding:13px 18px;margin:10px 0;}
+.tip .ic{font-size:24px;line-height:1;}.tip .tx{font-size:18px;line-height:1.7;}
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:18px;}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.26);padding:10px 14px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.two{display:flex;gap:20px;}.two>div{flex:1;}
+svg{display:block;margin:6px auto;max-width:100%;}
+@media print{
+ body{background:#0a130d;padding:0;}
+ .deck{max-width:none;}
+ .print-hint{display:none;}
+ .slide{margin:0;border-radius:0;box-shadow:none;min-height:100vh;
+  page-break-after:always;break-after:page;padding:32px 44px;justify-content:center;}
+ .slide:last-child{page-break-after:auto;break-after:auto;}
+ .slide h1{font-size:40px;}
+ .slide h2{font-size:27px;margin-bottom:13px;padding-bottom:8px;}
+ .slide p{font-size:17px;line-height:1.55;margin-bottom:6px;}
+ li{font-size:17px;line-height:1.55;margin-bottom:1px;padding-left:26px;}
+ .eyebrow{font-size:21px;margin-bottom:5px;}
+ .big-center .lead,.lead{font-size:26px;}
+ .box{font-size:16px;padding:10px 16px;margin:6px 0;line-height:1.5;}
+ .eg{font-size:16px;padding:11px 16px;margin:6px 0;}
+ .tip{font-size:16px;padding:10px 14px;margin:6px 0;}
+ .tbl{font-size:15px;margin:6px 0;}
+ .tbl th,.tbl td{padding:6px 10px;}
+ svg{max-height:210px;}
+}
+</style></head><body><div class="deck">
+<div class="print-hint">共 <b>16</b> 張・列印時每張一頁（Ctrl+P → 橫向 → 背景圖形）</div>
+
+
+<!-- 1 -->
+<div class="slide" data-pg="1 / 16"><div class="tag">Start!</div><div class="big-center">
+<div class="eyebrow">國二上學期・第一章 乘法公式與多項式</div>
+<h1>1-2　多項式與其加減運算</h1>
+<div class="lead">認識多項式的語言，才能正確整理<br>
+加減，就是「<span style="color:#f2d979;">合併同類</span>」</div>
+<div class="box y" style="max-width:640px;margin:16px auto 0;text-align:center;font-size:20px;">
+<span class="fm">5x³ − 3x² + x − 7</span>　（降冪排列的標準式）</div>
+</div></div>
+
+<!-- 2 -->
+<div class="slide" data-pg="2 / 16"><div class="tag">目標</div><div class="body">
+<h2>本節學習目標</h2>
+<ul>
+<li>理解多項式:<span class="hl">項、係數、次數、常數項、最高次項</span></li>
+<li>判斷兩項是否為<span class="hl-b">同類項</span></li>
+<li>合併同類項 → 化成<span class="hl">標準式（降冪）</span></li>
+<li>多項式<span class="hl">加減</span>（去括號注意負號分配）</li>
+</ul>
+<div class="box y">一句話:<span class="hl">多項式是代數的骨架;加減的本質就是「把同類項合併」。</span></div>
+</div></div>
+
+<!-- 3 -->
+<div class="slide" data-pg="3 / 16"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心　多項式的語言</div>
+<h2>以 5x³ − 3x² + x − 7 為例</h2>
+<table class="tbl">
+<tr><th style="width:24%;">名詞</th><th>說明</th></tr>
+<tr><td class="hl-b">項</td><td>5x³、−3x²、x、−7（四項＝四項式）</td></tr>
+<tr><td class="hl-b">係數</td><td>5、−3、<b>1</b>（x 的係數）、−7</td></tr>
+<tr><td class="hl-b">次數</td><td>最高次項 5x³ → <b>三次式</b></td></tr>
+<tr><td class="hl-b">常數項</td><td>−7（次數 0）</td></tr>
+<tr><td class="hl-b">標準式</td><td>按次數<b>由高到低</b>排列</td></tr>
+</table>
+<div class="box g" style="text-align:center;">x 前沒寫數字時，係數是 <b>1</b>（不是 0）。</div>
+</div></div>
+
+<!-- 4 -->
+<div class="slide" data-pg="4 / 16"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心　同類項</div>
+<h2>字母與次方都相同</h2>
+<table class="tbl">
+<tr><th style="width:44%;">兩項</th><th>是否同類</th></tr>
+<tr><td class="fm">3x²y 與 −5x²y</td><td class="hl-g">✅ 是</td></tr>
+<tr><td class="fm">3x²y 與 3xy²</td><td class="hl-r">❌ 不是（次方不同）</td></tr>
+<tr><td class="fm">5x² 與 5x</td><td class="hl-r">❌ 不是（2 ≠ 1）</td></tr>
+</table>
+<div class="box r" style="text-align:center;">
+判斷三問:<span class="hl">字母一樣嗎?每個字母的次方也一樣嗎?</span>一個不同就不是同類項。</div>
+</div></div>
+
+<!-- 5 -->
+<div class="slide" data-pg="5 / 16"><div class="tag">避雷</div><div class="body">
+<div class="eyebrow">核心　兩個關鍵動作</div>
+<h2>去括號 + 合併</h2>
+<div class="box y" style="text-align:center;font-size:21px;padding:14px;">
+去括號:<span class="fm">−(a − b + c) = −a + b − c</span></div>
+<div class="box r" style="text-align:center;">
+⚠️ 全章最高頻錯:括號前是負號 → <span class="hl">括號內「每一項」都要變號</span>，別只翻第一項!</div>
+<div class="box g" style="text-align:center;">
+合併同類項:<span class="hl">係數相加、變數部分保留</span>。3x²+2x² = 5x²（不是 5!）</div>
+</div></div>
+
+<!-- 6 -->
+<div class="slide" data-pg="6 / 16"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 1　難度 ★☆☆</div>
+<h2>辨識多項式</h2>
+<div class="eg">
+<div class="q">5x³ − 3x² + x − 7</div>
+<div class="stp"><b>各項</b>　5x³、−3x²、x、−7（四項式）</div>
+<div class="stp"><b>係數</b>　5、−3、1、−7</div>
+<div class="stp"><b>次數</b>　最高 5x³ → 三次式　<b>常數項</b>　−7</div>
+</div>
+</div></div>
+
+<!-- 7 -->
+<div class="slide" data-pg="7 / 16"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 2　難度 ★★☆　合併同類項</div>
+<h2>分組再相加</h2>
+<div class="eg">
+<div class="q">3x²y − 5xy² + 2x²y + 4xy² − xy</div>
+<div class="stp"><b>x²y 項</b>　3 + 2 = 5 → 5x²y</div>
+<div class="stp"><b>xy² 項</b>　−5 + 4 = −1 → −xy²</div>
+<div class="stp"><b>xy 項</b>　−xy</div>
+<div class="a">5x²y − xy² − xy</div>
+</div>
+<div class="box r" style="text-align:center;">⚠️ x²y 和 xy² 不是同類項，不能合併!</div>
+</div></div>
+
+<!-- 8 -->
+<div class="slide" data-pg="8 / 16"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 3　難度 ★★☆　減法去括號</div>
+<h2>負號分配給每一項</h2>
+<div class="eg">
+<div class="q">(3x² − 2x + 5) − (x² + 4x − 3)</div>
+<div class="stp"><b>去括號</b>　3x² − 2x + 5 <span class="hl-r">− x² − 4x + 3</span>（每項變號）</div>
+<div class="stp"><b>合併</b>　(3−1)x² + (−2−4)x + (5+3)</div>
+<div class="a">2x² − 6x + 8</div>
+</div>
+<div class="box y" style="text-align:center;">−(x²+4x−3) → −x²−4x<b class="hl">+3</b>，最後那項 −(−3)=+3 最常錯。</div>
+</div></div>
+
+<!-- 9 -->
+<div class="slide" data-pg="9 / 16"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 4　難度 ★★★　帶係數</div>
+<h2>求 2A − 3B</h2>
+<div class="eg">
+<div class="q">A = 2x²−3x+1，B = x²+x−4，求 2A − 3B。</div>
+<div class="stp"><b>代入</b>　2(2x²−3x+1) − 3(x²+x−4)</div>
+<div class="stp"><b>展開</b>　4x²−6x+2 − 3x²−3x+12</div>
+<div class="a">x² − 9x + 14</div>
+</div>
+<div class="box r" style="text-align:center;">⚠️ −3 要乘進 B 的每一項:−3×(−4) = +12。</div>
+</div></div>
+
+<!-- 10 -->
+<div class="slide" data-pg="10 / 16"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 5　難度 ★★★　待定係數</div>
+<h2>比較同次項的係數</h2>
+<div class="eg">
+<div class="q">(3x²+ax−2) + (bx²−5x+4) = 5x²−3x+2，求 a、b。</div>
+<div class="stp"><b>x² 項</b>　3 + b = 5 → b = 2</div>
+<div class="stp"><b>x 項</b>　a + (−5) = −3 → a = 2</div>
+<div class="stp"><b>常數驗算</b>　−2 + 4 = 2 ✓</div>
+<div class="a">a = 2、b = 2</div>
+</div>
+<div class="box g" style="text-align:center;">💡 兩多項式相等 → <span class="hl">同次項的係數對應相等</span>。</div>
+</div></div>
+
+<!-- 11 -->
+<div class="slide" data-pg="11 / 16"><div class="tag">精選</div><div class="body">
+<div class="eyebrow">隨堂精選</div>
+<h2>快速檢查</h2>
+<table class="tbl">
+<tr><th style="width:52%;">題目</th><th>答案</th></tr>
+<tr><td>(5x−3) − (2x+7)</td><td class="fm hl">3x − 10</td></tr>
+<tr><td>4x²−3x+2x²+5x</td><td class="fm hl">6x² + 2x</td></tr>
+<tr><td>5x² 和 5x 同類嗎?</td><td class="hl-r">不是（次方不同）</td></tr>
+<tr><td>x=2 時 3x²−5x+2</td><td class="fm hl">4</td></tr>
+<tr><td>P=3x²+2x−1，P+Q=5x²−x+3，Q=?</td><td class="fm hl">2x²−3x+4</td></tr>
+</table>
+<div class="box y" style="text-align:center;">求 Q:用 (P+Q) − P，記得去括號每項變號。</div>
+</div></div>
+
+<!-- 12 -->
+<div class="slide" data-pg="12 / 16"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 1　【產線成本】</div>
+<h2>成本多項式加減</h2>
+<div class="box">C_A = 2x²+50x+8000，C_B = 3x²+30x+6000</div>
+<div class="eg">
+<div class="stp"><b>(1) 合計</b>　C_A + C_B = 5x² + 80x + 14000</div>
+<div class="stp"><b>(2) 差值</b>　C_A − C_B = −x² + 20x + 2000</div>
+<div class="stp"><b>(3) x=100</b>　C_A = 33000、C_B = 39000 → A 線較低</div>
+</div>
+</div></div>
+
+<!-- 13 -->
+<div class="slide" data-pg="13 / 16"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 2　【加權成績】</div>
+<h2>代數式化簡</h2>
+<div class="box">期中 40%、期末 40%、平時 20%;A 為 x、y、z</div>
+<div class="eg">
+<div class="stp"><b>(1) A 總成績</b>　0.4x + 0.4y + 0.2z</div>
+<div class="stp"><b>(2) B</b>（期中+5、期末−10、平時+8）　0.4(x+5)+0.4(y−10)+0.2(z+8) = 0.4x+0.4y+0.2z − 0.4</div>
+<div class="stp"><b>(3) A − B</b>　= 0.4 → A 比 B 多 0.4 分</div>
+</div>
+</div></div>
+
+<!-- 14 -->
+<div class="slide" data-pg="14 / 16"><div class="tag">避雷</div><div class="body">
+<h2>避雷指南</h2>
+<table class="tbl">
+<tr><th style="width:46%;">❌ 錯誤</th><th>✓ 正確</th></tr>
+<tr><td>減法只翻第一項符號</td><td>括號前負號 → <b class="hl-g">每項</b>變號</td></tr>
+<tr><td class="fm">x²y 與 xy² 當同類項</td><td>次方也要相同</td></tr>
+<tr><td class="fm">3x²+2x² = 5</td><td class="fm hl-g">= 5x²（保留變數）</td></tr>
+<tr><td>沒有降冪排列</td><td>標準式次數<b class="hl-g">由高到低</b></td></tr>
+</table>
+<div class="box y" style="text-align:center;">合併前先問:<span class="hl">這兩項是同類項嗎?</span></div>
+</div></div>
+
+<!-- 15 -->
+<div class="slide" data-pg="15 / 16"><div class="tag">總結</div><div class="body">
+<h2>本節總結</h2>
+<ul>
+<li><span class="hl">多項式語言</span>:項、係數、次數、常數項、標準式（降冪）</li>
+<li><span class="hl">同類項</span>:字母與每個字母的次方都相同</li>
+<li><span class="hl-r">減法去括號</span>:括號內每項變號（最高頻錯）</li>
+<li><span class="hl">合併</span>:係數相加、變數保留;<span class="hl">待定係數</span>:同次項係數對應相等</li>
+</ul>
+<div class="box g" style="text-align:center;font-size:20px;">
+🔗 <b>承先</b>:1-1 乘法公式（展開）<br>
+🔗 <b>啟後</b>:<span class="hl">1-3 多項式乘除 —— 直式乘法與長除法。</span></div>
+</div></div>
+
+<!-- 16 -->
+<div class="slide" data-pg="16 / 16"><div class="tag">Next</div><div class="big-center">
+<div class="eyebrow">下節預告</div>
+<h1 style="font-size:40px;">1-3　多項式的乘除運算</h1>
+<div class="lead">加減學會了，換<span style="color:#eda0a8;">乘與除</span><br>
+直式乘法、長除法、餘式</div>
+<div class="box y" style="max-width:800px;margin:20px auto 0;font-size:20px;text-align:center;">
+乘法用分配律逐項相乘;除法像小學長除法，只是換成多項式。<br>
+<span class="hl">四則運算到這裡完整。</span></div>
+</div></div>
+
+</div></body></html>

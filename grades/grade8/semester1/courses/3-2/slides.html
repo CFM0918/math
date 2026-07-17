@@ -1,0 +1,255 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>八上 3-2 十字交乘法因式分解｜授課簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--chalk-soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);padding:24px 14px;}
+.deck{max-width:1060px;margin:0 auto;}
+.print-hint{text-align:center;color:rgba(243,239,226,0.4);font-size:13px;padding:6px 0 22px;}
+.print-hint b{color:var(--yellow);}
+.slide{position:relative;min-height:576px;margin:0 auto 26px;padding:44px 52px;
+ background:radial-gradient(ellipse at 18% 12%,rgba(255,255,255,0.05),transparent 45%),
+  radial-gradient(ellipse at 82% 88%,rgba(255,255,255,0.035),transparent 45%),
+  radial-gradient(ellipse at 60% 40%,rgba(120,160,130,0.10),transparent 60%),
+  linear-gradient(160deg,var(--board) 0%,var(--board2) 100%);
+ border-radius:14px;box-shadow:0 10px 34px rgba(0,0,0,0.55);
+ border:1px solid rgba(242,217,121,0.14);overflow:hidden;display:flex;flex-direction:column;}
+.slide::before{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;
+ background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.014) 40px,rgba(255,255,255,0.014) 41px),
+  radial-gradient(circle at 30% 72%,rgba(255,255,255,0.03),transparent 8%),
+  radial-gradient(circle at 76% 24%,rgba(255,255,255,0.025),transparent 7%);}
+.slide::after{content:attr(data-pg);position:absolute;bottom:15px;right:26px;font-family:'Caveat',cursive;font-size:20px;color:rgba(243,239,226,0.4);}
+.tag{position:absolute;top:20px;right:26px;font-family:'Caveat',cursive;font-size:22px;color:var(--pink);transform:rotate(4deg);}
+.eyebrow{font-family:'Caveat',cursive;font-size:25px;color:var(--yellow);letter-spacing:1px;margin-bottom:8px;opacity:0.92;}
+.slide h1{font-family:'Noto Serif TC',serif;font-size:46px;font-weight:900;line-height:1.28;letter-spacing:1px;
+ text-shadow:0 0 1px rgba(243,239,226,0.5),1px 1px 0 rgba(0,0,0,0.2);}
+.slide h2{font-family:'Noto Serif TC',serif;font-size:33px;font-weight:900;color:var(--yellow);
+ margin-bottom:20px;padding-bottom:11px;border-bottom:2px dashed rgba(242,217,121,0.4);
+ text-shadow:0 0 1px rgba(242,217,121,0.4);}
+.slide p{font-size:20px;line-height:1.85;margin-bottom:12px;}
+.big-center{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;}
+.big-center .lead,.lead{font-family:'Caveat',cursive;font-size:30px;color:var(--blue);letter-spacing:1px;margin-top:12px;}
+ul{list-style:none;margin:8px 0;}
+li{font-size:21px;line-height:1.95;padding-left:32px;position:relative;margin-bottom:4px;}
+li::before{content:'\2726';position:absolute;left:4px;color:var(--yellow);font-size:17px;top:3px;}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.34);border-radius:12px;padding:15px 21px;margin:12px 0;font-size:19px;line-height:1.8;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.38);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.38);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.34);}
+.eg{position:relative;background:rgba(0,0,0,0.24);border:1px solid rgba(242,217,121,0.2);border-radius:10px;padding:17px 22px;margin:12px 0;font-size:19px;}
+.eg::before{content:'';position:absolute;top:-8px;left:38px;width:58px;height:15px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.eg .q{color:var(--blue);font-weight:700;margin-bottom:8px;font-size:19px;}
+.eg .a{color:var(--green);font-weight:700;margin-top:6px;}
+.eg .stp{color:var(--chalk-soft);font-size:18px;margin:3px 0;}
+.tip{display:flex;gap:12px;align-items:flex-start;background:rgba(242,217,121,0.09);border:1.5px dashed rgba(242,217,121,0.45);border-radius:12px;padding:13px 18px;margin:10px 0;}
+.tip .ic{font-size:24px;line-height:1;}.tip .tx{font-size:18px;line-height:1.7;}
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:18px;}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.26);padding:10px 14px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.two{display:flex;gap:20px;}.two>div{flex:1;}
+svg{display:block;margin:6px auto;max-width:100%;}
+@media print{
+ body{background:#0a130d;padding:0;}
+ .deck{max-width:none;}
+ .print-hint{display:none;}
+ .slide{margin:0;border-radius:0;box-shadow:none;min-height:100vh;
+  page-break-after:always;break-after:page;padding:32px 44px;justify-content:center;}
+ .slide:last-child{page-break-after:auto;break-after:auto;}
+ .slide h1{font-size:40px;}
+ .slide h2{font-size:27px;margin-bottom:13px;padding-bottom:8px;}
+ .slide p{font-size:17px;line-height:1.55;margin-bottom:6px;}
+ li{font-size:17px;line-height:1.55;margin-bottom:1px;padding-left:26px;}
+ .eyebrow{font-size:21px;margin-bottom:5px;}
+ .big-center .lead,.lead{font-size:26px;}
+ .box{font-size:16px;padding:10px 16px;margin:6px 0;line-height:1.5;}
+ .eg{font-size:16px;padding:11px 16px;margin:6px 0;}
+ .tip{font-size:16px;padding:10px 14px;margin:6px 0;}
+ .tbl{font-size:15px;margin:6px 0;}
+ .tbl th,.tbl td{padding:6px 10px;}
+ svg{max-height:210px;}
+}
+</style></head><body><div class="deck">
+<div class="print-hint">共 <b>14</b> 張・列印時每張一頁（Ctrl+P → 橫向 → 背景圖形）</div>
+
+
+<!-- 1 -->
+<div class="slide" data-pg="1 / 14"><div class="tag">Start!</div><div class="big-center">
+<div class="eyebrow">國二上學期・第三章 因式分解</div>
+<h1>3-2　十字交乘法</h1>
+<div class="lead">找兩個數:<span style="color:#f2d979;">乘積 = c、和 = b</span><br>
+十字圖幫你快速試出答案</div>
+<div class="box y" style="max-width:660px;margin:16px auto 0;text-align:center;font-size:19px;">
+<span class="fm">x²+5x+6 = (x+2)(x+3)</span>，因為 2×3=6、2+3=5</div>
+</div></div>
+
+<!-- 2 -->
+<div class="slide" data-pg="2 / 14"><div class="tag">目標</div><div class="body">
+<h2>本節學習目標</h2>
+<ul>
+<li>理解原理:<span class="hl">(x+a)(x+b) = x²+(a+b)x+ab 的逆向</span></li>
+<li>分解 <span class="hl-b">x²+bx+c</span> 型</li>
+<li>處理 <span class="hl">ax²+bx+c</span>（首項係數 ≠ 1）</li>
+<li>結合<span class="hl">提公因式</span>做完整分解</li>
+</ul>
+<div class="box y">一句話:<span class="hl">十字交乘是下一章「解一元二次方程式」的核心工具，這節一定要練熟。</span></div>
+</div></div>
+
+<!-- 3 -->
+<div class="slide" data-pg="3 / 14"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心　x²+bx+c 型</div>
+<h2>找兩數:積 c、和 b</h2>
+<div class="box y" style="text-align:center;font-size:20px;">
+x²+bx+c = (x+p)(x+q)，其中 p+q=b、p×q=c</div><svg viewBox="0 0 280 170" width="280" height="170" style="display:block;margin:0 auto;"><line x1="60" y1="50" x2="220" y2="110" stroke="#98c9dc" stroke-width="1.5" stroke-dasharray="4 3"/><line x1="60" y1="110" x2="220" y2="50" stroke="#a6d6a0" stroke-width="1.5" stroke-dasharray="4 3"/><text x="60" y="55" font-size="17" fill="#f3efe2" text-anchor="middle" font-family="Noto Serif TC">x</text><text x="60" y="115" font-size="17" fill="#f3efe2" text-anchor="middle" font-family="Noto Serif TC">x</text><text x="220" y="55" font-size="17" fill="#f2d979" text-anchor="middle" font-family="Noto Serif TC">+3</text><text x="220" y="115" font-size="17" fill="#f2d979" text-anchor="middle" font-family="Noto Serif TC">+4</text><text x="140.0" y="156" font-size="14" fill="#eda0a8" text-anchor="middle" font-family="Noto Serif TC">交叉相乘和 = 3x+4x = 7x</text></svg><div class="box g" style="text-align:center;">x²+7x+12:找 3、4（積 12、和 7）→ (x+3)(x+4)。</div>
+</div></div>
+
+<!-- 4 -->
+<div class="slide" data-pg="4 / 14"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心　符號判斷</div>
+<h2>先看常數項 c 的正負</h2>
+<table class="tbl">
+<tr><th style="width:26%;">c 符號</th><th>p、q 符號</th></tr>
+<tr><td class="hl-b">c &gt; 0</td><td>同號（看 b:b&gt;0 都正、b&lt;0 都負）</td></tr>
+<tr><td class="hl-b">c &lt; 0</td><td>一正一負（絕對值大的取 b 的符號）</td></tr>
+</table>
+<div class="box r" style="text-align:center;">
+⚠️ 積、和<b>兩個條件同時滿足</b>;積為負一定<b>一正一負</b>，別把符號搞反。</div>
+</div></div>
+
+<!-- 5 -->
+<div class="slide" data-pg="5 / 14"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 1、2　難度 ★☆☆~★★☆</div>
+<h2>x²+bx+c 型</h2>
+<div class="eg">
+<div class="q">x²+7x+12</div>
+<div class="stp">p+q=7、pq=12 → (3,4) → (x+3)(x+4)</div>
+</div>
+<div class="eg">
+<div class="q">x²−3x−18</div>
+<div class="stp">積負 → 一正一負;p+q=−3、pq=−18 → (−6,3) → (x−6)(x+3)</div>
+</div>
+<div class="box y" style="text-align:center;">先問:積是幾?和是幾?哪對整數同時滿足?</div>
+</div></div>
+
+<!-- 6 -->
+<div class="slide" data-pg="6 / 14"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 3　難度 ★★★　首項係數≠1</div>
+<h2>ax²+bx+c 型</h2>
+<div class="box y" style="text-align:center;font-size:19px;">
+找 (px+r)(qx+s):pq=a、rs=c、<span class="hl">ps+qr=b</span></div><svg viewBox="0 0 280 170" width="280" height="170" style="display:block;margin:0 auto;"><line x1="60" y1="50" x2="220" y2="110" stroke="#98c9dc" stroke-width="1.5" stroke-dasharray="4 3"/><line x1="60" y1="110" x2="220" y2="50" stroke="#a6d6a0" stroke-width="1.5" stroke-dasharray="4 3"/><text x="60" y="55" font-size="17" fill="#f3efe2" text-anchor="middle" font-family="Noto Serif TC">2x</text><text x="60" y="115" font-size="17" fill="#f3efe2" text-anchor="middle" font-family="Noto Serif TC">x</text><text x="220" y="55" font-size="17" fill="#f2d979" text-anchor="middle" font-family="Noto Serif TC">+1</text><text x="220" y="115" font-size="17" fill="#f2d979" text-anchor="middle" font-family="Noto Serif TC">+3</text><text x="140.0" y="156" font-size="14" fill="#eda0a8" text-anchor="middle" font-family="Noto Serif TC">交叉相乘和 = 2·3 + 1·1 = 7</text></svg><div class="eg">
+<div class="q">2x²+7x+3</div>
+<div class="stp">pq=2、rs=3;試 (2x+1)(x+3):交叉 2×3+1×1=7 ✓</div>
+</div>
+</div></div>
+
+<!-- 7 -->
+<div class="slide" data-pg="7 / 14"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 4　難度 ★★★　提+交乘</div>
+<h2>先提公因式再十字交乘</h2>
+<div class="eg">
+<div class="q">6x³+9x²−6x</div>
+<div class="stp"><b>提公因式</b>　3x(2x²+3x−2)</div>
+<div class="stp"><b>十字交乘</b>　2x²+3x−2 = (2x−1)(x+2)</div>
+<div class="a">3x(2x−1)(x+2)</div>
+</div>
+<div class="box g" style="text-align:center;">先提公因式讓係數變小，交乘試驗更輕鬆。</div>
+</div></div>
+
+<!-- 8 -->
+<div class="slide" data-pg="8 / 14"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 5　難度 ★★★　無法分解</div>
+<h2>何時「整數範圍無法分解」?</h2>
+<div class="eg">
+<div class="q">x²+x+1 能分解嗎?</div>
+<div class="stp">需 p+q=1、pq=1</div>
+<div class="stp">積=1 的整數對:(1,1) 和=2;(−1,−1) 和=−2 → 都不是 1</div>
+<div class="a">整數範圍內無法分解</div>
+</div>
+<div class="box y" style="text-align:center;">窮舉積的整數對，若沒有一對的和符合 → 無法分解。</div>
+</div></div>
+
+<!-- 9 -->
+<div class="slide" data-pg="9 / 14"><div class="tag">精選</div><div class="body">
+<div class="eyebrow">隨堂精選</div>
+<h2>快速檢查</h2>
+<table class="tbl">
+<tr><th style="width:44%;">題目</th><th>分解</th></tr>
+<tr><td>x²−8x+15</td><td class="fm hl">(x−3)(x−5)</td></tr>
+<tr><td>x²−x−12</td><td class="fm hl">(x−4)(x+3)</td></tr>
+<tr><td>3x²−10x+3</td><td class="fm hl">(3x−1)(x−3)</td></tr>
+<tr><td>6x²+x−2</td><td class="fm hl">(2x−1)(3x+2)</td></tr>
+<tr><td>x²−5xy+6y²</td><td class="fm hl">(x−2y)(x−3y)</td></tr>
+</table>
+<div class="box y" style="text-align:center;">含兩字母:把 y 當常數，找 p+q=−5y、pq=6y²。</div>
+</div></div>
+
+<!-- 10 -->
+<div class="slide" data-pg="10 / 14"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 1　【面積模型】</div>
+<h2>面積 → 長 × 寬</h2>
+<div class="box">長方形面積 x²+8x+15</div>
+<div class="eg">
+<div class="stp"><b>(1) 分解</b>　(x+3)(x+5) → 長 (x+5)、寬 (x+3)</div>
+<div class="stp"><b>(2) x=5</b>　長 10、寬 8、面積 80</div>
+<div class="stp"><b>(3) 2x²+11x+15</b>　= (2x+5)(x+3)</div>
+</div>
+</div></div>
+
+<!-- 11 -->
+<div class="slide" data-pg="11 / 14"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 2　【連續整數積】</div>
+<h2>n³ − n 的結構</h2>
+<div class="eg">
+<div class="stp"><b>(1)</b> (n−1)n = n²−n</div>
+<div class="stp"><b>(2)</b> (n²−n)(n+1) = n³−n</div>
+<div class="stp"><b>(3) n³−n=24</b>　(n−1)n(n+1)=24 → n=3（2×3×4=24）</div>
+</div>
+<div class="box g" style="text-align:center;">連續整數的積 = 因式分解後的乘積形式。</div>
+</div></div>
+
+<!-- 12 -->
+<div class="slide" data-pg="12 / 14"><div class="tag">避雷</div><div class="body">
+<h2>避雷指南</h2>
+<table class="tbl">
+<tr><th style="width:46%;">❌ 錯誤</th><th>✓ 正確</th></tr>
+<tr><td>只湊積或只湊和</td><td>積、和<b class="hl-g">兩條件同時</b>滿足</td></tr>
+<tr><td>積為負卻取同號</td><td>積負 → <b class="hl-g">一正一負</b></td></tr>
+<tr><td>ax²型漏組合</td><td>系統列 pq=a、rs=c 再交叉</td></tr>
+<tr><td>忘記先提公因式</td><td>先提公因式，再交乘</td></tr>
+</table>
+<div class="box y" style="text-align:center;">追問:積等於幾?和等於幾?哪對整數同時滿足?</div>
+</div></div>
+
+<!-- 13 -->
+<div class="slide" data-pg="13 / 14"><div class="tag">總結</div><div class="body">
+<h2>本節總結</h2>
+<ul>
+<li><span class="hl">x²+bx+c</span>:找兩數 p+q=b、pq=c → (x+p)(x+q)</li>
+<li><span class="hl">符號</span>:c&gt;0 同號、c&lt;0 一正一負</li>
+<li><span class="hl">ax²+bx+c</span>:十字交叉 pq=a、rs=c、ps+qr=b</li>
+<li><span class="hl-r">策略</span>:先提公因式 → 再十字交乘 → 分到底;無整數對則無法分解</li>
+</ul>
+<div class="box g" style="text-align:center;font-size:20px;">
+🔗 <b>承先</b>:1-1 交叉展開（逆向）<br>
+🔗 <b>啟後</b>:<span class="hl">第 4 章 用因式分解法解一元二次方程式 —— 交乘是核心!</span></div>
+</div></div>
+
+<!-- 14 -->
+<div class="slide" data-pg="14 / 14"><div class="tag">Next</div><div class="big-center">
+<div class="eyebrow">下章預告</div>
+<h1 style="font-size:38px;">第 4 章　一元二次方程式</h1>
+<div class="lead">ax² + bx + c = 0<br>
+<span style="color:#eda0a8;">因式分解法、配方法、公式解</span></div>
+<div class="box y" style="max-width:800px;margin:20px auto 0;font-size:20px;text-align:center;">
+把左邊分解成 (x−p)(x−q)=0 → x=p 或 x=q。<br>
+<span class="hl">十字交乘練熟了，解方程式就水到渠成。</span></div>
+</div></div>
+
+</div></body></html>

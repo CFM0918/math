@@ -1,0 +1,251 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>八上 4-3 一元二次方程式應用問題｜授課簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--chalk-soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);padding:24px 14px;}
+.deck{max-width:1060px;margin:0 auto;}
+.print-hint{text-align:center;color:rgba(243,239,226,0.4);font-size:13px;padding:6px 0 22px;}
+.print-hint b{color:var(--yellow);}
+.slide{position:relative;min-height:576px;margin:0 auto 26px;padding:44px 52px;
+ background:radial-gradient(ellipse at 18% 12%,rgba(255,255,255,0.05),transparent 45%),
+  radial-gradient(ellipse at 82% 88%,rgba(255,255,255,0.035),transparent 45%),
+  radial-gradient(ellipse at 60% 40%,rgba(120,160,130,0.10),transparent 60%),
+  linear-gradient(160deg,var(--board) 0%,var(--board2) 100%);
+ border-radius:14px;box-shadow:0 10px 34px rgba(0,0,0,0.55);
+ border:1px solid rgba(242,217,121,0.14);overflow:hidden;display:flex;flex-direction:column;}
+.slide::before{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;
+ background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.014) 40px,rgba(255,255,255,0.014) 41px),
+  radial-gradient(circle at 30% 72%,rgba(255,255,255,0.03),transparent 8%),
+  radial-gradient(circle at 76% 24%,rgba(255,255,255,0.025),transparent 7%);}
+.slide::after{content:attr(data-pg);position:absolute;bottom:15px;right:26px;font-family:'Caveat',cursive;font-size:20px;color:rgba(243,239,226,0.4);}
+.tag{position:absolute;top:20px;right:26px;font-family:'Caveat',cursive;font-size:22px;color:var(--pink);transform:rotate(4deg);}
+.eyebrow{font-family:'Caveat',cursive;font-size:25px;color:var(--yellow);letter-spacing:1px;margin-bottom:8px;opacity:0.92;}
+.slide h1{font-family:'Noto Serif TC',serif;font-size:46px;font-weight:900;line-height:1.28;letter-spacing:1px;
+ text-shadow:0 0 1px rgba(243,239,226,0.5),1px 1px 0 rgba(0,0,0,0.2);}
+.slide h2{font-family:'Noto Serif TC',serif;font-size:33px;font-weight:900;color:var(--yellow);
+ margin-bottom:20px;padding-bottom:11px;border-bottom:2px dashed rgba(242,217,121,0.4);
+ text-shadow:0 0 1px rgba(242,217,121,0.4);}
+.slide p{font-size:20px;line-height:1.85;margin-bottom:12px;}
+.big-center{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;}
+.big-center .lead,.lead{font-family:'Caveat',cursive;font-size:30px;color:var(--blue);letter-spacing:1px;margin-top:12px;}
+ul{list-style:none;margin:8px 0;}
+li{font-size:21px;line-height:1.95;padding-left:32px;position:relative;margin-bottom:4px;}
+li::before{content:'\2726';position:absolute;left:4px;color:var(--yellow);font-size:17px;top:3px;}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.34);border-radius:12px;padding:15px 21px;margin:12px 0;font-size:19px;line-height:1.8;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.38);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.38);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.34);}
+.eg{position:relative;background:rgba(0,0,0,0.24);border:1px solid rgba(242,217,121,0.2);border-radius:10px;padding:17px 22px;margin:12px 0;font-size:19px;}
+.eg::before{content:'';position:absolute;top:-8px;left:38px;width:58px;height:15px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.eg .q{color:var(--blue);font-weight:700;margin-bottom:8px;font-size:19px;}
+.eg .a{color:var(--green);font-weight:700;margin-top:6px;}
+.eg .stp{color:var(--chalk-soft);font-size:18px;margin:3px 0;}
+.tip{display:flex;gap:12px;align-items:flex-start;background:rgba(242,217,121,0.09);border:1.5px dashed rgba(242,217,121,0.45);border-radius:12px;padding:13px 18px;margin:10px 0;}
+.tip .ic{font-size:24px;line-height:1;}.tip .tx{font-size:18px;line-height:1.7;}
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:18px;}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.26);padding:10px 14px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.two{display:flex;gap:20px;}.two>div{flex:1;}
+svg{display:block;margin:6px auto;max-width:100%;}
+@media print{
+ body{background:#0a130d;padding:0;}
+ .deck{max-width:none;}
+ .print-hint{display:none;}
+ .slide{margin:0;border-radius:0;box-shadow:none;min-height:100vh;
+  page-break-after:always;break-after:page;padding:32px 44px;justify-content:center;}
+ .slide:last-child{page-break-after:auto;break-after:auto;}
+ .slide h1{font-size:40px;}
+ .slide h2{font-size:27px;margin-bottom:13px;padding-bottom:8px;}
+ .slide p{font-size:17px;line-height:1.55;margin-bottom:6px;}
+ li{font-size:17px;line-height:1.55;margin-bottom:1px;padding-left:26px;}
+ .eyebrow{font-size:21px;margin-bottom:5px;}
+ .big-center .lead,.lead{font-size:26px;}
+ .box{font-size:16px;padding:10px 16px;margin:6px 0;line-height:1.5;}
+ .eg{font-size:16px;padding:11px 16px;margin:6px 0;}
+ .tip{font-size:16px;padding:10px 14px;margin:6px 0;}
+ .tbl{font-size:15px;margin:6px 0;}
+ .tbl th,.tbl td{padding:6px 10px;}
+ svg{max-height:210px;}
+}
+</style></head><body><div class="deck">
+<div class="print-hint">共 <b>13</b> 張・列印時每張一頁（Ctrl+P → 橫向 → 背景圖形）</div>
+
+
+<!-- 1 -->
+<div class="slide" data-pg="1 / 13"><div class="tag">Start!</div><div class="big-center">
+<div class="eyebrow">國二上學期・第四章 一元二次方程式</div>
+<h1>4-3　應用問題</h1>
+<div class="lead">把文字翻成二次方程式<br>
+解出後<span style="color:#eda0a8;">記得剔除不符合情境的解</span></div>
+<div class="box y" style="max-width:680px;margin:16px auto 0;text-align:center;font-size:18px;">
+設未知數 → 找等量關係 → 列式 → 解 → <span class="hl">依情境取捨</span></div>
+</div></div>
+
+<!-- 2 -->
+<div class="slide" data-pg="2 / 13"><div class="tag">目標</div><div class="body">
+<h2>本節學習目標</h2>
+<ul>
+<li>把<span class="hl">面積、連續整數、速度時間</span>翻成二次方程式</li>
+<li>選<span class="hl-b">適合的方法</span>（因式分解、公式解）求解</li>
+<li>依情境判斷<span class="hl">哪個解合理</span>（長度、人數非負）</li>
+<li>驗算答案是否滿足<span class="hl">所有條件</span></li>
+</ul>
+<div class="box y">一句話:<span class="hl">列式 → 解 → 取捨，三步缺一不可。解完一定回頭問「這答案合理嗎?」</span></div>
+</div></div>
+
+<!-- 3 -->
+<div class="slide" data-pg="3 / 13"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心　列式三大類型</div>
+<h2>常見情境的翻譯法</h2>
+<table class="tbl">
+<tr><th style="width:26%;">類型</th><th>列式要點</th></tr>
+<tr><td class="hl-b">面積</td><td>長 × 寬 = 面積（長 = 寬 + k）</td></tr>
+<tr><td class="hl-b">連續整數</td><td>設 n、n+1;連續偶/奇數 n、n+2</td></tr>
+<tr><td class="hl-b">工程/速度</td><td>總量 = 速率 × 時間（或次數）</td></tr>
+</table>
+<div class="box r" style="text-align:center;">
+⚠️ 「提前 4 天完成」= 需要 (20−4) 天，別把天數相加!</div>
+</div></div>
+
+<!-- 4 -->
+<div class="slide" data-pg="4 / 13"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 1、2　難度 ★☆☆~★★☆</div>
+<h2>連續整數 & 面積</h2>
+<div class="eg">
+<div class="q">兩連續正整數積 72</div>
+<div class="stp">n(n+1)=72 → n²+n−72=0 → (n+9)(n−8)=0 → n=8 → <b>8、9</b></div>
+</div>
+<div class="eg">
+<div class="q">長比寬多 4、面積 77</div>
+<div class="stp">x(x+4)=77 → (x+11)(x−7)=0 → 寬 7、長 11（x=−11 捨）</div>
+</div>
+<div class="box r" style="text-align:center;">⚠️ 寬不能為負 → x=−11 捨去!</div>
+</div></div>
+
+<!-- 5 -->
+<div class="slide" data-pg="5 / 13"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 3　難度 ★★★　意外的一次方程式</div>
+<h2>x² 抵消的情況</h2>
+<div class="eg">
+<div class="q">正方形邊長 +3 後，面積增加 51，求原邊長。</div>
+<div class="stp"><b>列式</b>　(x+3)² − x² = 51</div>
+<div class="stp"><b>展開</b>　x²+6x+9 − x² = 51 → 6x+9=51</div>
+<div class="stp"><b>解</b>　6x=42 → x=7</div>
+</div>
+<div class="box y" style="text-align:center;">
+💡 兩個 x² 抵消 → 變成<span class="hl">一次方程式</span>，不必用二次解法。</div>
+</div></div>
+
+<!-- 6 -->
+<div class="slide" data-pg="6 / 13"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 4　難度 ★★★　工程</div>
+<h2>提前完成問題</h2>
+<div class="eg">
+<div class="q">每天 x 條、20 天完成;每天多 5 條可提前 4 天，求 x。</div>
+<div class="stp"><b>總量不變</b>　(x+5)×(20−4) = 20x</div>
+<div class="stp"><b>展開</b>　16x+80 = 20x → 80=4x → x=20</div>
+<div class="stp"><b>驗算</b>　20×20 = 400 = 25×16 ✓</div>
+</div>
+<div class="box r" style="text-align:center;">⚠️ 提前 4 天 = 用 (20−4) 天，不是 24 天!</div>
+</div></div>
+
+<!-- 7 -->
+<div class="slide" data-pg="7 / 13"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 5　難度 ★★★　縮減面積</div>
+<h2>兩個解都要檢查</h2>
+<div class="eg">
+<div class="q">邊長 10，向內縮 x 後剩 64%，求 x。</div>
+<div class="stp"><b>列式</b>　(10−x)² = 0.64×100 = 64</div>
+<div class="stp"><b>解</b>　10−x=±8 → x=2 或 x=18</div>
+<div class="stp"><b>取捨</b>　x=18 超出邊長 10 → 捨;取 x=2</div>
+</div>
+<div class="box y" style="text-align:center;">解出兩個 → 逐一放回情境檢查，留合理的。</div>
+</div></div>
+
+<!-- 8 -->
+<div class="slide" data-pg="8 / 13"><div class="tag">精選</div><div class="body">
+<div class="eyebrow">隨堂精選</div>
+<h2>快速檢查</h2>
+<table class="tbl">
+<tr><th style="width:56%;">題目</th><th>答案</th></tr>
+<tr><td>兩連續正整數積 56</td><td class="fm hl">7、8</td></tr>
+<tr><td>兩連續偶數平方和 100</td><td class="fm hl">6、8</td></tr>
+<tr><td>長是寬 3 倍、周長 48，面積?</td><td class="fm hl">108</td></tr>
+<tr><td>外半徑比內多 5、環面積 175π</td><td class="fm hl">r=15、R=20</td></tr>
+<tr><td>「x=−3 一定捨去」對嗎?</td><td class="hl-r">不一定（看 x 是什麼）</td></tr>
+</table>
+<div class="box y" style="text-align:center;">環形面積 π(R²−r²)：R²−r² 常抵消成一次式。</div>
+</div></div>
+
+<!-- 9 -->
+<div class="slide" data-pg="9 / 13"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 1　【綠化帶】</div>
+<h2>四周留邊的面積</h2>
+<div class="box">廠區 40×30，四周留寬 x 綠化帶，中間生產區 720</div>
+<div class="eg">
+<div class="stp"><b>(1) 列式</b>　(40−2x)(30−2x) = 720</div>
+<div class="stp"><b>(2) 展開解</b>　x²−35x+120=0 → x ≈ 3.85 或 31.15</div>
+<div class="stp"><b>(3) 取捨</b>　x≈31.15 使邊長變負 → 捨;取 x≈3.85 公尺</div>
+</div>
+<div class="box r" style="text-align:center;">⚠️ 兩邊各留 x → 長寬各減 2x（不是 x）!</div>
+</div></div>
+
+<!-- 10 -->
+<div class="slide" data-pg="10 / 13"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 2　【複利】</div>
+<h2>代換 u = 1+r</h2>
+<div class="box">10 萬、每年利率 r、兩年後 11.4 萬</div>
+<div class="eg">
+<div class="stp"><b>(1) 列式</b>　設 u=1+r：u² = 1.14</div>
+<div class="stp"><b>(2) 解</b>　u=√1.14≈1.0677 → r≈6.77%</div>
+<div class="stp"><b>(3) 三年複利</b>　10×1.0677³ ≈ 12.18 萬元</div>
+</div>
+</div></div>
+
+<!-- 11 -->
+<div class="slide" data-pg="11 / 13"><div class="tag">避雷</div><div class="body">
+<h2>避雷指南</h2>
+<table class="tbl">
+<tr><th style="width:46%;">❌ 錯誤</th><th>✓ 正確</th></tr>
+<tr><td>解完不取捨（兩解都寫）</td><td>依情境判斷（長度/人數<b class="hl-g">捨負</b>）</td></tr>
+<tr><td>「提前 4 天」= 天數相加</td><td>= 需要 <b class="hl-g">(20−4)</b> 天</td></tr>
+<tr><td>四周留 x → 邊減 x</td><td>兩邊各留 → 邊減 <b class="hl-g">2x</b></td></tr>
+<tr><td>負解一律捨去</td><td>看 x 是什麼（坐標/溫差可負）</td></tr>
+</table>
+<div class="box y" style="text-align:center;">解出後追問:放回情境合理嗎?哪個解要排除?</div>
+</div></div>
+
+<!-- 12 -->
+<div class="slide" data-pg="12 / 13"><div class="tag">總結</div><div class="body">
+<h2>本節總結</h2>
+<ul>
+<li><span class="hl">三步</span>:設未知數 → 找等量關係列式 → 解 → 驗算取捨</li>
+<li><span class="hl">類型</span>:面積（長×寬）、連續整數（n,n+1）、工程（總量=率×時間）</li>
+<li><span class="hl-r">取捨</span>:長度/人數捨負;超出範圍的解也要捨</li>
+<li><span class="hl">技巧</span>:先移項別急著展開;複雜式用代換（u=1+r）</li>
+</ul>
+<div class="box g" style="text-align:center;font-size:20px;">
+🔗 <b>承先</b>:4-1、4-2 解法<br>
+🔗 <b>啟後</b>:<span class="hl">5-1 統計（八上）、九上 二次函數 —— 二次式的圖形與最佳化。</span></div>
+</div></div>
+
+<!-- 13 -->
+<div class="slide" data-pg="13 / 13"><div class="tag">Next</div><div class="big-center">
+<div class="eyebrow">下節預告</div>
+<h1 style="font-size:40px;">5-1　資料整理與統計圖表</h1>
+<div class="lead">次數分配表、直方圖<br>
+<span style="color:#f2d979;">四分位數與盒狀圖</span></div>
+<div class="box y" style="max-width:800px;margin:20px auto 0;font-size:19px;text-align:center;">
+把一大堆資料整理成看得懂的圖表，<span class="hl">用 Q1、Q2、Q3 描述分布。</span></div>
+</div></div>
+
+</div></body></html>

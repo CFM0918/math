@@ -1,0 +1,16 @@
+{
+  "name": "AI Math School V8",
+  "short_name": "Math V8",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#08120c",
+  "theme_color": "#132218",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

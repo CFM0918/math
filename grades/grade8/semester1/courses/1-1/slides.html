@@ -1,0 +1,313 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>八上 1-1 乘法公式｜授課簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--chalk-soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);padding:24px 14px;}
+.deck{max-width:1060px;margin:0 auto;}
+.print-hint{text-align:center;color:rgba(243,239,226,0.4);font-size:13px;padding:6px 0 22px;}
+.print-hint b{color:var(--yellow);}
+.slide{position:relative;min-height:576px;margin:0 auto 26px;padding:44px 52px;
+ background:radial-gradient(ellipse at 18% 12%,rgba(255,255,255,0.05),transparent 45%),
+  radial-gradient(ellipse at 82% 88%,rgba(255,255,255,0.035),transparent 45%),
+  radial-gradient(ellipse at 60% 40%,rgba(120,160,130,0.10),transparent 60%),
+  linear-gradient(160deg,var(--board) 0%,var(--board2) 100%);
+ border-radius:14px;box-shadow:0 10px 34px rgba(0,0,0,0.55);
+ border:1px solid rgba(242,217,121,0.14);overflow:hidden;display:flex;flex-direction:column;}
+.slide::before{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;
+ background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.014) 40px,rgba(255,255,255,0.014) 41px),
+  radial-gradient(circle at 30% 72%,rgba(255,255,255,0.03),transparent 8%),
+  radial-gradient(circle at 76% 24%,rgba(255,255,255,0.025),transparent 7%);}
+.slide::after{content:attr(data-pg);position:absolute;bottom:15px;right:26px;font-family:'Caveat',cursive;font-size:20px;color:rgba(243,239,226,0.4);}
+.tag{position:absolute;top:20px;right:26px;font-family:'Caveat',cursive;font-size:22px;color:var(--pink);transform:rotate(4deg);}
+.eyebrow{font-family:'Caveat',cursive;font-size:25px;color:var(--yellow);letter-spacing:1px;margin-bottom:8px;opacity:0.92;}
+.slide h1{font-family:'Noto Serif TC',serif;font-size:46px;font-weight:900;line-height:1.28;letter-spacing:1px;
+ text-shadow:0 0 1px rgba(243,239,226,0.5),1px 1px 0 rgba(0,0,0,0.2);}
+.slide h2{font-family:'Noto Serif TC',serif;font-size:33px;font-weight:900;color:var(--yellow);
+ margin-bottom:20px;padding-bottom:11px;border-bottom:2px dashed rgba(242,217,121,0.4);
+ text-shadow:0 0 1px rgba(242,217,121,0.4);}
+.slide p{font-size:20px;line-height:1.85;margin-bottom:12px;}
+.big-center{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;}
+.big-center .lead,.lead{font-family:'Caveat',cursive;font-size:30px;color:var(--blue);letter-spacing:1px;margin-top:12px;}
+ul{list-style:none;margin:8px 0;}
+li{font-size:21px;line-height:1.95;padding-left:32px;position:relative;margin-bottom:4px;}
+li::before{content:'\2726';position:absolute;left:4px;color:var(--yellow);font-size:17px;top:3px;}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.34);border-radius:12px;padding:15px 21px;margin:12px 0;font-size:19px;line-height:1.8;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.38);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.38);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.34);}
+.eg{position:relative;background:rgba(0,0,0,0.24);border:1px solid rgba(242,217,121,0.2);border-radius:10px;padding:17px 22px;margin:12px 0;font-size:19px;}
+.eg::before{content:'';position:absolute;top:-8px;left:38px;width:58px;height:15px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.eg .q{color:var(--blue);font-weight:700;margin-bottom:8px;font-size:19px;}
+.eg .a{color:var(--green);font-weight:700;margin-top:6px;}
+.eg .stp{color:var(--chalk-soft);font-size:18px;margin:3px 0;}
+.tip{display:flex;gap:12px;align-items:flex-start;background:rgba(242,217,121,0.09);border:1.5px dashed rgba(242,217,121,0.45);border-radius:12px;padding:13px 18px;margin:10px 0;}
+.tip .ic{font-size:24px;line-height:1;}.tip .tx{font-size:18px;line-height:1.7;}
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:18px;}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.26);padding:10px 14px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.two{display:flex;gap:20px;}.two>div{flex:1;}
+svg{display:block;margin:6px auto;max-width:100%;}
+@media print{
+ body{background:#0a130d;padding:0;}
+ .deck{max-width:none;}
+ .print-hint{display:none;}
+ .slide{margin:0;border-radius:0;box-shadow:none;min-height:100vh;
+  page-break-after:always;break-after:page;padding:32px 44px;justify-content:center;}
+ .slide:last-child{page-break-after:auto;break-after:auto;}
+ .slide h1{font-size:40px;}
+ .slide h2{font-size:27px;margin-bottom:13px;padding-bottom:8px;}
+ .slide p{font-size:17px;line-height:1.55;margin-bottom:6px;}
+ li{font-size:17px;line-height:1.55;margin-bottom:1px;padding-left:26px;}
+ .eyebrow{font-size:21px;margin-bottom:5px;}
+ .big-center .lead,.lead{font-size:26px;}
+ .box{font-size:16px;padding:10px 16px;margin:6px 0;line-height:1.5;}
+ .eg{font-size:16px;padding:11px 16px;margin:6px 0;}
+ .tip{font-size:16px;padding:10px 14px;margin:6px 0;}
+ .tbl{font-size:15px;margin:6px 0;}
+ .tbl th,.tbl td{padding:6px 10px;}
+ svg{max-height:210px;}
+}
+</style></head><body><div class="deck">
+<div class="print-hint">共 <b>18</b> 張・列印時每張一頁（Ctrl+P → 橫向 → 背景圖形）</div>
+
+
+<!-- 1 -->
+<div class="slide" data-pg="1 / 18"><div class="tag">Start!</div><div class="big-center">
+<div class="eyebrow">國二上學期・第一章 乘法公式與多項式</div>
+<h1>1-1　乘法公式</h1>
+<div class="lead">四個公式背熟，展開縮合一秒完成<br>
+它們也是<span style="color:#eda0a8;">因式分解的逆向操作</span></div>
+<div class="box y" style="max-width:640px;margin:16px auto 0;text-align:center;font-size:21px;">
+<span class="fm">(a+b)² = a² + 2ab + b²</span></div>
+</div></div>
+
+<!-- 2 -->
+<div class="slide" data-pg="2 / 18"><div class="tag">目標</div><div class="body">
+<h2>本節學習目標</h2>
+<ul>
+<li>記住<span class="hl">四個乘法公式</span></li>
+<li>能用公式<span class="hl-b">快速展開</span>多項式</li>
+<li>能辨識情境該用哪個公式</li>
+<li>能套用在含<span class="hl">係數、分數</span>與<span class="hl">數字速算</span></li>
+</ul>
+<div class="box y">一句話:<span class="hl">乘法公式是「展開的捷徑」，也是下一章因式分解的逆操作 —— 現在背熟，之後省一半力氣。</span></div>
+</div></div>
+
+<!-- 3 -->
+<div class="slide" data-pg="3 / 18"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心</div>
+<h2>四個乘法公式</h2>
+<table class="tbl">
+<tr><th style="width:40%;">名稱</th><th>展開</th></tr>
+<tr><td class="hl-b">完全平方（和）</td><td class="fm hl">(a+b)² = a² + 2ab + b²</td></tr>
+<tr><td class="hl-b">完全平方（差）</td><td class="fm hl">(a−b)² = a² − 2ab + b²</td></tr>
+<tr><td class="hl-b">平方差</td><td class="fm hl">(a+b)(a−b) = a² − b²</td></tr>
+<tr><td class="hl-b">交叉展開</td><td class="fm hl">(x+a)(x+b) = x² + (a+b)x + ab</td></tr>
+</table>
+<div class="box g" style="text-align:center;">口訣:完全平方＝首平方＋兩倍首尾積＋尾平方;平方差＝只剩首尾平方差。</div>
+</div></div>
+
+<!-- 4 -->
+<div class="slide" data-pg="4 / 18"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">為什麼?幾何看得見</div>
+<h2>(a+b)² 的面積拼圖</h2><div class="two" style="flex-direction:row;align-items:center;"><div style="flex:1;"><svg viewBox="0 0 260 200" width="260" height="200" style="display:block;margin:2px auto;"><rect x="30" y="20" width="100" height="100" fill="rgba(152,201,220,.3)" stroke="#98c9dc" stroke-width="1.5"/><text x="80.0" y="75.0" font-size="15" fill="#98c9dc" text-anchor="middle" font-family="Noto Serif TC">a²</text><rect x="130" y="20" width="60" height="100" fill="rgba(242,217,121,.22)" stroke="#f2d979" stroke-width="1.5"/><text x="160.0" y="75.0" font-size="13" fill="#f2d979" text-anchor="middle" font-family="Noto Serif TC">ab</text><rect x="30" y="120" width="100" height="60" fill="rgba(242,217,121,.22)" stroke="#f2d979" stroke-width="1.5"/><text x="80.0" y="155.0" font-size="13" fill="#f2d979" text-anchor="middle" font-family="Noto Serif TC">ab</text><rect x="130" y="120" width="60" height="60" fill="rgba(237,160,168,.25)" stroke="#eda0a8" stroke-width="1.5"/><text x="160.0" y="155.0" font-size="13" fill="#eda0a8" text-anchor="middle" font-family="Noto Serif TC">b²</text><text x="80.0" y="14" font-size="12" fill="rgba(243,239,226,.7)" text-anchor="middle">a</text><text x="160.0" y="14" font-size="12" fill="rgba(243,239,226,.7)" text-anchor="middle">b</text><text x="20" y="70.0" font-size="12" fill="rgba(243,239,226,.7)" text-anchor="middle">a</text><text x="20" y="150.0" font-size="12" fill="rgba(243,239,226,.7)" text-anchor="middle">b</text></svg></div><div style="flex:1;"><div class="box y"><b>邊長 (a+b) 的正方形</b><br>切成四塊:<br><span class="fm" style="color:#98c9dc;">a²</span> ＋ <span class="fm" style="color:#f2d979;">ab</span> ＋ <span class="fm" style="color:#f2d979;">ab</span> ＋ <span class="fm" style="color:#eda0a8;">b²</span></div><div class="box g" style="text-align:center;"><span class="fm">= a² + 2ab + b²</span></div></div></div><div class="box r" style="text-align:center;">💡 <span class="hl">中間的 2ab 就是那兩塊長方形</span> —— 看得見，就不會漏掉!</div>
+</div></div>
+
+<!-- 5 -->
+<div class="slide" data-pg="5 / 18"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">完全平方（差）</div>
+<h2>只有中間變減號</h2>
+<div class="box y" style="text-align:center;font-size:22px;padding:16px;">
+<span class="fm">(a−b)² = a² − 2ab + b²</span></div>
+<div class="eg">
+<div class="q">展開 (2x−3)²</div>
+<div class="stp"><b>首平方</b>　(2x)² = 4x²（<span class="hl-r">係數也要平方!</span>）</div>
+<div class="stp"><b>兩倍首尾積</b>　−2·(2x)·3 = −12x</div>
+<div class="stp"><b>尾平方</b>　3² = 9</div>
+<div class="a">4x² − 12x + 9</div>
+</div>
+</div></div>
+
+<!-- 6 -->
+<div class="slide" data-pg="6 / 18"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">平方差</div>
+<h2>和 × 差 = 平方差</h2>
+<div class="box y" style="text-align:center;font-size:22px;padding:16px;">
+<span class="fm">(a+b)(a−b) = a² − b²</span></div>
+<div class="eg">
+<div class="q">展開 (x+4)(x−4)</div>
+<div class="stp">首尾相同、中間一加一減 → 中間項抵消</div>
+<div class="a">x² − 16</div>
+</div>
+<div class="box g" style="text-align:center;">認出「同兩項、一加一減」就直接寫平方差，不必逐項乘。</div>
+</div></div>
+
+<!-- 7 -->
+<div class="slide" data-pg="7 / 18"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">交叉展開</div>
+<h2>(x+a)(x+b)</h2>
+<div class="box y" style="text-align:center;font-size:21px;padding:14px;">
+<span class="fm">(x+a)(x+b) = x² + (a+b)x + ab</span></div>
+<div class="eg">
+<div class="q">展開 (x+3)(x−7)</div>
+<div class="stp">a=3、b=−7</div>
+<div class="stp"><b>(a+b)x</b>　(3+(−7))x = −4x</div>
+<div class="stp"><b>ab</b>　3×(−7) = −21</div>
+<div class="a">x² − 4x − 21</div>
+</div>
+<div class="box r" style="text-align:center;">⚠️ a、b 是負數時符號別出錯:ab = −21，不是 +21。</div>
+</div></div>
+
+<!-- 8 -->
+<div class="slide" data-pg="8 / 18"><div class="tag">避雷</div><div class="body">
+<div class="eyebrow">🔑 全章最高頻的錯</div>
+<h2>三個一定要避開</h2>
+<table class="tbl">
+<tr><th style="width:44%;">❌ 錯誤</th><th>✓ 正確</th></tr>
+<tr><td class="fm">(a+b)² = a² + b²</td><td class="fm hl-g">a² + 2ab + b²（三項!）</td></tr>
+<tr><td class="fm">(2x)² = 2x²</td><td class="fm hl-g">4x²（係數也平方）</td></tr>
+<tr><td class="fm">(x+3)(x−7)，ab = +21</td><td class="fm hl-g">ab = −21（負號!）</td></tr>
+</table>
+<div class="box y" style="text-align:center;">
+最致命的是第一個:<span class="hl">完全平方有「三項」，永遠別漏掉中間的 2ab。</span></div>
+</div></div>
+
+<!-- 9 -->
+<div class="slide" data-pg="9 / 18"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 1　難度 ★☆☆</div>
+<h2>基本展開</h2>
+<div class="eg">
+<div class="q">(1) (x+5)²　(2) (2x−3)²　(3) (x+4)(x−4)</div>
+<div class="stp"><b>(1)</b> x² + 2·x·5 + 5² = <span class="fm hl">x² + 10x + 25</span></div>
+<div class="stp"><b>(2)</b> (2x)² − 2·(2x)·3 + 3² = <span class="fm hl">4x² − 12x + 9</span></div>
+<div class="stp"><b>(3)</b> x² − 4² = <span class="fm hl">x² − 16</span></div>
+</div>
+</div></div>
+
+<!-- 10 -->
+<div class="slide" data-pg="10 / 18"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 2　難度 ★★☆　數字速算</div>
+<h2>用公式心算大數</h2>
+<div class="eg">
+<div class="q">(1) 102²　(2) 98 × 102</div>
+<div class="stp"><b>(1)</b> (100+2)² = 100² + 2·100·2 + 2² = 10000+400+4 = <span class="fm hl">10404</span></div>
+<div class="stp"><b>(2)</b> (100−2)(100+2) = 100² − 2² = 10000 − 4 = <span class="fm hl">9996</span></div>
+</div>
+<div class="box g" style="text-align:center;">💡 看到接近整百的數 → 拆成 (100±b)，套公式比直接乘快得多。</div>
+</div></div>
+
+<!-- 11 -->
+<div class="slide" data-pg="11 / 18"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 3　難度 ★★★　平方差巧用</div>
+<h2>不要硬展開</h2>
+<div class="eg">
+<div class="q">(2x+3y)² − (2x−3y)²</div>
+<div class="stp"><b>設</b> A=2x+3y、B=2x−3y，用 A²−B²=(A+B)(A−B)</div>
+<div class="stp"><b>A+B</b>　(2x+3y)+(2x−3y) = 4x</div>
+<div class="stp"><b>A−B</b>　(2x+3y)−(2x−3y) = 6y</div>
+<div class="a">4x × 6y = 24xy</div>
+</div>
+<div class="box g" style="text-align:center;">看到「□² − ○²」先想平方差，往往一步到位。</div>
+</div></div>
+
+<!-- 12 -->
+<div class="slide" data-pg="12 / 18"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 4　難度 ★★★　和與積</div>
+<h2>由 x+y、xy 求平方和</h2>
+<div class="eg">
+<div class="q">已知 x+y=5、xy=3，求 x²+y² 與 (x−y)²。</div>
+<div class="stp"><b>x²+y²</b>　= (x+y)² − 2xy = 25 − 6 = 19</div>
+<div class="stp"><b>(x−y)²</b>　= (x²+y²) − 2xy = 19 − 6 = 13</div>
+</div>
+<div class="box y" style="text-align:center;">
+🔑 <span class="hl">x²+y² = (x+y)² − 2xy</span> —— 把「和、積」轉成「平方和」的萬用橋。</div>
+</div></div>
+
+<!-- 13 -->
+<div class="slide" data-pg="13 / 18"><div class="tag">精選</div><div class="body">
+<div class="eyebrow">隨堂精選</div>
+<h2>快速檢查</h2>
+<table class="tbl">
+<tr><th style="width:52%;">題目</th><th>答案</th></tr>
+<tr><td>(3x−4)²</td><td class="fm hl">9x²−24x+16</td></tr>
+<tr><td>(2a+3b)(2a−3b)</td><td class="fm hl">4a²−9b²</td></tr>
+<tr><td>(x+3)²−(x−3)²</td><td class="fm hl">12x</td></tr>
+<tr><td>a−b=4、ab=5，a²+b²</td><td class="fm hl">26</td></tr>
+<tr><td>x+1/x=3，x²+1/x²</td><td class="fm hl">7</td></tr>
+</table>
+<div class="box y" style="text-align:center;">a²+b² = (a−b)²+2ab;x²+1/x² = (x+1/x)²−2。</div>
+</div></div>
+
+<!-- 14 -->
+<div class="slide" data-pg="14 / 18"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 1　【橡膠板】</div>
+<h2>平方差的實際意義</h2>
+<div class="box">正方形邊長 a，長邊 +5、寬邊 −5 → 長方形</div>
+<div class="eg">
+<div class="stp"><b>(1) 新面積</b>　(a+5)(a−5) = a² − 25</div>
+<div class="stp"><b>(2) 變化</b>　原 a²，新 a²−25 → 減少 25（<span class="hl">與 a 無關!</span>）</div>
+<div class="stp"><b>(3) a=20</b>　400 → 375，差 25 平方公分</div>
+</div>
+<div class="box g" style="text-align:center;">💡 長邊加、寬邊減同一數 → 面積必減「那個數的平方」。</div>
+</div></div>
+
+<!-- 15 -->
+<div class="slide" data-pg="15 / 18"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 2　【漲價減量】</div>
+<h2>0.99 的秘密</h2>
+<div class="box">單價 x、數量 y，收入 xy。單價 +10%（1.1x）、數量 −10%（0.9y）</div>
+<div class="eg">
+<div class="stp"><b>(1) 新收入</b>　1.1x × 0.9y = 0.99xy</div>
+<div class="stp"><b>(2) 變化</b>　0.99xy < xy → 減少 0.01xy（原收入的 1%）</div>
+<div class="stp"><b>(3) x=100、y=50</b>　原 5000、新 4950，差 50 元</div>
+</div>
+<div class="box r" style="text-align:center;">⚠️ 「漲 10% 又跌 10%」不是回到原點 —— 會少 1%!</div>
+</div></div>
+
+<!-- 16 -->
+<div class="slide" data-pg="16 / 18"><div class="tag">避雷</div><div class="body">
+<h2>避雷指南</h2>
+<table class="tbl">
+<tr><th style="width:46%;">❌ 錯誤</th><th>✓ 正確</th></tr>
+<tr><td class="fm">(a+b)² = a²+b²</td><td class="fm hl-g">a²+2ab+b²（三項）</td></tr>
+<tr><td class="fm">(2x)² = 2x²</td><td class="fm hl-g">4x²</td></tr>
+<tr><td>(x+3)(x−7) 的 ab 忘記負號</td><td class="fm hl-g">ab = −21</td></tr>
+<tr><td>看到平方差還硬逐項乘</td><td class="hl-g">認出公式秒解</td></tr>
+</table>
+<div class="box y" style="text-align:center;">套公式前先問:<span class="hl">這是哪個公式?首項是什麼?尾項是什麼?</span></div>
+</div></div>
+
+<!-- 17 -->
+<div class="slide" data-pg="17 / 18"><div class="tag">總結</div><div class="body">
+<h2>本節總結</h2>
+<ul>
+<li><span class="hl">完全平方</span>:(a±b)² = a² ± 2ab + b²（三項，中間 2ab 別漏）</li>
+<li><span class="hl">平方差</span>:(a+b)(a−b) = a² − b²（同兩項、一加一減）</li>
+<li><span class="hl">交叉展開</span>:(x+a)(x+b) = x² + (a+b)x + ab（小心負號）</li>
+<li><span class="hl">和積橋</span>:x²+y² = (x+y)² − 2xy;數字速算拆成 (100±b)</li>
+</ul>
+<div class="box g" style="text-align:center;font-size:20px;">
+🔗 <b>承先</b>:七上分配律、乘方<br>
+🔗 <b>啟後</b>:<span class="hl">1-2 多項式運算、第 3 章因式分解 —— 乘法公式反過來用就是分解!</span></div>
+</div></div>
+
+<!-- 18 -->
+<div class="slide" data-pg="18 / 18"><div class="tag">Next</div><div class="big-center">
+<div class="eyebrow">下節預告</div>
+<h1 style="font-size:40px;">1-2　多項式與其加減運算</h1>
+<div class="lead">把式子當「積木」——<br>同類項才能<span style="color:#f2d979;">合併</span></div>
+<div class="box y" style="max-width:800px;margin:20px auto 0;font-size:20px;text-align:center;">
+今天學會「乘開」，下一節學「整理」:次數、係數、同類項合併。<br>
+<span class="hl">多項式是整個代數的骨架。</span></div>
+</div></div>
+
+</div></body></html>

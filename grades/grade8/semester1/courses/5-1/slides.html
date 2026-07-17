@@ -1,0 +1,270 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>八上 5-1 資料整理與統計圖表｜授課簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--chalk-soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);padding:24px 14px;}
+.deck{max-width:1060px;margin:0 auto;}
+.print-hint{text-align:center;color:rgba(243,239,226,0.4);font-size:13px;padding:6px 0 22px;}
+.print-hint b{color:var(--yellow);}
+.slide{position:relative;min-height:576px;margin:0 auto 26px;padding:44px 52px;
+ background:radial-gradient(ellipse at 18% 12%,rgba(255,255,255,0.05),transparent 45%),
+  radial-gradient(ellipse at 82% 88%,rgba(255,255,255,0.035),transparent 45%),
+  radial-gradient(ellipse at 60% 40%,rgba(120,160,130,0.10),transparent 60%),
+  linear-gradient(160deg,var(--board) 0%,var(--board2) 100%);
+ border-radius:14px;box-shadow:0 10px 34px rgba(0,0,0,0.55);
+ border:1px solid rgba(242,217,121,0.14);overflow:hidden;display:flex;flex-direction:column;}
+.slide::before{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;
+ background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.014) 40px,rgba(255,255,255,0.014) 41px),
+  radial-gradient(circle at 30% 72%,rgba(255,255,255,0.03),transparent 8%),
+  radial-gradient(circle at 76% 24%,rgba(255,255,255,0.025),transparent 7%);}
+.slide::after{content:attr(data-pg);position:absolute;bottom:15px;right:26px;font-family:'Caveat',cursive;font-size:20px;color:rgba(243,239,226,0.4);}
+.tag{position:absolute;top:20px;right:26px;font-family:'Caveat',cursive;font-size:22px;color:var(--pink);transform:rotate(4deg);}
+.eyebrow{font-family:'Caveat',cursive;font-size:25px;color:var(--yellow);letter-spacing:1px;margin-bottom:8px;opacity:0.92;}
+.slide h1{font-family:'Noto Serif TC',serif;font-size:46px;font-weight:900;line-height:1.28;letter-spacing:1px;
+ text-shadow:0 0 1px rgba(243,239,226,0.5),1px 1px 0 rgba(0,0,0,0.2);}
+.slide h2{font-family:'Noto Serif TC',serif;font-size:33px;font-weight:900;color:var(--yellow);
+ margin-bottom:20px;padding-bottom:11px;border-bottom:2px dashed rgba(242,217,121,0.4);
+ text-shadow:0 0 1px rgba(242,217,121,0.4);}
+.slide p{font-size:20px;line-height:1.85;margin-bottom:12px;}
+.big-center{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;}
+.big-center .lead,.lead{font-family:'Caveat',cursive;font-size:30px;color:var(--blue);letter-spacing:1px;margin-top:12px;}
+ul{list-style:none;margin:8px 0;}
+li{font-size:21px;line-height:1.95;padding-left:32px;position:relative;margin-bottom:4px;}
+li::before{content:'\2726';position:absolute;left:4px;color:var(--yellow);font-size:17px;top:3px;}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.34);border-radius:12px;padding:15px 21px;margin:12px 0;font-size:19px;line-height:1.8;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.38);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.38);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.34);}
+.eg{position:relative;background:rgba(0,0,0,0.24);border:1px solid rgba(242,217,121,0.2);border-radius:10px;padding:17px 22px;margin:12px 0;font-size:19px;}
+.eg::before{content:'';position:absolute;top:-8px;left:38px;width:58px;height:15px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.eg .q{color:var(--blue);font-weight:700;margin-bottom:8px;font-size:19px;}
+.eg .a{color:var(--green);font-weight:700;margin-top:6px;}
+.eg .stp{color:var(--chalk-soft);font-size:18px;margin:3px 0;}
+.tip{display:flex;gap:12px;align-items:flex-start;background:rgba(242,217,121,0.09);border:1.5px dashed rgba(242,217,121,0.45);border-radius:12px;padding:13px 18px;margin:10px 0;}
+.tip .ic{font-size:24px;line-height:1;}.tip .tx{font-size:18px;line-height:1.7;}
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:18px;}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.26);padding:10px 14px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.two{display:flex;gap:20px;}.two>div{flex:1;}
+svg{display:block;margin:6px auto;max-width:100%;}
+@media print{
+ body{background:#0a130d;padding:0;}
+ .deck{max-width:none;}
+ .print-hint{display:none;}
+ .slide{margin:0;border-radius:0;box-shadow:none;min-height:100vh;
+  page-break-after:always;break-after:page;padding:32px 44px;justify-content:center;}
+ .slide:last-child{page-break-after:auto;break-after:auto;}
+ .slide h1{font-size:40px;}
+ .slide h2{font-size:27px;margin-bottom:13px;padding-bottom:8px;}
+ .slide p{font-size:17px;line-height:1.55;margin-bottom:6px;}
+ li{font-size:17px;line-height:1.55;margin-bottom:1px;padding-left:26px;}
+ .eyebrow{font-size:21px;margin-bottom:5px;}
+ .big-center .lead,.lead{font-size:26px;}
+ .box{font-size:16px;padding:10px 16px;margin:6px 0;line-height:1.5;}
+ .eg{font-size:16px;padding:11px 16px;margin:6px 0;}
+ .tip{font-size:16px;padding:10px 14px;margin:6px 0;}
+ .tbl{font-size:15px;margin:6px 0;}
+ .tbl th,.tbl td{padding:6px 10px;}
+ svg{max-height:210px;}
+}
+</style></head><body><div class="deck">
+<div class="print-hint">共 <b>15</b> 張・列印時每張一頁（Ctrl+P → 橫向 → 背景圖形）</div>
+
+
+<!-- 1 -->
+<div class="slide" data-pg="1 / 15"><div class="tag">Start!</div><div class="big-center">
+<div class="eyebrow">國二上學期・第五章 統計資料處理</div>
+<h1>5-1　資料整理與統計圖表</h1>
+<div class="lead">次數分配表、直方圖 ——<br>
+<span style="color:#f2d979;">四分位數與盒狀圖</span>讓資料的分布一眼看清</div>
+<div class="box y" style="max-width:660px;margin:16px auto 0;text-align:center;font-size:18px;">
+Q1、Q2、Q3 把資料切成<span class="hl">四等份</span></div>
+</div></div>
+
+<!-- 2 -->
+<div class="slide" data-pg="2 / 15"><div class="tag">目標</div><div class="body">
+<h2>本節學習目標</h2>
+<ul>
+<li>複習<span class="hl">次數分配表與直方圖</span>（七下已學）</li>
+<li>理解<span class="hl-b">四分位數 Q1、Q2、Q3</span></li>
+<li>算<span class="hl">全距與四分位距（IQR）</span>，知道 IQR 不受極端值影響</li>
+<li>畫<span class="hl">盒狀圖</span>、判斷離群值</li>
+</ul>
+<div class="box y">一句話:<span class="hl">中位數看中間，四分位數看「中間的中間」—— IQR 是最穩定的分散度指標。</span></div>
+</div></div>
+
+<!-- 3 -->
+<div class="slide" data-pg="3 / 15"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心　四分位數</div>
+<h2>把資料切成四等份</h2>
+<table class="tbl">
+<tr><th style="width:26%;">名稱</th><th>意義</th><th>求法</th></tr>
+<tr><td class="hl-b">Q2 中位數</td><td>正中間</td><td>全部的中位數</td></tr>
+<tr><td class="hl-b">Q1 下四分位</td><td>第 25%</td><td><b>下半段</b>中位數</td></tr>
+<tr><td class="hl-b">Q3 上四分位</td><td>第 75%</td><td><b>上半段</b>中位數</td></tr>
+</table>
+<div class="box r" style="text-align:center;">
+⚠️ 求 Q1、Q3 前<span class="hl">一定先排序</span>!先求 Q2 分成上下兩半，再各取中位數。</div>
+</div></div>
+
+<!-- 4 -->
+<div class="slide" data-pg="4 / 15"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心　全距 vs 四分位距</div>
+<h2>哪個代表「分散程度」?</h2>
+<table class="tbl">
+<tr><th style="width:30%;">量</th><th>算法</th><th>特性</th></tr>
+<tr><td class="hl-b">全距</td><td>最大 − 最小</td><td class="hl-r">受極端值影響大</td></tr>
+<tr><td class="hl-b">四分位距 IQR</td><td>Q3 − Q1</td><td class="hl-g">不受極端值影響</td></tr>
+</table>
+<div class="box y" style="text-align:center;">
+💡 全距看頭尾（易被極端值拉大）;<span class="hl">IQR 只看中間 50%，穩定可靠</span>。</div>
+</div></div>
+
+<!-- 5 -->
+<div class="slide" data-pg="5 / 15"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心　盒狀圖</div>
+<h2>五個數畫出分布</h2><svg viewBox="0 0 520 110" width="88%" style="display:block;margin:6px auto;"><text x="260.0" y="16" font-size="12" fill="#f2d979" text-anchor="middle" font-weight="700">資料 3,5,6,7,8,10,12,15 的盒狀圖</text><line x1="40" y1="88" x2="480" y2="88" stroke="rgba(243,239,226,.4)" stroke-width="1"/><text x="71" y="102" font-size="11" fill="rgba(243,239,226,.7)" text-anchor="middle" font-family="Noto Serif TC">3</text><text x="150" y="102" font-size="11" fill="rgba(243,239,226,.7)" text-anchor="middle" font-family="Noto Serif TC">5.5</text><text x="213" y="102" font-size="11" fill="rgba(243,239,226,.7)" text-anchor="middle" font-family="Noto Serif TC">7.5</text><text x="323" y="102" font-size="11" fill="rgba(243,239,226,.7)" text-anchor="middle" font-family="Noto Serif TC">11</text><text x="449" y="102" font-size="11" fill="rgba(243,239,226,.7)" text-anchor="middle" font-family="Noto Serif TC">15</text><line x1="71" y1="58" x2="150" y2="58" stroke="#98c9dc" stroke-width="1.5"/><line x1="323" y1="58" x2="449" y2="58" stroke="#98c9dc" stroke-width="1.5"/><line x1="71" y1="50" x2="71" y2="66" stroke="#98c9dc" stroke-width="1.5"/><line x1="449" y1="50" x2="449" y2="66" stroke="#98c9dc" stroke-width="1.5"/><rect x="150" y="42" width="173" height="32" fill="rgba(166,214,160,.2)" stroke="#a6d6a0" stroke-width="1.8"/><line x1="213" y1="42" x2="213" y2="74" stroke="#f2d979" stroke-width="2.5"/><text x="150" y="36" font-size="11" fill="#a6d6a0" text-anchor="middle">Q1</text><text x="213" y="36" font-size="11" fill="#f2d979" text-anchor="middle">Q2</text><text x="323" y="36" font-size="11" fill="#a6d6a0" text-anchor="middle">Q3</text></svg><div class="box g" style="text-align:center;">
+盒子 = Q1~Q3（中間 50%）;中線 = Q2;鬍鬚 = 到最小/最大值。<br>
+<span class="hl">盒子越短（IQR 小）→ 中間資料越集中。</span></div>
+</div></div>
+
+<!-- 6 -->
+<div class="slide" data-pg="6 / 15"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 1　難度 ★★☆　20 筆</div>
+<h2>求四分位數</h2>
+<div class="eg">
+<div class="q">55,60,62,65,68,70,72,73,75,76,78,80,82,83,85,87,88,90,92,95</div>
+<div class="stp"><b>Q2</b>　第 10、11 個 (76+78)/2 = 77</div>
+<div class="stp"><b>Q1</b>　下半 10 筆中位數 (68+70)/2 = 69</div>
+<div class="stp"><b>Q3</b>　上半 10 筆中位數 (85+87)/2 = 86</div>
+<div class="a">Q1=69、Q2=77、Q3=86、IQR=17</div>
+</div>
+</div></div>
+
+<!-- 7 -->
+<div class="slide" data-pg="7 / 15"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 2　難度 ★★★　離群值</div>
+<h2>判斷有沒有離群值</h2>
+<div class="eg">
+<div class="q">資料 3, 5, 6, 7, 8, 10, 12, 15（8 筆）</div>
+<div class="stp"><b>四分位數</b>　Q1=5.5、Q2=7.5、Q3=11、IQR=5.5</div>
+<div class="stp"><b>離群界限</b>　下界 5.5−1.5×5.5 = −2.75;上界 11+1.5×5.5 = 19.25</div>
+<div class="a">所有資料都在範圍內 → 無離群值</div>
+</div>
+<div class="box y" style="text-align:center;">
+離群值:<span class="hl">&lt; Q1−1.5·IQR 或 &gt; Q3+1.5·IQR</span>。</div>
+</div></div>
+
+<!-- 8 -->
+<div class="slide" data-pg="8 / 15"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 3　難度 ★★★　16 筆</div>
+<h2>集中在哪個範圍</h2>
+<div class="eg">
+<div class="q">45,52,58,61,65,68,70,72,73,75,78,80,82,85,90,95</div>
+<div class="stp"><b>Q2</b>　(72+73)/2 = 72.5</div>
+<div class="stp"><b>Q1</b>　下半 (61+65)/2 = 63;<b>Q3</b>　上半 (80+82)/2 = 81</div>
+<div class="a">IQR=18;中間 50% 集中在 63~81 分</div>
+</div>
+</div></div>
+
+<!-- 9 -->
+<div class="slide" data-pg="9 / 15"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 4　難度 ★★☆　盒狀圖比較</div>
+<h2>兩班誰高誰集中?</h2>
+<div class="eg">
+<div class="q">A 班 Q1=60,Q2=72,Q3=85;B 班 Q1=65,Q2=75,Q3=80</div>
+<div class="stp"><b>中位數</b>　B(75) &gt; A(72) → B 整體較高</div>
+<div class="stp"><b>IQR</b>　A=25、B=15 → B 較集中，A 較分散</div>
+</div><div class="two" style="flex-direction:row;"><div style="flex:1;"><svg viewBox="0 0 280 90" width="88%" style="display:block;margin:6px auto;"><text x="140.0" y="16" font-size="12" fill="#f2d979" text-anchor="middle" font-weight="700">A 班</text><line x1="40" y1="88" x2="240" y2="88" stroke="rgba(243,239,226,.4)" stroke-width="1"/><text x="57" y="102" font-size="11" fill="rgba(243,239,226,.7)" text-anchor="middle" font-family="Noto Serif TC">45</text><text x="107" y="102" font-size="11" fill="rgba(243,239,226,.7)" text-anchor="middle" font-family="Noto Serif TC">60</text><text x="147" y="102" font-size="11" fill="rgba(243,239,226,.7)" text-anchor="middle" font-family="Noto Serif TC">72</text><text x="190" y="102" font-size="11" fill="rgba(243,239,226,.7)" text-anchor="middle" font-family="Noto Serif TC">85</text><text x="233" y="102" font-size="11" fill="rgba(243,239,226,.7)" text-anchor="middle" font-family="Noto Serif TC">98</text><line x1="57" y1="58" x2="107" y2="58" stroke="#98c9dc" stroke-width="1.5"/><line x1="190" y1="58" x2="233" y2="58" stroke="#98c9dc" stroke-width="1.5"/><line x1="57" y1="50" x2="57" y2="66" stroke="#98c9dc" stroke-width="1.5"/><line x1="233" y1="50" x2="233" y2="66" stroke="#98c9dc" stroke-width="1.5"/><rect x="107" y="42" width="83" height="32" fill="rgba(166,214,160,.2)" stroke="#a6d6a0" stroke-width="1.8"/><line x1="147" y1="42" x2="147" y2="74" stroke="#f2d979" stroke-width="2.5"/><text x="107" y="36" font-size="11" fill="#a6d6a0" text-anchor="middle">Q1</text><text x="147" y="36" font-size="11" fill="#f2d979" text-anchor="middle">Q2</text><text x="190" y="36" font-size="11" fill="#a6d6a0" text-anchor="middle">Q3</text></svg></div><div style="flex:1;"><svg viewBox="0 0 280 90" width="88%" style="display:block;margin:6px auto;"><text x="140.0" y="16" font-size="12" fill="#f2d979" text-anchor="middle" font-weight="700">B 班</text><line x1="40" y1="88" x2="240" y2="88" stroke="rgba(243,239,226,.4)" stroke-width="1"/><text x="73" y="102" font-size="11" fill="rgba(243,239,226,.7)" text-anchor="middle" font-family="Noto Serif TC">50</text><text x="123" y="102" font-size="11" fill="rgba(243,239,226,.7)" text-anchor="middle" font-family="Noto Serif TC">65</text><text x="157" y="102" font-size="11" fill="rgba(243,239,226,.7)" text-anchor="middle" font-family="Noto Serif TC">75</text><text x="173" y="102" font-size="11" fill="rgba(243,239,226,.7)" text-anchor="middle" font-family="Noto Serif TC">80</text><text x="213" y="102" font-size="11" fill="rgba(243,239,226,.7)" text-anchor="middle" font-family="Noto Serif TC">92</text><line x1="73" y1="58" x2="123" y2="58" stroke="#98c9dc" stroke-width="1.5"/><line x1="173" y1="58" x2="213" y2="58" stroke="#98c9dc" stroke-width="1.5"/><line x1="73" y1="50" x2="73" y2="66" stroke="#98c9dc" stroke-width="1.5"/><line x1="213" y1="50" x2="213" y2="66" stroke="#98c9dc" stroke-width="1.5"/><rect x="123" y="42" width="50" height="32" fill="rgba(166,214,160,.2)" stroke="#a6d6a0" stroke-width="1.8"/><line x1="157" y1="42" x2="157" y2="74" stroke="#f2d979" stroke-width="2.5"/><text x="123" y="36" font-size="11" fill="#a6d6a0" text-anchor="middle">Q1</text><text x="157" y="36" font-size="11" fill="#f2d979" text-anchor="middle">Q2</text><text x="173" y="36" font-size="11" fill="#a6d6a0" text-anchor="middle">Q3</text></svg></div></div>
+</div></div>
+
+<!-- 10 -->
+<div class="slide" data-pg="10 / 15"><div class="tag">精選</div><div class="body">
+<div class="eyebrow">隨堂精選</div>
+<h2>快速檢查</h2>
+<table class="tbl">
+<tr><th style="width:56%;">題目</th><th>答案</th></tr>
+<tr><td>4,6,8,10,12,14,16,18 的 Q1、Q3</td><td class="fm hl">7、15</td></tr>
+<tr><td>承上，全距、IQR</td><td class="fm hl">14、8</td></tr>
+<tr><td>10,12,14,16,18,20,22,60 有離群?</td><td class="fm hl">60 是（上界33）</td></tr>
+<tr><td>全距與 IQR 哪個抗極端值?</td><td class="fm hl">IQR</td></tr>
+<tr><td>「Q2 一定等於平均數」?</td><td class="hl-r">錯</td></tr>
+</table>
+<div class="box y" style="text-align:center;">平均 > 中位數 → 資料右偏（少數高值拉高平均）。</div>
+</div></div>
+
+<!-- 11 -->
+<div class="slide" data-pg="11 / 15"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 1　【兩班盒狀圖】</div>
+<h2>用盒狀圖說故事</h2>
+<div class="box">甲 Q1=55,Q2=70,Q3=80（低20高95）;乙 Q1=62,Q2=68,Q3=74（低50高88）</div>
+<div class="eg">
+<div class="stp"><b>(1) 中位數</b>　甲 70 &gt; 乙 68 → 甲略高</div>
+<div class="stp"><b>(2) IQR</b>　甲 25、乙 12 → 乙較集中</div>
+<div class="stp"><b>(3) 全距</b>　甲 75、乙 38 → 甲較分散（有很低與很高分）</div>
+</div>
+</div></div>
+
+<!-- 12 -->
+<div class="slide" data-pg="12 / 15"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 2　【胎壓次數分配】</div>
+<h2>次數分配表複習</h2>
+<table class="tbl">
+<tr><th>胎壓</th><th>28–30</th><th>30–32</th><th>32–34</th><th>34–36</th></tr>
+<tr><td>次數</td><td>8</td><td>27</td><td>40</td><td>25</td></tr>
+</table>
+<div class="eg">
+<div class="stp"><b>(1) 相對次數</b>　8%、27%、40%、25%</div>
+<div class="stp"><b>(2) 眾數區間</b>　32–34（次數 40 最多）</div>
+<div class="stp"><b>(3) 中位數區間</b>　累積到 32 是 35、到 34 是 75 → 第 50 條在 32–34</div>
+</div>
+</div></div>
+
+<!-- 13 -->
+<div class="slide" data-pg="13 / 15"><div class="tag">避雷</div><div class="body">
+<h2>避雷指南</h2>
+<table class="tbl">
+<tr><th style="width:46%;">❌ 錯誤</th><th>✓ 正確</th></tr>
+<tr><td>求 Q1、Q3 前沒排序</td><td>先<b class="hl-g">由小到大排列</b></td></tr>
+<tr><td>用全距比較分散</td><td>有極端值看 <b class="hl-g">IQR</b></td></tr>
+<tr><td>Q2 當成平均數</td><td>Q2 是中位數，未必等於平均</td></tr>
+<tr><td>忘記判斷離群值</td><td>界限 Q1−1.5IQR、Q3+1.5IQR</td></tr>
+</table>
+<div class="box y" style="text-align:center;">盒子短 = 集中;中線高 = 水準高;鬍鬚長 = 延伸範圍大。</div>
+</div></div>
+
+<!-- 14 -->
+<div class="slide" data-pg="14 / 15"><div class="tag">總結</div><div class="body">
+<h2>本節總結</h2>
+<ul>
+<li><span class="hl">四分位數</span>:Q2 中位數、Q1 下半中位數、Q3 上半中位數（先排序!）</li>
+<li><span class="hl">全距</span> = 最大−最小（受極端值影響）;<span class="hl-r">IQR = Q3−Q1</span>（穩定）</li>
+<li><span class="hl">盒狀圖</span>:盒=Q1~Q3、中線=Q2、鬍鬚到最值</li>
+<li><span class="hl">離群值</span>:&lt; Q1−1.5IQR 或 &gt; Q3+1.5IQR</li>
+</ul>
+<div class="box g" style="text-align:center;font-size:20px;">
+🎉 <b>八上全數完成!</b> 🔗 <b>承先</b>:七下 5-1 統計圖表<br>
+🔗 <b>啟後</b>:<span class="hl">八下 數列與級數、函數圖形、幾何證明。</span></div>
+</div></div>
+
+<!-- 15 -->
+<div class="slide" data-pg="15 / 15"><div class="tag">Fin</div><div class="big-center">
+<div class="eyebrow">國二上・完</div>
+<h1 style="font-size:40px;">資料，會說話</h1>
+<div class="lead">從一堆數字，到一張盒狀圖<br>
+<span style="color:#f2d979;">四分位數讓分布一目了然</span></div>
+<div class="box y" style="max-width:820px;margin:18px auto 0;font-size:19px;text-align:center;">
+乘法公式 → 根式 → 因式分解 → 一元二次方程式 → 統計 ——<br>
+<span class="hl">國二上學期的數學，在這裡收束成完整的地圖。</span></div>
+</div></div>
+
+</div></body></html>

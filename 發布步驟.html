@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Math School V9 發布步驟</title>
+<style>
+body{font-family:Arial,"Microsoft JhengHei",sans-serif;background:#0b1020;color:#eef2ff;margin:0;line-height:1.7}
+main{max-width:900px;margin:auto;padding:32px 20px 80px}
+h1{font-size:40px;margin-bottom:8px}.sub{color:#b8c0df}
+.card{background:#151c33;border:1px solid #2b365e;border-radius:18px;padding:22px;margin:18px 0}
+.num{display:inline-grid;place-items:center;width:38px;height:38px;border-radius:50%;background:#ffd166;color:#111;font-weight:bold;margin-right:10px}
+code{background:#090d19;padding:3px 7px;border-radius:6px;color:#ffd166}
+.ok{color:#7ee787;font-weight:bold}.warn{color:#ffb4a2;font-weight:bold}
+button{font-size:18px;padding:12px 18px;border:0;border-radius:10px;background:#ffd166;font-weight:bold}
+</style>
+</head>
+<body><main>
+<h1>AI Math School V9</h1>
+<p class="sub">GitHub Desktop 圖形化發布版，不需要 Git Bash、不需要輸入指令。</p>
+
+<div class="card"><h2><span class="num">1</span>安裝 GitHub Desktop</h2>
+<p>打開瀏覽器搜尋 <b>GitHub Desktop</b>，安裝後登入你的 GitHub 帳號 <code>CFM0918</code>。</p></div>
+
+<div class="card"><h2><span class="num">2</span>下載 math 專案</h2>
+<p>在 GitHub Desktop 上方選：</p>
+<p><code>File → Clone repository</code></p>
+<p>選擇 <code>CFM0918/math</code>，Local path 建議：</p>
+<p><code>D:\GitHub\math</code></p>
+<p>按 <b>Clone</b>。</p></div>
+
+<div class="card"><h2><span class="num">3</span>執行 V9 安裝器</h2>
+<p>在本 V9 資料夾內，雙擊：</p>
+<p><code>安裝V9到GitHub專案.bat</code></p>
+<p>跳出選擇視窗時，選剛剛下載的：</p>
+<p><code>D:\GitHub\math</code></p>
+<p class="warn">安裝器會清除 math 裡目前混亂的舊檔，再完整放入 V9；它會保留 .git，不會刪除 GitHub 連線。</p></div>
+
+<div class="card"><h2><span class="num">4</span>發布到 GitHub</h2>
+<p>回到 GitHub Desktop，左下方 Summary 可填：</p>
+<p><code>安裝 AI Math School V9</code></p>
+<p>依序按：</p>
+<p><b>Commit to main</b> → <b>Push origin</b></p></div>
+
+<div class="card"><h2><span class="num">5</span>查看網站</h2>
+<p>等待約 1～3 分鐘，開啟：</p>
+<p><code>https://cfm0918.github.io/math/</code></p>
+<p>若仍看到舊畫面，按 <code>Ctrl + F5</code>。</p></div>
+
+<div class="card"><h2>以後更新教材</h2>
+<p>把教材放進本機的正確資料夾，例如：</p>
+<p><code>D:\GitHub\math\grades\grade7\semester1\courses\1-1\interactive.html</code></p>
+<p>然後開 GitHub Desktop：</p>
+<p><b>Commit to main</b> → <b>Push origin</b></p>
+<p class="ok">不再使用 GitHub 網頁拖放，因此不會再出現 index (1).html 或 interactive (11).html。</p></div>
+</main></body></html>

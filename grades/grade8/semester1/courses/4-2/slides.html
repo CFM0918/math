@@ -1,0 +1,280 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>八上 4-2 配方法與公式解｜授課簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--chalk-soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);padding:24px 14px;}
+.deck{max-width:1060px;margin:0 auto;}
+.print-hint{text-align:center;color:rgba(243,239,226,0.4);font-size:13px;padding:6px 0 22px;}
+.print-hint b{color:var(--yellow);}
+.slide{position:relative;min-height:576px;margin:0 auto 26px;padding:44px 52px;
+ background:radial-gradient(ellipse at 18% 12%,rgba(255,255,255,0.05),transparent 45%),
+  radial-gradient(ellipse at 82% 88%,rgba(255,255,255,0.035),transparent 45%),
+  radial-gradient(ellipse at 60% 40%,rgba(120,160,130,0.10),transparent 60%),
+  linear-gradient(160deg,var(--board) 0%,var(--board2) 100%);
+ border-radius:14px;box-shadow:0 10px 34px rgba(0,0,0,0.55);
+ border:1px solid rgba(242,217,121,0.14);overflow:hidden;display:flex;flex-direction:column;}
+.slide::before{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;
+ background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.014) 40px,rgba(255,255,255,0.014) 41px),
+  radial-gradient(circle at 30% 72%,rgba(255,255,255,0.03),transparent 8%),
+  radial-gradient(circle at 76% 24%,rgba(255,255,255,0.025),transparent 7%);}
+.slide::after{content:attr(data-pg);position:absolute;bottom:15px;right:26px;font-family:'Caveat',cursive;font-size:20px;color:rgba(243,239,226,0.4);}
+.tag{position:absolute;top:20px;right:26px;font-family:'Caveat',cursive;font-size:22px;color:var(--pink);transform:rotate(4deg);}
+.eyebrow{font-family:'Caveat',cursive;font-size:25px;color:var(--yellow);letter-spacing:1px;margin-bottom:8px;opacity:0.92;}
+.slide h1{font-family:'Noto Serif TC',serif;font-size:46px;font-weight:900;line-height:1.28;letter-spacing:1px;
+ text-shadow:0 0 1px rgba(243,239,226,0.5),1px 1px 0 rgba(0,0,0,0.2);}
+.slide h2{font-family:'Noto Serif TC',serif;font-size:33px;font-weight:900;color:var(--yellow);
+ margin-bottom:20px;padding-bottom:11px;border-bottom:2px dashed rgba(242,217,121,0.4);
+ text-shadow:0 0 1px rgba(242,217,121,0.4);}
+.slide p{font-size:20px;line-height:1.85;margin-bottom:12px;}
+.big-center{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;}
+.big-center .lead,.lead{font-family:'Caveat',cursive;font-size:30px;color:var(--blue);letter-spacing:1px;margin-top:12px;}
+ul{list-style:none;margin:8px 0;}
+li{font-size:21px;line-height:1.95;padding-left:32px;position:relative;margin-bottom:4px;}
+li::before{content:'\2726';position:absolute;left:4px;color:var(--yellow);font-size:17px;top:3px;}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.34);border-radius:12px;padding:15px 21px;margin:12px 0;font-size:19px;line-height:1.8;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.38);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.38);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.34);}
+.eg{position:relative;background:rgba(0,0,0,0.24);border:1px solid rgba(242,217,121,0.2);border-radius:10px;padding:17px 22px;margin:12px 0;font-size:19px;}
+.eg::before{content:'';position:absolute;top:-8px;left:38px;width:58px;height:15px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.eg .q{color:var(--blue);font-weight:700;margin-bottom:8px;font-size:19px;}
+.eg .a{color:var(--green);font-weight:700;margin-top:6px;}
+.eg .stp{color:var(--chalk-soft);font-size:18px;margin:3px 0;}
+.tip{display:flex;gap:12px;align-items:flex-start;background:rgba(242,217,121,0.09);border:1.5px dashed rgba(242,217,121,0.45);border-radius:12px;padding:13px 18px;margin:10px 0;}
+.tip .ic{font-size:24px;line-height:1;}.tip .tx{font-size:18px;line-height:1.7;}
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:18px;}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.26);padding:10px 14px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.two{display:flex;gap:20px;}.two>div{flex:1;}
+svg{display:block;margin:6px auto;max-width:100%;}
+@media print{
+ body{background:#0a130d;padding:0;}
+ .deck{max-width:none;}
+ .print-hint{display:none;}
+ .slide{margin:0;border-radius:0;box-shadow:none;min-height:100vh;
+  page-break-after:always;break-after:page;padding:32px 44px;justify-content:center;}
+ .slide:last-child{page-break-after:auto;break-after:auto;}
+ .slide h1{font-size:40px;}
+ .slide h2{font-size:27px;margin-bottom:13px;padding-bottom:8px;}
+ .slide p{font-size:17px;line-height:1.55;margin-bottom:6px;}
+ li{font-size:17px;line-height:1.55;margin-bottom:1px;padding-left:26px;}
+ .eyebrow{font-size:21px;margin-bottom:5px;}
+ .big-center .lead,.lead{font-size:26px;}
+ .box{font-size:16px;padding:10px 16px;margin:6px 0;line-height:1.5;}
+ .eg{font-size:16px;padding:11px 16px;margin:6px 0;}
+ .tip{font-size:16px;padding:10px 14px;margin:6px 0;}
+ .tbl{font-size:15px;margin:6px 0;}
+ .tbl th,.tbl td{padding:6px 10px;}
+ svg{max-height:210px;}
+}
+</style></head><body><div class="deck">
+<div class="print-hint">共 <b>15</b> 張・列印時每張一頁（Ctrl+P → 橫向 → 背景圖形）</div>
+
+
+<!-- 1 -->
+<div class="slide" data-pg="1 / 15"><div class="tag">Start!</div><div class="big-center">
+<div class="eyebrow">國二上學期・第四章 一元二次方程式</div>
+<h1>4-2　配方法與公式解</h1>
+<div class="lead">因式分解找不到答案時<br>
+<span style="color:#eda0a8;">配方法</span>和<span style="color:#f2d979;">公式解</span>都能用 —— 公式解是最後的保險</div>
+<div class="box y" style="max-width:660px;margin:16px auto 0;text-align:center;font-size:19px;">
+<span class="fm">x = [ −b ± √(b²−4ac) ] / 2a</span></div>
+</div></div>
+
+<!-- 2 -->
+<div class="slide" data-pg="2 / 15"><div class="tag">目標</div><div class="body">
+<h2>本節學習目標</h2>
+<ul>
+<li>用<span class="hl">配方法</span>化成 (x+p)² = q</li>
+<li>記住<span class="hl-b">公式解</span>:x = [−b±√(b²−4ac)]/2a</li>
+<li>用<span class="hl">判別式 D=b²−4ac</span> 判斷解的個數</li>
+<li>靈活<span class="hl">選擇解法</span></li>
+</ul>
+<div class="box y">一句話:<span class="hl">因式分解優先，配方法次之，公式解萬能 —— 任何一元二次方程式都能解。</span></div>
+</div></div>
+
+<!-- 3 -->
+<div class="slide" data-pg="3 / 15"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心　配方法</div>
+<h2>湊成完全平方</h2>
+<div class="box y" style="text-align:center;font-size:20px;">
+x²+6x = (x+3)² − 9（加「一次項係數一半的平方」再減回）</div>
+<table class="tbl">
+<tr><th style="width:16%;">步</th><th>做法</th></tr>
+<tr><td>①</td><td>移常數項到右邊</td></tr>
+<tr><td>②</td><td><b>首項係數化 1</b></td></tr>
+<tr><td>③④</td><td>完成配方 → 開根號 → 求解</td></tr>
+</table>
+<div class="box r" style="text-align:center;">⚠️ 首項係數沒化 1 就配方 → 配出錯的完全平方式!</div>
+</div></div>
+
+<!-- 4 -->
+<div class="slide" data-pg="4 / 15"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 1、4　難度 ★★☆~★★★　配方法</div>
+<h2>配方法實作</h2>
+<div class="eg">
+<div class="q">x²−4x−3 = 0</div>
+<div class="stp">x²−4x=3 → +4 → (x−2)²=7 → x=2±√7</div>
+</div>
+<div class="eg">
+<div class="q">2x²+8x−1 = 0（首項係數化 1）</div>
+<div class="stp">x²+4x=1/2 → +4 → (x+2)²=9/2 → x=−2±3√2/2</div>
+</div>
+<div class="box g" style="text-align:center;">2x² 要先兩邊除 2，變成 x² 再配方。</div>
+</div></div>
+
+<!-- 5 -->
+<div class="slide" data-pg="5 / 15"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心　公式解</div>
+<h2>最後的保險</h2>
+<div class="box y" style="text-align:center;font-size:24px;padding:16px;">
+x = <span class="fm">[ −b ± √(b²−4ac) ] / 2a</span></div>
+<div class="box r" style="text-align:center;">
+⚠️ 代入 a、b、c 符號別出錯（尤其 b 為負時）!<br>
+<span class="hl">先寫下 a=__、b=__、c=__ 再代入。</span></div>
+<div class="box g" style="text-align:center;">
+任何一元二次方程式（分不分解得開）都能用公式解。</div>
+</div></div>
+
+<!-- 6 -->
+<div class="slide" data-pg="6 / 15"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 2　難度 ★★☆　公式解</div>
+<h2>套公式</h2>
+<div class="eg">
+<div class="q">2x²−5x+1 = 0</div>
+<div class="stp"><b>辨識</b>　a=2、b=−5、c=1</div>
+<div class="stp"><b>判別式</b>　D=(−5)²−4·2·1 = 25−8 = 17 &gt; 0（兩相異實數解）</div>
+<div class="stp"><b>代入</b>　x = [5 ± √17] / 4</div>
+</div>
+<div class="box r" style="text-align:center;">⚠️ b=−5 → −b=+5;(−5)²=25（不是 −25）。</div>
+</div></div>
+
+<!-- 7 -->
+<div class="slide" data-pg="7 / 15"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心　判別式 D = b²−4ac</div>
+<h2>不用解就知道有幾個解</h2>
+<table class="tbl">
+<tr><th style="width:26%;">D</th><th>解的個數</th></tr>
+<tr><td class="hl-g">D &gt; 0</td><td>兩個相異實數解</td></tr>
+<tr><td class="hl-b">D = 0</td><td>重根（一個解）</td></tr>
+<tr><td class="hl-r">D &lt; 0</td><td>無實數解</td></tr>
+</table>
+<div class="box y" style="text-align:center;">
+💡 判別式就在公式解的根號裡 —— 根號內是負的（D&lt;0）就開不出實數。</div>
+</div></div>
+
+<!-- 8 -->
+<div class="slide" data-pg="8 / 15"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 3、5　難度 ★★☆~★★★　判別式</div>
+<h2>判斷與求係數</h2>
+<div class="eg">
+<div class="q">判斷解的個數</div>
+<div class="stp">x²−4x+4=0:D=16−16=0 → 重根</div>
+<div class="stp">x²+x+2=0:D=1−8=−7&lt;0 → 無實數解</div>
+</div>
+<div class="eg">
+<div class="q">x²−6x+k=0 有兩相等實根，求 k</div>
+<div class="stp">重根 → D=0:36−4k=0 → k=9;根 x=3</div>
+</div>
+</div></div>
+
+<!-- 9 -->
+<div class="slide" data-pg="9 / 15"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">選擇解法</div>
+<h2>用哪一招?</h2>
+<table class="tbl">
+<tr><th style="width:52%;">情況</th><th>首選</th></tr>
+<tr><td>能整數因式分解</td><td class="hl-g">因式分解（最快）</td></tr>
+<tr><td>不能分解、係數簡單</td><td class="hl-b">配方法</td></tr>
+<tr><td>一般情況</td><td class="hl">公式解（萬能）</td></tr>
+</table>
+<div class="box g" style="text-align:center;">先試因式分解;分不開再配方或公式。別每題都硬套公式。</div>
+</div></div>
+
+<!-- 10 -->
+<div class="slide" data-pg="10 / 15"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">🔑 補充　韋達定理</div>
+<h2>不解方程式，直接求兩根的和與積</h2>
+<div class="box y" style="text-align:center;font-size:20px;">
+ax²+bx+c=0 的兩根 α、β:<br>
+α+β = <span class="fm">−b/a</span>　·　α×β = <span class="fm">c/a</span></div>
+<div class="eg">
+<div class="q">x²−5x+6=0 的兩根和與積?</div>
+<div class="stp">α+β = 5、α×β = 6（驗:根為 2、3，2+3=5、2×3=6 ✓）</div>
+</div>
+<div class="box g" style="text-align:center;">求「和與積」時，韋達定理比解方程式快得多。</div>
+</div></div>
+
+<!-- 11 -->
+<div class="slide" data-pg="11 / 15"><div class="tag">精選</div><div class="body">
+<div class="eyebrow">隨堂精選</div>
+<h2>快速檢查</h2>
+<table class="tbl">
+<tr><th style="width:44%;">方程式</th><th>解 / 判別</th></tr>
+<tr><td>x²−3x−4=0（公式）</td><td class="fm hl">x=4 或 −1</td></tr>
+<tr><td>x²−2x+5=0</td><td class="fm hl">D=−16，無實數解</td></tr>
+<tr><td>x²+bx+9=0 重根</td><td class="fm hl">b=±6</td></tr>
+<tr><td>3x²+7x−6=0（公式）</td><td class="fm hl">x=2/3 或 −3</td></tr>
+<tr><td>(x+1)²=3(x+1)+4</td><td class="fm hl">x=3 或 −2（設 u=x+1）</td></tr>
+</table>
+<div class="box y" style="text-align:center;">看到重複的 (x+1) → 設 u 代換，變單純的二次式。</div>
+</div></div>
+
+<!-- 12 -->
+<div class="slide" data-pg="12 / 15"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 1　【自由落體】</div>
+<h2>h = ½gt²</h2>
+<div class="box">g≈10，從 100 公尺落下</div>
+<div class="eg">
+<div class="stp"><b>(1) 列式</b>　5t²=100 → t²=20</div>
+<div class="stp"><b>(2) 落地時間</b>　t=√20=2√5≈4.47 秒（取正值）</div>
+<div class="stp"><b>(3) 從 200 公尺</b>　t=2√10，是原來的 √2≈1.41 倍</div>
+</div>
+</div></div>
+
+<!-- 13 -->
+<div class="slide" data-pg="13 / 15"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 2　【複利】</div>
+<h2>本利和 P(1+r)²</h2>
+<div class="box">本金 10 萬，兩年後希望達 11.025 萬</div>
+<div class="eg">
+<div class="stp"><b>(1) 列式</b>　10(1+r)²=11.025 → (1+r)²=1.1025</div>
+<div class="stp"><b>(2) 解</b>　1+r=1.05（取正）→ r=0.05</div>
+<div class="stp"><b>(3) 換算</b>　年利率 5%</div>
+</div>
+</div></div>
+
+<!-- 14 -->
+<div class="slide" data-pg="14 / 15"><div class="tag">總結</div><div class="body">
+<h2>本節總結</h2>
+<ul>
+<li><span class="hl">配方法</span>:移常數 → 首項化 1 → 配方 → 開根號</li>
+<li><span class="hl-r">公式解</span>:x=[−b±√(b²−4ac)]/2a（先寫 a,b,c 再代）</li>
+<li><span class="hl">判別式 D=b²−4ac</span>:&gt;0 兩解、=0 重根、&lt;0 無實數解</li>
+<li><span class="hl">選擇</span>:能分解→分解;否則配方或公式。<span class="hl">韋達</span>:α+β=−b/a、αβ=c/a</li>
+</ul>
+<div class="box g" style="text-align:center;font-size:20px;">
+🔗 <b>承先</b>:4-1 因式分解解法<br>
+🔗 <b>啟後</b>:<span class="hl">4-3 一元二次方程式應用 —— 列式、解、取捨。</span></div>
+</div></div>
+
+<!-- 15 -->
+<div class="slide" data-pg="15 / 15"><div class="tag">Next</div><div class="big-center">
+<div class="eyebrow">下節預告</div>
+<h1 style="font-size:40px;">4-3　一元二次方程式應用</h1>
+<div class="lead">幾何、數字、增長率<br>
+<span style="color:#f2d979;">把生活問題翻成二次方程式</span></div>
+<div class="box y" style="max-width:800px;margin:20px auto 0;font-size:20px;text-align:center;">
+面積、連續整數、拋物運動… <span class="hl">列式 → 解 → 檢查是否合理。</span></div>
+</div></div>
+
+</div></body></html>

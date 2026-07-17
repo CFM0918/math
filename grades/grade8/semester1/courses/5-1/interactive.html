@@ -1,0 +1,830 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>八上 5-1 資料整理與統計圖表｜互動教學平台</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;--wood:#6b4a32;}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);overscroll-behavior:none;}
+.topbar{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:10px 16px;background:linear-gradient(180deg,#1b2f21,#132218);border-bottom:2px solid var(--wood);box-shadow:0 4px 18px rgba(0,0,0,0.5);}
+.brand{font-family:'Noto Serif TC',serif;font-weight:900;font-size:clamp(15px,2.2vw,20px);color:var(--yellow);white-space:nowrap;}
+.brand small{display:block;font-family:'Caveat',cursive;font-size:14px;color:var(--soft);font-weight:400;}
+.spacer{flex:1;}
+.btn{background:rgba(243,239,226,0.08);border:1.5px solid rgba(243,239,226,0.28);color:var(--chalk);
+  border-radius:10px;padding:7px 13px;font-family:inherit;font-size:14px;cursor:pointer;white-space:nowrap;transition:.15s;}
+.btn:hover{background:rgba(243,239,226,0.16);}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:10px 16px 0;scrollbar-width:none;}
+.tabs::-webkit-scrollbar{display:none;}
+.tab{background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.2);border-bottom:none;
+  color:var(--soft);border-radius:10px 10px 0 0;padding:9px 15px;font-size:14px;cursor:pointer;white-space:nowrap;font-family:inherit;}
+.tab.on{background:var(--board);border-color:var(--yellow);color:var(--yellow);font-weight:700;}
+.tab .n{font-family:'Caveat',cursive;font-size:18px;margin-right:5px;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px 60px;}
+.panel{display:none;}.panel.on{display:block;}
+.card{background:radial-gradient(ellipse at 20% 10%,rgba(255,255,255,0.05),transparent 45%),
+   linear-gradient(160deg,var(--board),var(--board2));
+  border:1.5px solid rgba(242,217,121,0.16);border-radius:14px;padding:18px;margin-bottom:16px;
+  box-shadow:0 8px 26px rgba(0,0,0,0.45);position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 38px,rgba(255,255,255,0.012) 38px,rgba(255,255,255,0.012) 39px);}
+.card>*{position:relative;}
+.card h3{font-family:'Noto Serif TC',serif;font-size:clamp(17px,2.4vw,21px);color:var(--yellow);
+  margin-bottom:12px;padding-bottom:8px;border-bottom:2px dashed rgba(242,217,121,0.35);display:flex;align-items:center;gap:8px;}
+.card h3 .ic{font-size:20px;}
+.goals{display:flex;flex-wrap:wrap;gap:9px;}
+.goal{display:flex;align-items:center;gap:9px;background:rgba(242,217,121,0.07);
+  border:1.5px dashed rgba(242,217,121,0.4);border-radius:22px;padding:8px 15px 8px 8px;
+  font-size:clamp(13.5px,1.8vw,15px);color:var(--yellow);line-height:1.5;}
+.goal .bdg{width:24px;height:24px;border-radius:50%;background:var(--yellow);color:#16281c;
+  font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;flex:none;}
+.deck{position:relative;background:rgba(0,0,0,0.22);border-radius:12px;padding:clamp(16px,3vw,30px);
+  min-height:clamp(260px,42vh,380px);display:flex;flex-direction:column;justify-content:center;}
+.sl{display:none;animation:fade .25s;}.sl.on{display:block;}
+@keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+.sl .eyebrow{font-family:'Caveat',cursive;font-size:20px;color:var(--yellow);margin-bottom:6px;}
+.sl h4{font-family:'Noto Serif TC',serif;font-size:clamp(19px,3vw,27px);margin-bottom:12px;line-height:1.35;}
+.sl p{font-size:clamp(15px,2vw,18px);line-height:1.8;margin-bottom:9px;}
+.sl ul{list-style:none;}
+.sl li{font-size:clamp(15px,2vw,18px);line-height:1.85;padding-left:26px;position:relative;margin-bottom:4px;}
+.sl li::before{content:'✦';position:absolute;left:2px;color:var(--yellow);font-size:14px;top:3px;}
+.nav{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:14px;}
+.nav .pg{font-family:'Caveat',cursive;font-size:20px;color:var(--soft);min-width:64px;text-align:center;}
+.dots{display:flex;gap:6px;justify-content:center;margin-top:10px;flex-wrap:wrap;}
+.dot{width:9px;height:9px;border-radius:50%;background:rgba(243,239,226,0.25);cursor:pointer;border:none;padding:0;}
+.dot.on{background:var(--yellow);transform:scale(1.3);}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.32);border-radius:10px;
+  padding:11px 15px;margin:9px 0;font-size:clamp(14px,1.9vw,17px);line-height:1.7;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.36);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.36);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.32);}
+.two{display:flex;gap:12px;flex-wrap:wrap;}.two>*{flex:1;min-width:220px;}
+.teach{background:rgba(201,174,224,0.12);border:1.5px dashed rgba(201,174,224,0.5);
+  border-radius:10px;padding:11px 15px;margin:9px 0;font-size:clamp(14px,1.8vw,15px);line-height:1.7;}
+.teach b{color:var(--purple);}
+.tbl{width:100%;border-collapse:collapse;margin:9px 0;font-size:clamp(13.5px,1.8vw,16px);}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.24);padding:8px 11px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.cv-wrap{background:rgba(0,0,0,0.25);border-radius:12px;padding:10px;}
+canvas.viz{width:100%;display:block;border-radius:8px;touch-action:none;}
+.ctrl{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center;}
+.readout{font-family:'Noto Serif TC',serif;font-size:clamp(14px,1.9vw,18px);color:var(--chalk);
+  background:rgba(242,217,121,0.1);border:1px solid rgba(242,217,121,0.3);border-radius:8px;
+  padding:7px 12px;flex:1;min-width:220px;}
+.readout b{color:var(--yellow);}
+.q{background:rgba(0,0,0,0.2);border:1px solid rgba(242,217,121,0.18);border-radius:10px;padding:13px 15px;margin:10px 0;}
+.q .qt{font-size:clamp(15px,2vw,17px);margin-bottom:10px;line-height:1.7;}
+.q .qt .qn{font-family:'Caveat',cursive;color:var(--yellow);font-size:20px;margin-right:6px;}
+.opts{display:flex;flex-direction:column;gap:7px;}
+.opt{text-align:left;background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.22);
+  color:var(--chalk);border-radius:9px;padding:9px 13px;font-family:inherit;font-size:15px;cursor:pointer;transition:.15s;line-height:1.5;}
+.opt:hover:not(:disabled){background:rgba(243,239,226,0.13);}
+.opt.right{background:rgba(166,214,160,0.24);border-color:var(--green);color:#fff;font-weight:700;}
+.opt.wrong{background:rgba(237,160,168,0.22);border-color:var(--pink);}
+.opt:disabled{cursor:default;}
+.fb{display:none;margin-top:9px;padding:9px 13px;border-radius:8px;font-size:14.5px;line-height:1.65;}
+.fb.on{display:block;}
+.fb.ok{background:rgba(166,214,160,0.14);border-left:3px solid var(--green);}
+.fb.no{background:rgba(237,160,168,0.14);border-left:3px solid var(--pink);}
+.fill{display:inline-block;background:rgba(0,0,0,0.3);border:none;border-bottom:2px solid var(--yellow);
+  color:var(--yellow);font-family:'Noto Serif TC',serif;font-size:17px;width:110px;text-align:center;padding:3px 5px;margin:0 4px;}
+.fill:focus{outline:none;background:rgba(242,217,121,0.12);}
+.exq{background:rgba(0,0,0,0.26);border:1.5px solid rgba(242,217,121,0.28);border-radius:11px;padding:13px 15px;margin:10px 0;position:relative;}
+.exq::before{content:'';position:absolute;top:-8px;left:32px;width:54px;height:14px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.exq .exq-q{font-size:clamp(14.5px,1.9vw,17px);line-height:1.75;margin-bottom:11px;}
+.exo{text-align:left;background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.22);
+  color:var(--chalk);border-radius:9px;padding:9px 13px;font-family:inherit;font-size:clamp(14px,1.8vw,15.5px);
+  cursor:pointer;transition:.15s;line-height:1.55;width:100%;margin-bottom:6px;display:block;}
+.exo:hover:not(:disabled){background:rgba(243,239,226,0.13);}
+.exo.right{background:rgba(166,214,160,0.26);border-color:var(--green);color:#fff;font-weight:700;}
+.exo.wrong{background:rgba(237,160,168,0.2);border-color:var(--pink);opacity:.75;}
+.exo:disabled{cursor:default;}
+@keyframes shake{10%,90%{transform:translateX(-2px);}30%,70%{transform:translateX(4px);}50%{transform:translateX(-4px);}}
+.exo.shake{animation:shake .4s;}
+.exsol{display:none;margin-top:10px;padding:11px 14px;border-radius:9px;
+  background:rgba(166,214,160,0.13);border-left:3px solid var(--green);font-size:clamp(14px,1.8vw,15.5px);line-height:1.75;}
+.exsol.on{display:block;animation:fade .3s;}
+.exsol .st{color:var(--soft);margin:3px 0;}
+.exsol .an{color:var(--green);font-weight:700;margin-top:6px;}
+.exlock{display:flex;align-items:center;gap:7px;margin-top:9px;font-size:13.5px;color:rgba(243,239,226,0.45);}
+.exlock.hide{display:none;}
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:11px;}
+.icard{background:rgba(0,0,0,0.22);border:1.5px solid rgba(242,217,121,0.22);border-radius:11px;padding:14px;text-align:center;}
+.icard .big{font-family:'Noto Serif TC',serif;font-size:clamp(17px,2.6vw,23px);font-weight:900;margin:6px 0;}
+.icard .cap{font-size:13.5px;color:var(--soft);line-height:1.6;}
+.frow{display:flex;gap:12px;align-items:center;padding:9px 12px;border-bottom:1px dashed rgba(243,239,226,0.16);}
+.frow:last-child{border-bottom:none;}
+.flab{color:var(--blue);font-weight:700;min-width:150px;font-size:clamp(13.5px,1.8vw,15.5px);flex:none;}
+.fval{color:var(--yellow);font-weight:700;font-family:'Noto Serif TC',serif;font-size:clamp(14px,1.9vw,17px);}
+@media(max-width:560px){.frow{flex-direction:column;align-items:flex-start;gap:3px;}.flab{min-width:0;}}
+.hud{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:12px;}
+.hud .st{background:rgba(0,0,0,0.3);border:1.5px solid rgba(242,217,121,0.28);border-radius:9px;
+  padding:7px 13px;font-size:14px;flex:1;min-width:88px;text-align:center;}
+.hud .st b{display:block;font-family:'Noto Serif TC',serif;font-size:20px;color:var(--yellow);}
+.tbar{height:8px;background:rgba(0,0,0,0.35);border-radius:5px;overflow:hidden;margin-bottom:12px;}
+.tfill{height:100%;background:linear-gradient(90deg,var(--green),var(--yellow),var(--pink));width:100%;transition:width .1s linear;}
+.gscreen{display:none;}.gscreen.on{display:block;}
+.lvchips{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin:14px 0;}
+.lvchip{background:rgba(152,201,220,0.12);border:1.5px solid rgba(152,201,220,0.35);border-radius:18px;
+  padding:6px 13px;font-size:13.5px;color:var(--blue);}
+.lvchip.done{background:rgba(166,214,160,0.2);border-color:var(--green);color:var(--green);}
+.lvchip.now{background:rgba(242,217,121,0.22);border-color:var(--yellow);color:var(--yellow);font-weight:700;}
+.gq{font-size:clamp(16px,2.2vw,20px);line-height:1.7;margin:14px 0;text-align:center;font-family:'Noto Serif TC',serif;}
+.gopts{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+@media(max-width:560px){.gopts{grid-template-columns:1fr;}}
+.gopt{background:rgba(243,239,226,0.07);border:1.5px solid rgba(243,239,226,0.25);color:var(--chalk);
+  border-radius:10px;padding:12px;font-family:'Noto Serif TC',serif;font-size:17px;cursor:pointer;transition:.15s;min-height:48px;}
+.gopt:hover:not(:disabled){background:rgba(243,239,226,0.15);}
+.gopt.right{background:rgba(166,214,160,0.3);border-color:var(--green);font-weight:900;}
+.gopt.wrong{background:rgba(237,160,168,0.25);border-color:var(--pink);}
+.gfb{margin-top:11px;padding:10px 13px;border-radius:8px;font-size:14.5px;line-height:1.6;display:none;}
+.gfb.on{display:block;}
+.gfb.ok{background:rgba(166,214,160,0.15);border-left:3px solid var(--green);}
+.gfb.no{background:rgba(237,160,168,0.15);border-left:3px solid var(--pink);}
+.rank{font-size:54px;text-align:center;margin:10px 0;}
+.hint{text-align:center;color:rgba(243,239,226,0.35);font-size:12.5px;padding:8px 0 0;}
+@media (max-width:640px){.topbar{padding:8px 10px;gap:8px;}.wrap{padding:0 10px 70px;}.card{padding:13px;}}
+</style></head><body>
+
+<div class="topbar">
+  <div class="brand">5-1　資料整理與統計圖表<small>八上 · 第5章 統計資料處理</small></div>
+  <div class="spacer"></div>
+</div>
+
+<div class="tabs" id="tabs">
+  <button class="tab on" data-p="0"><span class="n">📊</span>四分位數</button>
+  <button class="tab" data-p="1"><span class="n">📦</span>盒狀圖比較</button>
+  <button class="tab" data-p="2"><span class="n">🔴</span>離群值</button>
+  <button class="tab" data-p="3"><span class="n">★</span>題型測驗</button>
+  <button class="tab" data-p="4"><span class="n">🎮</span>闖關遊戲</button>
+</div>
+
+<div class="wrap">
+  <div class="card" id="goalCard">
+    <h3><span class="ic">🎯</span>本節學習目標</h3>
+    <div class="goals" id="goals"></div>
+  </div>
+  <div id="wrap"></div>
+</div>
+
+<script>
+const GOALS = [
+  '複習次數分配表與直方圖',
+  '理解四分位數 Q1、Q2、Q3',
+  '算全距與 IQR，知道 IQR 不受極端值影響',
+  '畫盒狀圖、比較兩組資料',
+  '判斷離群值',
+];
+
+const DATA = [
+{ key:'quartile', viz:'quartile', vizTitle:'四分位數 —— Q2 中位數、Q1/Q3 上下半中位數（4 組）',
+  slides:[
+    {eb:'核心 四分位數', h:'把資料切成四等份', html:`
+      <table class="tbl">
+        <tr><th style="width:26%;">名稱</th><th>求法</th></tr>
+        <tr><td class="hl-b">Q2 中位數</td><td>全部的中位數</td></tr>
+        <tr><td class="hl-b">Q1</td><td>下半段中位數</td></tr>
+        <tr><td class="hl-b">Q3</td><td>上半段中位數</td></tr>
+      </table>
+      <div class="box r" style="text-align:center;">⚠️ 求 Q1、Q3 前<span class="hl">一定先排序</span>！</div>
+      <div class="box g">👉 用下方 Canvas：求四分位數並看盒狀圖。</div>`},
+    {eb:'例題 ★★☆', h:'求四分位數', html:`
+      <div class="exq" data-a="1">
+        <div class="exq-q"><span class="hl">Q</span>　4,6,8,10,12,14,16,18 的 Q1 = ？</div>
+        <button class="exo" data-i="0">6</button>
+        <button class="exo" data-i="1">7</button>
+        <button class="exo" data-i="2">8</button>
+        <button class="exo" data-i="3">11</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">下半段 {4,6,8,10} 的中位數 = (6+8)/2 = 7</div>
+          <div class="an">答：Q1 = 7</div>
+        </div>
+      </div>`},
+    {eb:'例題 ★★☆　IQR', h:'四分位距', html:`
+      <div class="exq" data-a="2">
+        <div class="exq-q"><span class="hl">Q</span>　Q1=7、Q3=15，IQR = ？</div>
+        <button class="exo" data-i="0">22</button>
+        <button class="exo" data-i="1">11</button>
+        <button class="exo" data-i="2">8</button>
+        <button class="exo" data-i="3">15</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">IQR = Q3 − Q1 = 15 − 7 = 8</div>
+          <div class="an">答：8</div>
+        </div>
+      </div>`}
+  ],
+  fa:[
+    {q:'求 Q1、Q3 前要？', o:['排序','求和','平方','取平均'], a:0, e:'先排序。'},
+    {q:'Q2 是？', o:['平均','中位數','眾數','最大'], a:1, e:'中位數。'},
+    {q:'IQR = ?', o:['Q3−Q1','Q3+Q1','max−min','Q2'], a:0, e:'Q3−Q1。'}
+  ],
+  info:[
+    {big:'Q2 中位數', cap:'正中間', c:'var(--yellow)'},
+    {big:'Q1/Q3', cap:'上下半中位數', c:'var(--green)'},
+    {big:'先排序', cap:'再求', c:'var(--pink)'}
+  ]
+},
+{ key:'boxplot', viz:'boxplot', vizTitle:'盒狀圖比較 —— 中位數看水準、IQR 看集中（3 組）',
+  slides:[
+    {eb:'核心 全距 vs IQR', h:'哪個代表分散？', html:`
+      <table class="tbl">
+        <tr><th style="width:30%;">量</th><th>特性</th></tr>
+        <tr><td class="hl-b">全距</td><td class="hl-r">受極端值影響大</td></tr>
+        <tr><td class="hl-b">IQR</td><td class="hl-g">不受極端值影響</td></tr>
+      </table>
+      <div class="box y" style="text-align:center;">💡 全距看頭尾；IQR 只看中間 50%，穩定可靠。</div>
+      <div class="box g">👉 用下方 Canvas：比較兩組資料的水準與集中。</div>`},
+    {eb:'例題 ★★☆', h:'盒狀圖比較', html:`
+      <div class="exq" data-a="0">
+        <div class="exq-q"><span class="hl">Q</span>　A：Q1=60,Q3=85；B：Q1=65,Q3=80。哪組較集中？</div>
+        <button class="exo" data-i="0">B（IQR 較小）</button>
+        <button class="exo" data-i="1">A（IQR 較小）</button>
+        <button class="exo" data-i="2">一樣</button>
+        <button class="exo" data-i="3">無法比</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">A IQR=25、B IQR=15 → B 較集中</div>
+          <div class="an">答：B</div>
+        </div>
+      </div>`},
+    {eb:'例題 ★★☆　水準', h:'中位數比較', html:`
+      <div class="exq" data-a="1">
+        <div class="exq-q"><span class="hl">Q</span>　甲 Q2=70、乙 Q2=75，誰整體較高？</div>
+        <button class="exo" data-i="0">甲</button>
+        <button class="exo" data-i="1">乙</button>
+        <button class="exo" data-i="2">一樣</button>
+        <button class="exo" data-i="3">看平均</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">中位數 75 > 70 → 乙整體較高</div>
+          <div class="an">答：乙</div>
+        </div>
+      </div>`}
+  ],
+  fa:[
+    {q:'比較水準看？', o:['全距','中位數','IQR','最大值'], a:1, e:'中位數。'},
+    {q:'比較集中看？', o:['全距','中位數','IQR','最小值'], a:2, e:'IQR。'},
+    {q:'IQR 越小？', o:['越集中','越分散','越高','越低'], a:0, e:'越集中。'}
+  ],
+  info:[
+    {big:'中位數', cap:'看水準高低', c:'var(--yellow)'},
+    {big:'IQR', cap:'看集中程度', c:'var(--green)'},
+    {big:'盒短=集中', cap:'IQR 小', c:'var(--blue)'}
+  ]
+},
+{ key:'outlier', viz:'outlier', vizTitle:'離群值 —— Q1−1.5IQR ～ Q3+1.5IQR（4 題）',
+  slides:[
+    {eb:'核心 離群值', h:'界限判斷', html:`
+      <div class="box y" style="text-align:center;">離群值：< Q1 − 1.5×IQR 或 > Q3 + 1.5×IQR</div>
+      <div class="box"><b>盒狀圖：</b>盒 = Q1~Q3、中線 = Q2、鬍鬚到最小/最大值（非離群）。</div>
+      <div class="box g">👉 用下方 Canvas：算界限判斷離群值。</div>`},
+    {eb:'例題 ★★★', h:'判斷離群值', html:`
+      <div class="exq" data-a="0">
+        <div class="exq-q"><span class="hl">Q</span>　Q1=13、Q3=21、IQR=8，值 60 是離群值嗎？</div>
+        <button class="exo" data-i="0">是（> 33）</button>
+        <button class="exo" data-i="1">不是</button>
+        <button class="exo" data-i="2">剛好在界限</button>
+        <button class="exo" data-i="3">無法判斷</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">上界 = 21 + 1.5×8 = 33；60 > 33</div>
+          <div class="an">答：是離群值</div>
+        </div>
+      </div>`},
+    {eb:'例題 ★★☆　範圍內', h:'不是離群值', html:`
+      <div class="exq" data-a="1">
+        <div class="exq-q"><span class="hl">Q</span>　Q1=5.5、Q3=11、IQR=5.5，值 15 是離群值嗎？</div>
+        <button class="exo" data-i="0">是</button>
+        <button class="exo" data-i="1">不是（在範圍內）</button>
+        <button class="exo" data-i="2">剛好界限</button>
+        <button class="exo" data-i="3">無法判斷</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">上界 = 11 + 1.5×5.5 = 19.25；15 < 19.25</div>
+          <div class="an">答：不是離群值</div>
+        </div>
+      </div>`}
+  ],
+  fa:[
+    {q:'離群值上界？', o:['Q3+1.5IQR','Q3−1.5IQR','Q3+IQR','max'], a:0, e:'Q3+1.5IQR。'},
+    {q:'離群值下界？', o:['Q1+1.5IQR','Q1−1.5IQR','Q1−IQR','min'], a:1, e:'Q1−1.5IQR。'},
+    {q:'Q2 一定=平均？', o:['是','否','看資料','一定'], a:1, e:'不一定。'}
+  ],
+  info:[
+    {big:'上界', cap:'Q3+1.5IQR', c:'var(--pink)'},
+    {big:'下界', cap:'Q1−1.5IQR', c:'var(--blue)'},
+    {big:'超出=離群', cap:'圈起來', c:'var(--yellow)'}
+  ]
+}];
+
+const QUIZ = [
+  {type:'choice', q:'求 Q1、Q3 前要？', o:['排序','求和','平方','取平均'], a:0, e:'先排序。'},
+  {type:'choice', q:'Q2 是？', o:['平均','中位數','眾數','最大'], a:1, e:'中位數。'},
+  {type:'choice', q:'4,6,8,10,12,14,16,18 的 Q1？', o:['6','7','8','11'], a:1, e:'下半(6+8)/2。'},
+  {type:'choice', q:'同上 Q3？', o:['14','15','16','12'], a:1, e:'上半(14+16)/2。'},
+  {type:'choice', q:'Q1=7、Q3=15，IQR？', o:['22','11','8','15'], a:2, e:'Q3−Q1。'},
+  {type:'choice', q:'全距 = ?', o:['Q3−Q1','max−min','Q2','平均'], a:1, e:'最大−最小。'},
+  {type:'choice', q:'哪個不受極端值影響？', o:['全距','IQR','最大值','平均'], a:1, e:'IQR。'},
+  {type:'choice', q:'A IQR=25、B IQR=15，誰集中？', o:['A','B','一樣','無法'], a:1, e:'B 較小。'},
+  {type:'choice', q:'甲 Q2=70、乙 Q2=75，誰高？', o:['甲','乙','一樣','看平均'], a:1, e:'乙。'},
+  {type:'choice', q:'離群值上界？', o:['Q3+1.5IQR','Q3−1.5IQR','Q3+IQR','max'], a:0, e:'Q3+1.5IQR。'},
+  {type:'choice', q:'Q1=13,Q3=21,IQR=8，值60？', o:['是離群','不是','剛好','無法'], a:0, e:'>33。'},
+  {type:'choice', q:'Q1=5.5,Q3=11,值15？', o:['是離群','不是','剛好','無法'], a:1, e:'<19.25。'},
+  {type:'tf', q:'判斷：「Q2 一定等於平均數。」', a:false, e:'錯。對稱時才相等。'},
+  {type:'choice', q:'盒狀圖盒子越短表示？', o:['越集中','越分散','越高','越低'], a:0, e:'IQR 小。'},
+  {type:'choice', q:'盒狀圖中線表示？', o:['平均','Q2','眾數','全距'], a:1, e:'Q2。'},
+  {type:'choice', q:'次數8總40，相對次數？', o:['8%','20%','32%','25%'], a:1, e:'8/40。'},
+  {type:'choice', q:'平均>中位數，資料？', o:['右偏','左偏','對稱','均勻'], a:0, e:'高值拉高平均。'},
+  {type:'choice', q:'比較兩組分散用？', o:['全距','IQR','平均','眾數'], a:1, e:'IQR 穩定。'}
+];
+
+const GAME = [
+  {name:'四分位數', qs:[
+    {q:'Q2 是？', o:['平均','中位數','眾數','最大'], a:1, e:'中位數。'},
+    {q:'4,6,8,10,12,14,16,18 Q1？', o:['6','7','8','11'], a:1, e:'7。'},
+    {q:'同上 Q3？', o:['14','15','16','12'], a:1, e:'15。'},
+    {q:'求前要？', o:['排序','求和','平方','平均'], a:0, e:'排序。'}
+  ]},
+  {name:'全距與IQR', qs:[
+    {q:'IQR=?', o:['Q3−Q1','Q3+Q1','max−min','Q2'], a:0, e:'Q3−Q1。'},
+    {q:'全距=?', o:['Q3−Q1','max−min','Q2','平均'], a:1, e:'max−min。'},
+    {q:'Q1=7,Q3=15 IQR?', o:['22','11','8','15'], a:2, e:'8。'},
+    {q:'不受極端值？', o:['全距','IQR','max','平均'], a:1, e:'IQR。'}
+  ]},
+  {name:'盒狀圖', qs:[
+    {q:'盒子=？', o:['Q1~Q3','min~max','Q2','全部'], a:0, e:'中間50%。'},
+    {q:'中線=？', o:['平均','Q2','眾數','全距'], a:1, e:'Q2。'},
+    {q:'鬍鬚到？', o:['Q1,Q3','最小最大','平均','眾數'], a:1, e:'最值。'},
+    {q:'盒短=？', o:['集中','分散','高','低'], a:0, e:'IQR小。'}
+  ]},
+  {name:'比較兩組', qs:[
+    {q:'比水準看？', o:['全距','中位數','IQR','最大'], a:1, e:'中位數。'},
+    {q:'比集中看？', o:['全距','中位數','IQR','最小'], a:2, e:'IQR。'},
+    {q:'IQR越小？', o:['越集中','越分散','越高','越低'], a:0, e:'集中。'},
+    {q:'A IQR25 B IQR15誰集中？', o:['A','B','一樣','無法'], a:1, e:'B。'}
+  ]},
+  {name:'離群值', qs:[
+    {q:'上界？', o:['Q3+1.5IQR','Q3−1.5IQR','Q3+IQR','max'], a:0, e:'Q3+1.5IQR。'},
+    {q:'下界？', o:['Q1+1.5IQR','Q1−1.5IQR','Q1−IQR','min'], a:1, e:'Q1−1.5IQR。'},
+    {q:'Q3=21,IQR=8,值60？', o:['離群','不是','剛好','無法'], a:0, e:'>33。'},
+    {q:'離群值要？', o:['圈出','刪掉','忽略','平均'], a:0, e:'標記。'}
+  ]},
+  {name:'綜合', qs:[
+    {q:'Q2=平均嗎？', o:['一定','不一定','是','看不出'], a:1, e:'對稱才相等。'},
+    {q:'平均>中位數？', o:['右偏','左偏','對稱','均勻'], a:0, e:'右偏。'},
+    {q:'次數8總40相對？', o:['8%','20%','32%','25%'], a:1, e:'20%。'},
+    {q:'直方圖長條？', o:['分開','緊貼','斜','無'], a:1, e:'緊貼。'}
+  ]}
+];
+
+document.getElementById('goals').innerHTML = GOALS.map((g,i)=>
+  `<div class="goal"><div class="bdg">${i+1}</div>${g}</div>`).join('');
+
+const wrap = document.getElementById('wrap');
+DATA.forEach((sec, si)=>{
+  const p = document.createElement('div');
+  p.className = 'panel' + (si===0?' on':'');
+  p.dataset.p = si;
+  p.innerHTML = `
+    <div class="card">
+      <h3><span class="ic">📽</span>簡報翻頁器</h3>
+      <div class="deck" data-deck="${si}">
+        ${sec.slides.map((s,i)=>`<div class="sl${i===0?' on':''}" data-i="${i}">
+          <div class="eyebrow">${s.eb}</div><h4>${s.h}</h4>${s.html}</div>`).join('')}
+      </div>
+      <div class="nav">
+        <button class="btn" data-nav="prev" data-s="${si}">◀ 上一張</button>
+        <span class="pg" id="pg-${si}">1 / ${sec.slides.length}</span>
+        <button class="btn" data-nav="next" data-s="${si}">下一張 ▶</button>
+      </div>
+      <div class="dots" id="dots-${si}">
+        ${sec.slides.map((_,i)=>`<button class="dot${i===0?' on':''}" data-s="${si}" data-i="${i}"></button>`).join('')}
+      </div>
+    </div>
+    <div class="card">
+      <h3><span class="ic">🎯</span>Canvas 互動視覺化<span style="font-size:14px;color:var(--soft);font-weight:400;">　${sec.vizTitle}</span></h3>
+      <div class="cv-wrap">
+        <canvas class="viz" data-viz="${sec.viz}" data-si="${si}"></canvas>
+        <div class="ctrl" data-ctrl="${si}"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3><span class="ic">✅</span>形成性評量</h3>
+      ${sec.fa.map((f,i)=>`<div class="q" data-fa="${si}-${i}">
+        <div class="qt"><span class="qn">Q${i+1}</span>${f.q}</div>
+        <div class="opts">${f.o.map((o,oi)=>`<button class="opt" data-si="${si}" data-qi="${i}" data-oi="${oi}">${o}</button>`).join('')}</div>
+        <div class="fb" id="fb-${si}-${i}"></div>
+      </div>`).join('')}
+    </div>
+    <div class="card">
+      <h3><span class="ic">📊</span>資訊圖表</h3>
+      <div class="info">
+        ${sec.info.map(c=>`<div class="icard"><div class="big" style="color:${c.c}">${c.big}</div><div class="cap">${c.cap}</div></div>`).join('')}
+      </div>
+    </div>`;
+  wrap.appendChild(p);
+});
+
+const qp = document.createElement('div');
+qp.className='panel'; qp.dataset.p='3';
+qp.innerHTML = `<div class="card"><h3><span class="ic">📝</span>題型測驗　<span style="font-size:14px;color:var(--soft);font-weight:400;">單選 · 是非 · 填充，共 ${QUIZ.length} 題</span></h3>
+  <div id="quizBox"></div>
+  <div style="display:flex;gap:10px;align-items:center;margin-top:14px;flex-wrap:wrap;">
+    <button class="btn" id="gradeBtn" style="background:rgba(242,217,121,.2);border-color:var(--yellow);color:var(--yellow);font-weight:700;">📊 批改並看成績</button>
+    <button class="btn" id="resetQuiz">🔄 重做</button>
+    <div class="readout" id="score" style="display:none;"></div>
+  </div></div>
+  <div class="card"><h3><span class="ic">📋</span>公式速查表</h3>
+    <div class="frow"><div class="flab">Q2 中位數</div><div class="fval">全部排序後的中位數</div></div>
+    <div class="frow"><div class="flab">Q1</div><div class="fval">下半段的中位數</div></div>
+    <div class="frow"><div class="flab">Q3</div><div class="fval">上半段的中位數</div></div>
+    <div class="frow"><div class="flab">⚠️ 先排序</div><div class="fval">求 Q1、Q3 前一定排序</div></div>
+    <div class="frow"><div class="flab">全距</div><div class="fval">最大 − 最小（受極端值影響）</div></div>
+    <div class="frow"><div class="flab">IQR</div><div class="fval">Q3 − Q1（不受極端值影響）</div></div>
+    <div class="frow"><div class="flab">盒狀圖</div><div class="fval">盒=Q1~Q3、中線=Q2、鬍鬚到最值</div></div>
+    <div class="frow"><div class="flab">離群上界</div><div class="fval">Q3 + 1.5×IQR</div></div>
+    <div class="frow"><div class="flab">離群下界</div><div class="fval">Q1 − 1.5×IQR</div></div>
+    <div class="frow"><div class="flab">比較</div><div class="fval">中位數看水準、IQR 看集中</div></div>
+    <div class="frow"><div class="flab">右偏</div><div class="fval">平均 &gt; 中位數</div></div>
+  </div>`;
+wrap.appendChild(qp);
+
+const gp = document.createElement('div');
+gp.className='panel'; gp.dataset.p='4';
+gp.innerHTML = `<div class="card"><h3><span class="ic">🎮</span>闖關遊戲　<span style="font-size:14px;color:var(--soft);font-weight:400;">6 關挑戰 · 每題 20 秒 · 連擊與速度都有加分</span></h3>
+  <div class="gscreen on" id="gStart">
+    <div style="text-align:center;font-size:clamp(15px,2vw,18px);line-height:1.8;">
+      闖過 <b class="hl">6</b> 關，每關 1 題，每題 <b class="hl">20 秒</b>。<br>
+      計分：基礎 <b class="hl">10</b> 分 + 連擊獎勵（最多 <b class="hl">5</b>）+ 速度獎勵（最多 <b class="hl">5</b>）＝ 單題最高 <b class="hl">20</b> 分</div>
+    <div class="lvchips" id="gStartChips"></div>
+    <div style="text-align:center;"><button class="btn" id="gGo" style="background:rgba(242,217,121,.25);border-color:var(--yellow);color:var(--yellow);font-weight:700;font-size:16px;padding:10px 24px;">🚀 開始挑戰</button></div>
+  </div>
+  <div class="gscreen" id="gPlay">
+    <div class="hud">
+      <div class="st">關卡<b id="hLv">1/6</b></div>
+      <div class="st">分數<b id="hSc">0</b></div>
+      <div class="st">連擊<b id="hStk">0</b></div>
+      <div class="st">剩餘<b id="hT">20</b></div>
+    </div>
+    <div class="tbar"><div class="tfill" id="tFill"></div></div>
+    <div class="lvchips" id="gChips"></div>
+    <div class="gq" id="gQ"></div>
+    <div class="gopts" id="gO"></div>
+    <div class="gfb" id="gFb"></div>
+    <div style="text-align:center;margin-top:12px;"><button class="btn" id="gNext" style="display:none;">下一關 ▶</button></div>
+  </div>
+  <div class="gscreen" id="gEnd">
+    <div class="rank" id="gRank">🏆</div>
+    <div style="text-align:center;font-size:clamp(17px,2.6vw,22px);font-family:'Noto Serif TC';" id="gFinal"></div>
+    <div style="text-align:center;color:var(--soft);margin-top:8px;" id="gStats"></div>
+    <div style="text-align:center;margin-top:16px;"><button class="btn" id="gAgain" style="background:rgba(242,217,121,.25);border-color:var(--yellow);color:var(--yellow);font-weight:700;">🔄 再挑戰一次</button></div>
+  </div></div>`;
+wrap.appendChild(gp);
+document.getElementById('gStartChips').innerHTML = GAME.map((g,i)=>`<div class="lvchip">第${i+1}關 ${g.name}</div>`).join('');
+
+const qb = document.getElementById('quizBox');
+QUIZ.forEach((q,i)=>{
+  const d = document.createElement('div'); d.className='q';
+  let body='';
+  if(q.type==='choice') body = `<div class="opts">${q.o.map((o,oi)=>`<button class="opt" data-quiz="${i}" data-oi="${oi}">${o}</button>`).join('')}</div>`;
+  else if(q.type==='tf') body = `<div class="opts" style="flex-direction:row;gap:10px;">
+      <button class="opt" data-quiz="${i}" data-oi="1" style="flex:1;">⭕ 對</button>
+      <button class="opt" data-quiz="${i}" data-oi="0" style="flex:1;">❌ 錯</button></div>`;
+  else body = `<div><input class="fill" data-quiz="${i}" placeholder="?"></div>`;
+  d.innerHTML = `<div class="qt"><span class="qn">${i+1}</span>
+    <span style="font-size:12px;color:var(--soft);border:1px solid rgba(243,239,226,.25);border-radius:6px;padding:1px 6px;margin-right:6px;">
+    ${q.type==='choice'?'單選':q.type==='tf'?'是非':'填充'}</span>${q.q}</div>${body}
+    <div class="fb" id="qfb-${i}"></div>`;
+  qb.appendChild(d);
+});
+
+document.getElementById('tabs').addEventListener('click', e=>{
+  const t = e.target.closest('.tab'); if(!t) return;
+  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on', x===t));
+  document.querySelectorAll('.panel').forEach(x=>x.classList.toggle('on', x.dataset.p===t.dataset.p));
+  document.getElementById('goalCard').style.display = (t.dataset.p==='4')?'none':'';
+  window.scrollTo({top:0,behavior:'smooth'});
+  setTimeout(resizeAll, 60);
+});
+
+const cur = DATA.map(()=>0);
+function showSlide(si, i){
+  const deck = document.querySelector(`[data-deck="${si}"]`);
+  const sl = deck.querySelectorAll('.sl');
+  i = Math.max(0, Math.min(sl.length-1, i));
+  cur[si] = i;
+  sl.forEach((s,k)=>s.classList.toggle('on', k===i));
+  document.getElementById('pg-'+si).textContent = `${i+1} / ${sl.length}`;
+  document.querySelectorAll(`#dots-${si} .dot`).forEach((d,k)=>d.classList.toggle('on', k===i));
+}
+document.addEventListener('click', e=>{
+  const n = e.target.closest('[data-nav]');
+  if(n){ const si=+n.dataset.s; showSlide(si, cur[si] + (n.dataset.nav==='next'?1:-1)); return; }
+  const d = e.target.closest('.dot');
+  if(d){ showSlide(+d.dataset.s, +d.dataset.i); return; }
+});
+document.addEventListener('keydown', e=>{
+  const p = document.querySelector('.panel.on'); if(!p) return;
+  const si = +p.dataset.p; if(si>=DATA.length) return;
+  if(e.key==='ArrowRight') showSlide(si, cur[si]+1);
+  if(e.key==='ArrowLeft') showSlide(si, cur[si]-1);
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.opt[data-si]'); if(!o) return;
+  const si=+o.dataset.si, qi=+o.dataset.qi, oi=+o.dataset.oi;
+  const f = DATA[si].fa[qi];
+  const box = document.querySelector(`[data-fa="${si}-${qi}"]`);
+  box.querySelectorAll('.opt').forEach((b,k)=>{
+    b.disabled = true;
+    if(k===f.a) b.classList.add('right'); else if(k===oi) b.classList.add('wrong');
+  });
+  const fb = document.getElementById(`fb-${si}-${qi}`);
+  const ok = oi===f.a;
+  fb.className = 'fb on ' + (ok?'ok':'no');
+  fb.innerHTML = (ok?'✅ <b>答對了！</b> ':'❌ <b>再想想。</b> ') + f.e;
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.exo');
+  if(o && !o.disabled){
+    const box = o.closest('.exq');
+    const ans = +box.dataset.a, pick = +o.dataset.i;
+    if(pick === ans){
+      box.querySelectorAll('.exo').forEach(b=>{ b.disabled=true; if(+b.dataset.i===ans) b.classList.add('right'); });
+      box.querySelector('.exsol').classList.add('on');
+      box.querySelector('.exlock').classList.add('hide');
+    } else {
+      o.classList.add('wrong','shake');
+      setTimeout(()=>o.classList.remove('shake'), 420);
+      o.disabled = true;
+      const lock = box.querySelector('.exlock');
+      lock.innerHTML = '🔒 再想想 —— 答對才會顯示詳解'; lock.style.color='var(--pink)';
+    }
+  }
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.opt[data-quiz]'); if(!o) return;
+  const i = +o.dataset.quiz;
+  o.parentElement.querySelectorAll('.opt').forEach(b=>b.classList.remove('right','wrong'));
+  o.classList.add('right'); o.dataset.sel='1';
+  o.parentElement.querySelectorAll('.opt').forEach(b=>{ if(b!==o) delete b.dataset.sel; });
+});
+document.getElementById('gradeBtn').addEventListener('click', ()=>{
+  let right=0;
+  QUIZ.forEach((q,i)=>{
+    const fb = document.getElementById('qfb-'+i);
+    let ok=false, picked=null;
+    if(q.type==='fill'){
+      const inp = document.querySelector(`.fill[data-quiz="${i}"]`);
+      const v = (inp.value||'').trim().replace(/−/g,'-').replace(/\s/g,'');
+      ok = q.a.some(a=>a.replace(/−/g,'-').replace(/\s/g,'')===v);
+      inp.style.borderBottomColor = ok?'var(--green)':'var(--pink)';
+    } else {
+      const sel = document.querySelector(`.opt[data-quiz="${i}"][data-sel="1"]`);
+      if(sel){ picked=+sel.dataset.oi; ok = (q.type==='tf') ? (picked===1)===q.a : picked===q.a; }
+      document.querySelectorAll(`.opt[data-quiz="${i}"]`).forEach(b=>{
+        b.classList.remove('right','wrong');
+        const bi=+b.dataset.oi;
+        const isAns = (q.type==='tf') ? ((bi===1)===q.a) : (bi===q.a);
+        if(isAns) b.classList.add('right'); else if(picked===bi) b.classList.add('wrong');
+      });
+    }
+    if(ok) right++;
+    fb.className='fb on '+(ok?'ok':'no');
+    fb.innerHTML = (ok?'✅ <b>正確</b> ':'❌ <b>錯誤</b> ') + q.e;
+  });
+  const s = document.getElementById('score');
+  const pct = Math.round(right/QUIZ.length*100);
+  s.style.display='block';
+  s.innerHTML = `成績：<b>${right} / ${QUIZ.length}</b>　（${pct} 分）　${pct>=80?'🏆 很棒！':pct>=60?'💪 再加油':'📖 建議重看重點'}`;
+});
+document.getElementById('resetQuiz').addEventListener('click', ()=>{
+  document.querySelectorAll('.opt[data-quiz]').forEach(b=>{b.classList.remove('right','wrong'); delete b.dataset.sel;});
+  document.querySelectorAll('.fill').forEach(i=>{i.value=''; i.style.borderBottomColor='var(--yellow)';});
+  document.querySelectorAll('[id^="qfb-"]').forEach(f=>f.className='fb');
+  document.getElementById('score').style.display='none';
+});
+
+/* ===== 闖關遊戲 ===== */
+const G = {lv:0, score:0, streak:0, best:0, t:20, timer:null, cur:null, answered:false};
+function gShow(id){ ['gStart','gPlay','gEnd'].forEach(x=>document.getElementById(x).classList.toggle('on', x===id)); }
+function gChips(){
+  document.getElementById('gChips').innerHTML = GAME.map((g,i)=>
+    `<div class="lvchip ${i<G.lv?'done':i===G.lv?'now':''}">${i+1}. ${g.name}</div>`).join('');
+}
+function gLoad(){
+  if(G.lv>=GAME.length){ gFinish(); return; }
+  G.answered=false; G.t=20;
+  const bank = GAME[G.lv].qs;
+  G.cur = bank[Math.floor(Math.random()*bank.length)];
+  document.getElementById('hLv').textContent = (G.lv+1)+'/'+GAME.length;
+  document.getElementById('hSc').textContent = G.score;
+  document.getElementById('hStk').textContent = G.streak;
+  document.getElementById('gQ').innerHTML = `<span style="color:var(--blue);font-size:15px;">第 ${G.lv+1} 關 · ${GAME[G.lv].name}</span><br>${G.cur.q}`;
+  document.getElementById('gO').innerHTML = G.cur.o.map((o,i)=>
+    `<button class="gopt" data-g="${i}">${'ABCD'[i]}. ${o}</button>`).join('');
+  document.getElementById('gFb').className='gfb';
+  document.getElementById('gNext').style.display='none';
+  gChips();
+  clearInterval(G.timer);
+  G.timer = setInterval(()=>{
+    G.t -= 0.1;
+    document.getElementById('hT').textContent = Math.max(0,G.t).toFixed(0);
+    document.getElementById('tFill').style.width = Math.max(0,G.t/20*100)+'%';
+    if(G.t<=0){ clearInterval(G.timer); gAnswer(-1); }
+  },100);
+}
+function gAnswer(pick){
+  if(G.answered) return;
+  G.answered = true; clearInterval(G.timer);
+  const ans = G.cur.a, ok = pick===ans;
+  document.querySelectorAll('.gopt').forEach((b,i)=>{
+    b.disabled=true;
+    if(i===ans) b.classList.add('right'); else if(i===pick) b.classList.add('wrong');
+  });
+  let gain=0, sb=0, tb=0;
+  if(ok){
+    G.streak++; G.best=Math.max(G.best,G.streak);
+    sb = Math.min(5, G.streak-1); tb = Math.min(5, Math.floor(G.t/4));
+    gain = 10+sb+tb; G.score += gain;
+  } else { G.streak = 0; }
+  document.getElementById('hSc').textContent = G.score;
+  document.getElementById('hStk').textContent = G.streak;
+  const fb = document.getElementById('gFb');
+  fb.className = 'gfb on '+(ok?'ok':'no');
+  fb.innerHTML = (ok? `✅ <b>答對！+${gain} 分</b>（基礎10 + 連擊${sb} + 速度${tb}）<br>`
+                    : (pick===-1?'⏰ <b>時間到！</b><br>':'❌ <b>答錯了</b><br>')) + G.cur.e;
+  document.getElementById('gNext').style.display='inline-block';
+  document.getElementById('gNext').textContent = (G.lv>=GAME.length-1)?'看成績 🏁':'下一關 ▶';
+}
+function gFinish(){
+  clearInterval(G.timer);
+  const max = GAME.length*20, pct = Math.round(G.score/max*100);
+  const rank = pct>=85?['🏆','數論大師']:pct>=70?['🥇','高手']:pct>=50?['🥈','不錯']:['📖','再加油'];
+  document.getElementById('gRank').textContent = rank[0];
+  document.getElementById('gFinal').innerHTML = `<b class="hl">${G.score}</b> / ${max} 分　·　${rank[1]}`;
+  document.getElementById('gStats').innerHTML = `最高連擊 <b class="hl">${G.best}</b>　·　完成 ${GAME.length} 關`;
+  gShow('gEnd');
+}
+document.getElementById('gGo').addEventListener('click', ()=>{ G.lv=0;G.score=0;G.streak=0;G.best=0; gShow('gPlay'); gLoad(); });
+document.getElementById('gAgain').addEventListener('click', ()=>{ G.lv=0;G.score=0;G.streak=0;G.best=0; gShow('gPlay'); gLoad(); });
+document.getElementById('gNext').addEventListener('click', ()=>{ G.lv++; gLoad(); });
+document.addEventListener('click', e=>{ const b=e.target.closest('.gopt'); if(!b||b.disabled) return; gAnswer(+b.dataset.g); });
+
+/* ===== Canvas ===== */
+const VIZ = {}; let DPR=1;
+
+/* ① 四分位數計算（皆偶數半段，無歧義） */
+const QT=[
+  {data:[4,6,8,10,12,14,16,18], q1:7, q2:11, q3:15, iqr:8},
+  {data:[3,5,6,7,8,10,12,15], q1:5.5, q2:7.5, q3:11, iqr:5.5},
+  {data:[10,20,30,40,50,60,70,80], q1:25, q2:45, q3:65, iqr:40},
+  {data:[2,4,4,6,8,8,10,12], q1:4, q2:7, q3:9, iqr:5},
+];
+/* ② 盒狀圖判讀 */
+const BX=[
+  {a:'A：Q1=60,Q2=72,Q3=85', b:'B：Q1=65,Q2=75,Q3=80', concl:'B 中位數高(75>72)且 IQR 小(15<25) → B 較高較集中'},
+  {a:'甲：Q1=55,Q2=70,Q3=80', b:'乙：Q1=62,Q2=68,Q3=74', concl:'甲中位數略高(70>68)；乙 IQR 小(12<25) → 乙較集中'},
+  {a:'A：IQR=20', b:'B：IQR=5', concl:'IQR 越小越集中 → B 較集中'},
+];
+/* ③ 離群值判斷 */
+const OL=[
+  {q:'Q1=13,Q3=21,IQR=8，值 60', lo:'13−12=1', hi:'21+12=33', out:true, why:'60 > 33 → 是離群值'},
+  {q:'Q1=5.5,Q3=11,IQR=5.5，值 15', lo:'5.5−8.25=−2.75', hi:'11+8.25=19.25', out:false, why:'15 在範圍內 → 不是離群值'},
+  {q:'Q1=30,Q3=60,IQR=30，值 5', lo:'30−45=−15', hi:'60+45=105', out:false, why:'5 在範圍內 → 不是離群值'},
+  {q:'Q1=20,Q3=40,IQR=20，值 75', lo:'20−30=−10', hi:'40+30=70', out:true, why:'75 > 70 → 是離群值'},
+];
+
+function initViz(cv){
+  const si=+cv.dataset.si, kind=cv.dataset.viz;
+  const ctx=cv.getContext('2d');
+  const st=VIZ[si]={kind,cv,ctx};
+  const ctrl=document.querySelector(`[data-ctrl="${si}"]`);
+  const revLabel = kind==='quartile' ? '🔍 求 Q1/Q2/Q3'
+                 : kind==='boxplot' ? '🔍 比較兩組' : '🔍 是不是離群值';
+  st.i=0; st.show=false;
+  ctrl.innerHTML=`<div class="readout" id="ro-${si}"></div>
+    <button class="btn" data-t="rev" data-si="${si}" style="background:rgba(242,217,121,.2);border-color:var(--yellow);color:var(--yellow);font-weight:700;">${revLabel}</button>
+    <button class="btn" data-t="next" data-si="${si}">下一題 ▶</button>`;
+  draw(si);
+}
+
+function drawQuartile(st, ctx, w, h, ro){
+  const E=QT[st.i], d=E.data;
+  ctx.textAlign='center';
+  ctx.fillStyle='rgba(242,217,121,.85)'; ctx.font='bold 13px "Noto Sans TC"';
+  ctx.fillText('四分位數（已排序）', w/2, 18);
+  ctx.fillStyle='#f3efe2'; ctx.font='16px "Noto Serif TC"';
+  ctx.fillText(d.join('、'), w/2, 44);
+  if(!st.show){
+    ctx.fillStyle='rgba(243,239,226,.4)'; ctx.font='13px "Noto Sans TC"';
+    ctx.fillText('🔒 Q2=中位數；Q1=下半中位數；Q3=上半中位數', w/2, 88);
+  } else {
+    // 盒狀圖
+    const mn=d[0], mx=d[d.length-1], L=40, R=w-40, cy=88;
+    const lo=mn-(mx-mn)*0.1, hi=mx+(mx-mn)*0.1;
+    const X=v=>L+(v-lo)/(hi-lo)*(R-L);
+    ctx.strokeStyle='#98c9dc'; ctx.lineWidth=1.5;
+    ctx.beginPath(); ctx.moveTo(X(mn),cy); ctx.lineTo(X(E.q1),cy); ctx.moveTo(X(E.q3),cy); ctx.lineTo(X(mx),cy); ctx.stroke();
+    ctx.fillStyle='rgba(166,214,160,.2)'; ctx.strokeStyle='#a6d6a0'; ctx.lineWidth=1.8;
+    ctx.fillRect(X(E.q1),cy-14,X(E.q3)-X(E.q1),28); ctx.strokeRect(X(E.q1),cy-14,X(E.q3)-X(E.q1),28);
+    ctx.strokeStyle='#f2d979'; ctx.lineWidth=2.5;
+    ctx.beginPath(); ctx.moveTo(X(E.q2),cy-14); ctx.lineTo(X(E.q2),cy+14); ctx.stroke();
+    ctx.fillStyle='#a6d6a0'; ctx.font='11px "Noto Serif TC"'; ctx.textAlign='center';
+    ctx.fillText('Q1='+E.q1, X(E.q1), cy+28); ctx.fillText('Q3='+E.q3, X(E.q3), cy+28);
+    ctx.fillStyle='#f2d979'; ctx.fillText('Q2='+E.q2, X(E.q2), cy-20);
+  }
+  ro.innerHTML = st.show ? `Q1=<b style="color:var(--green)">${E.q1}</b>、Q2=<b style="color:var(--yellow)">${E.q2}</b>、Q3=<b style="color:var(--green)">${E.q3}</b>、IQR=<b>${E.iqr}</b>`
+    : `${d.join('、')}　<span style="color:rgba(243,239,226,.5)">—— 求四分位數</span>`;
+}
+
+function drawBoxplot(st, ctx, w, h, ro){
+  const E=BX[st.i];
+  ctx.textAlign='center';
+  ctx.fillStyle='rgba(242,217,121,.85)'; ctx.font='bold 13px "Noto Sans TC"';
+  ctx.fillText('比較兩組資料', w/2, 18);
+  ctx.fillStyle='#98c9dc'; ctx.font='14px "Noto Serif TC"';
+  ctx.fillText(E.a, w/2, 46);
+  ctx.fillStyle='#eda0a8';
+  ctx.fillText(E.b, w/2, 70);
+  if(!st.show){
+    ctx.fillStyle='rgba(243,239,226,.4)'; ctx.font='13px "Noto Sans TC"';
+    ctx.fillText('🔒 比中位數（水準）、比 IQR（集中）', w/2, 108);
+  } else {
+    ctx.fillStyle='#a6d6a0'; ctx.font='13px "Noto Sans TC"';
+    wrapB(ctx, E.concl, w/2, 100, w-40, 20);
+  }
+  ro.innerHTML = st.show ? `<b style="color:var(--green)">${E.concl}</b>`
+    : `${E.a}｜${E.b}　<span style="color:rgba(243,239,226,.5)">—— 比較</span>`;
+}
+function wrapB(ctx, text, cx, y, maxw, lh){
+  const chars=[...text]; let line='', yy=y;
+  for(const c of chars){ if(ctx.measureText(line+c).width>maxw){ ctx.fillText(line,cx,yy); line=c; yy+=lh; } else line+=c; }
+  ctx.fillText(line, cx, yy);
+}
+
+function drawOutlier(st, ctx, w, h, ro){
+  const E=OL[st.i];
+  ctx.textAlign='center';
+  ctx.fillStyle='rgba(242,217,121,.85)'; ctx.font='bold 13px "Noto Sans TC"';
+  ctx.fillText('離群值判斷', w/2, 18);
+  ctx.fillStyle='#f3efe2'; ctx.font='15px "Noto Serif TC"';
+  ctx.fillText(E.q, w/2, 46);
+  if(!st.show){
+    ctx.fillStyle='rgba(243,239,226,.4)'; ctx.font='13px "Noto Sans TC"';
+    ctx.fillText('🔒 界限：Q1−1.5·IQR ～ Q3+1.5·IQR', w/2, 90);
+  } else {
+    ctx.fillStyle='#98c9dc'; ctx.font='13px "Noto Serif TC"';
+    ctx.fillText(`下界 ${E.lo}　上界 ${E.hi}`, w/2, 82);
+    ctx.fillStyle=E.out?'#eda0a8':'#a6d6a0'; ctx.font='bold 17px "Noto Serif TC"';
+    ctx.fillText(E.out?'⚠️ 是離群值':'✓ 不是離群值', w/2, 110);
+    ctx.fillStyle='rgba(243,239,226,.7)'; ctx.font='12px "Noto Sans TC"';
+    ctx.fillText(E.why, w/2, 132);
+  }
+  ro.innerHTML = st.show ? `${E.q} → <b style="color:${E.out?'var(--pink)':'var(--green)'}">${E.out?'是':'不是'}離群值</b>（${E.why}）`
+    : `${E.q}　<span style="color:rgba(243,239,226,.5)">—— 算界限</span>`;
+}
+
+function draw(si){
+  const st=VIZ[si]; if(!st) return;
+  const {cv,ctx,kind}=st, w=cv.width/DPR, h=cv.height/DPR;
+  ctx.clearRect(0,0,w,h);
+  const ro=document.getElementById('ro-'+si);
+  if(kind==='quartile') drawQuartile(st,ctx,w,h,ro);
+  else if(kind==='boxplot') drawBoxplot(st,ctx,w,h,ro);
+  else if(kind==='outlier') drawOutlier(st,ctx,w,h,ro);
+}
+
+document.addEventListener('click', e=>{
+  const btn=e.target.closest('[data-t]'); if(!btn) return;
+  const si=+btn.dataset.si, st=VIZ[si]; if(!st) return;
+  const t=btn.dataset.t;
+  const arr = st.kind==='quartile'?QT : st.kind==='boxplot'?BX : OL;
+  if(t==='rev') st.show=true;
+  if(t==='next'){ st.i=(st.i+1)%arr.length; st.show=false; }
+  draw(si);
+});
+
+function resizeAll(){
+  DPR = Math.min(2, window.devicePixelRatio||1);
+  document.querySelectorAll('canvas.viz').forEach(cv=>{
+    const w = cv.clientWidth || cv.parentElement.clientWidth;
+    const h = (cv.dataset.viz==='quartile') ? 180 : (cv.dataset.viz==='boxplot' ? 176 : 176);
+    cv.width=w*DPR; cv.height=h*DPR; cv.style.height=h+'px';
+    cv.getContext('2d').setTransform(DPR,0,0,DPR,0,0);
+  });
+  Object.keys(VIZ).forEach(k=>draw(+k));
+}
+document.querySelectorAll('canvas.viz').forEach(initViz);
+window.addEventListener('resize', resizeAll);
+resizeAll();
+</script>
+<div class="hint">← → 鍵可翻頁　·　Canvas 用按鈕互動　·　支援平板觸控</div>
+</body></html>

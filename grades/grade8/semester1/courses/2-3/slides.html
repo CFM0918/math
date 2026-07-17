@@ -1,0 +1,261 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>八上 2-3 畢氏定理｜授課簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--chalk-soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);padding:24px 14px;}
+.deck{max-width:1060px;margin:0 auto;}
+.print-hint{text-align:center;color:rgba(243,239,226,0.4);font-size:13px;padding:6px 0 22px;}
+.print-hint b{color:var(--yellow);}
+.slide{position:relative;min-height:576px;margin:0 auto 26px;padding:44px 52px;
+ background:radial-gradient(ellipse at 18% 12%,rgba(255,255,255,0.05),transparent 45%),
+  radial-gradient(ellipse at 82% 88%,rgba(255,255,255,0.035),transparent 45%),
+  radial-gradient(ellipse at 60% 40%,rgba(120,160,130,0.10),transparent 60%),
+  linear-gradient(160deg,var(--board) 0%,var(--board2) 100%);
+ border-radius:14px;box-shadow:0 10px 34px rgba(0,0,0,0.55);
+ border:1px solid rgba(242,217,121,0.14);overflow:hidden;display:flex;flex-direction:column;}
+.slide::before{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;
+ background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.014) 40px,rgba(255,255,255,0.014) 41px),
+  radial-gradient(circle at 30% 72%,rgba(255,255,255,0.03),transparent 8%),
+  radial-gradient(circle at 76% 24%,rgba(255,255,255,0.025),transparent 7%);}
+.slide::after{content:attr(data-pg);position:absolute;bottom:15px;right:26px;font-family:'Caveat',cursive;font-size:20px;color:rgba(243,239,226,0.4);}
+.tag{position:absolute;top:20px;right:26px;font-family:'Caveat',cursive;font-size:22px;color:var(--pink);transform:rotate(4deg);}
+.eyebrow{font-family:'Caveat',cursive;font-size:25px;color:var(--yellow);letter-spacing:1px;margin-bottom:8px;opacity:0.92;}
+.slide h1{font-family:'Noto Serif TC',serif;font-size:46px;font-weight:900;line-height:1.28;letter-spacing:1px;
+ text-shadow:0 0 1px rgba(243,239,226,0.5),1px 1px 0 rgba(0,0,0,0.2);}
+.slide h2{font-family:'Noto Serif TC',serif;font-size:33px;font-weight:900;color:var(--yellow);
+ margin-bottom:20px;padding-bottom:11px;border-bottom:2px dashed rgba(242,217,121,0.4);
+ text-shadow:0 0 1px rgba(242,217,121,0.4);}
+.slide p{font-size:20px;line-height:1.85;margin-bottom:12px;}
+.big-center{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;}
+.big-center .lead,.lead{font-family:'Caveat',cursive;font-size:30px;color:var(--blue);letter-spacing:1px;margin-top:12px;}
+ul{list-style:none;margin:8px 0;}
+li{font-size:21px;line-height:1.95;padding-left:32px;position:relative;margin-bottom:4px;}
+li::before{content:'\2726';position:absolute;left:4px;color:var(--yellow);font-size:17px;top:3px;}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.34);border-radius:12px;padding:15px 21px;margin:12px 0;font-size:19px;line-height:1.8;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.38);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.38);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.34);}
+.eg{position:relative;background:rgba(0,0,0,0.24);border:1px solid rgba(242,217,121,0.2);border-radius:10px;padding:17px 22px;margin:12px 0;font-size:19px;}
+.eg::before{content:'';position:absolute;top:-8px;left:38px;width:58px;height:15px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.eg .q{color:var(--blue);font-weight:700;margin-bottom:8px;font-size:19px;}
+.eg .a{color:var(--green);font-weight:700;margin-top:6px;}
+.eg .stp{color:var(--chalk-soft);font-size:18px;margin:3px 0;}
+.tip{display:flex;gap:12px;align-items:flex-start;background:rgba(242,217,121,0.09);border:1.5px dashed rgba(242,217,121,0.45);border-radius:12px;padding:13px 18px;margin:10px 0;}
+.tip .ic{font-size:24px;line-height:1;}.tip .tx{font-size:18px;line-height:1.7;}
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:18px;}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.26);padding:10px 14px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.two{display:flex;gap:20px;}.two>div{flex:1;}
+svg{display:block;margin:6px auto;max-width:100%;}
+@media print{
+ body{background:#0a130d;padding:0;}
+ .deck{max-width:none;}
+ .print-hint{display:none;}
+ .slide{margin:0;border-radius:0;box-shadow:none;min-height:100vh;
+  page-break-after:always;break-after:page;padding:32px 44px;justify-content:center;}
+ .slide:last-child{page-break-after:auto;break-after:auto;}
+ .slide h1{font-size:40px;}
+ .slide h2{font-size:27px;margin-bottom:13px;padding-bottom:8px;}
+ .slide p{font-size:17px;line-height:1.55;margin-bottom:6px;}
+ li{font-size:17px;line-height:1.55;margin-bottom:1px;padding-left:26px;}
+ .eyebrow{font-size:21px;margin-bottom:5px;}
+ .big-center .lead,.lead{font-size:26px;}
+ .box{font-size:16px;padding:10px 16px;margin:6px 0;line-height:1.5;}
+ .eg{font-size:16px;padding:11px 16px;margin:6px 0;}
+ .tip{font-size:16px;padding:10px 14px;margin:6px 0;}
+ .tbl{font-size:15px;margin:6px 0;}
+ .tbl th,.tbl td{padding:6px 10px;}
+ svg{max-height:210px;}
+}
+</style></head><body><div class="deck">
+<div class="print-hint">共 <b>14</b> 張・列印時每張一頁（Ctrl+P → 橫向 → 背景圖形）</div>
+
+
+<!-- 1 -->
+<div class="slide" data-pg="1 / 14"><div class="tag">Start!</div><div class="big-center">
+<div class="eyebrow">國二上學期・第二章 平方根與畢氏定理</div>
+<h1>2-3　畢氏定理</h1>
+<div class="lead">直角三角形三邊的關係<br>
+<span style="color:#f2d979;font-size:34px;">a² + b² = c²</span></div>
+<div class="lead" style="font-size:20px;margin-top:8px;">兩千五百年前的發現，至今無所不在</div>
+</div></div>
+
+<!-- 2 -->
+<div class="slide" data-pg="2 / 14"><div class="tag">目標</div><div class="body">
+<h2>本節學習目標</h2>
+<ul>
+<li>記住畢氏定理:<span class="hl">兩股平方和 = 斜邊平方</span></li>
+<li>求直角三角形的<span class="hl-b">第三邊</span>（含根號）</li>
+<li>用<span class="hl">逆定理</span>判斷是不是直角三角形</li>
+<li>用畢氏定理算<span class="hl">坐標平面兩點距離</span></li>
+</ul>
+<div class="box y">一句話:<span class="hl">a²+b²=c²，斜邊永遠是最長、在直角對面。解出平方後記得開根號。</span></div>
+</div></div>
+
+<!-- 3 -->
+<div class="slide" data-pg="3 / 14"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心　畢氏定理</div>
+<h2>a² + b² = c²</h2><svg viewBox="0 0 300 230" width="300" height="230" style="display:block;margin:0 auto;"><polygon points="120,130 198,130 120,26" fill="rgba(243,239,226,.1)" stroke="#f3efe2" stroke-width="2"/><rect x="120" y="120" width="10" height="10" fill="none" stroke="#eda0a8" stroke-width="1.4"/><rect x="120" y="130" width="78" height="78" fill="rgba(152,201,220,.22)" stroke="#98c9dc" stroke-width="1.5"/><text x="159.0" y="174.0" font-size="14" fill="#98c9dc" text-anchor="middle" font-family="Noto Serif TC">a²=9</text><rect x="16" y="26" width="104" height="104" fill="rgba(166,214,160,.22)" stroke="#a6d6a0" stroke-width="1.5"/><text x="68" y="83" font-size="14" fill="#a6d6a0" text-anchor="middle" font-family="Noto Serif TC">b²=16</text><line x1="198" y1="130" x2="120" y2="26" stroke="#f2d979" stroke-width="3"/><text x="175.0" y="74.0" font-size="13" fill="#f2d979" text-anchor="middle" font-family="Noto Serif TC">c=5</text><text x="159.0" y="20" font-size="13" fill="#f2d979" text-anchor="middle">c²=25 = 9+16</text></svg><div class="box g" style="text-align:center;font-size:19px;">
+兩股（夾直角的兩邊）平方和 = 斜邊（直角對邊、最長）平方<br>
+<span class="hl">9 + 16 = 25</span>，這就是 3-4-5。</div>
+</div></div>
+
+<!-- 4 -->
+<div class="slide" data-pg="4 / 14"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心　斜邊 & 逆定理</div>
+<h2>認清角色再列式</h2>
+<table class="tbl">
+<tr><th style="width:26%;">名稱</th><th>位置</th></tr>
+<tr><td class="hl-b">斜邊 c</td><td>直角的<b>對邊</b>、<b>最長</b>的邊</td></tr>
+<tr><td class="hl-b">兩股 a、b</td><td>夾住直角的兩邊</td></tr>
+</table>
+<div class="box y" style="text-align:center;">
+<b>逆定理</b>:若 a²+b²=c²（c 最長）→ 就是<span class="hl">直角三角形</span>。</div>
+<div class="box g" style="text-align:center;">
+常見畢氏數組:<span class="fm">(3,4,5)、(5,12,13)、(8,15,17)、(7,24,25)</span> 及其倍數。</div>
+</div></div>
+
+<!-- 5 -->
+<div class="slide" data-pg="5 / 14"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 1、2　難度 ★☆☆~★★☆</div>
+<h2>求第三邊</h2>
+<div class="eg">
+<div class="q">兩股 6、8，求斜邊</div>
+<div class="stp">c² = 6²+8² = 100 → c = √100 = 10（=3-4-5 的兩倍）</div>
+</div>
+<div class="eg">
+<div class="q">斜邊 13、一股 5，求另一股</div>
+<div class="stp">5²+b² = 13² → 25+b² = 169 → b² = 144 → b = 12</div>
+</div>
+<div class="box r" style="text-align:center;">⚠️ 求股時是「斜邊² − 股²」，別加成 13²+5²!</div>
+</div></div>
+
+<!-- 6 -->
+<div class="slide" data-pg="6 / 14"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 3　難度 ★★☆　逆定理</div>
+<h2>判斷是否直角三角形</h2>
+<div class="eg">
+<div class="q">(1) 7、24、25　(2) 5、7、9</div>
+<div class="stp"><b>(1)</b> 7²+24² = 49+576 = 625 = 25² ✓ → <span class="hl-g">是直角三角形</span></div>
+<div class="stp"><b>(2)</b> 5²+7² = 74 ≠ 81 = 9² ✗ → <span class="hl-r">不是</span></div>
+</div>
+<div class="box y" style="text-align:center;">
+判斷法:<span class="hl">最長邊的平方 = 另兩邊平方和?</span> 相等才是直角。</div>
+</div></div>
+
+<!-- 7 -->
+<div class="slide" data-pg="7 / 14"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 4　難度 ★★★　兩點距離</div>
+<h2>坐標平面上的距離</h2>
+<div class="box y" style="text-align:center;font-size:19px;">
+d = √[(x₂−x₁)² + (y₂−y₁)²]</div>
+<div class="eg">
+<div class="q">A(1,2)、B(5,5) 的距離</div>
+<div class="stp"><b>Δx</b> = 5−1 = 4;<b>Δy</b> = 5−2 = 3</div>
+<div class="stp">d = √(4²+3²) = √25 = 5</div>
+</div>
+<div class="box r" style="text-align:center;">⚠️ Δx、Δy 都要<b>先平方再相加</b>，別漏平方。</div>
+</div></div>
+
+<!-- 8 -->
+<div class="slide" data-pg="8 / 14"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 5　難度 ★★★　梯子問題</div>
+<h2>經典應用</h2>
+<div class="eg">
+<div class="q">5 公尺梯子靠牆，梯底距牆 3 公尺，求梯頂高。再往外推 1 公尺呢?</div>
+<div class="stp"><b>原高</b>　h₁ = √(5²−3²) = √16 = 4</div>
+<div class="stp"><b>推出後</b>（距牆 4）　h₂ = √(5²−4²) = √9 = 3</div>
+<div class="stp"><b>降低</b>　4 − 3 = 1 公尺</div>
+</div>
+<div class="box g" style="text-align:center;">梯長固定 = 斜邊;牆高、地距是兩股。</div>
+</div></div>
+
+<!-- 9 -->
+<div class="slide" data-pg="9 / 14"><div class="tag">精選</div><div class="body">
+<div class="eyebrow">隨堂精選</div>
+<h2>快速檢查</h2>
+<table class="tbl">
+<tr><th style="width:56%;">題目</th><th>答案</th></tr>
+<tr><td>正方形邊長 1，對角線</td><td class="fm hl">√2</td></tr>
+<tr><td>等腰直角三角形腰 5，斜邊</td><td class="fm hl">5√2</td></tr>
+<tr><td>正三角形邊 a 的高</td><td class="fm hl">(√3/2)a</td></tr>
+<tr><td>長方形 12×5 的對角線</td><td class="fm hl">13</td></tr>
+<tr><td>兩股比 3:4、斜邊 20</td><td class="fm hl">12、16</td></tr>
+</table>
+<div class="box y" style="text-align:center;">比例型:設 3k、4k，代入 (3k)²+(4k)²=20²。</div>
+</div></div>
+
+<!-- 10 -->
+<div class="slide" data-pg="10 / 14"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 1　【斜坡管線】</div>
+<h2>斜邊 = 實際坡長</h2>
+<div class="box">水平 24 公尺、垂直 7 公尺</div>
+<div class="eg">
+<div class="stp"><b>(1) 坡長</b>　√(24²+7²) = √625 = 25 公尺</div>
+<div class="stp"><b>(2) 費用</b>　25×350 = 8750 元</div>
+<div class="stp"><b>(3) 坡度</b>　7/24 ≈ 0.292 &lt; 1/3 → 不需加固</div>
+</div>
+<div class="box g" style="text-align:center;">(24,7,25) 也是一組畢氏數!</div>
+</div></div>
+
+<!-- 11 -->
+<div class="slide" data-pg="11 / 14"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 2　【廠房對角線】</div>
+<h2>長方形對角線</h2>
+<div class="box">長 40 公尺、寬 30 公尺</div>
+<div class="eg">
+<div class="stp"><b>(1) 對角線</b>　√(40²+30²) = √2500 = 50 公尺</div>
+<div class="stp"><b>(2) 中央到角落</b>　50 ÷ 2 = 25 公尺</div>
+<div class="stp"><b>(3) 費用</b>　50×80 = 4000 元</div>
+</div>
+<div class="box g" style="text-align:center;">(40,30,50) = (4,3,5)×10。</div>
+</div></div>
+
+<!-- 12 -->
+<div class="slide" data-pg="12 / 14"><div class="tag">避雷</div><div class="body">
+<h2>避雷指南</h2>
+<table class="tbl">
+<tr><th style="width:44%;">❌ 錯誤</th><th>✓ 正確</th></tr>
+<tr><td>把股當斜邊代</td><td>斜邊是<b class="hl-g">最長、在直角對面</b></td></tr>
+<tr><td class="fm">解出 c²=100 就寫 100</td><td class="fm hl-g">要開根號 c=10</td></tr>
+<tr><td>求股卻用 a²+c²</td><td class="fm hl-g">股 = √(斜²−另股²)</td></tr>
+<tr><td>距離公式漏平方</td><td>Δx、Δy 都<b class="hl-g">先平方再加</b></td></tr>
+</table>
+<div class="box y" style="text-align:center;">先問:哪條是直角?斜邊是哪條?已知、未知各是什麼?</div>
+</div></div>
+
+<!-- 13 -->
+<div class="slide" data-pg="13 / 14"><div class="tag">總結</div><div class="body">
+<h2>本節總結</h2>
+<ul>
+<li><span class="hl-r">a² + b² = c²</span>:兩股平方和 = 斜邊平方（斜邊最長、直角對面）</li>
+<li><span class="hl">逆定理</span>:a²+b²=c² → 直角三角形</li>
+<li><span class="hl">兩點距離</span>:d = √[(Δx)²+(Δy)²]</li>
+<li><span class="hl">畢氏數組</span>:(3,4,5)、(5,12,13)、(8,15,17)、(7,24,25) 背起來省時</li>
+</ul>
+<div class="box g" style="text-align:center;font-size:20px;">
+🔗 <b>承先</b>:2-1、2-2 根式（斜邊常要開根號）<br>
+🔗 <b>啟後</b>:<span class="hl">九上三角比、圓的切線、面積計算 —— 畢氏定理是基石。</span></div>
+</div></div>
+
+<!-- 14 -->
+<div class="slide" data-pg="14 / 14"><div class="tag">Next</div><div class="big-center">
+<div class="eyebrow">下章預告</div>
+<h1 style="font-size:38px;">第 3 章　因式分解</h1>
+<div class="lead">乘法公式<span style="color:#eda0a8;">反過來用</span><br>
+把多項式拆成因式的乘積</div>
+<div class="box y" style="max-width:800px;margin:20px auto 0;font-size:20px;text-align:center;">
+1-1 學展開，第 3 章學「還原」:x²+5x+6 = (x+2)(x+3)。<br>
+<span class="hl">展開與分解，是一體兩面。</span></div>
+</div></div>
+
+</div></body></html>
