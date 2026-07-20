@@ -1,0 +1,277 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>八上 2-1 平方根與近似值｜授課簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--chalk-soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);padding:24px 14px;}
+.deck{max-width:1060px;margin:0 auto;}
+.print-hint{text-align:center;color:rgba(243,239,226,0.4);font-size:13px;padding:6px 0 22px;}
+.print-hint b{color:var(--yellow);}
+.slide{position:relative;min-height:576px;margin:0 auto 26px;padding:44px 52px;
+ background:radial-gradient(ellipse at 18% 12%,rgba(255,255,255,0.05),transparent 45%),
+  radial-gradient(ellipse at 82% 88%,rgba(255,255,255,0.035),transparent 45%),
+  radial-gradient(ellipse at 60% 40%,rgba(120,160,130,0.10),transparent 60%),
+  linear-gradient(160deg,var(--board) 0%,var(--board2) 100%);
+ border-radius:14px;box-shadow:0 10px 34px rgba(0,0,0,0.55);
+ border:1px solid rgba(242,217,121,0.14);overflow:hidden;display:flex;flex-direction:column;}
+.slide::before{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;
+ background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.014) 40px,rgba(255,255,255,0.014) 41px),
+  radial-gradient(circle at 30% 72%,rgba(255,255,255,0.03),transparent 8%),
+  radial-gradient(circle at 76% 24%,rgba(255,255,255,0.025),transparent 7%);}
+.slide::after{content:attr(data-pg);position:absolute;bottom:15px;right:26px;font-family:'Caveat',cursive;font-size:20px;color:rgba(243,239,226,0.4);}
+.tag{position:absolute;top:20px;right:26px;font-family:'Caveat',cursive;font-size:22px;color:var(--pink);transform:rotate(4deg);}
+.eyebrow{font-family:'Caveat',cursive;font-size:25px;color:var(--yellow);letter-spacing:1px;margin-bottom:8px;opacity:0.92;}
+.slide h1{font-family:'Noto Serif TC',serif;font-size:46px;font-weight:900;line-height:1.28;letter-spacing:1px;
+ text-shadow:0 0 1px rgba(243,239,226,0.5),1px 1px 0 rgba(0,0,0,0.2);}
+.slide h2{font-family:'Noto Serif TC',serif;font-size:33px;font-weight:900;color:var(--yellow);
+ margin-bottom:20px;padding-bottom:11px;border-bottom:2px dashed rgba(242,217,121,0.4);
+ text-shadow:0 0 1px rgba(242,217,121,0.4);}
+.slide p{font-size:20px;line-height:1.85;margin-bottom:12px;}
+.big-center{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;}
+.big-center .lead,.lead{font-family:'Caveat',cursive;font-size:30px;color:var(--blue);letter-spacing:1px;margin-top:12px;}
+ul{list-style:none;margin:8px 0;}
+li{font-size:21px;line-height:1.95;padding-left:32px;position:relative;margin-bottom:4px;}
+li::before{content:'\2726';position:absolute;left:4px;color:var(--yellow);font-size:17px;top:3px;}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.34);border-radius:12px;padding:15px 21px;margin:12px 0;font-size:19px;line-height:1.8;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.38);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.38);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.34);}
+.eg{position:relative;background:rgba(0,0,0,0.24);border:1px solid rgba(242,217,121,0.2);border-radius:10px;padding:17px 22px;margin:12px 0;font-size:19px;}
+.eg::before{content:'';position:absolute;top:-8px;left:38px;width:58px;height:15px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.eg .q{color:var(--blue);font-weight:700;margin-bottom:8px;font-size:19px;}
+.eg .a{color:var(--green);font-weight:700;margin-top:6px;}
+.eg .stp{color:var(--chalk-soft);font-size:18px;margin:3px 0;}
+.tip{display:flex;gap:12px;align-items:flex-start;background:rgba(242,217,121,0.09);border:1.5px dashed rgba(242,217,121,0.45);border-radius:12px;padding:13px 18px;margin:10px 0;}
+.tip .ic{font-size:24px;line-height:1;}.tip .tx{font-size:18px;line-height:1.7;}
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:18px;}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.26);padding:10px 14px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.two{display:flex;gap:20px;}.two>div{flex:1;}
+svg{display:block;margin:6px auto;max-width:100%;}
+@media print{
+ body{background:#0a130d;padding:0;}
+ .deck{max-width:none;}
+ .print-hint{display:none;}
+ .slide{margin:0;border-radius:0;box-shadow:none;min-height:100vh;
+  page-break-after:always;break-after:page;padding:32px 44px;justify-content:center;}
+ .slide:last-child{page-break-after:auto;break-after:auto;}
+ .slide h1{font-size:40px;}
+ .slide h2{font-size:27px;margin-bottom:13px;padding-bottom:8px;}
+ .slide p{font-size:17px;line-height:1.55;margin-bottom:6px;}
+ li{font-size:17px;line-height:1.55;margin-bottom:1px;padding-left:26px;}
+ .eyebrow{font-size:21px;margin-bottom:5px;}
+ .big-center .lead,.lead{font-size:26px;}
+ .box{font-size:16px;padding:10px 16px;margin:6px 0;line-height:1.5;}
+ .eg{font-size:16px;padding:11px 16px;margin:6px 0;}
+ .tip{font-size:16px;padding:10px 14px;margin:6px 0;}
+ .tbl{font-size:15px;margin:6px 0;}
+ .tbl th,.tbl td{padding:6px 10px;}
+ svg{max-height:210px;}
+}
+</style></head><body><div class="deck">
+<div class="print-hint">共 <b>15</b> 張・列印時每張一頁（Ctrl+P → 橫向 → 背景圖形）</div>
+
+
+<!-- 1 -->
+<div class="slide" data-pg="1 / 15"><div class="tag">Start!</div><div class="big-center">
+<div class="eyebrow">國二上學期・第二章 平方根與畢氏定理</div>
+<h1>2-1　平方根與近似值</h1>
+<div class="lead">√ 是「什麼數平方等於它」<br>
+不是所有數的平方根都是<span style="color:#eda0a8;">整數</span></div>
+<div class="box y" style="max-width:640px;margin:16px auto 0;text-align:center;font-size:20px;">
+<span class="fm">√2 ≈ 1.414　√3 ≈ 1.732　√5 ≈ 2.236</span></div>
+</div></div>
+
+<!-- 2 -->
+<div class="slide" data-pg="2 / 15"><div class="tag">目標</div><div class="body">
+<h2>本節學習目標</h2>
+<ul>
+<li>理解平方根:<span class="hl">x² = a → x 是 a 的平方根</span></li>
+<li>正確用根號:<span class="hl-b">√a 是 a 的「正」平方根</span></li>
+<li>理解<span class="hl">實數 = 有理數 ＋ 無理數</span></li>
+<li>用<span class="hl">夾擠法</span>求 √a 的近似值</li>
+</ul>
+<div class="box y">一句話:<span class="hl">√a 只取正值;a 的平方根有兩個（±），別把這兩件事搞混。</span></div>
+</div></div>
+
+<!-- 3 -->
+<div class="slide" data-pg="3 / 15"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心　平方根 vs 根號</div>
+<h2>±√a 與 √a 不一樣</h2>
+<table class="tbl">
+<tr><th style="width:44%;">說法</th><th>值</th></tr>
+<tr><td>9 的平方根</td><td class="hl">±3（兩個）</td></tr>
+<tr><td>√9（算術平方根）</td><td class="hl-g">3（只取正）</td></tr>
+</table>
+<div class="box r" style="text-align:center;">
+⚠️ 最高頻錯:<span class="hl">√9 = ±3（✗）</span>。√9 = 3!<br>
+正數有兩個平方根;0 只有 0;負數<b>沒有</b>（實數範圍）平方根。</div>
+</div></div>
+
+<!-- 4 -->
+<div class="slide" data-pg="4 / 15"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心　實數的分類</div>
+<h2>實數 = 有理數 ＋ 無理數</h2>
+<table class="tbl">
+<tr><th style="width:34%;">類別</th><th>小數展開</th><th>例</th></tr>
+<tr><td class="hl-b">有理數</td><td>有限 / 無限循環</td><td class="fm">2、0.333…、1/3</td></tr>
+<tr><td class="hl-b">無理數</td><td>無限<b>不</b>循環</td><td class="fm">√2、√3、π</td></tr>
+</table>
+<div class="box r" style="text-align:center;">
+⚠️ 無理數<b>是實數</b> —— 在數線上有確切位置、有大小，不是「沒有大小的數」。</div>
+<div class="box g" style="text-align:center;">建議記憶:√2≈1.414、√3≈1.732、√5≈2.236。</div>
+</div></div>
+
+<!-- 5 -->
+<div class="slide" data-pg="5 / 15"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 1　難度 ★☆☆</div>
+<h2>求平方根</h2>
+<div class="eg">
+<div class="q">求 49、0.04、1/9 的平方根</div>
+<div class="stp"><b>49</b>　7²=49 → 平方根 ±7;√49 = 7</div>
+<div class="stp"><b>0.04</b>　0.2²=0.04 → ±0.2;√0.04 = 0.2</div>
+<div class="stp"><b>1/9</b>　(1/3)²=1/9 → ±1/3;√(1/9) = 1/3</div>
+</div>
+<div class="box y" style="text-align:center;">「平方根」問幾個 → 答 ±;「√」問一個 → 答正的。</div>
+</div></div>
+
+<!-- 6 -->
+<div class="slide" data-pg="6 / 15"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 2　難度 ★★☆　有理 / 無理</div>
+<h2>先化簡再判斷</h2>
+<table class="tbl">
+<tr><th>數</th><th>化簡</th><th>類別</th></tr>
+<tr><td class="fm">√4</td><td class="fm">= 2</td><td class="hl-g">有理數</td></tr>
+<tr><td class="fm">√5</td><td>無限不循環</td><td class="hl-r">無理數</td></tr>
+<tr><td class="fm">0.333…</td><td class="fm">= 1/3</td><td class="hl-g">有理數</td></tr>
+<tr><td class="fm">√12</td><td class="fm">= 2√3</td><td class="hl-r">無理數</td></tr>
+<tr><td class="fm">π</td><td>無限不循環</td><td class="hl-r">無理數</td></tr>
+</table>
+<div class="box y" style="text-align:center;">判斷前先<span class="hl">化簡</span>:√4 別急著說無理，它是 2!</div>
+</div></div>
+
+<!-- 7 -->
+<div class="slide" data-pg="7 / 15"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 3　難度 ★★☆　夾擠法</div>
+<h2>估算 √7</h2>
+<div class="eg">
+<div class="stp"><b>整數夾</b>　2²=4 &lt; 7 &lt; 9=3² → 2 &lt; √7 &lt; 3</div>
+<div class="stp"><b>小數一位</b>　2.6²=6.76 &lt; 7 &lt; 7.29=2.7² → 2.6 &lt; √7 &lt; 2.7</div>
+<div class="stp"><b>更精確</b>　2.64²=6.9696 &lt; 7 &lt; 7.0225=2.65²</div>
+<div class="a">√7 ≈ 2.6（到小數一位）</div>
+</div><svg viewBox="0 0 520 64" width="86%" style="display:block;margin:6px auto;"><line x1="40" y1="34" x2="480" y2="34" stroke="rgba(243,239,226,.7)" stroke-width="2"/><line x1="40" y1="28" x2="40" y2="40" stroke="#98c9dc" stroke-width="2"/><text x="40" y="56" font-size="13" fill="#98c9dc" text-anchor="middle" font-family="Noto Serif TC">2.6</text><line x1="480" y1="28" x2="480" y2="40" stroke="#98c9dc" stroke-width="2"/><text x="480" y="56" font-size="13" fill="#98c9dc" text-anchor="middle" font-family="Noto Serif TC">2.7</text><circle cx="241" cy="34" r="5" fill="#f2d979"/><text x="241" y="22" font-size="14" fill="#f2d979" text-anchor="middle" font-family="Noto Serif TC">√7≈2.65</text></svg>
+</div></div>
+
+<!-- 8 -->
+<div class="slide" data-pg="8 / 15"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 4　難度 ★★★　含字母</div>
+<h2>√(x²) = |x|，不是 x</h2>
+<div class="eg">
+<div class="q">化簡 (1) √(x²)（x 任意）　(2) √(4x²)（x≥0）</div>
+<div class="stp"><b>(1)</b> √(x²) = |x|　（x&lt;0 時 √(x²)=−x=|x|，不能直接寫 x）</div>
+<div class="stp"><b>(2)</b> √(4x²) = 2|x|;若 x≥0 則 = 2x</div>
+</div>
+<div class="box r" style="text-align:center;">
+⚠️ 根號結果一定 ≥ 0。x 可能是負的，所以要加絕對值!</div>
+</div></div>
+
+<!-- 9 -->
+<div class="slide" data-pg="9 / 15"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 5　難度 ★★★　提完全平方</div>
+<h2>不用計算機估大數/小數</h2>
+<div class="eg">
+<div class="q">已知 √2 ≈ 1.414，求 √200、√0.02</div>
+<div class="stp"><b>√200</b>　= √(100×2) = 10√2 ≈ 14.14</div>
+<div class="stp"><b>√0.02</b>　= √(2/100) = √2 ÷ 10 ≈ 0.1414</div>
+</div>
+<div class="box g" style="text-align:center;">
+💡 <span class="hl">把完全平方因數提出根號</span>（100=10²），剩下 √2 用近似值。</div>
+</div></div>
+
+<!-- 10 -->
+<div class="slide" data-pg="10 / 15"><div class="tag">精選</div><div class="body">
+<div class="eyebrow">隨堂精選</div>
+<h2>快速檢查</h2>
+<table class="tbl">
+<tr><th style="width:52%;">題目</th><th>答案</th></tr>
+<tr><td>25 的平方根?√25?</td><td class="fm hl">±5;5</td></tr>
+<tr><td>3 &lt; √n &lt; 4，n 整數?</td><td class="fm hl">10~15</td></tr>
+<tr><td>√(25a²)（a 任意）</td><td class="fm hl">5|a|</td></tr>
+<tr><td>√5 與 2.2 誰大?</td><td class="fm hl">√5（5&gt;4.84）</td></tr>
+<tr><td>a=√5+1，a²−2a?</td><td class="fm hl">4</td></tr>
+</table>
+<div class="box y" style="text-align:center;">比較大小:兩邊平方去根號（都是正數才行）。</div>
+</div></div>
+
+<!-- 11 -->
+<div class="slide" data-pg="11 / 15"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 1　【鋼板邊長】</div>
+<h2>面積開根號</h2>
+<div class="box">正方形鋼板面積 50 平方公尺</div>
+<div class="eg">
+<div class="stp"><b>(1) 邊長</b>　√50 = √(25×2) = 5√2 公尺</div>
+<div class="stp"><b>(2) 近似</b>　5×1.414 = 7.07 公尺</div>
+<div class="stp"><b>(3) 面積 200</b>　√200 = 10√2 ≈ 14.14 公尺（邊長變 2 倍）</div>
+</div>
+<div class="box g" style="text-align:center;">面積變 4 倍 → 邊長變 2 倍（√4=2）。</div>
+</div></div>
+
+<!-- 12 -->
+<div class="slide" data-pg="12 / 15"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 2　【操場對角線】</div>
+<h2>正方形對角線 = 邊 × √2</h2>
+<div class="box">正方形操場邊長 100 公尺，測量值 141.2~141.6</div>
+<div class="eg">
+<div class="stp"><b>(1) 理論對角線</b>　100√2 公尺</div>
+<div class="stp"><b>(2) 近似</b>　100×1.414 = 141.4 公尺</div>
+<div class="stp"><b>(3) 最準/最差</b>　第 4 次 141.4（誤差 0）;第 5 次 141.6（誤差 0.2）</div>
+</div>
+</div></div>
+
+<!-- 13 -->
+<div class="slide" data-pg="13 / 15"><div class="tag">避雷</div><div class="body">
+<h2>避雷指南</h2>
+<table class="tbl">
+<tr><th style="width:44%;">❌ 錯誤</th><th>✓ 正確</th></tr>
+<tr><td class="fm">√9 = ±3</td><td class="fm hl-g">√9 = 3（9 的平方根才是 ±3）</td></tr>
+<tr><td class="fm">√(x²) = x</td><td class="fm hl-g">√(x²) = |x|</td></tr>
+<tr><td>無理數不是實數</td><td>實數 = 有理 ＋ 無理</td></tr>
+<tr><td class="fm">√200 直接查表</td><td class="fm hl-g">提完全平方 = 10√2</td></tr>
+</table>
+<div class="box y" style="text-align:center;">√a 是正的、a 的平方根有 ±兩個 —— 分清楚兩種問法。</div>
+</div></div>
+
+<!-- 14 -->
+<div class="slide" data-pg="14 / 15"><div class="tag">總結</div><div class="body">
+<h2>本節總結</h2>
+<ul>
+<li><span class="hl">平方根 vs √</span>:a 的平方根 ±√a（兩個）;√a 只取正（一個）</li>
+<li><span class="hl">實數</span> = 有理數（可寫分數）＋ 無理數（無限不循環）</li>
+<li><span class="hl-r">√(x²) = |x|</span>，不是 x</li>
+<li><span class="hl">夾擠法</span>估近似;<span class="hl">提完全平方因數</span>化簡（√200=10√2）</li>
+</ul>
+<div class="box g" style="text-align:center;font-size:20px;">
+🔗 <b>承先</b>:平方、乘方<br>
+🔗 <b>啟後</b>:<span class="hl">2-2 根式運算（√ 的加減乘除）、2-3 畢氏定理。</span></div>
+</div></div>
+
+<!-- 15 -->
+<div class="slide" data-pg="15 / 15"><div class="tag">Next</div><div class="big-center">
+<div class="eyebrow">下節預告</div>
+<h1 style="font-size:40px;">2-2　根式的運算</h1>
+<div class="lead">√ 也能<span style="color:#eda0a8;">加減乘除</span><br>
+同類方根才能相加，分母不留根號</div>
+<div class="box y" style="max-width:800px;margin:20px auto 0;font-size:20px;text-align:center;">
+2√3 + 5√3 = 7√3（同類方根）;√2×√3 = √6;有理化把分母的根號趕走。<br>
+<span class="hl">根式運算，其實和多項式很像。</span></div>
+</div></div>
+
+</div></body></html>
