@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>九上 1-3 二次函數的應用｜授課簡報</title>
+<title>九上 1-3 相似多邊形｜授課簡報</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
 <style>
@@ -77,162 +77,150 @@ svg{display:block;margin:6px auto;max-width:100%;}
  svg{max-height:210px;}
 }
 </style></head><body><div class="deck">
-<div class="print-hint">共 <b>12</b> 張・列印時每張一頁（Ctrl+P → 橫向 → 背景圖形）</div>
+<div class="print-hint">共 <b>11</b> 張・列印時每張一頁（Ctrl+P → 橫向 → 背景圖形）</div>
 
 
 <!-- 1 -->
-<div class="slide" data-pg="1 / 12"><div class="tag">Start!</div><div class="big-center">
-<div class="eyebrow">國三上學期・第一章 二次函數</div>
-<h1>1-3　二次函數的應用</h1>
-<div class="lead">拋體軌跡、面積最佳化、利潤分析<br>
-找出<span style="color:#f2d979;">二次關係</span>就能用函數工具求解</div><svg viewBox="0 0 210 150" width="210" height="150" style="display:block;margin:0 auto;"><line x1="6" y1="133" x2="204" y2="133" stroke="rgba(243,239,226,.3)" stroke-width="1"/><line x1="105" y1="6" x2="105" y2="144" stroke="rgba(243,239,226,.3)" stroke-width="1"/><polyline points="105.0,127.9 111.0,108.8 117.0,91.6 123.0,76.5 129.0,63.4 135.0,52.3 141.0,43.2 147.0,36.2 153.0,31.2 159.0,28.1 165.0,27.1 171.0,28.1 177.0,31.2 183.0,36.2 189.0,43.2 195.0,52.3" fill="none" stroke="#a6d6a0" stroke-width="2"/><circle cx="165.0" cy="27.1" r="2.8" fill="#a6d6a0"/><text x="105" y="147" font-size="10" fill="#a6d6a0" text-anchor="middle" font-family="Noto Sans TC">h=−5t²+20t+1</text></svg>
+<div class="slide" data-pg="1 / 11"><div class="tag">Start!</div><div class="big-center">
+<div class="eyebrow">國三上學期・第一章 相似形與三角比</div>
+<h1>1-3　相似多邊形</h1>
+<div class="lead">形狀相同、大小不同<br>
+相似是<span style="color:#f2d979;">全等的推廣</span>——各對應邊成同一比例</div><svg viewBox="0 0 300 150" width="300" height="150" style="display:block;margin:0 auto;"><polygon points="20,120 90,120 50,55" fill="rgba(152,201,220,.15)" stroke="#98c9dc" stroke-width="2"/><text x="12" y="124" font-size="11" fill="#98c9dc">A</text><text x="82" y="124" font-size="11" fill="#98c9dc">B</text><text x="42" y="51" font-size="11" fill="#98c9dc">C</text><text x="55" y="138" font-size="10" fill="rgba(243,239,226,.6)">6</text><polygon points="160,130 265,130 220,32" fill="rgba(242,217,121,.13)" stroke="#f2d979" stroke-width="2"/><text x="152" y="134" font-size="11" fill="#f2d979">D</text><text x="257" y="134" font-size="11" fill="#f2d979">E</text><text x="212" y="28" font-size="11" fill="#f2d979">F</text><text x="205" y="146" font-size="10" fill="rgba(243,239,226,.6)">9</text><text x="150.0" y="16" font-size="11" fill="#eda0a8" text-anchor="middle" font-family="Noto Sans TC">△ABC ∽ △DEF（k=3/2）</text></svg>
 </div></div>
 
 <!-- 2 -->
-<div class="slide" data-pg="2 / 12"><div class="tag">目標</div><div class="body">
+<div class="slide" data-pg="2 / 11"><div class="tag">目標</div><div class="body">
 <h2>本節學習目標</h2>
 <ul>
-<li>把應用問題的<span class="hl">二次關係</span>設成函數</li>
-<li>用<span class="hl-b">頂點</span>求最值並解讀實際意義</li>
-<li>用<span class="hl">判別式</span>判斷交點個數</li>
-<li>解拋體運動、幾何最佳化</li>
+<li>相似定義:<span class="hl">對應角相等、對應邊成比例</span></li>
+<li>相似比 k → 面積比 <span class="hl-b">k²</span>、體積比 <span class="hl-b">k³</span></li>
+<li>用比例求未知邊長</li>
+<li>應用到地圖、測量、放大縮小</li>
 </ul>
-<div class="box y">一句話:<span class="hl">設變數→列函數→配方求頂點→還原意義（並檢查合理範圍）。</span></div>
+<div class="box y">一句話:<span class="hl">一維用 k、二維用 k²、三維用 k³。對應順序 A↔D、B↔E、C↔F 不能錯。</span></div>
 </div></div>
 
 <!-- 3 -->
-<div class="slide" data-pg="3 / 12"><div class="tag">核心</div><div class="body">
-<div class="eyebrow">核心　三大工具</div>
-<h2>步驟・拋體・判別式</h2>
-<table class="tbl">
-<tr><th style="width:26%;">工具</th><th>內容</th></tr>
-<tr><td class="hl-b">解題步驟</td><td>設 x(定範圍)→列 f(x)→頂點式→最值→還原</td></tr>
-<tr><td class="hl-b">拋體</td><td>h(t)=−½gt²+v₀t+h₀;落地令 h=0 取正根</td></tr>
-<tr><td class="hl-b">判別式</td><td>D=b²−4ac:&gt;0 兩交點、=0 相切、&lt;0 不交</td></tr>
-</table>
+<div class="slide" data-pg="3 / 11"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心　相似與維度</div>
+<h2>對應邊成比例，比隨維度升冪</h2>
+<div style="display:flex;flex-direction:row;align-items:center;gap:14px;justify-content:center;">
+<svg viewBox="0 0 300 130" width="300" height="130" style="display:block;margin:0 auto;"><line x1="20" y1="40" x2="50" y2="40" stroke="#98c9dc" stroke-width="3"/><line x1="20" y1="70" x2="80" y2="70" stroke="#98c9dc" stroke-width="3"/><text x="20" y="100" font-size="10" fill="#98c9dc">邊長 k=2</text><rect x="120" y="30" width="20" height="20" fill="none" stroke="#a6d6a0" stroke-width="2"/><rect x="120" y="60" width="40" height="40" fill="none" stroke="#a6d6a0" stroke-width="2"/><text x="120" y="118" font-size="10" fill="#a6d6a0">面積 k²=4</text><rect x="235" y="30" width="16" height="16" fill="none" stroke="#eda0a8" stroke-width="1.8"/><rect x="241" y="24" width="16" height="16" fill="none" stroke="rgba(237,160,168,.5)" stroke-width="1.3"/><line x1="235" y1="30" x2="241" y2="24" stroke="rgba(237,160,168,.5)" stroke-width="1.3"/><line x1="251" y1="30" x2="257" y2="24" stroke="rgba(237,160,168,.5)" stroke-width="1.3"/><line x1="251" y1="46" x2="257" y2="40" stroke="rgba(237,160,168,.5)" stroke-width="1.3"/><rect x="255" y="66" width="34" height="34" fill="none" stroke="#eda0a8" stroke-width="1.8"/><rect x="267" y="54" width="34" height="34" fill="none" stroke="rgba(237,160,168,.5)" stroke-width="1.3"/><line x1="255" y1="66" x2="267" y2="54" stroke="rgba(237,160,168,.5)" stroke-width="1.3"/><line x1="289" y1="66" x2="301" y2="54" stroke="rgba(237,160,168,.5)" stroke-width="1.3"/><line x1="289" y1="100" x2="301" y2="88" stroke="rgba(237,160,168,.5)" stroke-width="1.3"/><text x="235" y="122" font-size="10" fill="#eda0a8">體積 k³=8</text></svg>
+<table class="tbl" style="margin:0;font-size:14px;">
+<tr><td class="hl-b">邊長</td><td>k</td></tr>
+<tr><td class="hl-b">面積</td><td>k²</td></tr>
+<tr><td class="hl-b">體積</td><td>k³</td></tr>
+</table></div>
 <div class="box g" style="text-align:center;">
-⚠️ 求解後檢查合理範圍:長度不為負、時間取正根。</div>
+全等 = 相似比 k=1;AB/DE=BC/EF=CA/FD=k。</div>
 </div></div>
 
 <!-- 4 -->
-<div class="slide" data-pg="4 / 12"><div class="tag">例題</div><div class="body">
+<div class="slide" data-pg="4 / 11"><div class="tag">例題</div><div class="body">
 <div class="eyebrow">例題 1、2　難度 ★☆☆~★★☆</div>
-<h2>拋體 & 成本最小</h2>
+<h2>求邊角 & 由面積比求 k</h2>
 <div class="eg">
-<div class="q">球 h=−5t²+20t+1，求最高點與落地時間</div>
-<div class="stp">h=−5(t−2)²+21 → t=2 最高 21m;落地 t≈4.05 秒(正根)</div>
+<div class="q">△ABC∽△DEF，AB=6、DE=9、BC=8、∠A=50°，求 EF、∠D</div>
+<div class="stp">k=9/6=3/2;EF=8×3/2=12;∠D=∠A=50°</div>
 </div>
 <div class="eg">
-<div class="q">成本 C=x²−10x+30，求最低成本</div>
-<div class="stp">C=(x−5)²+5 → 最低 5 萬元(x=5 百件=500 件)</div>
+<div class="q">兩相似三角形面積比 9:25，求相似比</div>
+<div class="stp">k²=9/25 → k=3/5，邊長比 3:5</div>
 </div>
-<div class="box y" style="text-align:center;">落地兩根一正一負，捨負取正。</div>
+<div class="box y" style="text-align:center;">面積比開根號才是相似比:√(9/25)=3/5。</div>
 </div></div>
 
 <!-- 5 -->
-<div class="slide" data-pg="5 / 12"><div class="tag">例題</div><div class="body">
-<div class="eyebrow">例題 3　難度 ★★☆　交點個數</div>
-<h2>判別式看相交/相切/不交</h2>
-<div style="display:flex;flex-direction:row;align-items:flex-end;gap:10px;justify-content:center;">
-<svg viewBox="0 0 150 150" width="150" height="150" style="display:block;margin:0 auto;"><line x1="6" y1="108" x2="144" y2="108" stroke="rgba(243,239,226,.25)" stroke-width="1"/><line x1="75" y1="6" x2="75" y2="144" stroke="rgba(243,239,226,.25)" stroke-width="1"/><polyline points="20.4,13.4 23.5,24.0 26.7,33.9 29.8,43.3 33.0,52.0 36.1,60.1 39.3,67.5 42.4,74.4 45.6,80.6 48.7,86.1 51.9,91.1 55.0,95.4 58.2,99.0 61.3,102.1 64.5,104.5 67.6,106.3 70.8,107.4 73.9,108.0 77.1,107.9 80.2,107.1 83.4,105.8 86.5,103.8 89.7,101.1 92.8,97.9 96.0,94.0 99.1,89.5 102.3,84.3 105.4,78.6 108.6,72.2 111.7,65.1 114.9,57.5 118.0,49.2 121.2,40.2 124.3,30.7 127.5,20.5" fill="none" stroke="#98c9dc" stroke-width="2"/><polyline points="54.0,122.0 58.2,116.4 62.4,110.8 66.6,105.2 70.8,99.6 75.0,94.0 79.2,88.4 83.4,82.8 87.6,77.2 91.8,71.6 96.0,66.0 100.2,60.4 104.4,54.8 108.6,49.2 112.8,43.6 117.0,38.0 121.2,32.4 125.4,26.8 129.6,21.2" fill="none" stroke="#f2d979" stroke-width="2"/><circle cx="125.7" cy="26.4" r="3" fill="#eda0a8"/><circle cx="66.3" cy="105.6" r="3" fill="#eda0a8"/><text x="75" y="147" font-size="10" fill="#f3efe2" text-anchor="middle" font-family="Noto Sans TC">k=1：D=8>0 兩點</text></svg><svg viewBox="0 0 150 150" width="150" height="150" style="display:block;margin:0 auto;"><line x1="6" y1="108" x2="144" y2="108" stroke="rgba(243,239,226,.25)" stroke-width="1"/><line x1="75" y1="6" x2="75" y2="144" stroke="rgba(243,239,226,.25)" stroke-width="1"/><polyline points="20.4,13.4 23.5,24.0 26.7,33.9 29.8,43.3 33.0,52.0 36.1,60.1 39.3,67.5 42.4,74.4 45.6,80.6 48.7,86.1 51.9,91.1 55.0,95.4 58.2,99.0 61.3,102.1 64.5,104.5 67.6,106.3 70.8,107.4 73.9,108.0 77.1,107.9 80.2,107.1 83.4,105.8 86.5,103.8 89.7,101.1 92.8,97.9 96.0,94.0 99.1,89.5 102.3,84.3 105.4,78.6 108.6,72.2 111.7,65.1 114.9,57.5 118.0,49.2 121.2,40.2 124.3,30.7 127.5,20.5" fill="none" stroke="#98c9dc" stroke-width="2"/><polyline points="75.0,122.0 79.2,116.4 83.4,110.8 87.6,105.2 91.8,99.6 96.0,94.0 100.2,88.4 104.4,82.8 108.6,77.2 112.8,71.6 117.0,66.0 121.2,60.4 125.4,54.8 129.6,49.2" fill="none" stroke="#f2d979" stroke-width="2"/><circle cx="96.0" cy="94.0" r="3" fill="#eda0a8"/><text x="75" y="147" font-size="10" fill="#f3efe2" text-anchor="middle" font-family="Noto Sans TC">k=−1：D=0 相切</text></svg><svg viewBox="0 0 150 150" width="150" height="150" style="display:block;margin:0 auto;"><line x1="6" y1="108" x2="144" y2="108" stroke="rgba(243,239,226,.25)" stroke-width="1"/><line x1="75" y1="6" x2="75" y2="144" stroke="rgba(243,239,226,.25)" stroke-width="1"/><polyline points="20.4,13.4 23.5,24.0 26.7,33.9 29.8,43.3 33.0,52.0 36.1,60.1 39.3,67.5 42.4,74.4 45.6,80.6 48.7,86.1 51.9,91.1 55.0,95.4 58.2,99.0 61.3,102.1 64.5,104.5 67.6,106.3 70.8,107.4 73.9,108.0 77.1,107.9 80.2,107.1 83.4,105.8 86.5,103.8 89.7,101.1 92.8,97.9 96.0,94.0 99.1,89.5 102.3,84.3 105.4,78.6 108.6,72.2 111.7,65.1 114.9,57.5 118.0,49.2 121.2,40.2 124.3,30.7 127.5,20.5" fill="none" stroke="#98c9dc" stroke-width="2"/><polyline points="87.6,119.2 91.8,113.6 96.0,108.0 100.2,102.4 104.4,96.8 108.6,91.2 112.8,85.6 117.0,80.0 121.2,74.4 125.4,68.8 129.6,63.2" fill="none" stroke="#f2d979" stroke-width="2"/><text x="75" y="147" font-size="10" fill="#f3efe2" text-anchor="middle" font-family="Noto Sans TC">k=−2：D<0 不交</text></svg>
+<div class="slide" data-pg="5 / 11"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 3　難度 ★★☆　比例尺</div>
+<h2>地圖放大縮小</h2>
+<div class="eg">
+<div class="q">比例尺 1:50000，圖上 4cm，求實際距離</div>
+<div class="stp"><b>比例</b>　圖上 1cm = 實際 50000cm = 0.5km</div>
+<div class="stp"><b>實際</b>　4×50000=200000cm=2km</div>
 </div>
-<div class="box g" style="text-align:center;">y=2x+k 與 y=x²:聯立 x²−2x−k=0，D=4+4k。移動 k → 直線上下平移。</div>
+<div class="box g" style="text-align:center;">比例尺是相似比:圖上長 × 分母 = 實際長(先化同單位)。</div>
 </div></div>
 
 <!-- 6 -->
-<div class="slide" data-pg="6 / 12"><div class="tag">例題</div><div class="body">
-<div class="eyebrow">例題 4　難度 ★★★　內接正方形</div>
-<h2>面積最小值</h2>
-<div style="display:flex;flex-direction:row;align-items:center;gap:18px;justify-content:center;">
-<svg viewBox="0 0 150 150" width="150" height="150" style="display:block;margin:0 auto;"><rect x="20.0" y="16.0" width="110" height="110" fill="none" stroke="rgba(243,239,226,.5)" stroke-width="1.5"/><polygon points="55,16 130,51 95,126 20,91" fill="rgba(166,214,160,.18)" stroke="#a6d6a0" stroke-width="1.8"/><text x="20" y="16" font-size="9" fill="rgba(243,239,226,.6)">A</text><text x="130" y="16" font-size="9" fill="rgba(243,239,226,.6)">B</text><text x="130" y="126" font-size="9" fill="rgba(243,239,226,.6)">C</text><text x="20" y="126" font-size="9" fill="rgba(243,239,226,.6)">D</text><text x="75" y="148" font-size="10" fill="#a6d6a0" text-anchor="middle" font-family="Noto Sans TC">EFGH 內接正方形</text></svg>
-<div class="eg" style="margin:0;">
-<div class="q">邊 10，AE=BF=CG=DH=x，EFGH 正方形面積最小?</div>
-<div class="stp">角落 4 個直角三角形和 =2x(10−x)</div>
-<div class="stp">S=100−2x(10−x)=2(x−5)²+50</div>
-<div class="stp">最小 50(x=5);x=0 或 10 退回原正方形 100</div>
-</div></div>
-<div class="box y" style="text-align:center;">a&gt;0 → 有最小值:x=5 時內接正方形最小。</div>
+<div class="slide" data-pg="6 / 11"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 4、5　難度 ★★★</div>
+<h2>面積比反推 & 體積比</h2>
+<div class="eg">
+<div class="q">△ABC 面積 18，相似比 3:1，求 △DEF 面積</div>
+<div class="stp">面積比 k²=9 → 18÷9=2</div>
+</div>
+<div class="eg">
+<div class="q">兩相似球表面積比 4:9，求半徑比與體積比</div>
+<div class="stp">k²=4/9 → k=2/3;體積比 k³=8/27</div>
+</div>
+<div class="box y" style="text-align:center;">表面積比也是 k²(二維);體積比 k³(三維)。</div>
 </div></div>
 
 <!-- 7 -->
-<div class="slide" data-pg="7 / 12"><div class="tag">例題</div><div class="body">
-<div class="eyebrow">例題 5　難度 ★★★　利潤與不虧損</div>
-<h2>最大利潤 + P≥0 範圍</h2>
-<div class="eg">
-<div class="q">P=−3x²+300x−6300（元），每天生產 x 個</div>
-<div class="stp"><b>(1) 最大</b>　x=50，P(50)=1200 元</div>
-<div class="stp"><b>(2) 不虧損</b>　x²−100x+2100≤0 →(x−30)(x−70)≤0 → 30≤x≤70</div>
-<div class="stp"><b>結論</b>　至少生產 30 個才不虧損</div>
-</div>
-<div class="box g" style="text-align:center;">P≥0 是二次不等式:先解 P=0 的兩根，再取中間區間。</div>
-</div></div>
-
-<!-- 8 -->
-<div class="slide" data-pg="8 / 12"><div class="tag">精選</div><div class="body">
+<div class="slide" data-pg="7 / 11"><div class="tag">精選</div><div class="body">
 <div class="eyebrow">隨堂精選</div>
 <h2>快速檢查</h2>
 <table class="tbl">
-<tr><th style="width:60%;">題目</th><th>答案</th></tr>
-<tr><td>h=−5t²+30t 最高點?</td><td class="fm hl">t=3、45m</td></tr>
-<tr><td>y=x+k 與 y=x² 相切求 k?</td><td class="fm hl">−1/4</td></tr>
-<tr><td>售價 x 銷量(100−x) 最大利潤?</td><td class="fm hl">2500(x=50)</td></tr>
-<tr><td>兩數和 20，積最大?</td><td class="fm hl">100(各 10)</td></tr>
-<tr><td>P=−x²+12x−20≥0 範圍?</td><td class="fm hl">2≤x≤10</td></tr>
+<tr><th style="width:58%;">題目</th><th>答案</th></tr>
+<tr><td>相似比 3:4，面積比?</td><td class="fm hl">9:16</td></tr>
+<tr><td>面積比 16:1，相似比?</td><td class="fm hl">4:1</td></tr>
+<tr><td>相似比 2:5，體積比?</td><td class="fm hl">8:125</td></tr>
+<tr><td>面積 12 與 48，周長比?</td><td class="fm hl">1:2</td></tr>
+<tr><td>大圓半徑=小圓 3 倍，面積比?</td><td class="fm hl">9:1</td></tr>
 </table>
-<div class="box y" style="text-align:center;">相切 → D=0;不虧損 → 解 P=0 兩根取中間。</div>
+<div class="box y" style="text-align:center;">周長是一維 → 周長比=相似比 k=√(12/48)=1/2。</div>
+</div></div>
+
+<!-- 8 -->
+<div class="slide" data-pg="8 / 11"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 1　【衛星地圖】</div>
+<h2>求比例尺與距離</h2>
+<div class="box">台灣寬度圖上 3.2cm、實際約 160km</div>
+<div class="eg">
+<div class="stp"><b>(1)</b> 3.2:16000000 = 1:5000000</div>
+<div class="stp"><b>(2)</b> 圖上 1.9cm → 1.9×5000000=95km</div>
+<div class="stp"><b>(3)</b> 換 1:3000000 → 16000000÷3000000≈5.33cm</div>
+</div>
 </div></div>
 
 <!-- 9 -->
-<div class="slide" data-pg="9 / 12"><div class="tag">素養</div><div class="body">
-<div class="eyebrow">素養題型 1　【輪胎定價】</div>
-<h2>利潤最大化</h2>
-<div class="box">定價 x 元、月銷量 (2000−4x)，成本每條 400 元</div>
+<div class="slide" data-pg="9 / 11"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 2　【輪胎截面】</div>
+<h2>相似比與面積</h2>
+<div class="box">小輪胎半徑 15cm、大輪胎 20cm</div>
 <div class="eg">
-<div class="stp"><b>(1)</b> P=(x−400)(2000−4x)=−4x²+3600x−800000(100≤x≤500)</div>
-<div class="stp"><b>(2)</b> 頂點 x=450 → 最大利潤 10000 元</div>
-<div class="stp"><b>(3)</b> 定價上限 600 不影響(頂點 450 在內) → 仍 10000 元</div>
+<div class="stp"><b>(1)</b> 相似比 15:20=3:4</div>
+<div class="stp"><b>(2)</b> 面積比 9:16;大截面=225π×16/9=400π cm²</div>
+<div class="stp"><b>(3)</b> 多用 (400−225)/225=7/9≈77.8%</div>
 </div>
 </div></div>
 
 <!-- 10 -->
-<div class="slide" data-pg="10 / 12"><div class="tag">素養</div><div class="body">
-<div class="eyebrow">素養題型 2　【籃球投籃】</div>
-<h2>拋物線軌跡</h2>
-<div style="display:flex;flex-direction:row;align-items:center;gap:18px;justify-content:center;">
-<svg viewBox="0 0 190 150" width="190" height="150" style="display:block;margin:0 auto;"><line x1="6" y1="124" x2="184" y2="124" stroke="rgba(243,239,226,.3)" stroke-width="1"/><line x1="95" y1="6" x2="95" y2="144" stroke="rgba(243,239,226,.3)" stroke-width="1"/><polyline points="87.0,126.8 95.0,96.0 103.0,70.8 111.0,51.2 119.0,37.2 127.0,28.8 135.0,26.0 143.0,28.8 151.0,37.2 159.0,51.2 167.0,70.8 175.0,96.0" fill="none" stroke="#eda0a8" stroke-width="2"/><circle cx="135.0" cy="26.0" r="2.8" fill="#eda0a8"/><text x="95" y="147" font-size="10" fill="#eda0a8" text-anchor="middle" font-family="Noto Sans TC">h=−5t²+10t+2</text></svg>
-<div class="eg" style="margin:0;">
-<div class="q">h(t)=−5t²+10t+2，籃框高 3m</div>
-<div class="stp"><b>(1)</b> h=−5(t−1)²+7 → 最高 7m(t=1)</div>
-<div class="stp"><b>(2)</b> h=3:5t²−10t+1=0 → t≈0.11、1.89 秒</div>
-<div class="stp"><b>(3)</b> 落地 h=0 → t≈2.18 秒</div>
-</div></div>
+<div class="slide" data-pg="10 / 11"><div class="tag">避雷</div><div class="body">
+<h2>避雷指南</h2>
+<table class="tbl">
+<tr><th style="width:44%;">❌ 錯誤</th><th>✓ 正確</th></tr>
+<tr><td>面積比用 k</td><td>面積比 = <b class="hl-g">k²</b></td></tr>
+<tr><td>體積比用 k 或 k²</td><td>體積比 = <b class="hl-g">k³</b></td></tr>
+<tr><td>對應頂點順序亂寫</td><td><b class="hl-g">A↔D、B↔E、C↔F</b></td></tr>
+<tr><td>比例尺換算漏換單位</td><td>km 與 cm <b class="hl-g">先化同單位</b></td></tr>
+</table>
+<div class="box y" style="text-align:center;">追問:相似比 k 多少?求的是邊長比(k)、面積比(k²)還體積比(k³)?</div>
 </div></div>
 
 <!-- 11 -->
-<div class="slide" data-pg="11 / 12"><div class="tag">避雷</div><div class="body">
-<h2>避雷指南</h2>
-<table class="tbl">
-<tr><th style="width:46%;">❌ 錯誤</th><th>✓ 正確</th></tr>
-<tr><td>求解後不檢查範圍</td><td>長度/產量/時間<b class="hl-g">取合理值</b></td></tr>
-<tr><td>落地取到負根</td><td>兩根一正一負，<b class="hl-g">捨負取正</b></td></tr>
-<tr><td>交點題看圖估</td><td>先整理標準式，<b class="hl-g">用判別式 D</b></td></tr>
-<tr><td>三次關係當二次</td><td>確認目標函數<b class="hl-g">是二次式</b></td></tr>
-</table>
-<div class="box y" style="text-align:center;">追問:x 的合理範圍?求的是最大還最小?有無實際限制?</div>
-</div></div>
-
-<!-- 12 -->
-<div class="slide" data-pg="12 / 12"><div class="tag">總結</div><div class="body">
+<div class="slide" data-pg="11 / 11"><div class="tag">總結</div><div class="body">
 <h2>本節總結</h2>
 <ul>
-<li><span class="hl">應用步驟</span>:設→列函數→頂點式→最值→還原</li>
-<li><span class="hl">拋體</span>:h=0 取正根求落地</li>
-<li><span class="hl">判別式</span> D:&gt;0 兩點、=0 相切、&lt;0 不交</li>
-<li><span class="hl-r">最佳化</span>:面積/利潤/成本 → 化二次求頂點</li>
+<li><span class="hl">相似</span>:對應角相等 + 對應邊成比例(k)</li>
+<li><span class="hl">維度比</span>:邊長 k、面積 k²、體積 k³</li>
+<li><span class="hl">比例尺</span>:圖上 × 分母 = 實際(化同單位)</li>
+<li><span class="hl-r">全等</span>:相似比 k=1 的特例</li>
 </ul>
 <div class="box g" style="text-align:center;font-size:19px;">
-🎉 <b>第一章 二次函數 完成!</b> 承先:1-1 圖形、1-2 最值<br>
-🔗 <b>啟後</b>:<span class="hl">第2章 相似形（比例與相似三角形）。</span></div>
+承先:八下 全等 → 相似是全等的推廣<br>
+🔗 <b>啟後</b>:<span class="hl">1-4 相似三角形的應用與三角比（AA、SAS、SSS）。</span></div>
 </div></div>
 
 </div></body></html>

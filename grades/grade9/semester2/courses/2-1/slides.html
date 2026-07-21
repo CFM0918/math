@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>九下 2-1 機率的意義與基本概念｜授課簡報</title>
+<title>九下 2-1 四分位數與盒狀圖｜授課簡報</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
 <style>
@@ -82,93 +82,93 @@ svg{display:block;margin:6px auto;max-width:100%;}
 
 <!-- 1 -->
 <div class="slide" data-pg="1 / 12"><div class="tag">Start!</div><div class="big-center">
-<div class="eyebrow">國三下學期・第二章 機率</div>
-<h1>2-1　機率的意義</h1>
-<div class="lead">可能性用 <span style="color:#f2d979;">0 到 1</span> 的數字表達<br>
-機率是數學化的「不確定性」</div><svg viewBox="0 0 330 120" width="330" height="120" style="display:block;margin:0 auto;"><defs><linearGradient id="pg" x1="0" x2="1"><stop offset="0" stop-color="#eda0a8"/><stop offset="0.5" stop-color="#f2d979"/><stop offset="1" stop-color="#a6d6a0"/></linearGradient></defs><rect x="30" y="54" width="270" height="12" rx="6" fill="url(#pg)" opacity="0.55"/><line x1="30" y1="48" x2="30" y2="72" stroke="#eda0a8" stroke-width="2"/><text x="30" y="90" font-size="11" fill="#eda0a8" text-anchor="middle" font-family="Noto Sans TC">0 不可能</text><line x1="165" y1="48" x2="165" y2="72" stroke="#f2d979" stroke-width="2"/><text x="165" y="90" font-size="11" fill="#f2d979" text-anchor="middle" font-family="Noto Sans TC">½</text><line x1="300" y1="48" x2="300" y2="72" stroke="#a6d6a0" stroke-width="2"/><text x="300" y="90" font-size="11" fill="#a6d6a0" text-anchor="middle" font-family="Noto Sans TC">1 必然</text><text x="165" y="26" font-size="11" fill="rgba(243,239,226,.7)" text-anchor="middle" font-family="Noto Sans TC">機率一定在 0 到 1 之間</text></svg>
+<div class="eyebrow">國三下學期・第二章 統計與機率</div>
+<h1>2-1　四分位數與盒狀圖</h1>
+<div class="lead">莖葉圖、盒狀圖、散布圖<br>
+<span style="color:#f2d979;">選對圖表</span>才能有效呈現資料特性</div><svg viewBox="0 0 340 140" width="340" height="140" style="display:block;margin:0 auto;"><line x1="58" y1="45" x2="151" y2="45" stroke="#98c9dc" stroke-width="1.5"/><line x1="245" y1="45" x2="301" y2="45" stroke="#98c9dc" stroke-width="1.5"/><rect x="151" y="35" width="94" height="20" fill="rgba(242,217,121,.12)" stroke="#98c9dc" stroke-width="1.8"/><line x1="208" y1="35" x2="208" y2="55" stroke="#98c9dc" stroke-width="2"/><line x1="58" y1="39" x2="58" y2="51" stroke="#98c9dc" stroke-width="1.3"/><line x1="301" y1="39" x2="301" y2="51" stroke="#98c9dc" stroke-width="1.3"/><text x="14" y="49" font-size="10" fill="#98c9dc" text-anchor="end">甲</text><line x1="170" y1="95" x2="189" y2="95" stroke="#a6d6a0" stroke-width="1.5"/><line x1="238" y1="95" x2="282" y2="95" stroke="#a6d6a0" stroke-width="1.5"/><rect x="189" y="85" width="49" height="20" fill="rgba(242,217,121,.12)" stroke="#a6d6a0" stroke-width="1.8"/><line x1="215" y1="85" x2="215" y2="105" stroke="#a6d6a0" stroke-width="2"/><line x1="170" y1="89" x2="170" y2="101" stroke="#a6d6a0" stroke-width="1.3"/><line x1="282" y1="89" x2="282" y2="101" stroke="#a6d6a0" stroke-width="1.3"/><text x="14" y="99" font-size="10" fill="#a6d6a0" text-anchor="end">乙</text><line x1="20" y1="20" x2="20" y2="120" stroke="rgba(243,239,226,.12)" stroke-width="1"/><text x="20" y="134" font-size="9" fill="rgba(243,239,226,.5)" text-anchor="middle">20</text><line x1="95" y1="20" x2="95" y2="120" stroke="rgba(243,239,226,.12)" stroke-width="1"/><text x="95" y="134" font-size="9" fill="rgba(243,239,226,.5)" text-anchor="middle">40</text><line x1="170" y1="20" x2="170" y2="120" stroke="rgba(243,239,226,.12)" stroke-width="1"/><text x="170" y="134" font-size="9" fill="rgba(243,239,226,.5)" text-anchor="middle">60</text><line x1="245" y1="20" x2="245" y2="120" stroke="rgba(243,239,226,.12)" stroke-width="1"/><text x="245" y="134" font-size="9" fill="rgba(243,239,226,.5)" text-anchor="middle">80</text><line x1="320" y1="20" x2="320" y2="120" stroke="rgba(243,239,226,.12)" stroke-width="1"/><text x="320" y="134" font-size="9" fill="rgba(243,239,226,.5)" text-anchor="middle">100</text></svg>
 </div></div>
 
 <!-- 2 -->
 <div class="slide" data-pg="2 / 12"><div class="tag">目標</div><div class="body">
 <h2>本節學習目標</h2>
 <ul>
-<li>理解<span class="hl">樣本空間與事件</span></li>
-<li>機率定義 <span class="hl-b">P(A)=n(A)/n(S)</span>(等可能)</li>
-<li>性質:0≤P≤1、必然=1、不可能=0</li>
-<li>用列舉法算簡單事件機率</li>
+<li>讀<span class="hl">莖葉圖</span>算中位數、四分位數</li>
+<li>用<span class="hl-b">盒狀圖</span>比較多組資料分布</li>
+<li>理解<span class="hl-b">散布圖與相關性</span></li>
+<li>判斷資料<span class="hl">偏態</span>(右偏/左偏)</li>
 </ul>
-<div class="box y">一句話:<span class="hl">互斥→相加、獨立→相乘、餘事件→1減。「至少一個」優先用餘事件。</span></div>
+<div class="box y">一句話:<span class="hl">盒狀圖看分布與離群、散布圖看相關。相關 ≠ 因果。長尾在哪側就偏那側。</span></div>
 </div></div>
 
 <!-- 3 -->
 <div class="slide" data-pg="3 / 12"><div class="tag">核心</div><div class="body">
-<div class="eyebrow">核心　定義與運算</div>
-<h2>四個關鍵規則</h2>
+<div class="eyebrow">核心　四種圖表工具</div>
+<h2>各自呈現不同特性</h2>
 <table class="tbl">
-<tr><th style="width:24%;">概念</th><th>內容</th></tr>
-<tr><td class="hl-b">古典機率</td><td>P(A)=n(A)/n(S)(結果等可能)</td></tr>
-<tr><td class="hl-b">互斥</td><td>不能同時發生 → P(A或B)=P(A)+P(B)</td></tr>
-<tr><td class="hl-b">餘事件</td><td>P(A')=1−P(A)</td></tr>
-<tr><td class="hl-b">獨立</td><td>互不影響 → P(A且B)=P(A)×P(B)</td></tr>
+<tr><th style="width:24%;">圖表</th><th>用途</th></tr>
+<tr><td class="hl-b">莖葉圖</td><td>十位莖、個位葉;看分布找統計量</td></tr>
+<tr><td class="hl-b">盒狀圖</td><td>Q1/Q2/Q3/極值;IQR=Q3−Q1</td></tr>
+<tr><td class="hl-b">偏態</td><td>右偏:眾&lt;中&lt;均;左偏相反</td></tr>
+<tr><td class="hl-b">散布圖/r</td><td>正/負/無相關;−1≤r≤1</td></tr>
 </table>
-<div class="box g" style="text-align:center;">放回 → 獨立(相乘);不放回 → 第二次機率改變。</div>
+<div class="box g" style="text-align:center;">離群值界限:Q1−1.5·IQR ~ Q3+1.5·IQR。</div>
 </div></div>
 
 <!-- 4 -->
 <div class="slide" data-pg="4 / 12"><div class="tag">例題</div><div class="body">
-<div class="eyebrow">例題 1、2　難度 ★☆☆~★★☆</div>
-<h2>骰子 & 撲克牌</h2>
+<div class="eyebrow">例題 1　難度 ★☆☆　莖葉圖</div>
+<h2>四分位數</h2>
+<div class="box">資料(14個):52 58 61 65 67 69 70 73 76 78 78 82 84 89</div>
 <div class="eg">
-<div class="q">丟骰子:(1) 偶數 (2) 3 或 4 的機率</div>
-<div class="stp">(1) {2,4,6} → 3/6=1/2　(2) {3,4} → 2/6=1/3</div>
+<div class="stp"><b>Q2</b>　第7、8個平均 (70+73)/2=71.5</div>
+<div class="stp"><b>Q1</b>　前7個中位數=65</div>
+<div class="stp"><b>Q3</b>　後7個中位數=78;<b>IQR</b>=78−65=13</div>
 </div>
-<div class="eg">
-<div class="q">52 張牌:(1) 紅心 (2) 不是 A</div>
-<div class="stp">(1) 13/52=1/4　(2) 1−4/52=12/13(餘事件)</div>
-</div>
-<div class="box y" style="text-align:center;">「不是…」優先用餘事件 1−P(是)。</div>
+<div class="box y" style="text-align:center;">莖葉圖「7｜3」代表 73(葉是個位)，不是 7.3。</div>
 </div></div>
 
 <!-- 5 -->
 <div class="slide" data-pg="5 / 12"><div class="tag">例題</div><div class="body">
-<div class="eyebrow">例題 3　難度 ★★☆　兩骰子</div>
-<h2>點數和 = 7</h2>
-<div style="display:flex;flex-direction:row;align-items:center;gap:16px;justify-content:center;">
-<svg viewBox="0 0 190 190" width="190" height="190" style="display:block;margin:0 auto;"><text x="44" y="24" font-size="10" fill="rgba(243,239,226,.6)" text-anchor="middle">1</text><text x="20" y="47" font-size="10" fill="rgba(243,239,226,.6)" text-anchor="middle">1</text><text x="72" y="24" font-size="10" fill="rgba(243,239,226,.6)" text-anchor="middle">2</text><text x="20" y="75" font-size="10" fill="rgba(243,239,226,.6)" text-anchor="middle">2</text><text x="100" y="24" font-size="10" fill="rgba(243,239,226,.6)" text-anchor="middle">3</text><text x="20" y="103" font-size="10" fill="rgba(243,239,226,.6)" text-anchor="middle">3</text><text x="128" y="24" font-size="10" fill="rgba(243,239,226,.6)" text-anchor="middle">4</text><text x="20" y="131" font-size="10" fill="rgba(243,239,226,.6)" text-anchor="middle">4</text><text x="156" y="24" font-size="10" fill="rgba(243,239,226,.6)" text-anchor="middle">5</text><text x="20" y="159" font-size="10" fill="rgba(243,239,226,.6)" text-anchor="middle">5</text><text x="184" y="24" font-size="10" fill="rgba(243,239,226,.6)" text-anchor="middle">6</text><text x="20" y="187" font-size="10" fill="rgba(243,239,226,.6)" text-anchor="middle">6</text><rect x="30" y="30" width="26" height="26" fill="rgba(152,201,220,.08)" stroke="rgba(152,201,220,.3)" stroke-width="1"/><rect x="58" y="30" width="26" height="26" fill="rgba(152,201,220,.08)" stroke="rgba(152,201,220,.3)" stroke-width="1"/><rect x="86" y="30" width="26" height="26" fill="rgba(152,201,220,.08)" stroke="rgba(152,201,220,.3)" stroke-width="1"/><rect x="114" y="30" width="26" height="26" fill="rgba(152,201,220,.08)" stroke="rgba(152,201,220,.3)" stroke-width="1"/><rect x="142" y="30" width="26" height="26" fill="rgba(152,201,220,.08)" stroke="rgba(152,201,220,.3)" stroke-width="1"/><rect x="170" y="30" width="26" height="26" fill="rgba(242,217,121,.35)" stroke="#f2d979" stroke-width="1"/><rect x="30" y="58" width="26" height="26" fill="rgba(152,201,220,.08)" stroke="rgba(152,201,220,.3)" stroke-width="1"/><rect x="58" y="58" width="26" height="26" fill="rgba(152,201,220,.08)" stroke="rgba(152,201,220,.3)" stroke-width="1"/><rect x="86" y="58" width="26" height="26" fill="rgba(152,201,220,.08)" stroke="rgba(152,201,220,.3)" stroke-width="1"/><rect x="114" y="58" width="26" height="26" fill="rgba(152,201,220,.08)" stroke="rgba(152,201,220,.3)" stroke-width="1"/><rect x="142" y="58" width="26" height="26" fill="rgba(242,217,121,.35)" stroke="#f2d979" stroke-width="1"/><rect x="170" y="58" width="26" height="26" fill="rgba(152,201,220,.08)" stroke="rgba(152,201,220,.3)" stroke-width="1"/><rect x="30" y="86" width="26" height="26" fill="rgba(152,201,220,.08)" stroke="rgba(152,201,220,.3)" stroke-width="1"/><rect x="58" y="86" width="26" height="26" fill="rgba(152,201,220,.08)" stroke="rgba(152,201,220,.3)" stroke-width="1"/><rect x="86" y="86" width="26" height="26" fill="rgba(152,201,220,.08)" stroke="rgba(152,201,220,.3)" stroke-width="1"/><rect x="114" y="86" width="26" height="26" fill="rgba(242,217,121,.35)" stroke="#f2d979" stroke-width="1"/><rect x="142" y="86" width="26" height="26" fill="rgba(152,201,220,.08)" stroke="rgba(152,201,220,.3)" stroke-width="1"/><rect x="170" y="86" width="26" height="26" fill="rgba(152,201,220,.08)" stroke="rgba(152,201,220,.3)" stroke-width="1"/><rect x="30" y="114" width="26" height="26" fill="rgba(152,201,220,.08)" stroke="rgba(152,201,220,.3)" stroke-width="1"/><rect x="58" y="114" width="26" height="26" fill="rgba(152,201,220,.08)" stroke="rgba(152,201,220,.3)" stroke-width="1"/><rect x="86" y="114" width="26" height="26" fill="rgba(242,217,121,.35)" stroke="#f2d979" stroke-width="1"/><rect x="114" y="114" width="26" height="26" fill="rgba(152,201,220,.08)" stroke="rgba(152,201,220,.3)" stroke-width="1"/><rect x="142" y="114" width="26" height="26" fill="rgba(152,201,220,.08)" stroke="rgba(152,201,220,.3)" stroke-width="1"/><rect x="170" y="114" width="26" height="26" fill="rgba(152,201,220,.08)" stroke="rgba(152,201,220,.3)" stroke-width="1"/><rect x="30" y="142" width="26" height="26" fill="rgba(152,201,220,.08)" stroke="rgba(152,201,220,.3)" stroke-width="1"/><rect x="58" y="142" width="26" height="26" fill="rgba(242,217,121,.35)" stroke="#f2d979" stroke-width="1"/><rect x="86" y="142" width="26" height="26" fill="rgba(152,201,220,.08)" stroke="rgba(152,201,220,.3)" stroke-width="1"/><rect x="114" y="142" width="26" height="26" fill="rgba(152,201,220,.08)" stroke="rgba(152,201,220,.3)" stroke-width="1"/><rect x="142" y="142" width="26" height="26" fill="rgba(152,201,220,.08)" stroke="rgba(152,201,220,.3)" stroke-width="1"/><rect x="170" y="142" width="26" height="26" fill="rgba(152,201,220,.08)" stroke="rgba(152,201,220,.3)" stroke-width="1"/><rect x="30" y="170" width="26" height="26" fill="rgba(242,217,121,.35)" stroke="#f2d979" stroke-width="1"/><rect x="58" y="170" width="26" height="26" fill="rgba(152,201,220,.08)" stroke="rgba(152,201,220,.3)" stroke-width="1"/><rect x="86" y="170" width="26" height="26" fill="rgba(152,201,220,.08)" stroke="rgba(152,201,220,.3)" stroke-width="1"/><rect x="114" y="170" width="26" height="26" fill="rgba(152,201,220,.08)" stroke="rgba(152,201,220,.3)" stroke-width="1"/><rect x="142" y="170" width="26" height="26" fill="rgba(152,201,220,.08)" stroke="rgba(152,201,220,.3)" stroke-width="1"/><rect x="170" y="170" width="26" height="26" fill="rgba(152,201,220,.08)" stroke="rgba(152,201,220,.3)" stroke-width="1"/><text x="95" y="184" font-size="10" fill="#f2d979" text-anchor="middle" font-family="Noto Sans TC">和=7 有 6 種 → 6/36=1/6</text></svg>
-<div class="eg" style="margin:0;">
-<div class="q">兩公平骰子，和=7 的機率?</div>
-<div class="stp">n(S)=6×6=36</div>
-<div class="stp">和=7:(1,6)(2,5)(3,4)(4,3)(5,2)(6,1)=6 種</div>
-<div class="stp"><b>P=6/36=1/6</b></div>
+<div class="eyebrow">例題 2　難度 ★★☆　盒狀圖比較</div>
+<h2>甲乙兩班</h2>
+<div style="display:flex;flex-direction:row;align-items:center;gap:14px;justify-content:center;">
+<svg viewBox="0 0 300 130" width="300" height="130" style="display:block;margin:0 auto;"><line x1="52" y1="45" x2="134" y2="45" stroke="#98c9dc" stroke-width="1.5"/><line x1="215" y1="45" x2="264" y2="45" stroke="#98c9dc" stroke-width="1.5"/><rect x="134" y="35" width="81" height="20" fill="rgba(242,217,121,.12)" stroke="#98c9dc" stroke-width="1.8"/><line x1="182" y1="35" x2="182" y2="55" stroke="#98c9dc" stroke-width="2"/><line x1="52" y1="39" x2="52" y2="51" stroke="#98c9dc" stroke-width="1.3"/><line x1="264" y1="39" x2="264" y2="51" stroke="#98c9dc" stroke-width="1.3"/><text x="14" y="49" font-size="10" fill="#98c9dc" text-anchor="end">甲</text><line x1="150" y1="95" x2="166" y2="95" stroke="#a6d6a0" stroke-width="1.5"/><line x1="208" y1="95" x2="248" y2="95" stroke="#a6d6a0" stroke-width="1.5"/><rect x="166" y="85" width="42" height="20" fill="rgba(242,217,121,.12)" stroke="#a6d6a0" stroke-width="1.8"/><line x1="189" y1="85" x2="189" y2="105" stroke="#a6d6a0" stroke-width="2"/><line x1="150" y1="89" x2="150" y2="101" stroke="#a6d6a0" stroke-width="1.3"/><line x1="248" y1="89" x2="248" y2="101" stroke="#a6d6a0" stroke-width="1.3"/><text x="14" y="99" font-size="10" fill="#a6d6a0" text-anchor="end">乙</text><line x1="20" y1="20" x2="20" y2="120" stroke="rgba(243,239,226,.12)" stroke-width="1"/><text x="20" y="134" font-size="9" fill="rgba(243,239,226,.5)" text-anchor="middle">20</text><line x1="85" y1="20" x2="85" y2="120" stroke="rgba(243,239,226,.12)" stroke-width="1"/><text x="85" y="134" font-size="9" fill="rgba(243,239,226,.5)" text-anchor="middle">40</text><line x1="150" y1="20" x2="150" y2="120" stroke="rgba(243,239,226,.12)" stroke-width="1"/><text x="150" y="134" font-size="9" fill="rgba(243,239,226,.5)" text-anchor="middle">60</text><line x1="215" y1="20" x2="215" y2="120" stroke="rgba(243,239,226,.12)" stroke-width="1"/><text x="215" y="134" font-size="9" fill="rgba(243,239,226,.5)" text-anchor="middle">80</text><line x1="280" y1="20" x2="280" y2="120" stroke="rgba(243,239,226,.12)" stroke-width="1"/><text x="280" y="134" font-size="9" fill="rgba(243,239,226,.5)" text-anchor="middle">100</text></svg>
+<div class="eg" style="margin:0;font-size:13px;">
+<div class="stp">乙 Q2=72&gt;甲 70 → 乙略高</div>
+<div class="stp">IQR 甲25、乙13 → 乙更集中</div>
+<div class="stp">全距 甲65、乙30 → 甲更分散</div>
 </div></div>
-<div class="box g" style="text-align:center;">兩骰子要用「有序對」列舉:(2,5) 和 (5,2) 是不同結果。</div>
+<div class="box y" style="text-align:center;">乙整體高且穩定;甲有偏低同學、分布廣。</div>
 </div></div>
 
 <!-- 6 -->
 <div class="slide" data-pg="6 / 12"><div class="tag">例題</div><div class="body">
-<div class="eyebrow">例題 4　難度 ★★★　放回獨立</div>
-<h2>兩次都紅球</h2>
-<div class="eg">
-<div class="q">3 紅 5 白，放回後再取，兩次都紅?</div>
-<div class="stp"><b>每次</b>　P(紅)=3/8</div>
-<div class="stp"><b>放回=獨立</b>　相乘:3/8×3/8=9/64</div>
-</div>
-<div class="box y" style="text-align:center;">放回 → 每次條件相同、事件獨立 → 機率相乘。</div>
+<div class="eyebrow">例題 3　難度 ★★☆　偏態</div>
+<h2>三集中量順序</h2>
+<div style="display:flex;flex-direction:row;align-items:center;gap:16px;justify-content:center;">
+<svg viewBox="0 0 220 140" width="220" height="140" style="display:block;margin:0 auto;"><line x1="15" y1="120" x2="215" y2="120" stroke="rgba(243,239,226,.3)" stroke-width="1"/><polyline points="15,118 19,117 23,115 27,112 31,107 35,101 39,94 43,84 47,74 51,62 55,51 59,41 63,32 67,27 71,25 75,27 79,32 83,41 87,51 91,62 95,74 99,84 103,94 107,101 111,107 115,112 119,115 123,117 127,118 131,119 135,119 139,120 143,120 147,120 151,120 155,120 159,120 163,120 167,120 171,120 175,120 179,120 183,120 187,120 191,120 195,120 199,120 203,120 207,120 211,120 215,120" fill="none" stroke="#98c9dc" stroke-width="2"/><line x1="71" y1="30" x2="71" y2="120" stroke="#eda0a8" stroke-width="1.3" stroke-dasharray="3,2"/><text x="71" y="26" font-size="10" fill="#eda0a8" text-anchor="middle">眾</text><line x1="87" y1="30" x2="87" y2="120" stroke="#a6d6a0" stroke-width="1.3" stroke-dasharray="3,2"/><text x="87" y="26" font-size="10" fill="#a6d6a0" text-anchor="middle">中</text><line x1="107" y1="30" x2="107" y2="120" stroke="#f2d979" stroke-width="1.3" stroke-dasharray="3,2"/><text x="107" y="26" font-size="10" fill="#f2d979" text-anchor="middle">均</text><text x="110" y="137" font-size="10" fill="rgba(243,239,226,.7)" text-anchor="middle" font-family="Noto Sans TC">右偏：眾<中<均</text></svg>
+<div class="eg" style="margin:0;">
+<div class="q">月收入多數 3~5 萬、少數超 50 萬</div>
+<div class="stp">少數高薪把平均數拉高</div>
+<div class="stp">中位數≈4 萬(不受極端值影響)</div>
+<div class="stp"><b>右偏：眾數 &lt; 中位數 &lt; 平均數</b></div>
+</div></div>
+<div class="box g" style="text-align:center;">長尾在右 → 右偏(正偏) → 平均被拉向右(大)。</div>
 </div></div>
 
 <!-- 7 -->
 <div class="slide" data-pg="7 / 12"><div class="tag">例題</div><div class="body">
-<div class="eyebrow">例題 5　難度 ★★★　餘事件</div>
-<h2>至少答對 1 題</h2>
-<div style="display:flex;flex-direction:row;align-items:center;gap:16px;justify-content:center;">
-<svg viewBox="0 0 220 160" width="220" height="160" style="display:block;margin:0 auto;"><text x="110" y="20" font-size="11" fill="rgba(243,239,226,.75)" text-anchor="middle" font-family="Noto Sans TC">餘事件法</text><text x="20" y="55" font-size="13" fill="#f3efe2" font-family="Noto Sans TC">至少 1 題對</text><text x="20" y="80" font-size="12" fill="rgba(243,239,226,.6)" font-family="Noto Sans TC">＝ 1 − P(全部錯)</text><text x="20" y="112" font-size="13" fill="#eda0a8" font-family="Noto Serif TC">P(全錯)=(3/4)⁵=243/1024</text><text x="20" y="140" font-size="14" fill="#a6d6a0" font-family="Noto Serif TC">P=1−243/1024=781/1024</text><text x="20" y="162" font-size="11" fill="rgba(243,239,226,.6)" font-family="Noto Sans TC">≈ 76.3%</text></svg>
-<div class="eg" style="margin:0;">
-<div class="q">5 題各 4 選項猜答，至少對 1 題?</div>
-<div class="stp">餘事件=全部錯</div>
-<div class="stp">每題錯 3/4 → 全錯 (3/4)⁵=243/1024</div>
-<div class="stp"><b>1−243/1024=781/1024≈76.3%</b></div>
+<div class="eyebrow">例題 4、5　難度 ★★★</div>
+<h2>相關 & 離群值</h2>
+<div style="display:flex;flex-direction:row;align-items:center;gap:14px;justify-content:center;">
+<svg viewBox="0 0 180 150" width="180" height="150" style="display:block;margin:0 auto;"><line x1="24" y1="130" x2="185" y2="130" stroke="rgba(243,239,226,.3)" stroke-width="1"/><line x1="24" y1="20" x2="24" y2="130" stroke="rgba(243,239,226,.3)" stroke-width="1"/><circle cx="32" cy="120" r="3" fill="#f2d979"/><circle cx="48" cy="115" r="3" fill="#f2d979"/><circle cx="58" cy="100" r="3" fill="#f2d979"/><circle cx="73" cy="96" r="3" fill="#f2d979"/><circle cx="81" cy="87" r="3" fill="#f2d979"/><circle cx="95" cy="78" r="3" fill="#f2d979"/><circle cx="109" cy="64" r="3" fill="#f2d979"/><circle cx="121" cy="61" r="3" fill="#f2d979"/><circle cx="137" cy="47" r="3" fill="#f2d979"/><circle cx="151" cy="37" r="3" fill="#f2d979"/><circle cx="166" cy="30" r="3" fill="#f2d979"/><line x1="28" y1="124" x2="170" y2="30" stroke="rgba(237,160,168,.7)" stroke-width="1.5" stroke-dasharray="4,3"/><text x="100" y="146" font-size="9" fill="rgba(243,239,226,.6)" text-anchor="middle">讀書時間 →</text><text x="18" y="16" font-size="9" fill="rgba(243,239,226,.6)">成績</text><text x="150" y="60" font-size="10" fill="#eda0a8">r=0.85</text></svg>
+<div class="eg" style="margin:0;font-size:13px;">
+<div class="q">讀書時間 vs 成績 r=0.85</div>
+<div class="stp">強正相關;但相關 ≠ 因果</div>
+<div class="q">Q1=800 Q3=1500 IQR=700</div>
+<div class="stp">上界=1500+1.5×700=2550;2000&lt;2550 非離群</div>
 </div></div>
-<div class="box g" style="text-align:center;">「至少一個」直接算很煩 → 用 1−P(一個都沒有)。</div>
+<div class="box y" style="text-align:center;">|r| 接近 1=相關強;離群界限用 1.5 倍 IQR。</div>
 </div></div>
 
 <!-- 8 -->
@@ -177,36 +177,36 @@ svg{display:block;margin:6px auto;max-width:100%;}
 <h2>快速檢查</h2>
 <table class="tbl">
 <tr><th style="width:60%;">題目</th><th>答案</th></tr>
-<tr><td>兩骰子和≥11 的機率?</td><td class="fm hl">1/12</td></tr>
-<tr><td>不放回取兩紅(3紅5白)?</td><td class="fm hl">3/28</td></tr>
-<tr><td>硬幣3次恰2正?</td><td class="fm hl">3/8</td></tr>
-<tr><td>硬幣3次至少1正?</td><td class="fm hl">7/8</td></tr>
-<tr><td>20籤3中，不放回連抽2都中?</td><td class="fm hl">3/190</td></tr>
+<tr><td>r=−0.9，相關方向與強弱?</td><td class="fm hl">強負相關</td></tr>
+<tr><td>IQR=20 Q3=60，離群上界?</td><td class="fm hl">90</td></tr>
+<tr><td>中位數70 平均65，偏態?</td><td class="fm hl">左偏</td></tr>
+<tr><td>25人 Q1=60分，幾人低於?</td><td class="fm hl">約6人</td></tr>
+<tr><td>「r=0 表完全無關」對嗎?</td><td class="fm hl">錯(僅無線性)</td></tr>
 </table>
-<div class="box y" style="text-align:center;">互斥相加、獨立相乘、至少一個用餘事件。</div>
+<div class="box y" style="text-align:center;">盒子=中間 50%(Q1~Q3);Q1 以下約占 25%。</div>
 </div></div>
 
 <!-- 9 -->
 <div class="slide" data-pg="9 / 12"><div class="tag">素養</div><div class="body">
-<div class="eyebrow">素養題型 1　【品管抽樣】</div>
-<h2>不放回 + 餘事件</h2>
-<div class="box">100 條輪胎、5 條瑕疵，抽 2 條(不放回)</div>
+<div class="eyebrow">素養題型 1　【薪資分布】</div>
+<h2>平均 vs 中位數</h2>
+<div class="box">平均月薪 54000、中位數 43000</div>
 <div class="eg">
-<div class="stp"><b>(1)</b> 第一條瑕疵 5/100=1/20</div>
-<div class="stp"><b>(2)</b> 兩條都無瑕 95/100×94/99≈90.2%</div>
-<div class="stp"><b>(3)</b> 至少一條瑕疵 1−90.2%≈9.8%</div>
+<div class="stp"><b>(1)</b> 平均&gt;中位數 → 右偏(高薪拉高平均)</div>
+<div class="stp"><b>(2)</b> 看一般水準用中位數(不受極端值影響)</div>
+<div class="stp"><b>(3)</b> 移除前5%高薪 → 平均大降、中位數幾乎不變</div>
 </div>
 </div></div>
 
 <!-- 10 -->
 <div class="slide" data-pg="10 / 12"><div class="tag">素養</div><div class="body">
-<div class="eyebrow">素養題型 2　【天氣預報】</div>
-<h2>獨立 + 餘事件</h2>
-<div class="box">今天降雨 60%、明天 40%，兩天獨立</div>
+<div class="eyebrow">素養題型 2　【橡膠品管】</div>
+<h2>標準差看穩定性</h2>
+<div class="box">A:平均18 σ=1.2　B:平均18 σ=2.8</div>
 <div class="eg">
-<div class="stp"><b>(1)</b> 兩天都下雨 0.6×0.4=0.24</div>
-<div class="stp"><b>(2)</b> 兩天都不下雨 0.4×0.6=0.24</div>
-<div class="stp"><b>(3)</b> 至少一天下雨 1−0.24=0.76</div>
+<div class="stp"><b>(1)</b> A 標準差小 → 品質更穩定</div>
+<div class="stp"><b>(2)</b> 規格≥16:B 分布廣 → 不合格批次可能較多</div>
+<div class="stp"><b>(3)</b> 建議選 A(平均相同但更穩定、風險低)</div>
 </div>
 </div></div>
 
@@ -215,26 +215,25 @@ svg{display:block;margin:6px auto;max-width:100%;}
 <h2>避雷指南</h2>
 <table class="tbl">
 <tr><th style="width:44%;">❌ 錯誤</th><th>✓ 正確</th></tr>
-<tr><td>機率算出負數或 &gt;1</td><td>永遠 <b class="hl-g">0≤P≤1</b></td></tr>
-<tr><td>放回、不放回不分</td><td>放回<b class="hl-g">獨立相乘</b>;不放回機率改變</td></tr>
-<tr><td>「至少一個」硬算</td><td>用 <b class="hl-g">1−P(都不)</b></td></tr>
-<tr><td>結果不等可能仍套公式</td><td>古典機率需<b class="hl-g">等可能</b></td></tr>
+<tr><td>莖葉「7｜3」讀成 7.3</td><td>葉是個位 → <b class="hl-g">73</b></td></tr>
+<tr><td>相關 = 因果</td><td>相關只說<b class="hl-g">同時變化</b></td></tr>
+<tr><td>右偏左偏方向記反</td><td><b class="hl-g">長尾方向</b>即偏向</td></tr>
+<tr><td>r=0 表完全無關</td><td>僅無<b class="hl-g">線性</b>相關</td></tr>
 </table>
-<div class="box y" style="text-align:center;">追問:樣本空間幾個?事件幾種?這些結果等可能嗎?</div>
+<div class="box y" style="text-align:center;">追問:最大最小值在哪?哪側尾巴長?長尾側就是偏向。</div>
 </div></div>
 
 <!-- 12 -->
 <div class="slide" data-pg="12 / 12"><div class="tag">總結</div><div class="body">
 <h2>本節總結</h2>
 <ul>
-<li><span class="hl">古典機率</span>:P(A)=n(A)/n(S)(等可能)</li>
-<li><span class="hl">互斥/獨立</span>:相加 / 相乘</li>
-<li><span class="hl">餘事件</span>:P(A')=1−P(A)</li>
-<li><span class="hl-r">至少一個</span>:用餘事件最省力</li>
+<li><span class="hl">莖葉圖</span>:找中位數、四分位數</li>
+<li><span class="hl">盒狀圖</span>:比較分布、IQR、離群值</li>
+<li><span class="hl">偏態</span>:右偏 眾&lt;中&lt;均</li>
+<li><span class="hl-r">散布圖/相關</span>:r 看強弱;相關 ≠ 因果</li>
 </ul>
 <div class="box g" style="text-align:center;font-size:19px;">
-承先:統計描述資料 → 機率量化不確定<br>
-🔗 <b>啟後</b>:<span class="hl">2-2 機率的計算（樹狀圖、多步驟）。</span></div>
+承先:八上/九下 統計基礎 → 啟後:<span class="hl">2-2 機率。</span></div>
 </div></div>
 
 </div></body></html>
