@@ -1,1 +1,248 @@
-<!doctype html><html lang="zh-TW"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>3-1 推理證明｜授課簡報</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../../../../assets/course.css"></head><body class="slides-mode"><div class="topbar"><a class="back" href="../../index.html">← <span>返回九上課程</span></a><div class="brand">3-1 推理證明<small>114 學年度翰林版</small></div><div class="spacer"></div><a class="btn" href="interactive.html">互動教學</a><button class="btn" onclick="print()">列印</button></div><main class="deck"><div class="print-hint">共 10 張；方向鍵切換，列印可存成 PDF。</div><section class="slide" data-pg="1 / 10"><div class="eyebrow">九年級上學期 · Chapter 3</div><h1>3-1 推理證明</h1><p class="formula">每一步都有理由</p></section><section class="slide" data-pg="2 / 10"><h2>證明的三部分</h2><div class="three"><div class="box">已知</div><div class="box">論證</div><div class="box">求證</div></div></section><section class="slide" data-pg="3 / 10"><h2>可用的理由</h2><ul><li>定義與已知條件。</li><li>公理與基本性質。</li><li>已證明的定理。</li><li>前一步推得的結果。</li></ul></section><section class="slide" data-pg="4 / 10"><h2>命題格式</h2><div class="formula">若 P，則 Q</div><p>P 是條件，Q 是結論。</p></section><section class="slide" data-pg="5 / 10"><h2>逆命題</h2><div class="formula">若 Q，則 P</div><div class="box y">原命題為真，逆命題不一定為真，必須另外證明或找反例。</div></section><section class="slide" data-pg="6 / 10"><h2>反例</h2><div class="box">命題：「所有奇數都是質數。」</div><div class="box r">9 是奇數但不是質數，因此命題為假。</div></section><section class="slide" data-pg="7 / 10"><h2>幾何證明常用策略</h2><ul><li>補助線：角平分線、高、中線。</li><li>建立全等或相似。</li><li>利用平行線、角度與圓的性質。</li></ul></section><section class="slide" data-pg="8 / 10"><h2>等腰三角形底角證明</h2><div class="box">作頂角平分線，用 SAS 證明兩個小三角形全等，所以對應底角相等。</div></section><section class="slide" data-pg="9 / 10"><h2>常見錯誤</h2><ul><li>把要證明的結論當成已知。</li><li>以圖形「看起來」代替理由。</li><li>跳過關鍵中間步驟。</li></ul></section><section class="slide" data-pg="10 / 10"><h2>本節整理</h2><p class="formula">已知 → 理由 → 中間結論 → 求證</p><div class="box y">啟後：3-2 三角形的心。</div></section></main><nav class="slide-nav"><button data-prev>←</button><button data-next>→</button></nav><script src="../../../../../assets/course.js"></script></body></html>
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>九上 3-1 推理證明｜授課簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--chalk-soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);padding:24px 14px;}
+.deck{max-width:1060px;margin:0 auto;}
+.print-hint{text-align:center;color:rgba(243,239,226,0.4);font-size:13px;padding:6px 0 22px;}
+.print-hint b{color:var(--yellow);}
+.slide{position:relative;min-height:576px;margin:0 auto 26px;padding:44px 52px;
+ background:radial-gradient(ellipse at 18% 12%,rgba(255,255,255,0.05),transparent 45%),
+  radial-gradient(ellipse at 82% 88%,rgba(255,255,255,0.035),transparent 45%),
+  radial-gradient(ellipse at 60% 40%,rgba(120,160,130,0.10),transparent 60%),
+  linear-gradient(160deg,var(--board) 0%,var(--board2) 100%);
+ border-radius:14px;box-shadow:0 10px 34px rgba(0,0,0,0.55);
+ border:1px solid rgba(242,217,121,0.14);overflow:hidden;display:flex;flex-direction:column;}
+.slide::before{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;
+ background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.014) 40px,rgba(255,255,255,0.014) 41px),
+  radial-gradient(circle at 30% 72%,rgba(255,255,255,0.03),transparent 8%),
+  radial-gradient(circle at 76% 24%,rgba(255,255,255,0.025),transparent 7%);}
+.slide::after{content:attr(data-pg);position:absolute;bottom:15px;right:26px;font-family:'Caveat',cursive;font-size:20px;color:rgba(243,239,226,0.4);}
+.tag{position:absolute;top:20px;right:26px;font-family:'Caveat',cursive;font-size:22px;color:var(--pink);transform:rotate(4deg);}
+.eyebrow{font-family:'Caveat',cursive;font-size:25px;color:var(--yellow);letter-spacing:1px;margin-bottom:8px;opacity:0.92;}
+.slide h1{font-family:'Noto Serif TC',serif;font-size:46px;font-weight:900;line-height:1.28;letter-spacing:1px;
+ text-shadow:0 0 1px rgba(243,239,226,0.5),1px 1px 0 rgba(0,0,0,0.2);}
+.slide h2{font-family:'Noto Serif TC',serif;font-size:33px;font-weight:900;color:var(--yellow);
+ margin-bottom:20px;padding-bottom:11px;border-bottom:2px dashed rgba(242,217,121,0.4);
+ text-shadow:0 0 1px rgba(242,217,121,0.4);}
+.slide p{font-size:20px;line-height:1.85;margin-bottom:12px;}
+.big-center{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;}
+.big-center .lead,.lead{font-family:'Caveat',cursive;font-size:30px;color:var(--blue);letter-spacing:1px;margin-top:12px;}
+ul{list-style:none;margin:8px 0;}
+li{font-size:21px;line-height:1.95;padding-left:32px;position:relative;margin-bottom:4px;}
+li::before{content:'\2726';position:absolute;left:4px;color:var(--yellow);font-size:17px;top:3px;}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.34);border-radius:12px;padding:15px 21px;margin:12px 0;font-size:19px;line-height:1.8;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.38);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.38);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.34);}
+.eg{position:relative;background:rgba(0,0,0,0.24);border:1px solid rgba(242,217,121,0.2);border-radius:10px;padding:17px 22px;margin:12px 0;font-size:19px;}
+.eg::before{content:'';position:absolute;top:-8px;left:38px;width:58px;height:15px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.eg .q{color:var(--blue);font-weight:700;margin-bottom:8px;font-size:19px;}
+.eg .a{color:var(--green);font-weight:700;margin-top:6px;}
+.eg .stp{color:var(--chalk-soft);font-size:18px;margin:3px 0;}
+.tip{display:flex;gap:12px;align-items:flex-start;background:rgba(242,217,121,0.09);border:1.5px dashed rgba(242,217,121,0.45);border-radius:12px;padding:13px 18px;margin:10px 0;}
+.tip .ic{font-size:24px;line-height:1;}.tip .tx{font-size:18px;line-height:1.7;}
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:18px;}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.26);padding:10px 14px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.two{display:flex;gap:20px;}.two>div{flex:1;}
+svg{display:block;margin:6px auto;max-width:100%;}
+@media print{
+ body{background:#0a130d;padding:0;}
+ .deck{max-width:none;}
+ .print-hint{display:none;}
+ .slide{margin:0;border-radius:0;box-shadow:none;min-height:100vh;
+  page-break-after:always;break-after:page;padding:32px 44px;justify-content:center;}
+ .slide:last-child{page-break-after:auto;break-after:auto;}
+ .slide h1{font-size:40px;}
+ .slide h2{font-size:27px;margin-bottom:13px;padding-bottom:8px;}
+ .slide p{font-size:17px;line-height:1.55;margin-bottom:6px;}
+ li{font-size:17px;line-height:1.55;margin-bottom:1px;padding-left:26px;}
+ .eyebrow{font-size:21px;margin-bottom:5px;}
+ .big-center .lead,.lead{font-size:26px;}
+ .box{font-size:16px;padding:10px 16px;margin:6px 0;line-height:1.5;}
+ .eg{font-size:16px;padding:11px 16px;margin:6px 0;}
+ .tip{font-size:16px;padding:10px 14px;margin:6px 0;}
+ .tbl{font-size:15px;margin:6px 0;}
+ .tbl th,.tbl td{padding:6px 10px;}
+ svg{max-height:210px;}
+}
+</style></head><body><div class="deck">
+<div class="print-hint">共 <b>12</b> 張・列印時每張一頁（Ctrl+P → 橫向 → 背景圖形）</div>
+
+
+<!-- 1 -->
+<div class="slide" data-pg="1 / 12"><div class="tag">Start!</div><div class="big-center">
+<div class="eyebrow">國三上學期・第三章 推理證明與三角形的心</div>
+<h1>3-1　推理證明</h1>
+<div class="lead">命題有真有假、<span style="color:#f2d979;">一個反例</span>就能推翻<br>
+用定義、定理，一步步<span style="color:#98c9dc;">演繹</span>出結論</div><svg viewBox="0 0 200 160" width="200" height="160" style="display:block;margin:0 auto;"><polygon points="100,24 40,132 160,132" fill="rgba(166,214,160,.12)" stroke="#a6d6a0" stroke-width="1.8"/><text x="96" y="18" font-size="11" fill="#f3efe2">A</text><text x="26" y="138" font-size="11" fill="#f3efe2">B</text><text x="166" y="138" font-size="11" fill="#f3efe2">C</text><text x="90" y="46" font-size="10" fill="#f2d979">∠A</text><text x="48" y="124" font-size="10" fill="#eda0a8">∠B</text><text x="138" y="124" font-size="10" fill="#eda0a8">∠C</text><text x="100" y="158" font-size="10" fill="rgba(243,239,226,.7)" text-anchor="middle" font-family="Noto Sans TC">AB=AC → ∠B=∠C</text></svg>
+</div></div>
+
+<!-- 2 -->
+<div class="slide" data-pg="2 / 12"><div class="tag">目標</div><div class="body">
+<h2>本節學習目標</h2>
+<ul>
+<li>命題、條件與結論;真命題與假命題(<span class="hl">反例</span>)</li>
+<li>定義、公理、定理;<span class="hl-b">演繹推理</span></li>
+<li><span class="hl-b">兩欄式證明</span>(敘述—理由)</li>
+<li><span class="hl-b">逆命題</span>;平行線、內角和、外角推理</li>
+</ul>
+<div class="box y">一句話:<span class="hl">「若P則Q」判真假;真命題要證、假命題舉一個反例。逆命題真假另判。</span></div>
+</div></div>
+
+<!-- 3 -->
+<div class="slide" data-pg="3 / 12"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心　命題與真假</div>
+<h2>命題 · 條件 · 結論</h2>
+<table class="tbl">
+<tr><th style="width:24%;">名詞</th><th>意義</th></tr>
+<tr><td class="hl-b">命題</td><td>能判斷真/假的敘述，常寫「若P則Q」</td></tr>
+<tr><td class="hl-b">條件/結論</td><td>P 是條件、Q 是結論</td></tr>
+<tr><td class="hl-b">真命題</td><td>條件成立 → 結論一定成立</td></tr>
+<tr><td class="hl-b">假命題</td><td>存在<b>反例</b>(條件成立但結論不成立)</td></tr>
+</table>
+<div class="box r" style="text-align:center;">⚠️ 舉反例只需「一個」就能推翻命題。</div>
+</div></div>
+
+<!-- 4 -->
+<div class="slide" data-pg="4 / 12"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心　推理的工具</div>
+<h2>定義 · 公理 · 定理</h2>
+<table class="tbl">
+<tr><td class="hl-b">定義</td><td>對名詞的約定</td></tr>
+<tr><td class="hl-b">公理</td><td>不證自明的性質</td></tr>
+<tr><td class="hl-b">定理</td><td>經<b>證明</b>成立的性質</td></tr>
+<tr><td class="hl-b">演繹推理</td><td>由已知一步步推得結論</td></tr>
+<tr><td class="hl-b">兩欄式證明</td><td>左「敘述」右「理由」</td></tr>
+</table>
+<div class="box g" style="text-align:center;">逆命題:條件與結論對調;原命題真，逆命題<b>不一定</b>真。</div>
+</div></div>
+
+<!-- 5 -->
+<div class="slide" data-pg="5 / 12"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">🖍️ 圖解　常用理由</div>
+<h2>外角 = 兩內對角和</h2>
+<div style="display:flex;flex-direction:row;align-items:center;gap:16px;justify-content:center;">
+<svg viewBox="0 0 190 150" width="190" height="150" style="display:block;margin:0 auto;"><line x1="30" y1="130" x2="210" y2="130" stroke="rgba(243,239,226,.4)" stroke-width="1.4"/><polygon points="60,30 30,130 160,130" fill="rgba(152,201,220,.12)" stroke="#98c9dc" stroke-width="1.8"/><line x1="60" y1="30" x2="160" y2="130" stroke="#98c9dc" stroke-width="1.8"/><text x="56" y="24" font-size="11" fill="#f3efe2">A</text><text x="18" y="136" font-size="11" fill="#f3efe2">B</text><text x="158" y="146" font-size="11" fill="#f3efe2">C</text><text x="214" y="136" font-size="11" fill="#f3efe2">D</text><text x="56" y="52" font-size="10" fill="#f2d979">∠A</text><text x="46" y="124" font-size="10" fill="#f2d979">∠B</text><path d="M175,130 A18,18 0 0,1 168,116" fill="none" stroke="#eda0a8" stroke-width="1.6"/><text x="168" y="120" font-size="10" fill="#eda0a8">外角</text><text x="95" y="148" font-size="10" fill="rgba(243,239,226,.7)" text-anchor="middle" font-family="Noto Sans TC">外角 = ∠A + ∠B</text></svg>
+<div style="text-align:left;font-size:13px;line-height:1.85;">
+<span style="color:#eda0a8;">■</span> 外角 = ∠A+∠B<br>
+<span style="color:#98c9dc;">■</span> 內角和 = 180°<br>
+<span style="color:#a6d6a0;">■</span> 平行:內錯角相等<br>
+<span style="color:#c9aee0;">■</span> 等腰:等邊對等角
+</div></div>
+<div class="box y" style="text-align:center;">這些是證明時最常寫在「理由」欄的性質。</div>
+</div></div>
+
+<!-- 6 -->
+<div class="slide" data-pg="6 / 12"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 1　難度 ★☆☆　真假與逆命題</div>
+<h2>命題判真假</h2>
+<div class="eg">
+<div class="q">「若 a>3，則 a>1」及其逆命題的真假?</div>
+<div class="stp"><b>原命題</b>　大於3必大於1 → <b>真</b></div>
+<div class="stp"><b>逆命題</b>　「若 a>1 則 a>3」</div>
+<div class="stp"><b>反例</b>　a=2:2>1 但 2≯3 → <b>假</b></div>
+</div>
+<div class="box y" style="text-align:center;">原命題真 ≠ 逆命題真，各自判斷。</div>
+</div></div>
+
+<!-- 7 -->
+<div class="slide" data-pg="7 / 12"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 2、3　難度 ★★☆　外角/平行</div>
+<h2>用理由算角度</h2>
+<div style="display:flex;gap:14px;justify-content:center;align-items:flex-start;">
+<div class="eg" style="margin:0;flex:1;">
+<div class="q">∠A=50°、∠B=60° 求 C 外角</div>
+<div class="stp">外角=50+60=<b>110°</b></div>
+</div>
+<div class="eg" style="margin:0;flex:1;">
+<div class="q">L1∥L2 交角70° 求內錯角/同旁內角</div>
+<div class="stp">內錯角=70°;同旁內角=110°</div>
+</div>
+</div>
+<svg viewBox="0 0 180 120" width="180" height="120" style="display:block;margin:0 auto;"><line x1="12" y1="45" x2="198" y2="45" stroke="#98c9dc" stroke-width="1.8"/><line x1="12" y1="105" x2="198" y2="105" stroke="#98c9dc" stroke-width="1.8"/><line x1="55" y1="18" x2="150" y2="132" stroke="#f2d979" stroke-width="1.8"/><text x="200" y="48" font-size="10" fill="#98c9dc">L1</text><text x="200" y="108" font-size="10" fill="#98c9dc">L2</text><text x="86" y="40" font-size="10" fill="#eda0a8">70°</text><text x="104" y="100" font-size="10" fill="#a6d6a0">70°</text><text x="90" y="118" font-size="10" fill="rgba(243,239,226,.7)" text-anchor="middle" font-family="Noto Sans TC">內錯角相等</text></svg>
+<div class="box g" style="text-align:center;">外角=兩內對角和;平行→內錯角相等、同旁內角互補。</div>
+</div></div>
+
+<!-- 8 -->
+<div class="slide" data-pg="8 / 12"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 4　難度 ★★★　兩欄式證明</div>
+<h2>等腰底角</h2>
+<div class="box">△ABC 中 AB=AC、∠A=40°，求兩底角</div>
+<table class="tbl">
+<tr><th style="width:52%;">敘述</th><th>理由</th></tr>
+<tr><td>∠B=∠C</td><td>等邊對等角</td></tr>
+<tr><td>∠A+∠B+∠C=180°</td><td>內角和</td></tr>
+<tr><td>40+2∠B=180</td><td>代入</td></tr>
+<tr><td class="fm hl">∠B=∠C=70°</td><td>解方程式</td></tr>
+</table>
+</div></div>
+
+<!-- 9 -->
+<div class="slide" data-pg="9 / 12"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 5　難度 ★★★　多步驟推理</div>
+<h2>等腰 + 外角</h2>
+<div class="eg">
+<div class="q">△ABC 中 AB=AC、∠A=50°，D 在 BC 延長線上，求 ∠ACD</div>
+<div class="stp"><b>底角</b>　∠ACB=(180−50)÷2=65°</div>
+<div class="stp"><b>外角</b>　∠ACD=180−65=115°</div>
+<div class="stp"><b>驗證</b>　∠A+∠B=50+65=115° ✓</div>
+</div>
+<div class="box y" style="text-align:center;">外角=不相鄰兩內角和，可用來檢查。</div>
+</div></div>
+
+<!-- 10 -->
+<div class="slide" data-pg="10 / 12"><div class="tag">精選</div><div class="body">
+<div class="eyebrow">隨堂精選</div>
+<h2>快速檢查</h2>
+<table class="tbl">
+<tr><th style="width:62%;">題目</th><th>答案</th></tr>
+<tr><td>「x>0→x²>0」真假?</td><td class="fm hl">真</td></tr>
+<tr><td>其逆命題真假?反例?</td><td class="fm hl">假, x=−1</td></tr>
+<tr><td>∠A=80°、∠B=40°，C外角?</td><td class="fm hl">120°</td></tr>
+<tr><td>等腰頂角100°，底角?</td><td class="fm hl">40°</td></tr>
+<tr><td>外角130°、一內對角50°，另一?</td><td class="fm hl">80°</td></tr>
+</table>
+<div class="box y" style="text-align:center;">「對頂角相等」是定理;可用來當理由。</div>
+</div></div>
+
+<!-- 11 -->
+<div class="slide" data-pg="11 / 12"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 1、2</div>
+<h2>推理應用</h2>
+<div class="eg">
+<div class="q">① AB=AC、∠A=44°，過A作 L∥BC，求 L 與 AB 夾(BC同側)角</div>
+<div class="stp">底角∠B=(180−44)÷2=68°;內錯角 → <b>68°</b></div>
+</div>
+<div class="eg">
+<div class="q">② 「∠1=∠2 所以是對頂角」對嗎?</div>
+<div class="stp"><b>不對</b>:等腰兩底角相等卻非對頂角(反例)</div>
+</div>
+<div class="box g" style="text-align:center;">相等的角不一定是對頂角。</div>
+</div></div>
+
+<!-- 12 -->
+<div class="slide" data-pg="12 / 12"><div class="tag">總結</div><div class="body">
+<h2>本節總結</h2>
+<ul>
+<li><span class="hl">命題真假</span>:真要證、假舉一反例</li>
+<li><span class="hl">工具</span>:定義/公理/定理 + 演繹</li>
+<li><span class="hl">兩欄式證明</span>:敘述—理由</li>
+<li><span class="hl-r">逆命題</span>:真假需另判</li>
+</ul>
+<div class="box g" style="text-align:center;font-size:19px;">
+🎉 <b>推理證明打好基礎!</b><br>
+🔗 <b>啟後</b>:<span class="hl">3-2 三角形的心(外心/內心/重心)。</span></div>
+</div></div>
+
+</div></body></html>

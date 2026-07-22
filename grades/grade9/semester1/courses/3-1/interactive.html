@@ -1,1 +1,772 @@
-<!doctype html><html lang="zh-TW"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>3-1 推理證明｜互動教學</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../../../../assets/course.css"></head><body><div class="topbar"><a class="back" href="../../index.html">← <span>返回九上課程</span></a><div class="brand">3-1 推理證明<small>114 學年度翰林版</small></div><div class="spacer"></div><a class="btn" href="slides.html">授課簡報</a></div><main class="wrap"><header class="hero"><div class="eyebrow">Chapter 3 · Reasoning &amp; Proof</div><h1>推理證明</h1><p>從已知條件出發，每一步都寫出可靠理由，最後到達求證結論。</p><div class="goal-list"><span class="goal">已知與求證</span><span class="goal">命題與逆命題</span><span class="goal">證明格式</span><span class="goal">反例</span></div></header><nav class="tabs"><button class="tab on">觀念</button><button class="tab">推理鏈</button><button class="tab">練習</button><button class="tab">應用</button></nav><section class="panel on"><article class="card"><h2>證明的基本結構</h2><div class="three"><div class="box"><b>已知</b><br>題目給定的條件。</div><div class="box"><b>論證</b><br>定義、公理、定理與已證結果。</div><div class="box"><b>求證</b><br>必須推導出的結論。</div></div><div class="formula">條件 P → 理由 → 中間結論 → 理由 → 結論 Q</div></article><article class="card"><h2>命題、逆命題與反例</h2><div class="two"><div class="box"><b>原命題</b><br>若 P，則 Q。</div><div class="box"><b>逆命題</b><br>若 Q，則 P。原命題為真不代表逆命題也為真。</div></div><div class="box y">要推翻「所有……」只需一個反例；但舉很多例子不等於證明。</div></article></section><section class="panel"><article class="card"><h2>排出證明步驟</h2><p>目標：證明等腰三角形 ABC 的底角相等（AB=AC）。</p><div class="choices"><button class="choice step" data-step="1">作 ∠A 的角平分線 AD</button><button class="choice step" data-step="2">由 AB=AC、AD=AD、∠BAD=∠CAD，得 △ABD≅△ACD</button><button class="choice step" data-step="3">全等三角形對應角相等，得 ∠B=∠C</button></div><div class="box y" id="chain">請依推理順序點選三個步驟。</div><button class="btn" id="clearChain">清除</button></article></section><section class="panel"><article class="card"><h2>即時練習</h2><div class="summary"><div class="stat"><b data-score>0</b>答對</div><div class="stat"><b><span data-answered>0</span>/<span data-total>4</span></b>已完成</div></div><div class="progress"><span></span></div><div class="question" data-explain="證明必須由已知條件與可接受的理由逐步推出結論。"><p>1. 完整證明的每個推理步驟都需要？</p><div class="choices"><button class="choice">圖形顏色</button><button class="choice" data-correct="true">可靠理由</button><button class="choice">數值近似</button><button class="choice">猜測</button></div><div class="feedback"></div></div><div class="question" data-explain="原命題 P→Q 的逆命題是 Q→P。"><p>2. 「若 P，則 Q」的逆命題是？</p><div class="choices"><button class="choice" data-correct="true">若 Q，則 P</button><button class="choice">若非 P，則非 Q</button><button class="choice">P 且 Q</button><button class="choice">P 或 Q</button></div><div class="feedback"></div></div><div class="question" data-explain="一個反例就能推翻全稱命題。"><p>3. 要推翻「所有奇數都是質數」，最直接的反例？</p><div class="choices"><button class="choice">3</button><button class="choice">5</button><button class="choice" data-correct="true">9</button><button class="choice">11</button></div><div class="feedback"></div></div><div class="question" data-explain="圖形只幫助理解，不能用「看起來」代替論證。"><p>4. 幾何圖看起來兩邊等長，可以直接得出等長嗎？</p><div class="choices"><button class="choice">可以</button><button class="choice" data-correct="true">不可以，需要條件或證明</button><button class="choice">只要有方格就可以</button><button class="choice">只要是電腦畫的就可以</button></div><div class="feedback"></div></div></article></section><section class="panel"><article class="card"><h2>證明不只用在數學</h2><div class="two"><div class="box"><b>程式除錯</b><br>已知輸入與預期結果，逐步追蹤中間狀態，找出哪一步不成立。</div><div class="box"><b>新聞判讀</b><br>把「證據」、「推論」與「結論」分開，檢查有沒有跳步。</div></div><div class="box y">好證明的標準：每一句都能回答「為什麼？」</div><button class="btn primary" data-reset>重新挑戰</button></article></section></main><script src="../../../../../assets/course.js"></script><script>let expected=1,lines=[];document.querySelectorAll('.step').forEach(b=>b.addEventListener('click',()=>{const n=+b.dataset.step;if(n===expected){lines.push(`${n}. ${b.textContent}`);expected++;b.disabled=true;chain.textContent=expected===4?`${lines.join(' → ')} ✓ 證明完成`:`${lines.join(' → ')} → 請選第 ${expected} 步`}else{chain.textContent=`順序不對：目前需要第 ${expected} 步。`}}));clearChain.addEventListener('click',()=>{expected=1;lines=[];chain.textContent='請依推理順序點選三個步驟。';document.querySelectorAll('.step').forEach(b=>b.disabled=false)});</script></body></html>
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>九上 3-1 推理證明｜互動教學平台</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;--wood:#6b4a32;}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);overscroll-behavior:none;}
+.topbar{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  padding:10px 16px;background:linear-gradient(180deg,#1b2f21,#132218);border-bottom:2px solid var(--wood);box-shadow:0 4px 18px rgba(0,0,0,0.5);}
+.brand{font-family:'Noto Serif TC',serif;font-weight:900;font-size:clamp(15px,2.2vw,20px);color:var(--yellow);white-space:nowrap;}
+.brand small{display:block;font-family:'Caveat',cursive;font-size:14px;color:var(--soft);font-weight:400;}
+.spacer{flex:1;}
+.btn{background:rgba(243,239,226,0.08);border:1.5px solid rgba(243,239,226,0.28);color:var(--chalk);
+  border-radius:10px;padding:7px 13px;font-family:inherit;font-size:14px;cursor:pointer;white-space:nowrap;transition:.15s;}
+.btn:hover{background:rgba(243,239,226,0.16);}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:10px 16px 0;scrollbar-width:none;}
+.tabs::-webkit-scrollbar{display:none;}
+.tab{background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.2);border-bottom:none;
+  color:var(--soft);border-radius:10px 10px 0 0;padding:9px 15px;font-size:14px;cursor:pointer;white-space:nowrap;font-family:inherit;}
+.tab.on{background:var(--board);border-color:var(--yellow);color:var(--yellow);font-weight:700;}
+.tab .n{font-family:'Caveat',cursive;font-size:18px;margin-right:5px;}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px 60px;}
+.panel{display:none;}.panel.on{display:block;}
+.card{background:radial-gradient(ellipse at 20% 10%,rgba(255,255,255,0.05),transparent 45%),
+   linear-gradient(160deg,var(--board),var(--board2));
+  border:1.5px solid rgba(242,217,121,0.16);border-radius:14px;padding:18px;margin-bottom:16px;
+  box-shadow:0 8px 26px rgba(0,0,0,0.45);position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 38px,rgba(255,255,255,0.012) 38px,rgba(255,255,255,0.012) 39px);}
+.card>*{position:relative;}
+.card h3{font-family:'Noto Serif TC',serif;font-size:clamp(17px,2.4vw,21px);color:var(--yellow);
+  margin-bottom:12px;padding-bottom:8px;border-bottom:2px dashed rgba(242,217,121,0.35);display:flex;align-items:center;gap:8px;}
+.card h3 .ic{font-size:20px;}
+.goals{display:flex;flex-wrap:wrap;gap:9px;}
+.goal{display:flex;align-items:center;gap:9px;background:rgba(242,217,121,0.07);
+  border:1.5px dashed rgba(242,217,121,0.4);border-radius:22px;padding:8px 15px 8px 8px;
+  font-size:clamp(13.5px,1.8vw,15px);color:var(--yellow);line-height:1.5;}
+.goal .bdg{width:24px;height:24px;border-radius:50%;background:var(--yellow);color:#16281c;
+  font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;flex:none;}
+.deck{position:relative;background:rgba(0,0,0,0.22);border-radius:12px;padding:clamp(16px,3vw,30px);
+  min-height:clamp(260px,42vh,380px);display:flex;flex-direction:column;justify-content:center;}
+.sl{display:none;animation:fade .25s;}.sl.on{display:block;}
+@keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+.sl .eyebrow{font-family:'Caveat',cursive;font-size:20px;color:var(--yellow);margin-bottom:6px;}
+.sl h4{font-family:'Noto Serif TC',serif;font-size:clamp(19px,3vw,27px);margin-bottom:12px;line-height:1.35;}
+.sl p{font-size:clamp(15px,2vw,18px);line-height:1.8;margin-bottom:9px;}
+.sl ul{list-style:none;}
+.sl li{font-size:clamp(15px,2vw,18px);line-height:1.85;padding-left:26px;position:relative;margin-bottom:4px;}
+.sl li::before{content:'✦';position:absolute;left:2px;color:var(--yellow);font-size:14px;top:3px;}
+.nav{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:14px;}
+.nav .pg{font-family:'Caveat',cursive;font-size:20px;color:var(--soft);min-width:64px;text-align:center;}
+.dots{display:flex;gap:6px;justify-content:center;margin-top:10px;flex-wrap:wrap;}
+.dot{width:9px;height:9px;border-radius:50%;background:rgba(243,239,226,0.25);cursor:pointer;border:none;padding:0;}
+.dot.on{background:var(--yellow);transform:scale(1.3);}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.32);border-radius:10px;
+  padding:11px 15px;margin:9px 0;font-size:clamp(14px,1.9vw,17px);line-height:1.7;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.36);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.36);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.32);}
+.two{display:flex;gap:12px;flex-wrap:wrap;}.two>*{flex:1;min-width:220px;}
+.teach{background:rgba(201,174,224,0.12);border:1.5px dashed rgba(201,174,224,0.5);
+  border-radius:10px;padding:11px 15px;margin:9px 0;font-size:clamp(14px,1.8vw,15px);line-height:1.7;}
+.teach b{color:var(--purple);}
+.tbl{width:100%;border-collapse:collapse;margin:9px 0;font-size:clamp(13.5px,1.8vw,16px);}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.24);padding:8px 11px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.cv-wrap{background:rgba(0,0,0,0.25);border-radius:12px;padding:10px;}
+canvas.viz{width:100%;display:block;border-radius:8px;touch-action:none;}
+.ctrl{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center;}
+.readout{font-family:'Noto Serif TC',serif;font-size:clamp(14px,1.9vw,18px);color:var(--chalk);
+  background:rgba(242,217,121,0.1);border:1px solid rgba(242,217,121,0.3);border-radius:8px;
+  padding:7px 12px;flex:1;min-width:220px;}
+.readout b{color:var(--yellow);}
+.q{background:rgba(0,0,0,0.2);border:1px solid rgba(242,217,121,0.18);border-radius:10px;padding:13px 15px;margin:10px 0;}
+.q .qt{font-size:clamp(15px,2vw,17px);margin-bottom:10px;line-height:1.7;}
+.q .qt .qn{font-family:'Caveat',cursive;color:var(--yellow);font-size:20px;margin-right:6px;}
+.opts{display:flex;flex-direction:column;gap:7px;}
+.opt{text-align:left;background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.22);
+  color:var(--chalk);border-radius:9px;padding:9px 13px;font-family:inherit;font-size:15px;cursor:pointer;transition:.15s;line-height:1.5;}
+.opt:hover:not(:disabled){background:rgba(243,239,226,0.13);}
+.opt.right{background:rgba(166,214,160,0.24);border-color:var(--green);color:#fff;font-weight:700;}
+.opt.wrong{background:rgba(237,160,168,0.22);border-color:var(--pink);}
+.opt:disabled{cursor:default;}
+.fb{display:none;margin-top:9px;padding:9px 13px;border-radius:8px;font-size:14.5px;line-height:1.65;}
+.fb.on{display:block;}
+.fb.ok{background:rgba(166,214,160,0.14);border-left:3px solid var(--green);}
+.fb.no{background:rgba(237,160,168,0.14);border-left:3px solid var(--pink);}
+.fill{display:inline-block;background:rgba(0,0,0,0.3);border:none;border-bottom:2px solid var(--yellow);
+  color:var(--yellow);font-family:'Noto Serif TC',serif;font-size:17px;width:110px;text-align:center;padding:3px 5px;margin:0 4px;}
+.fill:focus{outline:none;background:rgba(242,217,121,0.12);}
+.exq{background:rgba(0,0,0,0.26);border:1.5px solid rgba(242,217,121,0.28);border-radius:11px;padding:13px 15px;margin:10px 0;position:relative;}
+.exq::before{content:'';position:absolute;top:-8px;left:32px;width:54px;height:14px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.exq .exq-q{font-size:clamp(14.5px,1.9vw,17px);line-height:1.75;margin-bottom:11px;}
+.exo{text-align:left;background:rgba(243,239,226,0.06);border:1.5px solid rgba(243,239,226,0.22);
+  color:var(--chalk);border-radius:9px;padding:9px 13px;font-family:inherit;font-size:clamp(14px,1.8vw,15.5px);
+  cursor:pointer;transition:.15s;line-height:1.55;width:100%;margin-bottom:6px;display:block;}
+.exo:hover:not(:disabled){background:rgba(243,239,226,0.13);}
+.exo.right{background:rgba(166,214,160,0.26);border-color:var(--green);color:#fff;font-weight:700;}
+.exo.wrong{background:rgba(237,160,168,0.2);border-color:var(--pink);opacity:.75;}
+.exo:disabled{cursor:default;}
+@keyframes shake{10%,90%{transform:translateX(-2px);}30%,70%{transform:translateX(4px);}50%{transform:translateX(-4px);}}
+.exo.shake{animation:shake .4s;}
+.exsol{display:none;margin-top:10px;padding:11px 14px;border-radius:9px;
+  background:rgba(166,214,160,0.13);border-left:3px solid var(--green);font-size:clamp(14px,1.8vw,15.5px);line-height:1.75;}
+.exsol.on{display:block;animation:fade .3s;}
+.exsol .st{color:var(--soft);margin:3px 0;}
+.exsol .an{color:var(--green);font-weight:700;margin-top:6px;}
+.exlock{display:flex;align-items:center;gap:7px;margin-top:9px;font-size:13.5px;color:rgba(243,239,226,0.45);}
+.exlock.hide{display:none;}
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:11px;}
+.icard{background:rgba(0,0,0,0.22);border:1.5px solid rgba(242,217,121,0.22);border-radius:11px;padding:14px;text-align:center;}
+.icard .big{font-family:'Noto Serif TC',serif;font-size:clamp(17px,2.6vw,23px);font-weight:900;margin:6px 0;}
+.icard .cap{font-size:13.5px;color:var(--soft);line-height:1.6;}
+.frow{display:flex;gap:12px;align-items:center;padding:9px 12px;border-bottom:1px dashed rgba(243,239,226,0.16);}
+.frow:last-child{border-bottom:none;}
+.flab{color:var(--blue);font-weight:700;min-width:150px;font-size:clamp(13.5px,1.8vw,15.5px);flex:none;}
+.fval{color:var(--yellow);font-weight:700;font-family:'Noto Serif TC',serif;font-size:clamp(14px,1.9vw,17px);}
+@media(max-width:560px){.frow{flex-direction:column;align-items:flex-start;gap:3px;}.flab{min-width:0;}}
+.hud{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:12px;}
+.hud .st{background:rgba(0,0,0,0.3);border:1.5px solid rgba(242,217,121,0.28);border-radius:9px;
+  padding:7px 13px;font-size:14px;flex:1;min-width:88px;text-align:center;}
+.hud .st b{display:block;font-family:'Noto Serif TC',serif;font-size:20px;color:var(--yellow);}
+.tbar{height:8px;background:rgba(0,0,0,0.35);border-radius:5px;overflow:hidden;margin-bottom:12px;}
+.tfill{height:100%;background:linear-gradient(90deg,var(--green),var(--yellow),var(--pink));width:100%;transition:width .1s linear;}
+.gscreen{display:none;}.gscreen.on{display:block;}
+.lvchips{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin:14px 0;}
+.lvchip{background:rgba(152,201,220,0.12);border:1.5px solid rgba(152,201,220,0.35);border-radius:18px;
+  padding:6px 13px;font-size:13.5px;color:var(--blue);}
+.lvchip.done{background:rgba(166,214,160,0.2);border-color:var(--green);color:var(--green);}
+.lvchip.now{background:rgba(242,217,121,0.22);border-color:var(--yellow);color:var(--yellow);font-weight:700;}
+.gq{font-size:clamp(16px,2.2vw,20px);line-height:1.7;margin:14px 0;text-align:center;font-family:'Noto Serif TC',serif;}
+.gopts{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+@media(max-width:560px){.gopts{grid-template-columns:1fr;}}
+.gopt{background:rgba(243,239,226,0.07);border:1.5px solid rgba(243,239,226,0.25);color:var(--chalk);
+  border-radius:10px;padding:12px;font-family:'Noto Serif TC',serif;font-size:17px;cursor:pointer;transition:.15s;min-height:48px;}
+.gopt:hover:not(:disabled){background:rgba(243,239,226,0.15);}
+.gopt.right{background:rgba(166,214,160,0.3);border-color:var(--green);font-weight:900;}
+.gopt.wrong{background:rgba(237,160,168,0.25);border-color:var(--pink);}
+.gfb{margin-top:11px;padding:10px 13px;border-radius:8px;font-size:14.5px;line-height:1.6;display:none;}
+.gfb.on{display:block;}
+.gfb.ok{background:rgba(166,214,160,0.15);border-left:3px solid var(--green);}
+.gfb.no{background:rgba(237,160,168,0.15);border-left:3px solid var(--pink);}
+.rank{font-size:54px;text-align:center;margin:10px 0;}
+.hint{text-align:center;color:rgba(243,239,226,0.35);font-size:12.5px;padding:8px 0 0;}
+@media (max-width:640px){.topbar{padding:8px 10px;gap:8px;}.wrap{padding:0 10px 70px;}.card{padding:13px;}}
+</style></head><body>
+
+<div class="topbar">
+  <div class="brand">3-1　推理證明<small>九上 · 第3章 推理證明與三角形的心</small></div>
+  <div class="spacer"></div>
+</div>
+
+<div class="tabs" id="tabs">
+  <button class="tab on" data-p="0"><span class="n">?</span>命題真假</button>
+  <button class="tab" data-p="1"><span class="n">∠</span>理由算角</button>
+  <button class="tab" data-p="2"><span class="n">△</span>兩欄推理</button>
+  <button class="tab" data-p="3"><span class="n">★</span>題型測驗</button>
+  <button class="tab" data-p="4"><span class="n">🎮</span>闖關遊戲</button>
+</div>
+
+<div class="wrap">
+  <div class="card" id="goalCard">
+    <h3><span class="ic">🎯</span>本節學習目標</h3>
+    <div class="goals" id="goals"></div>
+  </div>
+  <div id="wrap"></div>
+</div>
+
+<script>
+const GOALS = [
+  '命題「若P則Q」：判斷真假',
+  '真命題要證明、假命題舉一反例',
+  '定義／公理／定理與演繹推理',
+  '兩欄式證明（敘述—理由）',
+  '逆命題真假需另外判斷',
+];
+
+const DATA = [
+{ key:'prop', viz:'prop', vizTitle:'命題真假 / 逆命題（4 題）',
+  slides:[
+    {eb:'核心 命題與真假', h:'若 P 則 Q', html:`
+      <table class="tbl">
+        <tr><td class="hl-b">命題</td><td>能判真假的敘述</td></tr>
+        <tr><td class="hl-b">真命題</td><td>條件成立→結論一定成立</td></tr>
+        <tr><td class="hl-b">假命題</td><td>存在<b>反例</b></td></tr>
+        <tr><td class="hl-b">逆命題</td><td>P、Q 對調；真假另判</td></tr>
+      </table>
+      <div class="box r" style="text-align:center;">⚠️ 一個反例即可推翻命題。</div>
+      <div class="box g">👉 用下方 Canvas：判真假。</div>`},
+    {eb:'例題 ★☆☆', h:'原命題真假', html:`
+      <div class="exq" data-a="0">
+        <div class="exq-q"><span class="hl">Q</span>　「若 a>3，則 a>1」真假？</div>
+        <button class="exo" data-i="0">真</button>
+        <button class="exo" data-i="1">假</button>
+        <button class="exo" data-i="2">不一定</button>
+        <button class="exo" data-i="3">無法判斷</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">大於3必大於1 → 真</div>
+          <div class="an">答：真</div>
+        </div>
+      </div>`},
+    {eb:'例題 ★★☆　逆命題', h:'找反例', html:`
+      <div class="exq" data-a="1">
+        <div class="exq-q"><span class="hl">Q</span>　逆命題「若 a>1，則 a>3」真假？</div>
+        <button class="exo" data-i="0">真</button>
+        <button class="exo" data-i="1">假（反例 a=2）</button>
+        <button class="exo" data-i="2">與原命題相同</button>
+        <button class="exo" data-i="3">恆真</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">a=2：2>1 但 2≯3 → 假</div>
+          <div class="an">答：假</div>
+        </div>
+      </div>`}
+  ],
+  fa:[
+    {q:'「x>0→x²>0」真假?', o:['真','假','不一定','無法判斷'], a:0, e:'正數平方正。'},
+    {q:'其逆命題「x²>0→x>0」?', o:['假(x=−1)','真','恆真','相同'], a:0, e:'反例 −1。'},
+    {q:'推翻命題需幾個反例?', o:['1個','很多','全部','無法'], a:0, e:'一個即可。'}
+  ],
+  info:[
+    {big:'若P則Q', cap:'命題', c:'var(--pink)'},
+    {big:'一個反例', cap:'推翻', c:'var(--yellow)'},
+    {big:'逆命題', cap:'另判真假', c:'var(--blue)'}
+  ]
+},
+{ key:'ang', viz:'ang', vizTitle:'用理由算角度（4 題）',
+  slides:[
+    {eb:'核心 常用理由', h:'外角/平行/內角和', html:`
+      <div class="box"><b>外角定理：</b>外角 = 兩內對角和。</div>
+      <div class="box"><b>平行線：</b>同位角相等、內錯角相等、同旁內角互補。</div>
+      <div class="box"><b>內角和：</b>三角形三內角和 = 180°。</div>
+      <div class="box g">👉 用下方 Canvas：求角度。</div>`},
+    {eb:'例題 ★★☆', h:'外角', html:`
+      <div class="exq" data-a="2">
+        <div class="exq-q"><span class="hl">Q</span>　∠A=50°、∠B=60°，C 的外角？</div>
+        <button class="exo" data-i="0">70°</button>
+        <button class="exo" data-i="1">130°</button>
+        <button class="exo" data-i="2">110°</button>
+        <button class="exo" data-i="3">120°</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">外角=50+60=110°</div>
+          <div class="an">答：110°</div>
+        </div>
+      </div>`},
+    {eb:'例題 ★★☆　平行', h:'同旁內角', html:`
+      <div class="exq" data-a="1">
+        <div class="exq-q"><span class="hl">Q</span>　L₁∥L₂，交角 70°，同旁內角？</div>
+        <button class="exo" data-i="0">70°</button>
+        <button class="exo" data-i="1">110°</button>
+        <button class="exo" data-i="2">90°</button>
+        <button class="exo" data-i="3">140°</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">同旁內角互補=180−70=110°</div>
+          <div class="an">答：110°</div>
+        </div>
+      </div>`}
+  ],
+  fa:[
+    {q:'∠A=80°∠B=40° C外角?', o:['120°','100°','60°','140°'], a:0, e:'80+40。'},
+    {q:'平行內錯角?', o:['相等','互補','2倍','互餘'], a:0, e:'相等。'},
+    {q:'外角130° 一內對角50° 另一?', o:['80°','60°','70°','90°'], a:0, e:'130−50。'}
+  ],
+  info:[
+    {big:'外角=兩內對角和', cap:'外角定理', c:'var(--blue)'},
+    {big:'內錯角相等', cap:'平行', c:'var(--green)'},
+    {big:'內角和180°', cap:'三角形', c:'var(--yellow)'}
+  ]
+},
+{ key:'proof', viz:'proof', vizTitle:'等腰 / 兩欄式推理（4 題）',
+  slides:[
+    {eb:'核心 兩欄式證明', h:'敘述—理由', html:`
+      <div class="box"><b>等腰三角形：</b>等邊對等角（兩底角相等）。</div>
+      <div class="box">兩欄式：左寫<b>敘述</b>、右寫<b>理由</b>，逐步演繹到結論。</div>
+      <div class="box g">👉 用下方 Canvas：求角度。</div>`},
+    {eb:'例題 ★★★', h:'等腰底角', html:`
+      <div class="exq" data-a="3">
+        <div class="exq-q"><span class="hl">Q</span>　等腰 AB=AC、∠A=40°，底角？</div>
+        <button class="exo" data-i="0">40°</button>
+        <button class="exo" data-i="1">100°</button>
+        <button class="exo" data-i="2">50°</button>
+        <button class="exo" data-i="3">70°</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">(180−40)÷2=70°</div>
+          <div class="an">答：70°</div>
+        </div>
+      </div>`},
+    {eb:'例題 ★★★　外角', h:'底外角', html:`
+      <div class="exq" data-a="0">
+        <div class="exq-q"><span class="hl">Q</span>　等腰∠A=50°，底外角 ∠ACD？</div>
+        <button class="exo" data-i="0">115°</button>
+        <button class="exo" data-i="1">65°</button>
+        <button class="exo" data-i="2">130°</button>
+        <button class="exo" data-i="3">50°</button>
+        <div class="exlock">🔒 答對才會顯示詳解</div>
+        <div class="exsol">
+          <div class="st">底角=(180−50)÷2=65°；外角=180−65=115°</div>
+          <div class="an">答：115°</div>
+        </div>
+      </div>`}
+  ],
+  fa:[
+    {q:'等腰頂角100° 底角?', o:['40°','80°','50°','100°'], a:0, e:'(180−100)/2。'},
+    {q:'等腰∠B=72° 頂角?', o:['36°','72°','54°','108°'], a:0, e:'180−144。'},
+    {q:'等邊對?', o:['等角','等高','直角','鈍角'], a:0, e:'等邊對等角。'}
+  ],
+  info:[
+    {big:'等邊對等角', cap:'等腰', c:'var(--green)'},
+    {big:'敘述—理由', cap:'兩欄式', c:'var(--blue)'},
+    {big:'逐步演繹', cap:'證明', c:'var(--purple)'}
+  ]
+}];
+
+const QUIZ = [
+  {type:'choice', q:'「若a>3則a>1」真假?', o:['真','假','不一定','無法判斷'], a:0, e:'真。'},
+  {type:'choice', q:'逆命題「若a>1則a>3」?', o:['真','假','相同','恆真'], a:1, e:'反例 a=2。'},
+  {type:'choice', q:'「x>0→x²>0」真假?', o:['真','假','不一定','無法'], a:0, e:'真。'},
+  {type:'choice', q:'「x²>0→x>0」反例?', o:['x=−1','x=1','x=2','無反例'], a:0, e:'−1。'},
+  {type:'choice', q:'推翻命題需幾個反例?', o:['1個','2個','全部','無法'], a:0, e:'一個。'},
+  {type:'choice', q:'∠A=50°∠B=60° C外角?', o:['70°','130°','110°','120°'], a:2, e:'50+60。'},
+  {type:'choice', q:'∠A=80°∠B=40° C外角?', o:['120°','100°','60°','140°'], a:0, e:'80+40。'},
+  {type:'choice', q:'L1∥L2 交角70° 內錯角?', o:['70°','110°','90°','35°'], a:0, e:'相等。'},
+  {type:'choice', q:'L1∥L2 交角70° 同旁內角?', o:['70°','110°','90°','140°'], a:1, e:'互補。'},
+  {type:'choice', q:'外角130° 一內對角50° 另一?', o:['80°','60°','70°','90°'], a:0, e:'130−50。'},
+  {type:'choice', q:'等腰∠A=40° 底角?', o:['40°','100°','50°','70°'], a:3, e:'(180−40)/2。'},
+  {type:'choice', q:'等腰頂角100° 底角?', o:['40°','80°','50°','100°'], a:0, e:'(180−100)/2。'},
+  {type:'choice', q:'等腰∠B=72° 頂角?', o:['36°','72°','54°','108°'], a:0, e:'180−144。'},
+  {type:'choice', q:'等腰∠A=50° 底外角?', o:['115°','65°','130°','50°'], a:0, e:'180−65。'},
+  {type:'tf', q:'判斷：「原命題真，逆命題一定真。」', a:false, e:'錯。另判。'},
+  {type:'tf', q:'判斷：「對頂角相等是定理。」', a:true, e:'對。'},
+  {type:'choice', q:'三角形∠A=2x∠B=3x∠C=x, x=?', o:['30','36','45','60'], a:0, e:'6x=180。'},
+  {type:'choice', q:'「相等的兩角一定是對頂角」真假?', o:['真','假','恆真','無法'], a:1, e:'等腰底角反例。'}
+];
+
+const GAME = [
+  {name:'命題真假', qs:[
+    {q:'「a>3→a>1」?', o:['真','假','不一定','無法'], a:0, e:'真。'},
+    {q:'「x>0→x²>0」?', o:['真','假','不一定','無法'], a:0, e:'真。'},
+    {q:'推翻命題需?', o:['1反例','2反例','全部','無法'], a:0, e:'一個。'},
+    {q:'能判真假的敘述叫?', o:['命題','定義','公理','反例'], a:0, e:'命題。'}
+  ]},
+  {name:'逆命題', qs:[
+    {q:'「a>1→a>3」?', o:['假','真','相同','恆真'], a:0, e:'反例2。'},
+    {q:'「x²>0→x>0」反例?', o:['x=−1','x=1','x=3','無'], a:0, e:'−1。'},
+    {q:'逆命題是把P、Q?', o:['對調','相加','相減','相等'], a:0, e:'對調。'},
+    {q:'原命題真，逆命題?', o:['另判','必真','必假','相同'], a:0, e:'另判。'}
+  ]},
+  {name:'外角/內角', qs:[
+    {q:'∠A=50°∠B=60° C外角?', o:['110°','70°','130°','120°'], a:0, e:'和。'},
+    {q:'∠A=80°∠B=40° C外角?', o:['120°','100°','60°','140°'], a:0, e:'和。'},
+    {q:'外角130° 內對角50° 另一?', o:['80°','60°','70°','90°'], a:0, e:'減。'},
+    {q:'三角形內角和?', o:['180°','360°','90°','270°'], a:0, e:'180。'}
+  ]},
+  {name:'平行線', qs:[
+    {q:'內錯角?', o:['相等','互補','2倍','互餘'], a:0, e:'相等。'},
+    {q:'同旁內角?', o:['互補','相等','互餘','2倍'], a:0, e:'互補。'},
+    {q:'同位角?', o:['相等','互補','互餘','2倍'], a:0, e:'相等。'},
+    {q:'L1∥L2 交角70° 同旁內角?', o:['110°','70°','90°','140°'], a:0, e:'互補。'}
+  ]},
+  {name:'等腰推理', qs:[
+    {q:'等腰∠A=40° 底角?', o:['70°','40°','100°','50°'], a:0, e:'(180−40)/2。'},
+    {q:'等腰頂角100° 底角?', o:['40°','80°','50°','100°'], a:0, e:'40。'},
+    {q:'等腰∠B=72° 頂角?', o:['36°','72°','54°','108°'], a:0, e:'36。'},
+    {q:'等邊對?', o:['等角','等高','直角','鈍角'], a:0, e:'等角。'}
+  ]},
+  {name:'觀念', qs:[
+    {q:'不證自明的是?', o:['公理','定理','命題','反例'], a:0, e:'公理。'},
+    {q:'經證明成立的是?', o:['定理','公理','定義','假設'], a:0, e:'定理。'},
+    {q:'兩欄式左欄寫?', o:['敘述','理由','答案','圖'], a:0, e:'敘述。'},
+    {q:'第3章啟後?', o:['三角形的心','機率','統計','立體'], a:0, e:'3-2。'}
+  ]}
+];
+
+document.getElementById('goals').innerHTML = GOALS.map((g,i)=>
+  `<div class="goal"><div class="bdg">${i+1}</div>${g}</div>`).join('');
+
+const wrap = document.getElementById('wrap');
+DATA.forEach((sec, si)=>{
+  const p = document.createElement('div');
+  p.className = 'panel' + (si===0?' on':'');
+  p.dataset.p = si;
+  p.innerHTML = `
+    <div class="card">
+      <h3><span class="ic">📽</span>簡報翻頁器</h3>
+      <div class="deck" data-deck="${si}">
+        ${sec.slides.map((s,i)=>`<div class="sl${i===0?' on':''}" data-i="${i}">
+          <div class="eyebrow">${s.eb}</div><h4>${s.h}</h4>${s.html}</div>`).join('')}
+      </div>
+      <div class="nav">
+        <button class="btn" data-nav="prev" data-s="${si}">◀ 上一張</button>
+        <span class="pg" id="pg-${si}">1 / ${sec.slides.length}</span>
+        <button class="btn" data-nav="next" data-s="${si}">下一張 ▶</button>
+      </div>
+      <div class="dots" id="dots-${si}">
+        ${sec.slides.map((_,i)=>`<button class="dot${i===0?' on':''}" data-s="${si}" data-i="${i}"></button>`).join('')}
+      </div>
+    </div>
+    <div class="card">
+      <h3><span class="ic">🎯</span>Canvas 互動視覺化<span style="font-size:14px;color:var(--soft);font-weight:400;">　${sec.vizTitle}</span></h3>
+      <div class="cv-wrap">
+        <canvas class="viz" data-viz="${sec.viz}" data-si="${si}"></canvas>
+        <div class="ctrl" data-ctrl="${si}"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3><span class="ic">✅</span>形成性評量</h3>
+      ${sec.fa.map((f,i)=>`<div class="q" data-fa="${si}-${i}">
+        <div class="qt"><span class="qn">Q${i+1}</span>${f.q}</div>
+        <div class="opts">${f.o.map((o,oi)=>`<button class="opt" data-si="${si}" data-qi="${i}" data-oi="${oi}">${o}</button>`).join('')}</div>
+        <div class="fb" id="fb-${si}-${i}"></div>
+      </div>`).join('')}
+    </div>
+    <div class="card">
+      <h3><span class="ic">📊</span>資訊圖表</h3>
+      <div class="info">
+        ${sec.info.map(c=>`<div class="icard"><div class="big" style="color:${c.c}">${c.big}</div><div class="cap">${c.cap}</div></div>`).join('')}
+      </div>
+    </div>`;
+  wrap.appendChild(p);
+});
+
+const qp = document.createElement('div');
+qp.className='panel'; qp.dataset.p='3';
+qp.innerHTML = `<div class="card"><h3><span class="ic">📝</span>題型測驗　<span style="font-size:14px;color:var(--soft);font-weight:400;">單選 · 是非 · 填充，共 ${QUIZ.length} 題</span></h3>
+  <div id="quizBox"></div>
+  <div style="display:flex;gap:10px;align-items:center;margin-top:14px;flex-wrap:wrap;">
+    <button class="btn" id="gradeBtn" style="background:rgba(242,217,121,.2);border-color:var(--yellow);color:var(--yellow);font-weight:700;">📊 批改並看成績</button>
+    <button class="btn" id="resetQuiz">🔄 重做</button>
+    <div class="readout" id="score" style="display:none;"></div>
+  </div></div>
+  <div class="card"><h3><span class="ic">📋</span>推理證明速查表</h3>
+    <div class="frow"><div class="flab">命題</div><div class="fval">能判真假的敘述「若P則Q」</div></div>
+    <div class="frow"><div class="flab">真命題</div><div class="fval">條件成立→結論一定成立（要證）</div></div>
+    <div class="frow"><div class="flab">假命題</div><div class="fval">存在反例（一個即可推翻）</div></div>
+    <div class="frow"><div class="flab">定義/公理/定理</div><div class="fval">約定 / 不證自明 / 經證明</div></div>
+    <div class="frow"><div class="flab">兩欄式</div><div class="fval">左敘述、右理由</div></div>
+    <div class="frow"><div class="flab">逆命題</div><div class="fval">P、Q 對調；真假另判</div></div>
+    <div class="frow"><div class="flab">外角定理</div><div class="fval">外角 = 兩內對角和</div></div>
+    <div class="frow"><div class="flab">平行線</div><div class="fval">同位/內錯角相等、同旁內角互補</div></div>
+    <div class="frow"><div class="flab">等腰</div><div class="fval">等邊對等角（兩底角相等）</div></div>
+    <div class="frow"><div class="flab">⚠️ 反例</div><div class="fval">一個反例即可推翻命題</div></div>
+  </div>`;
+wrap.appendChild(qp);
+
+const gp = document.createElement('div');
+gp.className='panel'; gp.dataset.p='4';
+gp.innerHTML = `<div class="card"><h3><span class="ic">🎮</span>闖關遊戲　<span style="font-size:14px;color:var(--soft);font-weight:400;">6 關挑戰 · 每題 20 秒 · 連擊與速度都有加分</span></h3>
+  <div class="gscreen on" id="gStart">
+    <div style="text-align:center;font-size:clamp(15px,2vw,18px);line-height:1.8;">
+      闖過 <b class="hl">6</b> 關，每關 1 題，每題 <b class="hl">20 秒</b>。<br>
+      計分：基礎 <b class="hl">10</b> 分 + 連擊獎勵（最多 <b class="hl">5</b>）+ 速度獎勵（最多 <b class="hl">5</b>）＝ 單題最高 <b class="hl">20</b> 分</div>
+    <div class="lvchips" id="gStartChips"></div>
+    <div style="text-align:center;"><button class="btn" id="gGo" style="background:rgba(242,217,121,.25);border-color:var(--yellow);color:var(--yellow);font-weight:700;font-size:16px;padding:10px 24px;">🚀 開始挑戰</button></div>
+  </div>
+  <div class="gscreen" id="gPlay">
+    <div class="hud">
+      <div class="st">關卡<b id="hLv">1/6</b></div>
+      <div class="st">分數<b id="hSc">0</b></div>
+      <div class="st">連擊<b id="hStk">0</b></div>
+      <div class="st">剩餘<b id="hT">20</b></div>
+    </div>
+    <div class="tbar"><div class="tfill" id="tFill"></div></div>
+    <div class="lvchips" id="gChips"></div>
+    <div class="gq" id="gQ"></div>
+    <div class="gopts" id="gO"></div>
+    <div class="gfb" id="gFb"></div>
+    <div style="text-align:center;margin-top:12px;"><button class="btn" id="gNext" style="display:none;">下一關 ▶</button></div>
+  </div>
+  <div class="gscreen" id="gEnd">
+    <div class="rank" id="gRank">🏆</div>
+    <div style="text-align:center;font-size:clamp(17px,2.6vw,22px);font-family:'Noto Serif TC';" id="gFinal"></div>
+    <div style="text-align:center;color:var(--soft);margin-top:8px;" id="gStats"></div>
+    <div style="text-align:center;margin-top:16px;"><button class="btn" id="gAgain" style="background:rgba(242,217,121,.25);border-color:var(--yellow);color:var(--yellow);font-weight:700;">🔄 再挑戰一次</button></div>
+  </div></div>`;
+wrap.appendChild(gp);
+document.getElementById('gStartChips').innerHTML = GAME.map((g,i)=>`<div class="lvchip">第${i+1}關 ${g.name}</div>`).join('');
+
+const qb = document.getElementById('quizBox');
+QUIZ.forEach((q,i)=>{
+  const d = document.createElement('div'); d.className='q';
+  let body='';
+  if(q.type==='choice') body = `<div class="opts">${q.o.map((o,oi)=>`<button class="opt" data-quiz="${i}" data-oi="${oi}">${o}</button>`).join('')}</div>`;
+  else if(q.type==='tf') body = `<div class="opts" style="flex-direction:row;gap:10px;">
+      <button class="opt" data-quiz="${i}" data-oi="1" style="flex:1;">⭕ 對</button>
+      <button class="opt" data-quiz="${i}" data-oi="0" style="flex:1;">❌ 錯</button></div>`;
+  else body = `<div><input class="fill" data-quiz="${i}" placeholder="?"></div>`;
+  d.innerHTML = `<div class="qt"><span class="qn">${i+1}</span>
+    <span style="font-size:12px;color:var(--soft);border:1px solid rgba(243,239,226,.25);border-radius:6px;padding:1px 6px;margin-right:6px;">
+    ${q.type==='choice'?'單選':q.type==='tf'?'是非':'填充'}</span>${q.q}</div>${body}
+    <div class="fb" id="qfb-${i}"></div>`;
+  qb.appendChild(d);
+});
+
+document.getElementById('tabs').addEventListener('click', e=>{
+  const t = e.target.closest('.tab'); if(!t) return;
+  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on', x===t));
+  document.querySelectorAll('.panel').forEach(x=>x.classList.toggle('on', x.dataset.p===t.dataset.p));
+  document.getElementById('goalCard').style.display = (t.dataset.p==='4')?'none':'';
+  window.scrollTo({top:0,behavior:'smooth'});
+  setTimeout(resizeAll, 60);
+});
+
+const cur = DATA.map(()=>0);
+function showSlide(si, i){
+  const deck = document.querySelector(`[data-deck="${si}"]`);
+  const sl = deck.querySelectorAll('.sl');
+  i = Math.max(0, Math.min(sl.length-1, i));
+  cur[si] = i;
+  sl.forEach((s,k)=>s.classList.toggle('on', k===i));
+  document.getElementById('pg-'+si).textContent = `${i+1} / ${sl.length}`;
+  document.querySelectorAll(`#dots-${si} .dot`).forEach((d,k)=>d.classList.toggle('on', k===i));
+}
+document.addEventListener('click', e=>{
+  const n = e.target.closest('[data-nav]');
+  if(n){ const si=+n.dataset.s; showSlide(si, cur[si] + (n.dataset.nav==='next'?1:-1)); return; }
+  const d = e.target.closest('.dot');
+  if(d){ showSlide(+d.dataset.s, +d.dataset.i); return; }
+});
+document.addEventListener('keydown', e=>{
+  const p = document.querySelector('.panel.on'); if(!p) return;
+  const si = +p.dataset.p; if(si>=DATA.length) return;
+  if(e.key==='ArrowRight') showSlide(si, cur[si]+1);
+  if(e.key==='ArrowLeft') showSlide(si, cur[si]-1);
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.opt[data-si]'); if(!o) return;
+  const si=+o.dataset.si, qi=+o.dataset.qi, oi=+o.dataset.oi;
+  const f = DATA[si].fa[qi];
+  const box = document.querySelector(`[data-fa="${si}-${qi}"]`);
+  box.querySelectorAll('.opt').forEach((b,k)=>{
+    b.disabled = true;
+    if(k===f.a) b.classList.add('right'); else if(k===oi) b.classList.add('wrong');
+  });
+  const fb = document.getElementById(`fb-${si}-${qi}`);
+  const ok = oi===f.a;
+  fb.className = 'fb on ' + (ok?'ok':'no');
+  fb.innerHTML = (ok?'✅ <b>答對了！</b> ':'❌ <b>再想想。</b> ') + f.e;
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.exo');
+  if(o && !o.disabled){
+    const box = o.closest('.exq');
+    const ans = +box.dataset.a, pick = +o.dataset.i;
+    if(pick === ans){
+      box.querySelectorAll('.exo').forEach(b=>{ b.disabled=true; if(+b.dataset.i===ans) b.classList.add('right'); });
+      box.querySelector('.exsol').classList.add('on');
+      box.querySelector('.exlock').classList.add('hide');
+    } else {
+      o.classList.add('wrong','shake');
+      setTimeout(()=>o.classList.remove('shake'), 420);
+      o.disabled = true;
+      const lock = box.querySelector('.exlock');
+      lock.innerHTML = '🔒 再想想 —— 答對才會顯示詳解'; lock.style.color='var(--pink)';
+    }
+  }
+});
+document.addEventListener('click', e=>{
+  const o = e.target.closest('.opt[data-quiz]'); if(!o) return;
+  const i = +o.dataset.quiz;
+  o.parentElement.querySelectorAll('.opt').forEach(b=>b.classList.remove('right','wrong'));
+  o.classList.add('right'); o.dataset.sel='1';
+  o.parentElement.querySelectorAll('.opt').forEach(b=>{ if(b!==o) delete b.dataset.sel; });
+});
+document.getElementById('gradeBtn').addEventListener('click', ()=>{
+  let right=0;
+  QUIZ.forEach((q,i)=>{
+    const fb = document.getElementById('qfb-'+i);
+    let ok=false, picked=null;
+    if(q.type==='fill'){
+      const inp = document.querySelector(`.fill[data-quiz="${i}"]`);
+      const v = (inp.value||'').trim().replace(/−/g,'-').replace(/\s/g,'');
+      ok = q.a.some(a=>a.replace(/−/g,'-').replace(/\s/g,'')===v);
+      inp.style.borderBottomColor = ok?'var(--green)':'var(--pink)';
+    } else {
+      const sel = document.querySelector(`.opt[data-quiz="${i}"][data-sel="1"]`);
+      if(sel){ picked=+sel.dataset.oi; ok = (q.type==='tf') ? (picked===1)===q.a : picked===q.a; }
+      document.querySelectorAll(`.opt[data-quiz="${i}"]`).forEach(b=>{
+        b.classList.remove('right','wrong');
+        const bi=+b.dataset.oi;
+        const isAns = (q.type==='tf') ? ((bi===1)===q.a) : (bi===q.a);
+        if(isAns) b.classList.add('right'); else if(picked===bi) b.classList.add('wrong');
+      });
+    }
+    if(ok) right++;
+    fb.className='fb on '+(ok?'ok':'no');
+    fb.innerHTML = (ok?'✅ <b>正確</b> ':'❌ <b>錯誤</b> ') + q.e;
+  });
+  const s = document.getElementById('score');
+  const pct = Math.round(right/QUIZ.length*100);
+  s.style.display='block';
+  s.innerHTML = `成績：<b>${right} / ${QUIZ.length}</b>　（${pct} 分）　${pct>=80?'🏆 很棒！':pct>=60?'💪 再加油':'📖 建議重看重點'}`;
+});
+document.getElementById('resetQuiz').addEventListener('click', ()=>{
+  document.querySelectorAll('.opt[data-quiz]').forEach(b=>{b.classList.remove('right','wrong'); delete b.dataset.sel;});
+  document.querySelectorAll('.fill').forEach(i=>{i.value=''; i.style.borderBottomColor='var(--yellow)';});
+  document.querySelectorAll('[id^="qfb-"]').forEach(f=>f.className='fb');
+  document.getElementById('score').style.display='none';
+});
+
+/* ===== 闖關遊戲 ===== */
+const G = {lv:0, score:0, streak:0, best:0, t:20, timer:null, cur:null, answered:false};
+function gShow(id){ ['gStart','gPlay','gEnd'].forEach(x=>document.getElementById(x).classList.toggle('on', x===id)); }
+function gChips(){
+  document.getElementById('gChips').innerHTML = GAME.map((g,i)=>
+    `<div class="lvchip ${i<G.lv?'done':i===G.lv?'now':''}">${i+1}. ${g.name}</div>`).join('');
+}
+function gLoad(){
+  if(G.lv>=GAME.length){ gFinish(); return; }
+  G.answered=false; G.t=20;
+  const bank = GAME[G.lv].qs;
+  G.cur = bank[Math.floor(Math.random()*bank.length)];
+  document.getElementById('hLv').textContent = (G.lv+1)+'/'+GAME.length;
+  document.getElementById('hSc').textContent = G.score;
+  document.getElementById('hStk').textContent = G.streak;
+  document.getElementById('gQ').innerHTML = `<span style="color:var(--blue);font-size:15px;">第 ${G.lv+1} 關 · ${GAME[G.lv].name}</span><br>${G.cur.q}`;
+  document.getElementById('gO').innerHTML = G.cur.o.map((o,i)=>
+    `<button class="gopt" data-g="${i}">${'ABCD'[i]}. ${o}</button>`).join('');
+  document.getElementById('gFb').className='gfb';
+  document.getElementById('gNext').style.display='none';
+  gChips();
+  clearInterval(G.timer);
+  G.timer = setInterval(()=>{
+    G.t -= 0.1;
+    document.getElementById('hT').textContent = Math.max(0,G.t).toFixed(0);
+    document.getElementById('tFill').style.width = Math.max(0,G.t/20*100)+'%';
+    if(G.t<=0){ clearInterval(G.timer); gAnswer(-1); }
+  },100);
+}
+function gAnswer(pick){
+  if(G.answered) return;
+  G.answered = true; clearInterval(G.timer);
+  const ans = G.cur.a, ok = pick===ans;
+  document.querySelectorAll('.gopt').forEach((b,i)=>{
+    b.disabled=true;
+    if(i===ans) b.classList.add('right'); else if(i===pick) b.classList.add('wrong');
+  });
+  let gain=0, sb=0, tb=0;
+  if(ok){
+    G.streak++; G.best=Math.max(G.best,G.streak);
+    sb = Math.min(5, G.streak-1); tb = Math.min(5, Math.floor(G.t/4));
+    gain = 10+sb+tb; G.score += gain;
+  } else { G.streak = 0; }
+  document.getElementById('hSc').textContent = G.score;
+  document.getElementById('hStk').textContent = G.streak;
+  const fb = document.getElementById('gFb');
+  fb.className = 'gfb on '+(ok?'ok':'no');
+  fb.innerHTML = (ok? `✅ <b>答對！+${gain} 分</b>（基礎10 + 連擊${sb} + 速度${tb}）<br>`
+                    : (pick===-1?'⏰ <b>時間到！</b><br>':'❌ <b>答錯了</b><br>')) + G.cur.e;
+  document.getElementById('gNext').style.display='inline-block';
+  document.getElementById('gNext').textContent = (G.lv>=GAME.length-1)?'看成績 🏁':'下一關 ▶';
+}
+function gFinish(){
+  clearInterval(G.timer);
+  const max = GAME.length*20, pct = Math.round(G.score/max*100);
+  const rank = pct>=85?['🏆','數論大師']:pct>=70?['🥇','高手']:pct>=50?['🥈','不錯']:['📖','再加油'];
+  document.getElementById('gRank').textContent = rank[0];
+  document.getElementById('gFinal').innerHTML = `<b class="hl">${G.score}</b> / ${max} 分　·　${rank[1]}`;
+  document.getElementById('gStats').innerHTML = `最高連擊 <b class="hl">${G.best}</b>　·　完成 ${GAME.length} 關`;
+  gShow('gEnd');
+}
+document.getElementById('gGo').addEventListener('click', ()=>{ G.lv=0;G.score=0;G.streak=0;G.best=0; gShow('gPlay'); gLoad(); });
+document.getElementById('gAgain').addEventListener('click', ()=>{ G.lv=0;G.score=0;G.streak=0;G.best=0; gShow('gPlay'); gLoad(); });
+document.getElementById('gNext').addEventListener('click', ()=>{ G.lv++; gLoad(); });
+document.addEventListener('click', e=>{ const b=e.target.closest('.gopt'); if(!b||b.disabled) return; gAnswer(+b.dataset.g); });
+
+/* ===== Canvas ===== */
+const VIZ = {}; let DPR=1;
+
+/* ① 命題真假 / 逆命題 */
+const PROP=[
+  {q:'若a>3則a>1（真假?）', r:'真', why:'大於3必大於1'},
+  {q:'逆命題:若a>1則a>3', r:'假', why:'反例 a=2'},
+  {q:'若x>0則x²>0', r:'真', why:'正數平方為正'},
+  {q:'逆命題:若x²>0則x>0', r:'假', why:'反例 x=−1'},
+];
+/* ② 用理由算角度 */
+const ANG=[
+  {q:'∠A=50°∠B=60° C外角', r:'110°', why:'兩內對角和'},
+  {q:'∠A=80°∠B=40° C外角', r:'120°', why:'80+40'},
+  {q:'L1∥L2 交角70° 同旁內角', r:'110°', why:'互補'},
+  {q:'外角130° 一內對角50° 另一', r:'80°', why:'130−50'},
+];
+/* ③ 等腰 / 推理 */
+const PROOF=[
+  {q:'等腰 ∠A=40° 底角', r:'70°', why:'(180−40)÷2'},
+  {q:'等腰 頂角100° 底角', r:'40°', why:'(180−100)÷2'},
+  {q:'等腰 ∠B=72° 頂角', r:'36°', why:'180−2×72'},
+  {q:'等腰∠A=50° 底外角∠ACD', r:'115°', why:'180−65'},
+];
+
+function initViz(cv){
+  const si=+cv.dataset.si, kind=cv.dataset.viz;
+  const ctx=cv.getContext('2d');
+  const st=VIZ[si]={kind,cv,ctx};
+  const ctrl=document.querySelector(`[data-ctrl="${si}"]`);
+  const revLabel = kind==='prop' ? '🔍 判真假' : kind==='ang' ? '🔍 求角' : '🔍 求角';
+  st.i=0; st.show=false;
+  ctrl.innerHTML=`<div class="readout" id="ro-${si}"></div>
+    <button class="btn" data-t="rev" data-si="${si}" style="background:rgba(242,217,121,.2);border-color:var(--yellow);color:var(--yellow);font-weight:700;">${revLabel}</button>
+    <button class="btn" data-t="next" data-si="${si}">下一題 ▶</button>`;
+  draw(si);
+}
+
+function drawCard(st, ctx, w, h, ro, E, title, col){
+  ctx.textAlign='center';
+  ctx.fillStyle='rgba(242,217,121,.85)'; ctx.font='bold 13px "Noto Sans TC"';
+  ctx.fillText(title, w/2, 18);
+  ctx.fillStyle='#f3efe2'; ctx.font='15px "Noto Serif TC"';
+  ctx.fillText(E.q, w/2, 54);
+  if(!st.show){
+    ctx.fillStyle='rgba(243,239,226,.4)'; ctx.font='13px "Noto Sans TC"';
+    ctx.fillText('🔒 先自己判斷', w/2, 98);
+  } else {
+    ctx.fillStyle=col; ctx.font='bold 22px "Noto Serif TC"';
+    ctx.fillText(E.r, w/2, 96);
+    ctx.fillStyle='rgba(243,239,226,.72)'; ctx.font='12px "Noto Sans TC"';
+    ctx.fillText(E.why, w/2, 122);
+  }
+  ro.innerHTML = st.show ? `${E.q} → <b style="color:${col}">${E.r}</b>（${E.why}）`
+    : `${E.q}　<span style="color:rgba(243,239,226,.5)">—— 求解</span>`;
+}
+function drawProp(st,c,w,h,ro){ drawCard(st,c,w,h,ro,PROP[st.i],'命題真假 / 逆命題','#eda0a8'); }
+function drawAng(st,c,w,h,ro){ drawCard(st,c,w,h,ro,ANG[st.i],'用理由算角度','#98c9dc'); }
+function drawProof(st,c,w,h,ro){ drawCard(st,c,w,h,ro,PROOF[st.i],'等腰 / 推理','#a6d6a0'); }
+
+function draw(si){
+  const st=VIZ[si]; if(!st) return;
+  const {cv,ctx,kind}=st, w=cv.width/DPR, h=cv.height/DPR;
+  ctx.clearRect(0,0,w,h);
+  const ro=document.getElementById('ro-'+si);
+  if(kind==='prop') drawProp(st,ctx,w,h,ro);
+  else if(kind==='ang') drawAng(st,ctx,w,h,ro);
+  else if(kind==='proof') drawProof(st,ctx,w,h,ro);
+}
+
+document.addEventListener('click', e=>{
+  const btn=e.target.closest('[data-t]'); if(!btn) return;
+  const si=+btn.dataset.si, st=VIZ[si]; if(!st) return;
+  const t=btn.dataset.t;
+  const arr = st.kind==='prop'?PROP : st.kind==='ang'?ANG : PROOF;
+  if(t==='rev') st.show=true;
+  if(t==='next'){ st.i=(st.i+1)%arr.length; st.show=false; }
+  draw(si);
+});
+
+function resizeAll(){
+  DPR = Math.min(2, window.devicePixelRatio||1);
+  document.querySelectorAll('canvas.viz').forEach(cv=>{
+    const w = cv.clientWidth || cv.parentElement.clientWidth;
+    const h = (cv.dataset.viz==='ang') ? 176 : (cv.dataset.viz==='proof' ? 176 : 176);
+    cv.width=w*DPR; cv.height=h*DPR; cv.style.height=h+'px';
+    cv.getContext('2d').setTransform(DPR,0,0,DPR,0,0);
+  });
+  Object.keys(VIZ).forEach(k=>draw(+k));
+}
+document.querySelectorAll('canvas.viz').forEach(initViz);
+window.addEventListener('resize', resizeAll);
+resizeAll();
+</script>
+<div class="hint">← → 鍵可翻頁　·　Canvas 用按鈕互動　·　支援平板觸控</div>
+</body></html>

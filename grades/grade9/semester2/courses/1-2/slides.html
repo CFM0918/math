@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>九下 1-2 二次函數圖形與最大值、最小值｜授課簡報</title>
+<title>九下 1-2 二次函數最大最小值｜授課簡報</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
 <style>
@@ -77,163 +77,151 @@ svg{display:block;margin:6px auto;max-width:100%;}
  svg{max-height:210px;}
 }
 </style></head><body><div class="deck">
-<div class="print-hint">共 <b>12</b> 張・列印時每張一頁（Ctrl+P → 橫向 → 背景圖形）</div>
+<div class="print-hint">共 <b>11</b> 張・列印時每張一頁（Ctrl+P → 橫向 → 背景圖形）</div>
 
 
 <!-- 1 -->
-<div class="slide" data-pg="1 / 12"><div class="tag">Start!</div><div class="big-center">
+<div class="slide" data-pg="1 / 11"><div class="tag">Start!</div><div class="big-center">
 <div class="eyebrow">國三下學期・第一章 二次函數</div>
 <h1>1-2　最大值與最小值</h1>
-<div class="lead">定義域限制了 x 的範圍<br>
-最值可能在<span style="color:#eda0a8;">頂點</span>，也可能在<span style="color:#98c9dc;">端點</span></div><svg viewBox="0 0 220 160" width="220" height="160" style="display:block;margin:0 auto;"><rect x="110.0" y="6" width="118.8" height="148" fill="rgba(242,217,121,.10)"/><line x1="6" y1="103" x2="214" y2="103" stroke="rgba(243,239,226,.3)" stroke-width="1"/><line x1="110" y1="6" x2="110" y2="154" stroke="rgba(243,239,226,.3)" stroke-width="1"/><polyline points="86.3,12.0 91.0,25.1 95.8,37.4 100.5,48.7 105.3,59.1 110.0,68.7 114.8,77.3 119.5,85.0 124.3,91.8 129.0,97.7 133.8,102.7 138.5,106.7 143.3,109.9 148.0,112.2 152.8,113.5 157.5,114.0 162.3,113.5 167.0,112.2 171.8,109.9 176.5,106.7 181.3,102.7 186.0,97.7 190.8,91.8 195.5,85.0 200.3,77.3 205.0,68.7" fill="none" stroke="#a6d6a0" stroke-width="2"/><circle cx="110.0" cy="68.7" r="2.8" fill="#98c9dc"/><circle cx="228.8" cy="12.0" r="2.8" fill="#98c9dc"/><circle cx="157.5" cy="114.0" r="2.8" fill="#eda0a8"/><text x="110" y="157" font-size="10" fill="#a6d6a0" text-anchor="middle" font-family="Noto Sans TC">y=x²−4x+3 在 [0,5]</text></svg>
+<div class="lead">頂點就是<span style="color:#f2d979;">最值</span>發生的地方<br>
+a>0 有最小值、a<0 有<span style="color:#eda0a8;">最大值</span></div><svg viewBox="0 0 190 160" width="190" height="160" style="display:block;margin:0 auto;"><line x1="8" y1="136" x2="182" y2="136" stroke="rgba(243,239,226,.3)" stroke-width="1"/><line x1="95.0" y1="10" x2="95.0" y2="152" stroke="rgba(243,239,226,.3)" stroke-width="1"/><polyline points="66.2,162.4 69.8,147.4 73.4,133.6 77.0,121.0 80.6,109.6 84.2,99.4 87.8,90.4 91.4,82.6 95.0,76.0 98.6,70.6 102.2,66.4 105.8,63.4 109.4,61.6 113.0,61.0 116.6,61.6 120.2,63.4 123.8,66.4 127.4,70.6 131.0,76.0 134.6,82.6 138.2,90.4 141.8,99.4 145.4,109.6 149.0,121.0 152.6,133.6 156.2,147.4 159.8,162.4" fill="none" stroke="#eda0a8" stroke-width="2"/><circle cx="113.0" cy="61.0" r="3.5" fill="#eda0a8"/><text x="118.0" y="75.0" font-size="10" fill="#eda0a8">最高</text><text x="95" y="158" font-size="10" fill="rgba(243,239,226,.75)" text-anchor="middle" font-family="Noto Sans TC">y=−(x−1)²+5 最大值5</text></svg>
 </div></div>
 
 <!-- 2 -->
-<div class="slide" data-pg="2 / 12"><div class="tag">目標</div><div class="body">
+<div class="slide" data-pg="2 / 11"><div class="tag">目標</div><div class="body">
 <h2>本節學習目標</h2>
 <ul>
-<li>無限定義域:求<span class="hl">頂點的 y 值</span>(唯一最值)</li>
-<li>有限定義域 a≤x≤b:比較頂點與兩端點</li>
-<li>判斷<span class="hl-b">頂點是否在定義域內</span>再取值</li>
-<li>應用到面積、成本、利潤最佳化</li>
+<li>由<span class="hl">頂點式</span>判斷最大值或最小值</li>
+<li>由<span class="hl-b">一般式</span>配方或用 x=−b/2a 求頂點</li>
+<li><span class="hl-b">最佳化應用</span>:面積最大、利潤最大</li>
 </ul>
-<div class="box y">一句話:<span class="hl">頂點在域內算三點、在域外只比兩端點。</span></div>
+<div class="box y">一句話:<span class="hl">最值就是頂點的 k;a&gt;0 最小、a&lt;0 最大;一般式先求 x=−b/2a。</span></div>
 </div></div>
 
 <!-- 3 -->
-<div class="slide" data-pg="3 / 12"><div class="tag">核心</div><div class="body">
-<div class="eyebrow">核心　兩種定義域</div>
-<h2>先看頂點在不在範圍裡</h2>
+<div class="slide" data-pg="3 / 11"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心　頂點式的最值</div>
+<h2>a 決定最大或最小</h2>
 <table class="tbl">
-<tr><th style="width:32%;">情形</th><th>結論</th></tr>
-<tr><td class="hl-b">無限定義域</td><td>a&gt;0 有最小值;a&lt;0 有最大值(頂點 y)</td></tr>
-<tr><td class="hl-b">頂點在 [a,b] 內</td><td>算三個值:頂點 + 兩端點，取最大/最小</td></tr>
-<tr><td class="hl-b">頂點在 [a,b] 外</td><td>函數單調 → 只比兩端點</td></tr>
+<tr><th style="width:30%;">a</th><th>最值</th></tr>
+<tr><td class="hl-b">a>0(向上)</td><td>x=h 有<b>最小值 k</b>(無最大)</td></tr>
+<tr><td class="hl-b">a<0(向下)</td><td>x=h 有<b>最大值 k</b>(無最小)</td></tr>
 </table>
-<div class="box g" style="text-align:center;">
-⚠️ 有限定義域一定要比較端點，不能只看頂點。</div>
+<div class="box r" style="text-align:center;">⚠️ 最值是 k(y 值)，發生在 x=h。別把最值寫成 h。</div>
 </div></div>
 
 <!-- 4 -->
-<div class="slide" data-pg="4 / 12"><div class="tag">例題</div><div class="body">
-<div class="eyebrow">例題 1、2　難度 ★☆☆~★★☆</div>
-<h2>無限域 & 頂點在域內</h2>
-<div class="eg">
-<div class="q">y=x²−4x+3，無限定義域求最小值</div>
-<div class="stp">(x−2)²−1;a&gt;0 → 最小值 −1(x=2)，無最大值</div>
-</div>
-<div class="eg">
-<div class="q">同上，在 0≤x≤5 求最大最小</div>
-<div class="stp">三值:y(0)=3、y(2)=−1、y(5)=8 → 最大 8、最小 −1</div>
-</div>
-<div class="box y" style="text-align:center;">頂點 (2,−1) 在 [0,5] 內 → 算三點再比較。</div>
+<div class="slide" data-pg="4 / 11"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心　一般式求最值</div>
+<h2>x = −b / 2a</h2>
+<ul>
+<li>頂點的 x 座標 = <span class="hl">−b/2a</span></li>
+<li>代回原式得最值(y)</li>
+<li>或直接<span class="hl-b">配方</span>成頂點式</li>
+</ul>
+<div class="box g" style="text-align:center;">應用題:設變數 → 列二次式 → 求頂點 → 檢查範圍合理。</div>
 </div></div>
 
 <!-- 5 -->
-<div class="slide" data-pg="5 / 12"><div class="tag">例題</div><div class="body">
-<div class="eyebrow">例題 3　難度 ★★☆　頂點在域外</div>
-<h2>只比兩端點</h2>
-<div style="display:flex;flex-direction:row;align-items:center;gap:18px;justify-content:center;">
-<svg viewBox="0 0 200 158" width="200" height="158" style="display:block;margin:0 auto;"><rect x="156.7" y="6" width="56.7" height="146" fill="rgba(242,217,121,.10)"/><line x1="6" y1="131" x2="194" y2="131" stroke="rgba(243,239,226,.3)" stroke-width="1"/><line x1="100" y1="6" x2="100" y2="152" stroke="rgba(243,239,226,.3)" stroke-width="1"/><polyline points="60.3,13.4 64.1,25.3 67.9,36.6 71.7,47.4 75.4,57.5 79.2,67.0 83.0,75.9 86.8,84.3 90.6,92.0 94.3,99.2 98.1,105.7 101.9,111.7 105.7,117.0 109.4,121.8 113.2,126.0 117.0,129.5 120.8,132.5 124.6,134.9 128.3,136.7 132.1,137.9 135.9,138.5 139.7,138.5 143.4,137.9 147.2,136.7 151.0,134.9 154.8,132.5 158.6,129.5 162.3,126.0 166.1,121.8 169.9,117.0 173.7,111.7 177.4,105.7 181.2,99.2 185.0,92.0" fill="none" stroke="#a6d6a0" stroke-width="2"/><circle cx="156.7" cy="131.1" r="2.8" fill="#98c9dc"/><circle cx="213.3" cy="19.4" r="2.8" fill="#98c9dc"/><circle cx="137.8" cy="138.6" r="2.8" fill="#eda0a8"/><text x="100" y="155" font-size="10" fill="#a6d6a0" text-anchor="middle" font-family="Noto Sans TC">頂點 x=2 在 [3,6] 外</text></svg>
-<div class="eg" style="margin:0;">
-<div class="q">y=x²−4x+3，3≤x≤6</div>
-<div class="stp">頂點 x=2 不在 [3,6]</div>
-<div class="stp">區間在頂點右側遞增</div>
-<div class="stp">y(3)=0(最小)、y(6)=15(最大)</div>
-</div></div>
-<div class="box g" style="text-align:center;">頂點在域外 → 拋物線在此區間單調 → 端點就是最值。</div>
+<div class="slide" data-pg="5 / 11"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">🖍️ 圖解　最高 vs 最低</div>
+<h2>頂點在哪就在哪取值</h2>
+<div style="display:flex;gap:10px;justify-content:center;">
+<svg viewBox="0 0 160 150" width="160" height="150" style="display:block;margin:0 auto;"><line x1="8" y1="126" x2="152" y2="126" stroke="rgba(243,239,226,.3)" stroke-width="1"/><line x1="80.0" y1="10" x2="80.0" y2="142" stroke="rgba(243,239,226,.3)" stroke-width="1"/><polyline points="76.4,8.4 80.0,21.0 83.6,32.4 87.2,42.6 90.8,51.6 94.4,59.4 98.0,66.0 101.6,71.4 105.2,75.6 108.8,78.6 112.4,80.4 116.0,81.0 119.6,80.4 123.2,78.6 126.8,75.6 130.4,71.4 134.0,66.0 137.6,59.4 141.2,51.6 144.8,42.6 148.4,32.4 152.0,21.0" fill="none" stroke="#a6d6a0" stroke-width="2"/><circle cx="116.0" cy="81.0" r="3.5" fill="#a6d6a0"/><text x="121.0" y="75.0" font-size="10" fill="#a6d6a0">最低</text><text x="80" y="148" font-size="10" fill="rgba(243,239,226,.75)" text-anchor="middle" font-family="Noto Sans TC">a>0 最小值3</text></svg><svg viewBox="0 0 160 150" width="160" height="150" style="display:block;margin:0 auto;"><line x1="8" y1="126" x2="152" y2="126" stroke="rgba(243,239,226,.3)" stroke-width="1"/><line x1="80.0" y1="10" x2="80.0" y2="142" stroke="rgba(243,239,226,.3)" stroke-width="1"/><polyline points="51.2,152.4 54.8,137.4 58.4,123.6 62.0,111.0 65.6,99.6 69.2,89.4 72.8,80.4 76.4,72.6 80.0,66.0 83.6,60.6 87.2,56.4 90.8,53.4 94.4,51.6 98.0,51.0 101.6,51.6 105.2,53.4 108.8,56.4 112.4,60.6 116.0,66.0 119.6,72.6 123.2,80.4 126.8,89.4 130.4,99.6 134.0,111.0 137.6,123.6 141.2,137.4 144.8,152.4" fill="none" stroke="#eda0a8" stroke-width="2"/><circle cx="98.0" cy="51.0" r="3.5" fill="#eda0a8"/><text x="103.0" y="65.0" font-size="10" fill="#eda0a8">最高</text><text x="80" y="148" font-size="10" fill="rgba(243,239,226,.75)" text-anchor="middle" font-family="Noto Sans TC">a<0 最大值5</text></svg>
+</div>
+<div class="box y" style="text-align:center;">向上碗口→最低點;向下拱形→最高點。</div>
 </div></div>
 
 <!-- 6 -->
-<div class="slide" data-pg="6 / 12"><div class="tag">例題</div><div class="body">
-<div class="eyebrow">例題 4　難度 ★★★　面積最佳化</div>
-<h2>鐵絲圍長方形</h2>
-<div class="eg">
-<div class="q">長 120 公分鐵絲圍長方形，面積最大時長寬?</div>
-<div class="stp"><b>設</b>　寬 x，長=(120−2x)/2=60−x</div>
-<div class="stp"><b>面積</b>　S=x(60−x)=−(x−30)²+900</div>
-<div class="stp"><b>最大</b>　x=30 → S=900，長=寬=30(正方形)</div>
+<div class="slide" data-pg="6 / 11"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 1、2　難度 ★☆☆　頂點式</div>
+<h2>直接讀最值</h2>
+<div style="display:flex;gap:14px;justify-content:center;align-items:flex-start;">
+<div class="eg" style="margin:0;flex:1;">
+<div class="q">y=(x−2)²+3</div>
+<div class="stp">a>0 → 最小值 <b>3</b>(x=2)</div>
 </div>
-<div class="box y" style="text-align:center;">周長=2(長+寬):設一邊 x，另一邊是 周長/2 − x，別忘了除以 2。</div>
+<div class="eg" style="margin:0;flex:1;">
+<div class="q">y=−(x−1)²+5</div>
+<div class="stp">a<0 → 最大值 <b>5</b>(x=1)</div>
+</div>
+</div>
+<div class="box y" style="text-align:center;">頂點式的 k 就是最值。</div>
 </div></div>
 
 <!-- 7 -->
-<div class="slide" data-pg="7 / 12"><div class="tag">例題</div><div class="body">
-<div class="eyebrow">例題 5　難度 ★★★　頂點在中點</div>
-<h2>用對稱軸定 a</h2>
-<div class="eg">
-<div class="q">y=−x²+6x−5，a≤x≤a+2，頂點恰在中點求 a</div>
-<div class="stp"><b>頂點</b>　x=3</div>
-<div class="stp"><b>中點</b>　(a+(a+2))/2=a+1=3 → a=2，域 [2,4]</div>
-<div class="stp"><b>三值</b>　y(2)=3、y(3)=4、y(4)=3 → 最大 4、最小 3</div>
+<div class="slide" data-pg="7 / 11"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 3、4　難度 ★★☆~★★★　一般式</div>
+<h2>配方 / 公式</h2>
+<div style="display:flex;gap:14px;justify-content:center;align-items:flex-start;">
+<div class="eg" style="margin:0;flex:1;">
+<div class="q">y=x²−6x+11</div>
+<div class="stp">=(x−3)²+2 → 最小值 <b>2</b></div>
 </div>
+<div class="eg" style="margin:0;flex:1;">
+<div class="q">y=−2x²+8x−3</div>
+<div class="stp">x=−8/(−4)=2;最大值 <b>5</b></div>
+</div>
+</div>
+<div class="box g" style="text-align:center;">配方或 x=−b/2a 皆可，結果相同。</div>
 </div></div>
 
 <!-- 8 -->
-<div class="slide" data-pg="8 / 12"><div class="tag">精選</div><div class="body">
+<div class="slide" data-pg="8 / 11"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 5　難度 ★★★　面積最佳化</div>
+<h2>矩形最大面積</h2>
+<div class="eg">
+<div class="q">用長 20 的線圍矩形，求最大面積</div>
+<div class="stp"><b>設</b>　長 x、寬 10−x</div>
+<div class="stp"><b>列式</b>　A=x(10−x)=−(x−5)²+25</div>
+<div class="stp"><b>最大</b>　x=5，面積 <b>25</b>(正方形)</div>
+</div>
+<div class="box y" style="text-align:center;">周長固定，正方形面積最大。</div>
+</div></div>
+
+<!-- 9 -->
+<div class="slide" data-pg="9 / 11"><div class="tag">精選</div><div class="body">
 <div class="eyebrow">隨堂精選</div>
 <h2>快速檢查</h2>
 <table class="tbl">
 <tr><th style="width:60%;">題目</th><th>答案</th></tr>
-<tr><td>y=2x²−8x+5，−1≤x≤4 最大最小?</td><td class="fm hl">15、−3</td></tr>
-<tr><td>y=x²−6x+8，0≤x≤2 最小?</td><td class="fm hl">0(頂點在域外)</td></tr>
-<tr><td>P=−x²+10x，0≤x≤10 最大利潤?</td><td class="fm hl">25(x=5)</td></tr>
-<tr><td>靠牆 200m 圍三面最大面積?</td><td class="fm hl">5000(x=50)</td></tr>
-<tr><td>y=x²−4x+c，[0,3] 最小 −1 求 c?</td><td class="fm hl">3</td></tr>
+<tr><td>y=(x−3)²+1 最小值</td><td class="fm hl">1</td></tr>
+<tr><td>y=−(x+2)²+4 最大值</td><td class="fm hl">4</td></tr>
+<tr><td>y=x²−10x 最小值</td><td class="fm hl">−25</td></tr>
+<tr><td>兩數和12 乘積最大</td><td class="fm hl">36</td></tr>
+<tr><td>y=−2x²+8x 最大值</td><td class="fm hl">8</td></tr>
 </table>
-<div class="box y" style="text-align:center;">靠牆三面:S=x(200−2x)=−2(x−50)²+5000。</div>
-</div></div>
-
-<!-- 9 -->
-<div class="slide" data-pg="9 / 12"><div class="tag">素養</div><div class="body">
-<div class="eyebrow">素養題型 1　【河岸牧草區】</div>
-<h2>一面靠河不圍</h2>
-<div class="box">360 公尺圍欄，沿河岸圍長方形（河岸邊不圍）</div>
-<div class="eg">
-<div class="stp"><b>(1)</b> 平行河岸 x，x+2y=360 → S=−x²/2+180x</div>
-<div class="stp"><b>(2)</b> S=−½(x−180)²+16200;x=180 最大 16200 m²，y=90</div>
-<div class="stp"><b>(3)</b> 圍欄 360m，成本 360×80=28800 元</div>
-</div>
+<div class="box y" style="text-align:center;">a>0 只有最小、a<0 只有最大。</div>
 </div></div>
 
 <!-- 10 -->
-<div class="slide" data-pg="10 / 12"><div class="tag">素養</div><div class="body">
-<div class="eyebrow">素養題型 2　【拋物線天線】</div>
-<h2>截面深度</h2>
-<div style="display:flex;flex-direction:row;align-items:center;gap:18px;justify-content:center;">
-<svg viewBox="0 0 190 150" width="190" height="150" style="display:block;margin:0 auto;"><rect x="31.0" y="6" width="128.0" height="138" fill="rgba(242,217,121,.10)"/><line x1="6" y1="113" x2="184" y2="113" stroke="rgba(243,239,226,.3)" stroke-width="1"/><line x1="95" y1="6" x2="95" y2="144" stroke="rgba(243,239,226,.3)" stroke-width="1"/><polyline points="15.0,34.0 18.2,40.2 21.4,46.1 24.6,51.8 27.8,57.2 31.0,62.4 34.2,67.3 37.4,72.0 40.6,76.4 43.8,80.5 47.0,84.5 50.2,88.1 53.4,91.5 56.6,94.7 59.8,97.6 63.0,100.2 66.2,102.6 69.4,104.7 72.6,106.6 75.8,108.3 79.0,109.7 82.2,110.8 85.4,111.7 88.6,112.3 91.8,112.7 95.0,112.8 98.2,112.7 101.4,112.3 104.6,111.7 107.8,110.8 111.0,109.6 114.2,108.3 117.4,106.6 120.6,104.7 123.8,102.6 127.0,100.2 130.2,97.6 133.4,94.7 136.6,91.5 139.8,88.1 143.0,84.4 146.2,80.5 149.4,76.4 152.6,72.0 155.8,67.3 159.0,62.4 162.2,57.2 165.4,51.8 168.6,46.1 171.8,40.2 175.0,34.0" fill="none" stroke="#98c9dc" stroke-width="2"/><circle cx="31.0" cy="62.4" r="2.8" fill="#98c9dc"/><circle cx="159.0" cy="62.4" r="2.8" fill="#98c9dc"/><circle cx="95.0" cy="112.8" r="2.8" fill="#eda0a8"/><text x="95" y="147" font-size="10" fill="#98c9dc" text-anchor="middle" font-family="Noto Sans TC">y=x²/8，邊緣 x=±4</text></svg>
-<div class="eg" style="margin:0;">
-<div class="q">y=x²/8，邊緣在 x=±4</div>
-<div class="stp"><b>(1)</b> 最深點=頂點 (0,0)</div>
-<div class="stp"><b>(2)</b> y(4)=16/8=2 公尺</div>
-<div class="stp"><b>(3)</b> 深度=2−0=2 公尺</div>
-</div></div>
+<div class="slide" data-pg="10 / 11"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 1、2</div>
+<h2>最佳化應用</h2>
+<div class="eg">
+<div class="q">① 籬笆 24 靠牆圍矩形，最大面積?</div>
+<div class="stp">寬 x、長 24−2x;A=−2(x−6)²+72 → x=6，面積 <b>72</b></div>
+</div>
+<div class="eg">
+<div class="q">② h=−5t²+20t，最高點?</div>
+<div class="stp">=−5(t−2)²+20 → t=2 秒，最高 <b>20</b> 公尺</div>
+</div>
+<div class="box g" style="text-align:center;">靠牆只圍三邊，列式時寬算兩道。</div>
 </div></div>
 
 <!-- 11 -->
-<div class="slide" data-pg="11 / 12"><div class="tag">避雷</div><div class="body">
-<h2>避雷指南</h2>
-<table class="tbl">
-<tr><th style="width:48%;">❌ 錯誤</th><th>✓ 正確</th></tr>
-<tr><td>有限域只算頂點</td><td>頂點+兩端點，<b class="hl-g">比較取最值</b></td></tr>
-<tr><td>頂點在域外→無最值</td><td>只比<b class="hl-g">兩端點</b></td></tr>
-<tr><td>圍框設另一邊=周長−x</td><td>應為 <b class="hl-g">周長/2 − x</b></td></tr>
-<tr><td>a&lt;0 找最小值</td><td>開口向下<b class="hl-g">只有最大值</b></td></tr>
-</table>
-<div class="box y" style="text-align:center;">追問:頂點在 [a,b] 裡面嗎?在裡面算三點、不在只算兩端點。</div>
-</div></div>
-
-<!-- 12 -->
-<div class="slide" data-pg="12 / 12"><div class="tag">總結</div><div class="body">
+<div class="slide" data-pg="11 / 11"><div class="tag">總結</div><div class="body">
 <h2>本節總結</h2>
 <ul>
-<li><span class="hl">無限域</span>:唯一最值 = 頂點 y(a 正最小、a 負最大)</li>
-<li><span class="hl">頂點在域內</span>:算三點(頂點+兩端點)比較</li>
-<li><span class="hl">頂點在域外</span>:單調 → 只比兩端點</li>
-<li><span class="hl-r">最佳化</span>:面積/成本/利潤 → 化二次函數求頂點</li>
+<li><span class="hl">頂點式</span>:最值 = k，在 x=h</li>
+<li><span class="hl">a 正負</span>:a>0 最小、a<0 最大</li>
+<li><span class="hl">一般式</span>:x=−b/2a 或配方</li>
+<li><span class="hl-r">應用</span>:設變數→列式→求頂點→檢查範圍</li>
 </ul>
 <div class="box g" style="text-align:center;font-size:19px;">
-承先:1-1 頂點與配方 → 啟後:<span class="hl">2-1 四分位數與盒狀圖。</span></div>
+🎉 <b>二次函數整章完成!</b><br>
+🔗 <b>啟後</b>:<span class="hl">第2章 統計與機率(四分位數、盒狀圖、機率)。</span></div>
 </div></div>
 
 </div></body></html>

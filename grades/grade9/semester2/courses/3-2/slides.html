@@ -1,12 +1,230 @@
-<!doctype html><html lang="zh-TW"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>3-2 角錐與圓錐｜授課簡報</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../../../../assets/course.css"></head><body class="slides-mode"><div class="topbar"><a class="back" href="../../index.html">← <span>返回九下課程</span></a><div class="brand">3-2 角錐與圓錐<small>Teaching Slides</small></div><div class="spacer"></div><a class="btn" href="interactive.html">互動教學</a><button class="btn" onclick="print()">列印</button></div><main class="deck"><div class="print-hint">共 11 張；方向鍵切換，列印可存成 PDF。</div>
-<section class="slide" data-pg="1 / 11"><div class="eyebrow">九年級下學期 · Chapter 3</div><h1>3-2 角錐與圓錐</h1><p class="formula">從底面收束到頂點</p></section>
-<section class="slide" data-pg="2 / 11"><h2>角錐的構造</h2><ul><li>一個多邊形底面。</li><li>一個不在底面上的頂點。</li><li>側面都是三角形。</li><li>依底面命名：三角錐、四角錐……</li></ul></section>
-<section class="slide" data-pg="3 / 11"><h2>圓錐的構造</h2><ul><li>底面是圓。</li><li>側面是曲面。</li><li>頂點到底面圓心的垂直距離為高。</li><li>頂點到底面圓周的線段為斜高。</li></ul></section>
-<section class="slide" data-pg="4 / 11"><h2>高與斜高</h2><div class="two"><div class="box g">高 h：垂直底面，用於體積。</div><div class="box y">斜高 ℓ：沿側面，用於側面積。</div></div><div class="formula">ℓ² = r² + h²</div></section>
-<section class="slide" data-pg="5 / 11"><h2>為什麼有 ⅓？</h2><p>同底同高的柱體可以分成三個等體積的角錐。</p><div class="formula">V錐 = ⅓V柱 = ⅓Bh</div></section>
-<section class="slide" data-pg="6 / 11"><h2>角錐體積</h2><div class="formula">V = ⅓Bh</div><div class="box g">底面積 30、高 12：V=⅓×30×12=120。</div></section>
-<section class="slide" data-pg="7 / 11"><h2>圓錐體積</h2><div class="formula">V = ⅓πr²h</div><div class="box g">r=3、h=8：V=⅓×π×9×8=24π。</div></section>
-<section class="slide" data-pg="8 / 11"><h2>圓錐側面積</h2><div class="formula">側面積 = πrℓ</div><div class="formula">表面積 = πr² + πrℓ</div><p>封閉圓錐只有一個底面。</p></section>
-<section class="slide" data-pg="9 / 11"><h2>例題</h2><div class="box">圓錐 r=5、h=12。</div><div class="box g">ℓ=√(5²+12²)=13<br>側面積=65π<br>表面積=90π<br>體積=100π</div></section>
-<section class="slide" data-pg="10 / 11"><h2>常見錯誤</h2><ul><li>體積忘記乘 ⅓。</li><li>把斜高當成垂直高。</li><li>圓錐表面積算成兩個底面。</li><li>半徑與直徑混淆。</li></ul></section>
-<section class="slide" data-pg="11 / 11"><h2>本節整理</h2><p class="formula">體積看垂直高；側面積看斜高</p><div class="box y">同底同高：錐體與柱體的體積比是 1：3。</div></section></main><nav class="slide-nav"><button data-prev>←</button><button data-next>→</button></nav><script src="../../../../../assets/course.js"></script></body></html>
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>九下 3-2 角錐與圓錐｜授課簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--chalk-soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);padding:24px 14px;}
+.deck{max-width:1060px;margin:0 auto;}
+.print-hint{text-align:center;color:rgba(243,239,226,0.4);font-size:13px;padding:6px 0 22px;}
+.print-hint b{color:var(--yellow);}
+.slide{position:relative;min-height:576px;margin:0 auto 26px;padding:44px 52px;
+ background:radial-gradient(ellipse at 18% 12%,rgba(255,255,255,0.05),transparent 45%),
+  radial-gradient(ellipse at 82% 88%,rgba(255,255,255,0.035),transparent 45%),
+  radial-gradient(ellipse at 60% 40%,rgba(120,160,130,0.10),transparent 60%),
+  linear-gradient(160deg,var(--board) 0%,var(--board2) 100%);
+ border-radius:14px;box-shadow:0 10px 34px rgba(0,0,0,0.55);
+ border:1px solid rgba(242,217,121,0.14);overflow:hidden;display:flex;flex-direction:column;}
+.slide::before{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;
+ background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.014) 40px,rgba(255,255,255,0.014) 41px),
+  radial-gradient(circle at 30% 72%,rgba(255,255,255,0.03),transparent 8%),
+  radial-gradient(circle at 76% 24%,rgba(255,255,255,0.025),transparent 7%);}
+.slide::after{content:attr(data-pg);position:absolute;bottom:15px;right:26px;font-family:'Caveat',cursive;font-size:20px;color:rgba(243,239,226,0.4);}
+.tag{position:absolute;top:20px;right:26px;font-family:'Caveat',cursive;font-size:22px;color:var(--pink);transform:rotate(4deg);}
+.eyebrow{font-family:'Caveat',cursive;font-size:25px;color:var(--yellow);letter-spacing:1px;margin-bottom:8px;opacity:0.92;}
+.slide h1{font-family:'Noto Serif TC',serif;font-size:46px;font-weight:900;line-height:1.28;letter-spacing:1px;
+ text-shadow:0 0 1px rgba(243,239,226,0.5),1px 1px 0 rgba(0,0,0,0.2);}
+.slide h2{font-family:'Noto Serif TC',serif;font-size:33px;font-weight:900;color:var(--yellow);
+ margin-bottom:20px;padding-bottom:11px;border-bottom:2px dashed rgba(242,217,121,0.4);
+ text-shadow:0 0 1px rgba(242,217,121,0.4);}
+.slide p{font-size:20px;line-height:1.85;margin-bottom:12px;}
+.big-center{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;}
+.big-center .lead,.lead{font-family:'Caveat',cursive;font-size:30px;color:var(--blue);letter-spacing:1px;margin-top:12px;}
+ul{list-style:none;margin:8px 0;}
+li{font-size:21px;line-height:1.95;padding-left:32px;position:relative;margin-bottom:4px;}
+li::before{content:'\2726';position:absolute;left:4px;color:var(--yellow);font-size:17px;top:3px;}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.34);border-radius:12px;padding:15px 21px;margin:12px 0;font-size:19px;line-height:1.8;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.38);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.38);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.34);}
+.eg{position:relative;background:rgba(0,0,0,0.24);border:1px solid rgba(242,217,121,0.2);border-radius:10px;padding:17px 22px;margin:12px 0;font-size:19px;}
+.eg::before{content:'';position:absolute;top:-8px;left:38px;width:58px;height:15px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.eg .q{color:var(--blue);font-weight:700;margin-bottom:8px;font-size:19px;}
+.eg .a{color:var(--green);font-weight:700;margin-top:6px;}
+.eg .stp{color:var(--chalk-soft);font-size:18px;margin:3px 0;}
+.tip{display:flex;gap:12px;align-items:flex-start;background:rgba(242,217,121,0.09);border:1.5px dashed rgba(242,217,121,0.45);border-radius:12px;padding:13px 18px;margin:10px 0;}
+.tip .ic{font-size:24px;line-height:1;}.tip .tx{font-size:18px;line-height:1.7;}
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:18px;}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.26);padding:10px 14px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.two{display:flex;gap:20px;}.two>div{flex:1;}
+svg{display:block;margin:6px auto;max-width:100%;}
+@media print{
+ body{background:#0a130d;padding:0;}
+ .deck{max-width:none;}
+ .print-hint{display:none;}
+ .slide{margin:0;border-radius:0;box-shadow:none;min-height:100vh;
+  page-break-after:always;break-after:page;padding:32px 44px;justify-content:center;}
+ .slide:last-child{page-break-after:auto;break-after:auto;}
+ .slide h1{font-size:40px;}
+ .slide h2{font-size:27px;margin-bottom:13px;padding-bottom:8px;}
+ .slide p{font-size:17px;line-height:1.55;margin-bottom:6px;}
+ li{font-size:17px;line-height:1.55;margin-bottom:1px;padding-left:26px;}
+ .eyebrow{font-size:21px;margin-bottom:5px;}
+ .big-center .lead,.lead{font-size:26px;}
+ .box{font-size:16px;padding:10px 16px;margin:6px 0;line-height:1.5;}
+ .eg{font-size:16px;padding:11px 16px;margin:6px 0;}
+ .tip{font-size:16px;padding:10px 14px;margin:6px 0;}
+ .tbl{font-size:15px;margin:6px 0;}
+ .tbl th,.tbl td{padding:6px 10px;}
+ svg{max-height:210px;}
+}
+</style></head><body><div class="deck">
+<div class="print-hint">共 <b>11</b> 張・列印時每張一頁（Ctrl+P → 橫向 → 背景圖形）</div>
+
+
+<!-- 1 -->
+<div class="slide" data-pg="1 / 11"><div class="tag">Start!</div><div class="big-center">
+<div class="eyebrow">國三下學期・第三章 立體圖形</div>
+<h1>3-2　角錐與圓錐</h1>
+<div class="lead">錐體體積 = <span style="color:#f2d979;">⅓ × 底面積 × 高</span><br>
+圓錐側面用<span style="color:#98c9dc;">母線 l</span></div><svg viewBox="0 0 200 175" width="200" height="175" style="display:block;margin:0 auto;"><ellipse cx="100" cy="132" rx="40" ry="12" fill="rgba(242,217,121,.10)" stroke="#f2d979" stroke-width="1.8"/><line x1="60" y1="132" x2="100" y2="32" stroke="#f2d979" stroke-width="1.8"/><line x1="140" y1="132" x2="100" y2="32" stroke="#f2d979" stroke-width="1.8"/><line x1="100" y1="32" x2="100" y2="132" stroke="#98c9dc" stroke-width="1.4" stroke-dasharray="3,3"/><line x1="100" y1="132" x2="140" y2="132" stroke="#eda0a8" stroke-width="1.4"/><text x="86" y="82.0" font-size="10" fill="#98c9dc">h</text><text x="120.0" y="148" font-size="10" fill="#eda0a8">r</text><text x="128.0" y="82.0" font-size="10" fill="#f2d979">l</text><text x="100" y="173" font-size="10" fill="rgba(243,239,226,.7)" text-anchor="middle" font-family="Noto Sans TC">圓錐 l=√(r²+h²)</text></svg>
+</div></div>
+
+<!-- 2 -->
+<div class="slide" data-pg="2 / 11"><div class="tag">目標</div><div class="body">
+<h2>本節學習目標</h2>
+<ul>
+<li>角錐、圓錐<span class="hl">構造</span>(底面、頂點、高、母線)</li>
+<li><span class="hl-b">錐體體積 = ⅓ × 底面積 × 高</span></li>
+<li>圓錐<span class="hl-b">側面積 = πrl、表面積</span></li>
+<li>母線 <span class="hl-b">l = √(r²+h²)</span></li>
+</ul>
+<div class="box y">一句話:<span class="hl">錐是柱的 ⅓;圓錐側面用母線 l 不是 h;l、r、h 成直角三角形。</span></div>
+</div></div>
+
+<!-- 3 -->
+<div class="slide" data-pg="3 / 11"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心　錐體公式</div>
+<h2>體積乘 ⅓</h2>
+<table class="tbl">
+<tr><th style="width:34%;">量</th><th>公式</th></tr>
+<tr><td class="hl-b">錐體體積</td><td>⅓ × 底面積 × 高</td></tr>
+<tr><td class="hl-b">與柱比</td><td>同底同高 → 錐 = 柱的 ⅓</td></tr>
+<tr><td class="hl-b">母線 l</td><td>√(r²+h²)</td></tr>
+</table>
+<div class="box r" style="text-align:center;">⚠️ 體積別忘了乘 ⅓;母線是 √(r²+h²)，不是 r+h。</div>
+</div></div>
+
+<!-- 4 -->
+<div class="slide" data-pg="4 / 11"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心　圓錐公式</div>
+<h2>半徑 r、高 h、母線 l</h2>
+<table class="tbl">
+<tr><td class="hl-b">體積</td><td>⅓ π r² h</td></tr>
+<tr><td class="hl-b">側面積</td><td>π r l</td></tr>
+<tr><td class="hl-b">表面積</td><td>π r² + π r l</td></tr>
+<tr><td class="hl-b">母線</td><td>l = √(r²+h²)</td></tr>
+</table>
+<div class="box g" style="text-align:center;">側面積用母線 l，表面積再加底面 πr²。</div>
+</div></div>
+
+<!-- 5 -->
+<div class="slide" data-pg="5 / 11"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">🖍️ 圖解　母線直角三角形</div>
+<h2>r、h、l 的關係</h2>
+<div style="display:flex;gap:10px;justify-content:center;align-items:center;">
+<svg viewBox="0 0 170 160" width="170" height="160" style="display:block;margin:0 auto;"><ellipse cx="100" cy="132" rx="40" ry="12" fill="rgba(242,217,121,.10)" stroke="#f2d979" stroke-width="1.8"/><line x1="60" y1="132" x2="100" y2="32" stroke="#f2d979" stroke-width="1.8"/><line x1="140" y1="132" x2="100" y2="32" stroke="#f2d979" stroke-width="1.8"/><line x1="100" y1="32" x2="100" y2="132" stroke="#98c9dc" stroke-width="1.4" stroke-dasharray="3,3"/><line x1="100" y1="132" x2="140" y2="132" stroke="#eda0a8" stroke-width="1.4"/><text x="86" y="82.0" font-size="10" fill="#98c9dc">h</text><text x="120.0" y="148" font-size="10" fill="#eda0a8">r</text><text x="128.0" y="82.0" font-size="10" fill="#f2d979">l</text><text x="85" y="158" font-size="10" fill="rgba(243,239,226,.7)" text-anchor="middle" font-family="Noto Sans TC">圓錐 l=√(r²+h²)</text></svg><svg viewBox="0 0 180 150" width="180" height="150" style="display:block;margin:0 auto;"><polygon points="50,120 50,40 140,120" fill="rgba(152,201,220,.1)" stroke="#98c9dc" stroke-width="1.8"/><rect x="50" y="108" width="12" height="12" fill="none" stroke="#98c9dc" stroke-width="1"/><text x="34" y="80" font-size="11" fill="#98c9dc">h</text><text x="90" y="135" font-size="11" fill="#eda0a8">r</text><text x="100" y="72" font-size="11" fill="#f2d979">l</text><text x="90" y="148" font-size="10" fill="rgba(243,239,226,.7)" text-anchor="middle" font-family="Noto Sans TC">r、h、l 成直角三角形</text></svg>
+</div>
+<div class="box y" style="text-align:center;">半徑 r、高 h 為兩股，母線 l 為斜邊:l=√(r²+h²)。</div>
+</div></div>
+
+<!-- 6 -->
+<div class="slide" data-pg="6 / 11"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 1、4　難度 ★☆☆~★★☆　角錐</div>
+<h2>角錐體積</h2>
+<div style="display:flex;gap:14px;justify-content:center;align-items:flex-start;">
+<div class="eg" style="margin:0;flex:1;">
+<div class="q">底面積12、高5 角錐</div>
+<div class="stp">⅓×12×5=<b>20</b></div>
+</div>
+<div class="eg" style="margin:0;flex:1;">
+<div class="q">正四角錐 底邊6、高4</div>
+<div class="stp">⅓×36×4=<b>48</b></div>
+</div>
+</div>
+<div class="box y" style="text-align:center;">角錐體積 = ⅓ × 底面積 × 高。</div>
+</div></div>
+
+<!-- 7 -->
+<div class="slide" data-pg="7 / 11"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 2、3　難度 ★★☆　圓錐</div>
+<h2>母線與表面積</h2>
+<div style="display:flex;gap:14px;justify-content:center;align-items:flex-start;">
+<div class="eg" style="margin:0;flex:1;">
+<div class="q">半徑3、高4</div>
+<div class="stp">l=5;V=12π;側15π;表24π</div>
+</div>
+<div class="eg" style="margin:0;flex:1;">
+<div class="q">半徑6、高8</div>
+<div class="stp">l=10;V=96π;側60π;表96π</div>
+</div>
+</div>
+<div class="box g" style="text-align:center;">先算母線 l=√(r²+h²)，再套側面積 πrl。</div>
+</div></div>
+
+<!-- 8 -->
+<div class="slide" data-pg="8 / 11"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 5　難度 ★★★　逆求高</div>
+<h2>已知體積求高</h2>
+<div class="eg">
+<div class="q">圓錐體積 75π、底半徑 5，求高</div>
+<div class="stp"><b>列式</b>　⅓π×25×h=75π</div>
+<div class="stp"><b>化簡</b>　(25/3)h=75</div>
+<div class="stp"><b>解</b>　h=<b>9</b></div>
+</div>
+<div class="box y" style="text-align:center;">π 約掉;移項解出高。</div>
+</div></div>
+
+<!-- 9 -->
+<div class="slide" data-pg="9 / 11"><div class="tag">精選</div><div class="body">
+<div class="eyebrow">隨堂精選</div>
+<h2>快速檢查</h2>
+<table class="tbl">
+<tr><th style="width:60%;">題目</th><th>答案</th></tr>
+<tr><td>底面積15、高6 角錐體積</td><td class="fm hl">30</td></tr>
+<tr><td>圓錐r3、h4 母線</td><td class="fm hl">5</td></tr>
+<tr><td>圓錐r5、h12 母線</td><td class="fm hl">13</td></tr>
+<tr><td>圓錐r3、h4 體積</td><td class="fm hl">12π</td></tr>
+<tr><td>同底同高 錐是柱的</td><td class="fm hl">⅓</td></tr>
+</table>
+<div class="box y" style="text-align:center;">圓錐側面積 = πrl，用母線不是高。</div>
+</div></div>
+
+<!-- 10 -->
+<div class="slide" data-pg="10 / 11"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 1、2</div>
+<h2>綜合應用</h2>
+<div class="eg">
+<div class="q">① 圓錐 r5、h12（5-12-13）</div>
+<div class="stp">l=13;側65π、表90π、體積<b>100π</b></div>
+</div>
+<div class="eg">
+<div class="q">② r3、h6 圓柱 vs 圓錐 體積</div>
+<div class="stp">柱54π、錐18π → 柱是錐 <b>3 倍</b></div>
+</div>
+<div class="box g" style="text-align:center;">同底同高:柱體積是錐的 3 倍。</div>
+</div></div>
+
+<!-- 11 -->
+<div class="slide" data-pg="11 / 11"><div class="tag">總結</div><div class="body">
+<h2>本節總結</h2>
+<ul>
+<li><span class="hl">錐體體積</span> = ⅓ × 底面積 × 高</li>
+<li><span class="hl">圓錐</span>:V=⅓πr²h、側面=πrl</li>
+<li><span class="hl">母線</span> l = √(r²+h²)</li>
+<li><span class="hl-r">柱錐關係</span>:同底同高，柱 = 錐 × 3</li>
+</ul>
+<div class="box g" style="text-align:center;font-size:19px;">
+🎉🎉 <b>國中數學全六冊 完成!</b><br>
+<span class="hl">立體圖形、二次函數、統計機率、推理證明——全部到位。</span></div>
+</div></div>
+
+</div></body></html>

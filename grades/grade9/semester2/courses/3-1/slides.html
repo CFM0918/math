@@ -1,12 +1,229 @@
-<!doctype html><html lang="zh-TW"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>3-1 角柱與圓柱｜授課簡報</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../../../../assets/course.css"></head><body class="slides-mode"><div class="topbar"><a class="back" href="../../index.html">← <span>返回九下課程</span></a><div class="brand">3-1 角柱與圓柱<small>Teaching Slides</small></div><div class="spacer"></div><a class="btn" href="interactive.html">互動教學</a><button class="btn" onclick="print()">列印</button></div><main class="deck"><div class="print-hint">共 11 張；方向鍵切換，列印可存成 PDF。</div>
-<section class="slide" data-pg="1 / 11"><div class="eyebrow">九年級下學期 · Chapter 3</div><h1>3-1 角柱與圓柱</h1><p class="formula">底面平移，形成柱體</p></section>
-<section class="slide" data-pg="2 / 11"><h2>柱體的特徵</h2><ul><li>兩個底面全等且平行。</li><li>側面連接兩底面。</li><li>高是兩底面間的垂直距離。</li></ul></section>
-<section class="slide" data-pg="3 / 11"><h2>角柱的命名</h2><div class="box">依底面形狀命名：三角柱、四角柱、五角柱……</div><div class="box y">n 角柱：2n 個頂點、3n 條邊、n+2 個面。</div></section>
-<section class="slide" data-pg="4 / 11"><h2>角柱展開圖</h2><p>側面展開後排成一列長方形：</p><div class="formula">側面積 = 底面周長 P × 高 h</div><div class="formula">表面積 = 2B + Ph</div></section>
-<section class="slide" data-pg="5 / 11"><h2>圓柱展開圖</h2><ul><li>兩個半徑 r 的圓。</li><li>一個長 2πr、寬 h 的長方形。</li></ul><div class="formula">側面積 = 2πrh</div></section>
-<section class="slide" data-pg="6 / 11"><h2>圓柱表面積</h2><div class="formula">S = 2πr² + 2πrh</div><div class="box">兩個底面 + 一個側面。若容器沒有上蓋，要少算一個底面。</div></section>
-<section class="slide" data-pg="7 / 11"><h2>柱體體積</h2><div class="formula">V = Bh</div><div class="two"><div class="box g">角柱：底面積×高</div><div class="box g">圓柱：πr²h</div></div></section>
-<section class="slide" data-pg="8 / 11"><h2>例題：三角柱</h2><div class="box">底面三角形底 6、高 4，柱高 10。</div><div class="box g">B=6×4÷2=12<br>V=12×10=120</div></section>
-<section class="slide" data-pg="9 / 11"><h2>例題：圓柱</h2><div class="box">r=3、h=8</div><div class="box g">側面積=48π<br>表面積=66π<br>體積=72π</div></section>
-<section class="slide" data-pg="10 / 11"><h2>常見錯誤</h2><ul><li>把直徑當成半徑。</li><li>表面積漏掉底面或多算上蓋。</li><li>用斜邊當柱高。</li><li>面積、體積單位混用。</li></ul></section>
-<section class="slide" data-pg="11 / 11"><h2>本節整理</h2><p class="formula">柱體體積 = 底面積 × 高</p><div class="box y">表面積先畫展開圖；體積先圈出底面，再找垂直高度。</div></section></main><nav class="slide-nav"><button data-prev>←</button><button data-next>→</button></nav><script src="../../../../../assets/course.js"></script></body></html>
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>九下 3-1 角柱與圓柱｜授課簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--chalk-soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);padding:24px 14px;}
+.deck{max-width:1060px;margin:0 auto;}
+.print-hint{text-align:center;color:rgba(243,239,226,0.4);font-size:13px;padding:6px 0 22px;}
+.print-hint b{color:var(--yellow);}
+.slide{position:relative;min-height:576px;margin:0 auto 26px;padding:44px 52px;
+ background:radial-gradient(ellipse at 18% 12%,rgba(255,255,255,0.05),transparent 45%),
+  radial-gradient(ellipse at 82% 88%,rgba(255,255,255,0.035),transparent 45%),
+  radial-gradient(ellipse at 60% 40%,rgba(120,160,130,0.10),transparent 60%),
+  linear-gradient(160deg,var(--board) 0%,var(--board2) 100%);
+ border-radius:14px;box-shadow:0 10px 34px rgba(0,0,0,0.55);
+ border:1px solid rgba(242,217,121,0.14);overflow:hidden;display:flex;flex-direction:column;}
+.slide::before{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;
+ background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.014) 40px,rgba(255,255,255,0.014) 41px),
+  radial-gradient(circle at 30% 72%,rgba(255,255,255,0.03),transparent 8%),
+  radial-gradient(circle at 76% 24%,rgba(255,255,255,0.025),transparent 7%);}
+.slide::after{content:attr(data-pg);position:absolute;bottom:15px;right:26px;font-family:'Caveat',cursive;font-size:20px;color:rgba(243,239,226,0.4);}
+.tag{position:absolute;top:20px;right:26px;font-family:'Caveat',cursive;font-size:22px;color:var(--pink);transform:rotate(4deg);}
+.eyebrow{font-family:'Caveat',cursive;font-size:25px;color:var(--yellow);letter-spacing:1px;margin-bottom:8px;opacity:0.92;}
+.slide h1{font-family:'Noto Serif TC',serif;font-size:46px;font-weight:900;line-height:1.28;letter-spacing:1px;
+ text-shadow:0 0 1px rgba(243,239,226,0.5),1px 1px 0 rgba(0,0,0,0.2);}
+.slide h2{font-family:'Noto Serif TC',serif;font-size:33px;font-weight:900;color:var(--yellow);
+ margin-bottom:20px;padding-bottom:11px;border-bottom:2px dashed rgba(242,217,121,0.4);
+ text-shadow:0 0 1px rgba(242,217,121,0.4);}
+.slide p{font-size:20px;line-height:1.85;margin-bottom:12px;}
+.big-center{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;}
+.big-center .lead,.lead{font-family:'Caveat',cursive;font-size:30px;color:var(--blue);letter-spacing:1px;margin-top:12px;}
+ul{list-style:none;margin:8px 0;}
+li{font-size:21px;line-height:1.95;padding-left:32px;position:relative;margin-bottom:4px;}
+li::before{content:'\2726';position:absolute;left:4px;color:var(--yellow);font-size:17px;top:3px;}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.34);border-radius:12px;padding:15px 21px;margin:12px 0;font-size:19px;line-height:1.8;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.38);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.38);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.34);}
+.eg{position:relative;background:rgba(0,0,0,0.24);border:1px solid rgba(242,217,121,0.2);border-radius:10px;padding:17px 22px;margin:12px 0;font-size:19px;}
+.eg::before{content:'';position:absolute;top:-8px;left:38px;width:58px;height:15px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.eg .q{color:var(--blue);font-weight:700;margin-bottom:8px;font-size:19px;}
+.eg .a{color:var(--green);font-weight:700;margin-top:6px;}
+.eg .stp{color:var(--chalk-soft);font-size:18px;margin:3px 0;}
+.tip{display:flex;gap:12px;align-items:flex-start;background:rgba(242,217,121,0.09);border:1.5px dashed rgba(242,217,121,0.45);border-radius:12px;padding:13px 18px;margin:10px 0;}
+.tip .ic{font-size:24px;line-height:1;}.tip .tx{font-size:18px;line-height:1.7;}
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:18px;}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.26);padding:10px 14px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.two{display:flex;gap:20px;}.two>div{flex:1;}
+svg{display:block;margin:6px auto;max-width:100%;}
+@media print{
+ body{background:#0a130d;padding:0;}
+ .deck{max-width:none;}
+ .print-hint{display:none;}
+ .slide{margin:0;border-radius:0;box-shadow:none;min-height:100vh;
+  page-break-after:always;break-after:page;padding:32px 44px;justify-content:center;}
+ .slide:last-child{page-break-after:auto;break-after:auto;}
+ .slide h1{font-size:40px;}
+ .slide h2{font-size:27px;margin-bottom:13px;padding-bottom:8px;}
+ .slide p{font-size:17px;line-height:1.55;margin-bottom:6px;}
+ li{font-size:17px;line-height:1.55;margin-bottom:1px;padding-left:26px;}
+ .eyebrow{font-size:21px;margin-bottom:5px;}
+ .big-center .lead,.lead{font-size:26px;}
+ .box{font-size:16px;padding:10px 16px;margin:6px 0;line-height:1.5;}
+ .eg{font-size:16px;padding:11px 16px;margin:6px 0;}
+ .tip{font-size:16px;padding:10px 14px;margin:6px 0;}
+ .tbl{font-size:15px;margin:6px 0;}
+ .tbl th,.tbl td{padding:6px 10px;}
+ svg{max-height:210px;}
+}
+</style></head><body><div class="deck">
+<div class="print-hint">共 <b>11</b> 張・列印時每張一頁（Ctrl+P → 橫向 → 背景圖形）</div>
+
+
+<!-- 1 -->
+<div class="slide" data-pg="1 / 11"><div class="tag">Start!</div><div class="big-center">
+<div class="eyebrow">國三下學期・第三章 立體圖形</div>
+<h1>3-1　角柱與圓柱</h1>
+<div class="lead">體積 = <span style="color:#f2d979;">底面積 × 高</span><br>
+側面積 = <span style="color:#98c9dc;">底周長 × 高</span></div><svg viewBox="0 0 200 170" width="200" height="170" style="display:block;margin:0 auto;"><line x1="64" y1="42" x2="64" y2="128" stroke="#f2d979" stroke-width="1.8"/><line x1="136" y1="42" x2="136" y2="128" stroke="#f2d979" stroke-width="1.8"/><ellipse cx="100" cy="128" rx="36" ry="12" fill="rgba(242,217,121,.10)" stroke="#f2d979" stroke-width="1.8"/><ellipse cx="100" cy="42" rx="36" ry="12" fill="rgba(242,217,121,.22)" stroke="#f2d979" stroke-width="1.8"/><line x1="100" y1="42" x2="136" y2="42" stroke="#eda0a8" stroke-width="1.4"/><text x="118.0" y="38" font-size="10" fill="#eda0a8">r</text><text x="142" y="85.0" font-size="10" fill="#f2d979">h</text><text x="100" y="168" font-size="10" fill="rgba(243,239,226,.7)" text-anchor="middle" font-family="Noto Sans TC">圓柱 V=πr²h</text></svg>
+</div></div>
+
+<!-- 2 -->
+<div class="slide" data-pg="2 / 11"><div class="tag">目標</div><div class="body">
+<h2>本節學習目標</h2>
+<ul>
+<li>角柱、圓柱的<span class="hl">構造</span>(底面、側面、高)</li>
+<li><span class="hl-b">表面積</span> = 2×底面積 + 側面積</li>
+<li><span class="hl-b">體積</span> = 底面積 × 高</li>
+<li>展開圖:側面積 = 底周長 × 高</li>
+</ul>
+<div class="box y">一句話:<span class="hl">體積=底×高;側面=底周長×高;表面=兩底+側面。圓柱 V=πr²h。</span></div>
+</div></div>
+
+<!-- 3 -->
+<div class="slide" data-pg="3 / 11"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心　柱體公式</div>
+<h2>三個關鍵</h2>
+<table class="tbl">
+<tr><th style="width:32%;">量</th><th>公式</th></tr>
+<tr><td class="hl-b">側面積</td><td>底面周長 × 高</td></tr>
+<tr><td class="hl-b">表面積</td><td>2 × 底面積 + 側面積</td></tr>
+<tr><td class="hl-b">體積</td><td>底面積 × 高</td></tr>
+</table>
+<div class="box r" style="text-align:center;">⚠️ 側面積用底面「周長」,不是底面積。表面要加兩個底。</div>
+</div></div>
+
+<!-- 4 -->
+<div class="slide" data-pg="4 / 11"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心　圓柱公式</div>
+<h2>半徑 r、高 h</h2>
+<table class="tbl">
+<tr><td class="hl-b">底面積</td><td>π r²</td></tr>
+<tr><td class="hl-b">側面積</td><td>2π r h</td></tr>
+<tr><td class="hl-b">表面積</td><td>2π r² + 2π r h</td></tr>
+<tr><td class="hl-b">體積</td><td>π r² h</td></tr>
+</table>
+<div class="box g" style="text-align:center;">圓周長 2πr、圓面積 πr² 別搞混。</div>
+</div></div>
+
+<!-- 5 -->
+<div class="slide" data-pg="5 / 11"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">🖍️ 圖解　展開圖</div>
+<h2>側面攤平就是矩形</h2>
+<div style="display:flex;gap:10px;justify-content:center;align-items:center;">
+<svg viewBox="0 0 210 140" width="210" height="140" style="display:block;margin:0 auto;"><circle cx="40" cy="40" r="18" fill="none" stroke="#f2d979" stroke-width="1.6"/><circle cx="40" cy="115" r="18" fill="none" stroke="#f2d979" stroke-width="1.6"/><rect x="80" y="50" width="120" height="55" fill="rgba(152,201,220,.12)" stroke="#98c9dc" stroke-width="1.8"/><text x="140" y="82" font-size="10" fill="#98c9dc" text-anchor="middle">側面 = 2πr × h</text><text x="140" y="120" font-size="9" fill="rgba(243,239,226,.7)" text-anchor="middle">寬 = 底周長 2πr</text><text x="40" y="40" font-size="9" fill="#f2d979" text-anchor="middle">底</text><text x="105" y="138" font-size="10" fill="rgba(243,239,226,.7)" text-anchor="middle" font-family="Noto Sans TC">圓柱展開圖</text></svg><svg viewBox="0 0 160 150" width="160" height="150" style="display:block;margin:0 auto;"><rect x="40" y="50" width="90" height="70" fill="rgba(152,201,220,.12)" stroke="#98c9dc" stroke-width="1.8"/><polygon points="40,50 66,24 156,24 130,50" fill="rgba(152,201,220,.2)" stroke="#98c9dc" stroke-width="1.6"/><polygon points="130,50 156,24 156,94 130,120" fill="rgba(152,201,220,.06)" stroke="#98c9dc" stroke-width="1.6"/><text x="85.0" y="136" font-size="10" fill="rgba(243,239,226,.8)" text-anchor="middle">底 3×4</text><text x="16" y="85.0" font-size="10" fill="#98c9dc">高5</text><text x="80" y="148" font-size="10" fill="rgba(243,239,226,.7)" text-anchor="middle" font-family="Noto Sans TC">四角柱（長方體）</text></svg>
+</div>
+<div class="box y" style="text-align:center;">矩形的寬 = 底面周長，高 = 柱高 → 側面積 = 周長×高。</div>
+</div></div>
+
+<!-- 6 -->
+<div class="slide" data-pg="6 / 11"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 1、2　難度 ★☆☆~★★☆</div>
+<h2>長方體 & 三角柱</h2>
+<div style="display:flex;gap:14px;justify-content:center;align-items:flex-start;">
+<div class="eg" style="margin:0;flex:1;">
+<div class="q">底3×4、高5 長方體</div>
+<div class="stp">V=60;表面=24+70=94</div>
+</div>
+<div class="eg" style="margin:0;flex:1;">
+<div class="q">直角3-4-5底、高10 三角柱</div>
+<div class="stp">V=6×10=60;表面=12+120=132</div>
+</div>
+</div>
+<div class="box y" style="text-align:center;">底周長×高=側面積;再加兩個底。</div>
+</div></div>
+
+<!-- 7 -->
+<div class="slide" data-pg="7 / 11"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 3、4　難度 ★★☆~★★★　圓柱</div>
+<h2>用 π 表示</h2>
+<div style="display:flex;gap:14px;justify-content:center;align-items:flex-start;">
+<div class="eg" style="margin:0;flex:1;">
+<div class="q">半徑3、高5</div>
+<div class="stp">V=45π;表面=18π+30π=48π</div>
+</div>
+<div class="eg" style="margin:0;flex:1;">
+<div class="q">半徑5、高10</div>
+<div class="stp">V=250π;表面=50π+100π=150π</div>
+</div>
+</div>
+<div class="box g" style="text-align:center;">V=πr²h;側面=2πrh;表面=2πr²+2πrh。</div>
+</div></div>
+
+<!-- 8 -->
+<div class="slide" data-pg="8 / 11"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 5　難度 ★★★　逆求高</div>
+<h2>已知體積求高</h2>
+<div class="eg">
+<div class="q">圓柱體積 100π、半徑 5，求高</div>
+<div class="stp"><b>底面積</b>　π×5²=25π</div>
+<div class="stp"><b>高</b>　100π ÷ 25π = <b>4</b></div>
+</div>
+<div class="box y" style="text-align:center;">高 = 體積 ÷ 底面積;π 會約掉。</div>
+</div></div>
+
+<!-- 9 -->
+<div class="slide" data-pg="9 / 11"><div class="tag">精選</div><div class="body">
+<div class="eyebrow">隨堂精選</div>
+<h2>快速檢查</h2>
+<table class="tbl">
+<tr><th style="width:60%;">題目</th><th>答案</th></tr>
+<tr><td>底面積10、高6 角柱體積</td><td class="fm hl">60</td></tr>
+<tr><td>半徑2、高5 圓柱體積</td><td class="fm hl">20π</td></tr>
+<tr><td>圓柱側面積公式</td><td class="fm hl">2πrh</td></tr>
+<tr><td>正方體邊5 體積</td><td class="fm hl">125</td></tr>
+<tr><td>半徑3、高4 圓柱體積</td><td class="fm hl">36π</td></tr>
+</table>
+<div class="box y" style="text-align:center;">體積一定要乘高。</div>
+</div></div>
+
+<!-- 10 -->
+<div class="slide" data-pg="10 / 11"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 1、2</div>
+<h2>綜合應用</h2>
+<div class="eg">
+<div class="q">① 底邊6正方形、高10 四角柱 體積/表面</div>
+<div class="stp">V=360;表面=72+240=<b>312</b></div>
+</div>
+<div class="eg">
+<div class="q">② 圓柱半徑2、側面積20π，求高</div>
+<div class="stp">4πh=20π → h=<b>5</b></div>
+</div>
+<div class="box g" style="text-align:center;">逆求時用對應公式列方程式。</div>
+</div></div>
+
+<!-- 11 -->
+<div class="slide" data-pg="11 / 11"><div class="tag">總結</div><div class="body">
+<h2>本節總結</h2>
+<ul>
+<li><span class="hl">柱體</span>:體積=底面積×高</li>
+<li><span class="hl">側面積</span>=底周長×高</li>
+<li><span class="hl">表面積</span>=2×底面積+側面積</li>
+<li><span class="hl-r">圓柱</span>:V=πr²h、側面=2πrh</li>
+</ul>
+<div class="box g" style="text-align:center;font-size:19px;">
+🎉 <b>柱體掌握了!</b><br>
+🔗 <b>啟後</b>:<span class="hl">3-2 角錐與圓錐(體積是柱的 ⅓)。</span></div>
+</div></div>
+
+</div></body></html>

@@ -1,1 +1,228 @@
-<!doctype html><html lang="zh-TW"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>3-2 三角形的心｜授課簡報</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../../../../assets/course.css"></head><body class="slides-mode"><div class="topbar"><a class="back" href="../../index.html">← <span>返回九上課程</span></a><div class="brand">3-2 三角形的心<small>114 學年度翰林版</small></div><div class="spacer"></div><a class="btn" href="interactive.html">互動教學</a><button class="btn" onclick="print()">列印</button></div><main class="deck"><div class="print-hint">共 11 張；方向鍵切換，列印可存成 PDF。</div><section class="slide" data-pg="1 / 11"><div class="eyebrow">九年級上學期 · Chapter 3</div><h1>3-2 三角形的心</h1><p class="formula">外心、內心、重心</p></section><section class="slide" data-pg="2 / 11"><h2>外心</h2><ul><li>三邊中垂線的交點。</li><li>到三個頂點距離相等。</li><li>是三角形外接圓的圓心。</li></ul></section><section class="slide" data-pg="3 / 11"><h2>外心位置</h2><div class="three"><div class="box">銳角：內部</div><div class="box">直角：斜邊中點</div><div class="box">鈍角：外部</div></div></section><section class="slide" data-pg="4 / 11"><h2>內心</h2><ul><li>三個內角平分線的交點。</li><li>到三條邊的垂直距離相等。</li><li>是三角形內切圓的圓心。</li></ul></section><section class="slide" data-pg="5 / 11"><h2>重心</h2><ul><li>三條中線的交點。</li><li>永遠在三角形內。</li><li>是均勻三角形薄片的平衡點。</li></ul></section><section class="slide" data-pg="6 / 11"><h2>重心分割中線</h2><div class="formula">頂點到重心：重心到對邊中點 = 2：1</div></section><section class="slide" data-pg="7 / 11"><h2>三心快速對照</h2><div class="three"><div class="box">外心<br>頂點等距</div><div class="box">內心<br>邊等距</div><div class="box">重心<br>面積平衡</div></div></section><section class="slide" data-pg="8 / 11"><h2>作圖策略</h2><div class="box">作中心只需畫出其中兩條特徵線，交點即為中心；第三條可用來檢查。</div></section><section class="slide" data-pg="9 / 11"><h2>生活應用</h2><div class="three"><div class="box">三聚落等距→外心</div><div class="box">三路等距→內心</div><div class="box">薄片平衡→重心</div></div></section><section class="slide" data-pg="10 / 11"><h2>常見錯誤</h2><ul><li>混淆中線與中垂線。</li><li>誤以為外心永遠在三角形內。</li><li>把重心的 2：1 方向寫反。</li></ul></section><section class="slide" data-pg="11 / 11"><h2>本節整理</h2><p class="formula">頂點等距找外心；邊等距找內心；平衡找重心</p><div class="box y">114 學年度翰林版九上章節完成。</div></section></main><nav class="slide-nav"><button data-prev>←</button><button data-next>→</button></nav><script src="../../../../../assets/course.js"></script></body></html>
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>九上 3-2 三角形的心｜授課簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--chalk-soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);padding:24px 14px;}
+.deck{max-width:1060px;margin:0 auto;}
+.print-hint{text-align:center;color:rgba(243,239,226,0.4);font-size:13px;padding:6px 0 22px;}
+.print-hint b{color:var(--yellow);}
+.slide{position:relative;min-height:576px;margin:0 auto 26px;padding:44px 52px;
+ background:radial-gradient(ellipse at 18% 12%,rgba(255,255,255,0.05),transparent 45%),
+  radial-gradient(ellipse at 82% 88%,rgba(255,255,255,0.035),transparent 45%),
+  radial-gradient(ellipse at 60% 40%,rgba(120,160,130,0.10),transparent 60%),
+  linear-gradient(160deg,var(--board) 0%,var(--board2) 100%);
+ border-radius:14px;box-shadow:0 10px 34px rgba(0,0,0,0.55);
+ border:1px solid rgba(242,217,121,0.14);overflow:hidden;display:flex;flex-direction:column;}
+.slide::before{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;
+ background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.014) 40px,rgba(255,255,255,0.014) 41px),
+  radial-gradient(circle at 30% 72%,rgba(255,255,255,0.03),transparent 8%),
+  radial-gradient(circle at 76% 24%,rgba(255,255,255,0.025),transparent 7%);}
+.slide::after{content:attr(data-pg);position:absolute;bottom:15px;right:26px;font-family:'Caveat',cursive;font-size:20px;color:rgba(243,239,226,0.4);}
+.tag{position:absolute;top:20px;right:26px;font-family:'Caveat',cursive;font-size:22px;color:var(--pink);transform:rotate(4deg);}
+.eyebrow{font-family:'Caveat',cursive;font-size:25px;color:var(--yellow);letter-spacing:1px;margin-bottom:8px;opacity:0.92;}
+.slide h1{font-family:'Noto Serif TC',serif;font-size:46px;font-weight:900;line-height:1.28;letter-spacing:1px;
+ text-shadow:0 0 1px rgba(243,239,226,0.5),1px 1px 0 rgba(0,0,0,0.2);}
+.slide h2{font-family:'Noto Serif TC',serif;font-size:33px;font-weight:900;color:var(--yellow);
+ margin-bottom:20px;padding-bottom:11px;border-bottom:2px dashed rgba(242,217,121,0.4);
+ text-shadow:0 0 1px rgba(242,217,121,0.4);}
+.slide p{font-size:20px;line-height:1.85;margin-bottom:12px;}
+.big-center{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;}
+.big-center .lead,.lead{font-family:'Caveat',cursive;font-size:30px;color:var(--blue);letter-spacing:1px;margin-top:12px;}
+ul{list-style:none;margin:8px 0;}
+li{font-size:21px;line-height:1.95;padding-left:32px;position:relative;margin-bottom:4px;}
+li::before{content:'\2726';position:absolute;left:4px;color:var(--yellow);font-size:17px;top:3px;}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.34);border-radius:12px;padding:15px 21px;margin:12px 0;font-size:19px;line-height:1.8;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.38);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.38);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.34);}
+.eg{position:relative;background:rgba(0,0,0,0.24);border:1px solid rgba(242,217,121,0.2);border-radius:10px;padding:17px 22px;margin:12px 0;font-size:19px;}
+.eg::before{content:'';position:absolute;top:-8px;left:38px;width:58px;height:15px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.eg .q{color:var(--blue);font-weight:700;margin-bottom:8px;font-size:19px;}
+.eg .a{color:var(--green);font-weight:700;margin-top:6px;}
+.eg .stp{color:var(--chalk-soft);font-size:18px;margin:3px 0;}
+.tip{display:flex;gap:12px;align-items:flex-start;background:rgba(242,217,121,0.09);border:1.5px dashed rgba(242,217,121,0.45);border-radius:12px;padding:13px 18px;margin:10px 0;}
+.tip .ic{font-size:24px;line-height:1;}.tip .tx{font-size:18px;line-height:1.7;}
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:18px;}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.26);padding:10px 14px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.two{display:flex;gap:20px;}.two>div{flex:1;}
+svg{display:block;margin:6px auto;max-width:100%;}
+@media print{
+ body{background:#0a130d;padding:0;}
+ .deck{max-width:none;}
+ .print-hint{display:none;}
+ .slide{margin:0;border-radius:0;box-shadow:none;min-height:100vh;
+  page-break-after:always;break-after:page;padding:32px 44px;justify-content:center;}
+ .slide:last-child{page-break-after:auto;break-after:auto;}
+ .slide h1{font-size:40px;}
+ .slide h2{font-size:27px;margin-bottom:13px;padding-bottom:8px;}
+ .slide p{font-size:17px;line-height:1.55;margin-bottom:6px;}
+ li{font-size:17px;line-height:1.55;margin-bottom:1px;padding-left:26px;}
+ .eyebrow{font-size:21px;margin-bottom:5px;}
+ .big-center .lead,.lead{font-size:26px;}
+ .box{font-size:16px;padding:10px 16px;margin:6px 0;line-height:1.5;}
+ .eg{font-size:16px;padding:11px 16px;margin:6px 0;}
+ .tip{font-size:16px;padding:10px 14px;margin:6px 0;}
+ .tbl{font-size:15px;margin:6px 0;}
+ .tbl th,.tbl td{padding:6px 10px;}
+ svg{max-height:210px;}
+}
+</style></head><body><div class="deck">
+<div class="print-hint">共 <b>11</b> 張・列印時每張一頁（Ctrl+P → 橫向 → 背景圖形）</div>
+
+
+<!-- 1 -->
+<div class="slide" data-pg="1 / 11"><div class="tag">Start!</div><div class="big-center">
+<div class="eyebrow">國三上學期・第三章 推理證明與三角形的心</div>
+<h1>3-2　三角形的心</h1>
+<div class="lead">外心到<span style="color:#f2d979;">頂點</span>等距、內心到<span style="color:#eda0a8;">邊</span>等距<br>
+重心把中線分成 <span style="color:#c9aee0;">2:1</span></div><svg viewBox="0 0 200 160" width="200" height="160" style="display:block;margin:0 auto;"><polygon points="100,26 34,134 168,134" fill="rgba(201,174,224,.12)" stroke="#c9aee0" stroke-width="1.8"/><line x1="100" y1="26" x2="101" y2="134" stroke="rgba(243,239,226,.4)" stroke-width="1.2"/><line x1="34" y1="134" x2="134" y2="80" stroke="rgba(243,239,226,.4)" stroke-width="1.2"/><line x1="168" y1="134" x2="67" y2="80" stroke="rgba(243,239,226,.4)" stroke-width="1.2"/><circle cx="101" cy="98" r="3.2" fill="#c9aee0"/><text x="106" y="94" font-size="10" fill="#c9aee0">G</text><text x="96" y="20" font-size="10" fill="#f3efe2">A</text><text x="100" y="158" font-size="10" fill="rgba(243,239,226,.7)" text-anchor="middle" font-family="Noto Sans TC">重心=中線交點 2:1</text></svg>
+</div></div>
+
+<!-- 2 -->
+<div class="slide" data-pg="2 / 11"><div class="tag">目標</div><div class="body">
+<h2>本節學習目標</h2>
+<ul>
+<li><span class="hl">外心</span>:三邊中垂線交點、到頂點等距</li>
+<li><span class="hl-b">內心</span>:三內角平分線交點、到邊等距</li>
+<li><span class="hl-b">重心</span>:三中線交點、分中線 2:1</li>
+<li>外接圓/內切圓半徑、重心座標應用</li>
+</ul>
+<div class="box y">一句話:<span class="hl">外心↔頂點、內心↔邊、重心↔2:1。直角外心在斜邊中點;面積=r×s。</span></div>
+</div></div>
+
+<!-- 3 -->
+<div class="slide" data-pg="3 / 11"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心　三心對照</div>
+<h2>外心 · 內心 · 重心</h2>
+<table class="tbl">
+<tr><th style="width:20%;">心</th><th style="width:34%;">交點</th><th>關鍵性質</th></tr>
+<tr><td class="hl-b">外心 O</td><td>三邊中垂線</td><td>到<b>頂點</b>等距 = 外接圓半徑 R</td></tr>
+<tr><td class="hl-b">內心 I</td><td>內角平分線</td><td>到<b>邊</b>等距 = 內切圓半徑 r</td></tr>
+<tr><td class="hl-b">重心 G</td><td>三中線</td><td>分中線 <b>2:1</b>;座標=頂點平均</td></tr>
+</table>
+<div class="box g" style="text-align:center;">直角三角形外心=斜邊中點;正三角形三心重合。</div>
+</div></div>
+
+<!-- 4 -->
+<div class="slide" data-pg="4 / 11"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">🖍️ 圖解　三心位置</div>
+<h2>畫出來看</h2>
+<div style="display:flex;gap:8px;justify-content:center;">
+<svg viewBox="0 0 150 150" width="150" height="150" style="display:block;margin:0 auto;"><circle cx="100" cy="85" r="75" fill="none" stroke="rgba(152,201,220,.5)" stroke-width="1.4"/><polygon points="40,130 160,130 40,40" fill="rgba(152,201,220,.12)" stroke="#98c9dc" stroke-width="1.8"/><circle cx="100" cy="85" r="3" fill="#f2d979"/><text x="104" y="81" font-size="10" fill="#f2d979">O</text><text x="75" y="148" font-size="10" fill="rgba(243,239,226,.7)" text-anchor="middle" font-family="Noto Sans TC">外心=斜邊中點</text></svg><svg viewBox="0 0 150 150" width="150" height="150" style="display:block;margin:0 auto;"><polygon points="100,26 34,134 168,134" fill="rgba(166,214,160,.12)" stroke="#a6d6a0" stroke-width="1.8"/><circle cx="101" cy="106" r="34" fill="none" stroke="rgba(237,160,168,.6)" stroke-width="1.4"/><circle cx="101" cy="106" r="3" fill="#eda0a8"/><text x="105" y="102" font-size="10" fill="#eda0a8">I</text><text x="75" y="148" font-size="10" fill="rgba(243,239,226,.7)" text-anchor="middle" font-family="Noto Sans TC">內心=內切圓心</text></svg><svg viewBox="0 0 150 150" width="150" height="150" style="display:block;margin:0 auto;"><polygon points="100,26 34,134 168,134" fill="rgba(201,174,224,.12)" stroke="#c9aee0" stroke-width="1.8"/><line x1="100" y1="26" x2="101" y2="134" stroke="rgba(243,239,226,.4)" stroke-width="1.2"/><line x1="34" y1="134" x2="134" y2="80" stroke="rgba(243,239,226,.4)" stroke-width="1.2"/><line x1="168" y1="134" x2="67" y2="80" stroke="rgba(243,239,226,.4)" stroke-width="1.2"/><circle cx="101" cy="98" r="3.2" fill="#c9aee0"/><text x="106" y="94" font-size="10" fill="#c9aee0">G</text><text x="96" y="20" font-size="10" fill="#f3efe2">A</text><text x="75" y="148" font-size="10" fill="rgba(243,239,226,.7)" text-anchor="middle" font-family="Noto Sans TC">重心=中線交點 2:1</text></svg>
+</div>
+<div class="box y" style="text-align:center;">外心可在外部(鈍角);內心、重心一定在內部。</div>
+</div></div>
+
+<!-- 5 -->
+<div class="slide" data-pg="5 / 11"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 1、2　難度 ★☆☆~★★☆</div>
+<h2>外接圓 & 內心夾角</h2>
+<div style="display:flex;gap:14px;justify-content:center;align-items:flex-start;">
+<div class="eg" style="margin:0;flex:1;">
+<div class="q">直角 3-4-5 外接圓半徑 R</div>
+<div class="stp">R=斜邊÷2=5÷2=<b>2.5</b></div>
+</div>
+<div class="eg" style="margin:0;flex:1;">
+<div class="q">內心 I、∠A=40° 求 ∠BIC</div>
+<div class="stp">∠BIC=90+½×40=<b>110°</b></div>
+</div>
+</div>
+<div class="box y" style="text-align:center;">直角:R=斜邊/2;內心夾角:∠BIC=90°+½∠A。</div>
+</div></div>
+
+<!-- 6 -->
+<div class="slide" data-pg="6 / 11"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 3　難度 ★★☆　重心分中線</div>
+<h2>2 : 1</h2>
+<div style="display:flex;flex-direction:row;align-items:center;gap:16px;justify-content:center;">
+<svg viewBox="0 0 170 150" width="170" height="150" style="display:block;margin:0 auto;"><polygon points="100,26 34,134 168,134" fill="rgba(201,174,224,.12)" stroke="#c9aee0" stroke-width="1.8"/><line x1="100" y1="26" x2="101" y2="134" stroke="rgba(243,239,226,.4)" stroke-width="1.2"/><line x1="34" y1="134" x2="134" y2="80" stroke="rgba(243,239,226,.4)" stroke-width="1.2"/><line x1="168" y1="134" x2="67" y2="80" stroke="rgba(243,239,226,.4)" stroke-width="1.2"/><circle cx="101" cy="98" r="3.2" fill="#c9aee0"/><text x="106" y="94" font-size="10" fill="#c9aee0">G</text><text x="96" y="20" font-size="10" fill="#f3efe2">A</text><text x="85" y="148" font-size="10" fill="rgba(243,239,226,.7)" text-anchor="middle" font-family="Noto Sans TC">重心=中線交點 2:1</text></svg>
+<div class="eg" style="margin:0;">
+<div class="q">中線 AD=12，求 AG、GD</div>
+<div class="stp">AG:GD=2:1</div>
+<div class="stp">AG=⅔×12=<b>8</b></div>
+<div class="stp">GD=⅓×12=<b>4</b></div>
+</div></div>
+<div class="box g" style="text-align:center;">重心到頂點 : 到中點 = 2 : 1（頂點側較長）。</div>
+</div></div>
+
+<!-- 7 -->
+<div class="slide" data-pg="7 / 11"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 4　難度 ★★★　內切圓半徑</div>
+<h2>面積 = r × s</h2>
+<div class="eg">
+<div class="q">直角三角形三邊 5、12、13，求內切圓半徑 r</div>
+<div class="stp"><b>面積</b>　½×5×12=30</div>
+<div class="stp"><b>半周長</b>　s=(5+12+13)÷2=15</div>
+<div class="stp"><b>r</b>　30÷15=<b>2</b>（=(5+12−13)/2）</div>
+</div>
+<div class="box y" style="text-align:center;">內切圓半徑 r = 面積 ÷ 半周長。</div>
+</div></div>
+
+<!-- 8 -->
+<div class="slide" data-pg="8 / 11"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 5　難度 ★★★　重心座標</div>
+<h2>三頂點平均</h2>
+<div class="eg">
+<div class="q">A(0,0)、B(6,0)、C(0,9)，求重心 G</div>
+<div class="stp"><b>x</b>　(0+6+0)÷3=2</div>
+<div class="stp"><b>y</b>　(0+0+9)÷3=3</div>
+<div class="stp"><b>G</b>　<b>(2, 3)</b></div>
+</div>
+<div class="box g" style="text-align:center;">重心座標 = 三頂點座標的平均。</div>
+</div></div>
+
+<!-- 9 -->
+<div class="slide" data-pg="9 / 11"><div class="tag">精選</div><div class="body">
+<div class="eyebrow">隨堂精選</div>
+<h2>快速檢查</h2>
+<table class="tbl">
+<tr><th style="width:62%;">題目</th><th>答案</th></tr>
+<tr><td>斜邊10 外接圓半徑?</td><td class="fm hl">5</td></tr>
+<tr><td>∠A=50° 內心∠BIC?</td><td class="fm hl">115°</td></tr>
+<tr><td>中線9 重心到頂點?</td><td class="fm hl">6</td></tr>
+<tr><td>直角6-8-10 內切圓半徑?</td><td class="fm hl">2</td></tr>
+<tr><td>正三角形三心?</td><td class="fm hl">重合</td></tr>
+</table>
+<div class="box y" style="text-align:center;">外心到頂點等距、內心到邊等距——別搞混。</div>
+</div></div>
+
+<!-- 10 -->
+<div class="slide" data-pg="10 / 11"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 1、2</div>
+<h2>綜合應用</h2>
+<div class="eg">
+<div class="q">① 直角 6-8-10，求外接圓半徑 R 與內切圓半徑 r</div>
+<div class="stp">R=10÷2=5;面積24、s=12 → r=24÷12=<b>2</b></div>
+</div>
+<div class="eg">
+<div class="q">② A(1,2)、B(4,6)、C(7,1) 重心 G</div>
+<div class="stp">G=((1+4+7)/3,(2+6+1)/3)=<b>(4, 3)</b></div>
+</div>
+<div class="box g" style="text-align:center;">直角三角形:R=斜邊/2、r=(兩股−斜邊)/2。</div>
+</div></div>
+
+<!-- 11 -->
+<div class="slide" data-pg="11 / 11"><div class="tag">總結</div><div class="body">
+<h2>本節總結</h2>
+<ul>
+<li><span class="hl">外心</span>:中垂線、到頂點等距、R=斜邊/2(直角)</li>
+<li><span class="hl">內心</span>:角平分線、到邊等距、面積=r×s</li>
+<li><span class="hl">重心</span>:中線、2:1、座標=平均</li>
+<li><span class="hl-r">正三角形</span>:三心重合</li>
+</ul>
+<div class="box g" style="text-align:center;font-size:19px;">
+🎉 <b>九年級上學期 完成!</b><br>
+🔗 <b>啟後</b>:<span class="hl">九下 二次函數、統計與機率、立體圖形。</span></div>
+</div></div>
+
+</div></body></html>

@@ -1,1 +1,234 @@
-<!doctype html><html lang="zh-TW"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>1-1 連比｜授課簡報</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../../../../assets/course.css"></head><body class="slides-mode"><div class="topbar"><a class="back" href="../../index.html">← <span>返回九上課程</span></a><div class="brand">1-1 連比<small>114 學年度翰林版</small></div><div class="spacer"></div><a class="btn" href="interactive.html">互動教學</a><button class="btn" onclick="print()">列印</button></div><main class="deck"><div class="print-hint">共 10 張；方向鍵切換，列印可存成 PDF。</div><section class="slide" data-pg="1 / 10"><div class="eyebrow">九年級上學期 · Chapter 1</div><h1>1-1 連比</h1><p class="formula">先統一基準，再合併比值</p></section><section class="slide" data-pg="2 / 10"><h2>學習目標</h2><ul><li>理解連比記法。</li><li>將兩個比化成共同中間項。</li><li>化簡與擴分連比。</li><li>解決按比分配問題。</li></ul></section><section class="slide" data-pg="3 / 10"><h2>連比的意義</h2><div class="formula">a：b：c</div><p>表示三個量在同一基準下的相對大小，不是三個相減的差。</p></section><section class="slide" data-pg="4 / 10"><h2>合併兩個比</h2><div class="box">a：b=2：3，b：c=6：5</div><div class="box g">2：3→4：6，所以 a：b：c=4：6：5。</div></section><section class="slide" data-pg="5 / 10"><h2>等值連比</h2><div class="formula">a：b：c = ka：kb：kc</div><div class="box y">每一項必須同乘或同除以同一個非零數。</div></section><section class="slide" data-pg="6 / 10"><h2>最簡整數比</h2><div class="box">18：24：30</div><div class="box g">公因數 6，同除以 6 得 3：4：5。</div></section><section class="slide" data-pg="7 / 10"><h2>按比分配</h2><div class="box">總量 240 按 2：3：5 分配。</div><div class="box g">總比數 10，每份 24，結果 48、72、120。</div></section><section class="slide" data-pg="8 / 10"><h2>常見錯誤</h2><ul><li>中間項尚未統一就直接拼接。</li><li>只對部分項目乘倍。</li><li>分配時忘記先求比數總和。</li></ul></section><section class="slide" data-pg="9 / 10"><h2>自我檢查</h2><div class="box y">算完後確認：簡化後的項數沒有改變；按比分配的各份加總等於原總量。</div></section><section class="slide" data-pg="10 / 10"><h2>本節整理</h2><p class="formula">找公共項 → 統一數值 → 寫成連比 → 化簡</p><div class="box y">啟後：1-2 比例線段。</div></section></main><nav class="slide-nav"><button data-prev>←</button><button data-next>→</button></nav><script src="../../../../../assets/course.js"></script></body></html>
+<!DOCTYPE html><html lang="zh-TW"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>九上 1-1 連比｜授課簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#16281c;--board2:#101f16;--chalk:#f3efe2;--chalk-soft:rgba(243,239,226,0.72);
+--yellow:#f2d979;--pink:#eda0a8;--blue:#98c9dc;--green:#a6d6a0;--purple:#c9aee0;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a130d;font-family:'Noto Sans TC',sans-serif;color:var(--chalk);padding:24px 14px;}
+.deck{max-width:1060px;margin:0 auto;}
+.print-hint{text-align:center;color:rgba(243,239,226,0.4);font-size:13px;padding:6px 0 22px;}
+.print-hint b{color:var(--yellow);}
+.slide{position:relative;min-height:576px;margin:0 auto 26px;padding:44px 52px;
+ background:radial-gradient(ellipse at 18% 12%,rgba(255,255,255,0.05),transparent 45%),
+  radial-gradient(ellipse at 82% 88%,rgba(255,255,255,0.035),transparent 45%),
+  radial-gradient(ellipse at 60% 40%,rgba(120,160,130,0.10),transparent 60%),
+  linear-gradient(160deg,var(--board) 0%,var(--board2) 100%);
+ border-radius:14px;box-shadow:0 10px 34px rgba(0,0,0,0.55);
+ border:1px solid rgba(242,217,121,0.14);overflow:hidden;display:flex;flex-direction:column;}
+.slide::before{content:'';position:absolute;inset:0;border-radius:14px;pointer-events:none;
+ background:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,255,255,0.014) 40px,rgba(255,255,255,0.014) 41px),
+  radial-gradient(circle at 30% 72%,rgba(255,255,255,0.03),transparent 8%),
+  radial-gradient(circle at 76% 24%,rgba(255,255,255,0.025),transparent 7%);}
+.slide::after{content:attr(data-pg);position:absolute;bottom:15px;right:26px;font-family:'Caveat',cursive;font-size:20px;color:rgba(243,239,226,0.4);}
+.tag{position:absolute;top:20px;right:26px;font-family:'Caveat',cursive;font-size:22px;color:var(--pink);transform:rotate(4deg);}
+.eyebrow{font-family:'Caveat',cursive;font-size:25px;color:var(--yellow);letter-spacing:1px;margin-bottom:8px;opacity:0.92;}
+.slide h1{font-family:'Noto Serif TC',serif;font-size:46px;font-weight:900;line-height:1.28;letter-spacing:1px;
+ text-shadow:0 0 1px rgba(243,239,226,0.5),1px 1px 0 rgba(0,0,0,0.2);}
+.slide h2{font-family:'Noto Serif TC',serif;font-size:33px;font-weight:900;color:var(--yellow);
+ margin-bottom:20px;padding-bottom:11px;border-bottom:2px dashed rgba(242,217,121,0.4);
+ text-shadow:0 0 1px rgba(242,217,121,0.4);}
+.slide p{font-size:20px;line-height:1.85;margin-bottom:12px;}
+.big-center{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;}
+.big-center .lead,.lead{font-family:'Caveat',cursive;font-size:30px;color:var(--blue);letter-spacing:1px;margin-top:12px;}
+ul{list-style:none;margin:8px 0;}
+li{font-size:21px;line-height:1.95;padding-left:32px;position:relative;margin-bottom:4px;}
+li::before{content:'\2726';position:absolute;left:4px;color:var(--yellow);font-size:17px;top:3px;}
+.hl{color:var(--yellow);font-weight:700;}.hl-b{color:var(--blue);font-weight:700;}
+.hl-r{color:var(--pink);font-weight:700;}.hl-g{color:var(--green);font-weight:700;}
+.fm{font-family:'Noto Serif TC',serif;}
+.box{background:rgba(152,201,220,0.1);border:1.5px solid rgba(152,201,220,0.34);border-radius:12px;padding:15px 21px;margin:12px 0;font-size:19px;line-height:1.8;}
+.box.y{background:rgba(242,217,121,0.1);border-color:rgba(242,217,121,0.38);}
+.box.r{background:rgba(237,160,168,0.1);border-color:rgba(237,160,168,0.38);}
+.box.g{background:rgba(166,214,160,0.1);border-color:rgba(166,214,160,0.34);}
+.eg{position:relative;background:rgba(0,0,0,0.24);border:1px solid rgba(242,217,121,0.2);border-radius:10px;padding:17px 22px;margin:12px 0;font-size:19px;}
+.eg::before{content:'';position:absolute;top:-8px;left:38px;width:58px;height:15px;background:rgba(242,217,121,0.4);border-radius:2px;transform:rotate(-3deg);}
+.eg .q{color:var(--blue);font-weight:700;margin-bottom:8px;font-size:19px;}
+.eg .a{color:var(--green);font-weight:700;margin-top:6px;}
+.eg .stp{color:var(--chalk-soft);font-size:18px;margin:3px 0;}
+.tip{display:flex;gap:12px;align-items:flex-start;background:rgba(242,217,121,0.09);border:1.5px dashed rgba(242,217,121,0.45);border-radius:12px;padding:13px 18px;margin:10px 0;}
+.tip .ic{font-size:24px;line-height:1;}.tip .tx{font-size:18px;line-height:1.7;}
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:18px;}
+.tbl th,.tbl td{border:1.5px solid rgba(243,239,226,0.26);padding:10px 14px;text-align:center;}
+.tbl th{background:rgba(242,217,121,0.16);color:var(--yellow);font-weight:700;}
+.two{display:flex;gap:20px;}.two>div{flex:1;}
+svg{display:block;margin:6px auto;max-width:100%;}
+@media print{
+ body{background:#0a130d;padding:0;}
+ .deck{max-width:none;}
+ .print-hint{display:none;}
+ .slide{margin:0;border-radius:0;box-shadow:none;min-height:100vh;
+  page-break-after:always;break-after:page;padding:32px 44px;justify-content:center;}
+ .slide:last-child{page-break-after:auto;break-after:auto;}
+ .slide h1{font-size:40px;}
+ .slide h2{font-size:27px;margin-bottom:13px;padding-bottom:8px;}
+ .slide p{font-size:17px;line-height:1.55;margin-bottom:6px;}
+ li{font-size:17px;line-height:1.55;margin-bottom:1px;padding-left:26px;}
+ .eyebrow{font-size:21px;margin-bottom:5px;}
+ .big-center .lead,.lead{font-size:26px;}
+ .box{font-size:16px;padding:10px 16px;margin:6px 0;line-height:1.5;}
+ .eg{font-size:16px;padding:11px 16px;margin:6px 0;}
+ .tip{font-size:16px;padding:10px 14px;margin:6px 0;}
+ .tbl{font-size:15px;margin:6px 0;}
+ .tbl th,.tbl td{padding:6px 10px;}
+ svg{max-height:210px;}
+}
+</style></head><body><div class="deck">
+<div class="print-hint">共 <b>11</b> 張・列印時每張一頁（Ctrl+P → 橫向 → 背景圖形）</div>
+
+
+<!-- 1 -->
+<div class="slide" data-pg="1 / 11"><div class="tag">Start!</div><div class="big-center">
+<div class="eyebrow">國三上學期・第一章 相似形與三角比</div>
+<h1>1-1　連比</h1>
+<div class="lead">三個以上的量一起比較<br>
+用 <span style="color:#f2d979;">a : b : c</span> 表示它們的比例關係</div><svg viewBox="0 0 320 140" width="320" height="140" style="display:block;margin:0 auto;"><rect x="20" y="44" width="56" height="40" fill="#98c9dc" opacity="0.55" stroke="#98c9dc" stroke-width="1.5"/><text x="48" y="69" font-size="14" fill="#1a1a1a" text-anchor="middle" font-family="Noto Sans TC" font-weight="700">2</text><text x="48" y="38" font-size="11" fill="rgba(243,239,226,.7)" text-anchor="middle">2 份</text><rect x="76" y="44" width="84" height="40" fill="#f2d979" opacity="0.55" stroke="#f2d979" stroke-width="1.5"/><text x="118" y="69" font-size="14" fill="#1a1a1a" text-anchor="middle" font-family="Noto Sans TC" font-weight="700">3</text><text x="118" y="38" font-size="11" fill="rgba(243,239,226,.7)" text-anchor="middle">3 份</text><rect x="160" y="44" width="140" height="40" fill="#eda0a8" opacity="0.55" stroke="#eda0a8" stroke-width="1.5"/><text x="230" y="69" font-size="14" fill="#1a1a1a" text-anchor="middle" font-family="Noto Sans TC" font-weight="700">5</text><text x="230" y="38" font-size="11" fill="rgba(243,239,226,.7)" text-anchor="middle">5 份</text><text x="160" y="132" font-size="12" fill="#f2d979" text-anchor="middle" font-family="Noto Sans TC">連比 2 : 3 : 5</text></svg>
+</div></div>
+
+<!-- 2 -->
+<div class="slide" data-pg="2 / 11"><div class="tag">目標</div><div class="body">
+<h2>本節學習目標</h2>
+<ul>
+<li>理解<span class="hl">連比 a:b:c</span> 的意義與化簡</li>
+<li>由兩個比<span class="hl-b">合併成連比</span>（統一公共項）</li>
+<li>用「設 k 倍」解連比例式、求未知數</li>
+<li>應用連比做<span class="hl">按比例分配</span></li>
+</ul>
+<div class="box y">一句話:<span class="hl">合併 a:b 與 b:c 時，先把公共項 b 統一（取最小公倍數）再並排。</span></div>
+</div></div>
+
+<!-- 3 -->
+<div class="slide" data-pg="3 / 11"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">核心　連比與化簡</div>
+<h2>三個量一起比</h2>
+<table class="tbl">
+<tr><th style="width:26%;">概念</th><th>內容</th></tr>
+<tr><td class="hl-b">連比</td><td>三個以上量的比 a:b:c</td></tr>
+<tr><td class="hl-b">化簡</td><td>各項同乘/除一數（分數先化整數）</td></tr>
+<tr><td class="hl-b">合併</td><td>a:b 與 b:c → 統一 b（取 lcm）</td></tr>
+<tr><td class="hl-b">設 k 倍</td><td>a:b:c=3:4:5 → a=3k、b=4k、c=5k</td></tr>
+</table>
+<div class="box g" style="text-align:center;">按比例分配:每份 = 總量 ÷（份數和）。</div>
+</div></div>
+
+<!-- 4 -->
+<div class="slide" data-pg="4 / 11"><div class="tag">核心</div><div class="body">
+<div class="eyebrow">🖍️ 圖解</div>
+<h2>合併連比：統一公共項</h2>
+<div style="display:flex;flex-direction:row;align-items:center;gap:14px;justify-content:center;">
+<svg viewBox="0 0 270 130" width="270" height="130" style="display:block;margin:0 auto;"><rect x="20" y="44" width="53" height="40" fill="#98c9dc" opacity="0.55" stroke="#98c9dc" stroke-width="1.5"/><text x="46" y="69" font-size="14" fill="#1a1a1a" text-anchor="middle" font-family="Noto Sans TC" font-weight="700">a</text><text x="46" y="38" font-size="11" fill="rgba(243,239,226,.7)" text-anchor="middle">8 份</text><rect x="73" y="44" width="79" height="40" fill="#f2d979" opacity="0.55" stroke="#f2d979" stroke-width="1.5"/><text x="112" y="69" font-size="14" fill="#1a1a1a" text-anchor="middle" font-family="Noto Sans TC" font-weight="700">b</text><text x="112" y="38" font-size="11" fill="rgba(243,239,226,.7)" text-anchor="middle">12 份</text><rect x="151" y="44" width="99" height="40" fill="#eda0a8" opacity="0.55" stroke="#eda0a8" stroke-width="1.5"/><text x="201" y="69" font-size="14" fill="#1a1a1a" text-anchor="middle" font-family="Noto Sans TC" font-weight="700">c</text><text x="201" y="38" font-size="11" fill="rgba(243,239,226,.7)" text-anchor="middle">15 份</text><text x="135" y="122" font-size="12" fill="#f2d979" text-anchor="middle" font-family="Noto Sans TC">a:b:c = 8:12:15</text></svg>
+<div style="text-align:left;font-size:14px;line-height:1.9;">
+a:b = 2:3 = <b style="color:#f2d979;">8:12</b><br>
+b:c = 4:5 = <b style="color:#f2d979;">12:15</b><br>
+<span style="color:rgba(243,239,226,.7);">b 統一為 lcm(3,4)=12</span><br>
+→ a:b:c = 8:12:15
+</div></div>
+<div class="box y" style="text-align:center;">兩個比的橋樑是共同的 b，把它變一樣長就能接起來。</div>
+</div></div>
+
+<!-- 5 -->
+<div class="slide" data-pg="5 / 11"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 1、2　難度 ★☆☆~★★☆</div>
+<h2>化簡 & 合併</h2>
+<div class="eg">
+<div class="q">化簡連比 12:18:24</div>
+<div class="stp">三項同除以 gcd=6 → 2:3:4</div>
+</div>
+<div class="eg">
+<div class="q">a:b=2:3、b:c=4:5，求 a:b:c</div>
+<div class="stp">b 統一為 12:a:b=8:12、b:c=12:15 → 8:12:15</div>
+</div>
+<div class="box y" style="text-align:center;">化簡:找三項的最大公因數一起除。</div>
+</div></div>
+
+<!-- 6 -->
+<div class="slide" data-pg="6 / 11"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 3、4　難度 ★★☆</div>
+<h2>設 k 倍求值</h2>
+<div class="eg">
+<div class="q">a:b:c=3:4:5、a+b+c=36，求 a,b,c</div>
+<div class="stp">設 a=3k,b=4k,c=5k;12k=36 → k=3 → 9,12,15</div>
+</div>
+<div class="eg">
+<div class="q">a:b:c=2:3:4、b=15，求 a,c</div>
+<div class="stp">3k=15 → k=5;a=2k=10、c=4k=20</div>
+</div>
+<div class="box y" style="text-align:center;">已知其中一項或總和 → 反推 k，再算其他項。</div>
+</div></div>
+
+<!-- 7 -->
+<div class="slide" data-pg="7 / 11"><div class="tag">例題</div><div class="body">
+<div class="eyebrow">例題 5　難度 ★★★　按比例分配</div>
+<h2>分錢</h2>
+<div style="display:flex;flex-direction:row;align-items:center;gap:16px;justify-content:center;">
+<svg viewBox="0 0 260 130" width="260" height="130" style="display:block;margin:0 auto;"><rect x="20" y="44" width="44" height="40" fill="#98c9dc" opacity="0.55" stroke="#98c9dc" stroke-width="1.5"/><text x="42" y="69" font-size="14" fill="#1a1a1a" text-anchor="middle" font-family="Noto Sans TC" font-weight="700">甲</text><text x="42" y="38" font-size="11" fill="rgba(243,239,226,.7)" text-anchor="middle">2 份</text><rect x="64" y="44" width="66" height="40" fill="#f2d979" opacity="0.55" stroke="#f2d979" stroke-width="1.5"/><text x="97" y="69" font-size="14" fill="#1a1a1a" text-anchor="middle" font-family="Noto Sans TC" font-weight="700">乙</text><text x="97" y="38" font-size="11" fill="rgba(243,239,226,.7)" text-anchor="middle">3 份</text><rect x="130" y="44" width="110" height="40" fill="#eda0a8" opacity="0.55" stroke="#eda0a8" stroke-width="1.5"/><text x="185" y="69" font-size="14" fill="#1a1a1a" text-anchor="middle" font-family="Noto Sans TC" font-weight="700">丙</text><text x="185" y="38" font-size="11" fill="rgba(243,239,226,.7)" text-anchor="middle">5 份</text><text x="130" y="122" font-size="12" fill="#f2d979" text-anchor="middle" font-family="Noto Sans TC">6000 元 分 2:3:5</text></svg>
+<div class="eg" style="margin:0;">
+<div class="q">6000 元依 2:3:5 分給甲乙丙</div>
+<div class="stp">份數和 2+3+5=10</div>
+<div class="stp">每份 6000÷10=600</div>
+<div class="stp"><b>甲 1200、乙 1800、丙 3000</b></div>
+</div></div>
+<div class="box g" style="text-align:center;">先算「一份多少」，再乘各自的份數。</div>
+</div></div>
+
+<!-- 8 -->
+<div class="slide" data-pg="8 / 11"><div class="tag">精選</div><div class="body">
+<div class="eyebrow">隨堂精選</div>
+<h2>快速檢查</h2>
+<table class="tbl">
+<tr><th style="width:58%;">題目</th><th>答案</th></tr>
+<tr><td>化簡 8:12:20</td><td class="fm hl">2:3:5</td></tr>
+<tr><td>½:⅓:¼ 化整數比</td><td class="fm hl">6:4:3</td></tr>
+<tr><td>a:b=2:3、b:c=6:5，連比?</td><td class="fm hl">4:6:5</td></tr>
+<tr><td>三邊比 3:4:5、周長 36</td><td class="fm hl">9,12,15</td></tr>
+<tr><td>三數比 2:3:4，最大比最小多 20</td><td class="fm hl">20,30,40</td></tr>
+</table>
+<div class="box y" style="text-align:center;">分數連比:先乘各分母的最小公倍數化整數。</div>
+</div></div>
+
+<!-- 9 -->
+<div class="slide" data-pg="9 / 11"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 1　【混凝土配比】</div>
+<h2>按連比配料</h2>
+<div style="display:flex;flex-direction:row;align-items:center;gap:16px;justify-content:center;">
+<svg viewBox="0 0 260 130" width="260" height="130" style="display:block;margin:0 auto;"><rect x="20" y="44" width="31" height="40" fill="#98c9dc" opacity="0.55" stroke="#98c9dc" stroke-width="1.5"/><text x="36" y="69" font-size="14" fill="#1a1a1a" text-anchor="middle" font-family="Noto Sans TC" font-weight="700">水泥</text><text x="36" y="38" font-size="11" fill="rgba(243,239,226,.7)" text-anchor="middle">1 份</text><rect x="51" y="44" width="63" height="40" fill="#f2d979" opacity="0.55" stroke="#f2d979" stroke-width="1.5"/><text x="83" y="69" font-size="14" fill="#1a1a1a" text-anchor="middle" font-family="Noto Sans TC" font-weight="700">沙</text><text x="83" y="38" font-size="11" fill="rgba(243,239,226,.7)" text-anchor="middle">2 份</text><rect x="114" y="44" width="126" height="40" fill="#eda0a8" opacity="0.55" stroke="#eda0a8" stroke-width="1.5"/><text x="177" y="69" font-size="14" fill="#1a1a1a" text-anchor="middle" font-family="Noto Sans TC" font-weight="700">石</text><text x="177" y="38" font-size="11" fill="rgba(243,239,226,.7)" text-anchor="middle">4 份</text><text x="130" y="122" font-size="12" fill="#f2d979" text-anchor="middle" font-family="Noto Sans TC">1:2:4 共 700kg</text></svg>
+<div class="eg" style="margin:0;">
+<div class="q">水泥:沙:石=1:2:4，拌 700kg</div>
+<div class="stp">份數和 1+2+4=7</div>
+<div class="stp">每份 700÷7=100kg</div>
+<div class="stp"><b>水泥100、沙200、石400</b></div>
+</div></div>
+<div class="box y" style="text-align:center;">配方比例題:總量除以份數和 = 一份的量。</div>
+</div></div>
+
+<!-- 10 -->
+<div class="slide" data-pg="10 / 11"><div class="tag">素養</div><div class="body">
+<div class="eyebrow">素養題型 2　【三角形內角】</div>
+<h2>角度按比例</h2>
+<div class="box">一個三角形三內角比為 2:3:5</div>
+<div class="eg">
+<div class="stp"><b>份數和</b>　2+3+5=10</div>
+<div class="stp"><b>每份</b>　180°÷10=18°</div>
+<div class="stp"><b>三角</b>　36°、54°、90°（直角三角形）</div>
+</div>
+<div class="box g" style="text-align:center;">三角形內角和 180°:總量就是 180°。</div>
+</div></div>
+
+<!-- 11 -->
+<div class="slide" data-pg="11 / 11"><div class="tag">總結</div><div class="body">
+<h2>本節總結</h2>
+<ul>
+<li><span class="hl">連比</span>:三個以上量一起比 a:b:c</li>
+<li><span class="hl">化簡</span>:同除公因數;分數先化整數</li>
+<li><span class="hl">合併</span>:統一公共項 b（取 lcm）</li>
+<li><span class="hl-r">設 k 倍 & 分配</span>:反推 k、每份=總量÷份數和</li>
+</ul>
+<div class="box g" style="text-align:center;font-size:19px;">
+承先:七下 比與比例式 → 連比是它的推廣<br>
+🔗 <b>啟後</b>:<span class="hl">1-2 比例線段（平行線截線段成比例）。</span></div>
+</div></div>
+
+</div></body></html>
